@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
+import { Link } from "react-router-dom";
 import EventItem from "../components/EventItem";
 import axios from "axios";
-
-const API_URL = "http://127.0.0.1:8000";
 
 class EventsList extends Component {
    state = {
@@ -17,7 +16,7 @@ class EventsList extends Component {
 
    getList = () => {
       axios
-         .get(API_URL + "/api/events")
+         .get("/api/events")
          .then((response) => {
             this.setState({ eventlist: response.data });
          })
@@ -29,9 +28,9 @@ class EventsList extends Component {
    render() {
       let tgt_action;
       if (localStorage.getItem("token") === null) {
-         tgt_action = <a href={API_URL + "/token"}> LOGIN </a>;
+         tgt_action = <a href="http://localhost:8000/token"> LOGIN </a>;
       } else {
-         tgt_action = <p> LOGGED IN. TOKEN: {localStorage.getItem("token")}</p>;
+         tgt_action = <a href="http://localhost:8000/accounts/logout"> LOGOUT </a>;
       }
       return (
          <Container className="mt-5">
