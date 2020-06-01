@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Clubs from "./pages/Clubs";
+import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect.jsx";
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/calendar" component={Calendar} />
             <Route exact path="/blog" component={Blog} />
             <Route exact path="/contact" component={Contact} />
+            <Route exact path="/events" component={Events} />
             <Route exact path="/loginRedirect" component={LoginRedirect} />
             <Route exact path="/logoutRedirect" component={LogoutRedirect} />
          </Switch>

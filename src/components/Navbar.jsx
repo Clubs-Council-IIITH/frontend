@@ -68,6 +68,11 @@ class Navigationbar extends Component {
                         CONTACT
                      </NavLink>
                   </NavItem>
+                  <NavItem className="nav-item mx-md-2">
+                     <NavLink tag={Link} to="/events" activeClassName="active">
+                        MY EVENTS
+                     </NavLink>
+                  </NavItem>
                </Nav>
                <a href={this.state.navbtn_link}>
                   <Button className="nav-btn mr-md-3 mt-3 mt-md-0" outline color="light">

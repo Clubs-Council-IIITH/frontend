@@ -26,12 +26,6 @@ class EventsList extends Component {
    };
 
    render() {
-      let tgt_action;
-      if (localStorage.getItem("token") === null) {
-         tgt_action = <a href="http://localhost:8000/token"> LOGIN </a>;
-      } else {
-         tgt_action = <a href="http://localhost:8000/accounts/logout"> LOGOUT </a>;
-      }
       return (
          <Container className="mt-5">
             {tgt_action}
