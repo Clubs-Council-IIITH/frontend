@@ -18,6 +18,7 @@ code {
    background-color: #0d0d0d !important;
    font-family: "Quicksand";
    font-weight: 600;
+   box-shadow: 0 0 10px #555;
 }
 
 .nav-logo {

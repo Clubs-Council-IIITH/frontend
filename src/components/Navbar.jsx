@@ -38,7 +38,7 @@ class Navigationbar extends Component {
       return (
          <Navbar className="nav-dark py-3" color="dark" dark expand="md">
             <NavbarBrand href="/">
-               <img className="nav-logo" src="/cc_logo.svg" alt="cc_logo" />
+               <img className="nav-logo ml-md-3" src="/cc_logo.svg" alt="cc_logo" />
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -70,7 +70,7 @@ class Navigationbar extends Component {
                   </NavItem>
                </Nav>
                <a href={this.state.navbtn_link}>
-                  <Button className="nav-btn mt-3 mt-md-0" outline color="light">
+                  <Button className="nav-btn mr-md-3 mt-3 mt-md-0" outline color="light">
                      {this.state.navbtn_text}
                   </Button>
                </a>
