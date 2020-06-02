@@ -1,6 +1,5 @@
+// eslint-disable-next-line
 import React, { Component } from "react";
-
-import { Redirect } from "react-router-dom";
 
 class LogoutRedirect extends Component {
    componentDidMount() {
