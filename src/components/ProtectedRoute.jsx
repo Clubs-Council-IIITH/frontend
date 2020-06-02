@@ -5,9 +5,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
    if (Date.parse(localStorage.getItem("expirationDate")) < new Date().getTime()) {
       localStorage.removeItem("token");
       localStorage.removeItem("expirationDate");
-      console.log("delet");
    }
-   console.log("protecc");
    return (
       <Route
          {...rest}
