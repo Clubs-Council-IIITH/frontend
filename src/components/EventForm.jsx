@@ -35,7 +35,7 @@ class EventForm extends Component {
       formData.append("venue", this.state.formData.evenue);
       formData.append("creator", this.state.formData.ecreator);
       formData.append("audience", this.state.formData.eaudience);
-      formData.append("state", this.state.formData.estate.toLowerCase());
+      formData.append("state", this.state.formData.estate);
       axios({
          method: "POST",
          url: "/api/events/new/",
@@ -92,13 +92,13 @@ class EventForm extends Component {
                   onChange={this.handleChangeMultiple}
                   multiple
                >
-                  <option> UG 1 </option>
-                  <option> UG 2 </option>
-                  <option> UG 3 </option>
-                  <option> UG 4+ </option>
-                  <option> PG </option>
-                  <option> Staff </option>
-                  <option> Faculty </option>
+                  <option value="ug1"> UG 1 </option>
+                  <option value="ug2"> UG 2 </option>
+                  <option value="ug3"> UG 3 </option>
+                  <option value="ugx"> UG 4+ </option>
+                  <option value="pg"> PG </option>
+                  <option value="staff"> Staff </option>
+                  <option value="faculty"> Faculty </option>
                </Input>
             </FormGroup>
             <FormGroup>
@@ -118,12 +118,12 @@ class EventForm extends Component {
                   value={this.state.formData.estate}
                   onChange={this.handleChange}
                >
-                  <option> CREATED </option>
-                  <option> APPROVED </option>
-                  <option> PUBLISHED </option>
-                  <option> SCHEDULED </option>
-                  <option> COMPLETED </option>
-                  <option> DELETED </option>
+                  <option value="created"> CREATED </option>
+                  <option value="approved"> APPROVED </option>
+                  <option value="published"> PUBLISHED </option>
+                  <option value="scheduled"> SCHEDULED </option>
+                  <option value="completed"> COMPLETED </option>
+                  <option value="deleted"> DELETED </option>
                </Input>
             </FormGroup>
             <Button type="button" onClick={this.handleSubmit}>
