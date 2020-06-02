@@ -6,15 +6,12 @@ class EventItem extends Component {
       return (
          <Jumbotron>
             <ul key={this.props.id}>
-               <li> ID: {this.props.id} </li>
                <li> Name: {this.props.name} </li>
                <li> Audience: {this.props.audience} </li>
-               <li> Club: {this.props.club} </li>
-               <li> Date: {this.props.date} </li>
-               <li> Time: {this.props.time} </li>
+               <li> DateTime: {this.props.datetime} </li>
                <li> Venue: {this.props.venue} </li>
-               <li> Created By: {this.props.created_by} </li>
-               <li> STATE: {this.props.state} </li>
+               <li> Creator: {this.props.creator} </li>
+               <li> State: {this.props.state}</li>
             </ul>
          </Jumbotron>
       );

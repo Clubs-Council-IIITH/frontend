@@ -39,11 +39,9 @@ class Events extends Component {
                      id={event.id}
                      audience={event.audience}
                      name={event.name}
-                     club={event.club}
-                     date={event.date}
-                     time={event.time}
+                     datetime={event.datetime}
                      venue={event.venue}
-                     created_by={event.created_by}
+                     creator={event.creator}
                      state={event.state}
                   />
                ))}
