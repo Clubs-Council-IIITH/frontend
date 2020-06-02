@@ -36,7 +36,6 @@ class EventForm extends Component {
       formData.append("creator", this.state.formData.ecreator);
       formData.append("audience", this.state.formData.eaudience);
       formData.append("state", this.state.formData.estate.toLowerCase());
-      formData.append("user", "bruh");
       axios({
          method: "POST",
          url: "/api/events/new/",
