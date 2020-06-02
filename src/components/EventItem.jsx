@@ -1,7 +1,18 @@
 import React, { Component } from "react";
-import { Jumbotron } from "reactstrap";
+import { Jumbotron, Button } from "reactstrap";
+
+import axios from "axios";
 
 class EventItem extends Component {
+   handleDelete = () => {
+      console.log(this.props.id);
+      axios.delete("/api/events/delete/" + this.props.id, {
+         headers: {
+            Authorization: "Token " + localStorage.getItem("token"),
+         },
+      });
+      window.location.reload(false);
+   };
    render() {
       return (
          <Jumbotron>
@@ -13,6 +24,9 @@ class EventItem extends Component {
                <li> Creator: {this.props.creator} </li>
                <li> State: {this.props.state}</li>
             </ul>
+            <Button type="button" onClick={this.handleDelete}>
+               DELETE
+            </Button>
          </Jumbotron>
       );
    }
