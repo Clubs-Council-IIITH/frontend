@@ -14,13 +14,36 @@ import {
 class Navigationbar extends Component {
    state = {
       isOpen: false,
+      contextAction: "",
+      contextString: "",
    };
 
    toggle = () => {
       this.setState({ isOpen: !this.state.isOpen });
    };
 
+   setContext = () => {
+      console.log("setting context");
+      const usergroup = localStorage.getItem("usergroup");
+      var action, string;
+      switch (usergroup) {
+         case "organizers":
+            action = "/events";
+            string = "MY EVENTS";
+            break;
+         case "cc_admins":
+            action = "/admin/dashboard";
+            string = "DASHBOARD";
+            break;
+         default:
+            break;
+      }
+      this.setState({ contextAction: action, contextString: string });
+      console.log(this.state);
+   };
+
    componentDidMount() {
+      console.log("mounted");
       if (localStorage.getItem("token") === null) {
          this.setState({
             navbtn_link: "http://localhost:8000/token",
@@ -31,10 +54,21 @@ class Navigationbar extends Component {
             navbtn_link: "/logoutRedirect",
             navbtn_text: "LOGOUT",
          });
+         this.setContext();
       }
    }
 
    render() {
+      var contextButton = "";
+      if (!(this.state.contextString === "")) {
+         contextButton = (
+            <NavItem className="nav-item mx-md-2">
+               <NavLink tag={Link} to={this.state.contextAction} activeClassName="active">
+                  {this.state.contextString}
+               </NavLink>
+            </NavItem>
+         );
+      }
       return (
          <Navbar className="nav-dark py-3" color="dark" dark expand="md">
             <NavbarBrand href="/">
@@ -68,11 +102,7 @@ class Navigationbar extends Component {
                         CONTACT
                      </NavLink>
                   </NavItem>
-                  <NavItem className="nav-item mx-md-2">
-                     <NavLink tag={Link} to="/events" activeClassName="active">
-                        MY EVENTS
-                     </NavLink>
-                  </NavItem>
+                  {contextButton}
                </Nav>
                <a href={this.state.navbtn_link}>
                   <Button className="nav-btn mr-md-3 mt-3 mt-md-0" outline color="light">
