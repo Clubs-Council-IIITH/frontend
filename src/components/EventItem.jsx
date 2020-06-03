@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -27,6 +28,11 @@ class EventItem extends Component {
             <Button type="button" onClick={this.handleDelete}>
                DELETE
             </Button>
+            <Link to={"/events/edit/" + this.props.id}>
+               <Button className="mx-3" type="button">
+                  EDIT
+               </Button>
+            </Link>
          </Jumbotron>
       );
    }

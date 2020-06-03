@@ -36,8 +36,9 @@ class EventForm extends Component {
       formData.append("creator", this.state.formData.ecreator);
       formData.append("audience", this.state.formData.eaudience);
       formData.append("state", this.state.formData.estate);
+      const url = this.props.action + this.props.id;
       axios
-         .post("/api/events/new/", formData, {
+         .post(url, formData, {
             headers: {
                "Content-Type": "multipart/form-data",
                Authorization: "Token " + localStorage.getItem("token"),

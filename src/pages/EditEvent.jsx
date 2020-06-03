@@ -4,14 +4,14 @@ import Navigationbar from "../components/Navbar";
 import EventForm from "../components/EventForm";
 import { Jumbotron, Container } from "reactstrap";
 
-class NewEvent extends Component {
+class EditEvent extends Component {
    render() {
       return (
          <React.Fragment>
             <Navigationbar />
             <Container>
                <Jumbotron>
-                  <EventForm action="/api/events/new/" id="" />
+                  <EventForm action="/api/events/edit/" id={this.props.match.params.id} />
                </Jumbotron>
             </Container>
          </React.Fragment>
@@ -19,4 +19,4 @@ class NewEvent extends Component {
    }
 }
 
-export default NewEvent;
+export default EditEvent;
