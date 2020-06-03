@@ -15,6 +15,19 @@ class EventForm extends Component {
       },
    };
 
+   componentDidMount() {
+      this.setState({
+         formData: {
+            ename: this.props.initial.name,
+            ecreator: this.props.initial.creator,
+            edatetime: this.props.initial.datetime,
+            evenue: this.props.initial.venue,
+            eaudience: this.props.initial.audience,
+            estate: this.props.initial.state,
+         },
+      });
+   }
+
    handleChange = (e) => {
       const newFormData = this.state.formData;
       newFormData[e.target.name] = e.target.value;
@@ -28,7 +41,6 @@ class EventForm extends Component {
    };
 
    handleSubmit = (item) => {
-      console.log(this.state.formData);
       var formData = new FormData();
       formData.append("name", this.state.formData.ename);
       formData.append("datetime", this.state.formData.edatetime);
