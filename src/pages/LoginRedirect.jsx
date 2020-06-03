@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 class LoginRedirect extends Component {
    componentDidMount() {
-      const token = this.props.location.search.substring(7);
+      const token = this.props.location.search.split("&")[0].substring(7);
       const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
       const usergroup = this.props.location.search.split("&")[1].substring(10);
       localStorage.setItem("token", token);
