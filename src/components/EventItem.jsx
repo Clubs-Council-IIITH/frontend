@@ -6,7 +6,7 @@ import axios from "axios";
 class EventItem extends Component {
    handleDelete = () => {
       console.log(this.props.id);
-      axios.delete("/api/events/delete/" + this.props.id, {
+      axios.post("/api/events/delete/" + this.props.id, {
          headers: {
             Authorization: "Token " + localStorage.getItem("token"),
          },

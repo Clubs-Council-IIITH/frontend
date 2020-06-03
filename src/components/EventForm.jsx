@@ -36,21 +36,20 @@ class EventForm extends Component {
       formData.append("creator", this.state.formData.ecreator);
       formData.append("audience", this.state.formData.eaudience);
       formData.append("state", this.state.formData.estate);
-      axios({
-         method: "POST",
-         url: "/api/events/new/",
-         data: formData,
-         headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Token " + localStorage.getItem("token"),
-         },
-      })
+      axios
+         .post("/api/events/new/", formData, {
+            headers: {
+               "Content-Type": "multipart/form-data",
+               Authorization: "Token " + localStorage.getItem("token"),
+            },
+         })
          .then((response) => {
             console.log(response);
          })
          .catch((error) => {
             console.log(error);
          });
+      window.location.reload(false);
    };
 
    render() {
