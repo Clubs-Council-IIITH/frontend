@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Button, Container } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -33,6 +34,9 @@ class Events extends Component {
          <React.Fragment>
             <Navigationbar />
             <Container className="mt-5">
+               <Link to="/events/new">
+                  <Button className="my-3">NEW EVENT</Button>
+               </Link>
                {this.state.eventlist.map((event) => (
                   <EventItem
                      key={event.id}
