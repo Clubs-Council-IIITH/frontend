@@ -6,14 +6,22 @@ import axios from "axios";
 
 class EventItem extends Component {
    handleDelete = () => {
-      console.log(this.props.id);
-      axios.post("/api/events/delete/" + this.props.id, {
-         headers: {
-            Authorization: "Token " + localStorage.getItem("token"),
-         },
-      });
+      var data = {};
+      axios
+         .post("/api/events/delete/" + this.props.id, data, {
+            headers: {
+               Authorization: "Token " + localStorage.getItem("token"),
+            },
+         })
+         .then((response) => {
+            console.log(response);
+         })
+         .catch((error) => {
+            console.log(error);
+         });
       window.location.reload(false);
    };
+
    render() {
       return (
          <Jumbotron>
