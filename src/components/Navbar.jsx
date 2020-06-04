@@ -23,7 +23,6 @@ class Navigationbar extends Component {
    };
 
    setContext = () => {
-      console.log("setting context");
       const usergroup = localStorage.getItem("usergroup");
       var action, string;
       switch (usergroup) {
@@ -39,20 +38,18 @@ class Navigationbar extends Component {
             break;
       }
       this.setState({ contextAction: action, contextString: string });
-      console.log(this.state);
    };
 
    componentDidMount() {
-      console.log("mounted");
       if (localStorage.getItem("token") === null) {
          this.setState({
-            navbtn_link: "http://localhost:8000/token",
-            navbtn_text: "LOGIN",
+            authAction: "http://localhost:8000/token",
+            authString: "LOGIN",
          });
       } else {
          this.setState({
-            navbtn_link: "/logoutRedirect",
-            navbtn_text: "LOGOUT",
+            authAction: "/logoutRedirect",
+            authString: "LOGOUT",
          });
          this.setContext();
       }
@@ -104,9 +101,9 @@ class Navigationbar extends Component {
                   </NavItem>
                   {contextButton}
                </Nav>
-               <a href={this.state.navbtn_link}>
+               <a href={this.state.authAction}>
                   <Button className="nav-btn mr-md-3 mt-3 mt-md-0" outline color="light">
-                     {this.state.navbtn_text}
+                     {this.state.authString}
                   </Button>
                </a>
             </Collapse>

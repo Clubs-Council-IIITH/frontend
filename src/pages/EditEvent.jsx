@@ -23,7 +23,13 @@ class EditEvent extends Component {
             headers: { Authorization: "Token " + localStorage.getItem("token") },
          })
          .then((response) => {
-            this.setState({ initialData: response.data, isLoading: false });
+            this.setState({
+               isLoading: false,
+               initialData: {
+                  ...response.data,
+                  audience: response.data.audience.split(","),
+               },
+            });
             console.log(this.state.initialData);
          })
          .catch((error) => {
