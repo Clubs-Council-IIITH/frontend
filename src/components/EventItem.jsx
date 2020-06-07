@@ -8,7 +8,7 @@ class EventItem extends Component {
    handleDelete = () => {
       var data = {};
       axios
-         .post("/api/events/delete/" + this.props.id, data, {
+         .post("/api/organizers/events/delete/" + this.props.id, data, {
             headers: {
                Authorization: "Token " + localStorage.getItem("token"),
             },

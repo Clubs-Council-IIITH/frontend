@@ -19,7 +19,7 @@ class EditEvent extends Component {
    getInitial = () => {
       this.setState({ isLoading: true });
       axios
-         .get("/api/events/edit/" + this.props.match.params.id, {
+         .get("/api/organizers/events/edit/" + this.props.match.params.id, {
             headers: { Authorization: "Token " + localStorage.getItem("token") },
          })
          .then((response) => {
@@ -47,7 +47,7 @@ class EditEvent extends Component {
             <Container>
                <Jumbotron>
                   <EventForm
-                     action="/api/events/edit/"
+                     action="/api/organizers/events/edit/"
                      id={this.props.match.params.id}
                      initial={this.state.initialData}
                   />

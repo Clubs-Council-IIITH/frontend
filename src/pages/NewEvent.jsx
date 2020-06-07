@@ -22,7 +22,11 @@ class NewEvent extends Component {
             <Navigationbar />
             <Container>
                <Jumbotron>
-                  <EventForm action="/api/events/new/" id="" initial={this.state.initialData} />
+                  <EventForm
+                     action="/api/organizers/events/new/"
+                     id=""
+                     initial={this.state.initialData}
+                  />
                </Jumbotron>
             </Container>
          </React.Fragment>

@@ -18,7 +18,7 @@ class Events extends Component {
 
    getList = () => {
       axios
-         .get("/api/events", {
+         .get("/api/organizers/events", {
             headers: { Authorization: "Token " + localStorage.getItem("token") },
          })
          .then((response) => {
