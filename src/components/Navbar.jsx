@@ -26,16 +26,17 @@ class Navigationbar extends Component {
       const usergroup = localStorage.getItem("usergroup");
       var action, string;
       switch (usergroup) {
-         case "organizers":
+         case "organizer":
             action = "/events";
             string = "MY EVENTS";
             break;
-         case "cc_admins":
+         case "cc_admin":
             action = "/admin/dashboard";
             string = "DASHBOARD";
             break;
          default:
-            break;
+            action = "";
+            string = "";
       }
       this.setState({ contextAction: action, contextString: string });
    };
