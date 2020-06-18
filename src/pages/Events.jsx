@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container } from "reactstrap";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
@@ -33,23 +33,25 @@ class Events extends Component {
       return (
          <React.Fragment>
             <Navigationbar />
-            <Container className="mt-5">
+            <div className="container-fluid mt-5">
                <Link to="/events/new">
                   <Button className="my-3">NEW EVENT</Button>
                </Link>
-               {this.state.eventlist.map((event) => (
-                  <EventItem
-                     key={event.id}
-                     id={event.id}
-                     audience={event.audience}
-                     name={event.name}
-                     datetime={event.datetime}
-                     venue={event.venue}
-                     creator={event.creator}
-                     state={event.state}
-                  />
-               ))}
-            </Container>
+               <div class="row event-row">
+                  {this.state.eventlist.map((event) => (
+                     <EventItem
+                        key={event.id}
+                        id={event.id}
+                        audience={event.audience}
+                        name={event.name}
+                        datetime={event.datetime}
+                        venue={event.venue}
+                        creator={event.creator}
+                        state={event.state}
+                     />
+                  ))}
+               </div>
+            </div>
          </React.Fragment>
       );
    }

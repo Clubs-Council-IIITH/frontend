@@ -24,7 +24,7 @@ function App() {
             <Route exact path="/calendar" component={Calendar} />
             <Route exact path="/blog" component={Blog} />
             <Route exact path="/contact" component={Contact} />
-            <Route exact path="/events" component={Events} />
+            <ProtectedRoute exact path="/events" component={Events} />
             <ProtectedRoute exact path="/events/new" component={NewEvent} />
             <ProtectedRoute exact path="/events/edit/:id" component={EditEvent} />
             <Route exact path="/loginRedirect" component={LoginRedirect} />

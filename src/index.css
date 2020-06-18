@@ -30,3 +30,14 @@ code {
    font-weight: 600;
    border: 2px solid #eee;
 }
+
+.event-card {
+   min-width: 300px;
+}
+
+@media (min-width: 1200px) {
+   .event-row {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+   }
+}
