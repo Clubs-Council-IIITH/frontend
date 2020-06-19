@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Navigationbar from "../components/Navbar";
 
-class Clubs extends Component {
-   render() {
-      return <Navigationbar />;
-   }
-}
+const Clubs = () => {
+   return <Navigationbar />;
+};
 
 export default Clubs;

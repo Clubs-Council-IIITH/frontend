@@ -1,15 +1,11 @@
-// eslint-disable-next-line
-import React, { Component } from "react";
+import React, { useEffect } from "react"; // eslint-disable-line
 
-class LogoutRedirect extends Component {
-   componentDidMount() {
+const LogoutRedirect = () => {
+   useEffect(() => {
       localStorage.removeItem("token");
       window.location.href = "http://localhost:8000/accounts/logout";
-   }
-
-   render() {
-      return null;
-   }
-}
+   });
+   return null;
+};
 
 export default LogoutRedirect;

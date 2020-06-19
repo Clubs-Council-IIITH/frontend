@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Navigationbar from "../components/Navbar";
 
-class Calendar extends Component {
-   render() {
-      return <Navigationbar />;
-   }
-}
+const Calendar = () => {
+   return <Navigationbar />;
+};
 
 export default Calendar;

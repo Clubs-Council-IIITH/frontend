@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Navigationbar from "../components/Navbar";
 
-class Contact extends Component {
-   render() {
-      return <Navigationbar />;
-   }
-}
+const Contact = () => {
+   return <Navigationbar />;
+};
 
 export default Contact;

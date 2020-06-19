@@ -1,61 +1,49 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Jumbotron, Container } from "reactstrap";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
 import Navigationbar from "../components/Navbar";
 import EventForm from "../components/EventForm";
 
-class EditEvent extends Component {
-   state = {
-      isLoading: true,
-      initialData: {},
-   };
+const EditEvent = () => {
+   const { id } = useParams();
+   const [isLoading, setIsLoading] = useState(true);
+   const [initialData, setInitialData] = useState({});
 
-   componentDidMount() {
-      this.getInitial();
-   }
-
-   getInitial = () => {
-      this.setState({ isLoading: true });
+   useEffect(() => {
       axios
-         .get("/api/organizers/events/edit/" + this.props.match.params.id, {
+         .get("/api/organizers/events/edit/" + id + "/", {
             headers: { Authorization: "Token " + localStorage.getItem("token") },
          })
          .then((response) => {
-            this.setState({
-               isLoading: false,
-               initialData: {
-                  ...response.data,
-                  audience: response.data.audience.split(","),
-               },
+            setInitialData({
+               ...response.data,
+               audience: response.data.audience.split(","),
             });
-            console.log(this.state.initialData);
+            setIsLoading(false);
+            console.log(initialData);
          })
          .catch((error) => {
             console.log(error);
          });
-   };
+   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-   render() {
-      if (this.state.isLoading) {
-         return null; // TODO: Loading Spinner
-      }
-      return (
-         <React.Fragment>
-            <Navigationbar />
-            <Container>
-               <Jumbotron>
-                  <EventForm
-                     action="/api/organizers/events/edit/"
-                     id={this.props.match.params.id}
-                     initial={this.state.initialData}
-                  />
-               </Jumbotron>
-            </Container>
-         </React.Fragment>
-      );
+   if (isLoading) {
+      return null; // TODO: Loading Spinner
    }
-}
+
+   return (
+      <React.Fragment>
+         <Navigationbar />
+         <Container>
+            <Jumbotron>
+               <EventForm action="/api/organizers/events/edit/" id={id} initial={initialData} />
+            </Jumbotron>
+         </Container>
+      </React.Fragment>
+   );
+};
 
 export default EditEvent;
