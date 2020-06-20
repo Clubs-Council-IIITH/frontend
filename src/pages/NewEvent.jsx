@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Jumbotron, Container } from "reactstrap";
 
-import Navigationbar from "../components/Navbar";
 import EventForm from "../components/EventForm";
 
 const NewEvent = () => {
@@ -16,7 +15,6 @@ const NewEvent = () => {
 
    return (
       <React.Fragment>
-         <Navigationbar />
          <Container>
             <Jumbotron>
                <EventForm action="/api/organizers/events/new" id="" initial={initialData} />

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
-import Navigationbar from "../components/Navbar";
 import EventForm from "../components/EventForm";
 
 const EditEvent = () => {
@@ -36,7 +35,6 @@ const EditEvent = () => {
 
    return (
       <React.Fragment>
-         <Navigationbar />
          <Container>
             <Jumbotron>
                <EventForm action="/api/organizers/events/edit/" id={id} initial={initialData} />

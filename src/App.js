@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/Home";
@@ -9,15 +10,54 @@ import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
 import NewEvent from "./pages/NewEvent";
 import EditEvent from "./pages/EditEvent";
-import LoginRedirect from "./pages/LoginRedirect.jsx";
-import LogoutRedirect from "./pages/LogoutRedirect.jsx";
+import LoginRedirect from "./pages/LoginRedirect";
+import LogoutRedirect from "./pages/LogoutRedirect";
+import Navbar from "./components/Navbar";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+const App = () => {
+   const [contextAction, setContextAction] = useState("");
+   const [contextString, setContextString] = useState("");
+   const [authAction, setAuthAction] = useState("");
+   const [authString, setAuthString] = useState("");
+
+   const setContext = useCallback(() => {
+      const usergroup = localStorage.getItem("usergroup");
+      var action, string;
+      switch (usergroup) {
+         case "organizer":
+            action = "/events";
+            string = "MY EVENTS";
+            break;
+         case "cc_admin":
+            action = "/admin/dashboard";
+            string = "DASHBOARD";
+            break;
+         default:
+            action = "";
+            string = "";
+      }
+      setContextAction(action);
+      setContextString(string);
+   }, []);
+
+   useEffect(() => {
+      setAuthAction("http://localhost:8000/token");
+      setAuthString("LOGIN");
+      if (localStorage.getItem("token") !== null) {
+         setAuthAction("/logoutRedirect");
+         setAuthString("LOGOUT");
+         setContext();
+      }
+   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+   const authProps = { action: authAction, string: authString };
+   const contextProps = { action: contextAction, string: contextString };
+
    return (
       <Router>
+         <Navbar auth={authProps} context={contextProps} />
          <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/clubs" component={Clubs} />
@@ -32,6 +72,6 @@ function App() {
          </Switch>
       </Router>
    );
-}
+};
 
 export default App;

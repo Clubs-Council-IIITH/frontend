@@ -1,9 +1,7 @@
 import React from "react";
 
-import Navigationbar from "../components/Navbar";
-
 const Home = () => {
-   return <Navigationbar />;
+   return <React.Fragment />;
 };
 
 export default Home;

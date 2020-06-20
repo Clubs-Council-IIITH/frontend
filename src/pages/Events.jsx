@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import EventItem from "../components/EventItem";
-import Navigationbar from "../components/Navbar";
 
 const Events = () => {
    const [eventList, setEventList] = useState([]);
@@ -25,7 +24,6 @@ const Events = () => {
 
    return (
       <React.Fragment>
-         <Navigationbar />
          <div className="container-fluid mt-5">
             <Link to="/events/new">
                <Button className="my-3">NEW EVENT</Button>

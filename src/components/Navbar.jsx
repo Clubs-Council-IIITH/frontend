@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { NavLink as Link } from "react-router-dom";
 import {
    Collapse,
@@ -11,53 +11,19 @@ import {
    Button,
 } from "reactstrap";
 
-const Navigationbar = () => {
+const Navigationbar = (props) => {
    const [isOpen, setIsOpen] = useState(false);
-   const [contextAction, setContextAction] = useState("");
-   const [contextString, setContextString] = useState("");
-   const [authAction, setAuthAction] = useState("");
-   const [authString, setAuthString] = useState("");
 
    const toggle = useCallback(() => {
       setIsOpen(!isOpen);
-   });
-
-   const setContext = useCallback(() => {
-      const usergroup = localStorage.getItem("usergroup");
-      var action, string;
-      switch (usergroup) {
-         case "organizer":
-            action = "/events";
-            string = "MY EVENTS";
-            break;
-         case "cc_admin":
-            action = "/admin/dashboard";
-            string = "DASHBOARD";
-            break;
-         default:
-            action = "";
-            string = "";
-      }
-      setContextAction(action);
-      setContextString(string);
-   });
-
-   useEffect(() => {
-      setAuthAction("http://localhost:8000/token");
-      setAuthString("LOGIN");
-      if (localStorage.getItem("token") !== null) {
-         setAuthAction("/logoutRedirect");
-         setAuthString("LOGOUT");
-         setContext();
-      }
-   }, []);
+   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
    var contextButton = "";
-   if (!(contextString === "")) {
+   if (!(props.context.string === "")) {
       contextButton = (
          <NavItem className="nav-item mx-md-2">
-            <NavLink tag={Link} to={contextAction} activeClassName="active">
-               {contextString}
+            <NavLink tag={Link} to={props.context.action} activeClassName="active">
+               {props.context.string}
             </NavLink>
          </NavItem>
       );
@@ -98,9 +64,9 @@ const Navigationbar = () => {
                </NavItem>
                {contextButton}
             </Nav>
-            <a href={authAction}>
+            <a href={props.auth.action}>
                <Button className="nav-btn mr-md-3 mt-3 mt-md-0" outline color="light">
-                  {authString}
+                  {props.auth.string}
                </Button>
             </a>
          </Collapse>

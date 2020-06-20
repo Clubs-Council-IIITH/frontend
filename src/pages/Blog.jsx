@@ -1,9 +1,7 @@
 import React from "react";
 
-import Navigationbar from "../components/Navbar";
-
 const Blog = () => {
-   return <Navigationbar />;
+   return <React.Fragment />;
 };
 
 export default Blog;
