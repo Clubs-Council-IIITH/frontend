@@ -1,18 +1,21 @@
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { Card, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
 
-class EventItem extends Component {
-   handleDelete = () => {
-      var data = {};
+const EventItem = (props) => {
+   const handleDelete = useCallback(() => {
       axios
-         .post("/api/organizers/events/delete/" + this.props.id, data, {
-            headers: {
-               Authorization: "Token " + localStorage.getItem("token"),
-            },
-         })
+         .post(
+            "/api/organizers/events/delete/" + props.id + "/",
+            {},
+            {
+               headers: {
+                  Authorization: "Token " + localStorage.getItem("token"),
+               },
+            }
+         )
          .then((response) => {
             console.log(response);
          })
@@ -20,34 +23,32 @@ class EventItem extends Component {
             console.log(error);
          });
       window.location.reload(false);
-   };
+   }, [props.id]);
 
-   render() {
-      return (
-         <div class="col-lg-3 m-3">
-            <Card className="event-card card-block p-3">
-               <ul key={this.props.id}>
-                  <li> Name: {this.props.name} </li>
-                  <li> Audience: {this.props.audience} </li>
-                  <li> DateTime: {this.props.datetime} </li>
-                  <li> Venue: {this.props.venue} </li>
-                  <li> Creator: {this.props.creator} </li>
-                  <li> State: {this.props.state}</li>
-               </ul>
-               <div>
-                  <Button className="m-2" type="button" onClick={this.handleDelete}>
-                     D
+   return (
+      <div className="col-md-3 m-3">
+         <Card className="event-card card-block p-3">
+            <ul key={props.id}>
+               <li> Name: {props.name} </li>
+               <li> Audience: {props.audience} </li>
+               <li> DateTime: {props.datetime} </li>
+               <li> Venue: {props.venue} </li>
+               <li> Creator: {props.creator} </li>
+               <li> State: {props.state}</li>
+            </ul>
+            <div>
+               <Button className="m-2" type="button" onClick={handleDelete}>
+                  D
+               </Button>
+               <Link to={"/events/edit/" + props.id}>
+                  <Button className="m-2" type="button">
+                     E
                   </Button>
-                  <Link to={"/events/edit/" + this.props.id}>
-                     <Button className="m-2" type="button">
-                        E
-                     </Button>
-                  </Link>
-               </div>
-            </Card>
-         </div>
-      );
-   }
-}
+               </Link>
+            </div>
+         </Card>
+      </div>
+   );
+};
 
 export default EventItem;

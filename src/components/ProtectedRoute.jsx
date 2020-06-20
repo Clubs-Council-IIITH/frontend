@@ -7,6 +7,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       localStorage.removeItem("expirationDate");
       localStorage.removeItem("usergroup");
    }
+
    return (
       <Route
          {...rest}
