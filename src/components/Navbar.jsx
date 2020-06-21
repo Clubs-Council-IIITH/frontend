@@ -14,9 +14,9 @@ import {
 const Navigationbar = (props) => {
    const [isOpen, setIsOpen] = useState(false);
 
-   const toggle = useCallback(() => {
+   const toggle = () => {
       setIsOpen(!isOpen);
-   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+   };
 
    var contextButton = "";
    if (!(props.context.string === "")) {
