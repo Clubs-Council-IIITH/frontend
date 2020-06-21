@@ -35,7 +35,7 @@ code {
    min-width: 300px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
    .event-row {
       flex-wrap: nowrap;
       overflow-x: auto;
