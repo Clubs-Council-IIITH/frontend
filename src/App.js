@@ -12,8 +12,8 @@ import NewEvent from "./pages/NewEvent";
 import EditEvent from "./pages/EditEvent";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
-import Navbar from "./components/Navbar";
 
+import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -24,22 +24,18 @@ const App = () => {
 
    const setContext = useCallback(() => {
       const usergroup = localStorage.getItem("usergroup");
-      var action, string;
       switch (usergroup) {
          case "organizer":
-            action = "/events";
-            string = "MY EVENTS";
+            setContextAction("/events");
+            setContextString("MY EVENTS");
             break;
          case "cc_admin":
-            action = "/admin/dashboard";
-            string = "DASHBOARD";
+            setContextAction("/admin/dashboard");
+            setContextString("DASHBOARD");
             break;
          default:
-            action = "";
-            string = "";
+            break;
       }
-      setContextAction(action);
-      setContextString(string);
    }, []);
 
    useEffect(() => {
