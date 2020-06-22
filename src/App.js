@@ -8,7 +8,6 @@ import Clubs from "./pages/Clubs";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
-import NewEvent from "./pages/NewEvent";
 import EditEvent from "./pages/EditEvent";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
@@ -61,7 +60,6 @@ const App = () => {
             <Route exact path="/blog" component={Blog} />
             <Route exact path="/contact" component={Contact} />
             <ProtectedRoute exact path="/events" component={Events} />
-            <ProtectedRoute exact path="/events/new" component={NewEvent} />
             <ProtectedRoute exact path="/events/edit/:id" component={EditEvent} />
             <Route exact path="/loginRedirect" component={LoginRedirect} />
             <Route exact path="/logoutRedirect" component={LogoutRedirect} />

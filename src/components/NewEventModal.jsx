@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Jumbotron, Container } from "reactstrap";
+import { Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 
-import EventForm from "../components/EventForm";
+import EventForm from "./EventForm";
 
-const NewEvent = () => {
+const NewEventModal = (props) => {
    const [initialData] = useState({
       name: "",
       creator: "",
@@ -15,13 +15,13 @@ const NewEvent = () => {
 
    return (
       <React.Fragment>
-         <Container>
-            <Jumbotron>
+         <Modal isOpen={props.modal} toggle={props.toggleModal}>
+            <ModalBody>
                <EventForm action="/api/organizers/events/new" id="" initial={initialData} />
-            </Jumbotron>
-         </Container>
+            </ModalBody>
+         </Modal>
       </React.Fragment>
    );
 };
 
-export default NewEvent;
+export default NewEventModal;

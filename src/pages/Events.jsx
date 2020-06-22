@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
+import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/EventItem";
 
 const Events = () => {
    const [eventList, setEventList] = useState([]);
+   const [modal, setModal] = useState(false);
 
    useEffect(() => {
       axios
@@ -22,12 +24,17 @@ const Events = () => {
          });
    }, []);
 
+   const toggleModal = () => {
+      setModal(!modal);
+   };
+
    return (
       <React.Fragment>
          <div className="container-fluid mt-5">
-            <Link to="/events/new">
-               <Button className="my-3">NEW EVENT</Button>
-            </Link>
+            <NewEventModal modal={modal} toggleModal={toggleModal} />
+            <Button onClick={toggleModal} className="my-3">
+               NEW EVENT
+            </Button>
             <div className="row event-row">
                {eventList.map((event) => (
                   <EventItem
