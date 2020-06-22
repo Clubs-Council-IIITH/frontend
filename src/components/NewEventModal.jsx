@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 
 import EventForm from "./EventForm";
 
