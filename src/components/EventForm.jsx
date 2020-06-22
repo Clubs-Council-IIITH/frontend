@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import axios from "axios";
 
 const EventForm = (props) => {
-   const { register, handleSubmit, errors } = useForm();
+   const { register, handleSubmit, errors } = useForm({
+      defaultValues: {
+         name: props.initial.name,
+         creator: props.initial.creator,
+         datetime: props.initial.datetime,
+         venue: props.initial.venue,
+         audience: props.initial.audience,
+         state: props.initial.state,
+      },
+   });
 
    const onSubmit = (data) => {
       console.log(data);
