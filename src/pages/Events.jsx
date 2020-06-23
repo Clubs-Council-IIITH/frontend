@@ -29,12 +29,19 @@ const Events = () => {
 
    return (
       <React.Fragment>
-         <div className="container-fluid mt-5">
+         <div className="container-fluid mt-4">
             <NewEventModal modal={modal} toggleModal={toggleModal} />
-            <Button onClick={toggleModal} className="my-3">
-               NEW EVENT
-            </Button>
-            <div className="row event-row">
+            <div className="event-header mx-3">
+               <span class="event-title"> Upcoming Events </span>
+               <Button
+                  onClick={toggleModal}
+                  className="eventnew-btn body-btn btn-outline-dark py-2 px-3 my-3"
+               >
+                  <span className="d-md-none"> + </span>
+                  <span className="d-none d-md-block"> + NEW EVENT </span>
+               </Button>
+            </div>
+            <div className="row event-row my-5">
                {eventList.map((event) => (
                   <EventItem
                      key={event.id}

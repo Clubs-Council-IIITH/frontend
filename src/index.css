@@ -12,6 +12,7 @@ code {
 
 /* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
 /* Navbar Styles */
 .nav-dark {
@@ -31,8 +32,51 @@ code {
    border: 2px solid #eee;
 }
 
+.event-header {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   font-size: calc(36px + 1.2vw);
+}
+
+.eventnew-btn {
+   font-family: "Quicksand";
+   font-weight: 600;
+   font-size: 0.38em;
+   color: white;
+   background-color: black;
+   border: 2px solid #000;
+}
+
+.eventnew-btn:focus,
+.eventnew-btn:active,
+.eventnew-btn:hover {
+   color: black;
+   background-color: #fff;
+   border: 2px solid #000;
+}
+
+.event-title {
+   font-family: "Raleway", "sans-serif";
+   font-weight: 700;
+   font-size: 1em;
+   line-height: 1.2;
+}
+
 .event-card {
    min-width: 300px;
+}
+
+.body-btn {
+   box-shadow: 0;
+}
+
+.body-btn:hover,
+.body-btn:focus,
+.body-btn:active,
+.body-btn:visited {
+   box-shadow: 2px 3px #888 !important;
 }
 
 @media (min-width: 768px) {
