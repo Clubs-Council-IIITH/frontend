@@ -20,6 +20,7 @@ const EventForm = (props) => {
       console.log(data);
       var eventForm = document.getElementById("eventform");
       var eventFormData = new FormData(eventForm);
+      eventFormData.set("audience", data.audience.toString());
       const url = props.action + props.id + "/";
       axios
          .post(url, eventFormData, {
