@@ -9,6 +9,7 @@ import {
    NavItem,
    NavLink,
    Button,
+   NavbarText,
 } from "reactstrap";
 
 const Navigationbar = (props) => {
@@ -21,11 +22,17 @@ const Navigationbar = (props) => {
    var contextButton = "";
    if (!(props.context.string === "")) {
       contextButton = (
-         <NavItem className="nav-item mx-md-2">
-            <NavLink tag={Link} to={props.context.action} activeClassName="active">
-               {props.context.string}
-            </NavLink>
-         </NavItem>
+         <React.Fragment>
+            <NavItem className="nav-item mx-md-2">
+               <NavbarText>•</NavbarText>
+            </NavItem>
+
+            <NavItem className="nav-item mx-md-2">
+               <NavLink tag={Link} to={props.context.action} activeClassName="active">
+                  {props.context.string}
+               </NavLink>
+            </NavItem>
+         </React.Fragment>
       );
    }
 
