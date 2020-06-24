@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import EventForm from "./EventForm";
 
@@ -16,6 +16,7 @@ const NewEventModal = (props) => {
    return (
       <React.Fragment>
          <Modal isOpen={props.modal} toggle={props.toggleModal}>
+            <ModalHeader> Create a new event </ModalHeader>
             <ModalBody>
                <EventForm action="/api/organizers/events/new" id="" initial={initialData} />
             </ModalBody>
