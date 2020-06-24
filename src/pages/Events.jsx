@@ -29,9 +29,9 @@ const Events = () => {
 
    return (
       <React.Fragment>
-         <div className="container-fluid mt-4">
+         <div className="container-fluid event-container mt-4">
             <NewEventModal modal={modal} toggleModal={toggleModal} />
-            <div className="event-header mx-3">
+            <div className="event-header mx-3 mx-md-4">
                <span class="event-title"> Upcoming Events </span>
                <Button
                   onClick={toggleModal}
@@ -41,7 +41,7 @@ const Events = () => {
                   <span className="d-none d-md-block"> + NEW EVENT </span>
                </Button>
             </div>
-            <div className="row event-row my-5">
+            <div className="row event-row h-100 my-3 mx-md-1">
                {eventList.map((event) => (
                   <EventItem
                      key={event.id}

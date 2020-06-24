@@ -33,6 +33,10 @@ code {
    border: 2px solid #eee;
 }
 
+.event-container {
+   height: 70vh !important;
+}
+
 .event-header {
    display: flex;
    flex-direction: row;
@@ -68,7 +72,7 @@ code {
 .event-card {
    font-family: "Poppins";
    font-size: calc(20px + 1vw);
-   min-width: 300px;
+   width: 350px;
 }
 
 .event-datetime {
@@ -76,7 +80,7 @@ code {
 }
 
 .event-name {
-   font-size: 1em;
+   font-size: 1.2em;
    font-weight: 600;
 }
 
