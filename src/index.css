@@ -37,6 +37,13 @@ code {
    height: 70vh !important;
 }
 
+.event-row {
+   -ms-overflow-style: none;
+}
+.event-row::-webkit-scrollbar {
+   display: none;
+}
+
 .event-header {
    display: flex;
    flex-direction: row;
