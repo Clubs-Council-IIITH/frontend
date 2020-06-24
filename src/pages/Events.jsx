@@ -27,6 +27,14 @@ const Events = () => {
       setModal(!modal);
    };
 
+   const horizontalScroll = (e) => {
+      if (window.screen.width >= 768) {
+         e.preventDefault();
+         const delta = Math.max(-1, Math.min(1, e.nativeEvent.wheelDelta || -e.nativeEvent.detail));
+         e.currentTarget.scrollLeft -= delta * 50;
+      }
+   };
+
    return (
       <React.Fragment>
          <div className="container-fluid event-container mt-4">
@@ -41,7 +49,11 @@ const Events = () => {
                   <span className="d-none d-md-block"> + NEW EVENT </span>
                </Button>
             </div>
-            <div className="row event-row h-100 my-3 mx-md-1">
+            <div
+               id="event-row"
+               className="row event-row h-100 my-3 mx-md-1"
+               onWheel={horizontalScroll}
+            >
                {eventList.map((event) => (
                   <EventItem
                      key={event.id}
