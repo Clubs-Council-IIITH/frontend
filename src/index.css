@@ -13,6 +13,7 @@ code {
 /* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 /* Navbar Styles */
 .nav-dark {
@@ -65,7 +66,30 @@ code {
 }
 
 .event-card {
+   font-family: "Poppins";
+   font-size: calc(20px + 1vw);
    min-width: 300px;
+}
+
+.event-datetime {
+   font-size: 0.7em;
+}
+
+.event-name {
+   font-size: 1em;
+   font-weight: 600;
+}
+
+.event-state {
+   font-size: 0.8em;
+}
+
+.event-venue {
+   font-size: 0.7em;
+}
+
+.event-audience {
+   font-size: 0.7em;
 }
 
 .body-btn {
