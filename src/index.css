@@ -89,10 +89,43 @@ code {
 .event-name {
    font-size: 1.2em;
    font-weight: 600;
+   line-height: 1.2;
 }
 
 .event-state {
    font-size: 0.8em;
+   width: fit-content;
+   border-radius: 4px;
+}
+
+.state-completed {
+   background-color: #fff7cc;
+   color: #99851b;
+}
+
+.state-deleted {
+   background-color: #f7cccc;
+   color: #b40000;
+}
+
+.state-created {
+   background-color: #ddd;
+   color: #555;
+}
+
+.state-approved {
+   background-color: #ccf4dd;
+   color: #007932;
+}
+
+.state-scheduled {
+   background-color: #cce9fb;
+   color: #005da8;
+}
+
+.state-published {
+   background-color: #e5d2ec;
+   color: #530f7c;
 }
 
 .event-venue {
