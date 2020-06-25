@@ -51,7 +51,7 @@ const Events = () => {
             </div>
             <div
                id="event-row"
-               className="row event-row h-100 my-3 mx-md-1"
+               className="row event-row h-100 pb-3 my-3 mx-md-1"
                onWheel={horizontalScroll}
             >
                {eventList.map((event) => (

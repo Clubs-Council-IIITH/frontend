@@ -42,14 +42,25 @@ const EventItem = (props) => {
 
    return (
       <div className="col-xl-3 mx-xl-1 my-2 d-flex">
-         <Card className="event-card p-2 flex-fill">
-            <div className="card-body">
+         <Card className="event-card shadow p-2 flex-fill">
+            <div className="card-header">
                <div className="event-datetime">{formatDT(props.datetime)}</div>
                <div className="event-name">{props.name}</div>
                <EventState current={props.state} />
-               <div className="event-sep" />
-               <div className="event-venue">{props.venue}</div>
-               <div className="event-audience">{props.audience}</div>
+            </div>
+            <div className="card-body">
+               <div className="event-venue mb-2">
+                  <span>
+                     <img className="card-icon" src="/venue-18.svg" alt="V" />
+                  </span>
+                  {props.venue}
+               </div>
+               <div className="event-audience mb-2">
+                  <span>
+                     <img className="card-icon" src="/audience-18.svg" alt="A" />
+                  </span>
+                  {props.audience}
+               </div>
             </div>
             <div className="card-footer">
                <Button className="m-2" type="button" onClick={handleDelete}>
