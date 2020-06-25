@@ -27,11 +27,24 @@ const EventItem = (props) => {
       window.location.reload(false);
    }, [props.id]);
 
+   const formatDT = (rawDT) => {
+      var DT = new Date(rawDT);
+      var cleanDT =
+         DT.getDate() +
+         "." +
+         DT.getMonth() +
+         "." +
+         DT.getFullYear() +
+         " · " +
+         DT.toLocaleString("en-US", { hour: "numeric", minute: "numeric", hour12: true });
+      return cleanDT;
+   };
+
    return (
       <div className="col-xl-3 mx-xl-1 my-2 d-flex">
          <Card className="event-card p-2 flex-fill">
             <div className="card-body">
-               <div className="event-datetime">{props.datetime}</div>
+               <div className="event-datetime">{formatDT(props.datetime)}</div>
                <div className="event-name">{props.name}</div>
                <EventState current={props.state} />
                <div className="event-sep" />
