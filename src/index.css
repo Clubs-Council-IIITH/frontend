@@ -69,6 +69,21 @@ code {
    border: 2px solid #000;
 }
 
+.eventdelete-btn:focus,
+.eventdelete-btn:active,
+.eventdelete-btn:hover {
+   background-color: #f7cccc;
+   border-radius: 4px;
+   cursor: pointer;
+}
+
+.eventedit-btn:focus,
+.eventedit-btn:active,
+.eventedit-btn:hover {
+   background-color: #fff7cc;
+   border-radius: 4px;
+}
+
 .event-title {
    font-family: "Raleway", "sans-serif";
    font-weight: 700;
@@ -137,23 +152,31 @@ code {
    font-size: 0.7em;
 }
 
-.body-btn {
-   box-shadow: 0;
-}
-
 .card-header {
    background-color: rgba(255, 255, 255, 0) !important;
+   border: none !important;
 }
 
 .card-footer {
    background-color: rgba(255, 255, 255, 0) !important;
-   /* border: none !important; */
+   display: flex;
+   justify-content: space-between;
+   border: none !important;
 }
 
 .card-icon {
-   height: 1.2em !important;
+   height: 1.2em;
    width: 1.2em;
    margin-right: 0.5em;
+}
+
+.card-btn {
+   height: 1.2em;
+   width: 1.2em;
+}
+
+.body-btn {
+   box-shadow: 0;
 }
 
 .body-btn:hover,

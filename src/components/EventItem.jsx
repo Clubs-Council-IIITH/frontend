@@ -63,13 +63,13 @@ const EventItem = (props) => {
                </div>
             </div>
             <div className="card-footer">
-               <Button className="m-2" type="button" onClick={handleDelete}>
-                  D
-               </Button>
+               <a onClick={handleDelete}>
+                  <img className="card-btn eventdelete-btn m-2" src="/delete-18.svg" alt="D" />
+               </a>
                <Link to={"/events/edit/" + props.id}>
-                  <Button className="m-2" type="button">
-                     E
-                  </Button>
+                  <a>
+                     <img className="card-btn eventedit-btn m-2" src="/edit-18.svg" alt="E" />
+                  </a>
                </Link>
             </div>
          </Card>
