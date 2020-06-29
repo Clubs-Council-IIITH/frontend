@@ -34,6 +34,10 @@ code {
     border: 2px solid #eee;
 }
 
+.nav-divider {
+    display: none;
+}
+
 .event-container {
     height: 70vh !important;
 }
@@ -199,6 +203,9 @@ code {
 }
 
 @media (min-width: 768px) {
+    .nav-divider {
+        display: block;
+    }
     .event-row {
         flex-wrap: nowrap;
         overflow-x: auto;

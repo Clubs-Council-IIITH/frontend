@@ -23,7 +23,7 @@ const Navigationbar = (props) => {
     if (!(props.context.string === "")) {
         contextButton = (
             <React.Fragment>
-                <NavItem className="nav-item mx-md-2">
+                <NavItem className="nav-item mx-md-2 nav-divider">
                     <NavbarText>•</NavbarText>
                 </NavItem>
 
