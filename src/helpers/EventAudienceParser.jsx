@@ -9,6 +9,5 @@ const AudienceList = {
 };
 
 export function parseAudience(audience) {
-    console.log("parsing");
     return AudienceList[audience];
 }

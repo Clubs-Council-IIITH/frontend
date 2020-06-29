@@ -1,13 +1,13 @@
 body {
-   margin: 0;
-   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-      "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* Fonts */
@@ -17,178 +17,192 @@ code {
 
 /* Navbar Styles */
 .nav-dark {
-   background-color: #0d0d0d !important;
-   font-family: "Quicksand";
-   font-weight: 600;
-   box-shadow: 0 0 10px #555;
+    background-color: #0d0d0d !important;
+    font-family: "Quicksand";
+    font-weight: 600;
+    box-shadow: 0 0 10px #555;
 }
 
 .nav-logo {
-   height: 40px;
+    height: 40px;
 }
 
 .nav-btn {
-   font-family: "Quicksand";
-   font-weight: 600;
-   border: 2px solid #eee;
+    font-family: "Quicksand";
+    font-weight: 600;
+    border: 2px solid #eee;
 }
 
 .event-container {
-   height: 70vh !important;
+    height: 70vh !important;
 }
 
 .event-row {
-   -ms-overflow-style: none;
+    -ms-overflow-style: none;
 }
 .event-row::-webkit-scrollbar {
-   display: none;
+    display: none;
 }
 
 .event-header {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   font-size: calc(36px + 1.2vw);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: calc(36px + 1.2vw);
 }
 
 .eventnew-btn {
-   font-family: "Quicksand";
-   font-weight: 600;
-   font-size: 0.38em;
-   color: white;
-   background-color: black;
-   border: 2px solid #000;
+    font-family: "Quicksand";
+    font-weight: 600;
+    font-size: 0.38em;
+    color: white;
+    background-color: black;
+    border: 2px solid #000;
 }
 
 .eventnew-btn:focus,
 .eventnew-btn:active,
 .eventnew-btn:hover {
-   color: black;
-   background-color: #fff;
-   border: 2px solid #000;
+    color: black;
+    background-color: #fff;
+    border: 2px solid #000;
 }
 
 .eventdelete-btn:focus,
 .eventdelete-btn:active,
 .eventdelete-btn:hover {
-   background-color: #f7cccc;
-   border-radius: 4px;
-   cursor: pointer;
+    background-color: #f7cccc;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .eventedit-btn:focus,
 .eventedit-btn:active,
 .eventedit-btn:hover {
-   background-color: #fff7cc;
-   border-radius: 4px;
+    background-color: #fff7cc;
+    border-radius: 4px;
 }
 
 .event-title {
-   font-family: "Raleway", "sans-serif";
-   font-weight: 700;
-   font-size: 1em;
-   line-height: 1.2;
+    font-family: "Raleway", "sans-serif";
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.2;
+    width: min-content;
+}
+
+.event-title:hover {
+    background-color: #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.event-title:active {
+    background-color: #bbb;
 }
 
 .event-card {
-   font-family: "Poppins";
-   font-size: calc(20px + 1vw);
-   width: 350px;
+    font-family: "Poppins";
+    font-size: calc(20px + 1vw);
+    width: 350px;
 }
 
 .event-datetime {
-   font-size: 0.7em;
-   color: #555;
+    font-size: 0.7em;
+    color: #555;
 }
 
 .event-name {
-   font-size: 1.2em;
-   font-weight: 600;
-   line-height: 1.2;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 .event-state {
-   font-size: 0.8em;
-   width: fit-content;
-   border-radius: 4px;
+    font-size: 0.8em;
+    width: fit-content;
+    border-radius: 4px;
 }
 
 .state-completed {
-   background-color: #fff7cc;
-   color: #99851b;
+    background-color: #fff7cc;
+    color: #99851b;
 }
 
 .state-deleted {
-   background-color: #f7cccc;
-   color: #b40000;
+    background-color: #f7cccc;
+    color: #b40000;
 }
 
 .state-created {
-   background-color: #ddd;
-   color: #555;
+    background-color: #ddd;
+    color: #555;
 }
 
 .state-approved {
-   background-color: #ccf4dd;
-   color: #007932;
+    background-color: #ccf4dd;
+    color: #007932;
 }
 
 .state-scheduled {
-   background-color: #cce9fb;
-   color: #005da8;
+    background-color: #cce9fb;
+    color: #005da8;
 }
 
 .state-published {
-   background-color: #e5d2ec;
-   color: #530f7c;
+    background-color: #e5d2ec;
+    color: #530f7c;
 }
 
 .event-venue {
-   font-size: 0.7em;
+    font-size: 0.7em;
 }
 
 .event-audience {
-   font-size: 0.7em;
+    font-size: 0.7em;
 }
 
 .card-header {
-   background-color: rgba(255, 255, 255, 0) !important;
-   border: none !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: none !important;
 }
 
 .card-footer {
-   background-color: rgba(255, 255, 255, 0) !important;
-   display: flex;
-   justify-content: space-between;
-   border: none !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    display: flex;
+    justify-content: space-between;
+    border: none !important;
 }
 
 .card-icon {
-   height: 1.2em;
-   width: 1.2em;
-   margin-right: 0.5em;
+    height: 1.2em;
+    width: 1.2em;
+    margin-right: 0.5em;
 }
 
 .card-btn {
-   height: 1.2em;
-   width: 1.2em;
+    height: 1.2em;
+    width: 1.2em;
 }
 
 .body-btn {
-   box-shadow: 0;
+    box-shadow: 0;
 }
 
 .body-btn:hover,
 .body-btn:focus,
 .body-btn:active,
 .body-btn:visited {
-   box-shadow: 2px 3px #888 !important;
+    box-shadow: 2px 3px #888 !important;
 }
 
 @media (min-width: 768px) {
-   .event-row {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-   }
+    .event-row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    .event-title {
+        width: fit-content;
+    }
 }
