@@ -38,6 +38,7 @@ code {
     display: none;
 }
 
+/* Events */
 .event-container {
     height: 70vh !important;
 }
@@ -55,38 +56,6 @@ code {
     justify-content: space-between;
     align-items: center;
     font-size: calc(36px + 1.2vw);
-}
-
-.eventnew-btn {
-    font-family: "Quicksand";
-    font-weight: 600;
-    font-size: 0.38em;
-    color: white;
-    background-color: black;
-    border: 2px solid #000;
-}
-
-.eventnew-btn:focus,
-.eventnew-btn:active,
-.eventnew-btn:hover {
-    color: black;
-    background-color: #fff;
-    border: 2px solid #000;
-}
-
-.eventdelete-btn:focus,
-.eventdelete-btn:active,
-.eventdelete-btn:hover {
-    background-color: #f7cccc;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.eventedit-btn:focus,
-.eventedit-btn:active,
-.eventedit-btn:hover {
-    background-color: #fff7cc;
-    border-radius: 4px;
 }
 
 .event-title {
@@ -110,7 +79,6 @@ code {
 .event-card {
     font-family: "Poppins";
     font-size: calc(20px + 1vw);
-    width: 350px;
 }
 
 .event-datetime {
@@ -130,6 +98,7 @@ code {
     border-radius: 4px;
 }
 
+/* States */
 .state-completed {
     background-color: #fff7cc;
     color: #99851b;
@@ -168,6 +137,7 @@ code {
     font-size: 0.7em;
 }
 
+/* Cards */
 .card-header {
     background-color: rgba(255, 255, 255, 0) !important;
     border: none !important;
@@ -186,6 +156,7 @@ code {
     margin-right: 0.5em;
 }
 
+/* Buttons */
 .card-btn {
     height: 1.2em;
     width: 1.2em;
@@ -202,6 +173,39 @@ code {
     box-shadow: 2px 3px #888 !important;
 }
 
+.eventnew-btn {
+    font-family: "Quicksand";
+    font-weight: 600;
+    font-size: 0.38em;
+    color: white;
+    background-color: black;
+    border: 2px solid #000;
+}
+
+.eventnew-btn:focus,
+.eventnew-btn:active,
+.eventnew-btn:hover {
+    color: black;
+    background-color: #fff;
+    border: 2px solid #000;
+}
+
+.eventdelete-btn:focus,
+.eventdelete-btn:active,
+.eventdelete-btn:hover {
+    background-color: #f7cccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.eventedit-btn:focus,
+.eventedit-btn:active,
+.eventedit-btn:hover {
+    background-color: #fff7cc;
+    border-radius: 4px;
+}
+
+/* Styles exclusively for displays with width >= 768px */
 @media (min-width: 768px) {
     .nav-divider {
         display: block;
@@ -212,5 +216,8 @@ code {
     }
     .event-title {
         width: fit-content;
+    }
+    .event-card {
+        width: 500px !important;
     }
 }
