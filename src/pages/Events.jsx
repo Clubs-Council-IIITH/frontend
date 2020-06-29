@@ -46,7 +46,7 @@ const Events = () => {
 
     return (
         <React.Fragment>
-            <div className="container-fluid event-container mt-4">
+            <div className="container-fluid event-container pt-5">
                 <NewEventModal modal={modal} toggleModal={toggleModal} />
                 <div className="event-header mx-md-4 mt-4">
                     <span className="event-title p-2" onClick={togglePrevious}>
