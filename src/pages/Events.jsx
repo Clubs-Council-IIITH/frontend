@@ -66,7 +66,7 @@ const Events = () => {
                     onWheel={horizontalScroll}
                 >
                     {eventList.map((event) => {
-                        const isPrevious = event.state == "completed" || event.state == "deleted";
+                        const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (viewPrevious ? !isPrevious : isPrevious) return null;
                         return (
                             <EventItem
