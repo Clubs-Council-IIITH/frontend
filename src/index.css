@@ -64,6 +64,10 @@ code {
     font-size: 1em;
     line-height: 1.2;
     width: min-content;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .event-title:hover {
