@@ -1,24 +1,24 @@
 import React from "react";
-
-import DashboardCard from "../components/DashboardCard";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Card, CardBody, CardText } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
-    const clubList = [
-        { name: "Manage Clubs", coordinators: "description", link: "./clubs" },
-        { name: "Manage Coordinators", coordinators: "description", link: "./coordinators" },
-        { name: "Manage Council", coordinators: "description", link: "./council" },
+    const cardList = [
+        { title: "Manage Clubs", description: "description", link: "./clubs" },
+        { title: "Manage Coordinators", description: "description", link: "./coordinators" },
+        { title: "Manage Council", description: "description", link: "./council" },
     ];
     return (
         <Container className="pt-5">
             <Row className="pt-5">
-                {clubList.map((club) => (
+                {cardList.map((card) => (
                     <Col lg="4">
-                        <DashboardCard
-                            title={club.name}
-                            body={club.coordinators}
-                            link={club.link}
-                        />
+                        <Card tag={Link} to={card.link} className="m-3 my-4 dash-card shadow">
+                            <CardBody>
+                                <h2> {card.title} </h2>
+                                <CardText> {card.description} </CardText>
+                            </CardBody>
+                        </Card>
                     </Col>
                 ))}
             </Row>
