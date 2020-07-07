@@ -13,6 +13,7 @@ import EditEvent from "./pages/EditEvent";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminClubs from "./pages/AdminClubs";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -69,9 +70,18 @@ const App = () => {
 
                 {/* Admin routes */}
                 <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} />
-                <ProtectedRoute exact path="/admin/clubs" component={AdminDashboard} />
-                <ProtectedRoute exact path="/admin/coordinators" component={AdminDashboard} />
-                <ProtectedRoute exact path="/admin/council" component={AdminDashboard} />
+                <ProtectedRoute exact path="/admin/clubs" component={AdminClubs} />
+                {/* <ProtectedRoute path="/admin/clubs/new" component={AdminNewClubs} /> */}
+                {/* <ProtectedRoute path="/admin/clubs/:id" component={AdminViewClub} /> */}
+                {/* <ProtectedRoute path="/admin/clubs/:id/edit" component={AdminEditClub} /> */}
+                {/* <ProtectedRoute exact path="/admin/coordinators" component={AdminCoord} /> */}
+                {/* <ProtectedRoute path="/admin/coordinators/new" component={AdminNewCoord} /> */}
+                {/* <ProtectedRoute path="/admin/coordinators/:id" component={AdminViewCoord} /> */}
+                {/* <ProtectedRoute path="/admin/coordinators/:id/edit" component={AdminEditCoord} /> */}
+                {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
+                {/* <ProtectedRoute path="/admin/council/new" component={AdminNewCouncil} /> */}
+                {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
+                {/* <ProtectedRoute path="/admin/council/:id/edit" component={AdminViewCouncil} /> */}
 
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />

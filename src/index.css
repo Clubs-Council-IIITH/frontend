@@ -160,9 +160,23 @@ code {
     margin-right: 0.5em;
 }
 
+.dash-card {
+    color: #000;
+}
+
 .dash-card:hover {
+    color: #000;
     cursor: pointer;
     text-decoration: none;
+}
+
+.elevate {
+    transition: all 0.2s ease-out;
+}
+
+.elevate:hover {
+    transition: all 0.2s ease-out;
+    box-shadow: 0 8px 10px 0 rgba(168, 182, 191, 0.6);
 }
 
 /* Buttons */
