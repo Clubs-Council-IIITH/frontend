@@ -69,6 +69,9 @@ const App = () => {
 
                 {/* Admin routes */}
                 <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} />
+                <ProtectedRoute exact path="/admin/clubs" component={AdminDashboard} />
+                <ProtectedRoute exact path="/admin/coordinators" component={AdminDashboard} />
+                <ProtectedRoute exact path="/admin/council" component={AdminDashboard} />
 
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
