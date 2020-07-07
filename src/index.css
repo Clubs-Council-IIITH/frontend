@@ -160,6 +160,11 @@ code {
     margin-right: 0.5em;
 }
 
+.dash-card:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
 /* Buttons */
 .card-btn {
     height: 1.2em;

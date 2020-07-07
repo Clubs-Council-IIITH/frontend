@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
+// Pages
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Clubs from "./pages/Clubs";
@@ -11,7 +12,9 @@ import Calendar from "./pages/Calendar";
 import EditEvent from "./pages/EditEvent";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
+import AdminDashboard from "./pages/AdminDashboard";
 
+// Components
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -59,8 +62,14 @@ const App = () => {
                 <Route exact path="/calendar" component={Calendar} />
                 <Route exact path="/blog" component={Blog} />
                 <Route exact path="/contact" component={Contact} />
+
+                {/* Organizer routes */}
                 <ProtectedRoute exact path="/events" component={Events} />
                 <ProtectedRoute exact path="/events/edit/:id" component={EditEvent} />
+
+                {/* Admin routes */}
+                <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} />
+
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
             </Switch>
