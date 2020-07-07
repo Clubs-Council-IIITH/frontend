@@ -1,7 +1,7 @@
 import React from "react";
 
 const Clubs = () => {
-   return <React.Fragment />;
+    return <React.Fragment />;
 };
 
 export default Clubs;

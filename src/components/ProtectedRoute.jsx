@@ -2,21 +2,21 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-   if (Date.parse(localStorage.getItem("expirationDate")) < new Date().getTime()) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("expirationDate");
-      localStorage.removeItem("usergroup");
-   }
+    if (Date.parse(localStorage.getItem("expirationDate")) < new Date().getTime()) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("expirationDate");
+        localStorage.removeItem("usergroup");
+    }
 
-   return (
-      <Route
-         {...rest}
-         render={(props) => {
-            if (localStorage.getItem("token") === null) return <Redirect to="/" />;
-            else return <Component {...props} />;
-         }}
-      />
-   );
+    return (
+        <Route
+            {...rest}
+            render={(props) => {
+                if (localStorage.getItem("token") === null) return <Redirect to="/" />;
+                else return <Component {...props} />;
+            }}
+        />
+    );
 };
 
 export default ProtectedRoute;
