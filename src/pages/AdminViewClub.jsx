@@ -77,7 +77,7 @@ const AdminViewClub = (props) => {
                 {activities.map((activity) => (
                     <Card>
                         {activity.timestamp}
-                        {activity.actor}
+                        {activity.event[0]["creator"]}
                         {activity.action}
                         {activity.event[0]["name"]}
                     </Card>
