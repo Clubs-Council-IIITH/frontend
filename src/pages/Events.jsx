@@ -14,7 +14,7 @@ const Events = () => {
 
     useEffect(() => {
         axios
-            .get("/api/organizers/events", {
+            .get("/api/events", {
                 headers: { Authorization: "Token " + localStorage.getItem("token") },
             })
             .then((response) => {

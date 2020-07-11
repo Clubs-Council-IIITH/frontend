@@ -13,7 +13,7 @@ const EditEvent = () => {
 
     useEffect(() => {
         axios
-            .get("/api/organizers/events/edit/" + id + "/", {
+            .get("/api/events/edit/" + id + "/", {
                 headers: { Authorization: "Token " + localStorage.getItem("token") },
             })
             .then((response) => {
@@ -37,11 +37,7 @@ const EditEvent = () => {
         <React.Fragment>
             <Container>
                 <Jumbotron>
-                    <EventForm
-                        action="/api/organizers/events/edit/"
-                        id={id}
-                        initial={initialData}
-                    />
+                    <EventForm action="/api/events/edit/" id={id} initial={initialData} />
                 </Jumbotron>
             </Container>
         </React.Fragment>

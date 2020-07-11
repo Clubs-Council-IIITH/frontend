@@ -10,7 +10,7 @@ const EventItem = (props) => {
     const handleDelete = useCallback(() => {
         axios
             .post(
-                "/api/organizers/events/delete/" + props.id + "/",
+                "/api/events/delete/" + props.id + "/",
                 {},
                 {
                     headers: {

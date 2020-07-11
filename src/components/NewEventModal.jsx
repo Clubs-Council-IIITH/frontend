@@ -18,7 +18,7 @@ const NewEventModal = (props) => {
             <Modal isOpen={props.modal} toggle={props.toggleModal}>
                 <ModalHeader> Create a new event </ModalHeader>
                 <ModalBody>
-                    <EventForm action="/api/organizers/events/new" id="" initial={initialData} />
+                    <EventForm action="/api/events/new" id="" initial={initialData} />
                 </ModalBody>
             </Modal>
         </React.Fragment>
