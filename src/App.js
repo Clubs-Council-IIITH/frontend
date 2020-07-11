@@ -14,6 +14,7 @@ import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminClubs from "./pages/AdminClubs";
+import AdminViewClub from "./pages/AdminViewClub";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -71,10 +72,10 @@ const App = () => {
                 {/* Admin routes */}
                 <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} />
                 <ProtectedRoute exact path="/admin/clubs" component={AdminClubs} />
-                {/* <ProtectedRoute path="/admin/clubs/new" component={AdminNewClubs} /> */}
-                {/* <ProtectedRoute path="/admin/clubs/:id" component={AdminViewClub} /> */}
+                {/* <ProtectedRoute path="/admin/clubs/new" component={AdminNewClub} /> */}
+                <ProtectedRoute path="/admin/clubs/:id" component={AdminViewClub} />
                 {/* <ProtectedRoute path="/admin/clubs/:id/edit" component={AdminEditClub} /> */}
-                {/* <ProtectedRoute exact path="/admin/coordinators" component={AdminCoord} /> */}
+                {/* <ProtectedRoute exact path="/admin/coordinators" component={AdminCoords} /> */}
                 {/* <ProtectedRoute path="/admin/coordinators/new" component={AdminNewCoord} /> */}
                 {/* <ProtectedRoute path="/admin/coordinators/:id" component={AdminViewCoord} /> */}
                 {/* <ProtectedRoute path="/admin/coordinators/:id/edit" component={AdminEditCoord} /> */}
