@@ -2,28 +2,13 @@ import React, { useCallback } from "react";
 import { Card } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
+import API from "../../api/methods";
 
 import EventState from "../EventState";
 
 const EventItem = (props) => {
-    const handleDelete = useCallback(() => {
-        axios
-            .post(
-                "/api/events/delete/" + props.id + "/",
-                {},
-                {
-                    headers: {
-                        Authorization: "Token " + localStorage.getItem("token"),
-                    },
-                }
-            )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    const handleDelete = useCallback(async () => {
+        const res = await API.delete("events", props.id);
         window.location.reload(false);
     }, [props.id]);
 

@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 
-import axios from "axios";
+import API from "../api/methods";
 
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
 import { parseAudience } from "../utils/EventAudienceParser";
 
 const Events = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const [eventList, setEventList] = useState([]);
     const [modal, setModal] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
 
     useEffect(() => {
-        axios
-            .get("/api/events", {
-                headers: { Authorization: "Token " + localStorage.getItem("token") },
-            })
-            .then((response) => {
-                setEventList(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        async function getEventList() {
+            const res = await API.view("events", {});
+            setEventList(res.data);
+            setIsLoading(false);
+        }
+
+        getEventList();
     }, []);
 
     const toggleModal = () => {
@@ -44,6 +42,7 @@ const Events = () => {
         }
     };
 
+    if (isLoading) return null; // TODO: Add Spinner
     return (
         <React.Fragment>
             <div className="container-fluid event-container pt-5">

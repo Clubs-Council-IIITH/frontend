@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Container, Row, Col, Card, CardBody, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Container, Row, Col, Card, CardBody, CardText } from "reactstrap";
+
+import API from "../../api/methods";
 
 const AdminClubs = (props) => {
     const [clubList, setClubList] = useState(false);
     useEffect(() => {
-        axios
-            .get("/api/clubs/", {
-                headers: { Authorization: "Token " + localStorage.getItem("token") },
-            })
-            .then((response) => {
-                console.log(response);
-                setClubList(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        async function getClubList() {
+            const res = await API.view("clubs", {});
+            setClubList(res.data);
+        }
+
+        getClubList();
     }, []);
 
     if (!clubList) return null;

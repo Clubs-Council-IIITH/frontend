@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Jumbotron, Container } from "reactstrap";
 import { useParams } from "react-router-dom";
+import { Jumbotron, Container } from "reactstrap";
 
-import axios from "axios";
+import API from "../api/methods";
 
 import EventForm from "../forms/EventForm";
 
@@ -12,32 +12,21 @@ const EditEvent = () => {
     const [initialData, setInitialData] = useState({});
 
     useEffect(() => {
-        axios
-            .get("/api/events/edit/" + id + "/", {
-                headers: { Authorization: "Token " + localStorage.getItem("token") },
-            })
-            .then((response) => {
-                setInitialData({
-                    ...response.data,
-                    audience: response.data.audience.split(","),
-                });
-                setIsLoading(false);
-                console.log(initialData);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        async function getInitialData() {
+            const res = await API.view("events", { id: id });
+            setInitialData({ ...res.data[0], audience: res.data[0].audience.split(",") });
+            setIsLoading(false);
+        }
+
+        getInitialData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    if (isLoading) {
-        return null; // TODO: Loading Spinner
-    }
-
+    if (isLoading) return null; // TODO: Loading Spinner
     return (
         <React.Fragment>
             <Container>
                 <Jumbotron>
-                    <EventForm action="/api/events/edit/" id={id} initial={initialData} />
+                    <EventForm action="edit" id={id} initial={initialData} />
                 </Jumbotron>
             </Container>
         </React.Fragment>

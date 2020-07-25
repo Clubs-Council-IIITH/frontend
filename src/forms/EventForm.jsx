@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-import axios from "axios";
+import API from "../api/methods";
 
 const EventForm = (props) => {
     const { register, handleSubmit, errors } = useForm({
@@ -16,26 +16,16 @@ const EventForm = (props) => {
         },
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
         var eventForm = document.getElementById("eventform");
         var eventFormData = new FormData(eventForm);
         eventFormData.set("audience", data.audience.toString());
-        const url = props.action + props.id + "/";
-        axios
-            .post(url, eventFormData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    Authorization: "Token " + localStorage.getItem("token"),
-                },
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        window.location.reload(false);
+
+        var res;
+        if (props.action === "new") res = await API.new("events", eventFormData);
+        else res = await API.edit("events", props.id, eventFormData);
+
+        window.location.href = "/events";
     };
 
     return (

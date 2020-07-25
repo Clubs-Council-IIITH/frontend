@@ -1,44 +1,32 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Container, Row, Col, Card } from "reactstrap";
 
+import API from "../../api/methods";
+
 const AdminViewClub = (props) => {
-    const [club, SetClub] = useState(false);
-    const [events, SetEvents] = useState(false);
-    const [activities, SetActivities] = useState(false);
+    const [club, setClub] = useState(false);
+    const [events, setEvents] = useState(false);
+    const [logs, setLogs] = useState(false);
 
     useEffect(() => {
-        axios
-            .get("/api/clubs", { params: { id: props.match.params.id } })
-            .then((response) => {
-                console.log(response);
-                SetClub(response.data[0]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        axios
-            .get("/api/events", {
-                headers: { Authorization: "Token " + localStorage.getItem("token") },
-            })
-            .then((response) => {
-                console.log(response);
-                SetEvents(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        axios
-            .get("/api/logs", {
-                headers: { Authorization: "Token " + localStorage.getItem("token") },
-            })
-            .then((response) => {
-                console.log(response);
-                SetActivities(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        async function getClub() {
+            const res = await API.view("clubs", { id: props.match.params.id });
+            setClub(res.data[0]);
+        }
+
+        async function getEvents() {
+            const res = await API.view("events", {});
+            setEvents(res.data);
+        }
+
+        async function getLogs() {
+            const res = await API.view("logs", {});
+            setLogs(res.data);
+        }
+
+        getClub();
+        getEvents();
+        getLogs();
     }, []); // eslint-disable-line
 
     const renderClub = () => {
@@ -70,16 +58,17 @@ const AdminViewClub = (props) => {
         );
     };
 
-    const renderActivities = () => {
-        if (!activities) return null;
+    const renderLogs = () => {
+        console.log(logs);
+        if (!logs) return null;
         return (
             <React.Fragment>
-                {activities.map((activity) => (
+                {logs.map((log) => (
                     <Card>
-                        {activity.timestamp}
-                        {activity.event[0]["creator"]}
-                        {activity.action}
-                        {activity.event[0]["name"]}
+                        {log.timestamp}
+                        {log.event[0]["creator"]}
+                        {log.action}
+                        {log.event[0]["name"]}
                     </Card>
                 ))}
             </React.Fragment>
@@ -95,7 +84,7 @@ const AdminViewClub = (props) => {
                     </Col>
                     <Col className="m-3">
                         <Row className="card">{renderEvents()}</Row>
-                        <Row className="mt-4 card">{renderActivities()}</Row>
+                        <Row className="mt-4 card">{renderLogs()}</Row>
                     </Col>
                 </Row>
             </Container>

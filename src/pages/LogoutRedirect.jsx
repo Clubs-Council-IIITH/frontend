@@ -1,8 +1,10 @@
 import React, { useEffect } from "react"; // eslint-disable-line
 
+import API from "../api/methods";
+
 const LogoutRedirect = () => {
     useEffect(() => {
-        localStorage.removeItem("token");
+        API.logout();
         window.location.href = "http://localhost:8000/accounts/logout";
     });
     return null;
