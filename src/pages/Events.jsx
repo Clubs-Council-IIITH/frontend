@@ -4,8 +4,8 @@ import { Button } from "reactstrap";
 import axios from "axios";
 
 import NewEventModal from "../components/NewEventModal";
-import EventItem from "../components/EventItem";
-import { parseAudience } from "../helpers/EventAudienceParser";
+import EventItem from "../components/items/EventItem";
+import { parseAudience } from "../utils/EventAudienceParser";
 
 const Events = () => {
     const [eventList, setEventList] = useState([]);

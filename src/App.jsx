@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
-// Pages
+// Pages {{{
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Clubs from "./pages/Clubs";
@@ -12,13 +12,16 @@ import Calendar from "./pages/Calendar";
 import EditEvent from "./pages/EditEvent";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminClubs from "./pages/AdminClubs";
-import AdminViewClub from "./pages/AdminViewClub";
 
-// Components
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminClubs from "./pages/admin/AdminClubs";
+import AdminViewClub from "./pages/admin/AdminViewClub";
+// }}}
+
+// Components {{{
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
+// }}}
 
 const App = () => {
     const [contextAction, setContextAction] = useState("");

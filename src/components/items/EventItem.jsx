@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
-import EventState from "./EventState";
+import EventState from "../EventState";
 
 const EventItem = (props) => {
     const handleDelete = useCallback(() => {
