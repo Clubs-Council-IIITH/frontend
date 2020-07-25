@@ -39,7 +39,7 @@ const AdminViewClub = (props) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, []); // eslint-disable-line
 
     const renderClub = () => {
         if (!club) return null;
