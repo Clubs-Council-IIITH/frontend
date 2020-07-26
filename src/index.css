@@ -39,17 +39,6 @@ code {
 }
 
 /* Events */
-.event-container {
-    height: 70vh !important;
-}
-
-.event-row {
-    -ms-overflow-style: none;
-}
-.event-row::-webkit-scrollbar {
-    display: none;
-}
-
 .event-header {
     display: flex;
     flex-direction: row;
@@ -233,14 +222,7 @@ code {
     .nav-divider {
         display: block;
     }
-    .event-row {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-    }
     .event-title {
         width: fit-content;
-    }
-    .event-card {
-        width: 400px !important;
     }
 }

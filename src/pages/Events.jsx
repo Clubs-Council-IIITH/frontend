@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "reactstrap";
+import { Button, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
@@ -31,21 +31,10 @@ const Events = () => {
         setViewPrevious(!viewPrevious);
     };
 
-    const horizontalScroll = (e) => {
-        if (window.screen.width >= 768) {
-            e.preventDefault();
-            const delta = Math.max(
-                -1,
-                Math.min(1, e.nativeEvent.wheelDelta || -e.nativeEvent.detail)
-            );
-            e.currentTarget.scrollLeft -= delta * 50;
-        }
-    };
-
     if (isLoading) return null; // TODO: Add Spinner
     return (
         <React.Fragment>
-            <div className="container-fluid event-container pt-5">
+            <div className="container-fluid pt-5">
                 <NewEventModal modal={modal} toggleModal={toggleModal} />
                 <div className="event-header mx-md-4 mt-4">
                     <span className="event-title p-2" onClick={togglePrevious}>
@@ -59,28 +48,28 @@ const Events = () => {
                         <span className="d-none d-md-block"> + NEW EVENT </span>
                     </Button>
                 </div>
-                <div
-                    id="event-row"
-                    className="row event-row h-100 mt-4 pb-3 my-3 mx-md-1"
-                    onWheel={horizontalScroll}
-                >
+                <Row id="event-row" className="h-100 pt-4 mb-3 mx-md-1">
                     {eventList.map((event) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (viewPrevious ? !isPrevious : isPrevious) return null;
                         return (
-                            <EventItem
-                                key={event.id}
-                                id={event.id}
-                                audience={event.audience.split(",").map(parseAudience).join(", ")}
-                                name={event.name}
-                                datetime={event.datetime}
-                                venue={event.venue}
-                                creator={event.creator}
-                                state={event.state}
-                            />
+                            <Col md="5" lg="3" xl="3" key={event.id} className="p-4">
+                                <EventItem
+                                    id={event.id}
+                                    audience={event.audience
+                                        .split(",")
+                                        .map(parseAudience)
+                                        .join(", ")}
+                                    name={event.name}
+                                    datetime={event.datetime}
+                                    venue={event.venue}
+                                    creator={event.creator}
+                                    state={event.state}
+                                />
+                            </Col>
                         );
                     })}
-                </div>
+                </Row>
             </div>
         </React.Fragment>
     );
