@@ -4,12 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import SessionProvider from "./api/SessionContext";
 
 ReactDOM.render(
-   <React.StrictMode>
-      <App />
-   </React.StrictMode>,
-   document.getElementById("root")
+    <React.StrictMode>
+        <SessionProvider>
+            <App />
+        </SessionProvider>
+    </React.StrictMode>,
+    document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

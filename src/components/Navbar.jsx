@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
 import {
     Collapse,
@@ -14,13 +14,36 @@ import {
 
 const Navigationbar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [contextAction, setContextAction] = useState("");
+    const [contextString, setContextString] = useState("");
+
+    const isAuthenticated = props.session.usergroup !== null;
+    const loginURL = "http://localhost:8000/token";
+    const logoutURL = "/logoutRedirect";
 
     const toggle = () => {
         setIsOpen(!isOpen);
     };
 
-    var contextButton = "";
-    if (!(props.context.string === "")) {
+    useEffect(() => {
+        console.log(props.session);
+        const usergroup = props.session.usergroup;
+        switch (usergroup) {
+            case "organizer":
+                setContextAction("/events");
+                setContextString("MY EVENTS");
+                break;
+            case "cc_admin":
+                setContextAction("/admin/dashboard");
+                setContextString("DASHBOARD");
+                break;
+            default:
+                break;
+        }
+    }, [props.session]);
+
+    var contextButton = null;
+    if (isAuthenticated) {
         contextButton = (
             <React.Fragment>
                 <NavItem className="nav-item mx-md-2 nav-divider">
@@ -28,8 +51,8 @@ const Navigationbar = (props) => {
                 </NavItem>
 
                 <NavItem className="nav-item mx-md-2">
-                    <NavLink tag={Link} to={props.context.action} activeClassName="active">
-                        {props.context.string}
+                    <NavLink tag={Link} to={contextAction} activeClassName="active">
+                        {contextString}
                     </NavLink>
                 </NavItem>
             </React.Fragment>
@@ -71,9 +94,9 @@ const Navigationbar = (props) => {
                     </NavItem>
                     {contextButton}
                 </Nav>
-                <a href={props.auth.action}>
+                <a href={isAuthenticated ? logoutURL : loginURL}>
                     <Button className="nav-btn mr-md-3 mt-3 mt-md-0" outline color="light">
-                        {props.auth.string}
+                        {isAuthenticated ? "LOG OUT" : "LOG IN"}
                     </Button>
                 </a>
             </Collapse>

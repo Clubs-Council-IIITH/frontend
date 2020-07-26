@@ -1,32 +1,29 @@
 import axios from "axios";
 
 const headers = {
-    Authorization: "Token " + localStorage.getItem("token"),
+    Authorization: localStorage.getItem("token"),
     "Content-Type": "multipart/form-data",
 };
 
 function fetchToken() {
-    headers.Authorization = "Token " + localStorage.getItem("token");
+    headers.Authorization = localStorage.getItem("token") || null;
 }
 
 export default {
     login: async (props) => {
         const token = props.location.search.split("&")[0].substring(7);
         const expiration_date = new Date(new Date().getTime() + 3600 * 1000);
-        const usergroup = props.location.search.split("&")[1].substring(10);
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", "Token " + token);
         localStorage.setItem("expiration_date", expiration_date);
-        localStorage.setItem("usergroup", usergroup);
     },
 
     logout: async () => {
         localStorage.removeItem("token");
         localStorage.removeItem("expiration_date");
-        localStorage.removeItem("usergroup");
     },
 
     session: async () => {
-        const res = await axios.get("/api/session/", { headers });
+        const res = await axios.get("/session/", { headers });
         console.log(res);
         return res;
     },

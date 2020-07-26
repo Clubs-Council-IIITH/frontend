@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+import { SessionContext } from "./api/SessionContext";
 
 // Pages {{{
 import Home from "./pages/Home";
@@ -24,43 +25,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 // }}}
 
 const App = () => {
-    const [contextAction, setContextAction] = useState("");
-    const [contextString, setContextString] = useState("");
-    const [authAction, setAuthAction] = useState("");
-    const [authString, setAuthString] = useState("");
-
-    const setContext = useCallback(() => {
-        const usergroup = localStorage.getItem("usergroup");
-        switch (usergroup) {
-            case "organizer":
-                setContextAction("/events");
-                setContextString("MY EVENTS");
-                break;
-            case "cc_admin":
-                setContextAction("/admin/dashboard");
-                setContextString("DASHBOARD");
-                break;
-            default:
-                break;
-        }
-    }, []);
-
-    useEffect(() => {
-        setAuthAction("http://localhost:8000/token");
-        setAuthString("LOGIN");
-        if (localStorage.getItem("token") !== null) {
-            setAuthAction("/logoutRedirect");
-            setAuthString("LOGOUT");
-            setContext();
-        }
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const authProps = { action: authAction, string: authString };
-    const contextProps = { action: contextAction, string: contextString };
+    const sessionContext = useContext(SessionContext);
 
     return (
         <Router>
-            <Navbar auth={authProps} context={contextProps} />
+            <Navbar session={sessionContext.session} />
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/clubs" component={Clubs} />
