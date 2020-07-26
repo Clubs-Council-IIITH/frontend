@@ -5,7 +5,8 @@ import API from "../api/methods";
 
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
-import { parseAudience } from "../utils/EventAudienceParser";
+import { formatAudience } from "../utils/AudienceFormatter";
+import { formatDateTime } from "../utils/DateTimeFormatter";
 
 const Events = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -56,12 +57,9 @@ const Events = () => {
                             <Col md="5" lg="3" xl="3" key={event.id} className="p-4">
                                 <EventItem
                                     id={event.id}
-                                    audience={event.audience
-                                        .split(",")
-                                        .map(parseAudience)
-                                        .join(", ")}
+                                    audience={formatAudience(event.audience)}
                                     name={event.name}
-                                    datetime={event.datetime}
+                                    datetime={formatDateTime(event.datetime).datetime}
                                     venue={event.venue}
                                     creator={event.creator}
                                     state={event.state}

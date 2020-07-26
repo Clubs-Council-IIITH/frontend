@@ -11,3 +11,7 @@ const AudienceList = {
 export function parseAudience(audience) {
     return AudienceList[audience];
 }
+
+export function formatAudience(audienceList) {
+    return audienceList.split(",").map(parseAudience).join(", ");
+}

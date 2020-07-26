@@ -12,23 +12,10 @@ const EventItem = (props) => {
         window.location.reload(false);
     }, [props.id]);
 
-    const formatDT = (rawDT) => {
-        var DT = new Date(rawDT);
-        var cleanDT =
-            DT.getDate() +
-            "." +
-            DT.getMonth() +
-            "." +
-            DT.getFullYear() +
-            " · " +
-            DT.toLocaleString("en-US", { hour: "numeric", minute: "numeric", hour12: true });
-        return cleanDT;
-    };
-
     return (
         <Card className="event-card elevate p-2">
             <div className="card-header">
-                <div className="event-datetime">{formatDT(props.datetime)}</div>
+                <div className="event-datetime">{props.datetime}</div>
                 <div className="event-name">{props.name}</div>
                 <EventState current={props.state} />
             </div>
