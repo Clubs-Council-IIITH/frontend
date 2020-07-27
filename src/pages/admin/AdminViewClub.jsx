@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 import EventItem from "../../components/items/EventItem";
@@ -76,7 +76,6 @@ const AdminViewClub = (props) => {
     };
 
     const renderLogs = () => {
-        console.log(logs);
         if (!logs) return null;
         return (
             <React.Fragment>
