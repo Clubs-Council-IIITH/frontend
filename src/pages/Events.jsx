@@ -5,8 +5,6 @@ import API from "../api/methods";
 
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
-import { formatAudience } from "../utils/AudienceFormatter";
-import { formatDateTime } from "../utils/DateTimeFormatter";
 
 const Events = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +35,7 @@ const Events = () => {
         <React.Fragment>
             <div className="container-fluid pt-5">
                 <NewEventModal modal={modal} toggleModal={toggleModal} />
-                <div className="event-header mx-md-4 mt-4">
+                <div className="event-header mx-3 mx-md-4 mt-4">
                     <span className="event-title p-2" onClick={togglePrevious}>
                         {viewPrevious ? "Previous Events" : "Upcoming Events"}
                     </span>
@@ -49,17 +47,17 @@ const Events = () => {
                         <span className="d-none d-md-block"> + NEW EVENT </span>
                     </Button>
                 </div>
-                <Row id="event-row" className="h-100 pt-4 mb-3 mx-md-1">
+                <Row id="event-row" className="h-100 pt-4 mb-3 mx-1 m-md-3">
                     {eventList.map((event) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (viewPrevious ? !isPrevious : isPrevious) return null;
                         return (
-                            <Col md="5" lg="3" xl="3" key={event.id} className="p-4">
+                            <Col md="5" lg="4" xl="3" key={event.id} className="my-3">
                                 <EventItem
                                     id={event.id}
-                                    audience={formatAudience(event.audience)}
+                                    audience={event.audience}
                                     name={event.name}
-                                    datetime={formatDateTime(event.datetime).datetime}
+                                    datetime={event.datetime}
                                     venue={event.venue}
                                     creator={event.creator}
                                     state={event.state}

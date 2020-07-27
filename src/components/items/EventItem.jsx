@@ -1,10 +1,12 @@
 import React, { useCallback } from "react";
-import { Card } from "reactstrap";
+import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import API from "../../api/methods";
 
 import EventState from "../EventState";
+import { formatAudience } from "../../utils/AudienceFormatter";
+import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const EventItem = (props) => {
     const handleDelete = useCallback(async () => {
@@ -13,13 +15,13 @@ const EventItem = (props) => {
     }, [props.id]);
 
     return (
-        <Card className="event-card elevate p-2">
-            <div className="card-header">
-                <div className="event-datetime">{props.datetime}</div>
+        <Card className="event-card elevate">
+            <CardHeader>
+                <div className="event-datetime">{formatDateTime(props.datetime).datetime}</div>
                 <div className="event-name">{props.name}</div>
                 <EventState current={props.state} />
-            </div>
-            <div className="card-body">
+            </CardHeader>
+            <CardBody>
                 <div className="event-venue mb-2">
                     <span>
                         <img className="card-icon" src="/venue-18.svg" alt="V" />
@@ -30,10 +32,10 @@ const EventItem = (props) => {
                     <span>
                         <img className="card-icon" src="/audience-18.svg" alt="A" />
                     </span>
-                    {props.audience}
+                    {formatAudience(props.audience)}
                 </div>
-            </div>
-            <div className="card-footer">
+            </CardBody>
+            <CardFooter>
                 <p onClick={handleDelete}>
                     <img className="card-btn eventdelete-btn m-2" src="/delete-18.svg" alt="D" />
                 </p>
@@ -42,7 +44,7 @@ const EventItem = (props) => {
                         <img className="card-btn eventedit-btn m-2" src="/edit-18.svg" alt="E" />
                     </p>
                 </Link>
-            </div>
+            </CardFooter>
         </Card>
     );
 };
