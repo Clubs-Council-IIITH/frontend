@@ -96,6 +96,34 @@ code {
     border-radius: 4px;
 }
 
+/* Logs */
+.log-time {
+    font-weight: bold;
+    font-size: 0.6em;
+    color: #555555;
+}
+
+.log-date {
+    font-weight: bold;
+    font-size: 0.7em;
+}
+
+.log-message {
+    font-size: 0.7em;
+}
+
+.log-0 {
+    color: #00aa55;
+}
+
+.log-1 {
+    color: #f9a825;
+}
+
+.log-2 {
+    color: #b40000;
+}
+
 /* States */
 .state-completed {
     background-color: #fff7cc;

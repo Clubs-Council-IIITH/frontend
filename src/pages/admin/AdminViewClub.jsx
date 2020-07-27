@@ -4,6 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 import EventItem from "../../components/items/EventItem";
 import LogItem from "../../components/items/LogItem";
+import { isSameDay } from "../../utils/DateTimeFormatter";
 
 const AdminViewClub = (props) => {
     const [club, setClub] = useState(false);
@@ -77,15 +78,26 @@ const AdminViewClub = (props) => {
 
     const renderLogs = () => {
         if (!logs) return null;
+
+        var prevDate = logs[0].timestamp;
+        logs[0]["datebreak"] = true;
+        logs.forEach(function (log) {
+            if (!isSameDay(prevDate, log.timestamp)) {
+                log["datebreak"] = true;
+                prevDate = log.timestamp;
+            }
+        });
+
         return (
             <React.Fragment>
                 {logs.map((log) => (
-                    <Col md="12" className="my-3">
+                    <Col md="12" className="my-2">
                         <LogItem
                             datetime={log.timestamp}
                             creator={log.event[0]["creator"]}
                             action={log.action}
                             event={log.event[0]["name"]}
+                            datebreak={log.datebreak}
                         />
                     </Col>
                 ))}
@@ -108,11 +120,11 @@ const AdminViewClub = (props) => {
                         </div>
                         <Row className="h-100 w-100 my-4 mx-auto">{renderEvents()}</Row>
                     </Row>
-                    <Row className="m-3">
+                    <Row className="m-1 m-md-3">
                         <div className="logs-header">
                             <span className="logs-title p-1 mx-3"> Recent Activity </span>
                         </div>
-                        <Row className="h-100 w-100 my-4 mx-auto">{renderLogs()}</Row>
+                        <Row className="h-100 w-100 my-2 mx-auto">{renderLogs()}</Row>
                     </Row>
                 </Col>
             </Row>
