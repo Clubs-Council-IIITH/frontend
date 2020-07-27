@@ -15,3 +15,13 @@ export function formatDateTime(rawDT) {
     cleanDT["datetime"] = cleanDT["date"] + " · " + cleanDT["time"];
     return cleanDT;
 }
+
+export function isSameDay(dto1, dto2) {
+    const dt1 = new Date(dto1);
+    const dt2 = new Date(dto2);
+    return (
+        dt1.getDay() === dt2.getDay() &&
+        dt1.getMonth() === dt2.getMonth() &&
+        dt1.getFullYear() === dt2.getFullYear()
+    );
+}
