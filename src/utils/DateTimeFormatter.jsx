@@ -1,19 +1,34 @@
 export function formatDateTime(rawDT) {
     var DT = new Date(rawDT);
-    var cleanDT = {};
-    cleanDT["date"] =
+    var date =
         DT.getDate() +
         " " +
         DT.toLocaleString("default", { month: "long" }) +
         " " +
         DT.getFullYear();
-    cleanDT["time"] = DT.toLocaleString("en-US", {
+    var time = DT.toLocaleString("en-US", {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
     });
-    cleanDT["datetime"] = cleanDT["date"] + " · " + cleanDT["time"];
-    return cleanDT;
+    var datetime = date + " · " + time;
+    return { date: date, time: time, datetime: datetime };
+}
+
+export function parseDateTime(rawDT) {
+    var date, time;
+    try {
+        date = rawDT.split("T")[0];
+        time = new Date(rawDT).toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: false,
+        });
+    } catch {
+        date = "";
+        time = "";
+    }
+    return { date: date, time: time };
 }
 
 export function isSameDay(dto1, dto2) {
