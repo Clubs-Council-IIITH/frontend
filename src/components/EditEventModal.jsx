@@ -6,27 +6,26 @@ import API from "../api/methods";
 import EventForm from "../forms/EventForm";
 
 const EditEventModal = (props) => {
-    const id = props.id;
     const [isLoading, setIsLoading] = useState(true);
     const [initialData, setInitialData] = useState({});
 
     useEffect(() => {
         async function getInitialData() {
-            const res = await API.view("events", { id: id });
+            const res = await API.view("events", { id: props.id });
             setInitialData({ ...res.data[0], audience: res.data[0].audience.split(",") });
             setIsLoading(false);
         }
 
-        if (id !== 0) getInitialData();
-    }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+        if (props.id !== 0) getInitialData();
+    }, [props.id]);
 
-    if (isLoading || id === 0) return null; // TODO: Loading Spinner
+    if (isLoading || props.id === 0) return null; // TODO: Loading Spinner
     return (
         <React.Fragment>
             <Modal isOpen={props.modal} toggle={props.toggleModal}>
                 <ModalHeader> Edit event </ModalHeader>
                 <ModalBody>
-                    <EventForm action="edit" id={id} initial={initialData} />
+                    <EventForm action="edit" id={props.id} initial={initialData} />
                 </ModalBody>
             </Modal>
         </React.Fragment>
