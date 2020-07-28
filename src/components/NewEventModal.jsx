@@ -6,11 +6,10 @@ import EventForm from "../forms/EventForm";
 const NewEventModal = (props) => {
     const [initialData] = useState({
         name: "",
-        creator: "",
         datetime: "",
         venue: "",
         audience: "",
-        state: "",
+        state: "created",
     });
 
     return (

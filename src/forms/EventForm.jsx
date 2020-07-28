@@ -8,7 +8,7 @@ const EventForm = (props) => {
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
-            creator: props.initial.creator,
+            creator: "",
             datetime: props.initial.datetime,
             venue: props.initial.venue,
             audience: props.initial.audience,
@@ -75,21 +75,27 @@ const EventForm = (props) => {
                             <option value="faculty"> Faculty </option>
                         </Input>
                     </FormGroup>
-                    <FormGroup>
-                        <Label for="state"> State </Label>
-                        <Input type="select" name="state" innerRef={register({ required: true })}>
-                            <option value="created"> CREATED </option>
-                            <option value="approved"> APPROVED </option>
-                            <option value="published"> PUBLISHED </option>
-                            <option value="scheduled"> SCHEDULED </option>
-                            <option value="completed"> COMPLETED </option>
-                            <option value="deleted"> DELETED </option>
-                        </Input>
-                    </FormGroup>
+                    {props.action === "new" ? null : (
+                        <FormGroup>
+                            <Label for="state"> State </Label>
+                            <Input
+                                type="select"
+                                name="state"
+                                innerRef={register({ required: true })}
+                            >
+                                <option value="created"> CREATED </option>
+                                <option value="approved"> APPROVED </option>
+                                <option value="published"> PUBLISHED </option>
+                                <option value="scheduled"> SCHEDULED </option>
+                                <option value="completed"> COMPLETED </option>
+                                <option value="deleted"> DELETED </option>
+                            </Input>
+                        </FormGroup>
+                    )}
                     <FormGroup className="mt-4">
-                        <Label for="creator"> Creator name </Label>
+                        <Label for="creator"> Your name? </Label>
                         <Input type="text" name="creator" innerRef={register({ required: true })} />
-                        {errors.ename && <p> Creator name can not be empty! </p>}
+                        {errors.ename && <p> Your name can not be empty! </p>}
                     </FormGroup>
                 </Col>
             </Row>
