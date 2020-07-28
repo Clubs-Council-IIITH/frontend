@@ -77,8 +77,7 @@ const AdminViewClub = (props) => {
     };
 
     const renderLogs = () => {
-        if (!logs) return null;
-
+        if (!(logs.length > 0)) return null;
         var prevDate = logs[0].timestamp;
         logs[0]["datebreak"] = true;
         logs.forEach(function (log) {
