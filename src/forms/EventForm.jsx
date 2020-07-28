@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import { Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
+import { parseDateTime } from "../utils/DateTimeFormatter";
 
 const EventForm = (props) => {
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
             creator: "",
-            datetime: props.initial.datetime,
+            date: parseDateTime(props.initial.datetime).date,
+            time: parseDateTime(props.initial.datetime).time,
             venue: props.initial.venue,
             audience: props.initial.audience,
             state: props.initial.state,
@@ -20,6 +22,7 @@ const EventForm = (props) => {
         var eventForm = document.getElementById("eventform");
         var eventFormData = new FormData(eventForm);
         eventFormData.set("audience", data.audience.toString());
+        eventFormData.set("datetime", new Date(data.date + " " + data.time).toISOString());
 
         var res;
         if (props.action === "new") res = await API.new("events", eventFormData);
@@ -31,21 +34,34 @@ const EventForm = (props) => {
     return (
         <Form id="eventform" onSubmit={handleSubmit(onSubmit)}>
             <Row form>
-                <Col md="6" className="px-md-3">
+                <Col md="8" className="px-md-3">
                     <FormGroup>
                         <Label for="name"> Name </Label>
                         <Input type="text" name="name" innerRef={register({ required: true })} />
                         {errors.ename && <p> Name can not be empty! </p>}
                     </FormGroup>
-                    <FormGroup>
-                        <Label for="datetime"> DateTime </Label>
-                        <Input
-                            type="text"
-                            name="datetime"
-                            innerRef={register({ required: true })}
-                        />
-                        {errors.ename && <p> Invalid datetime! </p>}
-                    </FormGroup>
+                    <Row>
+                        <Col md="6">
+                            <FormGroup>
+                                <Label for="date"> Date </Label>
+                                <Input
+                                    type="date"
+                                    name="date"
+                                    innerRef={register({ required: true })}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup>
+                                <Label for="time"> Time </Label>
+                                <Input
+                                    type="time"
+                                    name="time"
+                                    innerRef={register({ required: true })}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
                     <FormGroup>
                         <Label for="venue"> Venue </Label>
                         <Input
@@ -57,7 +73,7 @@ const EventForm = (props) => {
                         {errors.ename && <p> Venue can not be empty! </p>}
                     </FormGroup>
                 </Col>
-                <Col md="6" className="px-md-3">
+                <Col md="4" className="px-md-3">
                     <FormGroup>
                         <Label for="audience"> Audience </Label>
                         <Input
