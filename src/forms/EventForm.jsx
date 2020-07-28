@@ -25,7 +25,7 @@ const EventForm = (props) => {
         if (props.action === "new") res = await API.new("events", eventFormData);
         else res = await API.edit("events", props.id, eventFormData);
 
-        window.location.href = "/events";
+        window.location.reload();
     };
 
     return (
