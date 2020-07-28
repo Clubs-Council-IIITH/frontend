@@ -248,6 +248,7 @@ code {
 .eventedit-btn:hover {
     background-color: #fff7cc;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 /* Styles exclusively for displays with width >= 768px */

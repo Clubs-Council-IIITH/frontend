@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Jumbotron, Container } from "reactstrap";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import API from "../api/methods";
 
 import EventForm from "../forms/EventForm";
 
-const EditEvent = () => {
-    const { id } = useParams();
+const EditEventModal = (props) => {
+    const id = props.id;
     const [isLoading, setIsLoading] = useState(true);
     const [initialData, setInitialData] = useState({});
 
@@ -18,19 +17,20 @@ const EditEvent = () => {
             setIsLoading(false);
         }
 
-        getInitialData();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        if (id !== 0) getInitialData();
+    }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    if (isLoading) return null; // TODO: Loading Spinner
+    if (isLoading || id === 0) return null; // TODO: Loading Spinner
     return (
         <React.Fragment>
-            <Container>
-                <Jumbotron>
+            <Modal isOpen={props.modal} toggle={props.toggleModal}>
+                <ModalHeader> Edit event </ModalHeader>
+                <ModalBody>
                     <EventForm action="edit" id={id} initial={initialData} />
-                </Jumbotron>
-            </Container>
+                </ModalBody>
+            </Modal>
         </React.Fragment>
     );
 };
 
-export default EditEvent;
+export default EditEventModal;

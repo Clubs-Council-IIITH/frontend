@@ -10,7 +10,6 @@ import Clubs from "./pages/Clubs";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
-import EditEvent from "./pages/EditEvent";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 
@@ -39,7 +38,6 @@ const App = () => {
 
                 {/* Organizer routes */}
                 <ProtectedRoute exact path="/events" component={Events} />
-                <ProtectedRoute exact path="/events/edit/:id" component={EditEvent} />
 
                 {/* Admin routes */}
                 <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} />
