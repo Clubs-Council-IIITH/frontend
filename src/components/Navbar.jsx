@@ -17,7 +17,8 @@ const Navigationbar = (props) => {
     const [contextAction, setContextAction] = useState("");
     const [contextString, setContextString] = useState("");
 
-    const isAuthenticated = props.session.usergroup !== null;
+    const isAuthenticated = props.session.is_authenticated;
+    const usergroup = props.session.usergroup;
     const loginURL = "http://localhost:8000/token";
     const logoutURL = "/logoutRedirect";
 
@@ -43,7 +44,7 @@ const Navigationbar = (props) => {
     }, [props.session]);
 
     var contextButton = null;
-    if (isAuthenticated) {
+    if (usergroup) {
         contextButton = (
             <React.Fragment>
                 <NavItem className="nav-item mx-md-2 nav-divider">
