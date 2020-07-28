@@ -21,14 +21,22 @@ const EditEventModal = (props) => {
 
     if (isLoading || props.id === 0) return null; // TODO: Loading Spinner
     return (
-        <React.Fragment>
-            <Modal isOpen={props.modal} toggle={props.toggleModal}>
-                <ModalHeader> Edit event </ModalHeader>
-                <ModalBody>
-                    <EventForm action="edit" id={props.id} initial={initialData} />
-                </ModalBody>
-            </Modal>
-        </React.Fragment>
+        <Modal
+            className="modal-lg"
+            isOpen={props.modal}
+            backdrop="static"
+            toggle={props.toggleModal}
+        >
+            <ModalHeader> Edit event </ModalHeader>
+            <ModalBody>
+                <EventForm
+                    action="edit"
+                    id={props.id}
+                    initial={initialData}
+                    cancelAction={props.toggleModal}
+                />
+            </ModalBody>
+        </Modal>
     );
 };
 
