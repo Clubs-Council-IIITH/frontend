@@ -18,14 +18,13 @@ const LogItem = (props) => {
         <React.Fragment>
             {props.datebreak ? (
                 <div className="event-card mt-3 mb-2 mx-2">
-                    {" "}
                     {formatDateTime(props.datetime).date}
                 </div>
             ) : null}
             <Card className="event-card">
-                <CardBody>
+                <CardBody className="py-2">
                     <Row>
-                        <Col xs="4" md="2" className="log-time my-auto">
+                        <Col xs="4" md="3" className="log-time my-auto">
                             {formatDateTime(props.datetime).time}
                         </Col>
                         <Col className="log-message my-auto">

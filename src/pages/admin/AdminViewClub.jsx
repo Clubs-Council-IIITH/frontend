@@ -90,7 +90,7 @@ const AdminViewClub = (props) => {
         return (
             <React.Fragment>
                 {logs.map((log) => (
-                    <Col md="12" className="my-2">
+                    <Col md="12" className="my-1">
                         <LogItem
                             datetime={log.timestamp}
                             creator={log.event[0]["creator"]}
