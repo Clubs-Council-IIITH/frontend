@@ -15,6 +15,7 @@ import LogoutRedirect from "./pages/LogoutRedirect";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminClubs from "./pages/admin/AdminClubs";
+import AdminUsers from "./pages/admin/AdminUsers";
 import AdminViewClub from "./pages/admin/AdminViewClub";
 // }}}
 
@@ -45,10 +46,10 @@ const App = () => {
                 {/* <ProtectedRoute path="/admin/clubs/new" component={AdminNewClub} /> */}
                 <ProtectedRoute path="/admin/clubs/:id" component={AdminViewClub} />
                 {/* <ProtectedRoute path="/admin/clubs/:id/edit" component={AdminEditClub} /> */}
-                {/* <ProtectedRoute exact path="/admin/coordinators" component={AdminCoords} /> */}
-                {/* <ProtectedRoute path="/admin/coordinators/new" component={AdminNewCoord} /> */}
-                {/* <ProtectedRoute path="/admin/coordinators/:id" component={AdminViewCoord} /> */}
-                {/* <ProtectedRoute path="/admin/coordinators/:id/edit" component={AdminEditCoord} /> */}
+                <ProtectedRoute exact path="/admin/users" component={AdminUsers} />
+                {/* <ProtectedRoute path="/admin/users/new" component={AdminNewCoord} /> */}
+                {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
+                {/* <ProtectedRoute path="/admin/users/:id/edit" component={AdminEditCoord} /> */}
                 {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
                 {/* <ProtectedRoute path="/admin/council/new" component={AdminNewCouncil} /> */}
                 {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
