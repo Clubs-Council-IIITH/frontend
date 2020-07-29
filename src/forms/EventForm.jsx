@@ -128,6 +128,7 @@ const EventForm = (props) => {
                     <FormGroup className="mt-4">
                         <Label for="creator"> Your name? </Label>
                         <Input
+                            autocomplete="off"
                             invalid={errors.creator}
                             type="text"
                             name="creator"
