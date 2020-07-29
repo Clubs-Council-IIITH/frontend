@@ -53,10 +53,13 @@ const EventForm = (props) => {
                                     invalid={errors.date}
                                     type="date"
                                     name="date"
-                                    innerRef={register({ required: true })}
+                                    innerRef={register({
+                                        required: true,
+                                        validate: (val) => new Date(val) > new Date(),
+                                    })}
                                 />
+                                <FormFeedback> Invalid date! </FormFeedback>
                             </FormGroup>
-                            <FormFeedback> Invalid date! </FormFeedback>
                         </Col>
                         <Col md="6">
                             <FormGroup>
@@ -67,8 +70,8 @@ const EventForm = (props) => {
                                     name="time"
                                     innerRef={register({ required: true })}
                                 />
+                                <FormFeedback> Invalid time! </FormFeedback>
                             </FormGroup>
-                            <FormFeedback> Invalid time! </FormFeedback>
                         </Col>
                     </Row>
                     <FormGroup>
