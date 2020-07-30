@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Row, Col, Card, CardBody } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import UserItem from "../../components/items/UserItem";
 import NewUserModal from "../../components/NewUserModal";
 
 const AdminUsers = () => {
@@ -27,7 +28,7 @@ const AdminUsers = () => {
         <Container fluid className="pt-5">
             <NewUserModal modal={modal} toggleModal={toggleModal} />
             <div className="event-header mx-3 mx-md-4 mt-4">
-                <span className="event-title p-2">Users</span>
+                <span className="logs-title p-2">Users</span>
                 <Button
                     onClick={toggleModal}
                     className="eventnew-btn body-btn btn-outline-dark py-2 px-3 my-3 mx-md-3"
@@ -39,14 +40,13 @@ const AdminUsers = () => {
             <Row className="pt-5 mx-md-2">
                 {userList.map((user) => (
                     <Col md="4" lg="3">
-                        <Card className="m-2 dash-card elevate">
-                            <CardBody>
-                                <h2> {user.name} </h2>
-                                <h4> {user.role} </h4>
-                                <h4> {user.mail} </h4>
-                                <h4> {user.mobile} </h4>
-                            </CardBody>
-                        </Card>
+                        <UserItem
+                            id={user.id}
+                            name={user.name}
+                            role={user.role}
+                            mail={user.mail}
+                            mobile={user.mobile}
+                        />
                     </Col>
                 ))}
             </Row>
