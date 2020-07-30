@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, CardBody, CardText } from "reactstrap";
 const AdminDashboard = () => {
     const cardList = [
         { title: "Manage Clubs", description: "description", link: "./clubs" },
-        { title: "Manage Coordinators", description: "description", link: "./coordinators" },
+        { title: "Manage Users", description: "description", link: "./users" },
         { title: "Manage Council", description: "description", link: "./council" },
     ];
     return (
