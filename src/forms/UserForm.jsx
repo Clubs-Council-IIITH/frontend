@@ -22,7 +22,7 @@ const UserForm = (props) => {
         if (props.action === "new") res = await API.new("coordinators", userFormData);
         else res = await API.edit("coordinators", props.id, userFormData);
 
-        // window.location.reload()
+        window.location.reload();
     };
 
     return (
