@@ -4,6 +4,7 @@ import { Button, Container, Row, Col, Card, CardBody, CardText } from "reactstra
 
 import API from "../../api/methods";
 import NewClubModal from "../../components/NewClubModal";
+import ClubItem from "../../components/items/ClubItem";
 
 const AdminClubs = (props) => {
     const [clubList, setClubList] = useState(false);
@@ -39,16 +40,12 @@ const AdminClubs = (props) => {
             <Row className="pt-5 mx-md-2">
                 {clubList.map((club) => (
                     <Col md="4" lg="3">
-                        <Card
-                            tag={Link}
-                            to={props.match.url + "/" + club.id}
-                            className="m-2 dash-card elevate"
-                        >
-                            <CardBody>
-                                <h2> {club.name} </h2>
-                                <CardText> {club.mail} </CardText>
-                            </CardBody>
-                        </Card>
+                        <ClubItem
+                            id={club.id}
+                            name={club.name}
+                            mail={club.mail}
+                            link={props.match.url + "/" + club.id}
+                        />
                     </Col>
                 ))}
             </Row>
