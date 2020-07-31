@@ -18,19 +18,17 @@ const AdminViewClub = (props) => {
             setClub(res.data[0]);
         }
 
-        async function getEvents() {
-            const res = await API.view("events", {});
-            setEvents(res.data);
-        }
-
-        async function getLogs() {
-            const res = await API.view("logs", {});
-            setLogs(res.data);
+        async function getData() {
+            const events_res = await API.view("events", { club: props.match.params.id });
+            setEvents(events_res.data);
+            var tst = Array.from(events_res.data, (e) => e.id);
+            console.log(tst);
+            const logs_res = await API.view("logs", { events: tst.join() });
+            setLogs(logs_res.data);
         }
 
         getClub();
-        getEvents();
-        getLogs();
+        getData();
     }, []); // eslint-disable-line
 
     const togglePrevious = () => {
