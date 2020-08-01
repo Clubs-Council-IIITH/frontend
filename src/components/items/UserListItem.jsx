@@ -34,8 +34,8 @@ const UserListItem = (props) => {
                         </Button>
                     </Col>
                 ) : (
-                    <Row>
-                        <Col xs="12" className="px-4 py-3 pt-md-0">
+                    <Row className="px-3 pt-2 pt-md-0">
+                        <Col xs="12">
                             <Input
                                 type="text"
                                 name="role"
@@ -43,12 +43,12 @@ const UserListItem = (props) => {
                                 onChange={(e) => handleChange(e)}
                             />
                         </Col>
-                        <Col className="text-right">
+                        <Col xs="12" className="text-right pt-2">
                             <Button
                                 type="button"
                                 onClick={toggleRoleInput}
                                 color="secondary"
-                                className="mx-2"
+                                className="mx-3"
                             >
                                 Cancel
                             </Button>
@@ -59,7 +59,6 @@ const UserListItem = (props) => {
                                     props.addUser(props.user.id, role);
                                 }}
                                 color="success"
-                                className="mx-2"
                             >
                                 Save
                             </Button>

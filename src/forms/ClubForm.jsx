@@ -91,9 +91,22 @@ const ClubForm = (props) => {
                 <h4 className="pt-2"> Existing Users </h4>
                 <ListGroup>
                     {existingUserList.map((user) => (
-                        <ListGroupItem>
-                            {user.name}
-                            <Badge className="p-2 mx-3">{renderRole(user.roles)}</Badge>
+                        <ListGroupItem className="p-2">
+                            <Row>
+                                <Col xs="2" md="1">
+                                    <img src={user.img} alt={user.name} className="userlist-img" />
+                                </Col>
+                                <Col>
+                                    <Row>
+                                        <Col className="userlist-name">
+                                            {user.name}
+                                            <Badge className="p-2 mx-3">
+                                                {renderRole(user.roles)}
+                                            </Badge>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
                         </ListGroupItem>
                     ))}
                 </ListGroup>
@@ -105,8 +118,8 @@ const ClubForm = (props) => {
         if (!newUserList.length) return null;
         return (
             <React.Fragment>
-                <h4 className="pt-2"> Add Users </h4>
-                <ListGroup className="mt-4">
+                <h4 className="mt-4"> Add Users </h4>
+                <ListGroup className="mt-2">
                     {newUserList.map((user) => (
                         <UserListItem user={user} addUser={addUser} />
                     ))}
