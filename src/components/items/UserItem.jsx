@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, CardFooter } from "reactstrap";
+import { Button, Card, CardImg, CardBody, CardFooter } from "reactstrap";
 
 import EditUserModal from "../../components/EditUserModal";
 
@@ -13,6 +13,7 @@ const UserItem = (props) => {
     return (
         <Card className="m-2 dash-card elevate">
             <EditUserModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
+            <CardImg src={props.img} />
             <CardBody>
                 <h2> {props.name} </h2>
                 <h4> {props.role} </h4>

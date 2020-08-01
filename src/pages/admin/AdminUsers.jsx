@@ -42,6 +42,7 @@ const AdminUsers = () => {
                     <Col md="4" lg="3">
                         <UserItem
                             id={user.id}
+                            img={user.img}
                             name={user.name}
                             role={user.role}
                             mail={user.mail}
