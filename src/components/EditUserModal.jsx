@@ -8,7 +8,6 @@ const EditUserModal = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [initialData, setInitialData] = useState({
         name: "",
-        role: "Coordinator",
         mail: "",
         mobile: "",
     });

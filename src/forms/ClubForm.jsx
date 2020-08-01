@@ -1,16 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "reactstrap";
+import {
+    Button,
+    ListGroup,
+    ListGroupItem,
+    Badge,
+    Form,
+    FormGroup,
+    FormFeedback,
+    Label,
+    Input,
+    Row,
+    Col,
+} from "reactstrap";
 
 import API from "../api/methods";
+import UserListItem from "../components/items/UserListItem";
 
 const ClubForm = (props) => {
+    const [existingUserList, setExistingUserList] = useState([]);
+    const [newUserList, setNewUserList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
             mail: props.initial.mail,
         },
     });
+
+    useEffect(() => {
+        async function getUserList() {
+            const res = await API.view("coordinators", {});
+            res.data.forEach((user) => {
+                var clubs;
+                if (user.roles) clubs = user.roles.map((o) => o[0]);
+                else clubs = [];
+                if (clubs.includes(JSON.stringify(props.id))) existingUserList.push(user);
+                else newUserList.push(user);
+            });
+            setIsLoading(false);
+        }
+
+        getUserList();
+    }, []); // eslint-disable-line
 
     const onSubmit = async (data) => {
         var clubForm = document.getElementById("clubform");
@@ -20,9 +53,62 @@ const ClubForm = (props) => {
         if (props.action === "new") res = await API.new("clubs", clubFormData);
         else res = await API.edit("clubs", props.id, clubFormData);
 
-        // window.location.reload();
+        console.log(existingUserList);
+        existingUserList.forEach(async (user) => {
+            var roleFormData = new FormData();
+            for (var key in user) roleFormData.append(key, user[key]);
+            roleFormData.delete("img");
+            var troles = user.roles;
+            console.log(troles);
+            roleFormData.append("roles", JSON.stringify(troles));
+
+            const user_res = await API.edit("coordinators", user.id, roleFormData);
+            console.log(user_res);
+        });
+        window.location.reload();
     };
 
+    const addUser = async (id, role) => {
+        const targetUser = newUserList.filter((user) => user.id === id)[0];
+        if (!targetUser.roles) targetUser.roles = [];
+        console.log(targetUser);
+        targetUser.roles.push([props.id.toString(), role]);
+        setExistingUserList([...existingUserList, targetUser]);
+        setNewUserList(newUserList.filter((user) => user.id !== id));
+    };
+
+    const renderExistingUsers = () => {
+        const renderRole = (roles) => {
+            const role = roles.filter((o) => o[0] == props.id);
+            console.log(role);
+            if (role.length) return role[0][1];
+            return null;
+        };
+
+        if (props.action !== "edit") return null;
+        return (
+            <ListGroup>
+                {existingUserList.map((user) => (
+                    <ListGroupItem>
+                        {user.name}
+                        <Badge className="p-2 mx-3">{renderRole(user.roles)}</Badge>
+                    </ListGroupItem>
+                ))}
+            </ListGroup>
+        );
+    };
+
+    const renderNewUsers = () => {
+        return (
+            <ListGroup className="mt-4">
+                {newUserList.map((user) => (
+                    <UserListItem user={user} addUser={addUser} />
+                ))}
+            </ListGroup>
+        );
+    };
+
+    if (isLoading) return null; // TODO: Add loading spinners
     return (
         <Form id="clubform" onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
@@ -45,6 +131,12 @@ const ClubForm = (props) => {
                 />
                 <FormFeedback> Club mail can not be empty! </FormFeedback>
             </FormGroup>
+
+            <h3 className="pt-4"> Users </h3>
+            {renderExistingUsers()}
+
+            {renderNewUsers()}
+
             <Row className="mt-4">
                 <Col className="text-right px-md-4">
                     <Button className="mx-3" onClick={props.cancelAction}>

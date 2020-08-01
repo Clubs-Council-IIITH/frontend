@@ -6,7 +6,6 @@ import UserForm from "../forms/UserForm";
 const NewUserModal = (props) => {
     const [initialData] = useState({
         name: "",
-        role: "Coordinator",
         mail: "",
         mobile: "",
     });

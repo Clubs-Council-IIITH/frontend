@@ -8,7 +8,6 @@ const UserForm = (props) => {
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
-            role: props.initial.role,
             mail: props.initial.mail,
             mobile: props.initial.mobile,
         },
@@ -22,6 +21,7 @@ const UserForm = (props) => {
         if (props.action === "new") res = await API.new("coordinators", userFormData);
         else res = await API.edit("coordinators", props.id, userFormData);
 
+        console.log(res);
         window.location.reload();
     };
 
@@ -36,16 +36,6 @@ const UserForm = (props) => {
                     innerRef={register({ required: true })}
                 />
                 <FormFeedback> User name can not be empty! </FormFeedback>
-            </FormGroup>
-            <FormGroup>
-                <Label for="role"> Role </Label>
-                <Input
-                    invalid={errors.role}
-                    type="text"
-                    name="role"
-                    innerRef={register({ register: true })}
-                />
-                <FormFeedback> Invalid role! </FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="mail"> E-Mail </Label>

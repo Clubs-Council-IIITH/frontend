@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Row, Col, Card, CardBody, CardText } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 import NewClubModal from "../../components/NewClubModal";
