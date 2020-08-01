@@ -8,14 +8,18 @@ import { isSameDay } from "../../utils/DateTimeFormatter";
 
 const AdminViewClub = (props) => {
     const [club, setClub] = useState(false);
+    const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
     const [logs, setLogs] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
 
     useEffect(() => {
         async function getClub() {
-            const res = await API.view("clubs", { id: props.match.params.id });
-            setClub(res.data[0]);
+            const club_res = await API.view("clubs", { id: props.match.params.id });
+            setClub(club_res.data[0]);
+            const users_res = await API.view("coordinators", { club: props.match.params.id });
+            setUsers(users_res.data);
+            console.log(users_res.data);
         }
 
         async function getData() {
@@ -36,13 +40,13 @@ const AdminViewClub = (props) => {
     };
 
     const renderClub = () => {
-        if (!club) return null;
+        if (!users) return null;
         return (
             <React.Fragment>
                 <h2> {club.name} </h2>
-                {club.coordinators.map((coord) => (
+                {users.map((coord) => (
                     <h5>
-                        {coord.name}, {coord.role}
+                        {coord.name}, {coord.roles.filter((role) => role[0] == club.id)[0][1]}
                     </h5>
                 ))}
             </React.Fragment>
