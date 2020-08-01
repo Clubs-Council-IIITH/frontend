@@ -251,6 +251,11 @@ code {
     cursor: pointer;
 }
 
+.userlist-img {
+    max-width: 50px;
+    border-radius: 4px;
+}
+
 /* Styles exclusively for displays with width >= 768px */
 @media (min-width: 768px) {
     .nav-divider {

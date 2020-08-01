@@ -14,10 +14,18 @@ const UserListItem = (props) => {
     };
 
     return (
-        <ListGroupItem>
+        <ListGroupItem className="p-2">
             <Row>
+                <Col xs="2" md="1">
+                    <img src={props.user.img} alt={props.user.name} className="userlist-img" />
+                </Col>
                 <Col>
-                    {props.user.name}, {props.user.mail}
+                    <Row>
+                        <Col className="userlist-name">{props.user.name}</Col>
+                    </Row>
+                    <Row>
+                        <Col className="userlist-mail">{props.user.mail}</Col>
+                    </Row>
                 </Col>
                 {!roleInput ? (
                     <Col xs="3" className="text-right">
