@@ -13,7 +13,7 @@ const UserItem = (props) => {
     return (
         <Card className="m-2 dash-card elevate">
             <EditUserModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
-            <CardImg src={props.img} />
+            <CardImg src={props.img} className="user-img" />
             <CardBody>
                 <h2> {props.name} </h2>
                 <h4> {props.role} </h4>

@@ -85,26 +85,33 @@ const ClubForm = (props) => {
             return null;
         };
 
-        if (props.action !== "edit") return null;
+        if (!existingUserList.length) return null;
         return (
-            <ListGroup>
-                {existingUserList.map((user) => (
-                    <ListGroupItem>
-                        {user.name}
-                        <Badge className="p-2 mx-3">{renderRole(user.roles)}</Badge>
-                    </ListGroupItem>
-                ))}
-            </ListGroup>
+            <React.Fragment>
+                <h4 className="pt-2"> Existing Users </h4>
+                <ListGroup>
+                    {existingUserList.map((user) => (
+                        <ListGroupItem>
+                            {user.name}
+                            <Badge className="p-2 mx-3">{renderRole(user.roles)}</Badge>
+                        </ListGroupItem>
+                    ))}
+                </ListGroup>
+            </React.Fragment>
         );
     };
 
     const renderNewUsers = () => {
+        if (!newUserList.length) return null;
         return (
-            <ListGroup className="mt-4">
-                {newUserList.map((user) => (
-                    <UserListItem user={user} addUser={addUser} />
-                ))}
-            </ListGroup>
+            <React.Fragment>
+                <h4 className="pt-2"> Add Users </h4>
+                <ListGroup className="mt-4">
+                    {newUserList.map((user) => (
+                        <UserListItem user={user} addUser={addUser} />
+                    ))}
+                </ListGroup>
+            </React.Fragment>
         );
     };
 
@@ -132,10 +139,13 @@ const ClubForm = (props) => {
                 <FormFeedback> Club mail can not be empty! </FormFeedback>
             </FormGroup>
 
-            <h3 className="pt-4"> Users </h3>
-            {renderExistingUsers()}
-
-            {renderNewUsers()}
+            {props.action === "edit" ? (
+                <React.Fragment>
+                    <h3 className="pt-4"> Manage Users </h3>
+                    {renderExistingUsers()}
+                    {renderNewUsers()}
+                </React.Fragment>
+            ) : null}
 
             <Row className="mt-4">
                 <Col className="text-right px-md-4">
