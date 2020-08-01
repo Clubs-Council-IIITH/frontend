@@ -22,11 +22,15 @@ const UserForm = (props) => {
         else res = await API.edit("coordinators", props.id, userFormData);
 
         console.log(res);
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (
         <Form id="userform" onSubmit={handleSubmit(onSubmit)}>
+            <FormGroup>
+                <Label for="img">Image</Label>
+                <Input type="file" name="img" innerRef={register({ required: false })} />
+            </FormGroup>
             <FormGroup>
                 <Label for="name"> Name </Label>
                 <Input
