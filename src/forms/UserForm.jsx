@@ -36,9 +36,9 @@ const UserForm = (props) => {
                     invalid={errors.name}
                     type="text"
                     name="name"
-                    innerRef={register({ required: true })}
+                    innerRef={register({ required: true, pattern: /^[a-zA-Z,. ]*$/ })}
                 />
-                <FormFeedback> User name can not be empty! </FormFeedback>
+                <FormFeedback> Invalid user name! </FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="mail"> E-Mail </Label>

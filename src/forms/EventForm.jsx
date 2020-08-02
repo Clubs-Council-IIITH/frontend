@@ -41,7 +41,7 @@ const EventForm = (props) => {
                             invalid={errors.name}
                             type="text"
                             name="name"
-                            innerRef={register({ required: true })}
+                            innerRef={register({ required: true, pattern: /^[a-zA-Z0-9,.!? ]*$/ })}
                         />
                         <FormFeedback> Event name can not be empty! </FormFeedback>
                     </FormGroup>
@@ -132,7 +132,7 @@ const EventForm = (props) => {
                             invalid={errors.creator}
                             type="text"
                             name="creator"
-                            innerRef={register({ required: true })}
+                            innerRef={register({ required: true, pattern: /^[a-zA-Z,. ]*$/ })}
                         />
                         <FormFeedback> Your name is required! </FormFeedback>
                     </FormGroup>

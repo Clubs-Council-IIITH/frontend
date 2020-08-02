@@ -4,12 +4,19 @@ import { ListGroupItem, Row, Col, Button, Input } from "reactstrap";
 const UserListItem = (props) => {
     const [roleInput, setRoleInput] = useState(false);
     const [role, setRole] = useState("Coordinator");
+    const [invalidRole, setInvalidRole] = useState(false);
 
     const toggleRoleInput = () => {
         setRoleInput(!roleInput);
     };
 
+    const isValid = (role) => {
+        const role_rgx = /^[a-zA-Z0-9 ]*$/;
+        return role_rgx.test(role);
+    };
+
     const handleChange = (e) => {
+        setInvalidRole(!isValid(e.target.value));
         setRole(e.target.value);
     };
 
@@ -37,6 +44,7 @@ const UserListItem = (props) => {
                     <Row className="px-3 pt-2 pt-md-0">
                         <Col xs="12">
                             <Input
+                                invalid={invalidRole}
                                 type="text"
                                 name="role"
                                 value={role}
@@ -55,8 +63,10 @@ const UserListItem = (props) => {
                             <Button
                                 type="button"
                                 onClick={() => {
-                                    toggleRoleInput();
-                                    props.addUser(props.user.id, role);
+                                    if (!invalidRole) {
+                                        toggleRoleInput();
+                                        props.addUser(props.user.id, role);
+                                    }
                                 }}
                                 color="success"
                             >

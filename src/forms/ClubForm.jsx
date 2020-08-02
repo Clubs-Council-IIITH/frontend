@@ -137,7 +137,7 @@ const ClubForm = (props) => {
                     invalid={errors.name}
                     type="text"
                     name="name"
-                    innerRef={register({ required: true })}
+                    innerRef={register({ required: true, pattern: /^[a-zA-Z,. ]*$/ })}
                 />
                 <FormFeedback> Club name can not be empty! </FormFeedback>
             </FormGroup>
