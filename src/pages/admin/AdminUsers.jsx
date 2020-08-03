@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import Searchbar from "../../components/Searchbar";
 import UserItem from "../../components/items/UserItem";
 import NewUserModal from "../../components/NewUserModal";
 
@@ -25,32 +26,41 @@ const AdminUsers = () => {
 
     if (!userList) return null;
     return (
-        <Container fluid className="pt-5">
+        <Container fluid>
+            <Container fluid className="actionbar-container p-5 rounded-lg">
+                <div className="actionbar-header mx-md-5 mt-5 pt-3">
+                    <span className="actionbar-title p-2">Users</span>
+                    <Button
+                        onClick={toggleModal}
+                        className="new-btn btn-outline-dark py-2 px-3 my-3"
+                    >
+                        <span className="d-md-none"> + </span>
+                        <span className="d-none d-md-block"> + NEW USER </span>
+                    </Button>
+                </div>
+                <Row className="mx-md-5 mt-5">
+                    <Searchbar />
+                </Row>
+            </Container>
+
             <NewUserModal modal={modal} toggleModal={toggleModal} />
-            <div className="event-header mx-3 mx-md-4 mt-4">
-                <span className="logs-title p-2">Users</span>
-                <Button
-                    onClick={toggleModal}
-                    className="eventnew-btn body-btn btn-outline-dark py-2 px-3 my-3 mx-md-3"
-                >
-                    <span className="d-md-none"> + </span>
-                    <span className="d-none d-md-block"> + NEW USER </span>
-                </Button>
-            </div>
-            <Row className="pt-5 mx-md-2">
-                {userList.map((user) => (
-                    <Col md="4" lg="3">
-                        <UserItem
-                            id={user.id}
-                            img={user.img}
-                            name={user.name}
-                            role={user.role}
-                            mail={user.mail}
-                            mobile={user.mobile}
-                        />
-                    </Col>
-                ))}
-            </Row>
+
+            <Container fluid>
+                <Row className="pt-5 mx-md-5">
+                    {userList.map((user) => (
+                        <Col md="4" lg="3">
+                            <UserItem
+                                id={user.id}
+                                img={user.img}
+                                name={user.name}
+                                role={user.role}
+                                mail={user.mail}
+                                mobile={user.mobile}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         </Container>
     );
 };
