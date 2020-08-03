@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 
 import EventState from "../EventState";
+import EditButton from "../buttons/EditButton";
+import DeleteButton from "../buttons/DeleteButton";
 import EditEventModal from "../EditEventModal";
 import DeleteEventModal from "../DeleteEventModal";
 import { formatAudience } from "../../utils/AudienceFormatter";
@@ -29,8 +31,8 @@ const EventItem = (props) => {
                 name={props.name}
             />
             <CardHeader>
-                <div className="event-datetime">{formatDateTime(props.datetime).datetime}</div>
-                <div className="event-name">{props.name}</div>
+                <div className="event-datetime mb-2">{formatDateTime(props.datetime).datetime}</div>
+                <div className="event-name mb-2">{props.name}</div>
                 <EventState current={props.state} />
             </CardHeader>
             <CardBody>
@@ -47,13 +49,9 @@ const EventItem = (props) => {
                     {formatAudience(props.audience)}
                 </div>
             </CardBody>
-            <CardFooter>
-                <p onClick={toggleDeleteModal}>
-                    <img className="card-btn eventdelete-btn m-2" src="/delete-18.svg" alt="D" />
-                </p>
-                <p onClick={toggleEditModal}>
-                    <img className="card-btn eventedit-btn m-2" src="/edit-18.svg" alt="E" />
-                </p>
+            <CardFooter className="text-right px-2">
+                <EditButton onClick={toggleEditModal} />
+                <DeleteButton onClick={toggleDeleteModal} />
             </CardFooter>
         </Card>
     );
