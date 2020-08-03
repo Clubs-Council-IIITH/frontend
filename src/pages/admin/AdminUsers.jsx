@@ -8,6 +8,7 @@ import UserItem from "../../components/items/UserItem";
 import NewUserModal from "../../components/NewUserModal";
 
 const AdminUsers = () => {
+    const [searchTerm, setSearchTerm] = useState("");
     const [userList, setUserList] = useState(false);
     const [modal, setModal] = useState(false);
 
@@ -39,7 +40,7 @@ const AdminUsers = () => {
                     </Button>
                 </div>
                 <Row className="mx-md-5 mt-5">
-                    <Searchbar />
+                    <Searchbar setSearchTerm={setSearchTerm} />
                 </Row>
             </Container>
 
@@ -47,18 +48,21 @@ const AdminUsers = () => {
 
             <Container fluid>
                 <Row className="pt-5 mx-md-5">
-                    {userList.map((user) => (
-                        <Col md="4" lg="3">
-                            <UserItem
-                                id={user.id}
-                                img={user.img}
-                                name={user.name}
-                                role={user.role}
-                                mail={user.mail}
-                                mobile={user.mobile}
-                            />
-                        </Col>
-                    ))}
+                    {userList.map((user) => {
+                        if (searchTerm !== "" && !user.name.includes(searchTerm)) return null;
+                        return (
+                            <Col md="4" lg="3">
+                                <UserItem
+                                    id={user.id}
+                                    img={user.img}
+                                    name={user.name}
+                                    role={user.role}
+                                    mail={user.mail}
+                                    mobile={user.mobile}
+                                />
+                            </Col>
+                        );
+                    })}
                 </Row>
             </Container>
         </Container>
