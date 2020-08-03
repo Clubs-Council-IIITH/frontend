@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, CardImg, CardBody, CardFooter } from "reactstrap";
 
 import EditUserModal from "../../components/EditUserModal";
+import EditButton from "../../components/buttons/EditButton";
 
 const UserItem = (props) => {
     const [editModal, setEditModal] = useState(false);
@@ -20,10 +21,8 @@ const UserItem = (props) => {
                 <h4> {props.mail} </h4>
                 <h4> {props.mobile} </h4>
             </CardBody>
-            <CardFooter>
-                <Button color="warning" onClick={toggleEditModal}>
-                    Edit
-                </Button>
+            <CardFooter className="text-right p-2">
+                <EditButton onClick={toggleEditModal} />
             </CardFooter>
         </Card>
     );
