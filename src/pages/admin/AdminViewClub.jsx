@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
+
+import Searchbar from "../../components/Searchbar";
 import EventItem from "../../components/items/EventItem";
 import LogItem from "../../components/items/LogItem";
 import { isSameDay } from "../../utils/DateTimeFormatter";
@@ -61,7 +63,7 @@ const AdminViewClub = (props) => {
                     const isPrevious = event.state === "completed" || event.state === "deleted";
                     if (viewPrevious ? !isPrevious : isPrevious) return null;
                     return (
-                        <Col lg="6" xl="4" key={event.id} className="my-3">
+                        <Col lg="6" key={event.id} className="my-3">
                             <EventItem
                                 id={event.id}
                                 audience={event.audience}
@@ -107,26 +109,33 @@ const AdminViewClub = (props) => {
     };
 
     return (
-        <Container fluid className="pt-5">
-            <Row className="mt-4">
-                <Col md="3" className="m-4 card">
-                    {renderClub()}
-                </Col>
-                <Col>
-                    <Row className="m-1 m-md-3">
-                        <div className="event-header">
-                            <span className="event-title p-1 mx-3" onClick={togglePrevious}>
+        <Container fluid>
+            <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
+                <div className="actionbar-header mx-md-5 mt-5 pt-3">
+                    <span className="actionbar-title p-2">{club.name}</span>
+                </div>
+            </Container>
+            <Row className="p-0">
+                <Col xl="8">
+                    <Container fluid className="actionbar-container p-3 mt-4 rounded-lg">
+                        <div className="actionbar-header">
+                            <span className="actionbar-title-thin p-2" onClick={togglePrevious}>
                                 {viewPrevious ? "Previous Events" : "Upcoming Events"}
                             </span>
                         </div>
-                        <Row className="h-100 w-100 my-4 mx-auto">{renderEvents()}</Row>
-                    </Row>
-                    <Row className="m-1 m-md-3">
-                        <div className="logs-header">
-                            <span className="logs-title p-1 mx-3"> Recent Activity </span>
+                        <Row className="px-4 px-md-0 mx-md-2 mt-4">
+                            <Searchbar />
+                        </Row>
+                    </Container>
+                    {renderEvents()}
+                </Col>
+                <Col>
+                    <Container fluid className="actionbar-container p-3 mt-4 rounded-lg">
+                        <div className="actionbar-header">
+                            <span className="actionbar-title-thin p-1"> Recent Activity </span>
                         </div>
-                        <Row className="h-100 w-100 my-2 mx-auto">{renderLogs()}</Row>
-                    </Row>
+                    </Container>
+                    <Row className="h-100 w-100 my-2 mx-auto">{renderLogs()}</Row>
                 </Col>
             </Row>
         </Container>
