@@ -1,0 +1,276 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+// Colors
+$bg-primary: #ffffff;
+$bg-secondary: #f6f6f6;
+
+// Font Styles
+$actionbar-text: calc(36px + 1.2vw);
+$card-text: calc(20px + 1vw);
+
+// Global Styles
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+// Navbar Styles
+.nav-dark {
+    background-color: #0d0d0d !important;
+    font-family: "Quicksand";
+    font-weight: 600;
+    box-shadow: 0 0 10px #555;
+}
+
+.nav-logo {
+    height: 40px;
+}
+
+.nav-btn {
+    font-family: "Quicksand";
+    font-weight: 600;
+    border: 2px solid #eee;
+}
+
+.nav-divider {
+    display: none;
+}
+
+// ActionBar
+.actionbar-container {
+    background-color: $bg-secondary;
+    font-size: $actionbar-text;
+}
+
+.actionbar-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actionbar-title {
+    font-family: "Raleway", "sans-serif";
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.2;
+    width: min-content;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+// Global Card Styles
+.card-header {
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: none !important;
+}
+
+.card-footer {
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: none !important;
+}
+
+.card-icon {
+    height: 1.2em;
+    width: 1.2em;
+    margin-right: 0.5em;
+}
+
+.dash-card {
+    color: #000;
+}
+
+.dash-card:hover {
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.elevate {
+    transition: all 0.2s ease-out;
+}
+
+.elevate:hover {
+    transition: all 0.2s ease-out;
+    box-shadow: 0 8px 10px 0 rgba(168, 182, 191, 0.6);
+}
+
+// Event Card
+.event-card {
+    font-family: "Poppins", "sans-serif";
+    font-size: $card-text;
+}
+
+.event-datetime {
+    font-size: 0.7em;
+    color: #555;
+}
+
+.event-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.event-venue {
+    font-size: 0.7em;
+}
+
+.event-audience {
+    font-size: 0.7em;
+}
+
+.event-state {
+    font-size: 0.8em;
+    width: fit-content;
+    border-radius: 4px;
+}
+
+// Event States
+.state-completed {
+    background-color: #fff7cc;
+    color: #99851b;
+}
+
+.state-deleted {
+    background-color: #f7cccc;
+    color: #b40000;
+}
+
+.state-created {
+    background-color: #ddd;
+    color: #555;
+}
+
+.state-approved {
+    background-color: #ccf4dd;
+    color: #007932;
+}
+
+.state-scheduled {
+    background-color: #cce9fb;
+    color: #005da8;
+}
+
+.state-published {
+    background-color: #e5d2ec;
+    color: #530f7c;
+}
+
+// Log Items
+.log-time {
+    font-weight: bold;
+    font-size: 0.6em;
+    color: #555555;
+}
+
+.log-date {
+    font-weight: bold;
+    font-size: 0.7em;
+}
+
+.log-message {
+    font-size: 0.7em;
+}
+
+.log-0 {
+    color: #00aa55;
+}
+
+.log-1 {
+    color: #f9a825;
+}
+
+.log-2 {
+    color: #b40000;
+}
+
+// UserList Items
+.userlist-img {
+    max-width: 50px;
+    border-radius: 4px;
+}
+
+// Buttons
+.card-btn {
+    height: 1.2em;
+    width: 1.2em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-btn {
+    font-family: "Quicksand";
+    font-weight: 600;
+    font-size: 0.38em;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #000;
+    box-shadow: 0;
+}
+
+.new-btn:visited {
+    box-shadow: 2px 3px #888 !important;
+}
+
+.new-btn:focus,
+.new-btn:active,
+.new-btn:hover {
+    color: #000;
+    background-color: #fff;
+    border: 2px solid #000;
+    box-shadow: 2px 3px #888 !important;
+}
+
+.edit-btn,
+.delete-btn {
+    background-color: #00000000;
+    height: 50px !important;
+    border: none;
+}
+
+.edit-btn:focus,
+.edit-btn:active,
+.edit-btn:hover {
+    background-color: #fff7cc;
+}
+
+.edit-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.delete-btn:focus,
+.delete-btn:active,
+.delete-btn:hover {
+    background-color: #f7cccc;
+}
+
+.delete-icon {
+    height: 30px;
+    width: 30px;
+}
+
+// Styles exclusively for displays with width >= 768px
+@media (min-width: 768px) {
+    .nav-divider {
+        display: block;
+    }
+    .event-title {
+        width: fit-content;
+    }
+}
