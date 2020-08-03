@@ -59,6 +59,13 @@ code {
   user-select: none;
 }
 
+.actionbar-title-thin {
+  font-family: "Raleway", "sans-serif";
+  font-weight: 700;
+  font-size: 0.7em;
+  line-height: 1.2;
+}
+
 .card-header {
   background-color: rgba(255, 255, 255, 0) !important;
   border: none !important;

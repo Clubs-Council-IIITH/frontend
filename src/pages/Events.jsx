@@ -3,11 +3,13 @@ import { Container, Button, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
+import Searchbar from "../components/Searchbar";
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
 
 const Events = () => {
     const [isLoading, setIsLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
     const [eventList, setEventList] = useState([]);
     const [modal, setModal] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
@@ -32,39 +34,50 @@ const Events = () => {
 
     if (isLoading) return null; // TODO: Add Spinner
     return (
-        <Container fluid className="pt-5">
+        <Container fluid>
+            <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
+                <div className="actionbar-header mx-md-5 mt-5 pt-3">
+                    <span className="actionbar-title clickable p-2" onClick={togglePrevious}>
+                        {viewPrevious ? "Previous Events" : "Upcoming Events"}
+                    </span>
+                    <Button
+                        onClick={toggleModal}
+                        className="new-btn btn-outline-dark py-2 px-3 my-3"
+                    >
+                        <span className="d-md-none"> + </span>
+                        <span className="d-none d-md-block"> + NEW EVENT </span>
+                    </Button>
+                </div>
+                <Row className="px-4 px-md-0 mx-md-5 mt-5">
+                    <Searchbar setSearchTerm={setSearchTerm} />
+                </Row>
+            </Container>
+
             <NewEventModal modal={modal} toggleModal={toggleModal} />
-            <div className="event-header mx-3 mx-md-4 mt-4">
-                <span className="event-title p-2" onClick={togglePrevious}>
-                    {viewPrevious ? "Previous Events" : "Upcoming Events"}
-                </span>
-                <Button
-                    onClick={toggleModal}
-                    className="eventnew-btn body-btn btn-outline-dark py-2 px-3 my-3 mx-md-3"
-                >
-                    <span className="d-md-none"> + </span>
-                    <span className="d-none d-md-block"> + NEW EVENT </span>
-                </Button>
-            </div>
-            <Row id="event-row" className="h-100 pt-4 mb-3 mx-1 m-md-3">
-                {eventList.map((event) => {
-                    const isPrevious = event.state === "completed" || event.state === "deleted";
-                    if (viewPrevious ? !isPrevious : isPrevious) return null;
-                    return (
-                        <Col md="5" lg="4" xl="3" key={event.id} className="my-3">
-                            <EventItem
-                                id={event.id}
-                                audience={event.audience}
-                                name={event.name}
-                                datetime={event.datetime}
-                                venue={event.venue}
-                                creator={event.creator}
-                                state={event.state}
-                            />
-                        </Col>
-                    );
-                })}
-            </Row>
+
+            <Container fluid>
+                <Row className="pt-5 mx-md-5">
+                    {eventList.map((event) => {
+                        const isPrevious = event.state === "completed" || event.state === "deleted";
+                        if (viewPrevious ? !isPrevious : isPrevious) return null;
+
+                        if (searchTerm !== "" && !event.name.includes(searchTerm)) return null;
+                        return (
+                            <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
+                                <EventItem
+                                    id={event.id}
+                                    audience={event.audience}
+                                    name={event.name}
+                                    datetime={event.datetime}
+                                    venue={event.venue}
+                                    creator={event.creator}
+                                    state={event.state}
+                                />
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Container>
         </Container>
     );
 };
