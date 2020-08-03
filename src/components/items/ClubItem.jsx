@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, CardBody, CardFooter } from "reactstrap";
 
 import EditClubModal from "../../components/EditClubModal";
+import EditButton from "../../components/buttons/EditButton";
 
 const ClubItem = (props) => {
     const [editModal, setEditModal] = useState(false);
@@ -22,10 +23,8 @@ const ClubItem = (props) => {
                 <h2> {props.name} </h2>
                 <p> {props.mail} </p>
             </CardBody>
-            <CardFooter>
-                <Button color="warning" onClick={toggleEditModal}>
-                    Edit
-                </Button>
+            <CardFooter className="text-right p-2">
+                <EditButton onClick={toggleEditModal} />
             </CardFooter>
         </Card>
     );
