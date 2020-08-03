@@ -9,6 +9,7 @@ import LogItem from "../../components/items/LogItem";
 import { isSameDay } from "../../utils/DateTimeFormatter";
 
 const AdminViewClub = (props) => {
+    const [searchTerm, setSearchTerm] = useState("");
     const [club, setClub] = useState(false);
     const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
@@ -62,6 +63,8 @@ const AdminViewClub = (props) => {
                 {events.map((event) => {
                     const isPrevious = event.state === "completed" || event.state === "deleted";
                     if (viewPrevious ? !isPrevious : isPrevious) return null;
+
+                    if (searchTerm !== "" && !event.name.includes(searchTerm)) return null;
                     return (
                         <Col lg="6" key={event.id} className="my-3">
                             <EventItem
@@ -124,7 +127,7 @@ const AdminViewClub = (props) => {
                             </span>
                         </div>
                         <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                            <Searchbar />
+                            <Searchbar setSearchTerm={setSearchTerm} />
                         </Row>
                     </Container>
                     {renderEvents()}
