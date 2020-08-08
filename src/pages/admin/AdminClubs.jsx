@@ -8,14 +8,15 @@ import NewClubModal from "../../components/NewClubModal";
 import ClubItem from "../../components/items/ClubItem";
 
 const AdminClubs = (props) => {
-    const [searchTerm, setSearchTerm] = useState("");
     const [clubList, setClubList] = useState(false);
+    const [filteredList, setFilteredList] = useState([]);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
         async function getClubList() {
             const res = await API.view("clubs", {});
             setClubList(res.data);
+            setFilteredList(res.data);
         }
 
         getClubList();
@@ -40,7 +41,7 @@ const AdminClubs = (props) => {
                     </Button>
                 </div>
                 <Row className="mx-md-5 mt-5">
-                    <Searchbar setSearchTerm={setSearchTerm} />
+                    <Searchbar dataList={clubList} setFilteredList={setFilteredList} />
                 </Row>
             </Container>
 
@@ -48,8 +49,7 @@ const AdminClubs = (props) => {
 
             <Container fluid>
                 <Row className="pt-5 mx-md-5">
-                    {clubList.map((club) => {
-                        if (searchTerm !== "" && !club.name.includes(searchTerm)) return null;
+                    {filteredList.map((club) => {
                         return (
                             <Col md="4" lg="4">
                                 <ClubItem

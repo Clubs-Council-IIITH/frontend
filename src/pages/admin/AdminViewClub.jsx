@@ -9,10 +9,10 @@ import LogItem from "../../components/items/LogItem";
 import { isSameDay } from "../../utils/DateTimeFormatter";
 
 const AdminViewClub = (props) => {
-    const [searchTerm, setSearchTerm] = useState("");
     const [club, setClub] = useState(false);
     const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
+    const [filteredList, setFilteredList] = useState([]);
     const [logs, setLogs] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
 
@@ -28,6 +28,7 @@ const AdminViewClub = (props) => {
         async function getData() {
             const events_res = await API.view("events", { club: props.match.params.id });
             setEvents(events_res.data);
+            setFilteredList(events_res.data);
             var tst = Array.from(events_res.data, (e) => e.id);
             console.log(tst);
             const logs_res = await API.view("logs", { events: tst.join() });
@@ -60,11 +61,9 @@ const AdminViewClub = (props) => {
         if (!events) return null;
         return (
             <React.Fragment>
-                {events.map((event) => {
+                {filteredList.map((event) => {
                     const isPrevious = event.state === "completed" || event.state === "deleted";
                     if (viewPrevious ? !isPrevious : isPrevious) return null;
-
-                    if (searchTerm !== "" && !event.name.includes(searchTerm)) return null;
                     return (
                         <Col lg="6" key={event.id} className="my-3">
                             <EventItem
@@ -127,7 +126,7 @@ const AdminViewClub = (props) => {
                             </span>
                         </div>
                         <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                            <Searchbar setSearchTerm={setSearchTerm} />
+                            <Searchbar dataList={events} setFilteredList={setFilteredList} />
                         </Row>
                     </Container>
                     {renderEvents()}

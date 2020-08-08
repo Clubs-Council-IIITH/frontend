@@ -4,18 +4,19 @@ import { Button, Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 
 import Searchbar from "../../components/Searchbar";
-import UserItem from "../../components/items/UserItem";
 import NewUserModal from "../../components/NewUserModal";
+import UserItem from "../../components/items/UserItem";
 
 const AdminUsers = () => {
-    const [searchTerm, setSearchTerm] = useState("");
     const [userList, setUserList] = useState(false);
+    const [filteredList, setFilteredList] = useState([]);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
         async function getUserList() {
             const res = await API.view("coordinators", {});
             setUserList(res.data);
+            setFilteredList(res.data);
         }
 
         getUserList();
@@ -40,7 +41,7 @@ const AdminUsers = () => {
                     </Button>
                 </div>
                 <Row className="mx-md-5 mt-5">
-                    <Searchbar setSearchTerm={setSearchTerm} />
+                    <Searchbar dataList={userList} setFilteredList={setFilteredList} />
                 </Row>
             </Container>
 
@@ -48,8 +49,7 @@ const AdminUsers = () => {
 
             <Container fluid>
                 <Row className="pt-5 mx-md-5">
-                    {userList.map((user) => {
-                        if (searchTerm !== "" && !user.name.includes(searchTerm)) return null;
+                    {filteredList.map((user) => {
                         return (
                             <Col md="4" lg="3">
                                 <UserItem

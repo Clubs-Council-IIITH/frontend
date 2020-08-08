@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input } from "reactstrap";
 
 const Searchbar = (props) => {
     const updateSearch = (e) => {
-        props.setSearchTerm(e.target.value);
+        if (!props.dataList) return null;
+        console.log(e.target.value);
+        props.setFilteredList(
+            props.dataList.filter((obj) =>
+                obj.name.toLowerCase().includes(e.target.value.toLowerCase())
+            )
+        );
     };
 
     return (

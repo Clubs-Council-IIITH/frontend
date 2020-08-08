@@ -8,9 +8,8 @@ import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
 
 const Events = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [eventList, setEventList] = useState([]);
+    const [eventList, setEventList] = useState(false);
+    const [filteredList, setFilteredList] = useState([]);
     const [modal, setModal] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
 
@@ -18,7 +17,7 @@ const Events = () => {
         async function getEventList() {
             const res = await API.view("events", {});
             setEventList(res.data);
-            setIsLoading(false);
+            setFilteredList(res.data);
         }
 
         getEventList();
@@ -32,7 +31,7 @@ const Events = () => {
         setViewPrevious(!viewPrevious);
     };
 
-    if (isLoading) return null; // TODO: Add Spinner
+    if (!eventList) return null; // TODO: Add Spinner
     return (
         <Container fluid>
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
@@ -49,7 +48,7 @@ const Events = () => {
                     </Button>
                 </div>
                 <Row className="px-4 px-md-0 mx-md-5 mt-5">
-                    <Searchbar setSearchTerm={setSearchTerm} />
+                    <Searchbar dataList={eventList} setFilteredList={setFilteredList} />
                 </Row>
             </Container>
 
@@ -57,11 +56,9 @@ const Events = () => {
 
             <Container fluid>
                 <Row className="pt-5 mx-md-5">
-                    {eventList.map((event) => {
+                    {filteredList.map((event) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (viewPrevious ? !isPrevious : isPrevious) return null;
-
-                        if (searchTerm !== "" && !event.name.includes(searchTerm)) return null;
                         return (
                             <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
                                 <EventItem
