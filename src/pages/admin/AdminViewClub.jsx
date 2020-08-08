@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
 import EventItem from "../../components/items/EventItem";
 import LogItem from "../../components/items/LogItem";
@@ -112,6 +113,7 @@ const AdminViewClub = (props) => {
 
     return (
         <Container fluid>
+            <SecondaryNavbar page="clubs" />
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
                 <div className="actionbar-header mx-md-5 mt-5 pt-3">
                     <span className="actionbar-title p-2">{club.name}</span>

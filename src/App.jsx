@@ -46,17 +46,11 @@ const App = () => {
                     component={() => <Redirect to="/admin/clubs" />}
                 />
                 <ProtectedRoute exact path="/admin/clubs" component={AdminClubs} />
-                {/* <ProtectedRoute path="/admin/clubs/new" component={AdminNewClub} /> */}
                 <ProtectedRoute exact path="/admin/clubs/:id" component={AdminViewClub} />
-                {/* <ProtectedRoute path="/admin/clubs/:id/edit" component={AdminEditClub} /> */}
                 <ProtectedRoute exact path="/admin/users" component={AdminUsers} />
-                {/* <ProtectedRoute path="/admin/users/new" component={AdminNewCoord} /> */}
                 {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
-                {/* <ProtectedRoute path="/admin/users/:id/edit" component={AdminEditCoord} /> */}
                 {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
-                {/* <ProtectedRoute path="/admin/council/new" component={AdminNewCouncil} /> */}
                 {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
-                {/* <ProtectedRoute path="/admin/council/:id/edit" component={AdminViewCouncil} /> */}
 
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
