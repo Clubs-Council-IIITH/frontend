@@ -3,32 +3,26 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 
 const SecondaryNavbar = (props) => {
+    const buttonList = [
+        { text: "clubs", page: "clubs", link: "./clubs" },
+        { text: "users", page: "users", link: "./users" },
+        { text: "council", page: "council", link: "./council" },
+    ];
+
     return (
         <div className="secondary-nav mb-3">
-            <Button
-                tag={Link}
-                to="./clubs"
-                className={"mx-3 px-3 py-2 nav-btn" + (props.page === "clubs" ? "-active" : "")}
-                color="secondary"
-            >
-                CLUBS
-            </Button>
-            <Button
-                tag={Link}
-                to="./users"
-                className={"mx-3 px-3 py-2 nav-btn" + (props.page === "users" ? "-active" : "")}
-                color="secondary"
-            >
-                USERS
-            </Button>
-            <Button
-                tag={Link}
-                to="./council"
-                className={"mx-3 px-3 py-2 nav-btn" + (props.page === "council" ? "-active" : "")}
-                color="secondary"
-            >
-                COUNCIL
-            </Button>
+            {buttonList.map((button) => (
+                <Button
+                    tag={Link}
+                    to={button.link}
+                    className={
+                        "text-uppercase mx-3 px-3 py-2 nav-btn" +
+                        (props.page === button.page ? "-active" : "")
+                    }
+                >
+                    {button.text}
+                </Button>
+            ))}
         </div>
     );
 };
