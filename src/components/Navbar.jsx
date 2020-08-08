@@ -35,7 +35,7 @@ const Navigationbar = (props) => {
                 setContextString("MY EVENTS");
                 break;
             case "cc_admin":
-                setContextAction("/admin/dashboard");
+                setContextAction("/admin");
                 setContextString("DASHBOARD");
                 break;
             default:

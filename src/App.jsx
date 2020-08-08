@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { SessionContext } from "./api/SessionContext";
 
@@ -13,7 +13,6 @@ import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 
-import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminViewClub from "./pages/admin/AdminViewClub";
@@ -41,10 +40,14 @@ const App = () => {
                 <ProtectedRoute exact path="/events" component={Events} />
 
                 {/* Admin routes */}
-                <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} />
+                <ProtectedRoute
+                    exact
+                    path="/admin"
+                    component={() => <Redirect to="/admin/clubs" />}
+                />
                 <ProtectedRoute exact path="/admin/clubs" component={AdminClubs} />
                 {/* <ProtectedRoute path="/admin/clubs/new" component={AdminNewClub} /> */}
-                <ProtectedRoute path="/admin/clubs/:id" component={AdminViewClub} />
+                <ProtectedRoute exact path="/admin/clubs/:id" component={AdminViewClub} />
                 {/* <ProtectedRoute path="/admin/clubs/:id/edit" component={AdminEditClub} /> */}
                 <ProtectedRoute exact path="/admin/users" component={AdminUsers} />
                 {/* <ProtectedRoute path="/admin/users/new" component={AdminNewCoord} /> */}
