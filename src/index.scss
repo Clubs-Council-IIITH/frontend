@@ -1,17 +1,20 @@
-// Fonts
+// Fonts {{{
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+// }}}
 
-// Colors
+// Colors {{{
 $bg-primary: #ffffff;
 $bg-secondary: #f6f6f6;
+// }}}
 
-// Font Styles
+// Font Styles {{{
 $actionbar-text: calc(36px + 1.2vw);
 $card-text: calc(20px + 1vw);
+// }}}
 
-// Global Styles
+// Global Styles {{{
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
@@ -25,8 +28,9 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+// }}}
 
-// Navbar Styles
+// Navbar Styles {{{
 .nav-dark {
     background-color: #0d0d0d !important;
     font-family: "Quicksand";
@@ -48,7 +52,37 @@ code {
     display: none;
 }
 
-// ActionBar
+.secondary-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: "Quicksand";
+
+    .nav-btn {
+        border: none;
+        font-weight: 600 !important;
+        border-radius: 500px;
+        background-color: white !important;
+        color: black !important;
+    }
+    .nav-btn:focus,
+    .nav-btn:active,
+    .nav-btn:hover {
+        background-color: #ddd !important;
+    }
+
+    .nav-btn-active {
+        font-weight: 600 !important;
+        border-radius: 500px;
+        background-color: black !important;
+        color: white !important;
+    }
+}
+
+// }}}
+
+// ActionBar {{{
 .actionbar-container {
     background-color: $bg-secondary;
     font-size: $actionbar-text;
@@ -79,8 +113,9 @@ code {
     font-size: 0.7em;
     line-height: 1.2;
 }
+// }}}
 
-// Global Card Styles
+// Global Card Styles {{{
 .card-header {
     background-color: rgba(255, 255, 255, 0) !important;
     border: none !important;
@@ -115,8 +150,9 @@ code {
     transition: all 0.2s ease-out;
     box-shadow: 0 8px 10px 0 rgba(168, 182, 191, 0.6);
 }
+// }}}
 
-// Event Card
+// Event Card {{{
 .event-card {
     font-family: "Poppins", "sans-serif";
     font-size: $card-text;
@@ -146,8 +182,9 @@ code {
     width: fit-content;
     border-radius: 4px;
 }
+// }}}
 
-// Event States
+// Event States {{{
 .state-completed {
     background-color: #fff7cc;
     color: #99851b;
@@ -177,8 +214,9 @@ code {
     background-color: #e5d2ec;
     color: #530f7c;
 }
+// }}}
 
-// Log Items
+// Log Items {{{
 .log-time {
     font-weight: bold;
     font-size: 0.6em;
@@ -205,14 +243,16 @@ code {
 .log-2 {
     color: #b40000;
 }
+// }}}
 
-// UserList Items
+// UserList Items {{{
 .userlist-img {
     max-width: 50px;
     border-radius: 4px;
 }
+// }}}
 
-// Buttons
+// Buttons {{{
 .card-btn {
     height: 1.2em;
     width: 1.2em;
@@ -271,8 +311,9 @@ code {
     height: 30px;
     width: 30px;
 }
+// }}}
 
-// Styles exclusively for displays with width >= 768px
+// Styles exclusively for displays with width >= 768px {{{
 @media (min-width: 768px) {
     .nav-divider {
         display: block;
@@ -281,3 +322,4 @@ code {
         width: fit-content;
     }
 }
+// }}}

@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
 import NewUserModal from "../../components/NewUserModal";
 import UserItem from "../../components/items/UserItem";
@@ -29,6 +30,7 @@ const AdminUsers = () => {
     if (!userList) return null;
     return (
         <Container fluid>
+            <SecondaryNavbar page="users" />
             <Container fluid className="actionbar-container p-5 rounded-lg">
                 <div className="actionbar-header mx-md-5 mt-5 pt-3">
                     <span className="actionbar-title p-2">Users</span>
