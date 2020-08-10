@@ -55,6 +55,7 @@ const AdminUsers = () => {
                         return (
                             <Col md="4" lg="3">
                                 <UserItem
+                                    modifiable
                                     id={user.id}
                                     img={user.img}
                                     name={user.name}

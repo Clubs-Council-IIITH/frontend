@@ -55,6 +55,7 @@ const AdminClubs = (props) => {
                         return (
                             <Col md="4" lg="4">
                                 <ClubItem
+                                    modifiable
                                     id={club.id}
                                     name={club.name}
                                     mail={club.mail}

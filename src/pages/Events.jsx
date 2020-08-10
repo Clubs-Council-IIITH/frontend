@@ -62,6 +62,7 @@ const Events = () => {
                         return (
                             <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
                                 <EventItem
+                                    modifiable
                                     id={event.id}
                                     audience={event.audience}
                                     name={event.name}

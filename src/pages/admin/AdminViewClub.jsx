@@ -65,6 +65,7 @@ const AdminViewClub = (props) => {
                 {filteredList.map((event) => (
                     <Col md="2" lg="4" xl="3" key={event.id} className="my-3">
                         <EventItem
+                            modifiable
                             id={event.id}
                             audience={event.audience}
                             name={event.name}
@@ -132,7 +133,6 @@ const AdminViewClub = (props) => {
     };
 
     const renderTab = () => {
-        console.log(tab);
         switch (tab) {
             case "events":
                 return renderEvents();
