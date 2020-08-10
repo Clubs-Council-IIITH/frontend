@@ -23,9 +23,11 @@ const ClubItem = (props) => {
                 <h2> {props.name} </h2>
                 <p> {props.mail} </p>
             </CardBody>
-            <CardFooter className="text-right p-2">
-                <EditButton onClick={toggleEditModal} />
-            </CardFooter>
+            {props.modifiable ? (
+                <CardFooter className="text-right p-2">
+                    <EditButton onClick={toggleEditModal} />
+                </CardFooter>
+            ) : null}
         </Card>
     );
 };

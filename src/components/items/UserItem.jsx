@@ -21,9 +21,11 @@ const UserItem = (props) => {
                 <h4> {props.mail} </h4>
                 <h4> {props.mobile} </h4>
             </CardBody>
-            <CardFooter className="text-right p-2">
-                <EditButton onClick={toggleEditModal} />
-            </CardFooter>
+            {props.modifiable ? (
+                <CardFooter className="text-right p-2">
+                    <EditButton onClick={toggleEditModal} />
+                </CardFooter>
+            ) : null}
         </Card>
     );
 };

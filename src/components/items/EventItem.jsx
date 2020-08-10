@@ -49,10 +49,12 @@ const EventItem = (props) => {
                     {formatAudience(props.audience)}
                 </div>
             </CardBody>
-            <CardFooter className="text-right px-2">
-                <EditButton onClick={toggleEditModal} />
-                <DeleteButton onClick={toggleDeleteModal} />
-            </CardFooter>
+            {props.modifiable ? (
+                <CardFooter className="text-right px-2">
+                    <EditButton onClick={toggleEditModal} />
+                    <DeleteButton onClick={toggleDeleteModal} />
+                </CardFooter>
+            ) : null}
         </Card>
     );
 };
