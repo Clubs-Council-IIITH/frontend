@@ -18,6 +18,7 @@ import API from "../api/methods";
 import UserListItem from "../components/items/UserListItem";
 
 const ClubForm = (props) => {
+    const [changedUserList, setChangedUserList] = useState([]);
     const [existingUserList, setExistingUserList] = useState([]);
     const [newUserList, setNewUserList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -53,17 +54,14 @@ const ClubForm = (props) => {
         if (props.action === "new") res = await API.new("clubs", clubFormData);
         else res = await API.edit("clubs", props.id, clubFormData);
 
-        console.log(existingUserList);
-        existingUserList.forEach(async (user) => {
+        changedUserList.forEach(async (user) => {
             var roleFormData = new FormData();
             for (var key in user) roleFormData.append(key, user[key]);
             roleFormData.delete("img");
             var troles = user.roles;
-            console.log(troles);
             roleFormData.append("roles", JSON.stringify(troles));
 
             const user_res = await API.edit("coordinators", user.id, roleFormData);
-            console.log(user_res);
         });
         window.location.reload();
     };
@@ -71,43 +69,33 @@ const ClubForm = (props) => {
     const addUser = async (id, role) => {
         const targetUser = newUserList.filter((user) => user.id === id)[0];
         if (!targetUser.roles) targetUser.roles = [];
-        console.log(targetUser);
         targetUser.roles.push([props.id.toString(), role]);
         setExistingUserList([...existingUserList, targetUser]);
         setNewUserList(newUserList.filter((user) => user.id !== id));
+        setChangedUserList([...changedUserList, targetUser]);
+    };
+
+    const removeUser = async (id) => {
+        const targetUser = existingUserList.filter((user) => user.id === id)[0];
+        targetUser.roles = targetUser.roles.filter((item) => item[0] !== props.id.toString());
+        setNewUserList([...newUserList, targetUser]);
+        setExistingUserList(existingUserList.filter((user) => user.id !== id));
+        setChangedUserList([...changedUserList, targetUser]);
     };
 
     const renderExistingUsers = () => {
-        const renderRole = (roles) => {
-            const role = roles.filter((o) => o[0] == props.id);
-            console.log(role);
-            if (role.length) return role[0][1];
-            return null;
-        };
-
         if (!existingUserList.length) return null;
         return (
             <React.Fragment>
                 <h4 className="pt-2"> Existing Users </h4>
                 <ListGroup>
                     {existingUserList.map((user) => (
-                        <ListGroupItem className="p-2">
-                            <Row>
-                                <Col xs="2" md="1">
-                                    <img src={user.img} alt={user.name} className="userlist-img" />
-                                </Col>
-                                <Col>
-                                    <Row>
-                                        <Col className="userlist-name">
-                                            {user.name}
-                                            <Badge className="p-2 mx-3">
-                                                {renderRole(user.roles)}
-                                            </Badge>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </ListGroupItem>
+                        <UserListItem
+                            existing
+                            user={user}
+                            removeUser={removeUser}
+                            club={props.id}
+                        />
                     ))}
                 </ListGroup>
             </React.Fragment>

@@ -202,6 +202,11 @@ code {
   color: #555;
 }
 
+.user-mail,
+.user-mobile {
+  font-size: 0.7em;
+}
+
 .state-completed {
   background-color: #fff7cc;
   color: #99851b;

@@ -41,7 +41,7 @@ const ViewClub = (props) => {
     const renderMembers = () => {
         if (!users) return null;
         return (
-            <div className="mt-4">
+            <Row className="mt-4">
                 {users.map((user) => (
                     <Col xs="6" sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
                         <UserItem
@@ -52,14 +52,14 @@ const ViewClub = (props) => {
                         />
                     </Col>
                 ))}
-            </div>
+            </Row>
         );
     };
 
     const renderEvents = () => {
         if (!events) return null;
         return (
-            <div className="mt-4">
+            <Row className="mt-4">
                 {filteredList.map((event) => (
                     <Col md="2" lg="3" xl="4" key={event.id} className="my-3">
                         <EventItem
@@ -73,7 +73,7 @@ const ViewClub = (props) => {
                         />
                     </Col>
                 ))}
-            </div>
+            </Row>
         );
     };
 
