@@ -43,14 +43,12 @@ const ViewClub = (props) => {
         return (
             <div className="mt-4">
                 {users.map((user) => (
-                    <Col md="2" lg="4" xl="3" key={user.id} className="my-3">
+                    <Col xs="6" sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
                         <UserItem
                             id={user.id}
                             img={user.img}
                             name={user.name}
                             role={user.roles.filter((role) => role[0] == club.id)[0][1]}
-                            mail={user.mail}
-                            mobile={user.mobile}
                         />
                     </Col>
                 ))}

@@ -17,7 +17,7 @@ const ClubItem = (props) => {
     };
 
     return (
-        <Card className="m-2 dash-card elevate">
+        <Card className="dash-card elevate">
             <EditClubModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
             <CardBody onClick={redirectToLink}>
                 <h2> {props.name} </h2>

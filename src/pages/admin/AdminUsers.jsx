@@ -50,10 +50,10 @@ const AdminUsers = () => {
             <NewUserModal modal={modal} toggleModal={toggleModal} />
 
             <Container fluid>
-                <Row className="pt-5 mx-md-5">
+                <Row className="pt-5 mx-md-5 user-card">
                     {filteredList.map((user) => {
                         return (
-                            <Col md="4" lg="3">
+                            <Col sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
                                 <UserItem
                                     modifiable
                                     id={user.id}

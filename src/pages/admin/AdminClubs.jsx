@@ -51,19 +51,17 @@ const AdminClubs = (props) => {
 
             <Container fluid>
                 <Row className="pt-5 mx-md-5">
-                    {filteredList.map((club) => {
-                        return (
-                            <Col md="4" lg="4">
-                                <ClubItem
-                                    modifiable
-                                    id={club.id}
-                                    name={club.name}
-                                    mail={club.mail}
-                                    link={props.match.url + "/" + club.id}
-                                />
-                            </Col>
-                        );
-                    })}
+                    {filteredList.map((club) => (
+                        <Col md="6" lg="4" className="py-3">
+                            <ClubItem
+                                modifiable
+                                id={club.id}
+                                name={club.name}
+                                mail={club.mail}
+                                link={props.match.url + "/" + club.id}
+                            />
+                        </Col>
+                    ))}
                 </Row>
             </Container>
         </Container>

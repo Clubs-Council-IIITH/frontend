@@ -185,6 +185,23 @@ code {
   border-radius: 4px;
 }
 
+.user-card {
+  font-family: "Poppins", "sans-serif";
+  font-size: calc(20px + 1vw);
+  min-width: 200px;
+}
+
+.user-name {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.user-role {
+  font-size: 0.8em;
+  color: #555;
+}
+
 .state-completed {
   background-color: #fff7cc;
   color: #99851b;
