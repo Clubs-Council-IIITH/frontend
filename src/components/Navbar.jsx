@@ -83,16 +83,16 @@ const Navigationbar = (props) => {
                             CALENDAR
                         </NavLink>
                     </NavItem>
-                    <NavItem className="nav-item mx-md-2">
-                        <NavLink tag={Link} to="/blog" activeClassName="active">
-                            BLOG
-                        </NavLink>
-                    </NavItem>
-                    <NavItem className="nav-item mx-md-2">
-                        <NavLink tag={Link} to="/contact" activeClassName="active">
-                            CONTACT
-                        </NavLink>
-                    </NavItem>
+                    {/* <NavItem className="nav-item mx-md-2"> */}
+                    {/*     <NavLink tag={Link} to="/blog" activeClassName="active"> */}
+                    {/*         BLOG */}
+                    {/*     </NavLink> */}
+                    {/* </NavItem> */}
+                    {/* <NavItem className="nav-item mx-md-2"> */}
+                    {/*     <NavLink tag={Link} to="/contact" activeClassName="active"> */}
+                    {/*         CONTACT */}
+                    {/*     </NavLink> */}
+                    {/* </NavItem> */}
                     {contextButton}
                 </Nav>
                 <a href={isAuthenticated ? logoutURL : loginURL}>
