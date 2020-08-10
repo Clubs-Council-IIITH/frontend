@@ -80,6 +80,35 @@ code {
     }
 }
 
+.tab-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Quicksand";
+    background-color: $bg-secondary;
+    border-radius: 8px;
+    width: min-content;
+
+    .nav-btn {
+        border: none;
+        font-weight: 600 !important;
+        background-color: $bg-secondary !important;
+        color: black !important;
+    }
+    .nav-btn:focus,
+    .nav-btn:active,
+    .nav-btn:hover {
+        background-color: #ddd !important;
+    }
+
+    .nav-btn-active {
+        font-weight: 600 !important;
+        background-color: black !important;
+        color: white !important;
+    }
+}
+
 // }}}
 
 // ActionBar {{{

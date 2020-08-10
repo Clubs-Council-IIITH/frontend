@@ -32,7 +32,7 @@ const AdminUsers = () => {
         <Container fluid>
             <SecondaryNavbar page="users" />
             <Container fluid className="actionbar-container p-5 rounded-lg">
-                <div className="actionbar-header mx-md-5 mt-5 pt-3">
+                <div className="actionbar-header mx-md-5 mt-0 pt-0">
                     <span className="actionbar-title p-2">Users</span>
                     <Button
                         onClick={toggleModal}

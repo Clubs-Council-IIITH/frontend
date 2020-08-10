@@ -61,6 +61,33 @@ code {
   color: white !important;
 }
 
+.tab-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Quicksand";
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  width: min-content;
+}
+.tab-nav .nav-btn {
+  border: none;
+  font-weight: 600 !important;
+  background-color: #f6f6f6 !important;
+  color: black !important;
+}
+.tab-nav .nav-btn:focus,
+.tab-nav .nav-btn:active,
+.tab-nav .nav-btn:hover {
+  background-color: #ddd !important;
+}
+.tab-nav .nav-btn-active {
+  font-weight: 600 !important;
+  background-color: black !important;
+  color: white !important;
+}
+
 .actionbar-container {
   background-color: #f6f6f6;
   font-size: calc(36px + 1.2vw);

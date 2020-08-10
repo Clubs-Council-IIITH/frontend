@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Button, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
@@ -11,11 +11,12 @@ import { isSameDay } from "../../utils/DateTimeFormatter";
 
 const AdminViewClub = (props) => {
     const [club, setClub] = useState(false);
+    const [logs, setLogs] = useState(false);
     const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
     const [filteredList, setFilteredList] = useState([]);
-    const [logs, setLogs] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
+    const [tab, setTab] = useState("events");
 
     useEffect(() => {
         async function getClub() {
@@ -44,42 +45,37 @@ const AdminViewClub = (props) => {
         setViewPrevious(!viewPrevious);
     };
 
-    const renderClub = () => {
+    const renderMembers = () => {
         if (!users) return null;
         return (
-            <React.Fragment>
-                <h2> {club.name} </h2>
+            <div className="mt-4">
                 {users.map((coord) => (
                     <h5>
                         {coord.name}, {coord.roles.filter((role) => role[0] == club.id)[0][1]}
                     </h5>
                 ))}
-            </React.Fragment>
+            </div>
         );
     };
 
     const renderEvents = () => {
         if (!events) return null;
         return (
-            <React.Fragment>
-                {filteredList.map((event) => {
-                    const isPrevious = event.state === "completed" || event.state === "deleted";
-                    if (viewPrevious ? !isPrevious : isPrevious) return null;
-                    return (
-                        <Col lg="6" key={event.id} className="my-3">
-                            <EventItem
-                                id={event.id}
-                                audience={event.audience}
-                                name={event.name}
-                                datetime={event.datetime}
-                                venue={event.venue}
-                                creator={event.creator}
-                                state={event.state}
-                            />
-                        </Col>
-                    );
-                })}
-            </React.Fragment>
+            <div className="mt-4">
+                {filteredList.map((event) => (
+                    <Col md="2" lg="4" xl="3" key={event.id} className="my-3">
+                        <EventItem
+                            id={event.id}
+                            audience={event.audience}
+                            name={event.name}
+                            datetime={event.datetime}
+                            venue={event.venue}
+                            creator={event.creator}
+                            state={event.state}
+                        />
+                    </Col>
+                ))}
+            </div>
         );
     };
 
@@ -95,7 +91,7 @@ const AdminViewClub = (props) => {
         });
 
         return (
-            <React.Fragment>
+            <div className="mt-4">
                 {logs.map((log) => (
                     <Col md="12" className="my-1">
                         <LogItem
@@ -107,40 +103,68 @@ const AdminViewClub = (props) => {
                         />
                     </Col>
                 ))}
-            </React.Fragment>
+            </div>
         );
+    };
+
+    const renderTabBar = () => {
+        const buttonList = [
+            { text: "events", tab: "events" },
+            { text: "activity", tab: "activity" },
+            { text: "members", tab: "members" },
+        ];
+
+        return (
+            <div className="tab-nav p-2">
+                {buttonList.map((button) => (
+                    <Button
+                        onClick={() => setTab(button.tab)}
+                        className={
+                            "text-uppercase mx-1 py-2 nav-btn" +
+                            (tab === button.tab ? "-active" : "")
+                        }
+                    >
+                        {button.text}
+                    </Button>
+                ))}
+            </div>
+        );
+    };
+
+    const renderTab = () => {
+        console.log(tab);
+        switch (tab) {
+            case "events":
+                return renderEvents();
+            case "activity":
+                return renderLogs();
+            case "members":
+                return renderMembers();
+            default:
+                return null;
+        }
     };
 
     return (
         <Container fluid>
             <SecondaryNavbar page="clubs" />
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
-                <div className="actionbar-header mx-md-5 mt-5 pt-3">
+                <div className="actionbar-header mx-md-5 mt-0 pt-0">
                     <span className="actionbar-title p-2">{club.name}</span>
                 </div>
             </Container>
+            <Row className="px-4 px-md-0 mx-md-2 mt-4">
+                <Col md className="my-auto px-0">
+                    {renderTabBar()}
+                </Col>
+                <Col className="my-auto py-3 py-md-0">
+                    {tab === "events" ? (
+                        <Searchbar dataList={events} setFilteredList={setFilteredList} />
+                    ) : null}
+                </Col>
+            </Row>
             <Row className="p-0">
-                <Col xl="8">
-                    <Container fluid className="actionbar-container p-3 mt-4 rounded-lg">
-                        <div className="actionbar-header">
-                            <span className="actionbar-title-thin p-2" onClick={togglePrevious}>
-                                {viewPrevious ? "Previous Events" : "Upcoming Events"}
-                            </span>
-                        </div>
-                        <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                            <Searchbar dataList={events} setFilteredList={setFilteredList} />
-                        </Row>
-                    </Container>
-                    {renderEvents()}
-                </Col>
-                <Col>
-                    <Container fluid className="actionbar-container p-3 mt-4 rounded-lg">
-                        <div className="actionbar-header">
-                            <span className="actionbar-title-thin p-1"> Recent Activity </span>
-                        </div>
-                    </Container>
-                    <Row className="h-100 w-100 my-2 mx-auto">{renderLogs()}</Row>
-                </Col>
+                <Col>{renderTab()}</Col>
             </Row>
         </Container>
     );
