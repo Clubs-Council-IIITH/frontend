@@ -105,7 +105,6 @@ code {
   font-weight: 700;
   font-size: 1em;
   line-height: 1.2;
-  width: min-content;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -116,6 +115,19 @@ code {
   font-family: "Raleway", "sans-serif";
   font-weight: 700;
   font-size: 0.7em;
+  line-height: 1.2;
+}
+
+.viewclub-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.viewclub-title {
+  font-family: "Raleway", "sans-serif";
+  font-weight: 700;
+  font-size: calc(0.6em + 1.4vw);
   line-height: 1.2;
 }
 
@@ -267,6 +279,25 @@ code {
 .userlist-img {
   max-width: 50px;
   border-radius: 4px;
+}
+
+.back-btn {
+  border: none;
+  border-radius: 8px;
+  background-color: #00000000 !important;
+}
+
+.back-btn:hover {
+  background-color: #ccc !important;
+}
+
+.back-btn-icon {
+  width: 2.5em;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;
 }
 
 .card-btn {

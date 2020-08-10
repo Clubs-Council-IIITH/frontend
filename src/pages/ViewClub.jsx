@@ -3,6 +3,7 @@ import { Container, Button, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
+import BackButton from "../components/buttons/BackButton";
 import Searchbar from "../components/Searchbar";
 import EventItem from "../components/items/EventItem";
 import UserItem from "../components/items/UserItem";
@@ -114,8 +115,9 @@ const ViewClub = (props) => {
     return (
         <Container fluid>
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
-                <div className="actionbar-header mx-md-5 mt-0 pt-0">
-                    <span className="actionbar-title p-2">{club.name}</span>
+                <div className="viewclub-header mx-md-3 mt-0 pt-0">
+                    <BackButton />
+                    <span className="viewclub-title p-2 my-auto">{club.name}</span>
                 </div>
             </Container>
             <Row className="px-4 px-md-0 mx-md-2 mt-4">
