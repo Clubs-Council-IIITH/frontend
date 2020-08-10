@@ -6,6 +6,7 @@ import API from "../../api/methods";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
 import EventItem from "../../components/items/EventItem";
+import UserItem from "../../components/items/UserItem";
 import LogItem from "../../components/items/LogItem";
 import { isSameDay } from "../../utils/DateTimeFormatter";
 
@@ -49,10 +50,18 @@ const AdminViewClub = (props) => {
         if (!users) return null;
         return (
             <div className="mt-4">
-                {users.map((coord) => (
-                    <h5>
-                        {coord.name}, {coord.roles.filter((role) => role[0] == club.id)[0][1]}
-                    </h5>
+                {users.map((user) => (
+                    <Col md="2" lg="4" xl="3" key={user.id} className="my-3">
+                        <UserItem
+                            modifiable
+                            id={user.id}
+                            img={user.img}
+                            name={user.name}
+                            role={user.roles.filter((role) => role[0] == club.id)[0][1]}
+                            mail={user.mail}
+                            mobile={user.mobile}
+                        />
+                    </Col>
                 ))}
             </div>
         );
