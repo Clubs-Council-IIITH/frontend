@@ -7,6 +7,7 @@ import { SessionContext } from "./api/SessionContext";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Clubs from "./pages/Clubs";
+import ViewClub from "./pages/ViewClub";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
@@ -32,6 +33,7 @@ const App = () => {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/clubs" component={Clubs} />
+                <Route exact path="/clubs/:id" component={ViewClub} />
                 <Route exact path="/calendar" component={Calendar} />
                 <Route exact path="/blog" component={Blog} />
                 <Route exact path="/contact" component={Contact} />
