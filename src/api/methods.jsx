@@ -30,6 +30,7 @@ export default {
 
     view: async (model, params) => {
         fetchToken();
+        if (!headers.Authorization) return await axios.get("/api/" + model + "/", { params });
         const res = await axios.get("/api/" + model + "/", { params, headers });
         console.log(res);
         return res;
