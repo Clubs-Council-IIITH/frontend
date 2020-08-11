@@ -147,6 +147,12 @@ code {
   margin-right: 0.5em;
 }
 
+.link-card,
+.link-card:hover {
+  color: #000;
+  text-decoration: none;
+}
+
 .dash-card {
   color: #000;
 }

@@ -6,7 +6,7 @@ const SecondaryNavbar = (props) => {
     const buttonList = [
         { text: "clubs", page: "clubs", link: "/admin/clubs" },
         { text: "users", page: "users", link: "/admin/users" },
-        { text: "council", page: "council", link: "/admin/council" },
+        // { text: "council", page: "council", link: "/admin/council" },
     ];
 
     return (
