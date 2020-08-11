@@ -5,7 +5,7 @@ import API from "../api/methods";
 
 import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
-import LoadingBar from "../components/LoadingBar";
+import LoadingIndicator from "../components/LoadingIndicator";
 import ClubItem from "../components/items/ClubItem";
 
 const Clubs = (props) => {
@@ -33,7 +33,7 @@ const Clubs = (props) => {
                 </Row>
             </Container>
             {!filteredList ? (
-                <LoadingBar />
+                <LoadingIndicator />
             ) : (
                 <Page>
                     <Row className="pt-5 mx-md-5">

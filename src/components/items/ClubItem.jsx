@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, CardFooter } from "reactstrap";
+import { Card, CardBody, CardFooter } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import EditClubModal from "../../components/EditClubModal";

@@ -6,7 +6,7 @@ import API from "../../api/methods";
 import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
-import LoadingBar from "../../components/LoadingBar";
+import LoadingIndicator from "../../components/LoadingIndicator";
 import NewUserModal from "../../components/NewUserModal";
 import UserItem from "../../components/items/UserItem";
 
@@ -52,7 +52,7 @@ const AdminUsers = () => {
                 <NewUserModal modal={modal} toggleModal={toggleModal} />
 
                 {!filteredList ? (
-                    <LoadingBar />
+                    <LoadingIndicator />
                 ) : (
                     <Container fluid>
                         <Row className="pt-5 mx-md-5 user-card">

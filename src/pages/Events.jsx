@@ -5,7 +5,7 @@ import API from "../api/methods";
 
 import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
-import LoadingBar from "../components/LoadingBar";
+import LoadingIndicator from "../components/LoadingIndicator";
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
 
@@ -56,7 +56,7 @@ const Events = () => {
             <NewEventModal modal={modal} toggleModal={toggleModal} />
 
             {!filteredList ? (
-                <LoadingBar />
+                <LoadingIndicator />
             ) : (
                 <Container fluid>
                     <Row className="pt-5 mx-md-5">

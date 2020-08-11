@@ -6,7 +6,7 @@ import API from "../api/methods";
 import Page from "../components/PageContainer";
 import BackButton from "../components/buttons/BackButton";
 import Searchbar from "../components/Searchbar";
-import LoadingBar from "../components/LoadingBar";
+import LoadingIndicator from "../components/LoadingIndicator";
 import EventItem from "../components/items/EventItem";
 import UserItem from "../components/items/UserItem";
 
@@ -15,7 +15,6 @@ const ViewClub = (props) => {
     const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
-    const [viewPrevious, setViewPrevious] = useState(false);
     const [tab, setTab] = useState("events");
 
     useEffect(() => {
@@ -37,12 +36,8 @@ const ViewClub = (props) => {
         getEvents();
     }, []); // eslint-disable-line
 
-    const togglePrevious = () => {
-        setViewPrevious(!viewPrevious);
-    };
-
     const renderMembers = () => {
-        if (!users) return <LoadingBar />;
+        if (!users) return <LoadingIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
@@ -62,7 +57,7 @@ const ViewClub = (props) => {
     };
 
     const renderEvents = () => {
-        if (!filteredList) return <LoadingBar />;
+        if (!filteredList) return <LoadingIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
