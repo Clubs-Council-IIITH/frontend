@@ -31,16 +31,30 @@ code {
 
 .loading-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 30vh;
+}
+
+.null-img {
+    min-width: 200px;
+    width: 30vw;
+    opacity: 20%;
+}
+
+.null-msg {
+    font-family: "Quicksand", "sans-serif";
+    font-weight: 700;
+    font-size: calc(1.5em + 1vw);
+    color: #bbb;
 }
 // }}}
 
 // Navbar Styles {{{
 .nav-dark {
     background-color: #0d0d0d !important;
-    font-family: "Quicksand";
+    font-family: "Quicksand", "sans-serif";
     font-weight: 600;
     box-shadow: 0 0 10px #555;
 }
