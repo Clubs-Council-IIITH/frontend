@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
+
+import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
 import ClubItem from "../components/items/ClubItem";
 
@@ -19,9 +21,8 @@ const Clubs = (props) => {
         getClubList();
     }, []);
 
-    if (!clubList) return null;
     return (
-        <Container fluid>
+        <Page>
             <Container fluid className="actionbar-container p-5 rounded-lg">
                 <div className="actionbar-header mx-md-5 mt-0 pt-0">
                     <span className="actionbar-title p-2">Clubs</span>
@@ -30,22 +31,25 @@ const Clubs = (props) => {
                     <Searchbar dataList={clubList} setFilteredList={setFilteredList} />
                 </Row>
             </Container>
-
-            <Container fluid>
-                <Row className="pt-5 mx-md-5">
-                    {filteredList.map((club) => (
-                        <Col md="6" lg="4" className="py-3">
-                            <ClubItem
-                                id={club.id}
-                                name={club.name}
-                                mail={club.mail}
-                                link={props.match.url + "/" + club.id}
-                            />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-        </Container>
+            {!clubList ? (
+                <></>
+            ) : (
+                <Container fluid>
+                    <Row className="pt-5 mx-md-5">
+                        {filteredList.map((club) => (
+                            <Col md="6" lg="4" className="py-3" key={club.id}>
+                                <ClubItem
+                                    id={club.id}
+                                    name={club.name}
+                                    mail={club.mail}
+                                    link={props.match.url + "/" + club.id}
+                                />
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
+            )}
+        </Page>
     );
 };
 

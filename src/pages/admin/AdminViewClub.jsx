@@ -3,6 +3,7 @@ import { Container, Button, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
@@ -48,7 +49,7 @@ const AdminViewClub = (props) => {
     };
 
     const renderMembers = () => {
-        if (!users) return null;
+        if (!users) return <></>; // TODO: Add Loading Spinner
         return (
             <Row className="mt-4">
                 {users.map((user) => (
@@ -68,7 +69,7 @@ const AdminViewClub = (props) => {
     };
 
     const renderEvents = () => {
-        if (!events) return null;
+        if (!filteredList) return <></>; // TODO: Add Loading Spinner
         return (
             <Row className="mt-4">
                 {filteredList.map((event) => (
@@ -90,7 +91,7 @@ const AdminViewClub = (props) => {
     };
 
     const renderLogs = () => {
-        if (!(logs.length > 0)) return null;
+        if (!(logs.length > 0)) return <></>; // TODO: Add Null Indicator
         var prevDate = logs[0].timestamp;
         logs[0]["datebreak"] = true;
         logs.forEach(function (log) {
@@ -155,28 +156,30 @@ const AdminViewClub = (props) => {
     };
 
     return (
-        <Container fluid>
+        <>
             <SecondaryNavbar page="clubs" />
-            <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
-                <div className="viewclub-header mx-md-3 mt-0 pt-0">
-                    <BackButton />
-                    <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                </div>
-            </Container>
-            <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                <Col md className="my-auto px-0">
-                    {renderTabBar()}
-                </Col>
-                <Col className="my-auto py-3 py-md-0">
-                    {tab === "events" ? (
-                        <Searchbar dataList={events} setFilteredList={setFilteredList} />
-                    ) : null}
-                </Col>
-            </Row>
-            <Row className="p-0">
-                <Col>{renderTab()}</Col>
-            </Row>
-        </Container>
+            <Page>
+                <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
+                    <div className="viewclub-header mx-md-3 mt-0 pt-0">
+                        <BackButton />
+                        <span className="viewclub-title p-2 my-auto">{club.name}</span>
+                    </div>
+                </Container>
+                <Row className="px-4 px-md-0 mx-md-2 mt-4">
+                    <Col md className="my-auto px-0">
+                        {renderTabBar()}
+                    </Col>
+                    <Col className="my-auto py-3 py-md-0">
+                        {tab === "events" ? (
+                            <Searchbar dataList={events} setFilteredList={setFilteredList} />
+                        ) : null}
+                    </Col>
+                </Row>
+                <Row className="p-0">
+                    <Col>{renderTab()}</Col>
+                </Row>
+            </Page>
+        </>
     );
 };
 

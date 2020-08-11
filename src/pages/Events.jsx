@@ -3,6 +3,7 @@ import { Container, Button, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
+import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
@@ -31,9 +32,8 @@ const Events = () => {
         setViewPrevious(!viewPrevious);
     };
 
-    if (!eventList) return null; // TODO: Add Spinner
     return (
-        <Container fluid>
+        <Page>
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
                 <div className="actionbar-header mx-md-5 mt-5 pt-3">
                     <span className="actionbar-title clickable p-2" onClick={togglePrevious}>
@@ -54,29 +54,34 @@ const Events = () => {
 
             <NewEventModal modal={modal} toggleModal={toggleModal} />
 
-            <Container fluid>
-                <Row className="pt-5 mx-md-5">
-                    {filteredList.map((event) => {
-                        const isPrevious = event.state === "completed" || event.state === "deleted";
-                        if (viewPrevious ? !isPrevious : isPrevious) return null;
-                        return (
-                            <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
-                                <EventItem
-                                    modifiable
-                                    id={event.id}
-                                    audience={event.audience}
-                                    name={event.name}
-                                    datetime={event.datetime}
-                                    venue={event.venue}
-                                    creator={event.creator}
-                                    state={event.state}
-                                />
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </Container>
-        </Container>
+            {!filteredList ? (
+                <></> // TODO: Add Loading Spinner
+            ) : (
+                <Container fluid>
+                    <Row className="pt-5 mx-md-5">
+                        {filteredList.map((event) => {
+                            const isPrevious =
+                                event.state === "completed" || event.state === "deleted";
+                            if (viewPrevious ? !isPrevious : isPrevious) return null;
+                            return (
+                                <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
+                                    <EventItem
+                                        modifiable
+                                        id={event.id}
+                                        audience={event.audience}
+                                        name={event.name}
+                                        datetime={event.datetime}
+                                        venue={event.venue}
+                                        creator={event.creator}
+                                        state={event.state}
+                                    />
+                                </Col>
+                            );
+                        })}
+                    </Row>
+                </Container>
+            )}
+        </Page>
     );
 };
 

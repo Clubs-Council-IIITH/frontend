@@ -3,6 +3,7 @@ import { Container, Button, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
+import Page from "../components/PageContainer";
 import BackButton from "../components/buttons/BackButton";
 import Searchbar from "../components/Searchbar";
 import EventItem from "../components/items/EventItem";
@@ -40,7 +41,7 @@ const ViewClub = (props) => {
     };
 
     const renderMembers = () => {
-        if (!users) return null;
+        if (!users) return <></>; // TODO: Add Loading Spinner
         return (
             <Row className="mt-4">
                 {users.map((user) => (
@@ -58,7 +59,7 @@ const ViewClub = (props) => {
     };
 
     const renderEvents = () => {
-        if (!events) return null;
+        if (!events) return <></>; // TODO: Add Loading Spinner
         return (
             <Row className="mt-4">
                 {filteredList.map((event) => (
@@ -113,7 +114,7 @@ const ViewClub = (props) => {
     };
 
     return (
-        <Container fluid>
+        <Page>
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
                 <div className="viewclub-header mx-md-3 mt-0 pt-0">
                     <BackButton />
@@ -133,7 +134,7 @@ const ViewClub = (props) => {
             <Row className="p-0">
                 <Col>{renderTab()}</Col>
             </Row>
-        </Container>
+        </Page>
     );
 };
 
