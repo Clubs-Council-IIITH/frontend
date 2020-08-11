@@ -5,6 +5,7 @@ import API from "../api/methods";
 
 import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
+import LoadingBar from "../components/LoadingBar";
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
 
@@ -55,7 +56,7 @@ const Events = () => {
             <NewEventModal modal={modal} toggleModal={toggleModal} />
 
             {!filteredList ? (
-                <></> // TODO: Add Loading Spinner
+                <LoadingBar />
             ) : (
                 <Container fluid>
                     <Row className="pt-5 mx-md-5">

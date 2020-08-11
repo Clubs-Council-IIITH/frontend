@@ -5,6 +5,7 @@ import API from "../api/methods";
 
 import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
+import LoadingBar from "../components/LoadingBar";
 import ClubItem from "../components/items/ClubItem";
 
 const Clubs = (props) => {
@@ -32,9 +33,9 @@ const Clubs = (props) => {
                 </Row>
             </Container>
             {!clubList ? (
-                <></>
+                <LoadingBar />
             ) : (
-                <Container fluid>
+                <Page>
                     <Row className="pt-5 mx-md-5">
                         {filteredList.map((club) => (
                             <Col md="6" lg="4" className="py-3" key={club.id}>
@@ -47,7 +48,7 @@ const Clubs = (props) => {
                             </Col>
                         ))}
                     </Row>
-                </Container>
+                </Page>
             )}
         </Page>
     );

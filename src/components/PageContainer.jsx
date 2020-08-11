@@ -1,28 +1,12 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { Container } from "reactstrap";
+import FadeIn from "react-fade-in";
 
-const pageTransition = {
-    in: {
-        opacity: 1,
-        y: 0,
-    },
-    out: {
-        opacity: 0.8,
-        y: "10px",
-    },
-};
-
-const PageContainer = ({ children }) => {
+const PageContainer = ({ className, children }) => {
     return (
-        <motion.div
-            initial="out"
-            animate="in"
-            exit="out"
-            variants={pageTransition}
-            className="mx-3"
-        >
+        <Container fluid tag={FadeIn} className={className}>
             {children}
-        </motion.div>
+        </Container>
     );
 };
 
