@@ -28,6 +28,13 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
 // }}}
 
 // Navbar Styles {{{
