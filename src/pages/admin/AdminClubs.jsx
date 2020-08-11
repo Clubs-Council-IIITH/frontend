@@ -7,6 +7,7 @@ import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import NullIndicator from "../../components/NullIndicator";
 import NewClubModal from "../../components/NewClubModal";
 import ClubItem from "../../components/items/ClubItem";
 
@@ -29,9 +30,32 @@ const AdminClubs = (props) => {
         setModal(!modal);
     };
 
+    const renderClubs = () => {
+        if (!filteredList) return <LoadingIndicator />;
+        if (filteredList.length === 0) return <NullIndicator />;
+        return (
+            <Page>
+                <Row className="pt-5 mx-md-5">
+                    {filteredList.map((club) => (
+                        <Col md="6" lg="4" className="py-3">
+                            <ClubItem
+                                modifiable
+                                id={club.id}
+                                name={club.name}
+                                mail={club.mail}
+                                link={"/admin/clubs/" + club.id}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            </Page>
+        );
+    };
+
     return (
         <>
             <SecondaryNavbar page="clubs" />
+            <NewClubModal modal={modal} toggleModal={toggleModal} />
             <Page>
                 <Container fluid className="actionbar-container p-5 rounded-lg">
                     <div className="actionbar-header mx-md-5 mt-0 pt-0">
@@ -48,27 +72,7 @@ const AdminClubs = (props) => {
                         <Searchbar dataList={clubList} setFilteredList={setFilteredList} />
                     </Row>
                 </Container>
-
-                <NewClubModal modal={modal} toggleModal={toggleModal} />
-                {!filteredList ? (
-                    <LoadingIndicator />
-                ) : (
-                    <Container fluid>
-                        <Row className="pt-5 mx-md-5">
-                            {filteredList.map((club) => (
-                                <Col md="6" lg="4" className="py-3">
-                                    <ClubItem
-                                        modifiable
-                                        id={club.id}
-                                        name={club.name}
-                                        mail={club.mail}
-                                        link={"/admin/clubs/" + club.id}
-                                    />
-                                </Col>
-                            ))}
-                        </Row>
-                    </Container>
-                )}
+                {renderClubs()}
             </Page>
         </>
     );

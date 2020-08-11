@@ -7,6 +7,7 @@ import Page from "../components/PageContainer";
 import BackButton from "../components/buttons/BackButton";
 import Searchbar from "../components/Searchbar";
 import LoadingIndicator from "../components/LoadingIndicator";
+import NullIndicator from "../components/NullIndicator";
 import EventItem from "../components/items/EventItem";
 import UserItem from "../components/items/UserItem";
 
@@ -38,6 +39,7 @@ const ViewClub = (props) => {
 
     const renderMembers = () => {
         if (!users) return <LoadingIndicator />;
+        if (users.length === 0) return <NullIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
@@ -58,6 +60,7 @@ const ViewClub = (props) => {
 
     const renderEvents = () => {
         if (!filteredList) return <LoadingIndicator />;
+        if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Page>
                 <Row className="mt-4">

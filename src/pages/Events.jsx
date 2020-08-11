@@ -6,6 +6,7 @@ import API from "../api/methods";
 import Page from "../components/PageContainer";
 import Searchbar from "../components/Searchbar";
 import LoadingIndicator from "../components/LoadingIndicator";
+import NullIndicator from "../components/NullIndicator";
 import NewEventModal from "../components/NewEventModal";
 import EventItem from "../components/items/EventItem";
 
@@ -33,12 +34,44 @@ const Events = () => {
         setViewPrevious(!viewPrevious);
     };
 
+    const renderEvents = () => {
+        if (!filteredList) return <LoadingIndicator />;
+        if (filteredList.length === 0) return <NullIndicator />;
+        return (
+            <Page>
+                <Row className="pt-5 mx-md-5">
+                    {filteredList.map((event) => {
+                        // const isPrevious = event.state === "completed" || event.state === "deleted";
+                        // if (viewPrevious ? !isPrevious : isPrevious) return null;
+                        return (
+                            <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
+                                <EventItem
+                                    modifiable
+                                    id={event.id}
+                                    audience={event.audience}
+                                    name={event.name}
+                                    datetime={event.datetime}
+                                    venue={event.venue}
+                                    creator={event.creator}
+                                    state={event.state}
+                                />
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Page>
+        );
+    };
+
     return (
         <Page>
+            <NewEventModal modal={modal} toggleModal={toggleModal} />
             <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
                 <div className="actionbar-header mx-md-5 mt-5 pt-3">
                     <span className="actionbar-title clickable p-2" onClick={togglePrevious}>
-                        {viewPrevious ? "Previous Events" : "Upcoming Events"}
+                        {/* TODO: Properly implement a way to switch between upcoming and previous events*/}
+                        {/* {viewPrevious ? "Previous Events" : "Upcoming Events"} */}
+                        Events
                     </span>
                     <Button
                         onClick={toggleModal}
@@ -52,36 +85,7 @@ const Events = () => {
                     <Searchbar dataList={eventList} setFilteredList={setFilteredList} />
                 </Row>
             </Container>
-
-            <NewEventModal modal={modal} toggleModal={toggleModal} />
-
-            {!filteredList ? (
-                <LoadingIndicator />
-            ) : (
-                <Container fluid>
-                    <Row className="pt-5 mx-md-5">
-                        {filteredList.map((event) => {
-                            const isPrevious =
-                                event.state === "completed" || event.state === "deleted";
-                            if (viewPrevious ? !isPrevious : isPrevious) return null;
-                            return (
-                                <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
-                                    <EventItem
-                                        modifiable
-                                        id={event.id}
-                                        audience={event.audience}
-                                        name={event.name}
-                                        datetime={event.datetime}
-                                        venue={event.venue}
-                                        creator={event.creator}
-                                        state={event.state}
-                                    />
-                                </Col>
-                            );
-                        })}
-                    </Row>
-                </Container>
-            )}
+            {renderEvents()}
         </Page>
     );
 };

@@ -7,6 +7,7 @@ import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import NullIndicator from "../../components/NullIndicator";
 import NewUserModal from "../../components/NewUserModal";
 import UserItem from "../../components/items/UserItem";
 
@@ -29,9 +30,36 @@ const AdminUsers = () => {
         setModal(!modal);
     };
 
+    const renderUsers = () => {
+        if (!filteredList) return <LoadingIndicator />;
+        if (filteredList.length === 0) return <NullIndicator />;
+        return (
+            <Page>
+                <Row className="pt-5 mx-md-5 user-card">
+                    {filteredList.map((user) => {
+                        return (
+                            <Col sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
+                                <UserItem
+                                    modifiable
+                                    id={user.id}
+                                    img={user.img}
+                                    name={user.name}
+                                    role={user.role}
+                                    mail={user.mail}
+                                    mobile={user.mobile}
+                                />
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Page>
+        );
+    };
+
     return (
         <>
             <SecondaryNavbar page="users" />
+            <NewUserModal modal={modal} toggleModal={toggleModal} />
             <Page>
                 <Container fluid className="actionbar-container p-5 rounded-lg">
                     <div className="actionbar-header mx-md-5 mt-0 pt-0">
@@ -48,38 +76,7 @@ const AdminUsers = () => {
                         <Searchbar dataList={userList} setFilteredList={setFilteredList} />
                     </Row>
                 </Container>
-
-                <NewUserModal modal={modal} toggleModal={toggleModal} />
-
-                {!filteredList ? (
-                    <LoadingIndicator />
-                ) : (
-                    <Container fluid>
-                        <Row className="pt-5 mx-md-5 user-card">
-                            {filteredList.map((user) => {
-                                return (
-                                    <Col
-                                        sm="4"
-                                        lg="3"
-                                        xl="2"
-                                        key={user.id}
-                                        className="py-3 user-card"
-                                    >
-                                        <UserItem
-                                            modifiable
-                                            id={user.id}
-                                            img={user.img}
-                                            name={user.name}
-                                            role={user.role}
-                                            mail={user.mail}
-                                            mobile={user.mobile}
-                                        />
-                                    </Col>
-                                );
-                            })}
-                        </Row>
-                    </Container>
-                )}
+                {renderUsers()}
             </Page>
         </>
     );

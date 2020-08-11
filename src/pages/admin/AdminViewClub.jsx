@@ -8,6 +8,7 @@ import SecondaryNavbar from "../../components/SecondaryNavbar";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import NullIndicator from "../../components/NullIndicator";
 import EventItem from "../../components/items/EventItem";
 import UserItem from "../../components/items/UserItem";
 import LogItem from "../../components/items/LogItem";
@@ -46,6 +47,7 @@ const AdminViewClub = (props) => {
 
     const renderMembers = () => {
         if (!users) return <LoadingIndicator />;
+        if (users.length === 0) return <NullIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
@@ -68,6 +70,7 @@ const AdminViewClub = (props) => {
 
     const renderEvents = () => {
         if (!filteredList) return <LoadingIndicator />;
+        if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
@@ -91,7 +94,8 @@ const AdminViewClub = (props) => {
     };
 
     const renderLogs = () => {
-        if (!(logs.length > 0)) return <LoadingIndicator />;
+        if (!logs) return <LoadingIndicator />;
+        if (logs.length === 0) return <NullIndicator />;
         var prevDate = logs[0].timestamp;
         logs[0]["datebreak"] = true;
         logs.forEach(function (log) {
