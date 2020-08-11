@@ -5,11 +5,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import SessionProvider from "./api/SessionContext";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
     <React.StrictMode>
         <SessionProvider>
-            <App />
+            <Router>
+                <App />
+            </Router>
         </SessionProvider>
     </React.StrictMode>,
     document.getElementById("root")
