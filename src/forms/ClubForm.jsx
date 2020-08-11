@@ -152,7 +152,7 @@ const ClubForm = (props) => {
                         Cancel
                     </Button>
                     <Button color="primary" type="submit">
-                        Submit
+                        Save
                     </Button>
                 </Col>
             </Row>

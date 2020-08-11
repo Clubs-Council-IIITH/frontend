@@ -49,7 +49,7 @@ const ViewClub = (props) => {
                                 id={user.id}
                                 img={user.img}
                                 name={user.name}
-                                role={user.roles.filter((role) => role[0] == club.id)[0][1]}
+                                role={user.roles.filter((role) => role[0] == club.id)[0][1]} // eslint-disable-line
                             />
                         </Col>
                     ))}
