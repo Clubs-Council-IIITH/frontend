@@ -6,12 +6,13 @@ import API from "../../api/methods";
 import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
+import LoadingBar from "../../components/LoadingBar";
 import NewUserModal from "../../components/NewUserModal";
 import UserItem from "../../components/items/UserItem";
 
 const AdminUsers = () => {
     const [userList, setUserList] = useState(false);
-    const [filteredList, setFilteredList] = useState([]);
+    const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -50,8 +51,8 @@ const AdminUsers = () => {
 
                 <NewUserModal modal={modal} toggleModal={toggleModal} />
 
-                {!userList ? (
-                    <></> // TODO: Add Loading Spinner
+                {!filteredList ? (
+                    <LoadingBar />
                 ) : (
                     <Container fluid>
                         <Row className="pt-5 mx-md-5 user-card">

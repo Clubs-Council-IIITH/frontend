@@ -11,7 +11,7 @@ import EventItem from "../components/items/EventItem";
 
 const Events = () => {
     const [eventList, setEventList] = useState(false);
-    const [filteredList, setFilteredList] = useState([]);
+    const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
 

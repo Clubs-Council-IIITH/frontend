@@ -6,12 +6,13 @@ import API from "../../api/methods";
 import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import Searchbar from "../../components/Searchbar";
+import LoadingBar from "../../components/LoadingBar";
 import NewClubModal from "../../components/NewClubModal";
 import ClubItem from "../../components/items/ClubItem";
 
 const AdminClubs = (props) => {
     const [clubList, setClubList] = useState(false);
-    const [filteredList, setFilteredList] = useState([]);
+    const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -50,7 +51,7 @@ const AdminClubs = (props) => {
 
                 <NewClubModal modal={modal} toggleModal={toggleModal} />
                 {!filteredList ? (
-                    <></> // TODO: Add Loading Spinner
+                    <LoadingBar />
                 ) : (
                     <Container fluid>
                         <Row className="pt-5 mx-md-5">

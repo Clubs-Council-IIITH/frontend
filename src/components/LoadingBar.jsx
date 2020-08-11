@@ -1,13 +1,14 @@
 import React from "react";
 import ReactLoading from "react-loading";
+import { Container } from "reactstrap";
 
 import Page from "./PageContainer";
 
 const LoadingBar = () => {
     return (
-        <Page className="loading-container">
+        <Container className="loading-container">
             <ReactLoading type="bars" color="black" />
-        </Page>
+        </Container>
     );
 };
 

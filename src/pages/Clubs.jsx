@@ -10,7 +10,7 @@ import ClubItem from "../components/items/ClubItem";
 
 const Clubs = (props) => {
     const [clubList, setClubList] = useState(false);
-    const [filteredList, setFilteredList] = useState([]);
+    const [filteredList, setFilteredList] = useState(false);
 
     useEffect(() => {
         async function getClubList() {
@@ -32,7 +32,7 @@ const Clubs = (props) => {
                     <Searchbar dataList={clubList} setFilteredList={setFilteredList} />
                 </Row>
             </Container>
-            {!clubList ? (
+            {!filteredList ? (
                 <LoadingBar />
             ) : (
                 <Page>

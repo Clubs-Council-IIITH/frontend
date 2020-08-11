@@ -7,6 +7,7 @@ import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
+import LoadingBar from "../../components/LoadingBar";
 import EventItem from "../../components/items/EventItem";
 import UserItem from "../../components/items/UserItem";
 import LogItem from "../../components/items/LogItem";
@@ -17,7 +18,7 @@ const AdminViewClub = (props) => {
     const [logs, setLogs] = useState(false);
     const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
-    const [filteredList, setFilteredList] = useState([]);
+    const [filteredList, setFilteredList] = useState(false);
     const [viewPrevious, setViewPrevious] = useState(false);
     const [tab, setTab] = useState("events");
 
@@ -49,49 +50,53 @@ const AdminViewClub = (props) => {
     };
 
     const renderMembers = () => {
-        if (!users) return <></>; // TODO: Add Loading Spinner
+        if (!users) return <LoadingBar />;
         return (
-            <Row className="mt-4">
-                {users.map((user) => (
-                    <Col xs="6" sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
-                        <UserItem
-                            id={user.id}
-                            img={user.img}
-                            name={user.name}
-                            role={user.roles.filter((role) => role[0] == club.id)[0][1]}
-                            mail={user.mail}
-                            mobile={user.mobile}
-                        />
-                    </Col>
-                ))}
-            </Row>
+            <Page>
+                <Row className="mt-4">
+                    {users.map((user) => (
+                        <Col xs="6" sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
+                            <UserItem
+                                id={user.id}
+                                img={user.img}
+                                name={user.name}
+                                role={user.roles.filter((role) => role[0] == club.id)[0][1]}
+                                mail={user.mail}
+                                mobile={user.mobile}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            </Page>
         );
     };
 
     const renderEvents = () => {
-        if (!filteredList) return <></>; // TODO: Add Loading Spinner
+        if (!filteredList) return <LoadingBar />;
         return (
-            <Row className="mt-4">
-                {filteredList.map((event) => (
-                    <Col md="2" lg="4" xl="3" key={event.id} className="my-3">
-                        <EventItem
-                            modifiable
-                            id={event.id}
-                            audience={event.audience}
-                            name={event.name}
-                            datetime={event.datetime}
-                            venue={event.venue}
-                            creator={event.creator}
-                            state={event.state}
-                        />
-                    </Col>
-                ))}
-            </Row>
+            <Page>
+                <Row className="mt-4">
+                    {filteredList.map((event) => (
+                        <Col md="2" lg="4" xl="3" key={event.id} className="my-3">
+                            <EventItem
+                                modifiable
+                                id={event.id}
+                                audience={event.audience}
+                                name={event.name}
+                                datetime={event.datetime}
+                                venue={event.venue}
+                                creator={event.creator}
+                                state={event.state}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            </Page>
         );
     };
 
     const renderLogs = () => {
-        if (!(logs.length > 0)) return <></>; // TODO: Add Null Indicator
+        if (!(logs.length > 0)) return <LoadingBar />;
         var prevDate = logs[0].timestamp;
         logs[0]["datebreak"] = true;
         logs.forEach(function (log) {
@@ -102,19 +107,21 @@ const AdminViewClub = (props) => {
         });
 
         return (
-            <div className="mt-4">
-                {logs.map((log) => (
-                    <Col md="12" className="my-1">
-                        <LogItem
-                            datetime={log.timestamp}
-                            creator={log.event[0]["creator"]}
-                            action={log.action}
-                            event={log.event[0]["name"]}
-                            datebreak={log.datebreak}
-                        />
-                    </Col>
-                ))}
-            </div>
+            <Page>
+                <div className="mt-4">
+                    {logs.map((log) => (
+                        <Col md="12" className="my-1">
+                            <LogItem
+                                datetime={log.timestamp}
+                                creator={log.event[0]["creator"]}
+                                action={log.action}
+                                event={log.event[0]["name"]}
+                                datebreak={log.datebreak}
+                            />
+                        </Col>
+                    ))}
+                </div>
+            </Page>
         );
     };
 
