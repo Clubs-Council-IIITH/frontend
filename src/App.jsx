@@ -14,6 +14,7 @@ import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 
 import OrganizerEvents from "./pages/organizer/OrganizerEvents";
+import OrganizerBudget from "./pages/organizer/OrganizerBudget";
 
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
@@ -45,6 +46,7 @@ const App = () => {
                     path={["/organizer/events", "/organizer"]}
                     component={OrganizerEvents}
                 />
+                <ProtectedRoute exact path="/organizer/budget" component={OrganizerBudget} />
 
                 {/* Admin routes */}
                 <ProtectedRoute exact path={["/admin/clubs", "/admin"]} component={AdminClubs} />

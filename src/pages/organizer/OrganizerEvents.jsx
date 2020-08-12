@@ -11,7 +11,7 @@ import NullIndicator from "../../components/NullIndicator";
 import NewEventModal from "../../components/NewEventModal";
 import EventItem from "../../components/items/EventItem";
 
-const Events = () => {
+const OrganizerEvents = () => {
     const [eventList, setEventList] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
@@ -98,4 +98,4 @@ const Events = () => {
     );
 };
 
-export default Events;
+export default OrganizerEvents;
