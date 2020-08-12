@@ -8,11 +8,12 @@ import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Clubs from "./pages/Clubs";
 import ViewClub from "./pages/ViewClub";
-import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
+
+import OrganizerEvents from "./pages/organizer/OrganizerEvents";
 
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
@@ -39,7 +40,11 @@ const App = () => {
                 <Route exact path="/contact" component={Contact} />
 
                 {/* Organizer routes */}
-                <ProtectedRoute exact path="/events" component={Events} />
+                <ProtectedRoute
+                    exact
+                    path={["/organizer/events", "/organizer"]}
+                    component={OrganizerEvents}
+                />
 
                 {/* Admin routes */}
                 <ProtectedRoute exact path={["/admin/clubs", "/admin"]} component={AdminClubs} />

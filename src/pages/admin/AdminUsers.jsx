@@ -58,7 +58,7 @@ const AdminUsers = () => {
 
     return (
         <>
-            <SecondaryNavbar page="users" />
+            <SecondaryNavbar admin page="users" />
             <NewUserModal modal={modal} toggleModal={toggleModal} />
             <Page fluid>
                 <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">

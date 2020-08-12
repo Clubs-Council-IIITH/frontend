@@ -54,7 +54,7 @@ const AdminClubs = (props) => {
 
     return (
         <>
-            <SecondaryNavbar page="clubs" />
+            <SecondaryNavbar admin page="clubs" />
             <NewClubModal modal={modal} toggleModal={toggleModal} />
             <Page fluid>
                 <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">

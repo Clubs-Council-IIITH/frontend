@@ -31,8 +31,8 @@ const Navigationbar = (props) => {
         const usergroup = props.session.usergroup;
         switch (usergroup) {
             case "organizer":
-                setContextAction("/events");
-                setContextString("MY EVENTS");
+                setContextAction("/organizer");
+                setContextString("MANAGE CLUB");
                 break;
             case "cc_admin":
                 setContextAction("/admin");

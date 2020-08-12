@@ -163,7 +163,7 @@ const AdminViewClub = (props) => {
 
     return (
         <>
-            <SecondaryNavbar page="clubs" />
+            <SecondaryNavbar admin page="clubs" />
             <Page fluid>
                 <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
                     <Page className="viewclub-header">
