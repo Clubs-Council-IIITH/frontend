@@ -28,9 +28,9 @@ const Clubs = (props) => {
         if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Page>
-                <Row className="pt-5 mx-md-5">
+                <Row className="mt-4">
                     {filteredList.map((club) => (
-                        <Col md="6" lg="4" className="py-3" key={club.id}>
+                        <Col md="6" lg="4" className="my-3" key={club.id}>
                             <ClubItem
                                 id={club.id}
                                 name={club.name}
@@ -45,14 +45,18 @@ const Clubs = (props) => {
     };
 
     return (
-        <Page>
-            <Container fluid className="actionbar-container p-5 rounded-lg">
-                <div className="actionbar-header mx-md-5 mt-0 pt-0">
+        <Page fluid>
+            <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                <Page header>
                     <span className="actionbar-title p-2">Clubs</span>
-                </div>
-                <Row className="mx-md-5 mt-5">
-                    <Searchbar dataList={clubList} setFilteredList={setFilteredList} />
-                </Row>
+                </Page>
+                <Page className="mt-5">
+                    <Searchbar
+                        className="w-100"
+                        dataList={clubList}
+                        setFilteredList={setFilteredList}
+                    />
+                </Page>
             </Container>
             {renderClubs()}
         </Page>

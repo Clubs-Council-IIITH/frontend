@@ -52,7 +52,7 @@ const AdminViewClub = (props) => {
             <Page>
                 <Row className="mt-4">
                     {users.map((user) => (
-                        <Col xs="6" sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
+                        <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
                             <UserItem
                                 id={user.id}
                                 img={user.img}
@@ -75,7 +75,7 @@ const AdminViewClub = (props) => {
             <Page>
                 <Row className="mt-4">
                     {filteredList.map((event) => (
-                        <Col md="2" lg="4" xl="3" key={event.id} className="my-3">
+                        <Col md="6" lg="4" className="my-3" key={event.id}>
                             <EventItem
                                 modifiable
                                 id={event.id}
@@ -164,23 +164,25 @@ const AdminViewClub = (props) => {
     return (
         <>
             <SecondaryNavbar page="clubs" />
-            <Page>
-                <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
-                    <div className="viewclub-header mx-md-3 mt-0 pt-0">
+            <Page fluid>
+                <Container fluid className="actionbar-container p-md-5 rounded-lg">
+                    <Page className="viewclub-header">
                         <BackButton />
                         <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                    </div>
+                    </Page>
                 </Container>
-                <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                    <Col md className="my-auto px-0">
-                        {renderTabBar()}
-                    </Col>
-                    <Col className="my-auto py-3 py-md-0">
-                        {tab === "events" ? (
-                            <Searchbar dataList={events} setFilteredList={setFilteredList} />
-                        ) : null}
-                    </Col>
-                </Row>
+                <Page>
+                    <Row className="px-4 px-md-0 mx-md-2 mt-4">
+                        <Col md className="my-auto px-0">
+                            {renderTabBar()}
+                        </Col>
+                        <Col className="my-auto py-3 py-md-0">
+                            {tab === "events" ? (
+                                <Searchbar dataList={events} setFilteredList={setFilteredList} />
+                            ) : null}
+                        </Col>
+                    </Row>
+                </Page>
                 <Row className="p-0">
                     <Col>{renderTab()}</Col>
                 </Row>

@@ -39,12 +39,12 @@ const Events = () => {
         if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Page>
-                <Row className="pt-5 mx-md-5">
+                <Row className="mt-4">
                     {filteredList.map((event) => {
                         // const isPrevious = event.state === "completed" || event.state === "deleted";
                         // if (viewPrevious ? !isPrevious : isPrevious) return null;
                         return (
-                            <Col md="5" lg="4" xl="4" key={event.id} className="my-3">
+                            <Col md="6" lg="4" className="my-3" key={event.id}>
                                 <EventItem
                                     modifiable
                                     id={event.id}
@@ -64,10 +64,10 @@ const Events = () => {
     };
 
     return (
-        <Page>
+        <Page fluid>
             <NewEventModal modal={modal} toggleModal={toggleModal} />
-            <Container fluid className="actionbar-container p-4 p-md-5 rounded-lg">
-                <div className="actionbar-header mx-md-5 mt-5 pt-3">
+            <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                <Page header>
                     <span className="actionbar-title clickable p-2" onClick={togglePrevious}>
                         {/* TODO: Properly implement a way to switch between upcoming and previous events*/}
                         {/* {viewPrevious ? "Previous Events" : "Upcoming Events"} */}
@@ -80,10 +80,14 @@ const Events = () => {
                         <span className="d-md-none"> + </span>
                         <span className="d-none d-md-block"> + NEW EVENT </span>
                     </Button>
-                </div>
-                <Row className="px-4 px-md-0 mx-md-5 mt-5">
-                    <Searchbar dataList={eventList} setFilteredList={setFilteredList} />
-                </Row>
+                </Page>
+                <Page className="mt-5">
+                    <Searchbar
+                        className="w-100"
+                        dataList={eventList}
+                        setFilteredList={setFilteredList}
+                    />
+                </Page>
             </Container>
             {renderEvents()}
         </Page>

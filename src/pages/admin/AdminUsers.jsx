@@ -35,10 +35,10 @@ const AdminUsers = () => {
         if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Page>
-                <Row className="pt-5 mx-md-5 user-card">
+                <Row className="mt-4">
                     {filteredList.map((user) => {
                         return (
-                            <Col sm="4" lg="3" xl="2" key={user.id} className="py-3 user-card">
+                            <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
                                 <UserItem
                                     modifiable
                                     id={user.id}
@@ -60,9 +60,9 @@ const AdminUsers = () => {
         <>
             <SecondaryNavbar page="users" />
             <NewUserModal modal={modal} toggleModal={toggleModal} />
-            <Page>
-                <Container fluid className="actionbar-container p-5 rounded-lg">
-                    <div className="actionbar-header mx-md-5 mt-0 pt-0">
+            <Page fluid>
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Page header>
                         <span className="actionbar-title p-2">Users</span>
                         <Button
                             onClick={toggleModal}
@@ -71,10 +71,14 @@ const AdminUsers = () => {
                             <span className="d-md-none"> + </span>
                             <span className="d-none d-md-block"> + NEW USER </span>
                         </Button>
-                    </div>
-                    <Row className="mx-md-5 mt-5">
-                        <Searchbar dataList={userList} setFilteredList={setFilteredList} />
-                    </Row>
+                    </Page>
+                    <Page className="mt-5">
+                        <Searchbar
+                            className="w-100"
+                            dataList={userList}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Page>
                 </Container>
                 {renderUsers()}
             </Page>
