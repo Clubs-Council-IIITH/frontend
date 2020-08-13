@@ -81,7 +81,7 @@ const EventForm = (props) => {
                             invalid={errors.duration}
                             type="text"
                             name="duration"
-                            innerRef={register({ required: false })}
+                            innerRef={register({ required: true })}
                         />
                         <FormFeedback> Invalid duration! </FormFeedback>
                     </FormGroup>

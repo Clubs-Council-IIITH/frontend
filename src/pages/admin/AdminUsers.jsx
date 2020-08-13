@@ -39,15 +39,7 @@ const AdminUsers = () => {
                     {filteredList.map((user) => {
                         return (
                             <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
-                                <UserItem
-                                    modifiable
-                                    id={user.id}
-                                    img={user.img}
-                                    name={user.name}
-                                    role={user.role}
-                                    mail={user.mail}
-                                    mobile={user.mobile}
-                                />
+                                <UserItem modifiable {...user} />
                             </Col>
                         );
                     })}

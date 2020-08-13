@@ -46,16 +46,7 @@ const OrganizerEvents = () => {
                         // if (viewPrevious ? !isPrevious : isPrevious) return null;
                         return (
                             <Col md="6" lg="4" className="my-3" key={event.id}>
-                                <EventItem
-                                    modifiable
-                                    id={event.id}
-                                    audience={event.audience}
-                                    name={event.name}
-                                    datetime={event.datetime}
-                                    venue={event.venue}
-                                    creator={event.creator}
-                                    state={event.state}
-                                />
+                                <EventItem modifiable {...event} />
                             </Col>
                         );
                     })}

@@ -54,12 +54,8 @@ const AdminViewClub = (props) => {
                     {users.map((user) => (
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
                             <UserItem
-                                id={user.id}
-                                img={user.img}
-                                name={user.name}
+                                {...user}
                                 role={user.roles.filter((role) => role[0] == club.id)[0][1]} // eslint-disable-line
-                                mail={user.mail}
-                                mobile={user.mobile}
                             />
                         </Col>
                     ))}
@@ -76,16 +72,7 @@ const AdminViewClub = (props) => {
                 <Row className="mt-4">
                     {filteredList.map((event) => (
                         <Col md="6" lg="4" className="my-3" key={event.id}>
-                            <EventItem
-                                modifiable
-                                id={event.id}
-                                audience={event.audience}
-                                name={event.name}
-                                datetime={event.datetime}
-                                venue={event.venue}
-                                creator={event.creator}
-                                state={event.state}
-                            />
+                            <EventItem modifiable {...event} />
                         </Col>
                     ))}
                 </Row>

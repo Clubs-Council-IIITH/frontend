@@ -38,13 +38,7 @@ const AdminClubs = (props) => {
                 <Row className="mt-4">
                     {filteredList.map((club) => (
                         <Col md="6" lg="4" className="my-3" key={club.id}>
-                            <ClubItem
-                                modifiable
-                                id={club.id}
-                                name={club.name}
-                                mail={club.mail}
-                                link={"/admin/clubs/" + club.id}
-                            />
+                            <ClubItem modifiable {...club} link={"/admin/clubs/" + club.id} />
                         </Col>
                     ))}
                 </Row>

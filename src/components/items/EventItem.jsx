@@ -62,6 +62,12 @@ const EventItem = (props) => {
                 <EventState current={props.state} />
             </CardHeader>
             <CardBody>
+                <div className="event-duration mb-2 text-lowercase">
+                    <span>
+                        <img className="card-icon" src="/clock-18.svg" alt="D" />
+                    </span>
+                    {props.duration}
+                </div>
                 {!hasLink ? (
                     <div className="event-venue mb-2">
                         <span>

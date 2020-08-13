@@ -200,7 +200,7 @@ code {
 }
 
 .event-datetime {
-  font-size: 0.7em;
+  font-size: 0.65em;
   color: #555;
 }
 
@@ -215,6 +215,10 @@ code {
 }
 
 .event-audience {
+  font-size: 0.7em;
+}
+
+.event-duration {
   font-size: 0.7em;
 }
 
