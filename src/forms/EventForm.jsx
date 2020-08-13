@@ -1,6 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "reactstrap";
+import {
+    Button,
+    Form,
+    FormText,
+    FormGroup,
+    FormFeedback,
+    Label,
+    Input,
+    Row,
+    Col,
+} from "reactstrap";
 
 import API from "../api/methods";
 import { parseDateTime } from "../utils/DateTimeFormatter";
@@ -116,6 +126,9 @@ const EventForm = (props) => {
                             <option value="staff"> Staff </option>
                             <option value="faculty"> Faculty </option>
                         </Input>
+                        <FormText color="muted" className="d-none d-md-block">
+                            hold ctrl to select multiple options
+                        </FormText>
                         <FormFeedback> Invalid audience! </FormFeedback>
                     </FormGroup>
                     {props.action === "new" ? null : (
