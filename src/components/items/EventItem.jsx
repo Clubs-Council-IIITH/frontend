@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Button, Card, CardHeader, CardBody, CardFooter } from "reactstrap";
+import { Alert, Button, Card, CardHeader, CardBody, CardFooter, Input } from "reactstrap";
 
 import EventState from "../EventState";
 import EditButton from "../buttons/EditButton";
@@ -25,7 +25,6 @@ const EventItem = (props) => {
 
     const toggleLinkAlert = () => {
         setLinkAlert(!linkAlert);
-        console.log(props.venue);
     };
 
     const LinkButton = () => {
@@ -92,9 +91,10 @@ const EventItem = (props) => {
                 color="info"
                 isOpen={linkAlert}
                 toggle={toggleLinkAlert}
-                className="link-alert mx-2"
+                className="link-alert mx-2 px-3"
             >
-                {props.venue}
+                <div className="mb-2"> Meeting Link </div>
+                <Input id="linkfield" type="text" value={props.venue} readonly />
             </Alert>
         </Card>
     );
