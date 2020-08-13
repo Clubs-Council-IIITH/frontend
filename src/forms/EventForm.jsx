@@ -12,6 +12,7 @@ const EventForm = (props) => {
             creator: "",
             date: parseDateTime(props.initial.datetime).date,
             time: parseDateTime(props.initial.datetime).time,
+            duration: props.initial.duration,
             venue: props.initial.venue,
             audience: props.initial.audience,
             state: props.initial.state,
@@ -32,7 +33,7 @@ const EventForm = (props) => {
     };
 
     return (
-        <Form id="eventform" onSubmit={handleSubmit(onSubmit)}>
+        <Form id="eventform" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <Row form>
                 <Col md="8" className="px-md-3">
                     <FormGroup>
@@ -75,13 +76,23 @@ const EventForm = (props) => {
                         </Col>
                     </Row>
                     <FormGroup>
-                        <Label for="venue"> Venue </Label>
+                        <Label for="duration"> Duration </Label>
+                        <Input
+                            invalid={errors.duration}
+                            type="text"
+                            name="duration"
+                            innerRef={register({ required: false })}
+                        />
+                        <FormFeedback> Invalid duration! </FormFeedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="venue"> Venue (or meeting link) </Label>
                         <Input
                             invalid={errors.venue}
                             type="textarea"
                             name="venue"
                             rows="4"
-                            innerRef={register({ required: true })}
+                            innerRef={register({ required: false })}
                         />
                         <FormFeedback> Invalid venue! </FormFeedback>
                     </FormGroup>
@@ -93,6 +104,7 @@ const EventForm = (props) => {
                             invalid={errors.audience}
                             type="select"
                             name="audience"
+                            size="7"
                             multiple
                             innerRef={register({ required: true })}
                         >
