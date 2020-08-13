@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
+import React, { useState, useEffect } from "react";
+import { Alert, Button, Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 
 import EventState from "../EventState";
 import EditButton from "../buttons/EditButton";
@@ -12,6 +12,8 @@ import { formatDateTime } from "../../utils/DateTimeFormatter";
 const EventItem = (props) => {
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [linkAlert, setLinkAlert] = useState(false);
+    const [hasLink, setHasLink] = useState(false);
 
     const toggleEditModal = () => {
         setEditModal(!editModal);
@@ -20,6 +22,31 @@ const EventItem = (props) => {
     const toggleDeleteModal = () => {
         setDeleteModal(!deleteModal);
     };
+
+    const toggleLinkAlert = () => {
+        setLinkAlert(!linkAlert);
+        console.log(props.venue);
+    };
+
+    const LinkButton = () => {
+        return (
+            <Button
+                color="info"
+                onClick={toggleLinkAlert}
+                className="link-btn mx-1"
+                active={linkAlert}
+            >
+                <img tag={Button} src="/link-18.svg" alt="L" className="link-icon" />
+            </Button>
+        );
+    };
+
+    useEffect(() => {
+        // eslint-disable-next-line no-useless-escape
+        const urlPattern = /(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))?/;
+        setHasLink(urlPattern.test(props.venue));
+        console.log(urlPattern.test(props.venue));
+    }, [props.venue]);
 
     return (
         <Card className="event-card elevate">
@@ -36,12 +63,14 @@ const EventItem = (props) => {
                 <EventState current={props.state} />
             </CardHeader>
             <CardBody>
-                <div className="event-venue mb-2">
-                    <span>
-                        <img className="card-icon" src="/venue-18.svg" alt="V" />
-                    </span>
-                    {props.venue}
-                </div>
+                {!hasLink ? (
+                    <div className="event-venue mb-2">
+                        <span>
+                            <img className="card-icon" src="/venue-18.svg" alt="V" />
+                        </span>
+                        {props.venue}
+                    </div>
+                ) : null}
                 <div className="event-audience mb-2">
                     <span>
                         <img className="card-icon" src="/audience-18.svg" alt="A" />
@@ -49,12 +78,24 @@ const EventItem = (props) => {
                     {formatAudience(props.audience)}
                 </div>
             </CardBody>
-            {props.modifiable ? (
-                <CardFooter className="text-right px-2">
-                    <EditButton onClick={toggleEditModal} />
-                    <DeleteButton onClick={toggleDeleteModal} />
-                </CardFooter>
-            ) : null}
+            <CardFooter className="text-right px-2">
+                {hasLink ? <LinkButton /> : null}
+                {props.modifiable ? (
+                    <>
+                        <EditButton onClick={toggleEditModal} />
+                        <DeleteButton onClick={toggleDeleteModal} />
+                    </>
+                ) : null}
+            </CardFooter>
+
+            <Alert
+                color="info"
+                isOpen={linkAlert}
+                toggle={toggleLinkAlert}
+                className="link-alert mx-2"
+            >
+                {props.venue}
+            </Alert>
         </Card>
     );
 };

@@ -358,7 +358,8 @@ code {
 }
 
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.link-btn {
   background-color: #00000000;
   height: 50px !important;
   border: none;
@@ -384,6 +385,21 @@ code {
 .delete-icon {
   height: 30px;
   width: 30px;
+}
+
+.link-btn:focus,
+.link-btn:active,
+.link-btn:hover {
+  background-color: #aaeffa;
+}
+
+.link-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.link-alert {
+  font-size: 0.5em;
 }
 
 @media (min-width: 768px) {
