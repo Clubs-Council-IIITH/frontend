@@ -28,7 +28,6 @@ const AdminViewClub = (props) => {
             setClub(club_res.data[0]);
             const users_res = await API.view("coordinators", { club: props.match.params.id });
             setUsers(users_res.data);
-            console.log(users_res.data);
         }
 
         async function getData() {
@@ -36,7 +35,6 @@ const AdminViewClub = (props) => {
             setEvents(events_res.data);
             setFilteredList(events_res.data);
             var tst = Array.from(events_res.data, (e) => e.id);
-            console.log(tst);
             const logs_res = await API.view("logs", { events: tst.join() });
             setLogs(logs_res.data);
         }

@@ -13,6 +13,8 @@ import {
 } from "reactstrap";
 
 import API from "../api/methods";
+
+import NullIndicator from "../components/NullIndicator";
 import UserListItem from "../components/items/UserListItem";
 
 const ClubForm = (props) => {
@@ -82,7 +84,7 @@ const ClubForm = (props) => {
     };
 
     const renderExistingUsers = () => {
-        if (!existingUserList.length) return null;
+        if (existingUserList.length === 0) return null;
         return (
             <React.Fragment>
                 <h4 className="pt-2"> Existing Users </h4>
@@ -101,7 +103,7 @@ const ClubForm = (props) => {
     };
 
     const renderNewUsers = () => {
-        if (!newUserList.length) return null;
+        if (newUserList.length === 0) return null;
         return (
             <React.Fragment>
                 <h4 className="mt-4"> Add Users </h4>

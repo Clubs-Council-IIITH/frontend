@@ -205,25 +205,25 @@ code {
 }
 
 .event-name {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .event-venue {
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .event-audience {
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .event-duration {
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .event-state {
-  font-size: 0.8em;
+  font-size: 0.7em;
   width: fit-content;
   border-radius: 4px;
 }
