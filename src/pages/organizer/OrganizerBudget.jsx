@@ -8,11 +8,13 @@ import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
+import NewProposalModal from "../../components/NewProposalModal";
 import ProposalItem from "../../components/items/ProposalItem";
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const OrganizerBudget = () => {
     const [proposals, setProposals] = useState(false);
+    const [modal, setModal] = useState(false);
     const [tab, setTab] = useState("proposals");
 
     useEffect(() => {
@@ -23,6 +25,10 @@ const OrganizerBudget = () => {
 
         getProposals();
     }, []);
+
+    const toggleModal = () => {
+        setModal(!modal);
+    };
 
     const renderProposals = () => {
         if (!proposals) return <LoadingIndicator />;
@@ -134,11 +140,15 @@ const OrganizerBudget = () => {
         <>
             <SecondaryNavbar page="budget" />
             <Page fluid>
+                <NewProposalModal modal={modal} toggleModal={toggleModal} />
                 <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
                     <Page header>
                         <span className="actionbar-title p-2">Budget</span>
                         {tab === "proposals" ? (
-                            <Button className="new-btn btn-outline-dark py-2 px-3 my-3">
+                            <Button
+                                onClick={toggleModal}
+                                className="new-btn btn-outline-dark py-2 px-3 my-3"
+                            >
                                 <span className="d-md-none"> + </span>
                                 <span className="d-none d-md-block"> + NEW PROPOSAL </span>
                             </Button>
