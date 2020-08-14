@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col, Alert, Input } from "reactstrap";
+import { Container, Button, Row, Col, Alert, Input, InputGroup, InputGroupAddon } from "reactstrap";
 
 import API from "../../api/methods";
 
@@ -39,7 +39,31 @@ const OrganizerBudget = () => {
                                 {formatDateTime(proposals[0].datetime).datetime}
                             </div>
                             <div className="proposal-alert-link mt-3">
-                                <Input bsSize="lg" type="text" value={proposals[0].link} readonly />
+                                <InputGroup>
+                                    <Input
+                                        bsSize="lg"
+                                        type="text"
+                                        value={proposals[0].link}
+                                        readonly
+                                    />
+                                    <InputGroupAddon
+                                        addonType="append"
+                                        className="proposal-link-btn"
+                                    >
+                                        <Button
+                                            color="success"
+                                            className="open-btn"
+                                            onClick={() => window.open(proposals[0].link, "_blank")}
+                                        >
+                                            <img
+                                                src="/open-18.svg"
+                                                className="btn-icon mb-1 mr-1"
+                                                alt="O"
+                                            />
+                                            <span> OPEN </span>
+                                        </Button>
+                                    </InputGroupAddon>
+                                </InputGroup>
                             </div>
                             <div className="proposal-alert-pdf mt-3"> {proposals[0].pdf} </div>
                         </Alert>
@@ -100,13 +124,13 @@ const OrganizerBudget = () => {
                         ) : null}
                     </Page>
                 </Container>
-                <Page>
-                    <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                        <Col md className="my-auto px-0">
-                            {renderTabBar()}
-                        </Col>
-                    </Row>
-                </Page>
+                {/* <Page> */}
+                {/*     <Row className="px-4 px-md-0 mx-md-2 mt-4"> */}
+                {/*         <Col md className="my-auto px-0"> */}
+                {/*             {renderTabBar()} */}
+                {/*         </Col> */}
+                {/*     </Row> */}
+                {/* </Page> */}
                 <Row className="p-0">
                     <Col>{renderTab()}</Col>
                 </Row>

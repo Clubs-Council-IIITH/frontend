@@ -255,17 +255,21 @@ code {
 }
 
 .proposal-date {
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: 700;
 }
 
 .proposal-time {
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: 700;
 }
 
 .proposal-link {
   font-size: 0.6em;
+}
+
+.proposal-link-btn {
+  font-size: 0.8em;
 }
 
 .proposal-pdf {
@@ -375,7 +379,7 @@ code {
 }
 
 .new-btn {
-  font-family: "Quicksand";
+  font-family: "Quicksand", "sans-serif";
   font-weight: 600;
   font-size: 0.38em;
   color: #fff;
@@ -385,7 +389,7 @@ code {
 }
 
 .new-btn:visited {
-  box-shadow: 2px 3px #888 !important;
+  box-shadow: 2px 3px #aaa !important;
 }
 
 .new-btn:focus,
@@ -394,7 +398,7 @@ code {
   color: #000;
   background-color: #fff;
   border: 2px solid #000;
-  box-shadow: 2px 3px #888 !important;
+  box-shadow: 2px 3px #aaa !important;
 }
 
 .edit-btn,
@@ -436,6 +440,11 @@ code {
 .link-icon {
   height: 30px;
   width: 30px;
+}
+
+.open-btn {
+  font-family: "Quicksand", "sans-serif";
+  font-weight: 600;
 }
 
 .link-alert {
