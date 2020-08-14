@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card, CardBody, Button, Input, InputGroup, InputGroupAddon } from "reactstrap";
 
 import { formatDateTime } from "../../utils/DateTimeFormatter";
@@ -24,7 +25,12 @@ const ProposalItem = (props) => {
                         </InputGroupAddon>
                     </InputGroup>
                 </div>
-                <div className="proposal-pdf mt-3"> {props.pdf} </div>
+                <div className="proposal-pdf mt-3">
+                    <Button tag={Link} target="_blank" to={props.pdf} className="open-btn w-100">
+                        <img src="/view-18.svg" className="btn-icon mb-1 mr-1" alt="V" />
+                        <span> VIEW PDF </span>
+                    </Button>
+                </div>
             </CardBody>
         </Card>
     );
