@@ -208,7 +208,6 @@ code {
 
 .dash-card:hover {
     color: #000;
-    cursor: pointer;
     text-decoration: none;
 }
 
@@ -280,6 +279,44 @@ code {
 .user-mail,
 .user-mobile {
     font-size: 0.6em;
+}
+// }}}
+
+// Proposal Card {{{
+.proposal-card {
+    font-family: "Poppins", "sans-serif";
+    font-size: $card-text;
+}
+
+.proposal-date {
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.proposal-time {
+    font-size: 0.7em;
+    font-weight: 700;
+}
+
+.proposal-link {
+    font-size: 0.6em;
+}
+
+.proposal-pdf {
+    font-size: 0.6em;
+}
+.proposal-alert {
+    font-family: "Poppins", "sans-serif";
+}
+
+.proposal-alert-header {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.proposal-alert-datetime {
+    font-size: 2em;
+    font-weight: 700;
 }
 // }}}
 

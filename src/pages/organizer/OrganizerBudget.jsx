@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col, Alert } from "reactstrap";
+import { Container, Button, Row, Col, Alert, Input } from "reactstrap";
 
 import API from "../../api/methods";
 
@@ -7,6 +7,8 @@ import Page from "../../components/PageContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
+import ProposalItem from "../../components/items/ProposalItem";
+import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const OrganizerBudget = () => {
     const [proposals, setProposals] = useState(false);
@@ -27,22 +29,26 @@ const OrganizerBudget = () => {
         return (
             <Page>
                 <Row className="mt-4">
-                    <Col className="my-3">
-                        <Alert color="success">
+                    <Col className="mt-3">
+                        <Alert color="success" className="proposal-alert p-4">
                             {console.log(proposals)}
-                            <h4 className="alert-heading">Current Proposal</h4>
-                            <p> {proposals[0].datetime}</p>
-                            <p> {proposals[0].link} </p>
-                            <p> {proposals[0].pdf} </p>
+                            <div className="proposal-alert-header mb-2 text-uppercase">
+                                Current Proposal
+                            </div>
+                            <div className="proposal-alert-datetime">
+                                {formatDateTime(proposals[0].datetime).datetime}
+                            </div>
+                            <div className="proposal-alert-link mt-3">
+                                <Input bsSize="lg" type="text" value={proposals[0].link} readonly />
+                            </div>
+                            <div className="proposal-alert-pdf mt-3"> {proposals[0].pdf} </div>
                         </Alert>
                     </Col>
                 </Row>
                 <Row className="mt-4">
                     {proposals.slice(1).map((proposal) => (
-                        <Col md="4" lg="3" className="my-3" key={proposal.id}>
-                            <p> {proposal.datetime}</p>
-                            <p> {proposal.link} </p>
-                            <p> {proposal.pdf} </p>
+                        <Col md="6" lg="4" className="my-3" key={proposal.id}>
+                            <ProposalItem {...proposal} />
                         </Col>
                     ))}
                 </Row>
