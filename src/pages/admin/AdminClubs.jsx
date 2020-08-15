@@ -36,11 +36,24 @@ const AdminClubs = (props) => {
         return (
             <Page>
                 <Row className="mt-4">
-                    {filteredList.map((club) => (
-                        <Col md="6" lg="4" className="my-3" key={club.id}>
-                            <ClubItem modifiable {...club} link={"/admin/clubs/" + club.id} />
-                        </Col>
-                    ))}
+                    {filteredList.map((club) => {
+                        if (club.state === "deleted") return null;
+                        return (
+                            <Col md="6" lg="4" className="my-3" key={club.id}>
+                                <ClubItem modifiable {...club} link={"/admin/clubs/" + club.id} />
+                            </Col>
+                        );
+                    })}
+                </Row>
+                <Row className="mt-4">
+                    {filteredList.map((club) => {
+                        if (club.state !== "deleted") return null;
+                        return (
+                            <Col md="6" lg="4" className="my-3" key={club.id}>
+                                <ClubItem {...club} link={"/admin/clubs/" + club.id} />
+                            </Col>
+                        );
+                    })}
                 </Row>
             </Page>
         );
