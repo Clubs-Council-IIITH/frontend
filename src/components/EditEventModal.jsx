@@ -3,6 +3,7 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import API from "../api/methods";
 
+import LoadingIndicator from "./LoadingIndicator";
 import EventForm from "../forms/EventForm";
 
 const EditEventModal = (props) => {
@@ -19,7 +20,7 @@ const EditEventModal = (props) => {
         if (props.id !== 0) getInitialData();
     }, [props.id]);
 
-    if (isLoading || props.id === 0) return null; // TODO: Loading Spinner
+    if (isLoading || props.id === 0) return <LoadingIndicator />;
     return (
         <Modal
             className="modal-lg"

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import API from "../api/methods";
+
+import LoadingIndicator from "./LoadingIndicator";
 import UserForm from "../forms/UserForm";
 
 const EditUserModal = (props) => {
@@ -22,7 +24,7 @@ const EditUserModal = (props) => {
         if (props.id !== 0) getInitialData();
     }, [props.id]);
 
-    if (isLoading || props.id === 0) return null; // TODO: Loading Spinner
+    if (isLoading || props.id === 0) return <LoadingIndicator />;
     return (
         <Modal
             className="modal-lg"
