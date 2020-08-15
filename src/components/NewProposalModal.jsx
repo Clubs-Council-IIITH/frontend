@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
+
+import API from "../api/methods";
 
 import ProposalForm from "../forms/ProposalForm";
 
 const NewProposalModal = (props) => {
-    const [initialData] = useState({
+    const [isLoading, setIsLoading] = useState(true);
+    const [initialData, setInitialData] = useState({
         link: "",
         pdf: "",
     });
+
+    useEffect(() => {
+        async function getInitialData() {
+            const res = await API.view("budget/proposals");
+            if (res.data.length > 0) setInitialData({ link: res.data[0].link, pdf: "" });
+            setIsLoading(false);
+        }
+
+        if (props.id !== 0) getInitialData();
+    }, [props.id]);
 
     return (
         <Modal
