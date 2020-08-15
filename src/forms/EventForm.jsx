@@ -66,7 +66,6 @@ const EventForm = (props) => {
                                     name="date"
                                     innerRef={register({
                                         required: true,
-                                        validate: (val) => new Date(val) > new Date(),
                                     })}
                                 />
                                 <FormFeedback> Invalid date! </FormFeedback>
