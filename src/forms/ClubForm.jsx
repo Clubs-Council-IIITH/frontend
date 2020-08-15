@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
+    Alert,
     Button,
     ListGroup,
     Form,
@@ -22,6 +23,7 @@ const ClubForm = (props) => {
     const [existingUserList, setExistingUserList] = useState([]);
     const [newUserList, setNewUserList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [failed, setFailed] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
@@ -54,16 +56,18 @@ const ClubForm = (props) => {
         if (props.action === "new") res = await API.new("clubs", clubFormData);
         else res = await API.edit("clubs", props.id, clubFormData);
 
-        changedUserList.forEach(async (user) => {
-            var roleFormData = new FormData();
-            for (var key in user) roleFormData.append(key, user[key]);
-            roleFormData.delete("img");
-            var troles = user.roles;
-            roleFormData.append("roles", JSON.stringify(troles));
+        if (res.status === 200) {
+            changedUserList.forEach(async (user) => {
+                var roleFormData = new FormData();
+                for (var key in user) roleFormData.append(key, user[key]);
+                roleFormData.delete("img");
+                var troles = user.roles;
+                roleFormData.append("roles", JSON.stringify(troles));
 
-            const user_res = await API.edit("coordinators", user.id, roleFormData);
-        });
-        window.location.reload();
+                await API.edit("coordinators", user.id, roleFormData);
+            });
+            window.location.reload();
+        } else setFailed(true);
     };
 
     const addUser = async (id, role) => {
@@ -119,6 +123,9 @@ const ClubForm = (props) => {
     if (isLoading) return null;
     return (
         <Form id="clubform" onSubmit={handleSubmit(onSubmit)}>
+            {failed ? (
+                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
+            ) : null}
             <FormGroup>
                 <Label for="name"> Name </Label>
                 <Input

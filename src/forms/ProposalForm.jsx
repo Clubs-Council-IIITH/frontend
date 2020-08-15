@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "reactstrap";
+import { Alert, Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
 
 const ProposalForm = (props) => {
+    const [failed, setFailed] = useState(false);
+
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             link: props.initial.link,
@@ -20,11 +22,15 @@ const ProposalForm = (props) => {
 
         var res = await API.new("budget/proposals", proposalFormData);
 
-        window.location.reload();
+        if (res.status === 200) window.location.reload();
+        else setFailed(true);
     };
 
     return (
         <Form id="proposalform" onSubmit={handleSubmit(onSubmit)}>
+            {failed ? (
+                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
+            ) : null}
             <FormGroup>
                 <Label for="link"> Working Draft Link </Label>
                 <Input type="text" name="link" innerRef={register({ required: true })} />

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
+    Alert,
     Button,
     Form,
     FormText,
@@ -18,6 +19,8 @@ import SubmitButton from "../components/buttons/SubmitButton";
 import { parseDateTime } from "../utils/DateTimeFormatter";
 
 const EventForm = (props) => {
+    const [failed, setFailed] = useState(false);
+
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
@@ -41,11 +44,15 @@ const EventForm = (props) => {
         if (props.action === "new") res = await API.new("events", eventFormData);
         else res = await API.edit("events", props.id, eventFormData);
 
-        window.location.reload();
+        if (res.status === 200) window.location.reload();
+        else setFailed(true);
     };
 
     return (
         <Form id="eventform" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+            {failed ? (
+                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
+            ) : null}
             <Row form>
                 <Col md="8" className="px-md-3">
                     <FormGroup>

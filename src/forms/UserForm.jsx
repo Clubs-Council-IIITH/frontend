@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "reactstrap";
+import { Alert, Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
 
 const UserForm = (props) => {
+    const [failed, setFailed] = useState(false);
+
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
@@ -23,11 +25,15 @@ const UserForm = (props) => {
         if (props.action === "new") res = await API.new("coordinators", userFormData);
         else res = await API.edit("coordinators", props.id, userFormData);
 
-        window.location.reload();
+        if (res.status === 200) window.location.reload();
+        else setFailed(true);
     };
 
     return (
         <Form id="userform" onSubmit={handleSubmit(onSubmit)}>
+            {failed ? (
+                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
+            ) : null}
             <FormGroup>
                 <Label for="img">Image</Label>
                 <Input type="file" name="img" innerRef={register({ required: false })} />
