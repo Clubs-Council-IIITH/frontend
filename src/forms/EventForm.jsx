@@ -144,8 +144,6 @@ const EventForm = (props) => {
                                 <option value="approved"> APPROVED </option>
                                 <option value="published"> PUBLISHED </option>
                                 <option value="scheduled"> SCHEDULED </option>
-                                <option value="completed"> COMPLETED </option>
-                                <option value="deleted"> DELETED </option>
                             </Input>
                             <FormFeedback> Invalid state! </FormFeedback>
                         </FormGroup>
