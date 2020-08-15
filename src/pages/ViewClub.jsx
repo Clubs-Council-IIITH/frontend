@@ -47,6 +47,8 @@ const ViewClub = (props) => {
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
                             <UserItem
                                 {...user}
+                                mail=""
+                                mobile=""
                                 role={user.roles.filter((role) => role[0] == club.id)[0][1]} // eslint-disable-line
                             />
                         </Col>
@@ -58,11 +60,14 @@ const ViewClub = (props) => {
 
     const renderEvents = () => {
         if (!filteredList) return <LoadingIndicator />;
-        if (filteredList.length === 0) return <NullIndicator />;
+        var activeEventsList = filteredList.filter((event) =>
+            ["approved", "published", "scheduled"].includes(event.state)
+        );
+        if (activeEventsList.length === 0) return <NullIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
-                    {filteredList.map((event) => (
+                    {activeEventsList.map((event) => (
                         <Col md="6" lg="4" className="my-3" key={event.id}>
                             <EventItem {...event} />
                         </Col>
