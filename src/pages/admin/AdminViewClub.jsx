@@ -68,11 +68,26 @@ const AdminViewClub = (props) => {
         return (
             <Page>
                 <Row className="mt-4">
-                    {filteredList.map((event) => (
-                        <Col md="6" lg="4" className="my-3" key={event.id}>
-                            <EventItem modifiable {...event} />
-                        </Col>
-                    ))}
+                    {filteredList.map((event) => {
+                        const isPrevious = event.state === "completed" || event.state === "deleted";
+                        if (isPrevious) return null;
+                        return (
+                            <Col md="6" lg="4" className="my-3" key={event.id}>
+                                <EventItem modifiable {...event} />
+                            </Col>
+                        );
+                    })}
+                </Row>
+                <Row className="mt-4">
+                    {filteredList.map((event) => {
+                        const isPrevious = event.state === "completed" || event.state === "deleted";
+                        if (!isPrevious) return null;
+                        return (
+                            <Col md="6" lg="4" className="my-3" key={event.id}>
+                                <EventItem modifiable {...event} />
+                            </Col>
+                        );
+                    })}
                 </Row>
             </Page>
         );
