@@ -4,6 +4,8 @@ import { Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "r
 
 import API from "../api/methods";
 
+import SubmitButton from "../components/buttons/SubmitButton";
+
 const UserForm = (props) => {
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
@@ -65,9 +67,7 @@ const UserForm = (props) => {
                     <Button className="mx-3" onClick={props.cancelAction}>
                         Cancel
                     </Button>
-                    <Button color="primary" type="submit">
-                        Save
-                    </Button>
+                    <SubmitButton errors={errors}>Save</SubmitButton>
                 </Col>
             </Row>
         </Form>

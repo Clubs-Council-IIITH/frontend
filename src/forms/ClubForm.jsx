@@ -14,7 +14,7 @@ import {
 
 import API from "../api/methods";
 
-import NullIndicator from "../components/NullIndicator";
+import SubmitButton from "../components/buttons/SubmitButton";
 import UserListItem from "../components/items/UserListItem";
 
 const ClubForm = (props) => {
@@ -116,7 +116,7 @@ const ClubForm = (props) => {
         );
     };
 
-    if (isLoading) return null; // TODO: Add loading spinners
+    if (isLoading) return null;
     return (
         <Form id="clubform" onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
@@ -153,9 +153,7 @@ const ClubForm = (props) => {
                     <Button className="mx-3" onClick={props.cancelAction}>
                         Cancel
                     </Button>
-                    <Button color="primary" type="submit">
-                        Save
-                    </Button>
+                    <SubmitButton errors={errors}>Save</SubmitButton>
                 </Col>
             </Row>
         </Form>

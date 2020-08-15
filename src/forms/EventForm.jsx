@@ -13,6 +13,8 @@ import {
 } from "reactstrap";
 
 import API from "../api/methods";
+
+import SubmitButton from "../components/buttons/SubmitButton";
 import { parseDateTime } from "../utils/DateTimeFormatter";
 
 const EventForm = (props) => {
@@ -165,9 +167,7 @@ const EventForm = (props) => {
                     <Button className="mx-3" onClick={props.cancelAction}>
                         Cancel
                     </Button>
-                    <Button color="primary" type="submit">
-                        Save
-                    </Button>
+                    <SubmitButton errors={errors}>Save</SubmitButton>
                 </Col>
             </Row>
         </Form>
