@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
-    Alert,
     Button,
     Form,
     FormText,
@@ -16,6 +15,7 @@ import {
 import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
+import FailureAlert from "../components/FailureAlert";
 import { parseDateTime } from "../utils/DateTimeFormatter";
 
 const EventForm = (props) => {
@@ -50,9 +50,7 @@ const EventForm = (props) => {
 
     return (
         <Form id="eventform" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-            {failed ? (
-                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
-            ) : null}
+            <FailureAlert failed={failed} />
             <Row form>
                 <Col md="8" className="px-md-3">
                     <FormGroup>

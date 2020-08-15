@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
-    Alert,
     Button,
     ListGroup,
     Form,
@@ -16,6 +15,7 @@ import {
 import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
+import FailureAlert from "../components/FailureAlert";
 import UserListItem from "../components/items/UserListItem";
 
 const ClubForm = (props) => {
@@ -123,9 +123,7 @@ const ClubForm = (props) => {
     if (isLoading) return null;
     return (
         <Form id="clubform" onSubmit={handleSubmit(onSubmit)}>
-            {failed ? (
-                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
-            ) : null}
+            <FailureAlert failed={failed} />
             <FormGroup>
                 <Label for="name"> Name </Label>
                 <Input

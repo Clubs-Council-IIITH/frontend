@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Alert, Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
+import FailureAlert from "../components/FailureAlert";
 
 const ProposalForm = (props) => {
     const [failed, setFailed] = useState(false);
@@ -28,9 +29,7 @@ const ProposalForm = (props) => {
 
     return (
         <Form id="proposalform" onSubmit={handleSubmit(onSubmit)}>
-            {failed ? (
-                <Alert color="danger"> Something went wrong! Try again in a while.</Alert>
-            ) : null}
+            <FailureAlert failed={failed} />
             <FormGroup>
                 <Label for="link"> Working Draft Link </Label>
                 <Input type="text" name="link" innerRef={register({ required: true })} />
