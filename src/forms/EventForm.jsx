@@ -102,7 +102,7 @@ const EventForm = (props) => {
                             type="textarea"
                             name="venue"
                             rows="4"
-                            innerRef={register({ required: false })}
+                            innerRef={register({ required: true })}
                         />
                         <FormFeedback> Invalid venue! </FormFeedback>
                     </FormGroup>
