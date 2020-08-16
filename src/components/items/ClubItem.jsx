@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, CardFooter } from "reactstrap";
+import { Card, CardBody, CardFooter, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import EditButton from "../../components/buttons/EditButton";
@@ -20,7 +20,7 @@ const ClubItem = (props) => {
     };
 
     return (
-        <Card className="dash-card elevate">
+        <Card className="dash-card club-card elevate">
             <EditClubModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
             <DeleteClubModal
                 modal={deleteModal}
@@ -29,12 +29,16 @@ const ClubItem = (props) => {
                 name={props.name}
             />
             <CardBody tag={Link} to={props.link} className="link-card">
-                <h2> {props.name} </h2>
-                <p> {props.mail} </p>
+                <div className={"club-name " + (props.modifiable ? null : "text-center mt-3")}>
+                    {props.name}
+                </div>
             </CardBody>
             <CardFooter className="text-right p-2">
                 {props.modifiable ? (
                     <>
+                        <div className="club-mail mb-3 mx-1">
+                            <Input className="text" value={props.mail} readonly />
+                        </div>
                         <EditButton onClick={toggleEditModal} />
                         <DeleteButton onClick={toggleDeleteModal} />
                     </>
