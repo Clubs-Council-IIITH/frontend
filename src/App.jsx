@@ -42,16 +42,37 @@ const App = () => {
 
                 {/* Organizer routes */}
                 <ProtectedRoute
+                    allowed={["organizer"]}
                     exact
                     path={["/organizer/events", "/organizer"]}
                     component={OrganizerEvents}
                 />
-                <ProtectedRoute exact path="/organizer/budget" component={OrganizerBudget} />
+                <ProtectedRoute
+                    allowed={["organizer"]}
+                    exact
+                    path="/organizer/budget"
+                    component={OrganizerBudget}
+                />
 
                 {/* Admin routes */}
-                <ProtectedRoute exact path={["/admin/clubs", "/admin"]} component={AdminClubs} />
-                <ProtectedRoute exact path="/admin/clubs/:id" component={AdminViewClub} />
-                <ProtectedRoute exact path="/admin/users" component={AdminUsers} />
+                <ProtectedRoute
+                    allowed={["cc_admin"]}
+                    exact
+                    path={["/admin/clubs", "/admin"]}
+                    component={AdminClubs}
+                />
+                <ProtectedRoute
+                    allowed={["cc_admin"]}
+                    exact
+                    path="/admin/clubs/:id"
+                    component={AdminViewClub}
+                />
+                <ProtectedRoute
+                    allowed={["cc_admin"]}
+                    exact
+                    path="/admin/users"
+                    component={AdminUsers}
+                />
                 {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
                 {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
                 {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
