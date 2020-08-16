@@ -103,10 +103,16 @@ code {
 .tab-nav .nav-btn:hover {
   background-color: #ddd !important;
 }
+.tab-nav .nav-btn-icon {
+  height: 1.4em;
+}
 .tab-nav .nav-btn-active {
   font-weight: 600 !important;
   background-color: black !important;
   color: white !important;
+}
+.tab-nav .nav-btn-icon-active {
+  filter: invert(95%);
 }
 
 .actionbar-container {

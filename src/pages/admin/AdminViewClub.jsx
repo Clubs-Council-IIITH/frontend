@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Alert, InputGroup, Input, InputGroupAddon, Container, Button, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
@@ -12,13 +13,15 @@ import NullIndicator from "../../components/NullIndicator";
 import EventItem from "../../components/items/EventItem";
 import UserItem from "../../components/items/UserItem";
 import LogItem from "../../components/items/LogItem";
-import { isSameDay } from "../../utils/DateTimeFormatter";
+import ProposalItem from "../../components/items/ProposalItem";
+import { isSameDay, formatDateTime } from "../../utils/DateTimeFormatter";
 
 const AdminViewClub = (props) => {
     const [club, setClub] = useState(false);
     const [logs, setLogs] = useState(false);
     const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
+    const [proposals, setProposals] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [tab, setTab] = useState("events");
 
@@ -39,8 +42,14 @@ const AdminViewClub = (props) => {
             setLogs(logs_res.data);
         }
 
+        async function getProposals() {
+            const res = await API.view("budget/proposals");
+            setProposals(res.data);
+        }
+
         getClub();
         getData();
+        getProposals();
     }, []); // eslint-disable-line
 
     const renderMembers = () => {
@@ -124,11 +133,89 @@ const AdminViewClub = (props) => {
         );
     };
 
+    const renderProposals = () => {
+        if (!proposals) return <LoadingIndicator />;
+        if (proposals.length === 0) return <NullIndicator />;
+        return (
+            <Page>
+                <Row className="mt-4">
+                    <Col className="mt-3">
+                        <Alert color="success" className="proposal-alert p-4">
+                            {console.log(proposals)}
+                            <div className="proposal-alert-header mb-2 text-uppercase">
+                                Current Proposal
+                            </div>
+                            <div className="proposal-alert-datetime">
+                                {formatDateTime(proposals[0].datetime).datetime}
+                            </div>
+                            <Row>
+                                <Col lg="9" className="proposal-alert-link mt-3">
+                                    <InputGroup>
+                                        <Input
+                                            bsSize="lg"
+                                            type="text"
+                                            value={proposals[0].link}
+                                            readonly
+                                        />
+                                        <InputGroupAddon
+                                            addonType="append"
+                                            className="proposal-link-btn"
+                                        >
+                                            <Button
+                                                color="success"
+                                                className="open-btn"
+                                                onClick={() =>
+                                                    window.open(proposals[0].link, "_blank")
+                                                }
+                                            >
+                                                <img
+                                                    src="/open-18.svg"
+                                                    className="btn-icon mb-1 mr-1"
+                                                    alt="O"
+                                                />
+                                                <span> OPEN </span>
+                                            </Button>
+                                        </InputGroupAddon>
+                                    </InputGroup>
+                                </Col>
+                                <Col className="proposal-alert-pdf mt-3">
+                                    <Button
+                                        color="danger"
+                                        size="lg"
+                                        tag={Link}
+                                        target="_blank"
+                                        to={proposals[0].pdf}
+                                        className="open-btn w-100"
+                                    >
+                                        <img
+                                            src="/view-18.svg"
+                                            className="btn-icon mb-1 mr-1"
+                                            alt="V"
+                                        />
+                                        <span> VIEW PDF </span>
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Alert>
+                    </Col>
+                </Row>
+                <Row className="mt-4">
+                    {proposals.slice(1).map((proposal) => (
+                        <Col md="6" lg="4" className="my-3" key={proposal.id}>
+                            <ProposalItem {...proposal} />
+                        </Col>
+                    ))}
+                </Row>
+            </Page>
+        );
+    };
+
     const renderTabBar = () => {
         const buttonList = [
-            { text: "events", tab: "events" },
-            { text: "activity", tab: "activity" },
-            { text: "members", tab: "members" },
+            { text: "events", tab: "events", icon: "/events-18.svg" },
+            { text: "activity", tab: "activity", icon: "/activity-18.svg" },
+            { text: "members", tab: "members", icon: "/audience-18.svg" },
+            { text: "budget", tab: "budget", icon: "/budget-18.svg" },
         ];
 
         return (
@@ -141,7 +228,14 @@ const AdminViewClub = (props) => {
                             (tab === button.tab ? "-active" : "")
                         }
                     >
-                        {button.text}
+                        <span className="d-md-none">
+                            <img
+                                src={button.icon}
+                                alt={button.text}
+                                className={"nav-btn-icon" + (tab === button.tab ? "-active" : "")}
+                            />
+                        </span>
+                        <span className="d-none d-md-block">{button.text}</span>
                     </Button>
                 ))}
             </div>
@@ -156,6 +250,8 @@ const AdminViewClub = (props) => {
                 return renderLogs();
             case "members":
                 return renderMembers();
+            case "budget":
+                return renderProposals();
             default:
                 return null;
         }
@@ -172,8 +268,8 @@ const AdminViewClub = (props) => {
                     </Page>
                 </Container>
                 <Page>
-                    <Row className="px-4 px-md-0 mx-md-2 mt-4">
-                        <Col md className="my-auto px-0">
+                    <Row className="mt-4">
+                        <Col md="8" className="my-auto">
                             {renderTabBar()}
                         </Col>
                         <Col className="my-auto py-3 py-md-0">

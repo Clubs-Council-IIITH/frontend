@@ -122,11 +122,17 @@ code {
     .nav-btn:hover {
         background-color: #ddd !important;
     }
+    .nav-btn-icon {
+        height: 1.4em;
+    }
 
     .nav-btn-active {
         font-weight: 600 !important;
         background-color: black !important;
         color: white !important;
+    }
+    .nav-btn-icon-active {
+        filter: invert(95%);
     }
 }
 
