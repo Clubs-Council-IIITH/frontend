@@ -107,6 +107,7 @@ const OrganizerBudget = () => {
         );
     };
 
+    // eslint-disable-next-line
     const renderTabBar = () => {
         const buttonList = [{ text: "proposals", tab: "proposals" }];
 

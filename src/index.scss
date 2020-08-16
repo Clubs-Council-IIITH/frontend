@@ -6,7 +6,7 @@
 
 // Colors {{{
 $bg-primary: #ffffff;
-$bg-secondary: #f6f6f6;
+$bg-secondary: #f3f2f1;
 // }}}
 
 // Font Styles {{{
@@ -182,6 +182,20 @@ code {
     font-weight: 700;
     font-size: calc(0.6em + 1vw);
     line-height: 1.2;
+}
+// }}}
+
+// Calendar {{{
+.calendar-container {
+    background-color: $bg-secondary;
+    border-radius: 8px;
+    height: 85vh;
+}
+
+.calendar-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 // }}}
 
