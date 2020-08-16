@@ -23,9 +23,15 @@ export default {
     },
 
     session: async () => {
-        const res = await axios.get("/session/", { headers });
-        console.log(res);
-        return res;
+        try {
+            const res = await axios.get("/session/", { headers });
+            console.log(res);
+            return res;
+        } catch (err) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("expiration_date");
+            return { usergroup: null, is_authenticated: false };
+        }
     },
 
     view: async (model, params) => {
