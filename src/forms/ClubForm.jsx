@@ -155,7 +155,7 @@ const ClubForm = (props) => {
 
             <Row className="mt-4">
                 <Col className="text-right px-md-4">
-                    <Button className="mx-3" onClick={props.cancelAction}>
+                    <Button className="mx-3 common-btn text-uppercase" onClick={props.cancelAction}>
                         Cancel
                     </Button>
                     <SubmitButton errors={errors}>Save</SubmitButton>

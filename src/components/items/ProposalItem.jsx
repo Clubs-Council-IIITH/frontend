@@ -16,7 +16,7 @@ const ProposalItem = (props) => {
                 {/*         <InputGroupAddon addonType="append" className="proposal-link-btn"> */}
                 {/*             <Button */}
                 {/*                 color="secondary" */}
-                {/*                 className="open-btn" */}
+                {/*                 className="common-btn" */}
                 {/*                 onClick={() => window.open(props.link, "_blank")} */}
                 {/*             > */}
                 {/*                 <img src="/open-18.svg" className="btn-icon mb-1 mr-1" alt="O" /> */}
@@ -31,7 +31,7 @@ const ProposalItem = (props) => {
                         tag={Link}
                         target="_blank"
                         to={props.pdf}
-                        className="open-btn w-100"
+                        className="common-btn w-100"
                     >
                         <img src="/view-18.svg" className="btn-icon mb-1 mr-1" alt="V" />
                         <span> VIEW PDF </span>

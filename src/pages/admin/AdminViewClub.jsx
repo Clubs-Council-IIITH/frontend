@@ -163,7 +163,7 @@ const AdminViewClub = (props) => {
                                         >
                                             <Button
                                                 color="success"
-                                                className="open-btn"
+                                                className="common-btn"
                                                 onClick={() =>
                                                     window.open(proposals[0].link, "_blank")
                                                 }
@@ -185,7 +185,7 @@ const AdminViewClub = (props) => {
                                         tag={Link}
                                         target="_blank"
                                         to={proposals[0].pdf}
-                                        className="open-btn w-100"
+                                        className="common-btn w-100"
                                     >
                                         <img
                                             src="/view-18.svg"

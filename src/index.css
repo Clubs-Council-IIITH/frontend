@@ -171,6 +171,11 @@ code {
   border: none;
 }
 
+.searchbar {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+}
+
 .card-header {
   background-color: rgba(255, 255, 255, 0) !important;
   border: none !important;
@@ -419,21 +424,6 @@ code {
   font-size: 0.38em;
   color: #fff;
   background-color: #000;
-  border: 2px solid #000;
-  box-shadow: 0;
-}
-
-.new-btn:visited {
-  box-shadow: 2px 3px #aaa !important;
-}
-
-.new-btn:focus,
-.new-btn:active,
-.new-btn:hover {
-  color: #000;
-  background-color: #fff;
-  border: 2px solid #000;
-  box-shadow: 2px 3px #aaa !important;
 }
 
 .edit-btn,
@@ -477,7 +467,7 @@ code {
   width: 30px;
 }
 
-.open-btn {
+.common-btn {
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
 }

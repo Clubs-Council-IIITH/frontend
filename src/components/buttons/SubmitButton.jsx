@@ -9,7 +9,7 @@ const SubmitButton = ({ errors, className, children }) => {
             color="primary"
             type="submit"
             onClick={() => setIsLoading(true)}
-            className={className}
+            className={"common-btn text-uppercase " + className}
         >
             {isLoading && Object.keys(errors).length === 0 ? (
                 <Spinner size="sm" color="light" className="mr-3" />

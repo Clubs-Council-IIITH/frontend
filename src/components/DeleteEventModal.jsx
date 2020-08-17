@@ -21,10 +21,14 @@ const DeleteEventModal = (props) => {
             <FailureAlert failed={failed} />
             <ModalHeader> Are you sure you want to delete '{props.name}'? </ModalHeader>
             <ModalBody className="text-right">
-                <Button className="mx-2" onClick={props.toggleModal}>
+                <Button className="mx-2 common-btn text-uppercase" onClick={props.toggleModal}>
                     Cancel
                 </Button>
-                <Button className="mx-2" color="danger" onClick={handleDelete}>
+                <Button
+                    className="mx-2 common-btn text-uppercase"
+                    color="danger"
+                    onClick={handleDelete}
+                >
                     Delete
                 </Button>
             </ModalBody>

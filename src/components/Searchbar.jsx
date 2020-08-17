@@ -15,7 +15,7 @@ const Searchbar = (props) => {
     return (
         <Input
             onChange={updateSearch}
-            className={"shadow-sm " + props.className}
+            className={"searchbar shadow-sm " + props.className}
             type="text"
             bsSize="lg"
             placeholder="Search..."
