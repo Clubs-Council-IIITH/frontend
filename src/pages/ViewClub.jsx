@@ -69,7 +69,7 @@ const ViewClub = (props) => {
                 <Row className="mt-4">
                     {activeEventsList.map((event) => (
                         <Col md="6" lg="4" className="my-3" key={event.id}>
-                            <EventItem {...event} />
+                            <EventItem {...event} state="" />
                         </Col>
                     ))}
                 </Row>

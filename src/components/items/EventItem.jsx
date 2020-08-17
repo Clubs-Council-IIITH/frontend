@@ -83,15 +83,17 @@ const EventItem = (props) => {
                     {formatAudience(props.audience)}
                 </div>
             </CardBody>
-            <CardFooter className="text-right px-2">
-                {hasLink ? <LinkButton /> : null}
-                {props.modifiable ? (
-                    <>
-                        <EditButton onClick={toggleEditModal} />
-                        <DeleteButton onClick={toggleDeleteModal} />
-                    </>
-                ) : null}
-            </CardFooter>
+            {props.modifiable || hasLink ? (
+                <CardFooter className="text-right px-2">
+                    {hasLink ? <LinkButton /> : null}
+                    {props.modifiable ? (
+                        <>
+                            <EditButton onClick={toggleEditModal} />
+                            <DeleteButton onClick={toggleDeleteModal} />
+                        </>
+                    ) : null}
+                </CardFooter>
+            ) : null}
 
             <Alert
                 color="info"
