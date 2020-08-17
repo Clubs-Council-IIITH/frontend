@@ -8,6 +8,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     if (Date.parse(localStorage.getItem("expiration_date")) < new Date().getTime()) {
         localStorage.removeItem("token");
         localStorage.removeItem("expiration_date");
+        return <Redirect to="/" />;
     }
 
     return (
