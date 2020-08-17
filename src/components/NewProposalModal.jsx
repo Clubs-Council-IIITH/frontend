@@ -31,7 +31,7 @@ const NewProposalModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Make a new proposal </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Make a new proposal </ModalHeader>
             <ModalBody>
                 <ProposalForm initial={initialData} cancelAction={props.toggleModal} />
             </ModalBody>

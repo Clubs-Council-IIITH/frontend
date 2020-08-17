@@ -27,7 +27,7 @@ const EditEventModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Edit event </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Edit event </ModalHeader>
             <ModalBody>
                 <EventForm
                     action="edit"

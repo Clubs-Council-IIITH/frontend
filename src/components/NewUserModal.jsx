@@ -17,7 +17,7 @@ const NewUserModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Create a new user </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Create a new user </ModalHeader>
             <ModalBody>
                 <UserForm
                     action="new"

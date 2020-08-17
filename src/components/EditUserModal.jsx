@@ -31,7 +31,7 @@ const EditUserModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Edit user </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Edit user </ModalHeader>
             <ModalBody>
                 <UserForm
                     action="edit"

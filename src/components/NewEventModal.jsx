@@ -19,7 +19,7 @@ const NewEventModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Create a new event </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Create a new event </ModalHeader>
             <ModalBody>
                 <EventForm
                     action="new"

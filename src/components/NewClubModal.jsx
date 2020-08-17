@@ -16,7 +16,7 @@ const NewClubModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Create a new club </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Create a new club </ModalHeader>
             <ModalBody>
                 <ClubForm
                     action="new"

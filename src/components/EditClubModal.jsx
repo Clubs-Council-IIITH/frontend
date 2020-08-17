@@ -30,7 +30,7 @@ const EditClubModal = (props) => {
             backdrop="static"
             toggle={props.toggleModal}
         >
-            <ModalHeader> Edit club </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase"> Edit club </ModalHeader>
             <ModalBody>
                 <ClubForm
                     action="edit"
