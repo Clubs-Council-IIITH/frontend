@@ -3,7 +3,6 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import API from "../api/methods";
 
-import LoadingIndicator from "./LoadingIndicator";
 import ClubForm from "../forms/ClubForm";
 
 const EditClubModal = (props) => {
@@ -23,7 +22,7 @@ const EditClubModal = (props) => {
         if (props.id !== 0) getInitialData();
     }, [props.id]);
 
-    if (isLoading || props.id === 0) return <LoadingIndicator />;
+    if (isLoading || props.id === 0) return null;
     return (
         <Modal
             className="modal-lg"
