@@ -30,7 +30,7 @@ code {
 }
 
 .null-msg {
-  font-family: "Quicksand", "sans-serif";
+  font-family: "Quicksand", sans-serif;
   font-weight: 700;
   font-size: calc(1.5em + 1vw);
   color: #bbb;
@@ -38,7 +38,7 @@ code {
 
 .nav-dark {
   background-color: #0d0d0d !important;
-  font-family: "Quicksand", "sans-serif";
+  font-family: "Quicksand", sans-serif;
   font-weight: 600;
   box-shadow: 0 0 10px #555;
 }
@@ -129,7 +129,7 @@ code {
 }
 
 .actionbar-title {
-  font-family: "Raleway", "sans-serif";
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
   font-size: 1em;
   line-height: 1.2;
@@ -140,7 +140,7 @@ code {
 }
 
 .actionbar-title-thin {
-  font-family: "Raleway", "sans-serif";
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
   font-size: 0.7em;
   line-height: 1.2;
@@ -153,7 +153,7 @@ code {
 }
 
 .viewclub-title {
-  font-family: "Raleway", "sans-serif";
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
   font-size: calc(0.6em + 1vw);
   line-height: 1.2;
@@ -212,7 +212,7 @@ code {
 }
 
 .event-card {
-  font-family: "Poppins", "sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: calc(20px + 1vw);
   min-width: 300px !important;
 }
@@ -247,7 +247,7 @@ code {
 }
 
 .user-card {
-  font-family: "Poppins", "sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: calc(20px + 1vw);
   min-width: 200px;
 }
@@ -269,7 +269,7 @@ code {
 }
 
 .proposal-card {
-  font-family: "Poppins", "sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: calc(20px + 1vw);
 }
 
@@ -296,7 +296,7 @@ code {
 }
 
 .proposal-alert {
-  font-family: "Poppins", "sans-serif";
+  font-family: "Poppins", sans-serif;
 }
 
 .proposal-alert-header {
@@ -310,7 +310,7 @@ code {
 }
 
 .club-card {
-  font-family: "Poppins", "sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: calc(20px + 1vw);
 }
 
@@ -414,7 +414,7 @@ code {
 }
 
 .new-btn {
-  font-family: "Quicksand", "sans-serif";
+  font-family: "Quicksand", sans-serif;
   font-weight: 600;
   font-size: 0.38em;
   color: #fff;
@@ -478,7 +478,7 @@ code {
 }
 
 .open-btn {
-  font-family: "Quicksand", "sans-serif";
+  font-family: "Quicksand", sans-serif;
   font-weight: 600;
 }
 
