@@ -6,6 +6,7 @@ import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
 import FailureAlert from "../components/FailureAlert";
+import { assertFiletype } from "../utils/FileUtils";
 
 const UserForm = (props) => {
     const [failed, setFailed] = useState(false);
@@ -42,14 +43,7 @@ const UserForm = (props) => {
                     accept="image/png, image/jpeg, image/jpg"
                     innerRef={register({
                         required: false,
-                        validate: (file) => {
-                            console.log(file[0].name.substr(file[0].name.lastIndexOf(".") + 1));
-                            return file.length === 1
-                                ? ["png", "jpg", "jpeg"].includes(
-                                      file[0].name.substr(file[0].name.lastIndexOf(".") + 1)
-                                  )
-                                : false;
-                        },
+                        validate: (file) => assertFiletype(file, ["png", "jpg", "jpeg"]),
                     })}
                 />
                 <FormFeedback> Upload only a single valid PNG or JPG/JPEG image! </FormFeedback>

@@ -42,12 +42,7 @@ const ProposalForm = (props) => {
                     accept="application/pdf,.pdf"
                     innerRef={register({
                         required: false,
-                        validate: (file) =>
-                            file.length === 1
-                                ? ["pdf"].includes(
-                                      file[0].name.substr(file[0].name.lastIndexOf(".") + 1)
-                                  )
-                                : false,
+                        validate: (file) => assertFiletype(file, ["pdf"]),
                     })}
                 />
                 <FormFeedback> Upload only a single valid PDF! </FormFeedback>
