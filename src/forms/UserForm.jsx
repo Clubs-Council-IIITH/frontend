@@ -34,8 +34,25 @@ const UserForm = (props) => {
         <Form id="userform" onSubmit={handleSubmit(onSubmit)}>
             <FailureAlert failed={failed} />
             <FormGroup>
-                <Label for="img">Image</Label>
-                <Input type="file" name="img" innerRef={register({ required: false })} />
+                <Label for="img">Image (as PNG or JPG)</Label>
+                <Input
+                    invalid={errors.img}
+                    type="file"
+                    name="img"
+                    accept="image/png, image/jpeg, image/jpg"
+                    innerRef={register({
+                        required: false,
+                        validate: (file) => {
+                            console.log(file[0].name.substr(file[0].name.lastIndexOf(".") + 1));
+                            return file.length === 1
+                                ? ["png", "jpg", "jpeg"].includes(
+                                      file[0].name.substr(file[0].name.lastIndexOf(".") + 1)
+                                  )
+                                : false;
+                        },
+                    })}
+                />
+                <FormFeedback> Upload only a single valid PNG or JPG/JPEG image! </FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="name"> Name </Label>
