@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardImg, CardBody, CardFooter } from "reactstrap";
+import { Card, CardImg, CardBody, CardFooter, Input } from "reactstrap";
 
 import EditUserModal from "../../components/EditUserModal";
 import EditButton from "../../components/buttons/EditButton";
@@ -18,8 +18,16 @@ const UserItem = (props) => {
             <CardBody>
                 <div className="user-name"> {props.name} </div>
                 <div className="user-role mt-2"> {props.role} </div>
-                <div className="user-mail"> {props.mail} </div>
-                <div className="user-mobile"> {props.mobile} </div>
+                {props.mail ? (
+                    <div className="user-mail my-1 mt-4">
+                        <Input className="text" value={props.mail} readonly />
+                    </div>
+                ) : null}
+                {props.mobile ? (
+                    <div className="user-mobile my-1">
+                        <Input className="text" value={props.mobile} readonly />
+                    </div>
+                ) : null}
             </CardBody>
             {props.modifiable ? (
                 <CardFooter className="text-right p-2">

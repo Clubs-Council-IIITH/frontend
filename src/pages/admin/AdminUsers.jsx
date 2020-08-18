@@ -38,7 +38,7 @@ const AdminUsers = () => {
                 <Row className="mt-4">
                     {filteredList.map((user) => {
                         return (
-                            <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
+                            <Col xs="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
                                 <UserItem modifiable {...user} />
                             </Col>
                         );
