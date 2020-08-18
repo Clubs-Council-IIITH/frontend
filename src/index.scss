@@ -196,9 +196,14 @@ code {
     height: 60vh;
 }
 
-.error-banner {
+.e404-banner {
     min-width: 300px;
     width: 60%;
+}
+
+.e401-banner {
+    min-width: 250px;
+    width: 50%;
 }
 
 .error-msg {

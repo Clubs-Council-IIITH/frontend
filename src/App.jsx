@@ -21,6 +21,7 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminViewClub from "./pages/admin/AdminViewClub";
 
 import Error404Page from "./pages/Error404Page";
+import Error401Page from "./pages/Error401Page";
 // }}}
 
 // Components {{{
@@ -83,6 +84,7 @@ const App = () => {
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
 
                 <Route exact path="/404" component={Error404Page} />
+                <Route exact path="/401" component={Error401Page} />
 
                 <Redirect to="/404" />
             </Switch>
