@@ -40,8 +40,8 @@ const App = () => {
                 <Route exact path="/clubs" component={Clubs} />
                 <Route exact path="/clubs/:id" component={ViewClub} />
                 <Route exact path="/calendar" component={Calendar} />
-                <Route exact path="/blog" component={Blog} />
-                <Route exact path="/contact" component={Contact} />
+                {/* <Route exact path="/blog" component={Blog} /> */}
+                {/* <Route exact path="/contact" component={Contact} /> */}
 
                 {/* Organizer routes */}
                 <ProtectedRoute
@@ -80,9 +80,11 @@ const App = () => {
                 {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
                 {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
 
+                {/* Auth routes */}
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
 
+                {/* Error routes */}
                 <Route exact path="/404" component={Error404Page} />
                 <Route exact path="/401" component={Error401Page} />
 

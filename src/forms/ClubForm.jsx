@@ -23,7 +23,7 @@ const ClubForm = (props) => {
     const [existingUserList, setExistingUserList] = useState([]);
     const [newUserList, setNewUserList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [failed, setFailed] = useState(false);
+    const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
@@ -67,7 +67,7 @@ const ClubForm = (props) => {
                 await API.edit("coordinators", user.id, roleFormData);
             });
             window.location.reload();
-        } else setFailed(true);
+        } else setAPIError(res.data);
     };
 
     const addUser = async (id, role) => {
@@ -123,7 +123,7 @@ const ClubForm = (props) => {
     if (isLoading) return null;
     return (
         <Form id="clubform" onSubmit={handleSubmit(onSubmit)}>
-            <FailureAlert failed={failed} />
+            <FailureAlert error={APIerror} />
             <FormGroup>
                 <Label for="name"> Name </Label>
                 <Input
@@ -137,10 +137,10 @@ const ClubForm = (props) => {
             <FormGroup>
                 <Label for="mail"> E-Mail </Label>
                 <Input
-                    invalid={errors.role}
+                    invalid={errors.mail}
                     type="email"
                     name="mail"
-                    innerRef={register({ register: true })}
+                    innerRef={register({ required: true })}
                 />
                 <FormFeedback> Club mail can not be empty! </FormFeedback>
             </FormGroup>

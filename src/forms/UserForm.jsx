@@ -9,7 +9,7 @@ import FailureAlert from "../components/FailureAlert";
 import { assertFiletype } from "../utils/FileUtils";
 
 const UserForm = (props) => {
-    const [failed, setFailed] = useState(false);
+    const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
@@ -28,12 +28,12 @@ const UserForm = (props) => {
         else res = await API.edit("coordinators", props.id, userFormData);
 
         if (res.status === 200) window.location.reload();
-        else setFailed(true);
+        else setAPIError(res.data);
     };
 
     return (
         <Form id="userform" onSubmit={handleSubmit(onSubmit)}>
-            <FailureAlert failed={failed} />
+            <FailureAlert error={APIerror} />
             <FormGroup>
                 <Label for="img">Image (as PNG or JPG)</Label>
                 <Input

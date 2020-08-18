@@ -9,7 +9,7 @@ import FailureAlert from "../components/FailureAlert";
 import { assertFiletype } from "../utils/FileUtils";
 
 const ProposalForm = (props) => {
-    const [failed, setFailed] = useState(false);
+    const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
@@ -22,13 +22,14 @@ const ProposalForm = (props) => {
         var proposalForm = document.getElementById("proposalform");
         var proposalFormData = new FormData(proposalForm);
         var res = await API.new("budget/proposals", proposalFormData);
+
         if (res.status === 200) window.location.reload();
-        else setFailed(true);
+        else setAPIError(res.data);
     };
 
     return (
         <Form id="proposalform" onSubmit={handleSubmit(onSubmit)}>
-            <FailureAlert failed={failed} />
+            <FailureAlert error={APIerror} />
             <FormGroup>
                 <Label for="link"> Working Draft Link </Label>
                 <Input type="text" name="link" innerRef={register({ required: true })} />

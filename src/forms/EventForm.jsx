@@ -19,7 +19,7 @@ import FailureAlert from "../components/FailureAlert";
 import { parseDateTime } from "../utils/DateTimeFormatter";
 
 const EventForm = (props) => {
-    const [failed, setFailed] = useState(false);
+    const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
@@ -45,12 +45,12 @@ const EventForm = (props) => {
         else res = await API.edit("events", props.id, eventFormData);
 
         if (res.status === 200) window.location.reload();
-        else setFailed(true);
+        else setAPIError(res.data);
     };
 
     return (
         <Form id="eventform" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-            <FailureAlert failed={failed} />
+            <FailureAlert error={APIerror} />
             <Row form>
                 <Col md="8" className="px-md-3">
                     <FormGroup>

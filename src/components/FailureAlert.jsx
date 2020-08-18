@@ -1,9 +1,15 @@
 import React from "react";
 import { Alert } from "reactstrap";
 
-const FailureAlert = ({ failed }) => {
-    if (!failed) return null;
-    return <Alert color="danger"> Something went wrong! Try again in a while. </Alert>;
+const FailureAlert = ({ error }) => {
+    if (!error) return null;
+    return (
+        <Alert color="danger" className="failure-alert">
+            {Object.keys(error).map((field) => (
+                <div>{`${field}: ${error[field]}`}</div>
+            ))}
+        </Alert>
+    );
 };
 
 export default FailureAlert;
