@@ -30,26 +30,6 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.loading-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-}
-
-.null-img {
-    min-width: 200px;
-    width: 30vw;
-    opacity: 20%;
-}
-
-.null-msg {
-    font-family: "Quicksand", sans-serif;
-    font-weight: 700;
-    font-size: calc(1.5em + 1vw);
-    color: #bbb;
-}
 // }}}
 
 // Navbar Styles {{{
@@ -204,6 +184,49 @@ code {
 .searchbar {
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
+}
+// }}}
+
+// Error & Loading Components {{{
+.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.error-banner {
+    min-width: 300px;
+    width: 60%;
+}
+
+.error-msg {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: calc(1.5em + 1vw);
+    color: #aaa;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.null-img {
+    min-width: 200px;
+    width: 30vw;
+    opacity: 20%;
+}
+
+.null-msg {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: calc(1.5em + 1vw);
+    color: #bbb;
 }
 // }}}
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { SessionContext } from "./api/SessionContext";
 import "./App.css";
 
@@ -19,6 +19,8 @@ import OrganizerBudget from "./pages/organizer/OrganizerBudget";
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminViewClub from "./pages/admin/AdminViewClub";
+
+import Error404Page from "./pages/Error404Page";
 // }}}
 
 // Components {{{
@@ -79,6 +81,10 @@ const App = () => {
 
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
+
+                <Route exact path="/404" component={Error404Page} />
+
+                <Redirect to="/404" />
             </Switch>
         </>
     );
