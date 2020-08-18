@@ -4,7 +4,6 @@ import { Input } from "reactstrap";
 const Searchbar = (props) => {
     const updateSearch = (e) => {
         if (!props.dataList) return null;
-        console.log(e.target.value);
         props.setFilteredList(
             props.dataList.filter((obj) =>
                 obj.name.toLowerCase().includes(e.target.value.toLowerCase())

@@ -25,7 +25,6 @@ export default {
     session: async () => {
         try {
             const res = await axios.get("/session/", { headers });
-            console.log(res);
             return res;
         } catch (err) {
             localStorage.removeItem("token");

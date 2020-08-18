@@ -11,7 +11,6 @@ export default ({ children }) => {
     useEffect(() => {
         async function getSession() {
             const response = await API.session();
-            console.log(response);
             setSession(response.data);
             setIsLoading(false);
         }

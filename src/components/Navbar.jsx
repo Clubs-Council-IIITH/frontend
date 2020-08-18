@@ -27,7 +27,6 @@ const Navigationbar = (props) => {
     };
 
     useEffect(() => {
-        console.log(props.session);
         const usergroup = props.session.usergroup;
         switch (usergroup) {
             case "organizer":

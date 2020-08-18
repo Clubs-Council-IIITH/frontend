@@ -3,7 +3,6 @@ import { Button, Spinner } from "reactstrap";
 
 const SubmitButton = ({ APIerror, errors, className, children }) => {
     const [isLoading, setIsLoading] = useState(false);
-    console.log(errors);
     return (
         <Button
             color="primary"

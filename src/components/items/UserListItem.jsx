@@ -22,7 +22,6 @@ const UserListItem = (props) => {
 
     const renderRole = (roles) => {
         const role = roles.filter((o) => o[0] == props.club); // eslint-disable-line
-        console.log(role);
         if (role.length) return role[0][1];
         return null;
     };

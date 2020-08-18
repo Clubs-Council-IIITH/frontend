@@ -24,7 +24,6 @@ const ViewClub = (props) => {
             setClub(club_res.data[0]);
             const users_res = await API.view("coordinators", { club: props.match.params.id });
             setUsers(users_res.data);
-            console.log(users_res.data);
         }
 
         async function getEvents() {

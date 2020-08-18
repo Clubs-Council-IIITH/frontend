@@ -141,7 +141,6 @@ const AdminViewClub = (props) => {
                 <Row className="mt-4">
                     <Col className="mt-3">
                         <Alert color="success" className="proposal-alert p-4">
-                            {console.log(proposals)}
                             <div className="proposal-alert-header mb-2 text-uppercase">
                                 Current Proposal
                             </div>

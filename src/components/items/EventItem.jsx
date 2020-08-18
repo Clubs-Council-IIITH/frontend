@@ -44,7 +44,6 @@ const EventItem = (props) => {
         // eslint-disable-next-line no-useless-escape
         const urlPattern = /(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))?/;
         setHasLink(urlPattern.test(props.venue));
-        console.log(urlPattern.test(props.venue));
     }, [props.venue]);
 
     return (
