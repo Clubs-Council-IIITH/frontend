@@ -5,10 +5,8 @@ import "./App.css";
 
 // Pages {{{
 import Home from "./pages/Home";
-import Blog from "./pages/Blog";
 import Clubs from "./pages/Clubs";
 import ViewClub from "./pages/ViewClub";
-import Contact from "./pages/Contact";
 import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";

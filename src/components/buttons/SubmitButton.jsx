@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Spinner } from "reactstrap";
 
-const SubmitButton = ({ errors, className, children }) => {
+const SubmitButton = ({ APIerror, errors, className, children }) => {
     const [isLoading, setIsLoading] = useState(false);
     console.log(errors);
     return (
@@ -11,7 +11,7 @@ const SubmitButton = ({ errors, className, children }) => {
             onClick={() => setIsLoading(true)}
             className={"common-btn text-uppercase " + className}
         >
-            {isLoading && Object.keys(errors).length === 0 ? (
+            {isLoading && Object.keys(errors).length === 0 && !APIerror ? (
                 <Spinner size="sm" color="light" className="mr-3" />
             ) : null}
             {children}

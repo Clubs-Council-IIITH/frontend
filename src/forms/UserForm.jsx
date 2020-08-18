@@ -83,7 +83,9 @@ const UserForm = (props) => {
                     <Button className="mx-3 common-btn text-uppercase" onClick={props.cancelAction}>
                         Cancel
                     </Button>
-                    <SubmitButton errors={errors}>Save</SubmitButton>
+                    <SubmitButton APIerror={APIerror} errors={errors}>
+                        Save
+                    </SubmitButton>
                 </Col>
             </Row>
         </Form>
