@@ -37,33 +37,41 @@ export default {
     view: async (model, params) => {
         fetchToken();
         if (!headers.Authorization) return await axios.get("/api/" + model + "/", { params });
-        const res = await axios.get("/api/" + model + "/", { params, headers });
-        console.log(res);
-        return res;
+        try {
+            return await axios.get("/api/" + model + "/", { params, headers });
+        } catch (err) {
+            return err.response;
+        }
     },
 
     new: async (model, data) => {
         fetchToken();
-        const res = await axios.post("/api/" + model + "/new/", data, { headers });
-        console.log(res);
-        return res;
+        try {
+            return await axios.post("/api/" + model + "/new/", data, { headers });
+        } catch (err) {
+            return err.response;
+        }
     },
 
     edit: async (model, id, data) => {
         fetchToken();
-        const res = await axios.post("/api/" + model + "/edit/" + id + "/", data, { headers });
-        console.log(res);
-        return res;
+        try {
+            return await axios.post("/api/" + model + "/edit/" + id + "/", data, { headers });
+        } catch (err) {
+            return err.response;
+        }
     },
 
     delete: async (model, id) => {
         fetchToken();
-        const res = await axios.post(
-            "/api/" + model + "/delete/" + id + "/",
-            {},
-            { headers: { Authorization: headers.Authorization } }
-        );
-        console.log(res);
-        return res;
+        try {
+            return await axios.post(
+                "/api/" + model + "/delete/" + id + "/",
+                {},
+                { headers: { Authorization: headers.Authorization } }
+            );
+        } catch (err) {
+            return err.response;
+        }
     },
 };
