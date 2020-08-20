@@ -24,8 +24,7 @@ export default {
 
     session: async () => {
         try {
-            const res = await axios.get("/session/", { headers });
-            return res;
+            return await axios.get("api/session/", { headers });
         } catch (err) {
             localStorage.removeItem("token");
             localStorage.removeItem("expiration_date");

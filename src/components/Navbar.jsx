@@ -19,7 +19,7 @@ const Navigationbar = (props) => {
 
     const isAuthenticated = props.session.is_authenticated;
     const usergroup = props.session.usergroup;
-    const loginURL = "http://localhost:8000/token";
+    const loginURL = "http://localhost:8000/api/token"; // TODO: CHANGE BEFORE DEPLOYING
     const logoutURL = "/logoutRedirect";
 
     const toggle = () => {
