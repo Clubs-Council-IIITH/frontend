@@ -206,6 +206,22 @@ code {
     width: 50%;
 }
 
+.hello-banner {
+    min-width: 200px;
+    width: 20%;
+}
+
+.hello-msg {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: calc(1em + 1vw);
+    color: #aaa;
+}
+
+.hello-header {
+    font-size: 1.8em;
+}
+
 .error-msg {
     font-family: "Quicksand", sans-serif;
     font-weight: 700;
