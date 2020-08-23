@@ -28,6 +28,12 @@ const Navigationbar = (props) => {
         setIsOpen(!isOpen);
     };
 
+    const closeNavbar = () => {
+        if (isOpen === true) {
+            setIsOpen(!isOpen);
+        }
+    };
+
     useEffect(() => {
         const usergroup = props.session.usergroup;
         switch (usergroup) {
@@ -70,27 +76,44 @@ const Navigationbar = (props) => {
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="m-auto" navbar>
                     <NavItem className="nav-item mx-md-2 mt-3 mt-md-0">
-                        <NavLink tag={Link} to="/" activeClassName="active" exact path="/">
+                        <NavLink
+                            onClick={closeNavbar}
+                            tag={Link}
+                            to="/"
+                            activeClassName="active"
+                            exact
+                            path="/"
+                        >
                             HOME
                         </NavLink>
                     </NavItem>
                     <NavItem className="nav-item mx-md-2">
-                        <NavLink tag={Link} to="/clubs" activeClassName="active">
+                        <NavLink
+                            onClick={closeNavbar}
+                            tag={Link}
+                            to="/clubs"
+                            activeClassName="active"
+                        >
                             CLUBS
                         </NavLink>
                     </NavItem>
                     <NavItem className="nav-item mx-md-2">
-                        <NavLink tag={Link} to="/calendar" activeClassName="active">
+                        <NavLink
+                            onClick={closeNavbar}
+                            tag={Link}
+                            to="/calendar"
+                            activeClassName="active"
+                        >
                             CALENDAR
                         </NavLink>
                     </NavItem>
                     {/* <NavItem className="nav-item mx-md-2"> */}
-                    {/*     <NavLink tag={Link} to="/blog" activeClassName="active"> */}
+                    {/*     <NavLink onClick={closeNavbar} tag={Link} to="/blog" activeClassName="active"> */}
                     {/*         BLOG */}
                     {/*     </NavLink> */}
                     {/* </NavItem> */}
                     {/* <NavItem className="nav-item mx-md-2"> */}
-                    {/*     <NavLink tag={Link} to="/contact" activeClassName="active"> */}
+                    {/*     <NavLink onClick={closeNavbar} tag={Link} to="/contact" activeClassName="active"> */}
                     {/*         CONTACT */}
                     {/*     </NavLink> */}
                     {/* </NavItem> */}
