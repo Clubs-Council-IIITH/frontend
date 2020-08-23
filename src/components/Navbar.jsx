@@ -12,6 +12,8 @@ import {
     NavbarText,
 } from "reactstrap";
 
+import "../config";
+
 const Navigationbar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [contextAction, setContextAction] = useState("");
@@ -19,7 +21,7 @@ const Navigationbar = (props) => {
 
     const isAuthenticated = props.session.is_authenticated;
     const usergroup = props.session.usergroup;
-    const loginURL = "http://localhost:8000/api/token"; // TODO: CHANGE BEFORE DEPLOYING
+    const loginURL = global.config.loginUrl;
     const logoutURL = "/logoutRedirect";
 
     const toggle = () => {
