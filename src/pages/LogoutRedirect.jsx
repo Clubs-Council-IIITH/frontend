@@ -10,7 +10,6 @@ const LogoutRedirect = () => {
 
     useEffect(() => {
         API.logout();
-        if (url[0] === "/") return <Redirect to={url} />;
         window.location.href = global.config.logoutRedirectUrl;
     });
     return null;
