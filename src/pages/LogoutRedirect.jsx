@@ -6,8 +6,12 @@ import "../config";
 
 const LogoutRedirect = () => {
     useEffect(() => {
-        API.logout();
-        window.location.href = global.config.logoutRedirectUrl;
+        async function logout() {
+            const res = await API.logout();
+            console.log(res);
+            if (res.status === 200) window.location.href = res.data.logout_url;
+        }
+        logout();
     });
     return null;
 };

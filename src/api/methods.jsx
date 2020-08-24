@@ -20,6 +20,7 @@ export default {
     logout: async () => {
         localStorage.removeItem("token");
         localStorage.removeItem("expiration_date");
+        return await axios.get("/api/endsession");
     },
 
     session: async () => {
