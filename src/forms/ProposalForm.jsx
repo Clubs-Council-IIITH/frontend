@@ -32,7 +32,13 @@ const ProposalForm = (props) => {
             <FailureAlert error={APIerror} />
             <FormGroup>
                 <Label for="link"> Working Draft Link </Label>
-                <Input type="text" name="link" innerRef={register({ required: true })} />
+                <Input
+                    invalid={errors.link}
+                    type="text"
+                    name="link"
+                    innerRef={register({ required: true })}
+                />
+                <FormFeedback> Upload a single valid PDF! </FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="pdf">PDF</Label>
@@ -46,7 +52,7 @@ const ProposalForm = (props) => {
                         validate: (file) => assertFiletype(file, ["pdf"]),
                     })}
                 />
-                <FormFeedback> Upload only a single valid PDF! </FormFeedback>
+                <FormFeedback> Upload a single valid PDF! </FormFeedback>
             </FormGroup>
             <Row className="mt-4">
                 <Col className="text-right px-md-4">
