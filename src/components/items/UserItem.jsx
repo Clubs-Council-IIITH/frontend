@@ -20,12 +20,12 @@ const UserItem = (props) => {
                 <div className="user-role mt-2"> {props.role} </div>
                 {props.mail ? (
                     <div className="user-mail my-1 mt-4">
-                        <Input className="text" value={props.mail} readonly />
+                        <Input type="text" value={props.mail} readonly />
                     </div>
                 ) : null}
                 {props.mobile ? (
                     <div className="user-mobile my-1">
-                        <Input className="text" value={props.mobile} readonly />
+                        <Input type="text" value={props.mobile} readonly />
                     </div>
                 ) : null}
             </CardBody>
