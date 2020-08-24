@@ -3,7 +3,6 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import API from "../api/methods";
 
-import LoadingIndicator from "./LoadingIndicator";
 import ProposalForm from "../forms/ProposalForm";
 
 const NewProposalModal = (props) => {
@@ -23,7 +22,7 @@ const NewProposalModal = (props) => {
         if (props.id !== 0) getInitialData();
     }, [props.id]);
 
-    if (isLoading) return <LoadingIndicator />;
+    if (isLoading) return null;
     return (
         <Modal
             className="modal-lg"
