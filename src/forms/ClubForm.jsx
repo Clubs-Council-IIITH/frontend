@@ -14,6 +14,7 @@ import {
 
 import API from "../api/methods";
 
+import Searchbar from "../components/Searchbar";
 import SubmitButton from "../components/buttons/SubmitButton";
 import FailureAlert from "../components/FailureAlert";
 import UserListItem from "../components/items/UserListItem";
@@ -22,6 +23,7 @@ const ClubForm = (props) => {
     const [changedUserList, setChangedUserList] = useState([]);
     const [existingUserList, setExistingUserList] = useState([]);
     const [newUserList, setNewUserList] = useState([]);
+    const [filteredList, setFilteredList] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [APIerror, setAPIError] = useState(false);
 
@@ -42,6 +44,7 @@ const ClubForm = (props) => {
                 if (clubs.includes(JSON.stringify(props.id))) existingUserList.push(user);
                 else newUserList.push(user);
             });
+            setFilteredList(newUserList);
             setIsLoading(false);
         }
 
@@ -77,6 +80,7 @@ const ClubForm = (props) => {
         setExistingUserList([...existingUserList, targetUser]);
         setNewUserList(newUserList.filter((user) => user.id !== id));
         setChangedUserList([...changedUserList, targetUser]);
+        setFilteredList(newUserList.filter((user) => user.id !== id));
     };
 
     const removeUser = async (id) => {
@@ -85,6 +89,7 @@ const ClubForm = (props) => {
         setNewUserList([...newUserList, targetUser]);
         setExistingUserList(existingUserList.filter((user) => user.id !== id));
         setChangedUserList([...changedUserList, targetUser]);
+        setFilteredList([...newUserList, targetUser]);
     };
 
     const renderExistingUsers = () => {
@@ -107,12 +112,16 @@ const ClubForm = (props) => {
     };
 
     const renderNewUsers = () => {
-        if (newUserList.length === 0) return null;
         return (
             <React.Fragment>
                 <h4 className="mt-4"> Add Users </h4>
+                <Searchbar
+                    className="w-100 input-sm"
+                    dataList={newUserList}
+                    setFilteredList={setFilteredList}
+                />
                 <ListGroup className="mt-2">
-                    {newUserList.map((user) => (
+                    {filteredList.map((user) => (
                         <UserListItem user={user} addUser={addUser} />
                     ))}
                 </ListGroup>
@@ -147,7 +156,9 @@ const ClubForm = (props) => {
 
             {props.action === "edit" ? (
                 <React.Fragment>
-                    <h3 className="pt-4"> Manage Users </h3>
+                    <div>
+                        <h3 className="pt-4"> Manage Users </h3>
+                    </div>
                     {renderExistingUsers()}
                     {renderNewUsers()}
                 </React.Fragment>

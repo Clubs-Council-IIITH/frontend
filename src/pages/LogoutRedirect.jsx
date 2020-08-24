@@ -8,7 +8,6 @@ const LogoutRedirect = () => {
     useEffect(() => {
         async function logout() {
             const res = await API.logout();
-            console.log(res);
             if (res.status === 200) window.location.href = res.data.logout_url;
         }
         logout();

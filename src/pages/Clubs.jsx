@@ -24,7 +24,6 @@ const Clubs = (props) => {
     }, []);
 
     const renderClubs = () => {
-        console.log(filteredList);
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
