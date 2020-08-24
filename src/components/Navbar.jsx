@@ -59,7 +59,12 @@ const Navigationbar = (props) => {
                 </NavItem>
 
                 <NavItem className="nav-item mx-md-2">
-                    <NavLink tag={Link} to={contextAction} activeClassName="active">
+                    <NavLink
+                        onClick={closeNavbar}
+                        tag={Link}
+                        to={contextAction}
+                        activeClassName="active"
+                    >
                         {contextString}
                     </NavLink>
                 </NavItem>

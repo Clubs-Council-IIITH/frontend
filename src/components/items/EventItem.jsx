@@ -98,7 +98,7 @@ const EventItem = (props) => {
                 color="info"
                 isOpen={linkAlert}
                 toggle={toggleLinkAlert}
-                className="link-alert mx-2 px-3"
+                className="link-alert mx-2 px-2 my-2"
             >
                 <div className="mb-2"> Meeting Link </div>
                 <Input id="linkfield" type="text" value={props.venue} readonly />

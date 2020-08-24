@@ -57,7 +57,7 @@ const OrganizerEvents = () => {
                         if (!isPrevious) return null;
                         return (
                             <Col md="6" lg="4" className="my-3" key={event.id}>
-                                <EventItem modifiable {...event} />
+                                <EventItem {...event} />
                             </Col>
                         );
                     })}
