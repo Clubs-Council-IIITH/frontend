@@ -16,27 +16,25 @@ const Clubs = (props) => {
     useEffect(() => {
         async function getClubList() {
             const res = await API.view("clubs", {});
-            setClubList(res.data);
-            setFilteredList(res.data);
+            setClubList(res.data.filter((club) => club.state !== "deleted"));
+            setFilteredList(res.data.filter((club) => club.state !== "deleted"));
         }
 
         getClubList();
     }, []);
 
     const renderClubs = () => {
+        console.log(filteredList);
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Page>
                 <Row className="mt-4">
-                    {filteredList.map((club) => {
-                        if (club.state === "deleted") return null;
-                        return (
-                            <Col md="6" lg="4" className="my-3" key={club.id}>
-                                <ClubItem {...club} link={props.match.url + "/" + club.id} />
-                            </Col>
-                        );
-                    })}
+                    {filteredList.map((club) => (
+                        <Col md="6" lg="4" className="my-3" key={club.id}>
+                            <ClubItem {...club} link={props.match.url + "/" + club.id} />
+                        </Col>
+                    ))}
                 </Row>
             </Page>
         );
