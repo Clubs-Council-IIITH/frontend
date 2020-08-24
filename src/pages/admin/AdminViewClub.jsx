@@ -43,7 +43,7 @@ const AdminViewClub = (props) => {
         }
 
         async function getProposals() {
-            const res = await API.view("budget/proposals");
+            const res = await API.view("budget/proposals", { club: props.match.params.id });
             setProposals(res.data);
         }
 
