@@ -11,7 +11,7 @@ $bg-secondary: #f3f2f1;
 
 // Font Styles {{{
 $actionbar-text: calc(36px + 1.2vw);
-$card-text: calc(20px + 1vw);
+$card-text: calc(24px + 0.5vw);
 // }}}
 
 // Global Styles {{{
@@ -307,7 +307,7 @@ code {
 }
 
 .event-datetime {
-    font-size: 0.65em;
+    font-size: 0.7em;
     color: #555;
 }
 
@@ -318,19 +318,19 @@ code {
 }
 
 .event-venue {
-    font-size: 0.6em;
+    font-size: 0.75em;
 }
 
 .event-audience {
-    font-size: 0.6em;
+    font-size: 0.75em;
 }
 
 .event-duration {
-    font-size: 0.6em;
+    font-size: 0.75em;
 }
 
 .event-state {
-    font-size: 0.7em;
+    font-size: 0.75em;
     width: fit-content;
     border-radius: 4px;
 }

@@ -261,7 +261,7 @@ const AdminViewClub = (props) => {
             <SecondaryNavbar admin page="clubs" />
             <Page fluid>
                 <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
-                    <Page className="viewclub-header">
+                    <Page className="viewclub-header pt-2 pt-md-1">
                         <BackButton />
                         <span className="viewclub-title p-2 my-auto">{club.name}</span>
                     </Page>

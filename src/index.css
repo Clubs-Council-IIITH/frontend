@@ -263,12 +263,12 @@ code {
 
 .event-card {
   font-family: "Poppins", sans-serif;
-  font-size: calc(20px + 1vw);
+  font-size: calc(24px + 0.5vw);
   min-width: 300px !important;
 }
 
 .event-datetime {
-  font-size: 0.65em;
+  font-size: 0.7em;
   color: #555;
 }
 
@@ -279,26 +279,26 @@ code {
 }
 
 .event-venue {
-  font-size: 0.6em;
+  font-size: 0.75em;
 }
 
 .event-audience {
-  font-size: 0.6em;
+  font-size: 0.75em;
 }
 
 .event-duration {
-  font-size: 0.6em;
+  font-size: 0.75em;
 }
 
 .event-state {
-  font-size: 0.7em;
+  font-size: 0.75em;
   width: fit-content;
   border-radius: 4px;
 }
 
 .user-card {
   font-family: "Poppins", sans-serif;
-  font-size: calc(20px + 1vw);
+  font-size: calc(24px + 0.5vw);
   min-width: 200px;
 }
 
@@ -320,7 +320,7 @@ code {
 
 .proposal-card {
   font-family: "Poppins", sans-serif;
-  font-size: calc(20px + 1vw);
+  font-size: calc(24px + 0.5vw);
 }
 
 .proposal-date {
@@ -361,7 +361,7 @@ code {
 
 .club-card {
   font-family: "Poppins", sans-serif;
-  font-size: calc(20px + 1vw);
+  font-size: calc(24px + 0.5vw);
 }
 
 .club-name {

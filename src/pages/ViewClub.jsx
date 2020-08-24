@@ -113,13 +113,13 @@ const ViewClub = (props) => {
     return (
         <Page fluid>
             <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
-                <Page className="viewclub-header">
+                <Page className="viewclub-header pt-2 pt-md-1">
                     <BackButton />
                     <span className="viewclub-title p-2 my-auto">{club.name}</span>
                 </Page>
             </Container>
             <Page>
-                <Row className="px-4 px-md-0 mx-md-2 mt-4">
+                <Row className="mt-4">
                     <Col md className="my-auto">
                         {renderTabBar()}
                     </Col>
