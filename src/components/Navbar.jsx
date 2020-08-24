@@ -78,7 +78,7 @@ const Navigationbar = (props) => {
                 <img className="nav-logo ml-md-3" src="/cc_logo.svg" alt="cc_logo" />
             </NavbarBrand>
             <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
+            <Collapse className="text-right" isOpen={isOpen} navbar>
                 <Nav className="m-auto" navbar>
                     <NavItem className="nav-item mx-md-2 mt-3 mt-md-0">
                         <NavLink
