@@ -42,7 +42,7 @@ const ProposalForm = (props) => {
                     name="pdf"
                     accept="application/pdf,.pdf"
                     innerRef={register({
-                        required: false,
+                        required: true,
                         validate: (file) => assertFiletype(file, ["pdf"]),
                     })}
                 />
