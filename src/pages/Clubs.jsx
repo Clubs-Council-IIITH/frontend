@@ -30,7 +30,7 @@ const Clubs = (props) => {
             <Page>
                 <Row className="mt-4">
                     {filteredList.map((club) => (
-                        <Col md="6" lg="4" className="my-3" key={club.id}>
+                        <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
                             <ClubItem {...club} link={props.match.url + "/" + club.id} />
                         </Col>
                     ))}

@@ -39,7 +39,7 @@ const AdminClubs = (props) => {
                     {filteredList.map((club) => {
                         if (club.state === "deleted") return null;
                         return (
-                            <Col md="6" lg="4" className="my-3" key={club.id}>
+                            <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
                                 <ClubItem modifiable {...club} link={"/admin/clubs/" + club.id} />
                             </Col>
                         );
@@ -49,7 +49,7 @@ const AdminClubs = (props) => {
                     {filteredList.map((club) => {
                         if (club.state !== "deleted") return null;
                         return (
-                            <Col md="6" lg="4" className="my-3" key={club.id}>
+                            <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
                                 <ClubItem {...club} link={"/admin/clubs/" + club.id} />
                             </Col>
                         );

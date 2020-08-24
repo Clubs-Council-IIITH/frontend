@@ -362,6 +362,7 @@ code {
 .club-card {
   font-family: "Poppins", sans-serif;
   font-size: calc(24px + 0.5vw);
+  min-height: 150px;
 }
 
 .club-name {

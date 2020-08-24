@@ -20,7 +20,7 @@ const ClubItem = (props) => {
     };
 
     return (
-        <Card className="dash-card club-card elevate">
+        <Card className="dash-card club-card elevate flex-fill">
             <EditClubModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
             <DeleteClubModal
                 modal={deleteModal}
@@ -28,22 +28,20 @@ const ClubItem = (props) => {
                 id={props.id}
                 name={props.name}
             />
-            <CardBody tag={Link} to={props.link} className="link-card">
-                <div className={"club-name " + (props.modifiable ? null : "text-center mt-3")}>
+            <CardBody tag={Link} to={props.link} className="link-card d-flex">
+                <div className={"club-name " + (props.modifiable ? null : "text-center m-auto")}>
                     {props.name}
                 </div>
             </CardBody>
-            <CardFooter className="text-right p-2">
-                {props.modifiable ? (
-                    <>
-                        <div className="club-mail mb-3 mx-1">
-                            <Input className="text" value={props.mail} readonly />
-                        </div>
-                        <EditButton onClick={toggleEditModal} />
-                        <DeleteButton onClick={toggleDeleteModal} />
-                    </>
-                ) : null}
-            </CardFooter>
+            {props.modifiable ? (
+                <CardFooter className="text-right p-2">
+                    <div className="club-mail mb-3 mx-1">
+                        <Input className="text" value={props.mail} readonly />
+                    </div>
+                    <EditButton onClick={toggleEditModal} />
+                    <DeleteButton onClick={toggleDeleteModal} />
+                </CardFooter>
+            ) : null}
         </Card>
     );
 };
