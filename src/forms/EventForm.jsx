@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import {
     Button,
@@ -14,11 +14,14 @@ import {
 
 import API from "../api/methods";
 
+import { SessionContext } from "../api/SessionContext";
 import SubmitButton from "../components/buttons/SubmitButton";
 import FailureAlert from "../components/FailureAlert";
 import { parseDateTime } from "../utils/DateTimeFormatter";
 
 const EventForm = (props) => {
+    const { session } = useContext(SessionContext);
+
     const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
@@ -137,7 +140,7 @@ const EventForm = (props) => {
                         </FormText>
                         <FormFeedback> Invalid audience! </FormFeedback>
                     </FormGroup>
-                    {props.action === "new" ? null : (
+                    {session.usergroup === "cc_admin" ? (
                         <FormGroup>
                             <Label for="state"> State </Label>
                             <Input
@@ -153,7 +156,7 @@ const EventForm = (props) => {
                             </Input>
                             <FormFeedback> Invalid state! </FormFeedback>
                         </FormGroup>
-                    )}
+                    ) : null}
                     <FormGroup className="mt-4">
                         <Label for="creator"> Your name? </Label>
                         <Input
