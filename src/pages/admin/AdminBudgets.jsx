@@ -12,20 +12,19 @@ import ProposalItem from "../../components/items/ProposalItem";
 
 const AdminBudgets = () => {
     const [proposals, setProposals] = useState([]);
-    const [clubs, setClubs] = useState([]);
     const [filteredList, setFilteredList] = useState(false);
 
     useEffect(() => {
         async function getProposals() {
-            const clubs_res = await API.view("clubs");
+            const clubs_res = await API.view("clubs", {});
             const proposals_res = await API.view("budget/proposals");
-            const proposals = proposals_res.data.map((proposal) => ({
-                ...proposal,
-                name: clubs_res.data.filter((club) => club.id === proposal.id)[0].name,
+            const proposal_list = clubs_res.data.map((club) => ({
+                ...club,
+                proposal: proposals_res.data.filter((proposal) => proposal.club === club.id)[0],
             }));
-            setClubs(clubs_res);
-            setProposals(proposals);
-            setFilteredList(proposals);
+
+            setProposals(proposal_list);
+            setFilteredList(proposal_list);
         }
 
         getProposals();
@@ -37,11 +36,13 @@ const AdminBudgets = () => {
         return (
             <Page>
                 <Row className="mt-4">
-                    {filteredList.map((proposal) => (
-                        <Col md="6" lg="4" className="my-3" key={proposal.id}>
-                            <ProposalItem name={proposal.name} pdf={proposal.pdf} />
-                        </Col>
-                    ))}
+                    {filteredList.map((club) =>
+                        club.proposal ? (
+                            <Col md="6" lg="4" className="my-3" key={club.id}>
+                                <ProposalItem name={club.name} pdf={club.proposal.pdf} />
+                            </Col>
+                        ) : null
+                    )}
                 </Row>
             </Page>
         );
