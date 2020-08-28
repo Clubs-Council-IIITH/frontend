@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, Button } from "reactstrap";
+import { Card, CardBody, Button, CardFooter } from "reactstrap";
 
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const ProposalItem = (props) => {
     return (
-        <Card className="proposal-card dash-card elevate">
+        <Card className="proposal-card dash-card elevate flex-fill">
             <CardBody>
                 <div className="proposal-club"> {props.name} </div>
                 <div className="proposal-date">
@@ -30,19 +30,20 @@ const ProposalItem = (props) => {
                 {/*         </InputGroupAddon> */}
                 {/*     </InputGroup> */}
                 {/* </div> */}
-                <div className="proposal-pdf mt-3">
-                    <Button
-                        size="lg"
-                        tag={Link}
-                        target="_blank"
-                        to={props.pdf}
-                        className="common-btn w-100"
-                    >
-                        <img src="/view-18.svg" className="btn-icon mb-1 mr-1" alt="V" />
-                        <span> VIEW PDF </span>
-                    </Button>
-                </div>
             </CardBody>
+            <CardFooter className="my-2">
+                <Button
+                    size="lg"
+                    tag={Link}
+                    target="_blank"
+                    to={props.pdf}
+                    className="common-btn w-100"
+                    color="danger"
+                >
+                    <img src="/view-18.svg" className="btn-icon mb-1 mr-1" alt="V" />
+                    <span> VIEW PDF </span>
+                </Button>
+            </CardFooter>
         </Card>
     );
 };

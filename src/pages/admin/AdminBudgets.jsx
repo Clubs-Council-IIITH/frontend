@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
@@ -38,7 +38,7 @@ const AdminBudgets = () => {
                 <Row className="mt-4">
                     {filteredList.map((club) =>
                         club.proposal ? (
-                            <Col md="6" lg="4" className="my-3" key={club.id}>
+                            <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
                                 <ProposalItem name={club.name} pdf={club.proposal.pdf} />
                             </Col>
                         ) : null
