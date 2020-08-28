@@ -8,8 +8,13 @@ const ProposalItem = (props) => {
     return (
         <Card className="proposal-card dash-card elevate">
             <CardBody>
-                <div className="proposal-date"> {formatDateTime(props.datetime).date} </div>
-                <div className="proposal-time"> {formatDateTime(props.datetime).time} </div>
+                <div className="proposal-club"> {props.name} </div>
+                <div className="proposal-date">
+                    {props.datetime && formatDateTime(props.datetime).date}
+                </div>
+                <div className="proposal-time">
+                    {props.datetime && formatDateTime(props.datetime).time}
+                </div>
                 {/* <div className="proposal-link mt-3"> */}
                 {/*     <InputGroup> */}
                 {/*         <Input type="text" value={props.link} readonly /> */}

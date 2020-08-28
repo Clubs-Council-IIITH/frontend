@@ -11,6 +11,7 @@ const SecondaryNavbar = (props) => {
     const adminButtonList = [
         { text: "clubs", page: "clubs", link: "/admin/clubs" },
         { text: "users", page: "users", link: "/admin/users" },
+        { text: "budgets", page: "budgets", link: "/admin/budgets" },
         // { text: "council", page: "council", link: "/admin/council" },
     ];
 
