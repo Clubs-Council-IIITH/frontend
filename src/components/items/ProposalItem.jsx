@@ -38,7 +38,6 @@ const ProposalItem = (props) => {
                     target="_blank"
                     to={props.pdf}
                     className="common-btn w-100"
-                    color="danger"
                 >
                     <img src="/view-18.svg" className="btn-icon mb-1 mr-1" alt="V" />
                     <span> VIEW PDF </span>

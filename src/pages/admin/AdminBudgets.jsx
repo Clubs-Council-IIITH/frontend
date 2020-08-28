@@ -37,7 +37,7 @@ const AdminBudgets = () => {
             <Page>
                 <Row className="mt-4">
                     {filteredList.map((club) =>
-                        club.proposal ? (
+                        club.proposal && club.state === "active" ? (
                             <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
                                 <ProposalItem name={club.name} pdf={club.proposal.pdf} />
                             </Col>
