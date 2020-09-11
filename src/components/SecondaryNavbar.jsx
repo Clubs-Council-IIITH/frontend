@@ -25,7 +25,7 @@ const SecondaryNavbar = (props) => {
                     tag={Link}
                     to={button.link}
                     className={
-                        "text-uppercase mx-3 px-3 py-2 nav-btn" +
+                        "text-uppercase mx-2 mx-md-3 px-3 py-2 nav-btn" +
                         (props.page === button.page ? "-active" : "")
                     }
                 >

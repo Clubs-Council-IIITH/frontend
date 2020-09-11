@@ -16,6 +16,7 @@
         "react-dom": "^16.13.1",
         "react-fade-in": "^1.1.0",
         "react-hook-form": "^5.7.2",
+        "react-linkify": "^1.0.0-alpha",
         "react-loading": "^2.0.3",
         "react-router-dom": "^5.2.0",
         "react-scripts": "^3.4.3",

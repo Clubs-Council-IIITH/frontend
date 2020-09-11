@@ -144,15 +144,15 @@ const OrganizerBudget = () => {
                 <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
                     <Page header>
                         <span className="actionbar-title p-2">Budget</span>
-                        {tab === "proposals" ? (
-                            <Button
-                                onClick={toggleModal}
-                                className="new-btn btn-outline-dark py-2 px-3 my-3"
-                            >
-                                <span className="d-md-none"> + </span>
-                                <span className="d-none d-md-block"> + NEW PROPOSAL </span>
-                            </Button>
-                        ) : null}
+                        {/* {tab === "proposals" ? ( */}
+                        {/*     <Button */}
+                        {/*         onClick={toggleModal} */}
+                        {/*         className="new-btn btn-outline-dark py-2 px-3 my-3" */}
+                        {/*     > */}
+                        {/*         <span className="d-md-none"> + </span> */}
+                        {/*         <span className="d-none d-md-block"> + NEW PROPOSAL </span> */}
+                        {/*     </Button> */}
+                        {/* ) : null} */}
                     </Page>
                 </Container>
                 {/* <Page> */}
