@@ -381,6 +381,28 @@ code {
   line-height: 1.2;
 }
 
+.update-card {
+  font-family: "Poppins", sans-serif;
+  font-size: calc(24px + 0.5vw);
+}
+
+.update-datetime {
+  font-size: 0.7em;
+}
+
+.update-title {
+  font-size: 0.9em;
+  line-height: 1.2;
+}
+
+.update-content {
+  font-size: 0.6em;
+}
+
+.update-creator {
+  font-size: 0.7em;
+}
+
 .state-completed {
   background-color: #fff7cc;
   color: #99851b;

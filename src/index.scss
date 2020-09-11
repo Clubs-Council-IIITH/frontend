@@ -426,6 +426,30 @@ code {
 }
 // }}}
 
+// Update Card {{{
+.update-card {
+    font-family: "Poppins", sans-serif;
+    font-size: $card-text;
+}
+
+.update-datetime {
+    font-size: 0.7em;
+}
+
+.update-title {
+    font-size: 0.9em;
+    line-height: 1.2;
+}
+
+.update-content {
+    font-size: 0.6em;
+}
+
+.update-creator {
+    font-size: 0.7em;
+}
+// }}}
+
 // Event States {{{
 .state-completed {
     background-color: #fff7cc;

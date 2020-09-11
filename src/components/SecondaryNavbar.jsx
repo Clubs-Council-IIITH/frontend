@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 
 const SecondaryNavbar = (props) => {
     const organizerButtonList = [
+        { text: "updates", page: "updates", link: "/organizer/updates" },
         { text: "events", page: "events", link: "/organizer/events" },
         { text: "budget", page: "budget", link: "/organizer/budget" },
     ];

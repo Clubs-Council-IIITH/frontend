@@ -11,6 +11,7 @@ import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 
+import OrganizerUpdates from "./pages/organizer/OrganizerUpdates";
 import OrganizerEvents from "./pages/organizer/OrganizerEvents";
 import OrganizerBudget from "./pages/organizer/OrganizerBudget";
 
@@ -46,7 +47,13 @@ const App = () => {
                 <ProtectedRoute
                     allowed={["organizer"]}
                     exact
-                    path={["/organizer/events", "/organizer"]}
+                    path={["/organizer/updates", "/organizer"]}
+                    component={OrganizerUpdates}
+                />
+                <ProtectedRoute
+                    allowed={["organizer"]}
+                    exact
+                    path="/organizer/events"
                     component={OrganizerEvents}
                 />
                 <ProtectedRoute

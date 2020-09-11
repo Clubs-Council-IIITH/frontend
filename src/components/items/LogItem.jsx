@@ -15,7 +15,7 @@ const LogItem = (props) => {
     };
 
     return (
-        <React.Fragment>
+        <>
             {props.datebreak ? (
                 <div className="event-card mt-3 mb-2 mx-2">
                     {formatDateTime(props.datetime).date}
@@ -34,7 +34,7 @@ const LogItem = (props) => {
                     </Row>
                 </CardBody>
             </Card>
-        </React.Fragment>
+        </>
     );
 };
 
