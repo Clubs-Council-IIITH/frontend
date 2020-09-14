@@ -20,7 +20,10 @@ const UpdateForm = (props) => {
     const onSubmit = async (data) => {
         var updateForm = document.getElementById("updateform");
         var updateFormData = new FormData(updateForm);
-        var res = await API.new("updates", updateFormData);
+
+        var res;
+        if (props.action === "new") res = await API.new("updates", updateFormData);
+        else res = await API.edit("updates", props.id, updateFormData);
 
         if (res.status === 200) window.location.reload();
         else setAPIError(res.data);
