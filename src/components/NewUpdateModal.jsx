@@ -19,7 +19,12 @@ const NewUpdateModal = (props) => {
         >
             <ModalHeader className="common-modal text-uppercase"> Post a new update </ModalHeader>
             <ModalBody>
-                <UpdateForm initial={initialData} cancelAction={props.toggleModal} />
+                <UpdateForm
+                    action="new"
+                    id=""
+                    initial={initialData}
+                    cancelAction={props.toggleModal}
+                />
             </ModalBody>
         </Modal>
     );
