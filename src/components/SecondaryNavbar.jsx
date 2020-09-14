@@ -13,6 +13,7 @@ const SecondaryNavbar = (props) => {
         { text: "clubs", page: "clubs", link: "/admin/clubs" },
         { text: "users", page: "users", link: "/admin/users" },
         { text: "budgets", page: "budgets", link: "/admin/budgets" },
+        { text: "updates", page: "updates", link: "/admin/updates" },
         // { text: "council", page: "council", link: "/admin/council" },
     ];
 

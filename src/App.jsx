@@ -18,6 +18,7 @@ import OrganizerBudget from "./pages/organizer/OrganizerBudget";
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminBudgets from "./pages/admin/AdminBudgets";
+import AdminUpdates from "./pages/admin/AdminUpdates";
 import AdminViewClub from "./pages/admin/AdminViewClub";
 
 import Error404Page from "./pages/Error404Page";
@@ -87,6 +88,12 @@ const App = () => {
                     exact
                     path="/admin/budgets"
                     component={AdminBudgets}
+                />
+                <ProtectedRoute
+                    allowed={["cc_admin"]}
+                    exact
+                    path="/admin/updates"
+                    component={AdminUpdates}
                 />
                 {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
                 {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
