@@ -6,53 +6,59 @@ import API from "../api/methods";
 
 import SubmitButton from "../components/buttons/SubmitButton";
 import FailureAlert from "../components/FailureAlert";
-import { assertFiletype } from "../utils/FileUtils";
 
-const ProposalForm = (props) => {
+const UpdateForm = (props) => {
     const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
-            link: props.initial.link,
-            pdf: props.initial.pdf,
+            title: props.initial.title,
+            content: props.initial.content,
         },
     });
 
     const onSubmit = async (data) => {
-        var proposalForm = document.getElementById("proposalform");
-        var proposalFormData = new FormData(proposalForm);
-        var res = await API.new("budget/proposals", proposalFormData);
+        var updateForm = document.getElementById("updateform");
+        var updateFormData = new FormData(updateForm);
+        var res = await API.new("updates", updateFormData);
 
         if (res.status === 200) window.location.reload();
         else setAPIError(res.data);
     };
 
     return (
-        <Form id="proposalform" onSubmit={handleSubmit(onSubmit)}>
+        <Form id="updateform" onSubmit={handleSubmit(onSubmit)}>
             <FailureAlert error={APIerror} />
             <FormGroup>
-                <Label for="link"> Working Draft Link </Label>
+                <Label for="title"> Title </Label>
                 <Input
-                    invalid={errors.link}
+                    invalid={errors.title}
                     type="text"
-                    name="link"
+                    name="title"
                     innerRef={register({ required: true })}
                 />
-                <FormFeedback> Provide a valid link! </FormFeedback>
+                <FormFeedback> You need to provide a title! </FormFeedback>
             </FormGroup>
             <FormGroup>
-                <Label for="pdf">PDF</Label>
+                <Label for="content"> Content </Label>
                 <Input
-                    invalid={errors.pdf}
-                    type="file"
-                    name="pdf"
-                    accept="application/pdf,.pdf"
-                    innerRef={register({
-                        required: true,
-                        validate: (file) => assertFiletype(file, ["pdf"]),
-                    })}
+                    invalid={errors.content}
+                    type="textarea"
+                    name="content"
+                    rows="4"
+                    innerRef={register({ required: true })}
                 />
-                <FormFeedback> Upload a single valid PDF! </FormFeedback>
+                <FormFeedback> You need to provide some update content! </FormFeedback>
+            </FormGroup>
+            <FormGroup>
+                <Label for="creator"> Your name? </Label>
+                <Input
+                    invalid={errors.creator}
+                    type="text"
+                    name="creator"
+                    innerRef={register({ required: true })}
+                />
+                <FormFeedback> Your name is required! </FormFeedback>
             </FormGroup>
             <Row className="mt-4">
                 <Col className="text-right px-md-4">
@@ -68,4 +74,4 @@ const ProposalForm = (props) => {
     );
 };
 
-export default ProposalForm;
+export default UpdateForm;
