@@ -34,7 +34,7 @@ const AdminUpdates = () => {
             <Page>
                 <Row className="mt-4">
                     {updates.map((update) => (
-                        <Col md="6" className="my-3" key={update.id}>
+                        <Col lg="6" className="my-3" key={update.id}>
                             <UpdateItem admin {...update} />
                         </Col>
                     ))}

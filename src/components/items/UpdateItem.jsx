@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Card, CardBody, Row, Col } from "reactstrap";
 import Linkify from "react-linkify";
-import { Card, CardBody } from "reactstrap";
 
 import EditButton from "../buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
@@ -40,9 +40,15 @@ const UpdateItem = (props) => {
                 {props.admin ? (
                     <>
                         <hr className="mt-4" />
-                        <div className="update-creator text-right"> {props.creator}</div>
-                        <EditButton onClick={toggleEditModal} />
-                        <DeleteButton onClick={toggleDeleteModal} />
+                        <Row>
+                            <Col xs="6" sm="4">
+                                <EditButton onClick={toggleEditModal} />
+                                <DeleteButton onClick={toggleDeleteModal} />
+                            </Col>
+                            <Col className="d-flex flex-row-reverse">
+                                <div className="update-creator my-auto">{props.creator}</div>
+                            </Col>
+                        </Row>
                     </>
                 ) : null}
             </CardBody>
