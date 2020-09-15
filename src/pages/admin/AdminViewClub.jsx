@@ -37,8 +37,7 @@ const AdminViewClub = (props) => {
             const events_res = await API.view("events", { club: props.match.params.id });
             setEvents(events_res.data);
             setFilteredList(events_res.data);
-            var tst = Array.from(events_res.data, (e) => e.id);
-            const logs_res = await API.view("logs", { events: tst.join() });
+            const logs_res = await API.view("logs", { club: props.match.params.id });
             setLogs(logs_res.data);
         }
 
@@ -105,10 +104,10 @@ const AdminViewClub = (props) => {
     const renderLogs = () => {
         if (!logs) return <LoadingIndicator />;
         if (logs.length === 0) return <NullIndicator />;
-        var prevDate = logs[0].timestamp;
+        var prevDate = logs[0].datetime;
         logs[0]["datebreak"] = true;
         logs.forEach(function (log) {
-            if (!isSameDay(prevDate, log.timestamp)) {
+            if (!isSameDay(prevDate, log.datetime)) {
                 log["datebreak"] = true;
                 prevDate = log.timestamp;
             }
@@ -117,11 +116,12 @@ const AdminViewClub = (props) => {
         return (
             <Page>
                 <div className="mt-4">
+                    {console.log(logs)}
                     {logs.map((log) => (
                         <Col md="12" className="my-1">
                             <LogItem
-                                datetime={log.timestamp}
-                                creator={log.event[0]["creator"]}
+                                datetime={log.datetime}
+                                creator={log.actor}
                                 action={log.action}
                                 event={log.event[0]["name"]}
                                 datebreak={log.datebreak}
