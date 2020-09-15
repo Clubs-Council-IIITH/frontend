@@ -27,6 +27,7 @@ import Error401Page from "./pages/Error401Page";
 
 // Components {{{
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import ProtectedRoute from "./components/ProtectedRoute";
 // }}}
 
@@ -35,7 +36,8 @@ const App = () => {
 
     return (
         <>
-            <Navbar session={sessionContext.session} />
+            <Sidebar />
+            {/* <Navbar session={sessionContext.session} /> */}
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/clubs" component={Clubs} />

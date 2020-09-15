@@ -4,8 +4,8 @@ import Page from "../components/PageContainer";
 
 const Home = () => {
     return (
-        <Page fluid padding="300px">
-            <div className="error-page">
+        <Page fluid>
+            <div className="error-page mt-4">
                 <img src="/hello.svg" alt="hello" className="hello-banner" />
                 <div className="hello-msg mt-5">
                     <div className="hello-header">hello there! </div>

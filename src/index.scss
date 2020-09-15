@@ -21,7 +21,6 @@ body {
         "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-top: 100px;
     padding-bottom: 50px;
     overflow-y: scroll;
 }
@@ -29,7 +28,27 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+// }}}
 
+// Sidebar and Page Styles {{{
+.page-container {
+    padding-left: 0;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d0d0d;
+    z-index: 9999;
+    width: 0;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: row;
+}
 // }}}
 
 // Navbar Styles {{{
@@ -607,7 +626,7 @@ code {
 }
 // }}}
 
-// Styles exclusively for displays with width >= 768px {{{
+// Styles exclusively for displays with width >= 768px (bs-md) {{{
 @media (min-width: 768px) {
     .nav-divider {
         display: block;
@@ -615,5 +634,23 @@ code {
     .event-title {
         width: fit-content;
     }
+
+    .sidebar {
+        width: 80px;
+    }
+    .page-container {
+        padding-left: 95px;
+    }
 }
 // }}}
+
+// Styles exclusively for displays with width >= 992px (bs-lg) {{{
+@media (min-width: 992px) {
+    .sidebar {
+        width: 280px;
+    }
+    .page-container {
+        padding-left: 295px;
+    }
+}
+//}}}
