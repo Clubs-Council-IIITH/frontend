@@ -78,13 +78,13 @@ const OrganizerEvents = () => {
                             {/* {viewPrevious ? "Previous Events" : "Upcoming Events"} */}
                             Events
                         </span>
-                        {/* <Button */}
-                        {/*     onClick={toggleModal} */}
-                        {/*     className="new-btn btn-outline-dark py-2 px-3 my-3" */}
-                        {/* > */}
-                        {/*     <span className="d-md-none"> + </span> */}
-                        {/*     <span className="d-none d-md-block"> + NEW EVENT </span> */}
-                        {/* </Button> */}
+                        <Button
+                            onClick={toggleModal}
+                            className="new-btn btn-outline-dark py-2 px-3 my-3"
+                        >
+                            <span className="d-md-none"> + </span>
+                            <span className="d-none d-md-block"> + NEW EVENT </span>
+                        </Button>
                     </Page>
                     <Page className="mt-5">
                         <Searchbar
