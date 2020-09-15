@@ -32,6 +32,7 @@ code {
 
 // Sidebar and Page Styles {{{
 .page-container {
+    padding-top: 15px;
     padding-left: 0;
 }
 
@@ -49,6 +50,19 @@ code {
     display: flex;
     flex-direction: row;
 }
+
+.sidebar-nav {
+    height: 93%;
+}
+
+.nav-icon {
+    width: 24px;
+}
+
+.nav-icon-active {
+    color: #111111 !important;
+    filter: brightness(0) invert(1);
+}
 // }}}
 
 // Navbar Styles {{{
@@ -56,11 +70,15 @@ code {
     background-color: #0d0d0d !important;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
-    box-shadow: 0 0 10px #555;
 }
 
 .nav-logo {
     height: 40px;
+}
+
+.nav-logo-sm {
+    height: 40px;
+    margin-left: -5px;
 }
 
 .nav-btn {

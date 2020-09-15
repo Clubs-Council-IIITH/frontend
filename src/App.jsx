@@ -36,7 +36,7 @@ const App = () => {
 
     return (
         <>
-            <Sidebar />
+            <Sidebar session={sessionContext.session} />
             {/* <Navbar session={sessionContext.session} /> */}
             <Switch>
                 <Route exact path="/" component={Home} />
