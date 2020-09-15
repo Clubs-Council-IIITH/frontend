@@ -14,9 +14,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
 .page-container {
-  padding-top: 15px;
-  padding-left: 0;
+  padding-top: 80px;
+  padding-left: 15px;
 }
 
 .sidebar {
@@ -27,6 +31,10 @@ code {
   background-color: #0d0d0d;
   z-index: 9999;
   width: 0;
+}
+
+.sidebar-collapse {
+  width: 280px !important;
 }
 
 .sidebar-item {
@@ -42,9 +50,32 @@ code {
   width: 24px;
 }
 
+.nav-icon:hover,
+.nav-icon:focus,
+.nav-icon:active {
+  filter: brightness(0.4) invert(1);
+}
+
 .nav-icon-active {
   color: #111111 !important;
   filter: brightness(0) invert(1);
+}
+
+.sidebar-nav-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sidebar-nav-link:hover,
+.sidebar-nav-link:focus,
+.sidebar-nav-link:active {
+  color: #aaaaaa;
+  text-decoration: none;
+}
+
+.nav-light {
+  background-color: #ffffff !important;
+  height: 70px;
 }
 
 .nav-dark {
@@ -60,6 +91,16 @@ code {
 .nav-logo-sm {
   height: 40px;
   margin-left: -5px;
+}
+
+.nav-logo-sm-inv {
+  height: 40px;
+  filter: invert(1);
+}
+
+.nav-close {
+  height: 40px;
+  filter: opacity(0.5);
 }
 
 .nav-btn {
@@ -605,11 +646,11 @@ code {
 }
 @media (min-width: 992px) {
   .sidebar {
-    width: 280px;
+    width: 260px;
   }
 
   .page-container {
-    padding-left: 295px;
+    padding-left: 275px;
   }
 }
 

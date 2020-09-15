@@ -26,7 +26,6 @@ import Error401Page from "./pages/Error401Page";
 // }}}
 
 // Components {{{
-import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import ProtectedRoute from "./components/ProtectedRoute";
 // }}}
