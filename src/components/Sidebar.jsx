@@ -13,7 +13,7 @@ const SidebarNavItem = (props) => {
                     to={props.link}
                     className="d-flex flex-row"
                     activeClassName="active nav-icon-active"
-                    exact
+                    exact={props.exact}
                 >
                     <img
                         src={props.icon}
@@ -123,6 +123,7 @@ const Sidebar = (props) => {
                 <Nav className="m-auto d-flex justify-content-between sidebar-nav" navbar>
                     <div className="pt-5">
                         <SidebarNavItem
+                            exact
                             link="/"
                             icon="/sb-home-18.svg"
                             text="HOME"

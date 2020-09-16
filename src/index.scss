@@ -229,6 +229,31 @@ code {
 }
 // }}}
 
+// Tab Bar {{{
+.nav-tab {
+    font-family: "Roboto", sans-serif;
+    background-color: #fff;
+    display: inline-block;
+    padding: 10px 25px;
+    color: #bbb;
+    border-bottom: 1px solid #ddd;
+    text-decoration: none;
+}
+
+.nav-tab:hover {
+    background-color: oldlace;
+}
+
+.nav-tab.active {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid orange;
+    border-bottom: 1px solid #fff;
+    cursor: default;
+}
+// }}}
+
 // View Club {{{
 .viewclub-header {
     display: flex;
@@ -271,17 +296,17 @@ code {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    height: 90vh;
 }
 
 .e404-banner {
     min-width: 300px;
-    width: 60%;
+    width: 40%;
 }
 
 .e401-banner {
     min-width: 250px;
-    width: 50%;
+    width: 40%;
 }
 
 .hello-banner {

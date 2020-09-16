@@ -4,6 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import API from "../api/methods";
 
 import Page from "../components/PageContainer";
+import Transition from "../components/TransitionContainer";
 import Searchbar from "../components/Searchbar";
 import LoadingIndicator from "../components/LoadingIndicator";
 import NullIndicator from "../components/NullIndicator";
@@ -27,7 +28,7 @@ const Clubs = (props) => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {filteredList.map((club) => (
                         <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
@@ -35,25 +36,27 @@ const Clubs = (props) => {
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
     return (
         <Page fluid>
-            <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                <Page header>
-                    <span className="actionbar-title p-2">Clubs</span>
-                </Page>
-                <Page className="mt-5">
-                    <Searchbar
-                        className="w-100"
-                        dataList={clubList}
-                        setFilteredList={setFilteredList}
-                    />
-                </Page>
-            </Container>
-            {renderClubs()}
+            <Transition>
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Container fluid>
+                        <span className="actionbar-title p-2">Clubs</span>
+                    </Container>
+                    <Container fluid className="mt-5">
+                        <Searchbar
+                            className="w-100"
+                            dataList={clubList}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Container>
+                </Container>
+                {renderClubs()}
+            </Transition>
         </Page>
     );
 };

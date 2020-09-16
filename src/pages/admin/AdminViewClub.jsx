@@ -55,7 +55,7 @@ const AdminViewClub = (props) => {
         if (!users) return <LoadingIndicator />;
         if (users.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {users.map((user) => (
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
@@ -66,7 +66,7 @@ const AdminViewClub = (props) => {
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
@@ -74,7 +74,7 @@ const AdminViewClub = (props) => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {filteredList.map((event) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
@@ -97,7 +97,7 @@ const AdminViewClub = (props) => {
                         );
                     })}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
@@ -114,7 +114,7 @@ const AdminViewClub = (props) => {
         });
 
         return (
-            <Page>
+            <Container fluid>
                 <div className="mt-4">
                     {console.log(logs)}
                     {logs.map((log) => (
@@ -129,7 +129,7 @@ const AdminViewClub = (props) => {
                         </Col>
                     ))}
                 </div>
-            </Page>
+            </Container>
         );
     };
 
@@ -137,7 +137,7 @@ const AdminViewClub = (props) => {
         if (!proposals) return <LoadingIndicator />;
         if (proposals.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     <Col className="mt-3">
                         <Alert color="success" className="proposal-alert p-4">
@@ -205,7 +205,7 @@ const AdminViewClub = (props) => {
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
@@ -258,15 +258,14 @@ const AdminViewClub = (props) => {
 
     return (
         <>
-            <SecondaryNavbar admin page="clubs" />
             <Page fluid>
-                <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
-                    <Page className="viewclub-header pt-2 pt-md-1">
+                <Container fluid className="actionbar-container pt-2 pb-3 py-md-5 rounded-lg">
+                    <Container fluid className="viewclub-header pt-2 pt-md-1">
                         <BackButton />
                         <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                    </Page>
+                    </Container>
                 </Container>
-                <Page>
+                <Container fluid>
                     <Row className="mt-4">
                         <Col md="8" className="my-auto">
                             {renderTabBar()}
@@ -277,7 +276,7 @@ const AdminViewClub = (props) => {
                             ) : null}
                         </Col>
                     </Row>
-                </Page>
+                </Container>
                 <Row className="p-0">
                     <Col>{renderTab()}</Col>
                 </Row>

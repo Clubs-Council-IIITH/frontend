@@ -3,8 +3,9 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import AdminTabBar from "./AdminTabBar";
 import Page from "../../components/PageContainer";
-import SecondaryNavbar from "../../components/SecondaryNavbar";
+import Transition from "../../components/TransitionContainer";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewUpdateModal from "../../components/NewUpdateModal";
@@ -31,7 +32,7 @@ const AdminUpdates = () => {
         if (!updates) return <LoadingIndicator />;
         if (updates.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {updates.map((update) => (
                         <Col lg="6" className="my-3" key={update.id}>
@@ -39,30 +40,32 @@ const AdminUpdates = () => {
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
     return (
         <>
-            <SecondaryNavbar admin page="updates" />
             <Page fluid>
-                <NewUpdateModal modal={modal} toggleModal={toggleModal} />
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Page header>
-                        <span className="actionbar-title p-2">Updates</span>
-                        <Button
-                            onClick={toggleModal}
-                            className="new-btn btn-outline-dark py-2 px-3 my-3"
-                        >
-                            <span className="d-md-none"> + </span>
-                            <span className="d-none d-md-block"> + NEW UPDATE </span>
-                        </Button>
-                    </Page>
-                </Container>
-                <Row className="p-0">
-                    <Col>{renderUpdates()}</Col>
-                </Row>
+                <AdminTabBar />
+                <Transition>
+                    <NewUpdateModal modal={modal} toggleModal={toggleModal} />
+                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                        <Container fluid>
+                            <span className="actionbar-title p-2">Updates</span>
+                            <Button
+                                onClick={toggleModal}
+                                className="new-btn btn-outline-dark py-2 px-3 my-3"
+                            >
+                                <span className="d-md-none"> + </span>
+                                <span className="d-none d-md-block"> + NEW UPDATE </span>
+                            </Button>
+                        </Container>
+                    </Container>
+                    <Row className="p-0">
+                        <Col>{renderUpdates()}</Col>
+                    </Row>
+                </Transition>
             </Page>
         </>
     );

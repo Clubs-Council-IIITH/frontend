@@ -4,6 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 
 import Page from "../../components/PageContainer";
+import Transition from "../../components/TransitionContainer";
 import SecondaryNavbar from "../../components/SecondaryNavbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
@@ -41,14 +42,16 @@ const OrganizerUpdates = () => {
         <>
             <SecondaryNavbar page="updates" />
             <Page fluid>
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Page header>
-                        <span className="actionbar-title p-2">Updates</span>
-                    </Page>
-                </Container>
-                <Row className="p-0">
-                    <Col>{renderUpdates()}</Col>
-                </Row>
+                <Transition>
+                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                        <Page header>
+                            <span className="actionbar-title p-2">Updates</span>
+                        </Page>
+                    </Container>
+                    <Row className="p-0">
+                        <Col>{renderUpdates()}</Col>
+                    </Row>
+                </Transition>
             </Page>
         </>
     );

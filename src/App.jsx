@@ -36,7 +36,6 @@ const App = () => {
     return (
         <>
             <Sidebar session={sessionContext.session} />
-            {/* <Navbar session={sessionContext.session} /> */}
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/clubs" component={Clubs} />
@@ -45,7 +44,7 @@ const App = () => {
                 {/* <Route exact path="/blog" component={Blog} /> */}
                 {/* <Route exact path="/contact" component={Contact} /> */}
 
-                {/* Organizer routes */}
+                {/* Organizer routes {{{ */}
                 <ProtectedRoute
                     allowed={["organizer"]}
                     exact
@@ -64,12 +63,14 @@ const App = () => {
                     path="/organizer/budget"
                     component={OrganizerBudget}
                 />
+                {/* }}} */}
 
-                {/* Admin routes */}
+                {/* Admin routes {{{ */}
+                <Route exact path="/admin" render={() => <Redirect replace to="/admin/clubs" />} />
                 <ProtectedRoute
                     allowed={["cc_admin"]}
                     exact
-                    path={["/admin/clubs", "/admin"]}
+                    path="/admin/clubs"
                     component={AdminClubs}
                 />
                 <ProtectedRoute
@@ -99,16 +100,18 @@ const App = () => {
                 {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
                 {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
                 {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
+                {/* }}} */}
 
-                {/* Auth routes */}
+                {/* Auth routes {{{ */}
                 <Route exact path="/loginRedirect" component={LoginRedirect} />
                 <Route exact path="/logoutRedirect" component={LogoutRedirect} />
+                {/* }}} */}
 
-                {/* Error routes */}
+                {/* Error routes {{{ */}
                 <Route exact path="/404" component={Error404Page} />
                 <Route exact path="/401" component={Error401Page} />
-
                 <Redirect to="/404" />
+                {/* }}} */}
             </Switch>
         </>
     );

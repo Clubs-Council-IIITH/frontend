@@ -3,8 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import AdminTabBar from "./AdminTabBar";
 import Page from "../../components/PageContainer";
-import SecondaryNavbar from "../../components/SecondaryNavbar";
+import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
@@ -34,7 +35,7 @@ const AdminBudgets = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {filteredList.map((club) =>
                         club.proposal && club.state === "active" ? (
@@ -44,27 +45,29 @@ const AdminBudgets = () => {
                         ) : null
                     )}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
     return (
         <>
-            <SecondaryNavbar admin page="budgets" />
             <Page fluid>
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Page header>
-                        <span className="actionbar-title p-2">Budget Proposals</span>
-                    </Page>
-                    <Page className="mt-5">
-                        <Searchbar
-                            className="w-100"
-                            dataList={proposals}
-                            setFilteredList={setFilteredList}
-                        />
-                    </Page>
-                </Container>
-                {renderProposals()}
+                <AdminTabBar />
+                <Transition>
+                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                        <Container fluid>
+                            <span className="actionbar-title p-2">Budget Proposals</span>
+                        </Container>
+                        <Container fluid className="mt-5">
+                            <Searchbar
+                                className="w-100"
+                                dataList={proposals}
+                                setFilteredList={setFilteredList}
+                            />
+                        </Container>
+                    </Container>
+                    {renderProposals()}
+                </Transition>
             </Page>
         </>
     );

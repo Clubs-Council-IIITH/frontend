@@ -3,8 +3,9 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
+import AdminTabBar from "./AdminTabBar";
 import Page from "../../components/PageContainer";
-import SecondaryNavbar from "../../components/SecondaryNavbar";
+import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
@@ -34,7 +35,7 @@ const AdminUsers = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {filteredList.map((user) => {
                         return (
@@ -44,35 +45,37 @@ const AdminUsers = () => {
                         );
                     })}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
     return (
         <>
-            <SecondaryNavbar admin page="users" />
             <NewUserModal modal={modal} toggleModal={toggleModal} />
             <Page fluid>
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Page header>
-                        <span className="actionbar-title p-2">Users</span>
-                        <Button
-                            onClick={toggleModal}
-                            className="new-btn btn-outline-dark py-2 px-3 my-3"
-                        >
-                            <span className="d-md-none"> + </span>
-                            <span className="d-none d-md-block"> + NEW USER </span>
-                        </Button>
-                    </Page>
-                    <Page className="mt-5">
-                        <Searchbar
-                            className="w-100"
-                            dataList={userList}
-                            setFilteredList={setFilteredList}
-                        />
-                    </Page>
-                </Container>
-                {renderUsers()}
+                <AdminTabBar />
+                <Transition>
+                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                        <Container fluid>
+                            <span className="actionbar-title p-2">Users</span>
+                            <Button
+                                onClick={toggleModal}
+                                className="new-btn btn-outline-dark py-2 px-3 my-3"
+                            >
+                                <span className="d-md-none"> + </span>
+                                <span className="d-none d-md-block"> + NEW USER </span>
+                            </Button>
+                        </Container>
+                        <Container fluid className="mt-5">
+                            <Searchbar
+                                className="w-100"
+                                dataList={userList}
+                                setFilteredList={setFilteredList}
+                            />
+                        </Container>
+                    </Container>
+                    {renderUsers()}
+                </Transition>
             </Page>
         </>
     );

@@ -40,7 +40,7 @@ const ViewClub = (props) => {
         if (!users) return <LoadingIndicator />;
         if (users.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {users.map((user) => (
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
@@ -53,7 +53,7 @@ const ViewClub = (props) => {
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
@@ -64,7 +64,7 @@ const ViewClub = (props) => {
         );
         if (activeEventsList.length === 0) return <NullIndicator />;
         return (
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     {activeEventsList.map((event) => (
                         <Col md="6" lg="4" className="my-3" key={event.id}>
@@ -72,7 +72,7 @@ const ViewClub = (props) => {
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
@@ -113,12 +113,12 @@ const ViewClub = (props) => {
     return (
         <Page fluid>
             <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
-                <Page className="viewclub-header pt-2 pt-md-1">
+                <Container fluid className="viewclub-header pt-2 pt-md-1">
                     <BackButton />
                     <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                </Page>
+                </Container>
             </Container>
-            <Page>
+            <Container fluid>
                 <Row className="mt-4">
                     <Col md className="my-auto">
                         {renderTabBar()}
@@ -129,7 +129,7 @@ const ViewClub = (props) => {
                         ) : null}
                     </Col>
                 </Row>
-            </Page>
+            </Container>
             <Row className="p-0">
                 <Col>{renderTab()}</Col>
             </Row>
