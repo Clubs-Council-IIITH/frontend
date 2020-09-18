@@ -19,7 +19,7 @@ code {
 }
 
 .page-container {
-  padding-top: 80px;
+  padding-top: 70px;
   padding-left: 15px;
 }
 
@@ -231,10 +231,17 @@ code {
 
 .nav-tab-collapse {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  min-height: 50px;
   width: 100%;
   border: none;
+}
+
+.nav-tab-current {
+  background-color: #ffffff;
+  color: #000;
 }
 
 .viewclub-header {
