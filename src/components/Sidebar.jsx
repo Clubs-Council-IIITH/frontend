@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { Navbar, NavbarBrand, Nav, NavbarText } from "reactstrap";
 
 import Leftbar from "./Leftbar";
+import Rightbar from "./Rightbar";
 
 const Sidebar = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isLeftOpen, setIsLeftOpen] = useState(false);
+    const [isRightOpen, setIsRightOpen] = useState(false);
 
-    const toggle = () => {
-        setIsOpen(!isOpen);
+    const toggleLeft = () => {
+        setIsLeftOpen(!isLeftOpen);
+    };
+
+    const toggleRight = () => {
+        setIsRightOpen(!isRightOpen);
     };
 
     return (
         <>
-            <Navbar light className="nav-light" fixed="top" expand="xs">
-                <NavbarBrand onClick={toggle}>
+            <Navbar light className="nav-top" fixed="top" expand="xs">
+                <NavbarBrand onClick={toggleLeft}>
                     <img
                         className="nav-logo-sm-inv clickable d-block d-md-none"
                         src="/cc_logo_sm.svg"
@@ -21,9 +27,10 @@ const Sidebar = (props) => {
                     />
                 </NavbarBrand>
                 <Nav className="mr-auto" navbar></Nav>
-                <NavbarText>updates</NavbarText>
+                <NavbarText onClick={toggleRight}>updates</NavbarText>
             </Navbar>
-            <Leftbar session={props.session} isOpen={isOpen} toggle={toggle} />
+            <Leftbar session={props.session} isOpen={isLeftOpen} toggle={toggleLeft} />
+            <Rightbar session={props.session} isOpen={isRightOpen} toggle={toggleRight} />
         </>
     );
 };

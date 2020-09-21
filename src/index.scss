@@ -54,9 +54,7 @@ code {
     position: fixed;
     right: 0;
     height: 100% !important;
-    display: flex;
-    flex-direction: column;
-    background-color: #0d0d0d;
+    display: none;
     z-index: 9999;
     width: 0;
 }
@@ -65,12 +63,29 @@ code {
     width: 280px !important;
 }
 
+.rightbar-collapse {
+    display: flex;
+    flex-direction: column;
+    background-color: $bg-secondary;
+    width: 80vw !important;
+    max-width: 400px !important;
+}
+
 .leftbar-item {
     display: flex;
     flex-direction: row;
 }
 
+.rightbar-item {
+    display: flex;
+    flex-direction: row;
+}
+
 .leftbar-nav {
+    height: 93%;
+}
+
+.rightbar-nav {
     height: 93%;
 }
 
@@ -103,13 +118,19 @@ code {
 // }}}
 
 // Navbar Styles {{{
-.nav-light {
+.nav-top {
     background-color: $bg-primary !important;
     height: 70px;
 }
 
 .nav-dark {
     background-color: #0d0d0d !important;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+}
+
+.nav-light {
+    background-color: $bg-secondary !important;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
 }
@@ -760,8 +781,14 @@ code {
     .leftbar {
         width: 80px;
     }
+
+    .rightbar {
+        width: 0;
+    }
+
     .page-container {
         padding-left: 95px;
+        padding-right: 15px;
     }
 }
 // }}}
@@ -771,8 +798,22 @@ code {
     .leftbar {
         width: 260px;
     }
+
     .page-container {
         padding-left: 275px;
+    }
+}
+//}}}
+
+// Styles exclusively for displays with width >= 1400px (bs-xl) {{{
+@media (min-width: 1400px) {
+    .rightbar {
+        display: block;
+        width: 400px;
+    }
+
+    .page-container {
+        padding-right: 415px;
     }
 }
 //}}}
