@@ -34,8 +34,8 @@ const AdminClubs = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {filteredList.map((club) => {
                         if (club.state === "deleted") return null;
                         return (
@@ -61,27 +61,32 @@ const AdminClubs = () => {
 
     return (
         <>
-            <NewClubModal modal={modal} toggleModal={toggleModal} />
             <AdminTabBar />
+            <NewClubModal modal={modal} toggleModal={toggleModal} />
             <Transition>
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Container fluid>
-                        <span className="actionbar-title p-2">Clubs</span>
-                        <Button
-                            onClick={toggleModal}
-                            className="new-btn btn-outline-dark py-2 px-3 my-3"
+                <Container fluid className="actionbar-container rounded-lg">
+                    <Row>
+                        <Col
+                            md="6"
+                            className="d-flex flex-row justify-content-between justify-content-md-start"
                         >
-                            <span className="d-md-none"> + </span>
-                            <span className="d-none d-md-block"> + NEW CLUB </span>
-                        </Button>
-                    </Container>
-                    <Container fluid className="mt-5">
-                        <Searchbar
-                            className="w-100"
-                            dataList={clubList}
-                            setFilteredList={setFilteredList}
-                        />
-                    </Container>
+                            <span className="actionbar-title ml-md-2">Clubs</span>
+                            <Button
+                                onClick={toggleModal}
+                                className="new-btn btn-outline-dark py-2 px-3 mx-md-5 my-auto"
+                            >
+                                <span className="d-md-none"> + </span>
+                                <span className="d-none d-md-block"> + NEW CLUB </span>
+                            </Button>
+                        </Col>
+                        <Col className="my-4 my-md-auto">
+                            <Searchbar
+                                className="w-100"
+                                dataList={clubList}
+                                setFilteredList={setFilteredList}
+                            />
+                        </Col>
+                    </Row>
                 </Container>
                 {renderClubs()}
             </Transition>

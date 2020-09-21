@@ -4,6 +4,7 @@ import { Alert, InputGroup, Input, InputGroupAddon, Container, Button, Row, Col 
 
 import API from "../../api/methods";
 
+import AdminTabBar from "./AdminTabBar";
 import Transition from "../../components/TransitionContainer";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
@@ -54,8 +55,8 @@ const AdminViewClub = (props) => {
         if (!users) return <LoadingIndicator />;
         if (users.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {users.map((user) => (
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
                             <UserItem
@@ -73,8 +74,8 @@ const AdminViewClub = (props) => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {filteredList.map((event) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (isPrevious) return null;
@@ -136,8 +137,8 @@ const AdminViewClub = (props) => {
         if (!proposals) return <LoadingIndicator />;
         if (proposals.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     <Col className="mt-3">
                         <Alert color="success" className="proposal-alert p-4">
                             <div className="proposal-alert-header mb-2 text-uppercase">
@@ -257,16 +258,19 @@ const AdminViewClub = (props) => {
 
     return (
         <>
+            <AdminTabBar />
             <Transition>
-                <Container fluid className="actionbar-container pt-2 pb-3 py-md-5 rounded-lg">
-                    <Container fluid className="viewclub-header pt-2 pt-md-1">
-                        <BackButton />
-                        <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                    </Container>
+                <Container fluid className="actionbar-container rounded-lg">
+                    <Row>
+                        <Col xs="3" sm="1" className="my-auto">
+                            <BackButton />
+                        </Col>
+                        <Col className="viewclub-title my-auto">{club.name}</Col>
+                    </Row>
                 </Container>
-                <Container fluid>
-                    <Row className="mt-4">
-                        <Col md="8" className="my-auto">
+                <Container fluid className="mt-4 mt-md-5">
+                    <Row>
+                        <Col md className="my-auto">
                             {renderTabBar()}
                         </Col>
                         <Col className="my-auto py-3 py-md-0">

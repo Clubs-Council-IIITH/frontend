@@ -40,8 +40,8 @@ const ViewClub = (props) => {
         if (!users) return <LoadingIndicator />;
         if (users.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {users.map((user) => (
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
                             <UserItem
@@ -64,8 +64,8 @@ const ViewClub = (props) => {
         );
         if (activeEventsList.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {activeEventsList.map((event) => (
                         <Col md="6" lg="4" className="my-3" key={event.id}>
                             <EventItem {...event} state="" />
@@ -120,8 +120,8 @@ const ViewClub = (props) => {
                     <Col className="viewclub-title my-auto pt-2">{club.name}</Col>
                 </Row>
             </Container>
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-4 mt-md-5">
+                <Row>
                     <Col md className="my-auto">
                         {renderTabBar()}
                     </Col>

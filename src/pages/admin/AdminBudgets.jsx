@@ -34,8 +34,8 @@ const AdminBudgets = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {filteredList.map((club) =>
                         club.proposal && club.state === "active" ? (
                             <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
@@ -52,17 +52,19 @@ const AdminBudgets = () => {
         <>
             <AdminTabBar />
             <Transition>
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Container fluid>
-                        <span className="actionbar-title p-2">Budget Proposals</span>
-                    </Container>
-                    <Container fluid className="mt-5">
-                        <Searchbar
-                            className="w-100"
-                            dataList={proposals}
-                            setFilteredList={setFilteredList}
-                        />
-                    </Container>
+                <Container fluid className="actionbar-container rounded-lg">
+                    <Row>
+                        <Col md="6" className="d-flex flex-row">
+                            <span className="actionbar-title ml-md-2">Budget Proposals</span>
+                        </Col>
+                        <Col className="my-4 my-md-auto">
+                            <Searchbar
+                                className="w-100"
+                                dataList={proposals}
+                                setFilteredList={setFilteredList}
+                            />
+                        </Col>
+                    </Row>
                 </Container>
                 {renderProposals()}
             </Transition>

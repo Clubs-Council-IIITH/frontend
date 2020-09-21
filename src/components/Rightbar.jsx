@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Navbar, NavbarBrand, Nav } from "reactstrap";
+import { Row, Col, Navbar, Nav } from "reactstrap";
 
 import API from "../api/methods";
 
@@ -55,7 +55,7 @@ const Rightbar = (props) => {
                 />
             </div>
             <Nav className="m-auto d-flex justify-content-between rightbar-nav" navbar>
-                <div className="mt-2 pb-4">{renderUpdates()}</div>
+                <div className="mt-3 pb-4">{renderUpdates()}</div>
             </Nav>
         </Navbar>
     );

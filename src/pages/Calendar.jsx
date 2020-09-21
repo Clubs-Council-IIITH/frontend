@@ -13,7 +13,7 @@ const Calendar = () => {
                     title="calendar"
                     src={CALENDAR_URI}
                     frameborder="0"
-                    className="calendar-frame p-2"
+                    className="calendar-frame p-1"
                 />
             </div>
         </Transition>

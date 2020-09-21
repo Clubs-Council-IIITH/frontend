@@ -7,13 +7,19 @@ const AdminTabBar = () => {
     const location = useLocation();
     const tabs = [
         { to: "/clubs", title: "Clubs" },
-        { to: "/updates", title: "Updates" },
         { to: "/users", title: "Users" },
         { to: "/budgets", title: "Budgets" },
     ];
 
+    const currentPath = () => {
+        const path = location.pathname.split("/");
+        const tab = tabs.filter((tab) => path.includes(tab.to.slice(1)));
+        if (tab.length) return tab[0].title;
+        return "";
+    };
+
     return (
-        <div className="mb-3 mb-md-2">
+        <div className="mb-3 mb-md-5">
             <ul class="nav d-none d-sm-block">
                 <RoutedTabs startPathWith="/admin">
                     {tabs.map((tab) => (
@@ -25,7 +31,7 @@ const AdminTabBar = () => {
                 id="tabs"
                 className="w-100 d-block d-sm-none text-uppercase common-btn nav-tab-collapse nav-tab-current dropdown-toggle mt-2"
             >
-                {tabs.filter((tab) => tab.to === `/${location.pathname.split("/").pop()}`)[0].title}
+                {currentPath()}
             </Button>
             <UncontrolledCollapse toggler="#tabs" className="mb-2">
                 <RoutedTabs startPathWith="/admin">

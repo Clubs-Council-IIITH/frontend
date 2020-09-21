@@ -27,8 +27,8 @@ const Clubs = (props) => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Container fluid>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {filteredList.map((club) => (
                         <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
                             <ClubItem {...club} link={props.match.url + "/" + club.id} />
@@ -44,9 +44,9 @@ const Clubs = (props) => {
             <Container fluid className="actionbar-container rounded-lg">
                 <Row>
                     <Col md="6">
-                        <span className="actionbar-title p-2">Clubs</span>
+                        <span className="actionbar-title ml-md-2">Clubs</span>
                     </Col>
-                    <Col className="my-3 my-md-auto">
+                    <Col className="my-4 my-md-auto">
                         <Searchbar
                             className="w-100 my-auto"
                             dataList={clubList}
