@@ -574,7 +574,7 @@ code {
 }
 
 .update-datetime {
-  font-size: 0.6em;
+  font-size: 0.55em;
 }
 
 .update-title {
@@ -583,7 +583,7 @@ code {
 }
 
 .update-content {
-  font-size: 0.55em;
+  font-size: 0.6em;
   white-space: pre-line;
 }
 

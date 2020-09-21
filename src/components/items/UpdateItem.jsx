@@ -34,7 +34,7 @@ const UpdateItem = (props) => {
                     {props.datetime && formatDateTime(props.datetime).datetime}
                 </div>
                 <div className="update-title font-weight-bold my-2"> {props.title} </div>
-                <div className="update-content mb-3">
+                <div className="update-content mb-2">
                     <Linkify> {props.content} </Linkify>
                 </div>
                 {props.admin ? (
