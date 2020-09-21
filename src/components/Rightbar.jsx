@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavLink as Link } from "react-router-dom";
 import { Navbar, NavItem, NavbarBrand, Nav, NavLink } from "reactstrap";
 
@@ -25,9 +25,6 @@ const SidebarNavItem = (props) => {
 };
 
 const Rightbar = (props) => {
-    const isAuthenticated = props.session.is_authenticated;
-    const usergroup = props.session.usergroup;
-
     return (
         <Navbar
             light

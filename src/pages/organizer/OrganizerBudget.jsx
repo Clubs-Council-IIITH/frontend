@@ -140,35 +140,33 @@ const OrganizerBudget = () => {
     return (
         <>
             <SecondaryNavbar page="budget" />
-            <Page fluid>
-                <Transition>
-                    <NewProposalModal modal={modal} toggleModal={toggleModal} />
-                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                        <Page header>
-                            <span className="actionbar-title p-2">Budget</span>
-                            {/* {tab === "proposals" ? ( */}
-                            {/*     <Button */}
-                            {/*         onClick={toggleModal} */}
-                            {/*         className="new-btn btn-outline-dark py-2 px-3 my-3" */}
-                            {/*     > */}
-                            {/*         <span className="d-md-none"> + </span> */}
-                            {/*         <span className="d-none d-md-block"> + NEW PROPOSAL </span> */}
-                            {/*     </Button> */}
-                            {/* ) : null} */}
-                        </Page>
-                    </Container>
-                    {/* <Page> */}
-                    {/*     <Row className="px-4 px-md-0 mx-md-2 mt-4"> */}
-                    {/*         <Col md className="my-auto px-0"> */}
-                    {/*             {renderTabBar()} */}
-                    {/*         </Col> */}
-                    {/*     </Row> */}
-                    {/* </Page> */}
-                    <Row className="p-0">
-                        <Col>{renderTab()}</Col>
-                    </Row>
-                </Transition>
-            </Page>
+            <Transition>
+                <NewProposalModal modal={modal} toggleModal={toggleModal} />
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Page header>
+                        <span className="actionbar-title p-2">Budget</span>
+                        {/* {tab === "proposals" ? ( */}
+                        {/*     <Button */}
+                        {/*         onClick={toggleModal} */}
+                        {/*         className="new-btn btn-outline-dark py-2 px-3 my-3" */}
+                        {/*     > */}
+                        {/*         <span className="d-md-none"> + </span> */}
+                        {/*         <span className="d-none d-md-block"> + NEW PROPOSAL </span> */}
+                        {/*     </Button> */}
+                        {/* ) : null} */}
+                    </Page>
+                </Container>
+                {/* <Page> */}
+                {/*     <Row className="px-4 px-md-0 mx-md-2 mt-4"> */}
+                {/*         <Col md className="my-auto px-0"> */}
+                {/*             {renderTabBar()} */}
+                {/*         </Col> */}
+                {/*     </Row> */}
+                {/* </Page> */}
+                <Row className="p-0">
+                    <Col>{renderTab()}</Col>
+                </Row>
+            </Transition>
         </>
     );
 };

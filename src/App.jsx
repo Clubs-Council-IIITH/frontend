@@ -26,7 +26,7 @@ import Error401Page from "./pages/Error401Page";
 // }}}
 
 // Components {{{
-import Sidebar from "./components/Sidebar";
+import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 // }}}
 
@@ -35,84 +35,89 @@ const App = () => {
 
     return (
         <>
-            <Sidebar session={sessionContext.session} />
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/clubs" component={Clubs} />
-                <Route exact path="/clubs/:id" component={ViewClub} />
-                <Route exact path="/calendar" component={Calendar} />
-                {/* <Route exact path="/blog" component={Blog} /> */}
-                {/* <Route exact path="/contact" component={Contact} /> */}
+            <Navigation session={sessionContext.session}>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/clubs" component={Clubs} />
+                    <Route exact path="/clubs/:id" component={ViewClub} />
+                    <Route exact path="/calendar" component={Calendar} />
+                    {/* <Route exact path="/blog" component={Blog} /> */}
+                    {/* <Route exact path="/contact" component={Contact} /> */}
 
-                {/* Organizer routes {{{ */}
-                <ProtectedRoute
-                    allowed={["organizer"]}
-                    exact
-                    path={["/organizer/updates", "/organizer"]}
-                    component={OrganizerUpdates}
-                />
-                <ProtectedRoute
-                    allowed={["organizer"]}
-                    exact
-                    path="/organizer/events"
-                    component={OrganizerEvents}
-                />
-                <ProtectedRoute
-                    allowed={["organizer"]}
-                    exact
-                    path="/organizer/budget"
-                    component={OrganizerBudget}
-                />
-                {/* }}} */}
+                    {/* Organizer routes {{{ */}
+                    <ProtectedRoute
+                        allowed={["organizer"]}
+                        exact
+                        path={["/organizer/updates", "/organizer"]}
+                        component={OrganizerUpdates}
+                    />
+                    <ProtectedRoute
+                        allowed={["organizer"]}
+                        exact
+                        path="/organizer/events"
+                        component={OrganizerEvents}
+                    />
+                    <ProtectedRoute
+                        allowed={["organizer"]}
+                        exact
+                        path="/organizer/budget"
+                        component={OrganizerBudget}
+                    />
+                    {/* }}} */}
 
-                {/* Admin routes {{{ */}
-                <Route exact path="/admin" render={() => <Redirect replace to="/admin/clubs" />} />
-                <ProtectedRoute
-                    allowed={["cc_admin"]}
-                    exact
-                    path="/admin/clubs"
-                    component={AdminClubs}
-                />
-                <ProtectedRoute
-                    allowed={["cc_admin"]}
-                    exact
-                    path="/admin/clubs/:id"
-                    component={AdminViewClub}
-                />
-                <ProtectedRoute
-                    allowed={["cc_admin"]}
-                    exact
-                    path="/admin/users"
-                    component={AdminUsers}
-                />
-                <ProtectedRoute
-                    allowed={["cc_admin"]}
-                    exact
-                    path="/admin/budgets"
-                    component={AdminBudgets}
-                />
-                <ProtectedRoute
-                    allowed={["cc_admin"]}
-                    exact
-                    path="/admin/updates"
-                    component={AdminUpdates}
-                />
-                {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
-                {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
-                {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
-                {/* }}} */}
+                    {/* Admin routes {{{ */}
+                    <Route
+                        exact
+                        path="/admin"
+                        render={() => <Redirect replace to="/admin/clubs" />}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin"]}
+                        exact
+                        path="/admin/clubs"
+                        component={AdminClubs}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin"]}
+                        exact
+                        path="/admin/clubs/:id"
+                        component={AdminViewClub}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin"]}
+                        exact
+                        path="/admin/users"
+                        component={AdminUsers}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin"]}
+                        exact
+                        path="/admin/budgets"
+                        component={AdminBudgets}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin"]}
+                        exact
+                        path="/admin/updates"
+                        component={AdminUpdates}
+                    />
+                    {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
+                    {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
+                    {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
+                    {/* }}} */}
 
-                {/* Auth routes {{{ */}
-                <Route exact path="/loginRedirect" component={LoginRedirect} />
-                <Route exact path="/logoutRedirect" component={LogoutRedirect} />
-                {/* }}} */}
+                    {/* Auth routes {{{ */}
+                    <Route exact path="/loginRedirect" component={LoginRedirect} />
+                    <Route exact path="/logoutRedirect" component={LogoutRedirect} />
+                    {/* }}} */}
 
-                {/* Error routes {{{ */}
-                <Route exact path="/404" component={Error404Page} />
-                <Route exact path="/401" component={Error401Page} />
-                <Redirect to="/404" />
-                {/* }}} */}
-            </Switch>
+                    {/* Error routes {{{ */}
+                    <Route exact path="/404" component={Error404Page} />
+                    <Route exact path="/401" component={Error401Page} />
+                    <Redirect to="/404" />
+                    {/* }}} */}
+                </Switch>
+            </Navigation>
         </>
     );
 };

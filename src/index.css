@@ -36,7 +36,6 @@ code {
 
 .page-container {
   padding-top: 70px;
-  padding-left: 15px;
 }
 
 .leftbar {
@@ -748,9 +747,12 @@ code {
     width: 0;
   }
 
-  .page-container {
-    padding-left: 95px;
+  .page-rightbar {
     padding-right: 15px;
+  }
+
+  .page-leftbar {
+    padding-left: 95px;
   }
 }
 @media (min-width: 992px) {
@@ -758,7 +760,7 @@ code {
     width: 260px;
   }
 
-  .page-container {
+  .page-leftbar {
     padding-left: 275px;
   }
 }
@@ -776,7 +778,7 @@ code {
     width: 400px;
   }
 
-  .page-container {
+  .page-rightbar {
     padding-right: 415px;
   }
 }

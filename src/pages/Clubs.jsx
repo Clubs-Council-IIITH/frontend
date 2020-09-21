@@ -3,7 +3,6 @@ import { Container, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
-import Page from "../components/PageContainer";
 import Transition from "../components/TransitionContainer";
 import Searchbar from "../components/Searchbar";
 import LoadingIndicator from "../components/LoadingIndicator";
@@ -41,25 +40,23 @@ const Clubs = (props) => {
     };
 
     return (
-        <Page fluid>
-            <Transition>
-                <Container fluid className="actionbar-container rounded-lg">
-                    <Row>
-                        <Col md="6">
-                            <span className="actionbar-title p-2">Clubs</span>
-                        </Col>
-                        <Col className="my-3 my-md-auto">
-                            <Searchbar
-                                className="w-100 my-auto"
-                                dataList={clubList}
-                                setFilteredList={setFilteredList}
-                            />
-                        </Col>
-                    </Row>
-                </Container>
-                {renderClubs()}
-            </Transition>
-        </Page>
+        <Transition>
+            <Container fluid className="actionbar-container rounded-lg">
+                <Row>
+                    <Col md="6">
+                        <span className="actionbar-title p-2">Clubs</span>
+                    </Col>
+                    <Col className="my-3 my-md-auto">
+                        <Searchbar
+                            className="w-100 my-auto"
+                            dataList={clubList}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Col>
+                </Row>
+            </Container>
+            {renderClubs()}
+        </Transition>
     );
 };
 

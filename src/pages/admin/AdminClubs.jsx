@@ -4,7 +4,6 @@ import { Button, Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 
 import AdminTabBar from "./AdminTabBar";
-import Page from "../../components/PageContainer";
 import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -12,7 +11,7 @@ import NullIndicator from "../../components/NullIndicator";
 import NewClubModal from "../../components/NewClubModal";
 import ClubItem from "../../components/items/ClubItem";
 
-const AdminClubs = (props) => {
+const AdminClubs = () => {
     const [clubList, setClubList] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
@@ -63,31 +62,29 @@ const AdminClubs = (props) => {
     return (
         <>
             <NewClubModal modal={modal} toggleModal={toggleModal} />
-            <Page fluid>
-                <AdminTabBar />
-                <Transition>
-                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                        <Container fluid>
-                            <span className="actionbar-title p-2">Clubs</span>
-                            <Button
-                                onClick={toggleModal}
-                                className="new-btn btn-outline-dark py-2 px-3 my-3"
-                            >
-                                <span className="d-md-none"> + </span>
-                                <span className="d-none d-md-block"> + NEW CLUB </span>
-                            </Button>
-                        </Container>
-                        <Container fluid className="mt-5">
-                            <Searchbar
-                                className="w-100"
-                                dataList={clubList}
-                                setFilteredList={setFilteredList}
-                            />
-                        </Container>
+            <AdminTabBar />
+            <Transition>
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Container fluid>
+                        <span className="actionbar-title p-2">Clubs</span>
+                        <Button
+                            onClick={toggleModal}
+                            className="new-btn btn-outline-dark py-2 px-3 my-3"
+                        >
+                            <span className="d-md-none"> + </span>
+                            <span className="d-none d-md-block"> + NEW CLUB </span>
+                        </Button>
                     </Container>
-                    {renderClubs()}
-                </Transition>
-            </Page>
+                    <Container fluid className="mt-5">
+                        <Searchbar
+                            className="w-100"
+                            dataList={clubList}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Container>
+                </Container>
+                {renderClubs()}
+            </Transition>
         </>
     );
 };

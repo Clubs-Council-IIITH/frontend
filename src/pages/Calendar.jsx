@@ -1,6 +1,5 @@
 import React from "react";
 
-import Page from "../components/PageContainer";
 import Transition from "../components/TransitionContainer";
 
 const CALENDAR_URI =
@@ -8,18 +7,16 @@ const CALENDAR_URI =
 
 const Calendar = () => {
     return (
-        <Page fluid>
-            <Transition>
-                <div className="calendar-container">
-                    <iframe
-                        title="calendar"
-                        src={CALENDAR_URI}
-                        frameborder="0"
-                        className="calendar-frame p-2"
-                    />
-                </div>
-            </Transition>
-        </Page>
+        <Transition>
+            <div className="calendar-container">
+                <iframe
+                    title="calendar"
+                    src={CALENDAR_URI}
+                    frameborder="0"
+                    className="calendar-frame p-2"
+                />
+            </div>
+        </Transition>
     );
 };
 

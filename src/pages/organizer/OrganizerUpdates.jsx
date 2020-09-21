@@ -41,18 +41,16 @@ const OrganizerUpdates = () => {
     return (
         <>
             <SecondaryNavbar page="updates" />
-            <Page fluid>
-                <Transition>
-                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                        <Page header>
-                            <span className="actionbar-title p-2">Updates</span>
-                        </Page>
-                    </Container>
-                    <Row className="p-0">
-                        <Col>{renderUpdates()}</Col>
-                    </Row>
-                </Transition>
-            </Page>
+            <Transition>
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Page header>
+                        <span className="actionbar-title p-2">Updates</span>
+                    </Page>
+                </Container>
+                <Row className="p-0">
+                    <Col>{renderUpdates()}</Col>
+                </Row>
+            </Transition>
         </>
     );
 };

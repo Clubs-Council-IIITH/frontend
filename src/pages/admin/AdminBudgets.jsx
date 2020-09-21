@@ -4,7 +4,6 @@ import { Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 
 import AdminTabBar from "./AdminTabBar";
-import Page from "../../components/PageContainer";
 import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -51,24 +50,22 @@ const AdminBudgets = () => {
 
     return (
         <>
-            <Page fluid>
-                <AdminTabBar />
-                <Transition>
-                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                        <Container fluid>
-                            <span className="actionbar-title p-2">Budget Proposals</span>
-                        </Container>
-                        <Container fluid className="mt-5">
-                            <Searchbar
-                                className="w-100"
-                                dataList={proposals}
-                                setFilteredList={setFilteredList}
-                            />
-                        </Container>
+            <AdminTabBar />
+            <Transition>
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Container fluid>
+                        <span className="actionbar-title p-2">Budget Proposals</span>
                     </Container>
-                    {renderProposals()}
-                </Transition>
-            </Page>
+                    <Container fluid className="mt-5">
+                        <Searchbar
+                            className="w-100"
+                            dataList={proposals}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Container>
+                </Container>
+                {renderProposals()}
+            </Transition>
         </>
     );
 };

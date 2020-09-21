@@ -4,7 +4,6 @@ import { Alert, InputGroup, Input, InputGroupAddon, Container, Button, Row, Col 
 
 import API from "../../api/methods";
 
-import Page from "../../components/PageContainer";
 import Transition from "../../components/TransitionContainer";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
@@ -258,34 +257,29 @@ const AdminViewClub = (props) => {
 
     return (
         <>
-            <Page fluid>
-                <Transition>
-                    <Container fluid className="actionbar-container pt-2 pb-3 py-md-5 rounded-lg">
-                        <Container fluid className="viewclub-header pt-2 pt-md-1">
-                            <BackButton />
-                            <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                        </Container>
+            <Transition>
+                <Container fluid className="actionbar-container pt-2 pb-3 py-md-5 rounded-lg">
+                    <Container fluid className="viewclub-header pt-2 pt-md-1">
+                        <BackButton />
+                        <span className="viewclub-title p-2 my-auto">{club.name}</span>
                     </Container>
-                    <Container fluid>
-                        <Row className="mt-4">
-                            <Col md="8" className="my-auto">
-                                {renderTabBar()}
-                            </Col>
-                            <Col className="my-auto py-3 py-md-0">
-                                {tab === "events" ? (
-                                    <Searchbar
-                                        dataList={events}
-                                        setFilteredList={setFilteredList}
-                                    />
-                                ) : null}
-                            </Col>
-                        </Row>
-                    </Container>
-                    <Row className="p-0">
-                        <Col>{renderTab()}</Col>
+                </Container>
+                <Container fluid>
+                    <Row className="mt-4">
+                        <Col md="8" className="my-auto">
+                            {renderTabBar()}
+                        </Col>
+                        <Col className="my-auto py-3 py-md-0">
+                            {tab === "events" ? (
+                                <Searchbar dataList={events} setFilteredList={setFilteredList} />
+                            ) : null}
+                        </Col>
                     </Row>
-                </Transition>
-            </Page>
+                </Container>
+                <Row className="p-0">
+                    <Col>{renderTab()}</Col>
+                </Row>
+            </Transition>
         </>
     );
 };

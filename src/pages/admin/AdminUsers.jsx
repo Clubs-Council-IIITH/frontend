@@ -4,7 +4,6 @@ import { Button, Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 
 import AdminTabBar from "./AdminTabBar";
-import Page from "../../components/PageContainer";
 import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -52,31 +51,29 @@ const AdminUsers = () => {
     return (
         <>
             <NewUserModal modal={modal} toggleModal={toggleModal} />
-            <Page fluid>
-                <AdminTabBar />
-                <Transition>
-                    <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                        <Container fluid>
-                            <span className="actionbar-title p-2">Users</span>
-                            <Button
-                                onClick={toggleModal}
-                                className="new-btn btn-outline-dark py-2 px-3 my-3"
-                            >
-                                <span className="d-md-none"> + </span>
-                                <span className="d-none d-md-block"> + NEW USER </span>
-                            </Button>
-                        </Container>
-                        <Container fluid className="mt-5">
-                            <Searchbar
-                                className="w-100"
-                                dataList={userList}
-                                setFilteredList={setFilteredList}
-                            />
-                        </Container>
+            <AdminTabBar />
+            <Transition>
+                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
+                    <Container fluid>
+                        <span className="actionbar-title p-2">Users</span>
+                        <Button
+                            onClick={toggleModal}
+                            className="new-btn btn-outline-dark py-2 px-3 my-3"
+                        >
+                            <span className="d-md-none"> + </span>
+                            <span className="d-none d-md-block"> + NEW USER </span>
+                        </Button>
                     </Container>
-                    {renderUsers()}
-                </Transition>
-            </Page>
+                    <Container fluid className="mt-5">
+                        <Searchbar
+                            className="w-100"
+                            dataList={userList}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Container>
+                </Container>
+                {renderUsers()}
+            </Transition>
         </>
     );
 };
