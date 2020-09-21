@@ -34,13 +34,13 @@ code {
 }
 // }}}
 
-// Sidebar and Page Styles {{{
+// Sidebars and Page Styles {{{
 .page-container {
     padding-top: 70px;
     padding-left: 15px;
 }
 
-.sidebar {
+.leftbar {
     position: fixed;
     height: 100% !important;
     display: flex;
@@ -50,16 +50,27 @@ code {
     width: 0;
 }
 
-.sidebar-collapse {
+.rightbar {
+    position: fixed;
+    right: 0;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d0d0d;
+    z-index: 9999;
+    width: 0;
+}
+
+.leftbar-collapse {
     width: 280px !important;
 }
 
-.sidebar-item {
+.leftbar-item {
     display: flex;
     flex-direction: row;
 }
 
-.sidebar-nav {
+.leftbar-nav {
     height: 93%;
 }
 
@@ -78,14 +89,14 @@ code {
     filter: brightness(0) invert(1);
 }
 
-.sidebar-nav-link {
+.leftbar-nav-link {
     color: #ffffff;
     text-decoration: none;
 }
 
-.sidebar-nav-link:hover,
-.sidebar-nav-link:focus,
-.sidebar-nav-link:active {
+.leftbar-nav-link:hover,
+.leftbar-nav-link:focus,
+.leftbar-nav-link:active {
     color: #aaaaaa;
     text-decoration: none;
 }
@@ -746,7 +757,7 @@ code {
         width: fit-content;
     }
 
-    .sidebar {
+    .leftbar {
         width: 80px;
     }
     .page-container {
@@ -757,7 +768,7 @@ code {
 
 // Styles exclusively for displays with width >= 992px (bs-lg) {{{
 @media (min-width: 992px) {
-    .sidebar {
+    .leftbar {
         width: 260px;
     }
     .page-container {
