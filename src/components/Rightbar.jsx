@@ -25,61 +25,20 @@ const SidebarNavItem = (props) => {
 };
 
 const Rightbar = (props) => {
-    const [contextAction, setContextAction] = useState("");
-    const [contextString, setContextString] = useState("");
-
     const isAuthenticated = props.session.is_authenticated;
     const usergroup = props.session.usergroup;
-    const loginURL = global.config.loginUrl;
-    const logoutURL = "/logoutRedirect";
-
-    useEffect(() => {
-        const usergroup = props.session.usergroup;
-        switch (usergroup) {
-            case "organizer":
-                setContextAction("/organizer");
-                setContextString("MANAGE CLUB");
-                break;
-            case "cc_admin":
-                setContextAction("/admin");
-                setContextString("DASHBOARD");
-                break;
-            default:
-                break;
-        }
-    }, [props.session]);
-
-    var contextButton = null;
-    if (usergroup) {
-        contextButton = (
-            <SidebarNavItem
-                link={contextAction}
-                icon="/sb-dashboard-18.svg"
-                text={contextString}
-                isOpen={props.isOpen}
-            />
-        );
-    }
 
     return (
         <Navbar
             light
-            className={`rightbar nav-light p-4 ${props.isOpen ? "d-block rightbar-collapse" : ""}`}
+            className={`rightbar nav-light p-4 d-xlp ${
+                props.isOpen ? "d-block rightbar-collapse" : ""
+            }`}
         >
             <NavbarBrand className="d-flex flex-row justify-content-between">
-                <Link to="/" className=" d-none d-lg-block">
-                    <img className="nav-logo" src="/cc_logo.svg" alt="cc_logo" />
-                </Link>
+                <div className="rightbar-title">Updates</div>
                 <img
-                    className={`nav-logo-sm clickable d-none d-sm-block d-lg-none ${
-                        props.isOpen ? "d-block" : ""
-                    }`}
-                    src="/cc_logo_sm.svg"
-                    alt="cc_logo"
-                    onClick={props.toggle}
-                />
-                <img
-                    className={`nav-close clickable d-none d-xl-none ${
+                    className={`nav-close invert clickable d-xlp-none ${
                         props.isOpen ? "d-block" : ""
                     }`}
                     src="/sb-close-18.svg"
@@ -108,23 +67,6 @@ const Rightbar = (props) => {
                         text="CALENDAR"
                         isOpen={props.isOpen}
                     />
-                    {contextButton}
-                </div>
-                <div>
-                    <div className="rightbar-item">
-                        <NavItem className="nav-item d-flex flex-row">
-                            <a
-                                className="rightbar-nav-link d-flex flex-row"
-                                href={isAuthenticated ? logoutURL : loginURL}
-                            >
-                                <span
-                                    className={`d-none d-lg-block ${props.isOpen ? "d-block" : ""}`}
-                                >
-                                    {isAuthenticated ? "LOG OUT" : "LOG IN"}
-                                </span>
-                            </a>
-                        </NavItem>
-                    </div>
                 </div>
             </Nav>
         </Navbar>

@@ -18,6 +18,22 @@ code {
   cursor: pointer;
 }
 
+.d-xlp {
+  display: none;
+}
+
+.d-xlph {
+  display: hidden;
+}
+
+.d-xlp-none {
+  display: block;
+}
+
+.invert {
+  filter: invert(1) !important;
+}
+
 .page-container {
   padding-top: 70px;
   padding-left: 15px;
@@ -37,7 +53,6 @@ code {
   position: fixed;
   right: 0;
   height: 100% !important;
-  display: none;
   z-index: 9999;
   width: 0;
 }
@@ -99,6 +114,13 @@ code {
   text-decoration: none;
 }
 
+.rightbar-title {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: 1.8em;
+}
+
 .nav-top {
   background-color: #ffffff !important;
   height: 70px;
@@ -125,9 +147,9 @@ code {
   margin-left: -5px;
 }
 
-.nav-logo-sm-inv {
-  height: 40px;
-  filter: invert(1);
+.update-icon-sm {
+  height: 28px;
+  margin-left: -5px;
 }
 
 .nav-close {
@@ -205,7 +227,7 @@ code {
 }
 
 .actionbar-container {
-  background-color: #f3f2f1;
+  background-color: #ffffff;
   font-size: calc(36px + 1.2vw);
 }
 
@@ -741,8 +763,16 @@ code {
   }
 }
 @media (min-width: 1400px) {
-  .rightbar {
+  .d-xlp,
+.d-xlph {
     display: block;
+  }
+
+  .d-xlp-none {
+    display: none !important;
+  }
+
+  .rightbar {
     width: 400px;
   }
 

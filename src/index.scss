@@ -32,6 +32,23 @@ code {
 .clickable:hover {
     cursor: pointer;
 }
+
+.d-xlp {
+    display: none;
+}
+
+.d-xlph {
+    display: hidden;
+}
+
+.d-xlp-none {
+    display: block;
+}
+
+.invert {
+    filter: invert(1) !important;
+}
+
 // }}}
 
 // Sidebars and Page Styles {{{
@@ -54,7 +71,6 @@ code {
     position: fixed;
     right: 0;
     height: 100% !important;
-    display: none;
     z-index: 9999;
     width: 0;
 }
@@ -115,6 +131,13 @@ code {
     color: #aaaaaa;
     text-decoration: none;
 }
+
+.rightbar-title {
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 1.8em;
+}
 // }}}
 
 // Navbar Styles {{{
@@ -144,9 +167,9 @@ code {
     margin-left: -5px;
 }
 
-.nav-logo-sm-inv {
-    height: 40px;
-    filter: invert(1);
+.update-icon-sm {
+    height: 28px;
+    margin-left: -5px;
 }
 
 .nav-close {
@@ -231,7 +254,7 @@ code {
 
 // ActionBar {{{
 .actionbar-container {
-    background-color: $bg-secondary;
+    background-color: $bg-primary;
     font-size: $actionbar-text;
 }
 
@@ -805,10 +828,18 @@ code {
 }
 //}}}
 
-// Styles exclusively for displays with width >= 1400px (bs-xl) {{{
+// Styles exclusively for displays with width >= 1400px (xlp) {{{
 @media (min-width: 1400px) {
-    .rightbar {
+    .d-xlp,
+    .d-xlph {
         display: block;
+    }
+
+    .d-xlp-none {
+        display: none !important;
+    }
+
+    .rightbar {
         width: 400px;
     }
 
