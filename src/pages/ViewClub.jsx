@@ -4,6 +4,7 @@ import { Container, Button, Row, Col } from "reactstrap";
 import API from "../api/methods";
 
 import Page from "../components/PageContainer";
+import Transition from "../components/TransitionContainer";
 import BackButton from "../components/buttons/BackButton";
 import Searchbar from "../components/Searchbar";
 import LoadingIndicator from "../components/LoadingIndicator";
@@ -112,27 +113,31 @@ const ViewClub = (props) => {
 
     return (
         <Page fluid>
-            <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
-                <Container fluid className="viewclub-header pt-2 pt-md-1">
-                    <BackButton />
-                    <span className="viewclub-title p-2 my-auto">{club.name}</span>
+            <Transition>
+                <Container fluid className="actionbar-container rounded-lg">
+                    <Row>
+                        <Col xs="3" sm="1" className="my-auto">
+                            <BackButton />
+                        </Col>
+                        <Col className="viewclub-title my-auto pt-2">{club.name}</Col>
+                    </Row>
                 </Container>
-            </Container>
-            <Container fluid>
-                <Row className="mt-4">
-                    <Col md className="my-auto">
-                        {renderTabBar()}
-                    </Col>
-                    <Col className="my-auto py-3 py-md-0">
-                        {tab === "events" ? (
-                            <Searchbar dataList={events} setFilteredList={setFilteredList} />
-                        ) : null}
-                    </Col>
+                <Container fluid>
+                    <Row className="mt-4">
+                        <Col md className="my-auto">
+                            {renderTabBar()}
+                        </Col>
+                        <Col className="my-auto py-3 py-md-0">
+                            {tab === "events" ? (
+                                <Searchbar dataList={events} setFilteredList={setFilteredList} />
+                            ) : null}
+                        </Col>
+                    </Row>
+                </Container>
+                <Row className="p-0">
+                    <Col>{renderTab()}</Col>
                 </Row>
-            </Container>
-            <Row className="p-0">
-                <Col>{renderTab()}</Col>
-            </Row>
+            </Transition>
         </Page>
     );
 };
