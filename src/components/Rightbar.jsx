@@ -1,34 +1,42 @@
-import React from "react";
-import { NavLink as Link } from "react-router-dom";
-import { Navbar, NavItem, NavbarBrand, Nav, NavLink } from "reactstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Navbar, NavbarBrand, Nav } from "reactstrap";
 
-import "../config";
+import API from "../api/methods";
 
-const SidebarNavItem = (props) => {
-    return (
-        <div className="rightbar-item my-3">
-            <NavItem className="nav-item">
-                <NavLink
-                    tag={Link}
-                    to={props.link}
-                    className="d-flex flex-row"
-                    activeClassName="active nav-icon-active"
-                    exact={props.exact}
-                >
-                    <span className={`d-none d-lg-block ${props.isOpen ? "d-block" : ""}`}>
-                        {props.text}
-                    </span>
-                </NavLink>
-            </NavItem>
-        </div>
-    );
-};
+import NullIndicator from "./NullIndicator";
+import LoadingIndicator from "./LoadingIndicator";
+import UpdateItem from "./items/UpdateItem";
 
 const Rightbar = (props) => {
+    const [updates, setUpdates] = useState(false);
+
+    useEffect(() => {
+        async function getUpdates() {
+            const res = await API.view("updates");
+            setUpdates(res.data);
+        }
+
+        getUpdates();
+    }, []);
+
+    const renderUpdates = () => {
+        if (!updates) return <LoadingIndicator />;
+        if (updates.length === 0) return <NullIndicator />;
+        return (
+            <Row>
+                {updates.map((update) => (
+                    <Col md="12" className="my-2" key={update.id}>
+                        <UpdateItem {...update} />
+                    </Col>
+                ))}
+            </Row>
+        );
+    };
+
     return (
         <Navbar
             light
-            className={`rightbar nav-light p-4 d-xlp ${
+            className={`rightbar overflow-auto nav-light p-4 d-xlp ${
                 props.isOpen ? "d-block rightbar-collapse" : ""
             }`}
         >
@@ -44,27 +52,7 @@ const Rightbar = (props) => {
                 />
             </NavbarBrand>
             <Nav className="m-auto d-flex justify-content-between rightbar-nav" navbar>
-                <div className="pt-5">
-                    <SidebarNavItem
-                        exact
-                        link="/"
-                        icon="/sb-home-18.svg"
-                        text="HOME"
-                        isOpen={props.isOpen}
-                    />
-                    <SidebarNavItem
-                        link="/clubs"
-                        icon="/sb-explore-18.svg"
-                        text="CLUBS"
-                        isOpen={props.isOpen}
-                    />
-                    <SidebarNavItem
-                        link="/calendar"
-                        icon="/sb-calendar-18.svg"
-                        text="CALENDAR"
-                        isOpen={props.isOpen}
-                    />
-                </div>
+                <div className="mt-3 pb-4">{renderUpdates()}</div>
             </Nav>
         </Navbar>
     );

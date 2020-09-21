@@ -52,6 +52,7 @@ code {
   position: fixed;
   right: 0;
   height: 100% !important;
+  max-height: 100%;
   z-index: 9999;
   width: 0;
 }
@@ -63,7 +64,7 @@ code {
 .rightbar-collapse {
   display: flex;
   flex-direction: column;
-  background-color: #f3f2f1;
+  background-color: #f7f8fa;
   width: 80vw !important;
   max-width: 400px !important;
 }
@@ -84,6 +85,7 @@ code {
 
 .rightbar-nav {
   height: 93%;
+  max-height: 93%;
 }
 
 .nav-icon {
@@ -132,7 +134,7 @@ code {
 }
 
 .nav-light {
-  background-color: #f3f2f1 !important;
+  background-color: #f7f8fa !important;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
 }
@@ -198,14 +200,14 @@ code {
   justify-content: flex-start;
   align-items: center;
   font-family: "Quicksand";
-  background-color: #f3f2f1;
+  background-color: #f7f8fa;
   border-radius: 8px;
   width: min-content;
 }
 .tab-nav .nav-btn {
   border: none;
   font-weight: 600 !important;
-  background-color: #f3f2f1 !important;
+  background-color: #f7f8fa !important;
   color: black !important;
 }
 .tab-nav .nav-btn:focus,
@@ -301,7 +303,7 @@ code {
 .nav-tab-current:hover,
 .nav-tab-current:focus,
 .nav-tab-current:active {
-  background-color: #f3f2f1;
+  background-color: #f7f8fa;
   color: #000;
 }
 
@@ -319,7 +321,7 @@ code {
 }
 
 .calendar-container {
-  background-color: #f3f2f1;
+  background-color: #f7f8fa;
   border-radius: 8px;
   height: 85vh;
 }

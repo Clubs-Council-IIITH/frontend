@@ -6,7 +6,7 @@
 
 // Colors {{{
 $bg-primary: #ffffff;
-$bg-secondary: #f3f2f1;
+$bg-secondary: #f7f8fa;
 // }}}
 
 // Font Styles {{{
@@ -70,6 +70,7 @@ code {
     position: fixed;
     right: 0;
     height: 100% !important;
+    max-height: 100%;
     z-index: 9999;
     width: 0;
 }
@@ -102,6 +103,7 @@ code {
 
 .rightbar-nav {
     height: 93%;
+    max-height: 93%;
 }
 
 .nav-icon {
