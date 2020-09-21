@@ -116,10 +116,10 @@ code {
 }
 
 .rightbar-title {
-  font-family: "Raleway", sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: 700;
   line-height: 1.2;
-  font-size: 1.8em;
+  font-size: 1.1em;
 }
 
 .nav-top {
@@ -148,13 +148,17 @@ code {
   margin-left: -5px;
 }
 
+.update-icon {
+  height: 28px;
+}
+
 .update-icon-sm {
   height: 28px;
   margin-left: -5px;
 }
 
 .nav-close {
-  height: 40px;
+  height: 30px;
   filter: opacity(0.5);
 }
 
@@ -566,10 +570,11 @@ code {
 .update-card {
   font-family: "Poppins", sans-serif;
   font-size: calc(24px + 0.5vw);
+  font-weight: 400;
 }
 
 .update-datetime {
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .update-title {
@@ -578,7 +583,7 @@ code {
 }
 
 .update-content {
-  font-size: 0.6em;
+  font-size: 0.55em;
   white-space: pre-line;
 }
 

@@ -40,8 +40,11 @@ const Rightbar = (props) => {
                 props.isOpen ? "d-block rightbar-collapse" : ""
             }`}
         >
-            <NavbarBrand className="d-flex flex-row justify-content-between">
-                <div className="rightbar-title">Updates</div>
+            <div className="d-flex flex-row justify-content-between">
+                <div className="rightbar-title d-flex flex-row">
+                    <img className="update-icon" src="/sb-updates-18.svg" alt="updates" />
+                    <span className="text-uppercase my-auto mx-2"> Updates </span>
+                </div>
                 <img
                     className={`nav-close invert clickable d-xlp-none ${
                         props.isOpen ? "d-block" : ""
@@ -50,9 +53,9 @@ const Rightbar = (props) => {
                     alt="X"
                     onClick={props.toggle}
                 />
-            </NavbarBrand>
+            </div>
             <Nav className="m-auto d-flex justify-content-between rightbar-nav" navbar>
-                <div className="mt-3 pb-4">{renderUpdates()}</div>
+                <div className="mt-2 pb-4">{renderUpdates()}</div>
             </Nav>
         </Navbar>
     );

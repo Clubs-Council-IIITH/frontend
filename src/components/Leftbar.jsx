@@ -75,7 +75,7 @@ const Leftbar = (props) => {
                 props.isOpen ? "d-block leftbar-collapse" : ""
             }`}
         >
-            <NavbarBrand className="d-flex flex-row justify-content-between">
+            <div className="d-flex flex-row justify-content-between p-0">
                 <Link to="/" className=" d-none d-lg-block">
                     <img className="nav-logo" src="/cc_logo.svg" alt="cc_logo" />
                 </Link>
@@ -88,14 +88,14 @@ const Leftbar = (props) => {
                     onClick={props.toggle}
                 />
                 <img
-                    className={`nav-close clickable d-none d-lg-none ${
+                    className={`nav-close clickable my-auto d-none d-lg-none ${
                         props.isOpen ? "d-block" : ""
                     }`}
                     src="/sb-close-18.svg"
                     alt="X"
                     onClick={props.toggle}
                 />
-            </NavbarBrand>
+            </div>
             <Nav className="m-auto d-flex justify-content-between leftbar-nav" navbar>
                 <div className="pt-5">
                     <SidebarNavItem
