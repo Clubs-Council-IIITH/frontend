@@ -242,6 +242,14 @@ code {
 .nav-tab-current {
   background-color: #ffffff;
   color: #000;
+  border: none !important;
+}
+
+.nav-tab-current:hover,
+.nav-tab-current:focus,
+.nav-tab-current:active {
+  background-color: #f3f2f1;
+  color: #000;
 }
 
 .viewclub-header {

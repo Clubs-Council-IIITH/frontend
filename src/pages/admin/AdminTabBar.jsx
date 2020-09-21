@@ -23,7 +23,7 @@ const AdminTabBar = () => {
             </ul>
             <Button
                 id="tabs"
-                className="w-100 d-block d-sm-none text-uppercase common-btn nav-tab-collapse nav-tab-current dropdown-toggle"
+                className="w-100 d-block d-sm-none text-uppercase common-btn nav-tab-collapse nav-tab-current dropdown-toggle mt-2"
             >
                 {tabs.filter((tab) => tab.to === `/${location.pathname.split("/").pop()}`)[0].title}
             </Button>
@@ -31,7 +31,7 @@ const AdminTabBar = () => {
                 <RoutedTabs startPathWith="/admin">
                     {tabs.map((tab) => (
                         <NavTab
-                            className="nav-tab-collapse common-btn text-uppercase"
+                            className="nav-tab-collapse common-btn text-uppercase d-sm-none"
                             activeClassName="d-none"
                             to={tab.to}
                         >

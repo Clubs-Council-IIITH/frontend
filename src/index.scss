@@ -270,6 +270,14 @@ code {
 .nav-tab-current {
     background-color: $bg-primary;
     color: #000;
+    border: none !important;
+}
+
+.nav-tab-current:hover,
+.nav-tab-current:focus,
+.nav-tab-current:active {
+    background-color: $bg-secondary;
+    color: #000;
 }
 // }}}
 
