@@ -6,7 +6,8 @@
 
 // Colors {{{
 $bg-primary: #ffffff;
-$bg-secondary: #f7f8fa;
+$bg-secondary: #f9fafc;
+$bg-dark: #111111;
 // }}}
 
 // Font Styles {{{
@@ -117,7 +118,7 @@ code {
 }
 
 .nav-icon-active {
-    color: #111111 !important;
+    color: $bg-dark !important;
     filter: brightness(0) invert(1);
 }
 
@@ -203,8 +204,8 @@ code {
         border: none;
         font-weight: 600 !important;
         border-radius: 500px;
-        background-color: white !important;
-        color: black !important;
+        background-color: $bg-primary !important;
+        color: $bg-dark !important;
     }
     .nav-btn:focus,
     .nav-btn:active,
@@ -215,8 +216,8 @@ code {
     .nav-btn-active {
         font-weight: 600 !important;
         border-radius: 500px;
-        background-color: black !important;
-        color: white !important;
+        background-color: $bg-dark !important;
+        color: $bg-primary !important;
     }
 }
 
@@ -234,7 +235,7 @@ code {
         border: none;
         font-weight: 600 !important;
         background-color: $bg-secondary !important;
-        color: black !important;
+        color: $bg-dark !important;
     }
     .nav-btn:focus,
     .nav-btn:active,
@@ -247,8 +248,8 @@ code {
 
     .nav-btn-active {
         font-weight: 600 !important;
-        background-color: black !important;
-        color: white !important;
+        background-color: $bg-dark !important;
+        color: $bg-primary !important;
     }
     .nav-btn-icon-active {
         filter: invert(95%);
@@ -628,13 +629,14 @@ code {
 }
 
 .update-title {
-    font-size: 0.9em;
+    font-size: 0.8em;
     line-height: 1.2;
 }
 
 .update-content {
-    font-size: 0.6em;
-    white-space: pre-line;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.55em;
+    $bg-primary-space: pre-line;
 }
 
 .update-creator {

@@ -64,7 +64,7 @@ code {
 .rightbar-collapse {
   display: flex;
   flex-direction: column;
-  background-color: #f7f8fa;
+  background-color: #f9fafc;
   width: 80vw !important;
   max-width: 400px !important;
 }
@@ -134,7 +134,7 @@ code {
 }
 
 .nav-light {
-  background-color: #f7f8fa !important;
+  background-color: #f9fafc !important;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
 }
@@ -183,8 +183,8 @@ code {
   border: none;
   font-weight: 600 !important;
   border-radius: 500px;
-  background-color: white !important;
-  color: black !important;
+  background-color: #ffffff !important;
+  color: #111111 !important;
 }
 .secondary-nav .nav-btn:focus,
 .secondary-nav .nav-btn:active,
@@ -194,8 +194,8 @@ code {
 .secondary-nav .nav-btn-active {
   font-weight: 600 !important;
   border-radius: 500px;
-  background-color: black !important;
-  color: white !important;
+  background-color: #111111 !important;
+  color: #ffffff !important;
 }
 
 .tab-nav {
@@ -204,15 +204,15 @@ code {
   justify-content: flex-start;
   align-items: center;
   font-family: "Quicksand";
-  background-color: #f7f8fa;
+  background-color: #f9fafc;
   border-radius: 8px;
   width: min-content;
 }
 .tab-nav .nav-btn {
   border: none;
   font-weight: 600 !important;
-  background-color: #f7f8fa !important;
-  color: black !important;
+  background-color: #f9fafc !important;
+  color: #111111 !important;
 }
 .tab-nav .nav-btn:focus,
 .tab-nav .nav-btn:active,
@@ -224,8 +224,8 @@ code {
 }
 .tab-nav .nav-btn-active {
   font-weight: 600 !important;
-  background-color: black !important;
-  color: white !important;
+  background-color: #111111 !important;
+  color: #ffffff !important;
 }
 .tab-nav .nav-btn-icon-active {
   filter: invert(95%);
@@ -307,7 +307,7 @@ code {
 .nav-tab-current:hover,
 .nav-tab-current:focus,
 .nav-tab-current:active {
-  background-color: #f7f8fa;
+  background-color: #f9fafc;
   color: #000;
 }
 
@@ -325,7 +325,7 @@ code {
 }
 
 .calendar-container {
-  background-color: #f7f8fa;
+  background-color: #f9fafc;
   border-radius: 8px;
   height: 85vh;
 }
@@ -578,13 +578,13 @@ code {
 }
 
 .update-title {
-  font-size: 0.9em;
+  font-size: 0.8em;
   line-height: 1.2;
 }
 
 .update-content {
-  font-size: 0.6em;
-  white-space: pre-line;
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.55em;
 }
 
 .update-creator {

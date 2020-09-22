@@ -140,6 +140,7 @@ const ClubForm = (props) => {
                     type="text"
                     name="name"
                     innerRef={register({ required: true, pattern: /^[a-zA-Z,.' ]*$/ })}
+                    autoFocus
                 />
                 <FormFeedback> Club name can not be empty! </FormFeedback>
             </FormGroup>

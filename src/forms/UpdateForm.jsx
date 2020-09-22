@@ -39,6 +39,7 @@ const UpdateForm = (props) => {
                     type="text"
                     name="title"
                     innerRef={register({ required: true })}
+                    autoFocus
                 />
                 <FormFeedback> You need to provide a title! </FormFeedback>
             </FormGroup>

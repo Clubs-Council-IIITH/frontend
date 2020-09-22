@@ -55,6 +55,7 @@ const UserForm = (props) => {
                     type="text"
                     name="name"
                     innerRef={register({ required: true, pattern: /^[a-zA-Z,. ]*$/ })}
+                    autoFocus
                 />
                 <FormFeedback> Invalid user name! </FormFeedback>
             </FormGroup>

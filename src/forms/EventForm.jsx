@@ -63,6 +63,7 @@ const EventForm = (props) => {
                             type="text"
                             name="name"
                             innerRef={register({ required: true, pattern: /^[a-zA-Z0-9,.!? ]*$/ })}
+                            autoFocus
                         />
                         <FormFeedback> Event name can not be empty! </FormFeedback>
                     </FormGroup>
