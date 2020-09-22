@@ -18,6 +18,7 @@ const Searchbar = (props) => {
             type="text"
             bsSize="lg"
             placeholder="Search..."
+            autoFocus
         />
     );
 };
