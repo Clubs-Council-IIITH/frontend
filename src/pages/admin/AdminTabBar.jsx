@@ -29,7 +29,7 @@ const AdminTabBar = () => {
             </ul>
             <Button
                 id="tabs"
-                className="w-100 d-block d-sm-none text-uppercase common-btn nav-tab-collapse nav-tab-current dropdown-toggle mt-2"
+                className="w-100 d-block d-sm-none text-uppercase common-btn nav-tab-collapse nav-tab-current dropdown-toggle mt-1"
             >
                 {currentPath()}
             </Button>

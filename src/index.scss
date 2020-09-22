@@ -63,7 +63,7 @@ code {
     display: flex;
     flex-direction: column;
     background-color: #0d0d0d;
-    z-index: 9999;
+    z-index: 999;
     width: 0;
 }
 
@@ -72,7 +72,7 @@ code {
     right: 0;
     height: 100% !important;
     max-height: 100%;
-    z-index: 9999;
+    z-index: 999;
     width: 0;
 }
 
@@ -146,6 +146,7 @@ code {
 .nav-top {
     background-color: $bg-primary !important;
     height: 70px;
+    z-index: 990;
 }
 
 .nav-dark {
@@ -445,6 +446,11 @@ code {
 .common-modal {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
+}
+
+.modal-lg {
+    z-index: 9999;
+    min-width: 60%;
 }
 // }}}
 
@@ -795,11 +801,6 @@ code {
 
 .new-update-btn {
     background-color: $bg-dark;
-}
-
-.new-update-btn:focus,
-.new-update-btn:active,
-.new-update-btn:hover {
 }
 
 // }}}

@@ -65,7 +65,7 @@ const Rightbar = (props) => {
             </div>
             <Nav className="m-auto d-flex justify-content-between rightbar-nav" navbar>
                 {props.session.usergroup === "cc_admin" ? (
-                    <Button className="mt-3 common-btn new-update-btn py-2" onClick={toggleModal}>
+                    <Button className="mt-4 common-btn new-update-btn py-2" onClick={toggleModal}>
                         + NEW UPDATE
                     </Button>
                 ) : null}

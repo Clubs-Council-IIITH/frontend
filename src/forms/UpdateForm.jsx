@@ -49,7 +49,7 @@ const UpdateForm = (props) => {
                     invalid={errors.content}
                     type="textarea"
                     name="content"
-                    rows="4"
+                    rows="6"
                     innerRef={register({ required: true })}
                 />
                 <FormFeedback> You need to provide some update content! </FormFeedback>

@@ -44,7 +44,7 @@ code {
   display: flex;
   flex-direction: column;
   background-color: #0d0d0d;
-  z-index: 9999;
+  z-index: 999;
   width: 0;
 }
 
@@ -53,7 +53,7 @@ code {
   right: 0;
   height: 100% !important;
   max-height: 100%;
-  z-index: 9999;
+  z-index: 999;
   width: 0;
 }
 
@@ -125,6 +125,7 @@ code {
 .nav-top {
   background-color: #ffffff !important;
   height: 70px;
+  z-index: 990;
 }
 
 .nav-dark {
@@ -405,6 +406,11 @@ code {
 .common-modal {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
+}
+
+.modal-lg {
+  z-index: 9999;
+  min-width: 60%;
 }
 
 .card-header {
