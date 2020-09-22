@@ -42,9 +42,9 @@ const Rightbar = (props) => {
     return (
         <Navbar
             light
-            className={`rightbar overflow-auto nav-light p-4 d-xlp ${
-                props.isOpen ? "d-block rightbar-collapse" : ""
-            }`}
+            className={`rightbar overflow-auto nav-light p-4 d-block ${
+                props.open && props.collapsed ? "rightbar-collapse" : ""
+            } ${props.open || props.full ? "showing" : "not-showing"}`}
         >
             {props.session.usergroup === "cc_admin" ? (
                 <NewUpdateModal modal={modal} toggleModal={toggleModal} />
@@ -55,9 +55,7 @@ const Rightbar = (props) => {
                     <span className="text-uppercase my-auto mx-2"> Updates </span>
                 </div>
                 <img
-                    className={`nav-close invert clickable d-xlp-none ${
-                        props.isOpen ? "d-block" : ""
-                    }`}
+                    className={`nav-close invert clickable ${props.open ? "d-block" : "d-none"}`}
                     src="/sb-close-18.svg"
                     alt="X"
                     onClick={props.toggle}

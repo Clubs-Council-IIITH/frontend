@@ -81,8 +81,6 @@ code {
 }
 
 .rightbar-collapse {
-    display: flex;
-    flex-direction: column;
     background-color: $bg-secondary;
     width: 80vw !important;
     max-width: 400px !important;
@@ -139,6 +137,24 @@ code {
     font-weight: 700;
     line-height: 1.2;
     font-size: 1.1em;
+}
+
+.not-showing {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: width 0.2s ease-out;
+    -moz-transition: width 0.2s ease-out;
+    -o-transition: width 0.2s ease-out;
+    transition: width 0.2s ease-out;
+}
+
+.showing {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: width 0.2s ease-out;
+    -moz-transition: width 0.2s ease-out;
+    -o-transition: width 0.2s ease-out;
+    transition: width 0.2s ease-out;
 }
 // }}}
 
@@ -631,7 +647,7 @@ code {
 }
 
 .update-datetime {
-    font-size: 0.55em;
+    font-size: 0.6em;
 }
 
 .update-title {
@@ -641,7 +657,7 @@ code {
 
 .update-content {
     font-family: "Quicksand", sans-serif;
-    font-size: 0.55em;
+    font-size: 0.6em;
     $bg-primary-space: pre-line;
 }
 
