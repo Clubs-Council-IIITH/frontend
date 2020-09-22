@@ -29,14 +29,20 @@ const AdminViewClub = (props) => {
         async function getClub() {
             const club_res = await API.view("clubs", { id: props.match.params.id });
             setClub(club_res.data[0]);
+        }
+
+        async function getUsers() {
             const users_res = await API.view("coordinators", { club: props.match.params.id });
             setUsers(users_res.data);
         }
 
-        async function getData() {
+        async function getEvents() {
             const events_res = await API.view("events", { club: props.match.params.id });
             setEvents(events_res.data);
             setFilteredList(events_res.data);
+        }
+
+        async function getLogs() {
             const logs_res = await API.view("logs", { club: props.match.params.id });
             setLogs(logs_res.data);
         }
@@ -47,7 +53,9 @@ const AdminViewClub = (props) => {
         }
 
         getClub();
-        getData();
+        getUsers();
+        getEvents();
+        getLogs();
         getProposals();
     }, []); // eslint-disable-line
 

@@ -61,14 +61,12 @@ export default {
         }
     },
 
-    delete: async (model, id) => {
+    delete: async (model, id, data = {}) => {
         fetchToken();
         try {
-            return await axios.post(
-                "/api/" + model + "/delete/" + id + "/",
-                {},
-                { headers: { Authorization: headers.Authorization } }
-            );
+            return await axios.post("/api/" + model + "/delete/" + id + "/", data, {
+                headers: { Authorization: headers.Authorization },
+            });
         } catch (err) {
             return err.response;
         }
