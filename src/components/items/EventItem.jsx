@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardFooter } from "reactstrap";
 
+import EventForm from "../../forms/EventForm";
+
 import EventState from "../EventState";
 import EditButton from "../buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
 import ViewEventModal from "../ViewEventModal";
-import EditEventModal from "../EditEventModal";
+import EditModal from "../EditModal";
 import DeleteEventModal from "../DeleteEventModal";
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
@@ -29,7 +31,14 @@ const EventItem = (props) => {
     return (
         <Card className="event-card elevate clickable">
             <ViewEventModal modal={viewModal} toggleModal={toggleViewModal} instance={props} />
-            <EditEventModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
+            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="event">
+                <EventForm
+                    action="edit"
+                    id={props.id}
+                    initial={props}
+                    cancelAction={toggleEditModal}
+                />
+            </EditModal>
             <DeleteEventModal
                 modal={deleteModal}
                 toggleModal={toggleDeleteModal}

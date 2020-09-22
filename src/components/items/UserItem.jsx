@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Card, CardImg, CardBody, CardFooter, Input } from "reactstrap";
 
-import EditUserModal from "../../components/EditUserModal";
+import UserForm from "../../forms/UserForm";
+
+import EditModal from "../../components/EditModal";
 import EditButton from "../../components/buttons/EditButton";
 
 const UserItem = (props) => {
@@ -13,7 +15,14 @@ const UserItem = (props) => {
 
     return (
         <Card className="dash-card elevate">
-            <EditUserModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
+            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="user">
+                <UserForm
+                    action="edit"
+                    id={props.id}
+                    initial={props}
+                    cancelAction={toggleEditModal}
+                />
+            </EditModal>
             <CardImg src={props.img} className="user-img" />
             <CardBody>
                 <div className="user-name"> {props.name} </div>

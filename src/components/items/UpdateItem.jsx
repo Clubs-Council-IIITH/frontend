@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Card, CardBody, Row, Col } from "reactstrap";
 import Linkify from "react-linkify";
 
+import UpdateForm from "../../forms/UpdateForm";
+
 import EditButton from "../buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
-import EditUpdateModal from "../EditUpdateModal";
+import EditModal from "../EditModal";
 import DeleteUpdateModal from "../DeleteUpdateModal";
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
@@ -22,7 +24,14 @@ const UpdateItem = (props) => {
 
     return (
         <Card className="update-card dash-card flex-fill">
-            <EditUpdateModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
+            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="update">
+                <UpdateForm
+                    action="edit"
+                    id={props.id}
+                    initial={props}
+                    cancelAction={toggleEditModal}
+                />
+            </EditModal>
             <DeleteUpdateModal
                 modal={deleteModal}
                 toggleModal={toggleDeleteModal}

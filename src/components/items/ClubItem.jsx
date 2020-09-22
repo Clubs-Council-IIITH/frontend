@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Card, CardBody, CardFooter, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import ClubForm from "../../forms/ClubForm";
+
 import EditButton from "../../components/buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
-import EditClubModal from "../../components/EditClubModal";
+import EditModal from "../../components/EditModal";
 import DeleteClubModal from "../DeleteClubModal";
 
 const ClubItem = (props) => {
@@ -21,7 +23,14 @@ const ClubItem = (props) => {
 
     return (
         <Card className="dash-card club-card elevate flex-fill">
-            <EditClubModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
+            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="club">
+                <ClubForm
+                    action="edit"
+                    id={props.id}
+                    initial={props}
+                    cancelAction={toggleEditModal}
+                />
+            </EditModal>
             <DeleteClubModal
                 modal={deleteModal}
                 toggleModal={toggleDeleteModal}
