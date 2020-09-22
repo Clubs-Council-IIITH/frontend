@@ -9,11 +9,11 @@ const DeleteClubModal = (props) => {
     const [failed, setFailed] = useState(false);
 
     const handleDelete = useCallback(async () => {
-        const res = await API.delete("clubs", props.id);
+        const res = await API.delete(props.target, props.id);
 
         if (res.status === 200) window.location.reload(false);
         else setFailed(true);
-    }, [props.id]);
+    }, [props.target, props.id]);
 
     if (props.id === 0) return null;
     return (

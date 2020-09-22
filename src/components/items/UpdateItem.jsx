@@ -7,7 +7,7 @@ import UpdateForm from "../../forms/UpdateForm";
 import EditButton from "../buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
 import EditModal from "../EditModal";
-import DeleteUpdateModal from "../DeleteUpdateModal";
+import DeleteModal from "../DeleteModal";
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const UpdateItem = (props) => {
@@ -32,12 +32,14 @@ const UpdateItem = (props) => {
                     cancelAction={toggleEditModal}
                 />
             </EditModal>
-            <DeleteUpdateModal
+            <DeleteModal
+                target="updates"
                 modal={deleteModal}
                 toggleModal={toggleDeleteModal}
                 id={props.id}
                 name={props.title}
             />
+
             <CardBody>
                 <div className="update-datetime">
                     {props.datetime && formatDateTime(props.datetime).datetime}

@@ -7,7 +7,7 @@ import ClubForm from "../../forms/ClubForm";
 import EditButton from "../../components/buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
 import EditModal from "../../components/EditModal";
-import DeleteClubModal from "../DeleteClubModal";
+import DeleteModal from "../DeleteModal";
 
 const ClubItem = (props) => {
     const [editModal, setEditModal] = useState(false);
@@ -31,12 +31,14 @@ const ClubItem = (props) => {
                     cancelAction={toggleEditModal}
                 />
             </EditModal>
-            <DeleteClubModal
+            <DeleteModal
+                target="clubs"
                 modal={deleteModal}
                 toggleModal={toggleDeleteModal}
                 id={props.id}
                 name={props.name}
             />
+
             <CardBody tag={Link} to={props.link} className="link-card d-flex">
                 <div className={"club-name " + (props.modifiable ? null : "text-center m-auto")}>
                     {props.name}

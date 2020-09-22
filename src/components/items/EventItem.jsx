@@ -8,7 +8,7 @@ import EditButton from "../buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
 import ViewEventModal from "../ViewEventModal";
 import EditModal from "../EditModal";
-import DeleteEventModal from "../DeleteEventModal";
+import DeleteModal from "../DeleteModal";
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const EventItem = (props) => {
@@ -39,17 +39,18 @@ const EventItem = (props) => {
                     cancelAction={toggleEditModal}
                 />
             </EditModal>
-            <DeleteEventModal
+            <DeleteModal
+                target="events"
                 modal={deleteModal}
                 toggleModal={toggleDeleteModal}
                 id={props.id}
                 name={props.name}
             />
+
             <CardHeader className="mb-2" onClick={toggleViewModal}>
                 <div className="event-datetime my-2">{formatDateTime(props.datetime).datetime}</div>
                 <div className="event-name mb-2">{props.name}</div>
             </CardHeader>
-
             <CardFooter className="d-flex flex-row justify-content-between">
                 {props.modifiable ? (
                     <>
