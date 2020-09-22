@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Navbar, Nav } from "reactstrap";
+import { Button, Row, Col, Navbar, Nav } from "reactstrap";
 
 import API from "../api/methods";
 
 import NullIndicator from "./NullIndicator";
-import LoadingIndicator from "./LoadingIndicator";
 import UpdateItem from "./items/UpdateItem";
+import NewUpdateModal from "./NewUpdateModal";
+import LoadingIndicator from "./LoadingIndicator";
 
 const Rightbar = (props) => {
     const [updates, setUpdates] = useState(false);
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         async function getUpdates() {
@@ -18,6 +20,10 @@ const Rightbar = (props) => {
 
         getUpdates();
     }, []);
+
+    const toggleModal = () => {
+        setModal(!modal);
+    };
 
     const renderUpdates = () => {
         if (!updates) return <LoadingIndicator />;
@@ -40,6 +46,9 @@ const Rightbar = (props) => {
                 props.isOpen ? "d-block rightbar-collapse" : ""
             }`}
         >
+            {props.session.usergroup === "cc_admin" ? (
+                <NewUpdateModal modal={modal} toggleModal={toggleModal} />
+            ) : null}
             <div className="d-flex flex-row justify-content-between">
                 <div className="rightbar-title d-flex flex-row">
                     <img className="update-icon" src="/sb-updates-18.svg" alt="updates" />
@@ -55,7 +64,12 @@ const Rightbar = (props) => {
                 />
             </div>
             <Nav className="m-auto d-flex justify-content-between rightbar-nav" navbar>
-                <div className="mt-3 pb-4">{renderUpdates()}</div>
+                {props.session.usergroup === "cc_admin" ? (
+                    <Button className="mt-3 common-btn new-update-btn py-2" onClick={toggleModal}>
+                        + NEW UPDATE
+                    </Button>
+                ) : null}
+                <div className="mt-2 pb-4">{renderUpdates()}</div>
             </Nav>
         </Navbar>
     );

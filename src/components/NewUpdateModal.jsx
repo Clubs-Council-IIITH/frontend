@@ -16,6 +16,7 @@ const NewUpdateModal = (props) => {
             isOpen={props.modal}
             backdrop="static"
             toggle={props.toggleModal}
+            autoFocus={false}
         >
             <ModalHeader className="common-modal text-uppercase"> Post a new update </ModalHeader>
             <ModalBody>

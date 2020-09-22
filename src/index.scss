@@ -744,7 +744,7 @@ code {
     font-weight: 600;
     font-size: 0.38em;
     color: #fff;
-    background-color: #000;
+    background-color: $bg-dark;
 }
 
 .edit-btn,
@@ -790,8 +790,18 @@ code {
 
 .common-btn {
     font-family: "Quicksand", sans-serif;
-    font-weight: 600;
+    font-weight: 700;
 }
+
+.new-update-btn {
+    background-color: $bg-dark;
+}
+
+.new-update-btn:focus,
+.new-update-btn:active,
+.new-update-btn:hover {
+}
+
 // }}}
 
 // Alerts {{{

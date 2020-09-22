@@ -684,7 +684,7 @@ code {
   font-weight: 600;
   font-size: 0.38em;
   color: #fff;
-  background-color: #000;
+  background-color: #111111;
 }
 
 .edit-btn,
@@ -730,7 +730,11 @@ code {
 
 .common-btn {
   font-family: "Quicksand", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.new-update-btn {
+  background-color: #111111;
 }
 
 .link-alert {

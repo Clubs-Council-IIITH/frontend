@@ -36,7 +36,7 @@ const ClubItem = (props) => {
             {props.modifiable ? (
                 <CardFooter className="text-right p-2">
                     <div className="club-mail mb-3 mx-1">
-                        <Input className="text" value={props.mail} readonly />
+                        <Input className="text" value={props.mail} readonly disabled />
                     </div>
                     <EditButton onClick={toggleEditModal} />
                     <DeleteButton onClick={toggleDeleteModal} />

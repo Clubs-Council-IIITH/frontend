@@ -29,6 +29,7 @@ const NewProposalModal = (props) => {
             isOpen={props.modal}
             backdrop="static"
             toggle={props.toggleModal}
+            autoFocus={false}
         >
             <ModalHeader className="common-modal text-uppercase"> Make a new proposal </ModalHeader>
             <ModalBody>

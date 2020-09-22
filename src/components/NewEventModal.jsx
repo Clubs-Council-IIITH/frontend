@@ -18,6 +18,7 @@ const NewEventModal = (props) => {
             isOpen={props.modal}
             backdrop="static"
             toggle={props.toggleModal}
+            autoFocus={false}
         >
             <ModalHeader className="common-modal text-uppercase"> Create a new event </ModalHeader>
             <ModalBody>
