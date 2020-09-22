@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
-import Transition from "../components/TransitionContainer";
 import Searchbar from "../components/Searchbar";
-import LoadingIndicator from "../components/LoadingIndicator";
-import NullIndicator from "../components/NullIndicator";
 import ClubItem from "../components/items/ClubItem";
+import NullIndicator from "../components/NullIndicator";
+import Transition from "../components/TransitionContainer";
+import LoadingIndicator from "../components/LoadingIndicator";
+import { PageContext } from "../components/Navigation";
 
 const Clubs = (props) => {
     const [clubList, setClubList] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
+
+    const pageContext = useContext(PageContext);
 
     useEffect(() => {
         async function getClubList() {
@@ -30,7 +33,12 @@ const Clubs = (props) => {
             <Container fluid className="mt-2 mt-md-5">
                 <Row>
                     {filteredList.map((club) => (
-                        <Col md="6" lg="4" className="my-3 d-flex" key={club.id}>
+                        <Col
+                            md="6"
+                            xl={pageContext.rightbarEnabled ? "4" : "3"}
+                            className="my-3 d-flex"
+                            key={club.id}
+                        >
                             <ClubItem {...club} link={props.match.url + "/" + club.id} />
                         </Col>
                     ))}

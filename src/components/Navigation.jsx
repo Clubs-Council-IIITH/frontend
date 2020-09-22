@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import { Container, Navbar, NavbarBrand, Nav, NavbarText } from "reactstrap";
 
 import Leftbar from "./Leftbar";
 import Rightbar from "./Rightbar";
+
+export const PageContext = createContext();
 
 const Navigation = (props) => {
     const [isLeftOpen, setIsLeftOpen] = useState(false);
@@ -45,12 +47,16 @@ const Navigation = (props) => {
             {rightbarEnabled ? (
                 <Rightbar session={props.session} isOpen={isRightOpen} toggle={toggleRight} />
             ) : null}
-            <Container
-                fluid
-                className={`page-container page-leftbar ${rightbarEnabled ? "page-rightbar" : ""}`}
-            >
-                {props.children}
-            </Container>
+            <PageContext.Provider value={{ rightbarEnabled }}>
+                <Container
+                    fluid
+                    className={`page-container page-leftbar ${
+                        rightbarEnabled ? "page-rightbar" : ""
+                    }`}
+                >
+                    {props.children}
+                </Container>
+            </PageContext.Provider>
         </>
     );
 };

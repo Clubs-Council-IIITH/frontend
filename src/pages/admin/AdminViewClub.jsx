@@ -80,7 +80,7 @@ const AdminViewClub = (props) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (isPrevious) return null;
                         return (
-                            <Col md="6" lg="4" className="my-3" key={event.id}>
+                            <Col md="6" xl="4" className="my-3" key={event.id}>
                                 <EventItem modifiable {...event} />
                             </Col>
                         );
@@ -91,7 +91,7 @@ const AdminViewClub = (props) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (!isPrevious) return null;
                         return (
-                            <Col md="6" lg="4" className="my-3" key={event.id}>
+                            <Col md="6" xl="4" className="my-3" key={event.id}>
                                 <EventItem {...event} />
                             </Col>
                         );
@@ -200,7 +200,7 @@ const AdminViewClub = (props) => {
                 </Row>
                 <Row className="mt-4">
                     {proposals.slice(1).map((proposal) => (
-                        <Col md="6" lg="4" className="my-3" key={proposal.id}>
+                        <Col md="6" xl="4" className="my-3" key={proposal.id}>
                             <ProposalItem {...proposal} />
                         </Col>
                     ))}
@@ -265,15 +265,15 @@ const AdminViewClub = (props) => {
                         <Col xs="3" sm="1" className="my-auto">
                             <BackButton />
                         </Col>
-                        <Col className="viewclub-title my-auto">{club.name}</Col>
+                        <Col className="viewclub-title my-auto pt-2">{club.name}</Col>
                     </Row>
                 </Container>
                 <Container fluid className="mt-4 mt-md-5">
                     <Row>
-                        <Col md className="my-auto">
+                        <Col lg className="my-auto">
                             {renderTabBar()}
                         </Col>
-                        <Col className="my-auto py-3 py-md-0">
+                        <Col className="my-auto py-3 py-lg-0">
                             {tab === "events" ? (
                                 <Searchbar dataList={events} setFilteredList={setFilteredList} />
                             ) : null}
