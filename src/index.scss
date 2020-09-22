@@ -6,7 +6,7 @@
 
 // Colors {{{
 $bg-primary: #ffffff;
-$bg-secondary: #f9fafc;
+$bg-secondary: #f6f8fa;
 $bg-dark: #111111;
 // }}}
 
@@ -68,12 +68,18 @@ code {
 }
 
 .rightbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     position: fixed;
     right: 0;
     height: 100% !important;
     max-height: 100%;
     z-index: 999;
     width: 0;
+}
+
+.rightbar::-webkit-scrollbar {
+    display: none;
 }
 
 .leftbar-collapse {
@@ -464,9 +470,41 @@ code {
     font-weight: 600;
 }
 
+.blank-modal-header {
+    border: none;
+}
+
 .modal-lg {
     z-index: 9999;
-    min-width: 60%;
+    min-width: 50%;
+}
+
+.instance-modal {
+    font-size: $card-text;
+    font-weight: 400;
+}
+
+.event-view-name {
+    font-size: 1.4em;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.event-view-datetime {
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.event-view-description {
+    font-size: 0.65em;
+    line-height: 1.4;
+}
+
+.event-view-duration,
+.event-view-audience,
+.event-view-venue {
+    font-size: 0.7em;
+    line-height: 1.2;
 }
 // }}}
 
@@ -520,7 +558,7 @@ code {
 }
 
 .event-datetime {
-    font-size: 0.7em;
+    font-size: 0.6em;
     color: #555;
 }
 
@@ -546,6 +584,14 @@ code {
     font-size: 0.75em;
     width: fit-content;
     border-radius: 4px;
+}
+
+.view-event-indicator {
+    background-color: $bg-secondary;
+    color: #888888;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.6em;
+    border-radius: 6px;
 }
 // }}}
 
@@ -656,8 +702,9 @@ code {
 }
 
 .update-content {
-    font-family: "Quicksand", sans-serif;
-    font-size: 0.6em;
+    font-family: sans-serif;
+    font-weight: 200;
+    font-size: 0.55em;
     $bg-primary-space: pre-line;
 }
 

@@ -49,6 +49,8 @@ code {
 }
 
 .rightbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   position: fixed;
   right: 0;
   height: 100% !important;
@@ -57,12 +59,16 @@ code {
   width: 0;
 }
 
+.rightbar::-webkit-scrollbar {
+  display: none;
+}
+
 .leftbar-collapse {
   width: 280px !important;
 }
 
 .rightbar-collapse {
-  background-color: #f9fafc;
+  background-color: #f6f8fa;
   width: 80vw !important;
   max-width: 400px !important;
 }
@@ -151,7 +157,7 @@ code {
 }
 
 .nav-light {
-  background-color: #f9fafc !important;
+  background-color: #f6f8fa !important;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
 }
@@ -221,14 +227,14 @@ code {
   justify-content: flex-start;
   align-items: center;
   font-family: "Quicksand";
-  background-color: #f9fafc;
+  background-color: #f6f8fa;
   border-radius: 8px;
   width: min-content;
 }
 .tab-nav .nav-btn {
   border: none;
   font-weight: 600 !important;
-  background-color: #f9fafc !important;
+  background-color: #f6f8fa !important;
   color: #111111 !important;
 }
 .tab-nav .nav-btn:focus,
@@ -324,7 +330,7 @@ code {
 .nav-tab-current:hover,
 .nav-tab-current:focus,
 .nav-tab-current:active {
-  background-color: #f9fafc;
+  background-color: #f6f8fa;
   color: #000;
 }
 
@@ -342,7 +348,7 @@ code {
 }
 
 .calendar-container {
-  background-color: #f9fafc;
+  background-color: #f6f8fa;
   border-radius: 8px;
   height: 85vh;
 }
@@ -424,9 +430,41 @@ code {
   font-weight: 600;
 }
 
+.blank-modal-header {
+  border: none;
+}
+
 .modal-lg {
   z-index: 9999;
-  min-width: 60%;
+  min-width: 50%;
+}
+
+.instance-modal {
+  font-size: calc(24px + 0.5vw);
+  font-weight: 400;
+}
+
+.event-view-name {
+  font-size: 1.4em;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.event-view-datetime {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.event-view-description {
+  font-size: 0.65em;
+  line-height: 1.4;
+}
+
+.event-view-duration,
+.event-view-audience,
+.event-view-venue {
+  font-size: 0.7em;
+  line-height: 1.2;
 }
 
 .card-header {
@@ -476,7 +514,7 @@ code {
 }
 
 .event-datetime {
-  font-size: 0.7em;
+  font-size: 0.6em;
   color: #555;
 }
 
@@ -502,6 +540,14 @@ code {
   font-size: 0.75em;
   width: fit-content;
   border-radius: 4px;
+}
+
+.view-event-indicator {
+  background-color: #f6f8fa;
+  color: #888888;
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.6em;
+  border-radius: 6px;
 }
 
 .user-card {
@@ -605,8 +651,9 @@ code {
 }
 
 .update-content {
-  font-family: "Quicksand", sans-serif;
-  font-size: 0.6em;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 0.55em;
 }
 
 .update-creator {
