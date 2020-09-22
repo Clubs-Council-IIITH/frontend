@@ -109,14 +109,13 @@ const AdminViewClub = (props) => {
         logs.forEach(function (log) {
             if (!isSameDay(prevDate, log.datetime)) {
                 log["datebreak"] = true;
-                prevDate = log.timestamp;
+                prevDate = log.datetime;
             }
         });
 
         return (
             <Container fluid>
                 <div className="mt-4">
-                    {console.log(logs)}
                     {logs.map((log) => (
                         <Col md="12" className="my-1">
                             <LogItem

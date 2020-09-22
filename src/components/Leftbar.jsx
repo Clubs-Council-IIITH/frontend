@@ -5,7 +5,6 @@ import { Navbar, NavItem, Nav, NavLink } from "reactstrap";
 import "../config";
 
 const Leftbar = (props) => {
-    console.log(props.minimized);
     const [contextAction, setContextAction] = useState("");
     const [contextString, setContextString] = useState("");
 
