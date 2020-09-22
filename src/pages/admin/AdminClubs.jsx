@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
 import AdminTabBar from "./AdminTabBar";
-import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
+import NewButton from "../../components/buttons/NewButton";
+import Transition from "../../components/TransitionContainer";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewClubModal from "../../components/NewClubModal";
@@ -71,13 +72,7 @@ const AdminClubs = () => {
                             className="d-flex flex-row justify-content-between justify-content-md-start"
                         >
                             <span className="actionbar-title ml-md-2">Clubs</span>
-                            <Button
-                                onClick={toggleModal}
-                                className="new-btn btn-outline-dark py-2 px-3 mx-md-5 my-auto"
-                            >
-                                <span className="d-md-none"> + </span>
-                                <span className="d-none d-md-block"> + NEW CLUB </span>
-                            </Button>
+                            <NewButton onClick={toggleModal} text="club" />
                         </Col>
                         <Col className="my-4 my-md-auto">
                             <Searchbar
