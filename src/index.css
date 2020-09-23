@@ -816,6 +816,14 @@ code {
   font-size: 0.5em;
 }
 
+.event-form-venue {
+  min-height: 115px;
+}
+
+.event-form-description {
+  min-height: 120px;
+}
+
 @media (min-width: 768px) {
   .nav-divider {
     display: block;

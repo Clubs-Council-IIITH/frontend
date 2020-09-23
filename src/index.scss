@@ -880,6 +880,16 @@ code {
 }
 // }}}
 
+// Forms {{{
+.event-form-venue {
+    min-height: 115px;
+}
+
+.event-form-description {
+    min-height: 120px;
+}
+// }}}
+
 // Styles exclusively for displays with width >= 768px (bs-md) {{{
 @media (min-width: 768px) {
     .nav-divider {

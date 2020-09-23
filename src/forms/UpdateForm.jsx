@@ -12,6 +12,7 @@ const UpdateForm = (props) => {
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
+            tag: props.initial.tag,
             title: props.initial.title,
             content: props.initial.content,
         },
