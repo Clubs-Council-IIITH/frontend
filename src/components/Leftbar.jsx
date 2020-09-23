@@ -76,12 +76,14 @@ const Leftbar = (props) => {
         <Navbar
             dark
             className={`leftbar nav-dark p-4 d-block ${
-                props.open && props.collapsed ? "leftbar-collapse" : ""
+                props.open && (props.collapsed || props.minimized) ? "leftbar-collapse" : ""
             } ${props.open || props.full || props.minimized ? "showing" : "not-showing"}`}
         >
             <div className="d-flex flex-row justify-content-between p-0">
                 <img
-                    className={`nav-logo-sm clickable ${props.minimized ? "d-block" : "d-none"}`}
+                    className={`nav-logo-sm clickable ${
+                        props.minimized && !props.open ? "d-block" : "d-none"
+                    }`}
                     src="/cc_logo_sm.svg"
                     alt="cc_logo"
                     onClick={props.toggle}
@@ -95,7 +97,7 @@ const Leftbar = (props) => {
                 </Link>
                 <img
                     className={`nav-close clickable my-auto ${
-                        props.open && props.collapsed ? "d-block" : "d-none"
+                        props.open && (props.collapsed || props.minimized) ? "d-block" : "d-none"
                     }`}
                     src="/sb-close-18.svg"
                     alt="X"

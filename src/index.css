@@ -641,6 +641,12 @@ code {
   font-weight: 400;
 }
 
+.update-tag {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.55em;
+  color: #ffffff;
+}
+
 .update-datetime {
   font-size: 0.6em;
 }

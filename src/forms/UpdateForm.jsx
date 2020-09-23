@@ -33,6 +33,20 @@ const UpdateForm = (props) => {
         <Form id="updateform" onSubmit={handleSubmit(onSubmit)}>
             <FailureAlert error={APIerror} />
             <FormGroup>
+                <Label for="tag"> Tag </Label>
+                <Input
+                    invalid={errors.tag}
+                    type="select"
+                    name="tag"
+                    innerRef={register({ required: true })}
+                >
+                    <option value="normal"> NORMAL </option>
+                    <option value="reminder"> REMINDER </option>
+                    <option value="important"> IMPORTANT </option>
+                </Input>
+                <FormFeedback> Invalid tag! </FormFeedback>
+            </FormGroup>
+            <FormGroup>
                 <Label for="title"> Title </Label>
                 <Input
                     invalid={errors.title}

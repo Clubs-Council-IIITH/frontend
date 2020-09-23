@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, Row, Col, Badge } from "reactstrap";
 import Linkify from "react-linkify";
 
 import UpdateForm from "../../forms/UpdateForm";
@@ -23,7 +23,7 @@ const UpdateItem = (props) => {
     };
 
     return (
-        <Card className="update-card dash-card flex-fill">
+        <Card className="update-card">
             <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="update">
                 <UpdateForm
                     action="edit"
@@ -40,7 +40,19 @@ const UpdateItem = (props) => {
                 name={props.title}
             />
 
-            <CardBody>
+            <CardHeader className="my-0 py-0 pt-2 pt-md-0">
+                {props.tag.toLowerCase() !== "normal" ? (
+                    <Badge
+                        color={
+                            { reminder: "warning", important: "danger" }[props.tag.toLowerCase()]
+                        }
+                        className="update-tag text-uppercase"
+                    >
+                        {props.tag}
+                    </Badge>
+                ) : null}
+            </CardHeader>
+            <CardBody className={props.tag.toLowerCase() !== "normal" ? "pt-2 pt-md-1" : ""}>
                 <div className="update-datetime">
                     {props.datetime && formatDateTime(props.datetime).datetime}
                 </div>
