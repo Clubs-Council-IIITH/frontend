@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, CardHeader, CardBody, Row, Col, Badge } from "reactstrap";
 import Linkify from "react-linkify";
+
+import { SessionContext } from "../../api/SessionContext";
 
 import UpdateForm from "../../forms/UpdateForm";
 
 import EditButton from "../buttons/EditButton";
 import DeleteButton from "../buttons/DeleteButton";
+
 import EditModal from "../EditModal";
 import DeleteModal from "../DeleteModal";
+
 import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const UpdateItem = (props) => {
+    const sessionContext = useContext(SessionContext);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
@@ -40,7 +45,7 @@ const UpdateItem = (props) => {
                 name={props.title}
             />
 
-            <CardHeader className="my-0 py-0 pt-2 pt-md-0">
+            <CardHeader className="my-0 py-0 pt-2 pt-md-1">
                 {props.tag.toLowerCase() !== "normal" ? (
                     <Badge
                         color={
@@ -52,7 +57,7 @@ const UpdateItem = (props) => {
                     </Badge>
                 ) : null}
             </CardHeader>
-            <CardBody className={props.tag.toLowerCase() !== "normal" ? "pt-2 pt-md-1" : ""}>
+            <CardBody className={props.tag.toLowerCase() !== "normal" ? "pt-2 pt-md-2" : ""}>
                 <div className="update-datetime">
                     {props.datetime && formatDateTime(props.datetime).datetime}
                 </div>
@@ -60,16 +65,16 @@ const UpdateItem = (props) => {
                 <div className="update-content mb-2">
                     <Linkify> {props.content} </Linkify>
                 </div>
-                {props.admin ? (
+                {sessionContext.session.usergroup === "cc_admin" ? (
                     <>
                         <hr className="mt-4" />
-                        <Row>
-                            <Col xs="6" sm="4">
+                        <Row className="my-0">
+                            <Col xs="8" className="d-flex flex-row">
+                                <div className="update-creator my-auto">{props.creator}</div>
+                            </Col>
+                            <Col className="d-flex flex-row justify-content-end mr-n2">
                                 <EditButton onClick={toggleEditModal} />
                                 <DeleteButton onClick={toggleDeleteModal} />
-                            </Col>
-                            <Col className="d-flex flex-row-reverse">
-                                <div className="update-creator my-auto">{props.creator}</div>
                             </Col>
                         </Row>
                     </>
