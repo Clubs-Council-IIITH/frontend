@@ -334,6 +334,28 @@ code {
   color: #000;
 }
 
+.club-nav-dropdown {
+  background-color: #111111;
+  border: none !important;
+}
+
+.club-nav-collapse {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  width: 100%;
+  border: none;
+  text-decoration: none;
+  z-index: 9999;
+}
+
+.club-nav-collapse:hover,
+.club-nav-collapse:active {
+  text-decoration: none;
+}
+
 .viewclub-header {
   display: flex;
   flex-direction: row;

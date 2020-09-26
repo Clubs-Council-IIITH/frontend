@@ -7,6 +7,7 @@ import ClubNavigation from "./ClubNavigation";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import UserItem from "../../components/items/UserItem";
+import Transition from "../../components/TransitionContainer";
 
 const ClubMembers = (props) => {
     const [users, setUsers] = useState(false);
@@ -40,7 +41,11 @@ const ClubMembers = (props) => {
         );
     };
 
-    return <ClubNavigation match={props.match}> {renderUsers()} </ClubNavigation>;
+    return (
+        <ClubNavigation match={props.match}>
+            <Transition>{renderUsers()}</Transition>
+        </ClubNavigation>
+    );
 };
 
 export default ClubMembers;

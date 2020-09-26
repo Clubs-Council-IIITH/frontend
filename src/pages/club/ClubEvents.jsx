@@ -7,6 +7,7 @@ import ClubNavigation from "./ClubNavigation";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import EventItem from "../../components/items/EventItem";
+import Transition from "../../components/TransitionContainer";
 
 const ClubEvents = (props) => {
     const [events, setEvents] = useState(false);
@@ -52,7 +53,11 @@ const ClubEvents = (props) => {
         );
     };
 
-    return <ClubNavigation match={props.match}> {renderEvents()} </ClubNavigation>;
+    return (
+        <ClubNavigation match={props.match}>
+            <Transition>{renderEvents()}</Transition>
+        </ClubNavigation>
+    );
 };
 
 export default ClubEvents;

@@ -8,6 +8,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import LogItem from "../../components/items/LogItem";
 import { isSameDay } from "../../utils/DateTimeFormatter";
+import Transition from "../../components/TransitionContainer";
 
 const ClubActivity = (props) => {
     const [logs, setLogs] = useState(false);
@@ -50,7 +51,11 @@ const ClubActivity = (props) => {
         );
     };
 
-    return <ClubNavigation match={props.match}> {renderActivity()} </ClubNavigation>;
+    return (
+        <ClubNavigation match={props.match}>
+            <Transition>{renderActivity()}</Transition>
+        </ClubNavigation>
+    );
 };
 
 export default ClubActivity;

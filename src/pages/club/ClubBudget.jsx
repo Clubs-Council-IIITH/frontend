@@ -9,6 +9,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import ProposalItem from "../../components/items/ProposalItem";
 import { formatDateTime } from "../../utils/DateTimeFormatter";
+import Transition from "../../components/TransitionContainer";
 
 const ClubBudget = (props) => {
     const [proposals, setProposals] = useState(false);
@@ -97,7 +98,11 @@ const ClubBudget = (props) => {
         );
     };
 
-    return <ClubNavigation match={props.match}> {renderBudget()} </ClubNavigation>;
+    return (
+        <ClubNavigation match={props.match}>
+            <Transition>{renderBudget()}</Transition>
+        </ClubNavigation>
+    );
 };
 
 export default ClubBudget;

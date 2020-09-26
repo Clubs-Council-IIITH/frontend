@@ -3,8 +3,6 @@ import { useLocation } from "react-router-dom";
 import { UncontrolledCollapse, Button } from "reactstrap";
 import { RoutedTabs, NavTab } from "react-router-tabs";
 
-import Transition from "../../components/TransitionContainer";
-
 const AdminNavigation = ({ children }) => {
     const location = useLocation();
     const tabs = [
@@ -22,7 +20,7 @@ const AdminNavigation = ({ children }) => {
 
     return (
         <>
-            <div className="mb-3 mb-md-5 sticky-top pt-2 pt-md-3">
+            <div className="mb-3 mb-md-5 pt-2 pt-md-3">
                 <ul class="nav d-none d-sm-block">
                     <RoutedTabs startPathWith="/admin">
                         {tabs.map((tab) => (
@@ -50,7 +48,7 @@ const AdminNavigation = ({ children }) => {
                     </RoutedTabs>
                 </UncontrolledCollapse>
             </div>
-            <Transition>{children}</Transition>
+            {children}
         </>
     );
 };

@@ -10,6 +10,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewUserModal from "../../components/NewUserModal";
 import UserItem from "../../components/items/UserItem";
+import Transition from "../../components/TransitionContainer";
 
 const AdminUsers = () => {
     const [userList, setUserList] = useState(false);
@@ -52,25 +53,27 @@ const AdminUsers = () => {
         <>
             <NewUserModal modal={modal} toggleModal={toggleModal} />
             <AdminNavigation>
-                <Container fluid className="actionbar-container rounded-lg">
-                    <Row>
-                        <Col
-                            md="6"
-                            className="d-flex flex-row justify-content-between justify-content-md-start"
-                        >
-                            <span className="actionbar-title ml-md-2">Users</span>
-                            <NewButton onClick={toggleModal} text="user" />
-                        </Col>
-                        <Col className="my-4 my-md-auto">
-                            <Searchbar
-                                className="w-100"
-                                dataList={userList}
-                                setFilteredList={setFilteredList}
-                            />
-                        </Col>
-                    </Row>
-                </Container>
-                {renderUsers()}
+                <Transition>
+                    <Container fluid className="actionbar-container rounded-lg">
+                        <Row>
+                            <Col
+                                md="6"
+                                className="d-flex flex-row justify-content-between justify-content-md-start"
+                            >
+                                <span className="actionbar-title ml-md-2">Users</span>
+                                <NewButton onClick={toggleModal} text="user" />
+                            </Col>
+                            <Col className="my-4 my-md-auto">
+                                <Searchbar
+                                    className="w-100"
+                                    dataList={userList}
+                                    setFilteredList={setFilteredList}
+                                />
+                            </Col>
+                        </Row>
+                    </Container>
+                    {renderUsers()}
+                </Transition>
             </AdminNavigation>
         </>
     );

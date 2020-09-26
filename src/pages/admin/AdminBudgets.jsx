@@ -8,6 +8,7 @@ import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import ProposalItem from "../../components/items/ProposalItem";
+import Transition from "../../components/TransitionContainer";
 
 const AdminBudgets = () => {
     const [proposals, setProposals] = useState([]);
@@ -50,21 +51,23 @@ const AdminBudgets = () => {
     return (
         <>
             <AdminNavigation>
-                <Container fluid className="actionbar-container rounded-lg">
-                    <Row>
-                        <Col md="6" className="d-flex flex-row">
-                            <span className="actionbar-title ml-md-2">Budget Proposals</span>
-                        </Col>
-                        <Col className="my-4 my-md-auto">
-                            <Searchbar
-                                className="w-100"
-                                dataList={proposals}
-                                setFilteredList={setFilteredList}
-                            />
-                        </Col>
-                    </Row>
-                </Container>
-                {renderProposals()}
+                <Transition>
+                    <Container fluid className="actionbar-container rounded-lg">
+                        <Row>
+                            <Col md="6" className="d-flex flex-row">
+                                <span className="actionbar-title ml-md-2">Budget Proposals</span>
+                            </Col>
+                            <Col className="my-4 my-md-auto">
+                                <Searchbar
+                                    className="w-100"
+                                    dataList={proposals}
+                                    setFilteredList={setFilteredList}
+                                />
+                            </Col>
+                        </Row>
+                    </Container>
+                    {renderProposals()}
+                </Transition>
             </AdminNavigation>
         </>
     );
