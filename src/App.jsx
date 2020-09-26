@@ -11,15 +11,17 @@ import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 
-import OrganizerUpdates from "./pages/organizer/OrganizerUpdates";
 import OrganizerEvents from "./pages/organizer/OrganizerEvents";
 import OrganizerBudget from "./pages/organizer/OrganizerBudget";
 
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminBudgets from "./pages/admin/AdminBudgets";
-import AdminUpdates from "./pages/admin/AdminUpdates";
-import AdminViewClub from "./pages/admin/AdminViewClub";
+
+import ClubEvents from "./pages/club/ClubEvents";
+import ClubBudget from "./pages/club/ClubBudget";
+import ClubActivity from "./pages/club/ClubActivity";
+import ClubMembers from "./pages/club/ClubMembers";
 
 import Error404Page from "./pages/Error404Page";
 import Error401Page from "./pages/Error401Page";
@@ -45,12 +47,6 @@ const App = () => {
                     {/* <Route exact path="/contact" component={Contact} /> */}
 
                     {/* Organizer routes {{{ */}
-                    <ProtectedRoute
-                        allowed={["organizer"]}
-                        exact
-                        path={["/organizer/updates", "/organizer"]}
-                        component={OrganizerUpdates}
-                    />
                     <ProtectedRoute
                         allowed={["organizer"]}
                         exact
@@ -80,12 +76,6 @@ const App = () => {
                     <ProtectedRoute
                         allowed={["cc_admin"]}
                         exact
-                        path="/admin/clubs/:id"
-                        component={AdminViewClub}
-                    />
-                    <ProtectedRoute
-                        allowed={["cc_admin"]}
-                        exact
                         path="/admin/users"
                         component={AdminUsers}
                     />
@@ -95,15 +85,44 @@ const App = () => {
                         path="/admin/budgets"
                         component={AdminBudgets}
                     />
-                    <ProtectedRoute
-                        allowed={["cc_admin"]}
-                        exact
-                        path="/admin/updates"
-                        component={AdminUpdates}
-                    />
                     {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
                     {/* <ProtectedRoute exact path="/admin/council" component={AdminCouncil} /> */}
                     {/* <ProtectedRoute path="/admin/council/:id" component={AdminViewCouncil} /> */}
+                    {/* }}} */}
+
+                    {/* Club routes {{{ */}
+                    <Route
+                        exact
+                        path="/admin/clubs/:id"
+                        render={({ match }) => (
+                            <Redirect replace to={`/admin/clubs/${match.params.id}/events`} />
+                        )}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin", "organizer"]}
+                        exact
+                        path="/admin/clubs/:id/events"
+                        component={ClubEvents}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin", "organizer"]}
+                        exact
+                        path="/admin/clubs/:id/members"
+                        component={ClubMembers}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin", "organizer"]}
+                        exact
+                        path="/admin/clubs/:id/budget"
+                        component={ClubBudget}
+                    />
+                    <ProtectedRoute
+                        allowed={["cc_admin"]}
+                        exact
+                        path="/admin/clubs/:id/activity"
+                        component={ClubActivity}
+                    />
+
                     {/* }}} */}
 
                     {/* Auth routes {{{ */}
