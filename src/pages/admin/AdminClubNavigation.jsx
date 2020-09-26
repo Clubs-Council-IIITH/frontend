@@ -56,7 +56,7 @@ const AdminClubNavigation = (props) => {
                         <Transition>{club.name}</Transition>
                     </Col>
                     <Col md="3" className="text-center mt-3 mt-md-0">
-                        <UncontrolledButtonDropdown className="mb-2 text-uppercase w-75">
+                        <UncontrolledButtonDropdown className="mb-2 text-uppercase w-100">
                             <DropdownToggle
                                 className="text-uppercase py-3 club-nav-dropdown common-btn"
                                 caret

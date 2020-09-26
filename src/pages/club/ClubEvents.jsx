@@ -8,6 +8,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import EventItem from "../../components/items/EventItem";
 import Transition from "../../components/TransitionContainer";
+import Searchbar from "../../components/Searchbar";
 
 const ClubEvents = (props) => {
     const [events, setEvents] = useState(false);
@@ -55,7 +56,18 @@ const ClubEvents = (props) => {
 
     return (
         <ClubNavigation match={props.match}>
-            <Transition>{renderEvents()}</Transition>
+            <Transition>
+                <Row className="mt-4 mt-md-5">
+                    <Col className="mx-3">
+                        <Searchbar
+                            className="w-100"
+                            dataList={events}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Col>
+                </Row>
+                {renderEvents()}
+            </Transition>
         </ClubNavigation>
     );
 };

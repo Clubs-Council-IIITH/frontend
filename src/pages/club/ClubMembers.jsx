@@ -8,6 +8,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import UserItem from "../../components/items/UserItem";
 import Transition from "../../components/TransitionContainer";
+import Searchbar from "../../components/Searchbar";
 
 const ClubMembers = (props) => {
     const [users, setUsers] = useState(false);
@@ -43,7 +44,18 @@ const ClubMembers = (props) => {
 
     return (
         <ClubNavigation match={props.match}>
-            <Transition>{renderUsers()}</Transition>
+            <Transition>
+                <Row className="mt-4 mt-md-5">
+                    <Col className="mx-3">
+                        <Searchbar
+                            className="w-100"
+                            dataList={users}
+                            setFilteredList={setFilteredList}
+                        />
+                    </Col>
+                </Row>
+                {renderUsers()}
+            </Transition>
         </ClubNavigation>
     );
 };
