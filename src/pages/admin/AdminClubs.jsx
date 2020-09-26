@@ -3,10 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
-import AdminTabBar from "./AdminTabBar";
+import AdminNavigation from "./AdminNavigation";
 import Searchbar from "../../components/Searchbar";
 import NewButton from "../../components/buttons/NewButton";
-import Transition from "../../components/TransitionContainer";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewClubModal from "../../components/NewClubModal";
@@ -62,9 +61,8 @@ const AdminClubs = () => {
 
     return (
         <>
-            <AdminTabBar />
             <NewClubModal modal={modal} toggleModal={toggleModal} />
-            <Transition>
+            <AdminNavigation>
                 <Container fluid className="actionbar-container rounded-lg">
                     <Row>
                         <Col
@@ -84,7 +82,7 @@ const AdminClubs = () => {
                     </Row>
                 </Container>
                 {renderClubs()}
-            </Transition>
+            </AdminNavigation>
         </>
     );
 };

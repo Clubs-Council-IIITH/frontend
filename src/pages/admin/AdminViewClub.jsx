@@ -4,8 +4,7 @@ import { Alert, InputGroup, Input, InputGroupAddon, Container, Button, Row, Col 
 
 import API from "../../api/methods";
 
-import AdminTabBar from "./AdminTabBar";
-import Transition from "../../components/TransitionContainer";
+import AdminNavigation from "./AdminNavigation";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -265,8 +264,7 @@ const AdminViewClub = (props) => {
 
     return (
         <>
-            <AdminTabBar />
-            <Transition>
+            <AdminNavigation>
                 <Container fluid className="actionbar-container rounded-lg">
                     <Row>
                         <Col xs="3" sm="1" className="my-auto">
@@ -290,7 +288,7 @@ const AdminViewClub = (props) => {
                 <Row className="p-0">
                     <Col>{renderTab()}</Col>
                 </Row>
-            </Transition>
+            </AdminNavigation>
         </>
     );
 };

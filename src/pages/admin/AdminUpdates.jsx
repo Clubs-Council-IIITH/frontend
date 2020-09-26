@@ -3,8 +3,7 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
-import AdminTabBar from "./AdminTabBar";
-import Transition from "../../components/TransitionContainer";
+import AdminNavigation from "./AdminNavigation";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewUpdateModal from "../../components/NewUpdateModal";
@@ -45,8 +44,7 @@ const AdminUpdates = () => {
 
     return (
         <>
-            <AdminTabBar />
-            <Transition>
+            <AdminNavigation>
                 <NewUpdateModal modal={modal} toggleModal={toggleModal} />
                 <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
                     <Container fluid>
@@ -63,7 +61,7 @@ const AdminUpdates = () => {
                 <Row className="p-0">
                     <Col>{renderUpdates()}</Col>
                 </Row>
-            </Transition>
+            </AdminNavigation>
         </>
     );
 };

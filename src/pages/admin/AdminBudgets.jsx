@@ -3,8 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
-import AdminTabBar from "./AdminTabBar";
-import Transition from "../../components/TransitionContainer";
+import AdminNavigation from "./AdminNavigation";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
@@ -50,8 +49,7 @@ const AdminBudgets = () => {
 
     return (
         <>
-            <AdminTabBar />
-            <Transition>
+            <AdminNavigation>
                 <Container fluid className="actionbar-container rounded-lg">
                     <Row>
                         <Col md="6" className="d-flex flex-row">
@@ -67,7 +65,7 @@ const AdminBudgets = () => {
                     </Row>
                 </Container>
                 {renderProposals()}
-            </Transition>
+            </AdminNavigation>
         </>
     );
 };
