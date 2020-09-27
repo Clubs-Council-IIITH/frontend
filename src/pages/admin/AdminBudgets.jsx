@@ -52,7 +52,10 @@ const AdminBudgets = () => {
         <>
             <AdminNavigation>
                 <Transition>
-                    <Container fluid className="actionbar-container rounded-lg">
+                    <Container
+                        fluid
+                        className="actionbar-container rounded-lg mt-0 mt-sm-5 mt-md-0"
+                    >
                         <Row>
                             <Col md="6" className="d-flex flex-row">
                                 <span className="actionbar-title ml-md-2">Budget Proposals</span>

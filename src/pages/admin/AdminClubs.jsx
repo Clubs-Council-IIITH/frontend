@@ -65,14 +65,17 @@ const AdminClubs = () => {
             <NewClubModal modal={modal} toggleModal={toggleModal} />
             <AdminNavigation>
                 <Transition>
-                    <Container fluid className="actionbar-container rounded-lg">
+                    <Container
+                        fluid
+                        className="actionbar-container rounded-lg mt-0 mt-sm-5 mt-md-0"
+                    >
                         <Row>
                             <Col
                                 md="6"
                                 className="d-flex flex-row justify-content-between justify-content-md-start"
                             >
-                                <span className="actionbar-title ml-md-2">Clubs</span>
-                                <NewButton onClick={toggleModal} text="club" />
+                                <span className="actionbar-title ml-md-2 mr-md-5">Clubs</span>
+                                <NewButton onClick={toggleModal} text="new club" />
                             </Col>
                             <Col className="my-4 my-md-auto">
                                 <Searchbar
