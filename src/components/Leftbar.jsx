@@ -17,7 +17,7 @@ const Leftbar = (props) => {
         const usergroup = props.session.usergroup;
         switch (usergroup) {
             case "organizer":
-                setContextAction("/organizer");
+                setContextAction("/club");
                 setContextString("MANAGE CLUB");
                 break;
             case "cc_admin":

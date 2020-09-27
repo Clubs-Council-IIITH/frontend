@@ -5,11 +5,12 @@ import { Button, Container, Row, Col, Alert, InputGroup, InputGroupAddon, Input 
 import API from "../../api/methods";
 
 import ClubNavigation from "./ClubNavigation";
+import NewProposalModal from "../../components/NewProposalModal";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import ProposalItem from "../../components/items/ProposalItem";
-import { formatDateTime } from "../../utils/DateTimeFormatter";
 import Transition from "../../components/TransitionContainer";
+import { formatDateTime } from "../../utils/DateTimeFormatter";
 
 const ClubBudget = (props) => {
     const [proposals, setProposals] = useState(false);
@@ -100,6 +101,7 @@ const ClubBudget = (props) => {
 
     return (
         <ClubNavigation match={props.match}>
+            <NewProposalModal modal={props.modal} toggleModal={props.toggleModal} />
             <Transition>{renderBudget()}</Transition>
         </ClubNavigation>
     );

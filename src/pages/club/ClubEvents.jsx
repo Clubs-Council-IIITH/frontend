@@ -4,6 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import API from "../../api/methods";
 
 import ClubNavigation from "./ClubNavigation";
+import NewEventModal from "../../components/NewEventModal";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import EventItem from "../../components/items/EventItem";
@@ -56,6 +57,7 @@ const ClubEvents = (props) => {
 
     return (
         <ClubNavigation match={props.match}>
+            <NewEventModal modal={props.modal} toggleModal={props.toggleModal} />
             <Transition>
                 <Row className="mt-4 mt-md-5">
                     <Col className="mx-3">

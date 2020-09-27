@@ -11,9 +11,6 @@ import Calendar from "./pages/Calendar";
 import LoginRedirect from "./pages/LoginRedirect";
 import LogoutRedirect from "./pages/LogoutRedirect";
 
-import OrganizerEvents from "./pages/organizer/OrganizerEvents";
-import OrganizerBudget from "./pages/organizer/OrganizerBudget";
-
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminBudgets from "./pages/admin/AdminBudgets";
@@ -45,21 +42,6 @@ const App = () => {
                     <Route exact path="/calendar" component={Calendar} />
                     {/* <Route exact path="/blog" component={Blog} /> */}
                     {/* <Route exact path="/contact" component={Contact} /> */}
-
-                    {/* Organizer routes {{{ */}
-                    <ProtectedRoute
-                        allowed={["organizer"]}
-                        exact
-                        path="/organizer/events"
-                        component={OrganizerEvents}
-                    />
-                    <ProtectedRoute
-                        allowed={["organizer"]}
-                        exact
-                        path="/organizer/budget"
-                        component={OrganizerBudget}
-                    />
-                    {/* }}} */}
 
                     {/* Admin routes {{{ */}
                     <Route
@@ -93,27 +75,25 @@ const App = () => {
                     {/* Club routes {{{ */}
                     <Route
                         exact
-                        path="/admin/clubs/:id"
-                        render={({ match }) => (
-                            <Redirect replace to={`/admin/clubs/${match.params.id}/events`} />
-                        )}
+                        path={["/admin/clubs/:id", "/club"]}
+                        render={({ match }) => <Redirect replace to={`${match.url}/events`} />}
                     />
                     <ProtectedRoute
                         allowed={["cc_admin", "organizer"]}
                         exact
-                        path="/admin/clubs/:id/events"
+                        path={["/admin/clubs/:id/events", "/club/events"]}
                         component={ClubEvents}
                     />
                     <ProtectedRoute
                         allowed={["cc_admin", "organizer"]}
                         exact
-                        path="/admin/clubs/:id/members"
+                        path={["/admin/clubs/:id/members", "/club/members"]}
                         component={ClubMembers}
                     />
                     <ProtectedRoute
                         allowed={["cc_admin", "organizer"]}
                         exact
-                        path="/admin/clubs/:id/budget"
+                        path={["/admin/clubs/:id/budget", "/club/budget"]}
                         component={ClubBudget}
                     />
                     <ProtectedRoute
@@ -122,7 +102,6 @@ const App = () => {
                         path="/admin/clubs/:id/activity"
                         component={ClubActivity}
                     />
-
                     {/* }}} */}
 
                     {/* Auth routes {{{ */}
