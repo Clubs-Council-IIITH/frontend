@@ -16,7 +16,9 @@ const ClubMembers = (props) => {
 
     useEffect(() => {
         async function getUsers() {
-            const users_res = await API.view("coordinators", { club: props.match.params.id });
+            const users_res = await API.view("coordinators", {
+                club: props.match.params.id || null,
+            });
             setUsers(users_res.data);
             setFilteredList(users_res.data);
         }
@@ -44,6 +46,7 @@ const ClubMembers = (props) => {
 
     return (
         <ClubNavigation match={props.match}>
+            <></>
             <Transition>
                 <Row className="mt-4 mt-md-5">
                     <Col className="mx-3">
