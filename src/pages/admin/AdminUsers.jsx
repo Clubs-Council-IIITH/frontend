@@ -19,7 +19,7 @@ const AdminUsers = () => {
 
     useEffect(() => {
         async function getUserList() {
-            const res = await API.view("members");
+            const res = await API.view("users");
             setUserList(res.data);
             setFilteredList(res.data);
         }
@@ -39,7 +39,7 @@ const AdminUsers = () => {
                 <Row>
                     {filteredList.map((user) => (
                         <Col xs="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
-                            <UserItem {...user.user_info} role={user.role} />
+                            <UserItem {...user} />
                         </Col>
                     ))}
                 </Row>

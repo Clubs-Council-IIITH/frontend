@@ -24,8 +24,16 @@ const UserItem = (props) => {
             </EditModal>
             <CardImg src={props.img} className="member-img" />
             <CardBody>
-                <div className="member-name"> {props.name} </div>
-                <div className="member-role mt-2"> {props.role} </div>
+                <div className="user-name"> {props.name} </div>
+                <div className="user-mail mt-2"> {props.mail} </div>
+
+                {/* move everything below to separate modal */}
+                <div className="user-mobile mt-2"> {props.mobile} </div>
+                <div className="user-roles mt-2">
+                    {props.roles.map((roles) => (
+                        <div>{`${roles.active_year}: ${roles.club} : ${roles.role}`}</div>
+                    ))}
+                </div>
             </CardBody>
             {props.modifiable ? (
                 <CardFooter className="text-right p-2">
