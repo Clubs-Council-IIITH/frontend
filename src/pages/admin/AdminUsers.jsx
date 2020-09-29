@@ -9,41 +9,39 @@ import NewButton from "../../components/buttons/NewButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewUserModal from "../../components/NewUserModal";
-import MemberItem from "../../components/items/MemberItem";
+import UserItem from "../../components/items/UserItem";
 import Transition from "../../components/TransitionContainer";
 
-const AdminMembers = () => {
-    const [userList, setMemberList] = useState(false);
+const AdminUsers = () => {
+    const [userList, setUserList] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-        async function getMemberList() {
-            const res = await API.view("users", {});
-            setMemberList(res.data);
+        async function getUserList() {
+            const res = await API.view("members");
+            setUserList(res.data);
             setFilteredList(res.data);
         }
 
-        getMemberList();
+        getUserList();
     }, []);
 
     const toggleModal = () => {
         setModal(!modal);
     };
 
-    const renderMembers = () => {
+    const renderUsers = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Container fluid className="mt-2 mt-md-5">
                 <Row>
-                    {filteredList.map((user) => {
-                        return (
-                            <Col xs="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
-                                <MemberItem modifiable {...user} />
-                            </Col>
-                        );
-                    })}
+                    {filteredList.map((user) => (
+                        <Col xs="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
+                            <UserItem {...user.user_info} role={user.role} />
+                        </Col>
+                    ))}
                 </Row>
             </Container>
         );
@@ -63,7 +61,7 @@ const AdminMembers = () => {
                                 md="6"
                                 className="d-flex flex-row justify-content-between justify-content-md-start"
                             >
-                                <span className="actionbar-title ml-md-2 mr-md-5">Members</span>
+                                <span className="actionbar-title ml-md-2 mr-md-5">Users</span>
                                 <NewButton onClick={toggleModal} text="new user" />
                             </Col>
                             <Col className="my-4 my-md-auto">
@@ -76,11 +74,11 @@ const AdminMembers = () => {
                             </Col>
                         </Row>
                     </Container>
-                    {renderMembers()}
+                    {renderUsers()}
                 </Transition>
             </AdminNavigation>
         </>
     );
 };
 
-export default AdminMembers;
+export default AdminUsers;
