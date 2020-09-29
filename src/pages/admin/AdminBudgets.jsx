@@ -65,6 +65,7 @@ const AdminBudgets = () => {
                                     className="w-100"
                                     dataList={proposals}
                                     setFilteredList={setFilteredList}
+                                    searchAttr={(obj) => obj.name}
                                 />
                             </Col>
                         </Row>

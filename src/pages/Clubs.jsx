@@ -59,6 +59,7 @@ const Clubs = (props) => {
                             className="w-100 my-auto"
                             dataList={clubList}
                             setFilteredList={setFilteredList}
+                            searchAttr={(obj) => obj.name}
                         />
                     </Col>
                 </Row>

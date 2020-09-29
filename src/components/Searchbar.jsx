@@ -1,12 +1,12 @@
 import React from "react";
 import { Input } from "reactstrap";
 
-const Searchbar = (props) => {
+const Searchbar = ({ dataList, searchAttr, setFilteredList, className }) => {
     const updateSearch = (e) => {
-        if (!props.dataList) return null;
-        props.setFilteredList(
-            props.dataList.filter((obj) =>
-                obj.name.toLowerCase().includes(e.target.value.toLowerCase())
+        if (!dataList) return null;
+        setFilteredList(
+            dataList.filter((obj) =>
+                searchAttr(obj).toLowerCase().includes(e.target.value.toLowerCase())
             )
         );
     };
@@ -14,7 +14,7 @@ const Searchbar = (props) => {
     return (
         <Input
             onChange={updateSearch}
-            className={"searchbar shadow-sm " + props.className}
+            className={"searchbar shadow-sm " + className}
             type="text"
             bsSize="lg"
             placeholder="Search..."

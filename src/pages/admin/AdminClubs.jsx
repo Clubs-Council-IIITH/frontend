@@ -82,6 +82,7 @@ const AdminClubs = () => {
                                     className="w-100"
                                     dataList={clubList}
                                     setFilteredList={setFilteredList}
+                                    searchAttr={(obj) => obj.name}
                                 />
                             </Col>
                         </Row>

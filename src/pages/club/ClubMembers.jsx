@@ -6,37 +6,34 @@ import API from "../../api/methods";
 import ClubNavigation from "./ClubNavigation";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
-import UserItem from "../../components/items/UserItem";
+import MemberItem from "../../components/items/MemberItem";
 import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 
 const ClubMembers = (props) => {
-    const [users, setUsers] = useState(false);
+    const [members, setMembers] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
 
     useEffect(() => {
-        async function getUsers() {
-            const users_res = await API.view("coordinators", {
+        async function getMembers() {
+            const members_res = await API.view("members", {
                 club: props.match.params.id || null,
             });
-            setUsers(users_res.data);
-            setFilteredList(users_res.data);
+            setMembers(members_res.data);
+            setFilteredList(members_res.data);
         }
-        getUsers();
+        getMembers();
     }, [props.match.params.id]);
 
-    const renderUsers = () => {
+    const renderMembers = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
             <Container fluid className="mt-2 mt-md-5">
                 <Row>
-                    {filteredList.map((user) => (
-                        <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
-                            <UserItem
-                                {...user}
-                                role={user.roles.filter((role) => role[0] == club.id)[0][1]} // eslint-disable-line
-                            />
+                    {filteredList.map((member) => (
+                        <Col sm="6" md="4" lg="3" className="my-3 member-card" key={member.id}>
+                            <MemberItem {...member.user_info} role={member.role} />
                         </Col>
                     ))}
                 </Row>
@@ -52,12 +49,13 @@ const ClubMembers = (props) => {
                     <Col className="mx-3">
                         <Searchbar
                             className="w-100"
-                            dataList={users}
+                            dataList={members}
                             setFilteredList={setFilteredList}
+                            searchAttr={(obj) => obj.user_info.name}
                         />
                     </Col>
                 </Row>
-                {renderUsers()}
+                {renderMembers()}
             </Transition>
         </ClubNavigation>
     );

@@ -9,29 +9,29 @@ import NewButton from "../../components/buttons/NewButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewUserModal from "../../components/NewUserModal";
-import UserItem from "../../components/items/UserItem";
+import MemberItem from "../../components/items/MemberItem";
 import Transition from "../../components/TransitionContainer";
 
-const AdminUsers = () => {
-    const [userList, setUserList] = useState(false);
+const AdminMembers = () => {
+    const [userList, setMemberList] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-        async function getUserList() {
+        async function getMemberList() {
             const res = await API.view("coordinators", {});
-            setUserList(res.data);
+            setMemberList(res.data);
             setFilteredList(res.data);
         }
 
-        getUserList();
+        getMemberList();
     }, []);
 
     const toggleModal = () => {
         setModal(!modal);
     };
 
-    const renderUsers = () => {
+    const renderMembers = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
@@ -40,7 +40,7 @@ const AdminUsers = () => {
                     {filteredList.map((user) => {
                         return (
                             <Col xs="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
-                                <UserItem modifiable {...user} />
+                                <MemberItem modifiable {...user} />
                             </Col>
                         );
                     })}
@@ -63,7 +63,7 @@ const AdminUsers = () => {
                                 md="6"
                                 className="d-flex flex-row justify-content-between justify-content-md-start"
                             >
-                                <span className="actionbar-title ml-md-2 mr-md-5">Users</span>
+                                <span className="actionbar-title ml-md-2 mr-md-5">Members</span>
                                 <NewButton onClick={toggleModal} text="new user" />
                             </Col>
                             <Col className="my-4 my-md-auto">
@@ -71,15 +71,16 @@ const AdminUsers = () => {
                                     className="w-100"
                                     dataList={userList}
                                     setFilteredList={setFilteredList}
+                                    searchAttr={(obj) => obj.name}
                                 />
                             </Col>
                         </Row>
                     </Container>
-                    {renderUsers()}
+                    {renderMembers()}
                 </Transition>
             </AdminNavigation>
         </>
     );
 };
 
-export default AdminUsers;
+export default AdminMembers;

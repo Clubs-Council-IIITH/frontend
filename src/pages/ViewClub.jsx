@@ -9,11 +9,11 @@ import Searchbar from "../components/Searchbar";
 import LoadingIndicator from "../components/LoadingIndicator";
 import NullIndicator from "../components/NullIndicator";
 import EventItem from "../components/items/EventItem";
-import UserItem from "../components/items/UserItem";
+import MemberItem from "../components/items/MemberItem";
 
 const ViewClub = (props) => {
     const [club, setClub] = useState(false);
-    const [users, setUsers] = useState(false);
+    const [users, setMembers] = useState(false);
     const [events, setEvents] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [tab, setTab] = useState("events");
@@ -22,8 +22,8 @@ const ViewClub = (props) => {
         async function getClub() {
             const club_res = await API.view("clubs", { id: props.match.params.id });
             setClub(club_res.data[0]);
-            const users_res = await API.view("coordinators", { club: props.match.params.id });
-            setUsers(users_res.data);
+            const users_res = await API.view("members", { club: props.match.params.id });
+            setMembers(users_res.data);
         }
 
         async function getEvents() {
@@ -44,12 +44,7 @@ const ViewClub = (props) => {
                 <Row>
                     {users.map((user) => (
                         <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
-                            <UserItem
-                                {...user}
-                                mail=""
-                                mobile=""
-                                role={user.roles.filter((role) => role[0] == club.id)[0][1]} // eslint-disable-line
-                            />
+                            <MemberItem {...user.user_info} role={user.role} />
                         </Col>
                     ))}
                 </Row>
@@ -127,7 +122,11 @@ const ViewClub = (props) => {
                     </Col>
                     <Col className="my-auto py-3 py-md-0">
                         {tab === "events" ? (
-                            <Searchbar dataList={events} setFilteredList={setFilteredList} />
+                            <Searchbar
+                                dataList={events}
+                                setFilteredList={setFilteredList}
+                                searchAttr={(obj) => obj.name}
+                            />
                         ) : null}
                     </Col>
                 </Row>
