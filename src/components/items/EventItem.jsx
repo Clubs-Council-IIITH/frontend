@@ -29,7 +29,7 @@ const EventItem = (props) => {
     };
 
     return (
-        <Card className="event-card elevate clickable">
+        <Card className="event-card elevate clickable flex-fill">
             <ViewEventModal modal={viewModal} toggleModal={toggleViewModal} instance={props} />
             <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="event">
                 <EventForm
@@ -47,7 +47,7 @@ const EventItem = (props) => {
                 name={props.name}
             />
 
-            <CardHeader className="mb-2" onClick={toggleViewModal}>
+            <CardHeader className="mb-2 flex-fill" onClick={toggleViewModal}>
                 <div className="event-datetime my-2">{formatDateTime(props.datetime).datetime}</div>
                 <div className="event-name mb-2">{props.name}</div>
             </CardHeader>

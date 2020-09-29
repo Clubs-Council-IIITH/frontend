@@ -41,7 +41,7 @@ const ClubActivity = (props) => {
                                 datetime={log.datetime}
                                 creator={log.actor}
                                 action={log.action}
-                                event={log.event[0]["name"]}
+                                event={log.event.name}
                                 datebreak={log.datebreak}
                             />
                         </Col>

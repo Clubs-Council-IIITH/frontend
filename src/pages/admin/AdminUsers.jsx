@@ -19,7 +19,7 @@ const AdminMembers = () => {
 
     useEffect(() => {
         async function getMemberList() {
-            const res = await API.view("coordinators", {});
+            const res = await API.view("users", {});
             setMemberList(res.data);
             setFilteredList(res.data);
         }

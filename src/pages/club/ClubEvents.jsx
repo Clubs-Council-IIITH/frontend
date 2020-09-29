@@ -34,7 +34,7 @@ const ClubEvents = (props) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (isPrevious) return null;
                         return (
-                            <Col md="6" xl="4" className="my-3" key={event.id}>
+                            <Col md="6" xl="4" className="d-flex my-3" key={event.id}>
                                 <EventItem modifiable {...event} />
                             </Col>
                         );
@@ -45,8 +45,8 @@ const ClubEvents = (props) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
                         if (!isPrevious) return null;
                         return (
-                            <Col md="6" xl="4" className="my-3" key={event.id}>
-                                <EventItem {...event} />
+                            <Col md="6" xl="4" className="d-flex my-3" key={event.id}>
+                                <EventItem modifiable {...event} />
                             </Col>
                         );
                     })}
