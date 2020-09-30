@@ -63,10 +63,10 @@ const EventForm = (props) => {
                             invalid={errors.name}
                             type="text"
                             name="name"
-                            innerRef={register({ required: true, pattern: /^[a-zA-Z0-9,.!? ]*$/ })}
+                            innerRef={register({ required: true, pattern: /^[a-zA-Z 0-9,.!?-]*$/ })}
                             autoFocus
                         />
-                        <FormFeedback> Event name can not be empty! </FormFeedback>
+                        <FormFeedback> Invalid event name! </FormFeedback>
                     </FormGroup>
                     <Row>
                         <Col lg="6">
