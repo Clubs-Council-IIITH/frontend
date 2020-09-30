@@ -528,6 +528,42 @@ code {
     font-size: 0.7em;
     line-height: 1.2;
 }
+
+.user-view-img {
+    width: 50vw;
+    max-width: 300px;
+    border-radius: 8px;
+}
+
+.user-view-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.user-view-roles {
+    font-size: 0.7em;
+}
+
+.user-view-role-year {
+    font-size: 1em;
+    color: #888;
+}
+
+.user-view-role-item {
+    font-size: 0.9em;
+}
+
+.user-view-role-club {
+    display: flex;
+    flex-basis: 100%;
+    line-height: 1.2;
+}
+
+.user-view-mail,
+.user-view-mobile {
+    font-size: 0.6em;
+}
 // }}}
 
 // Global Card Styles {{{
@@ -649,13 +685,7 @@ code {
     line-height: 1.2;
 }
 
-.user-roles {
-    font-size: 0.5em;
-    color: #555;
-}
-
-.user-mail,
-.user-mobile {
+.user-mail {
     font-size: 0.6em;
 }
 // }}}
@@ -752,7 +782,7 @@ code {
     font-family: sans-serif;
     font-weight: 200;
     font-size: 0.55em;
-    $bg-primary-space: pre-line;
+    white-space: pre-line;
 }
 
 .update-creator {

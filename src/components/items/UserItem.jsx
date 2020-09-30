@@ -3,17 +3,23 @@ import { Card, CardImg, CardBody, CardFooter } from "reactstrap";
 
 import EditModal from "../../components/EditModal";
 import EditButton from "../../components/buttons/EditButton";
+import ViewUserModal from "../ViewUserModal";
 
 const UserItem = (props) => {
+    const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
+
+    const toggleViewModal = () => {
+        setViewModal(!viewModal);
+    };
 
     const toggleEditModal = () => {
         setEditModal(!editModal);
     };
 
     return (
-        <Card className="dash-card">
-            {console.log(props)}
+        <Card className="dash-card elevate clickable">
+            <ViewUserModal modal={viewModal} toggleModal={toggleViewModal} instance={props} />
             <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="member">
                 {/* <UserForm */}
                 {/*     action="edit" */}
@@ -22,18 +28,10 @@ const UserItem = (props) => {
                 {/*     cancelAction={toggleEditModal} */}
                 {/* /> */}
             </EditModal>
-            <CardImg src={props.img} className="member-img" />
-            <CardBody>
+            <CardImg onClick={toggleViewModal} src={props.img} className="member-img" />
+            <CardBody onClick={toggleViewModal}>
                 <div className="user-name"> {props.name} </div>
                 <div className="user-mail mt-2"> {props.mail} </div>
-
-                {/* move everything below to separate modal */}
-                <div className="user-mobile mt-2"> {props.mobile} </div>
-                <div className="user-roles mt-2">
-                    {props.roles.map((roles) => (
-                        <div>{`${roles.active_year}: ${roles.club} : ${roles.role}`}</div>
-                    ))}
-                </div>
             </CardBody>
             {props.modifiable ? (
                 <CardFooter className="text-right p-2">

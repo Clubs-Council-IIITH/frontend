@@ -38,7 +38,7 @@ const AdminUsers = () => {
             <Container fluid className="mt-2 mt-md-5">
                 <Row>
                     {filteredList.map((user) => (
-                        <Col xs="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
+                        <Col sm="6" md="4" lg="3" className="my-3 user-card" key={user.id}>
                             <UserItem {...user} />
                         </Col>
                     ))}
