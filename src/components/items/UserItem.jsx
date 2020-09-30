@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Card, CardImg, CardBody, CardFooter } from "reactstrap";
+import { Card, CardImg, CardBody, CardFooter, Input } from "reactstrap";
+
+import UserForm from "../../forms/UserForm";
 
 import EditModal from "../../components/EditModal";
 import EditButton from "../../components/buttons/EditButton";
@@ -18,26 +20,26 @@ const UserItem = (props) => {
     };
 
     return (
-        <Card className="dash-card elevate clickable">
+        <Card className="dash-card elevate clickable flex-fill">
             <ViewUserModal modal={viewModal} toggleModal={toggleViewModal} instance={props} />
-            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="member">
-                {/* <UserForm */}
-                {/*     action="edit" */}
-                {/*     id={props.id} */}
-                {/*     initial={props} */}
-                {/*     cancelAction={toggleEditModal} */}
-                {/* /> */}
+            <EditModal modal={editModal} toggleModal={toggleEditModal} text="user">
+                <UserForm
+                    action="edit"
+                    id={props.id}
+                    initial={props}
+                    cancelAction={toggleEditModal}
+                />
             </EditModal>
             <CardImg onClick={toggleViewModal} src={props.img} className="member-img" />
             <CardBody onClick={toggleViewModal}>
                 <div className="user-name"> {props.name} </div>
-                <div className="user-mail mt-2"> {props.mail} </div>
+                <div className="user-mail mt-3 mx-n1">
+                    <Input className="text" value={props.mail} readonly disabled />
+                </div>
             </CardBody>
-            {props.modifiable ? (
-                <CardFooter className="text-right p-2">
-                    <EditButton onClick={toggleEditModal} />
-                </CardFooter>
-            ) : null}
+            <CardFooter className="text-right p-2">
+                <EditButton onClick={toggleEditModal} />
+            </CardFooter>
         </Card>
     );
 };

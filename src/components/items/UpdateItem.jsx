@@ -29,7 +29,7 @@ const UpdateItem = (props) => {
 
     return (
         <Card className="update-card">
-            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="update">
+            <EditModal modal={editModal} toggleModal={toggleEditModal} text="update">
                 <UpdateForm
                     action="edit"
                     id={props.id}

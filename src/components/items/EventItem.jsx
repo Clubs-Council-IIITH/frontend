@@ -31,7 +31,7 @@ const EventItem = (props) => {
     return (
         <Card className="event-card elevate clickable flex-fill">
             <ViewEventModal modal={viewModal} toggleModal={toggleViewModal} instance={props} />
-            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="event">
+            <EditModal modal={editModal} toggleModal={toggleEditModal} text="event">
                 <EventForm
                     action="edit"
                     id={props.id}

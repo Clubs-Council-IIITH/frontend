@@ -7,8 +7,8 @@ const EditModal = (props) => {
         <Modal
             className="modal-lg"
             isOpen={props.modal}
-            backdrop="static"
             toggle={props.toggleModal}
+            autoFocus={false}
         >
             <ModalHeader className="common-modal text-uppercase"> Edit {props.text} </ModalHeader>
             <ModalBody>{props.children}</ModalBody>

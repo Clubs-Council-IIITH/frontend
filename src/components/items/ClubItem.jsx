@@ -23,7 +23,7 @@ const ClubItem = (props) => {
 
     return (
         <Card className="dash-card club-card elevate flex-fill">
-            <EditModal modal={editModal} toggleEditModal={toggleEditModal} text="club">
+            <EditModal modal={editModal} toggleModal={toggleEditModal} text="club">
                 <ClubForm
                     action="edit"
                     id={props.id}

@@ -13,7 +13,6 @@ const NewClubModal = (props) => {
         <Modal
             className="modal-lg"
             isOpen={props.modal}
-            backdrop="static"
             toggle={props.toggleModal}
             autoFocus={false}
         >
