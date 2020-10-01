@@ -1,3 +1,3 @@
 module.exports = global.config = {
-    loginUrl: process.env.REACT_APP_LOGINURL,
+    loginUrl: process.env.REACT_APP_LOGINURL || "/api/token",
 };

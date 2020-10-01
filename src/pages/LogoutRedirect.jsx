@@ -2,8 +2,6 @@ import React, { useEffect } from "react"; // eslint-disable-line
 
 import API from "../api/methods";
 
-import "../config";
-
 const LogoutRedirect = () => {
     useEffect(() => {
         async function logout() {
