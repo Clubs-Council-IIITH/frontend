@@ -28,7 +28,7 @@ const ClubEvents = (props) => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Container fluid className="mt-2 mt-md-5">
+            <Container fluid className="mt-2 mt-md-3">
                 <Row>
                     {filteredList.map((event) => {
                         const isPrevious = event.state === "completed" || event.state === "deleted";
