@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, ModalHeader, ModalBody, Row, Col, Input, Badge } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Row, Col, Badge } from "reactstrap";
 
 const ViewUserModal = (props) => {
     const renderRoles = () => {
@@ -7,7 +7,7 @@ const ViewUserModal = (props) => {
         props.instance.roles.sort((a, b) => parseInt(b.active_year) - parseInt(a.active_year));
         var prevYear = props.instance.roles[0].active_year;
         props.instance.roles[0]["datebreak"] = true;
-        props.instance.roles.forEach(function (role) {
+        props.instance.roles.forEach((role) => {
             if (prevYear !== role.active_year) {
                 role["datebreak"] = true;
                 prevYear = role.active_year;
@@ -16,7 +16,6 @@ const ViewUserModal = (props) => {
 
         return (
             <div className="mt-4">
-                {console.log(props.instance.roles)}
                 {props.instance.roles.map((role) => (
                     <>
                         {role.datebreak ? (

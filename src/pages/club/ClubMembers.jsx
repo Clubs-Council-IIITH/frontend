@@ -19,8 +19,8 @@ const ClubMembers = (props) => {
             const members_res = await API.view("members", {
                 club: props.match.params.id || null,
             });
-            setMembers(members_res.data);
-            setFilteredList(members_res.data);
+            setMembers(members_res.data.sort((a, b) => b.active_year - a.active_year));
+            setFilteredList(members_res.data.sort((a, b) => b.active_year - a.active_year));
         }
         getMembers();
     }, [props.match.params.id]);
@@ -28,13 +28,35 @@ const ClubMembers = (props) => {
     const renderMembers = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
+        var prevYear = filteredList[0].active_year;
+        filteredList.forEach((role) => {
+            if (prevYear !== role.active_year) {
+                role["datebreak"] = true;
+                prevYear = role.active_year;
+            }
+        });
+
         return (
             <Container fluid className="mt-2 mt-md-5">
                 <Row>
+                    {filteredList.filter((o) => o.active_year === new Date().getFullYear())
+                        .length ? (
+                        <div className="member-view-year font-weight-bold mt-md-0 mt-3 mb-1 w-100 ml-3">
+                            Present
+                        </div>
+                    ) : null}
                     {filteredList.map((member) => (
-                        <Col sm="6" md="4" lg="3" className="my-3 member-card" key={member.id}>
-                            <MemberItem {...member.user_info} role={member.role} />
-                        </Col>
+                        <>
+                            {member.datebreak &&
+                            !(member.active_year === new Date().getFullYear()) ? (
+                                <div className="member-view-year font-weight-bold mt-3 w-100 ml-3">
+                                    {member.active_year}
+                                </div>
+                            ) : null}
+                            <Col sm="6" md="4" lg="3" className="my-3 member-card" key={member.id}>
+                                <MemberItem {...member.user_info} role={member.role} />
+                            </Col>
+                        </>
                     ))}
                 </Row>
             </Container>
@@ -43,7 +65,6 @@ const ClubMembers = (props) => {
 
     return (
         <ClubNavigation match={props.match}>
-            <></>
             <Transition>
                 <Row className="mt-4 mt-md-5">
                     <Col className="mx-3">

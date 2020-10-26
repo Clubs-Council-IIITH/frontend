@@ -13,7 +13,6 @@ const MemberItem = (props) => {
 
     return (
         <Card className="dash-card">
-            {console.log(props)}
             <EditModal modal={editModal} toggleModal={toggleEditModal} text="member">
                 {/* <MemberForm */}
                 {/*     action="edit" */}
