@@ -43,7 +43,10 @@ const ClubMembers = (props) => {
 
         return (
             <Container fluid className="mt-2 mt-md-5">
-                <div className="mb-3 mt-4 mt-md-0 d-flex flex-row justify-content-start align-items-stretch">
+                <div className="mb-3 mt-4 mt-md-0 d-flex flex-row justify-content-between justify-content-md-start align-items-stretch">
+                    <Button className="font-weight-bold common-btn mr-3 px-4 new-update-btn">
+                        + NEW MEMBER
+                    </Button>
                     <UncontrolledButtonDropdown>
                         <DropdownToggle
                             className="text-uppercase viewclub-members-year common-btn py-3 px-4"
@@ -63,9 +66,6 @@ const ClubMembers = (props) => {
                             ))}
                         </DropdownMenu>
                     </UncontrolledButtonDropdown>
-                    <Button className="font-weight-bold common-btn mx-2 px-4" color="dark">
-                        + NEW MEMBER
-                    </Button>
                 </div>
                 <Row>
                     {filteredList.map((member) => (
