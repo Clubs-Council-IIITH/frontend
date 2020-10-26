@@ -369,6 +369,10 @@ code {
   line-height: 1.2;
 }
 
+.viewclub-members-year {
+  background-color: #f6f8fa;
+}
+
 .calendar-container {
   background-color: #f6f8fa;
   border-radius: 8px;

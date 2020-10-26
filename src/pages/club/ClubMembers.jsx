@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import {
+    Button,
+    UncontrolledButtonDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
 
 import API from "../../api/methods";
 
@@ -13,6 +22,7 @@ import Searchbar from "../../components/Searchbar";
 const ClubMembers = (props) => {
     const [members, setMembers] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
     useEffect(() => {
         async function getMembers() {
@@ -28,34 +38,49 @@ const ClubMembers = (props) => {
     const renderMembers = () => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
-        var prevYear = filteredList[0].active_year;
-        filteredList.forEach((role) => {
-            if (prevYear !== role.active_year) {
-                role["datebreak"] = true;
-                prevYear = role.active_year;
-            }
-        });
+        const yearList = filteredList.map((obj) => obj.active_year);
+        const yearSet = [...new Set(yearList)];
 
         return (
             <Container fluid className="mt-2 mt-md-5">
+                <div className="mb-3 mt-4 mt-md-0 d-flex flex-row justify-content-start align-items-stretch">
+                    <UncontrolledButtonDropdown>
+                        <DropdownToggle
+                            className="text-uppercase viewclub-members-year common-btn py-3 px-4"
+                            color="light"
+                            caret
+                        >
+                            {currentYear} &nbsp;
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            {yearSet.map((year) => (
+                                <DropdownItem
+                                    className="common-btn text-uppercase w-100"
+                                    onClick={() => setCurrentYear(year)}
+                                >
+                                    {year}
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </UncontrolledButtonDropdown>
+                    <Button className="font-weight-bold common-btn mx-2 px-4" color="dark">
+                        + NEW MEMBER
+                    </Button>
+                </div>
                 <Row>
-                    {filteredList.filter((o) => o.active_year === new Date().getFullYear())
-                        .length ? (
-                        <div className="member-view-year font-weight-bold mt-md-0 mt-3 mb-1 w-100 ml-3">
-                            Present
-                        </div>
-                    ) : null}
                     {filteredList.map((member) => (
                         <>
-                            {member.datebreak &&
-                            !(member.active_year === new Date().getFullYear()) ? (
-                                <div className="member-view-year font-weight-bold mt-3 w-100 ml-3">
-                                    {member.active_year}
-                                </div>
+                            {member.active_year === currentYear ? (
+                                <Col
+                                    sm="6"
+                                    md="4"
+                                    lg="3"
+                                    className="my-3 member-card"
+                                    key={member.id}
+                                >
+                                    <MemberItem {...member.user_info} role={member.role} />
+                                </Col>
                             ) : null}
-                            <Col sm="6" md="4" lg="3" className="my-3 member-card" key={member.id}>
-                                <MemberItem {...member.user_info} role={member.role} />
-                            </Col>
                         </>
                     ))}
                 </Row>
