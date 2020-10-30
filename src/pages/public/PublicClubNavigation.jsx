@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { UncontrolledCollapse, Button, Container, Row, Col } from "reactstrap";
+import { UncontrolledCollapse, Button, Container } from "reactstrap";
 import { RoutedTabs, NavTab } from "react-router-tabs";
 
 import API from "../../api/methods";
@@ -36,13 +36,12 @@ const CoordClubNavigation = (props) => {
     return (
         <>
             <Container fluid className="actionbar-container rounded-lg">
-                <Row className="mb-3 mb-md-5">
-                    <Col xs="3" sm="1" className="my-auto px-0">
+                <div className="d-flex mb-3 mb-md-5">
+                    <div className="my-auto">
                         <BackButton />
-                    </Col>
-                    <Col className="actionbar-title my-auto pt-2">{club.name}</Col>
-                    {/* <Col className="actionbar-title my-auto pt-2">{club.name}</Col> */}
-                </Row>
+                    </div>
+                    <div className="actionbar-title my-auto pt-2">{club.name}</div>
+                </div>
             </Container>
             <div className="mb-3 mb-md-5 pt-2 pt-md-3 mx-3">
                 <ul class="nav d-none d-sm-block">

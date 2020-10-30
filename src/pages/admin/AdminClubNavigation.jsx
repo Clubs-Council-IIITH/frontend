@@ -15,7 +15,6 @@ import API from "../../api/methods";
 
 import AdminNavigation from "./AdminNavigation";
 import BackButton from "../../components/buttons/BackButton";
-import Transition from "../../components/TransitionContainer";
 
 const AdminClubNavigation = (props) => {
     const [club, setClub] = useState(false);
@@ -49,11 +48,11 @@ const AdminClubNavigation = (props) => {
         <AdminNavigation>
             <Container fluid className="actionbar-container rounded-lg">
                 <Row>
-                    <Col xs="3" sm="1" className="my-auto">
-                        <BackButton />
-                    </Col>
-                    <Col className="viewclub-title my-auto pt-2">
-                        <Transition>{club.name}</Transition>
+                    <Col className="d-flex">
+                        <div className="my-auto">
+                            <BackButton />
+                        </div>
+                        <div className="actionbar-title my-auto pt-2">{club.name}</div>
                     </Col>
                     <Col md="3" className="text-center mt-4 mt-md-0">
                         <UncontrolledButtonDropdown className="mb-2 text-uppercase w-100">
