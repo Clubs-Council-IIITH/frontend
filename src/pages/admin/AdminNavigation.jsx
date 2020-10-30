@@ -20,7 +20,7 @@ const AdminNavigation = ({ children }) => {
 
     return (
         <>
-            <div className="mb-3 mb-md-5 pt-2 pt-md-3">
+            <div className="mb-3 mb-md-5 pt-2 pt-md-3 mx-3">
                 <ul class="nav d-none d-sm-block">
                     <RoutedTabs startPathWith="/admin">
                         {tabs.map((tab) => (

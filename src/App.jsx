@@ -5,11 +5,11 @@ import "./App.css";
 
 // Pages {{{
 import Home from "./pages/Home";
-import Clubs from "./pages/Clubs";
-import ViewClub from "./pages/ViewClub";
-import Calendar from "./pages/Calendar";
-import LoginRedirect from "./pages/LoginRedirect";
-import LogoutRedirect from "./pages/LogoutRedirect";
+
+import PublicClubs from "./pages/public/PublicClubs";
+import PublicCalendar from "./pages/public/PublicCalendar";
+import PublicClubEvents from "./pages/public/PublicClubEvents";
+import PublicClubMembers from "./pages/public/PublicClubMembers";
 
 import AdminClubs from "./pages/admin/AdminClubs";
 import AdminUsers from "./pages/admin/AdminUsers";
@@ -19,6 +19,9 @@ import ClubEvents from "./pages/club/ClubEvents";
 import ClubBudget from "./pages/club/ClubBudget";
 import ClubActivity from "./pages/club/ClubActivity";
 import ClubMembers from "./pages/club/ClubMembers";
+
+import LoginRedirect from "./pages/LoginRedirect";
+import LogoutRedirect from "./pages/LogoutRedirect";
 
 import Error404Page from "./pages/Error404Page";
 import Error401Page from "./pages/Error401Page";
@@ -37,11 +40,12 @@ const App = () => {
             <Navigation session={sessionContext.session}>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/clubs" component={Clubs} />
-                    <Route exact path="/clubs/:id" component={ViewClub} />
-                    <Route exact path="/calendar" component={Calendar} />
-                    {/* <Route exact path="/blog" component={Blog} /> */}
-                    {/* <Route exact path="/contact" component={Contact} /> */}
+                    {/* <Route exact path="/blog" component={PublicBlog} /> */}
+                    <Route exact path="/clubs" component={PublicClubs} />
+                    {/* <Route exact path="/contact" component={PublicContact} /> */}
+                    <Route exact path="/calendar" component={PublicCalendar} />
+                    <Route exact path="/clubs/:id/events" component={PublicClubEvents} />
+                    <Route exact path="/clubs/:id/members" component={PublicClubMembers} />
 
                     {/* Admin routes {{{ */}
                     <Route
@@ -75,7 +79,7 @@ const App = () => {
                     {/* Club routes {{{ */}
                     <Route
                         exact
-                        path={["/admin/clubs/:id", "/club"]}
+                        path={["(/admin)?/clubs/:id", "/club"]}
                         render={({ match }) => <Redirect replace to={`${match.url}/events`} />}
                     />
                     <ProtectedRoute

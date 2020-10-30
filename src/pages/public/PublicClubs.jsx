@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "reactstrap";
 
-import API from "../api/methods";
+import API from "../../api/methods";
 
-import Searchbar from "../components/Searchbar";
-import ClubItem from "../components/items/ClubItem";
-import NullIndicator from "../components/NullIndicator";
-import Transition from "../components/TransitionContainer";
-import LoadingIndicator from "../components/LoadingIndicator";
-import { PageContext } from "../components/Navigation";
+import Searchbar from "../../components/Searchbar";
+import ClubItem from "../../components/items/ClubItem";
+import NullIndicator from "../../components/NullIndicator";
+import Transition from "../../components/TransitionContainer";
+import LoadingIndicator from "../../components/LoadingIndicator";
+import { PageContext } from "../../components/Navigation";
 
 const Clubs = (props) => {
     const [clubList, setClubList] = useState(false);
