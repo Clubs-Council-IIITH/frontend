@@ -25,53 +25,48 @@ const ClubEvents = (props) => {
 
     const renderEvents = () => {
         if (!filteredList) return <LoadingIndicator />;
-        var activeEventsList = filteredList.filter((event) =>
-            ["approved", "published", "scheduled"].includes(event.state)
+
+        var upcomingList = filteredList.filter(
+            (event) => !["completed", "deleted"].includes(event.state)
         );
-        if (activeEventsList.length === 0) return <NullIndicator />;
+
+        var previousList = filteredList.filter((event) => ["completed"].includes(event));
+
+        if (!upcomingList.length && !previousList.length) return <NullIndicator />;
         return (
             <Container fluid className="mt-2 mt-md-5">
-                <Row>
-                    {activeEventsList.map((event) => (
-                        <Col md="6" lg="4" className="my-3" key={event.id}>
-                            <EventItem {...event} state="" />
-                        </Col>
-                    ))}
-                </Row>
+                {upcomingList.length ? (
+                    <>
+                        <div className="event-category-banner mt-5 mt-md-0"> UPCOMING </div>
+                        <Row className="mb-4">
+                            {upcomingList.map((event) => {
+                                return (
+                                    <Col md="6" lg="4" className="d-flex my-3" key={event.id}>
+                                        <EventItem {...event} state="" />
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+                    </>
+                ) : null}
+
+                {previousList.length ? (
+                    <>
+                        <div className="event-category-banner"> PREVIOUS </div>
+                        <Row>
+                            {previousList.map((event) => {
+                                return (
+                                    <Col md="6" lg="4" className="d-flex my-3" key={event.id}>
+                                        <EventItem {...event} state="" />
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+                    </>
+                ) : null}
             </Container>
         );
     };
-
-    // const renderEvents = () => {
-    //     if (!filteredList) return <LoadingIndicator />;
-    //     if (filteredList.length === 0) return <NullIndicator />;
-    //     return (
-    //         <Container fluid className="mt-2 mt-md-3">
-    //             <Row>
-    //                 {filteredList.map((event) => {
-    //                     const isPrevious = event.state === "completed" || event.state === "deleted";
-    //                     if (isPrevious) return null;
-    //                     return (
-    //                         <Col md="6" xl="4" className="d-flex my-3" key={event.id}>
-    //                             <EventItem modifiable {...event} />
-    //                         </Col>
-    //                     );
-    //                 })}
-    //             </Row>
-    //             <Row className="mt-4">
-    //                 {filteredList.map((event) => {
-    //                     const isPrevious = event.state === "completed" || event.state === "deleted";
-    //                     if (!isPrevious) return null;
-    //                     return (
-    //                         <Col md="6" xl="4" className="d-flex my-3" key={event.id}>
-    //                             <EventItem modifiable {...event} />
-    //                         </Col>
-    //                     );
-    //                 })}
-    //             </Row>
-    //         </Container>
-    //     );
-    // };
 
     return (
         <ClubNavigation match={props.match}>

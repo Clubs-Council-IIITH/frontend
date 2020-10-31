@@ -36,7 +36,7 @@ const CoordClubNavigation = (props) => {
     return (
         <>
             <Container fluid className="actionbar-container rounded-lg">
-                <div className="d-flex mb-3 mb-md-5">
+                <div className="d-flex mb-3 mb-sm-5">
                     <div className="my-auto">
                         <BackButton />
                     </div>

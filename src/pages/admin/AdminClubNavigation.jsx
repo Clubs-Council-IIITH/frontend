@@ -60,7 +60,7 @@ const AdminClubNavigation = (props) => {
                                 className="text-uppercase py-3 club-nav-dropdown common-btn"
                                 caret
                             >
-                                {currentPath()}
+                                {currentPath()} &nbsp;
                             </DropdownToggle>
                             <DropdownMenu className="w-100">
                                 <RoutedTabs startPathWith={`/admin/clubs/${props.match.params.id}`}>

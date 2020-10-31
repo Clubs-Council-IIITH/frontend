@@ -70,7 +70,7 @@ const ClubMembers = (props) => {
                                 <Col
                                     sm="6"
                                     md="4"
-                                    lg="3"
+                                    lg="2"
                                     className="my-3 member-card"
                                     key={member.id}
                                 >
