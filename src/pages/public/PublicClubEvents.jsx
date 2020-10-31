@@ -30,7 +30,8 @@ const ClubEvents = (props) => {
             (event) => !["completed", "deleted"].includes(event.state)
         );
 
-        var previousList = filteredList.filter((event) => ["completed"].includes(event));
+        var previousList = filteredList.filter((event) => event.state === "completed");
+        previousList.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
 
         if (!upcomingList.length && !previousList.length) return <NullIndicator />;
         return (

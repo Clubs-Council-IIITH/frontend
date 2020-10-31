@@ -6,6 +6,7 @@ import { RoutedTabs, NavTab } from "react-router-tabs";
 import API from "../../api/methods";
 
 import BackButton from "../../components/buttons/BackButton";
+import Transition from "../../components/TransitionContainer";
 
 const CoordClubNavigation = (props) => {
     const [club, setClub] = useState(false);
@@ -40,7 +41,9 @@ const CoordClubNavigation = (props) => {
                     <div className="my-auto">
                         <BackButton />
                     </div>
-                    <div className="actionbar-title my-auto pt-2">{club.name}</div>
+                    <Transition>
+                        <div className="actionbar-title my-auto pt-2">{club.name}</div>
+                    </Transition>
                 </div>
             </Container>
             <div className="mb-3 mb-md-5 pt-2 pt-md-3 mx-3">

@@ -33,6 +33,7 @@ const ClubEvents = (props) => {
         );
 
         var previousList = filteredList.filter((event) => !upcomingList.includes(event));
+        previousList.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
 
         return (
             <Container fluid className="mt-2 mt-md-5">
