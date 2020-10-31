@@ -27,7 +27,7 @@ const Rightbar = (props) => {
 
     const renderUpdates = () => {
         if (!updates) return <LoadingIndicator />;
-        if (updates.length === 0) return <NullIndicator />;
+        if (updates.length === 0) return null;
         return (
             <Row>
                 {updates.map((update) => (
@@ -61,7 +61,7 @@ const Rightbar = (props) => {
                     onClick={props.toggle}
                 />
             </div>
-            <Nav className="m-auto d-flex justify-content-between rightbar-nav" navbar>
+            <Nav className="m-auto d-flex rightbar-nav" navbar>
                 {props.session.usergroup === "cc_admin" ? (
                     <Button className="mt-4 common-btn new-update-btn py-2" onClick={toggleModal}>
                         + NEW UPDATE
