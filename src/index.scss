@@ -488,6 +488,18 @@ code {
     font-size: calc(1.5em + 1vw);
     color: #bbb;
 }
+
+.null-img-sidebar {
+    min-width: 200px;
+    width: 20vw;
+}
+
+.null-msg-sidebar {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: calc(0.8em + 0.8vw);
+    color: #bbb;
+}
 // }}}
 
 // Modal Styles {{{
@@ -955,6 +967,7 @@ code {
 
 .new-update-btn {
     background-color: $bg-dark;
+    min-width: 150px;
 }
 
 // }}}

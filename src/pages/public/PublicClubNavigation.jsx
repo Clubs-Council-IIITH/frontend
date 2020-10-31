@@ -41,7 +41,7 @@ const CoordClubNavigation = (props) => {
                     <div className="my-auto">
                         <BackButton />
                     </div>
-                    <Transition>
+                    <Transition className="my-auto">
                         <div className="actionbar-title my-auto pt-2">{club.name}</div>
                     </Transition>
                 </div>

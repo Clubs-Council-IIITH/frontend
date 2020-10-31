@@ -36,7 +36,6 @@ const AdminClubNavigation = (props) => {
     };
 
     useEffect(() => {
-        console.log(props.match.params.id);
         async function getClub() {
             const club_res = await API.view("clubs", { id: props.match.params.id });
             setClub(club_res.data[0]);
@@ -53,7 +52,7 @@ const AdminClubNavigation = (props) => {
                         <div className="my-auto">
                             <BackButton />
                         </div>
-                        <Transition>
+                        <Transition className="my-auto">
                             <div className="actionbar-title my-auto pt-2">{club.name}</div>
                         </Transition>
                     </Col>

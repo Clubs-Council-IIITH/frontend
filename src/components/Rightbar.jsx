@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Navbar, Nav } from "reactstrap";
+import { Container, Button, Row, Col, Navbar, Nav } from "reactstrap";
 
 import API from "../api/methods";
 
-import NullIndicator from "./NullIndicator";
 import UpdateItem from "./items/UpdateItem";
 import NewUpdateModal from "./NewUpdateModal";
 import LoadingIndicator from "./LoadingIndicator";
@@ -27,7 +26,15 @@ const Rightbar = (props) => {
 
     const renderUpdates = () => {
         if (!updates) return <LoadingIndicator />;
-        if (updates.length === 0) return null;
+        if (updates.length === 0)
+            return (
+                <Container fluid className="mt-5 d-flex justify-content-center">
+                    <img src="/shrug-18.svg" alt="empty" className="null-img-sidebar" />
+                    <div className="null-msg-sidebar mt-3">
+                        {props.msg ? props.msg : "there's nothing here..."}
+                    </div>
+                </Container>
+            );
         return (
             <Row>
                 {updates.map((update) => (
