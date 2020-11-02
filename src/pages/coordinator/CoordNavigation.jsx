@@ -27,6 +27,22 @@ const CoordClubNavigation = (props) => {
         setModal(!modal);
     };
 
+    const renderChildren = (children) => {
+        if (children.length > 1) {
+            return (
+                <>
+                    {React.cloneElement(children[0], {
+                        modal: modal,
+                        toggleModal: toggleModal,
+                    })}
+                    {children.slice(1)}
+                </>
+            );
+        } else {
+            return <>{children}</>;
+        }
+    };
+
     return (
         <>
             <div className="mb-3 mb-md-5 pt-2 pt-md-3">
@@ -78,7 +94,7 @@ const CoordClubNavigation = (props) => {
                     </Row>
                 </Transition>
             </Container>
-            {props.children}
+            {renderChildren(props.children)}
         </>
     );
 };
