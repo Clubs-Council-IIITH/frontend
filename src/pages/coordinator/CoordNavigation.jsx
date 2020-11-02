@@ -71,11 +71,7 @@ const CoordClubNavigation = (props) => {
                     </Row>
                 </Transition>
             </Container>
-            {React.cloneElement(props.children[0], {
-                modal: modal,
-                toggleModal: toggleModal,
-            })}
-            {props.children.slice(1)}
+            {props.children}
         </>
     );
 };
