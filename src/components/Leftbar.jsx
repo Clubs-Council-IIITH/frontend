@@ -39,6 +39,7 @@ const Leftbar = (props) => {
                         className="d-flex flex-row"
                         activeClassName="active nav-icon-active"
                         exact={exact}
+                        onClick={props.toggle}
                     >
                         <img
                             src={icon}
