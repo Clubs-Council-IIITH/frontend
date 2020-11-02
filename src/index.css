@@ -288,6 +288,12 @@ select {
   line-height: 1.2;
 }
 
+.actionbar-subtext {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.5em;
+  line-height: 1.2;
+}
+
 .nav-tab {
   font-family: "Quicksand", sans-serif;
   font-weight: 600;

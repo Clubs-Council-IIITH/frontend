@@ -10,6 +10,7 @@ import {
     Col,
 } from "reactstrap";
 import { RoutedTabs, NavTab } from "react-router-tabs";
+import FadeIn from "react-fade-in";
 
 import API from "../../api/methods";
 
@@ -54,16 +55,21 @@ const AdminClubNavigation = (props) => {
                         </div>
                         <Transition className="my-auto">
                             <div className="actionbar-title my-auto pt-2">{club.name}</div>
+                            <div className="actionbar-subtext my-auto pt-3 d-none d-sm-block">
+                                {club.mail}
+                            </div>
                         </Transition>
                     </Col>
                     <Col md="3" className="text-center mt-4 mt-md-0">
                         <UncontrolledButtonDropdown className="mb-2 text-uppercase w-100">
-                            <DropdownToggle
-                                className="text-uppercase py-3 club-nav-dropdown common-btn"
-                                caret
-                            >
-                                {currentPath()} &nbsp;
-                            </DropdownToggle>
+                            <Transition className="w-100">
+                                <DropdownToggle
+                                    className="text-uppercase py-3 club-nav-dropdown common-btn w-100"
+                                    caret
+                                >
+                                    {currentPath()} &nbsp;
+                                </DropdownToggle>
+                            </Transition>
                             <DropdownMenu className="w-100">
                                 <RoutedTabs startPathWith={`/admin/clubs/${props.match.params.id}`}>
                                     {tabs.map((tab) => (
