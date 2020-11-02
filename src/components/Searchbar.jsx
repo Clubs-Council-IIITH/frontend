@@ -18,7 +18,6 @@ const Searchbar = ({ dataList, searchAttr, setFilteredList, className }) => {
             type="text"
             bsSize="lg"
             placeholder="Search..."
-            autoFocus
         />
     );
 };
