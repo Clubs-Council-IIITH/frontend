@@ -12,7 +12,7 @@ const CoordClubNavigation = (props) => {
     const location = useLocation();
     const tabs = [
         { to: "/events", title: "Events", modalButton: "New Event" },
-        { to: "/members", title: "Members", modalButton: "Add Member" },
+        { to: "/members", title: "Members", modalButton: null },
         // { to: "/budget", title: "Budgets", modalButton: "New Proposal" },
     ];
 
@@ -66,13 +66,15 @@ const CoordClubNavigation = (props) => {
                 <Transition>
                     <Row>
                         <Col className="actionbar-title my-auto pt-2">{currentPath().title}</Col>
-                        <Col xs="4" className="d-flex justify-content-end">
-                            <NewButton
-                                className="mx-0"
-                                onClick={toggleModal}
-                                text={currentPath().modalButton}
-                            />
-                        </Col>
+                        {currentPath().modalButton ? (
+                            <Col xs="4" className="d-flex justify-content-end">
+                                <NewButton
+                                    className="mx-0"
+                                    onClick={toggleModal}
+                                    text={currentPath().modalButton}
+                                />
+                            </Col>
+                        ) : null}
                     </Row>
                 </Transition>
             </Container>
