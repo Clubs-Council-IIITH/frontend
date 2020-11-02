@@ -1,55 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-    Button,
-    ListGroup,
-    Form,
-    FormGroup,
-    FormFeedback,
-    Label,
-    Input,
-    Row,
-    Col,
-} from "reactstrap";
+import { Button, Form, FormGroup, FormFeedback, Label, Input, Row, Col } from "reactstrap";
 
 import API from "../api/methods";
 
-import Searchbar from "../components/Searchbar";
 import SubmitButton from "../components/buttons/SubmitButton";
 import FailureAlert from "../components/FailureAlert";
-import UserListItem from "../components/items/UserListItem";
 
 const ClubForm = (props) => {
-    const [changedUserList, setChangedUserList] = useState([]);
-    const [existingUserList, setExistingUserList] = useState([]);
-    const [newUserList, setNewUserList] = useState([]);
-    const [filteredList, setFilteredList] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
     const [APIerror, setAPIError] = useState(false);
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             name: props.initial.name,
             mail: props.initial.mail,
+            website: props.initial.website,
         },
     });
-
-    useEffect(() => {
-        async function getUserList() {
-            const res = await API.view("coordinators", {});
-            res.data.forEach((user) => {
-                var clubs;
-                if (user.roles) clubs = user.roles.map((o) => o[0]);
-                else clubs = [];
-                if (clubs.includes(JSON.stringify(props.id))) existingUserList.push(user);
-                else newUserList.push(user);
-            });
-            setFilteredList(newUserList);
-            setIsLoading(false);
-        }
-
-        getUserList();
-    }, []); // eslint-disable-line
 
     const onSubmit = async (data) => {
         var clubForm = document.getElementById("clubform");
@@ -59,77 +26,10 @@ const ClubForm = (props) => {
         if (props.action === "new") res = await API.new("clubs", clubFormData);
         else res = await API.edit("clubs", props.id, clubFormData);
 
-        if (res.status === 200) {
-            changedUserList.forEach(async (user) => {
-                var roleFormData = new FormData();
-                for (var key in user) roleFormData.append(key, user[key]);
-                roleFormData.delete("img");
-                var troles = user.roles;
-                roleFormData.append("roles", JSON.stringify(troles));
-
-                await API.edit("coordinators", user.id, roleFormData);
-            });
-            window.location.reload();
-        } else setAPIError(res.data);
+        if (res.status === 200) window.location.reload();
+        else setAPIError(res.data);
     };
 
-    const addUser = async (id, role) => {
-        const targetUser = newUserList.filter((user) => user.id === id)[0];
-        if (!targetUser.roles) targetUser.roles = [];
-        targetUser.roles.push([props.id.toString(), role]);
-        setExistingUserList([...existingUserList, targetUser]);
-        setNewUserList(newUserList.filter((user) => user.id !== id));
-        setChangedUserList([...changedUserList, targetUser]);
-        setFilteredList(newUserList.filter((user) => user.id !== id));
-    };
-
-    const removeUser = async (id) => {
-        const targetUser = existingUserList.filter((user) => user.id === id)[0];
-        targetUser.roles = targetUser.roles.filter((item) => item[0] !== props.id.toString());
-        setNewUserList([...newUserList, targetUser]);
-        setExistingUserList(existingUserList.filter((user) => user.id !== id));
-        setChangedUserList([...changedUserList, targetUser]);
-        setFilteredList([...newUserList, targetUser]);
-    };
-
-    const renderExistingUsers = () => {
-        if (existingUserList.length === 0) return null;
-        return (
-            <React.Fragment>
-                <h4 className="pt-2"> Existing Users </h4>
-                <ListGroup>
-                    {existingUserList.map((user) => (
-                        <UserListItem
-                            existing
-                            user={user}
-                            removeUser={removeUser}
-                            club={props.id}
-                        />
-                    ))}
-                </ListGroup>
-            </React.Fragment>
-        );
-    };
-
-    const renderNewUsers = () => {
-        return (
-            <React.Fragment>
-                <h4 className="mt-4"> Add Users </h4>
-                <Searchbar
-                    className="w-100 input-sm"
-                    dataList={newUserList}
-                    setFilteredList={setFilteredList}
-                />
-                <ListGroup className="mt-2">
-                    {filteredList.map((user) => (
-                        <UserListItem user={user} addUser={addUser} />
-                    ))}
-                </ListGroup>
-            </React.Fragment>
-        );
-    };
-
-    if (isLoading) return null;
     return (
         <Form id="clubform" onSubmit={handleSubmit(onSubmit)}>
             <FailureAlert error={APIerror} />
@@ -139,9 +39,10 @@ const ClubForm = (props) => {
                     invalid={errors.name}
                     type="text"
                     name="name"
-                    innerRef={register({ required: true, pattern: /^[a-zA-Z,.' ]*$/ })}
+                    innerRef={register({ required: true, pattern: /^[a-zA-Z ,.'-]*$/ })}
+                    autoFocus
                 />
-                <FormFeedback> Club name can not be empty! </FormFeedback>
+                <FormFeedback> Invalid club name! </FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="mail"> E-Mail </Label>
@@ -153,16 +54,15 @@ const ClubForm = (props) => {
                 />
                 <FormFeedback> Club mail can not be empty! </FormFeedback>
             </FormGroup>
-
-            {props.action === "edit" ? (
-                <React.Fragment>
-                    <div>
-                        <h3 className="pt-4"> Manage Users </h3>
-                    </div>
-                    {renderExistingUsers()}
-                    {renderNewUsers()}
-                </React.Fragment>
-            ) : null}
+            <FormGroup>
+                <Label for="website"> Website Link </Label>
+                <Input
+                    invalid={errors.website}
+                    type="text"
+                    name="website"
+                    innerRef={register({ required: false })}
+                />
+            </FormGroup>
 
             <Row className="mt-4">
                 <Col className="text-right px-md-4">

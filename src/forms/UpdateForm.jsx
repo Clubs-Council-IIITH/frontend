@@ -12,6 +12,7 @@ const UpdateForm = (props) => {
 
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
+            tag: props.initial.tag,
             title: props.initial.title,
             content: props.initial.content,
         },
@@ -33,12 +34,27 @@ const UpdateForm = (props) => {
         <Form id="updateform" onSubmit={handleSubmit(onSubmit)}>
             <FailureAlert error={APIerror} />
             <FormGroup>
+                <Label for="tag"> Tag </Label>
+                <Input
+                    invalid={errors.tag}
+                    type="select"
+                    name="tag"
+                    innerRef={register({ required: true })}
+                >
+                    <option value="normal"> NORMAL </option>
+                    <option value="reminder"> REMINDER </option>
+                    <option value="important"> IMPORTANT </option>
+                </Input>
+                <FormFeedback> Invalid tag! </FormFeedback>
+            </FormGroup>
+            <FormGroup>
                 <Label for="title"> Title </Label>
                 <Input
                     invalid={errors.title}
                     type="text"
                     name="title"
                     innerRef={register({ required: true })}
+                    autoFocus
                 />
                 <FormFeedback> You need to provide a title! </FormFeedback>
             </FormGroup>
@@ -48,7 +64,7 @@ const UpdateForm = (props) => {
                     invalid={errors.content}
                     type="textarea"
                     name="content"
-                    rows="4"
+                    rows="6"
                     innerRef={register({ required: true })}
                 />
                 <FormFeedback> You need to provide some update content! </FormFeedback>

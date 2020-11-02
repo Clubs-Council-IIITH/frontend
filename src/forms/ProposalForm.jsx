@@ -37,6 +37,7 @@ const ProposalForm = (props) => {
                     type="text"
                     name="link"
                     innerRef={register({ required: true })}
+                    autoFocus
                 />
                 <FormFeedback> Provide a valid link! </FormFeedback>
             </FormGroup>

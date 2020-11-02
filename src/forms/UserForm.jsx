@@ -24,8 +24,8 @@ const UserForm = (props) => {
         var userFormData = new FormData(userForm);
 
         var res;
-        if (props.action === "new") res = await API.new("coordinators", userFormData);
-        else res = await API.edit("coordinators", props.id, userFormData);
+        if (props.action === "new") res = await API.new("users", userFormData);
+        else res = await API.edit("users", props.id, userFormData);
 
         if (res.status === 200) window.location.reload();
         else setAPIError(res.data);
@@ -55,6 +55,7 @@ const UserForm = (props) => {
                     type="text"
                     name="name"
                     innerRef={register({ required: true, pattern: /^[a-zA-Z,. ]*$/ })}
+                    autoFocus
                 />
                 <FormFeedback> Invalid user name! </FormFeedback>
             </FormGroup>

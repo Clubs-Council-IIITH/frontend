@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import API from "../../api/methods";
 
-import Page from "../../components/PageContainer";
-import SecondaryNavbar from "../../components/SecondaryNavbar";
+import AdminNavigation from "./AdminNavigation";
 import Searchbar from "../../components/Searchbar";
+import NewButton from "../../components/buttons/NewButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import NullIndicator from "../../components/NullIndicator";
 import NewClubModal from "../../components/NewClubModal";
 import ClubItem from "../../components/items/ClubItem";
+import Transition from "../../components/TransitionContainer";
 
-const AdminClubs = (props) => {
+const AdminClubs = () => {
     const [clubList, setClubList] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [modal, setModal] = useState(false);
@@ -34,8 +35,8 @@ const AdminClubs = (props) => {
         if (!filteredList) return <LoadingIndicator />;
         if (filteredList.length === 0) return <NullIndicator />;
         return (
-            <Page>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     {filteredList.map((club) => {
                         if (club.state === "deleted") return null;
                         return (
@@ -55,36 +56,40 @@ const AdminClubs = (props) => {
                         );
                     })}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
     return (
         <>
-            <SecondaryNavbar admin page="clubs" />
             <NewClubModal modal={modal} toggleModal={toggleModal} />
-            <Page fluid>
-                <Container fluid className="actionbar-container py-4 p-md-5 rounded-lg">
-                    <Page header>
-                        <span className="actionbar-title p-2">Clubs</span>
-                        <Button
-                            onClick={toggleModal}
-                            className="new-btn btn-outline-dark py-2 px-3 my-3"
-                        >
-                            <span className="d-md-none"> + </span>
-                            <span className="d-none d-md-block"> + NEW CLUB </span>
-                        </Button>
-                    </Page>
-                    <Page className="mt-5">
-                        <Searchbar
-                            className="w-100"
-                            dataList={clubList}
-                            setFilteredList={setFilteredList}
-                        />
-                    </Page>
-                </Container>
-                {renderClubs()}
-            </Page>
+            <AdminNavigation>
+                <Transition>
+                    <Container
+                        fluid
+                        className="actionbar-container rounded-lg mt-0 mt-sm-5 mt-md-0"
+                    >
+                        <Row>
+                            <Col
+                                md="6"
+                                className="d-flex flex-row justify-content-between justify-content-md-start"
+                            >
+                                <span className="actionbar-title ml-md-2 mr-md-5">Clubs</span>
+                                <NewButton onClick={toggleModal} text="new club" />
+                            </Col>
+                            <Col className="my-4 my-md-auto">
+                                <Searchbar
+                                    className="w-100"
+                                    dataList={clubList}
+                                    setFilteredList={setFilteredList}
+                                    searchAttr={(obj) => obj.name}
+                                />
+                            </Col>
+                        </Row>
+                    </Container>
+                    {renderClubs()}
+                </Transition>
+            </AdminNavigation>
         </>
     );
 };

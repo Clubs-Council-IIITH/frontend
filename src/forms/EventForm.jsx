@@ -34,6 +34,8 @@ const EventForm = (props) => {
             venue: props.initial.venue,
             audience: props.initial.audience,
             state: props.initial.state,
+            description: props.initial.description,
+            financial_requirements: props.initial.financial_requirements,
         },
     });
 
@@ -41,7 +43,7 @@ const EventForm = (props) => {
         var eventForm = document.getElementById("eventform");
         var eventFormData = new FormData(eventForm);
         eventFormData.set("audience", data.audience.toString());
-        eventFormData.set("datetime", new Date(data.date + " " + data.time).toISOString());
+        eventFormData.set("datetime", new Date(`${data.date} ${data.time}`).toISOString());
 
         var res;
         if (props.action === "new") res = await API.new("events", eventFormData);
@@ -55,19 +57,21 @@ const EventForm = (props) => {
         <Form id="eventform" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <FailureAlert error={APIerror} />
             <Row form>
-                <Col md="8" className="px-md-3">
+                <Col lg className="px-lg-3 d-flex flex-column">
                     <FormGroup>
                         <Label for="name"> Name </Label>
                         <Input
                             invalid={errors.name}
                             type="text"
                             name="name"
-                            innerRef={register({ required: true, pattern: /^[a-zA-Z0-9,.!? ]*$/ })}
+                            innerRef={register({ required: true, pattern: /^[a-zA-Z 0-9,.!?-]*$/ })}
+                            autoFocus
+                            placeholder="An amazing event"
                         />
-                        <FormFeedback> Event name can not be empty! </FormFeedback>
+                        <FormFeedback> Invalid event name! </FormFeedback>
                     </FormGroup>
                     <Row>
-                        <Col md="6">
+                        <Col lg="6">
                             <FormGroup>
                                 <Label for="date"> Date </Label>
                                 <Input
@@ -81,7 +85,7 @@ const EventForm = (props) => {
                                 <FormFeedback> Invalid date! </FormFeedback>
                             </FormGroup>
                         </Col>
-                        <Col md="6">
+                        <Col lg="6">
                             <FormGroup>
                                 <Label for="time"> Time </Label>
                                 <Input
@@ -101,6 +105,7 @@ const EventForm = (props) => {
                             type="text"
                             name="duration"
                             innerRef={register({ required: true })}
+                            placeholder="1 hr"
                         />
                         <FormFeedback> Invalid duration! </FormFeedback>
                     </FormGroup>
@@ -110,13 +115,27 @@ const EventForm = (props) => {
                             invalid={errors.venue}
                             type="textarea"
                             name="venue"
-                            rows="4"
-                            innerRef={register({ required: true })}
+                            rows="5"
+                            innerRef={register({ required: false })}
+                            placeholder="-"
                         />
                         <FormFeedback> Invalid venue! </FormFeedback>
                     </FormGroup>
+                    <FormGroup className="d-flex flex-column align-items-stretch flex-fill">
+                        <Label for="financial_requirements"> Financial Requirements </Label>
+                        <Input
+                            invalid={errors.financial_requirements}
+                            type="textarea"
+                            name="financial_requirements"
+                            rows="4"
+                            className="flex-fill"
+                            innerRef={register({ required: false })}
+                            placeholder="None."
+                        />
+                        <FormFeedback> Invalid requirements! </FormFeedback>
+                    </FormGroup>
                 </Col>
-                <Col md="4" className="px-md-3">
+                <Col className="px-lg-3 d-flex flex-column">
                     <FormGroup>
                         <Label for="audience"> Audience </Label>
                         <Input
@@ -135,10 +154,23 @@ const EventForm = (props) => {
                             <option value="staff"> Staff </option>
                             <option value="faculty"> Faculty </option>
                         </Input>
-                        <FormText color="muted" className="d-none d-md-block">
+                        <FormText color="muted" className="d-none d-lg-block">
                             hold ctrl to select multiple options
                         </FormText>
                         <FormFeedback> Invalid audience! </FormFeedback>
+                    </FormGroup>
+                    <FormGroup className="d-flex flex-column flex-fill align-items-stretch">
+                        <Label for="description"> Description </Label>
+                        <Input
+                            invalid={errors.description}
+                            type="textarea"
+                            name="description"
+                            rows="12"
+                            className="flex-fill"
+                            innerRef={register({ required: false })}
+                            placeholder="No description available."
+                        />
+                        <FormFeedback> Invalid description! </FormFeedback>
                     </FormGroup>
                     {session.usergroup === "cc_admin" ? (
                         <FormGroup>
@@ -157,7 +189,11 @@ const EventForm = (props) => {
                             <FormFeedback> Invalid state! </FormFeedback>
                         </FormGroup>
                     ) : null}
-                    <FormGroup className="mt-4">
+                </Col>
+            </Row>
+            <Row form>
+                <Col className="px-lg-3">
+                    <FormGroup>
                         <Label for="creator"> Your name? </Label>
                         <Input
                             autocomplete="off"
@@ -171,7 +207,7 @@ const EventForm = (props) => {
                 </Col>
             </Row>
             <Row className="mt-4">
-                <Col className="text-right px-md-4">
+                <Col className="text-right px-lg-4">
                     <Button className="mx-3 common-btn text-uppercase" onClick={props.cancelAction}>
                         Cancel
                     </Button>

@@ -1,39 +1,45 @@
 import React, { useState } from "react";
 import { Card, CardImg, CardBody, CardFooter, Input } from "reactstrap";
 
-import EditUserModal from "../../components/EditUserModal";
+import UserForm from "../../forms/UserForm";
+
+import EditModal from "../../components/EditModal";
 import EditButton from "../../components/buttons/EditButton";
+import ViewUserModal from "../ViewUserModal";
 
 const UserItem = (props) => {
+    const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
+
+    const toggleViewModal = () => {
+        setViewModal(!viewModal);
+    };
 
     const toggleEditModal = () => {
         setEditModal(!editModal);
     };
 
     return (
-        <Card className="dash-card elevate">
-            <EditUserModal modal={editModal} toggleModal={toggleEditModal} id={props.id} />
-            <CardImg src={props.img} className="user-img" />
-            <CardBody>
+        <Card className="dash-card elevate clickable flex-fill">
+            <ViewUserModal modal={viewModal} toggleModal={toggleViewModal} instance={props} />
+            <EditModal modal={editModal} toggleModal={toggleEditModal} text="user">
+                <UserForm
+                    action="edit"
+                    id={props.id}
+                    initial={props}
+                    cancelAction={toggleEditModal}
+                />
+            </EditModal>
+            <CardImg onClick={toggleViewModal} src={props.img} className="member-img" />
+            <CardBody onClick={toggleViewModal}>
                 <div className="user-name"> {props.name} </div>
-                <div className="user-role mt-2"> {props.role} </div>
-                {props.mail ? (
-                    <div className="user-mail my-1 mt-4">
-                        <Input type="text" value={props.mail} readonly />
-                    </div>
-                ) : null}
-                {props.mobile ? (
-                    <div className="user-mobile my-1">
-                        <Input type="text" value={props.mobile} readonly />
-                    </div>
-                ) : null}
+                <div className="user-mail mt-3 mx-n1">
+                    <Input className="text" value={props.mail} readonly disabled />
+                </div>
             </CardBody>
-            {props.modifiable ? (
-                <CardFooter className="text-right p-2">
-                    <EditButton onClick={toggleEditModal} />
-                </CardFooter>
-            ) : null}
+            <CardFooter className="text-right p-2">
+                <EditButton onClick={toggleEditModal} />
+            </CardFooter>
         </Card>
     );
 };

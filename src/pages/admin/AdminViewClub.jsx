@@ -4,8 +4,7 @@ import { Alert, InputGroup, Input, InputGroupAddon, Container, Button, Row, Col 
 
 import API from "../../api/methods";
 
-import Page from "../../components/PageContainer";
-import SecondaryNavbar from "../../components/SecondaryNavbar";
+import AdminNavigation from "./AdminNavigation";
 import BackButton from "../../components/buttons/BackButton";
 import Searchbar from "../../components/Searchbar";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -19,7 +18,6 @@ import { isSameDay, formatDateTime } from "../../utils/DateTimeFormatter";
 const AdminViewClub = (props) => {
     const [club, setClub] = useState(false);
     const [logs, setLogs] = useState(false);
-    const [users, setUsers] = useState(false);
     const [events, setEvents] = useState(false);
     const [proposals, setProposals] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
@@ -29,16 +27,6 @@ const AdminViewClub = (props) => {
         async function getClub() {
             const club_res = await API.view("clubs", { id: props.match.params.id });
             setClub(club_res.data[0]);
-            const users_res = await API.view("coordinators", { club: props.match.params.id });
-            setUsers(users_res.data);
-        }
-
-        async function getData() {
-            const events_res = await API.view("events", { club: props.match.params.id });
-            setEvents(events_res.data);
-            setFilteredList(events_res.data);
-            const logs_res = await API.view("logs", { club: props.match.params.id });
-            setLogs(logs_res.data);
         }
 
         async function getProposals() {
@@ -47,98 +35,15 @@ const AdminViewClub = (props) => {
         }
 
         getClub();
-        getData();
         getProposals();
     }, []); // eslint-disable-line
-
-    const renderMembers = () => {
-        if (!users) return <LoadingIndicator />;
-        if (users.length === 0) return <NullIndicator />;
-        return (
-            <Page>
-                <Row className="mt-4">
-                    {users.map((user) => (
-                        <Col md="4" lg="3" className="my-3 user-card" key={user.id}>
-                            <UserItem
-                                {...user}
-                                role={user.roles.filter((role) => role[0] == club.id)[0][1]} // eslint-disable-line
-                            />
-                        </Col>
-                    ))}
-                </Row>
-            </Page>
-        );
-    };
-
-    const renderEvents = () => {
-        if (!filteredList) return <LoadingIndicator />;
-        if (filteredList.length === 0) return <NullIndicator />;
-        return (
-            <Page>
-                <Row className="mt-4">
-                    {filteredList.map((event) => {
-                        const isPrevious = event.state === "completed" || event.state === "deleted";
-                        if (isPrevious) return null;
-                        return (
-                            <Col md="6" lg="4" className="my-3" key={event.id}>
-                                <EventItem modifiable {...event} />
-                            </Col>
-                        );
-                    })}
-                </Row>
-                <Row className="mt-4">
-                    {filteredList.map((event) => {
-                        const isPrevious = event.state === "completed" || event.state === "deleted";
-                        if (!isPrevious) return null;
-                        return (
-                            <Col md="6" lg="4" className="my-3" key={event.id}>
-                                <EventItem {...event} />
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </Page>
-        );
-    };
-
-    const renderLogs = () => {
-        if (!logs) return <LoadingIndicator />;
-        if (logs.length === 0) return <NullIndicator />;
-        var prevDate = logs[0].datetime;
-        logs[0]["datebreak"] = true;
-        logs.forEach(function (log) {
-            if (!isSameDay(prevDate, log.datetime)) {
-                log["datebreak"] = true;
-                prevDate = log.timestamp;
-            }
-        });
-
-        return (
-            <Page>
-                <div className="mt-4">
-                    {console.log(logs)}
-                    {logs.map((log) => (
-                        <Col md="12" className="my-1">
-                            <LogItem
-                                datetime={log.datetime}
-                                creator={log.actor}
-                                action={log.action}
-                                event={log.event[0]["name"]}
-                                datebreak={log.datebreak}
-                            />
-                        </Col>
-                    ))}
-                </div>
-            </Page>
-        );
-    };
 
     const renderProposals = () => {
         if (!proposals) return <LoadingIndicator />;
         if (proposals.length === 0) return <NullIndicator />;
         return (
-            <Page>
-                <Row className="mt-4">
+            <Container fluid className="mt-2 mt-md-5">
+                <Row>
                     <Col className="mt-3">
                         <Alert color="success" className="proposal-alert p-4">
                             <div className="proposal-alert-header mb-2 text-uppercase">
@@ -200,12 +105,12 @@ const AdminViewClub = (props) => {
                 </Row>
                 <Row className="mt-4">
                     {proposals.slice(1).map((proposal) => (
-                        <Col md="6" lg="4" className="my-3" key={proposal.id}>
+                        <Col md="6" xl="4" className="my-3" key={proposal.id}>
                             <ProposalItem {...proposal} />
                         </Col>
                     ))}
                 </Row>
-            </Page>
+            </Container>
         );
     };
 
@@ -258,30 +163,31 @@ const AdminViewClub = (props) => {
 
     return (
         <>
-            <SecondaryNavbar admin page="clubs" />
-            <Page fluid>
-                <Container fluid className="actionbar-container pb-3 p-md-5 rounded-lg">
-                    <Page className="viewclub-header pt-2 pt-md-1">
-                        <BackButton />
-                        <span className="viewclub-title p-2 my-auto">{club.name}</span>
-                    </Page>
+            <AdminNavigation>
+                <Container fluid className="actionbar-container rounded-lg">
+                    <Row>
+                        <Col xs="3" sm="1" className="my-auto">
+                            <BackButton />
+                        </Col>
+                        <Col className="viewclub-title my-auto pt-2">{club.name}</Col>
+                    </Row>
                 </Container>
-                <Page>
-                    <Row className="mt-4">
-                        <Col md="8" className="my-auto">
+                <Container fluid className="mt-4 mt-md-5">
+                    <Row>
+                        <Col lg className="my-auto">
                             {renderTabBar()}
                         </Col>
-                        <Col className="my-auto py-3 py-md-0">
+                        <Col className="my-auto py-3 py-lg-0">
                             {tab === "events" ? (
                                 <Searchbar dataList={events} setFilteredList={setFilteredList} />
                             ) : null}
                         </Col>
                     </Row>
-                </Page>
+                </Container>
                 <Row className="p-0">
                     <Col>{renderTab()}</Col>
                 </Row>
-            </Page>
+            </AdminNavigation>
         </>
     );
 };

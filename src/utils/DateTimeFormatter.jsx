@@ -1,17 +1,14 @@
 export function formatDateTime(rawDT) {
     var DT = new Date(rawDT);
-    var date =
-        DT.getDate() +
-        " " +
-        DT.toLocaleString("default", { month: "long" }) +
-        " " +
-        DT.getFullYear();
+    var date = `${DT.getDate()} ${DT.toLocaleString("default", {
+        month: "short",
+    })} ${DT.getFullYear()}`;
     var time = DT.toLocaleString("en-US", {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
     });
-    var datetime = date + " · " + time;
+    var datetime = `${date} · ${time}`;
     return { date: date, time: time, datetime: datetime };
 }
 
