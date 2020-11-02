@@ -30,6 +30,10 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+select {
+    overflow-y: auto;
+}
+
 .clickable:hover {
     cursor: pointer;
 }
@@ -975,16 +979,6 @@ code {
 // Alerts {{{
 .link-alert {
     font-size: 0.5em;
-}
-// }}}
-
-// Forms {{{
-.event-form-venue {
-    min-height: 115px;
-}
-
-.event-form-description {
-    min-height: 120px;
 }
 // }}}
 

@@ -14,6 +14,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+select {
+  overflow-y: auto;
+}
+
 .clickable:hover {
   cursor: pointer;
 }
@@ -910,14 +914,6 @@ code {
 
 .link-alert {
   font-size: 0.5em;
-}
-
-.event-form-venue {
-  min-height: 115px;
-}
-
-.event-form-description {
-  min-height: 120px;
 }
 
 @media (min-width: 768px) {
