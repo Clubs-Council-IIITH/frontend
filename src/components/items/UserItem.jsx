@@ -34,7 +34,7 @@ const UserItem = (props) => {
             <CardBody onClick={toggleViewModal}>
                 <div className="user-name"> {props.name} </div>
                 <div className="user-mail mt-3 mx-n1">
-                    <Input className="text" value={props.mail} readonly disabled />
+                    <Input className="text" value={props.mail} readOnly disabled />
                 </div>
             </CardBody>
             <CardFooter className="text-right p-2">

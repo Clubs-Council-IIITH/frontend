@@ -17,7 +17,7 @@ const ViewUserModal = (props) => {
         return (
             <div className="mt-4">
                 {props.instance.roles.map((role) => (
-                    <>
+                    <React.Fragment key={`${role.club}-${role.year}-${role.role}`}>
                         {role.datebreak ? (
                             <div className="user-view-role-year font-weight-bold mt-3 mb-1">
                                 {role.active_year}
@@ -29,7 +29,7 @@ const ViewUserModal = (props) => {
                                 <Badge className="py-2 px-2">{role.role}</Badge>
                             </div>
                         </div>
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
         );

@@ -13,7 +13,7 @@ const CoordClubNavigation = (props) => {
     const tabs = [
         { to: "/events", title: "Events", modalButton: "New Event" },
         { to: "/members", title: "Members", modalButton: "Add Member" },
-        { to: "/budget", title: "Budgets", modalButton: "New Proposal" },
+        // { to: "/budget", title: "Budgets", modalButton: "New Proposal" },
     ];
 
     const currentPath = () => {
@@ -30,10 +30,12 @@ const CoordClubNavigation = (props) => {
     return (
         <>
             <div className="mb-3 mb-md-5 pt-2 pt-md-3">
-                <ul class="nav d-none d-sm-block">
+                <ul className="nav d-none d-sm-block">
                     <RoutedTabs startPathWith="/club">
                         {tabs.map((tab) => (
-                            <NavTab to={tab.to}>{tab.title}</NavTab>
+                            <NavTab key={tab.to} to={tab.to}>
+                                {tab.title}
+                            </NavTab>
                         ))}
                     </RoutedTabs>
                 </ul>
@@ -44,17 +46,20 @@ const CoordClubNavigation = (props) => {
                     {currentPath().title}
                 </Button>
                 <UncontrolledCollapse toggler="#tabs" className="mb-2">
-                    <RoutedTabs startPathWith="/club">
-                        {tabs.map((tab) => (
-                            <NavTab
-                                className="nav-tab-collapse common-btn text-uppercase d-sm-none bg-white"
-                                activeClassName="d-none"
-                                to={tab.to}
-                            >
-                                {tab.title}
-                            </NavTab>
-                        ))}
-                    </RoutedTabs>
+                    <Transition>
+                        <RoutedTabs startPathWith="/club">
+                            {tabs.map((tab) => (
+                                <NavTab
+                                    className="nav-tab-collapse common-btn text-uppercase d-sm-none bg-white"
+                                    activeClassName="d-none"
+                                    key={tab.to}
+                                    to={tab.to}
+                                >
+                                    {tab.title}
+                                </NavTab>
+                            ))}
+                        </RoutedTabs>
+                    </Transition>
                 </UncontrolledCollapse>
             </div>
             <Container fluid className="actionbar-container rounded-lg">

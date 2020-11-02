@@ -10,7 +10,6 @@ import {
     Col,
 } from "reactstrap";
 import { RoutedTabs, NavTab } from "react-router-tabs";
-import FadeIn from "react-fade-in";
 
 import API from "../../api/methods";
 
@@ -51,7 +50,9 @@ const AdminClubNavigation = (props) => {
                 <Row>
                     <Col className="d-flex">
                         <div className="my-auto">
-                            <BackButton />
+                            <Transition className="my-auto">
+                                <BackButton />
+                            </Transition>
                         </div>
                         <Transition className="my-auto">
                             <div className="actionbar-title my-auto pt-2">{club.name}</div>
@@ -74,9 +75,9 @@ const AdminClubNavigation = (props) => {
                                 <RoutedTabs startPathWith={`/admin/clubs/${props.match.params.id}`}>
                                     {tabs.map((tab) => (
                                         <NavTab
-                                            tag={DropdownItem}
                                             className="club-nav-collapse common-btn text-uppercase bg-white"
                                             activeClassName="d-none"
+                                            key={tab.to}
                                             to={tab.to}
                                         >
                                             {tab.title}

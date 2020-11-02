@@ -12,7 +12,7 @@ const Calendar = () => {
                 <iframe
                     title="calendar"
                     src={CALENDAR_URI}
-                    frameborder="0"
+                    frameBorder="0"
                     className="calendar-frame p-1"
                 />
             </div>

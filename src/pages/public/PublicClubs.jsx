@@ -35,6 +35,7 @@ const Clubs = (props) => {
                     {filteredList.map((club) => (
                         <Col
                             md="6"
+                            lg={pageContext.rightbarEnabled ? "6" : "4"}
                             xl={pageContext.rightbarEnabled ? "4" : "3"}
                             className="my-3 d-flex"
                             key={club.id}

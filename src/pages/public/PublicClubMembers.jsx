@@ -54,6 +54,7 @@ const ClubMembers = (props) => {
                         <DropdownMenu>
                             {yearSet.map((year) => (
                                 <DropdownItem
+                                    key={year}
                                     className="common-btn text-uppercase w-100"
                                     onClick={() => setCurrentYear(year)}
                                 >
@@ -64,21 +65,13 @@ const ClubMembers = (props) => {
                     </UncontrolledButtonDropdown>
                 </div>
                 <Row>
-                    {filteredList.map((member) => (
-                        <>
-                            {member.active_year === currentYear ? (
-                                <Col
-                                    sm="6"
-                                    md="4"
-                                    lg="2"
-                                    className="my-3 member-card"
-                                    key={member.id}
-                                >
-                                    <MemberItem {...member.user_info} role={member.role} />
-                                </Col>
-                            ) : null}
-                        </>
-                    ))}
+                    {filteredList.map((member) =>
+                        member.active_year === currentYear ? (
+                            <Col sm="6" md="4" lg="2" className="my-3 member-card" key={member.id}>
+                                <MemberItem {...member.user_info} role={member.role} />
+                            </Col>
+                        ) : null
+                    )}
                 </Row>
             </Container>
         );

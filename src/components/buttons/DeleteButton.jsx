@@ -4,7 +4,7 @@ import { Button } from "reactstrap";
 const DeleteButton = (props) => {
     return (
         <Button color="danger" onClick={props.onClick} className="delete-btn mx-1">
-            <img tag={Button} src="/delete-18.svg" alt="D" className="delete-icon" />
+            <img src="/delete-18.svg" alt="D" className="delete-icon" />
         </Button>
     );
 };

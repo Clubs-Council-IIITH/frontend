@@ -21,10 +21,12 @@ const AdminNavigation = ({ children }) => {
     return (
         <>
             <div className="mb-3 mb-md-5 pt-2 pt-md-3 mx-3">
-                <ul class="nav d-none d-sm-block">
+                <ul className="nav d-none d-sm-block">
                     <RoutedTabs startPathWith="/admin">
                         {tabs.map((tab) => (
-                            <NavTab to={tab.to}>{tab.title}</NavTab>
+                            <NavTab key={tab.to} to={tab.to}>
+                                {tab.title}
+                            </NavTab>
                         ))}
                     </RoutedTabs>
                 </ul>
@@ -38,6 +40,7 @@ const AdminNavigation = ({ children }) => {
                     <RoutedTabs startPathWith="/admin">
                         {tabs.map((tab) => (
                             <NavTab
+                                key={tab.to}
                                 className="nav-tab-collapse common-btn text-uppercase d-sm-none bg-white"
                                 activeClassName="d-none"
                                 to={tab.to}
