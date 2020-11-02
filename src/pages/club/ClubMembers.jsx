@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
     Button,
     UncontrolledButtonDropdown,
@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 
 import API from "../../api/methods";
+import { SessionContext } from "../../api/SessionContext";
 
 import ClubNavigation from "./ClubNavigation";
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -20,6 +21,7 @@ import Transition from "../../components/TransitionContainer";
 import Searchbar from "../../components/Searchbar";
 
 const ClubMembers = (props) => {
+    const sessionContext = useContext(SessionContext);
     const [members, setMembers] = useState(false);
     const [filteredList, setFilteredList] = useState(false);
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -44,9 +46,11 @@ const ClubMembers = (props) => {
         return (
             <Container fluid className="mt-2 mt-md-5">
                 <div className="mb-3 mt-4 mt-md-0 d-flex flex-row justify-content-between justify-content-md-start align-items-stretch">
-                    <Button className="font-weight-bold common-btn mr-3 px-4 new-update-btn">
-                        + NEW MEMBER
-                    </Button>
+                    {sessionContext.session.usergroup === "cc_admin" ? (
+                        <Button className="font-weight-bold common-btn mr-3 px-4 new-update-btn">
+                            + NEW MEMBER
+                        </Button>
+                    ) : null}
                     <UncontrolledButtonDropdown>
                         <DropdownToggle
                             className="text-uppercase viewclub-members-year common-btn py-3 px-4"
