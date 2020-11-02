@@ -45,7 +45,7 @@ const CoordClubNavigation = (props) => {
 
     return (
         <>
-            <div className="mb-3 mb-md-5 pt-2 pt-md-3">
+            <div className="mb-3 mb-md-5 pt-2 pt-md-3 mx-3">
                 <ul className="nav d-none d-sm-block">
                     <RoutedTabs startPathWith="/club">
                         {tabs.map((tab) => (
