@@ -14,6 +14,7 @@ const ClubForm = (props) => {
         defaultValues: {
             name: props.initial.name,
             mail: props.initial.mail,
+            website: props.initial.website,
         },
     });
 
@@ -52,6 +53,15 @@ const ClubForm = (props) => {
                     innerRef={register({ required: true })}
                 />
                 <FormFeedback> Club mail can not be empty! </FormFeedback>
+            </FormGroup>
+            <FormGroup>
+                <Label for="website"> Website Link </Label>
+                <Input
+                    invalid={errors.website}
+                    type="text"
+                    name="website"
+                    innerRef={register({ required: false })}
+                />
             </FormGroup>
 
             <Row className="mt-4">
