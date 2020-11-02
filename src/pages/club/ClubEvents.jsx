@@ -54,7 +54,7 @@ const ClubEvents = (props) => {
 
                 {previousList.length ? (
                     <>
-                        <div className="event-category-banner"> PREVIOUS </div>
+                        <div className="event-category-banner mt-5 mt-md-0"> PREVIOUS </div>
                         <Row>
                             {previousList.map((event) => {
                                 return (
