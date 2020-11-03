@@ -73,9 +73,24 @@ const Leftbar = (props) => {
         );
     }
 
+    const expandOnEnter = () => {
+        if (!props.open) props.toggle();
+    };
+
+    const collapseOnLeave = () => {
+        if (props.open) props.toggle();
+    };
+
+    // leftbar states passed down as props
+    // open: bar is set to open
+    // full: full width of the bar including menu text is visible
+    // minimized: only menu icons on a thinner bar are visible
+    // collapsed: only brand icon is visible
     return (
         <Navbar
             dark
+            onMouseEnter={expandOnEnter}
+            onMouseLeave={collapseOnLeave}
             className={`leftbar nav-dark p-4 d-block ${
                 props.open && (props.collapsed || props.minimized) ? "leftbar-collapse" : ""
             } ${props.open || props.full || props.minimized ? "showing" : "not-showing"}`}
