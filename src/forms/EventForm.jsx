@@ -104,7 +104,10 @@ const EventForm = (props) => {
                             invalid={errors.duration}
                             type="text"
                             name="duration"
-                            innerRef={register({ required: true })}
+                            innerRef={register({
+                                required: false,
+                                pattern: /^[a-zA-Z 0-9,.!?-]*$/,
+                            })}
                             placeholder="1 hr"
                         />
                         <FormFeedback> Invalid duration! </FormFeedback>
