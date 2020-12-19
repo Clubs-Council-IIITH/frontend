@@ -58,7 +58,7 @@ const AdminBudgets = () => {
                     >
                         <Row>
                             <Col md="6" className="d-flex flex-row">
-                                <span className="actionbar-title ml-md-2">Budget Proposals</span>
+                                <span className="actionbar-title ml-md-2">Report Submissions</span>
                             </Col>
                             <Col className="my-4 my-md-auto">
                                 <Searchbar

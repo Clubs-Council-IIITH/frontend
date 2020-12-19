@@ -32,7 +32,7 @@ const ClubBudget = (props) => {
                     <Col className="mt-3">
                         <Alert color="success" className="proposal-alert p-4">
                             <div className="proposal-alert-header mb-2 text-uppercase">
-                                Current Proposal
+                                Current Submission
                             </div>
                             <div className="proposal-alert-datetime">
                                 {formatDateTime(proposals[0].datetime).datetime}

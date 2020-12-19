@@ -30,7 +30,7 @@ const NewProposalModal = (props) => {
             toggle={props.toggleModal}
             autoFocus={false}
         >
-            <ModalHeader className="common-modal text-uppercase"> Make a new proposal </ModalHeader>
+            <ModalHeader className="common-modal text-uppercase">Add a new submission</ModalHeader>
             <ModalBody>
                 <ProposalForm initial={initialData} cancelAction={props.toggleModal} />
             </ModalBody>

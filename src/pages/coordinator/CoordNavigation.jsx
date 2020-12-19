@@ -13,7 +13,7 @@ const CoordClubNavigation = (props) => {
     const tabs = [
         { to: "/events", title: "Events", modalButton: "New Event" },
         { to: "/members", title: "Members", modalButton: null },
-        // { to: "/budget", title: "Budgets", modalButton: "New Proposal" },
+        { to: "/report", title: "Report", modalButton: "New Submission" },
     ];
 
     const currentPath = () => {

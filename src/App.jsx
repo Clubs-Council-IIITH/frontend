@@ -68,7 +68,7 @@ const App = () => {
                     <ProtectedRoute
                         allowed={["cc_admin"]}
                         exact
-                        path="/admin/budgets"
+                        path="/admin/reports"
                         component={AdminBudgets}
                     />
                     {/* <ProtectedRoute path="/admin/users/:id" component={AdminViewCoord} /> */}
@@ -97,7 +97,7 @@ const App = () => {
                     <ProtectedRoute
                         allowed={["cc_admin", "organizer"]}
                         exact
-                        path={["/admin/clubs/:id/budget", "/club/budget"]}
+                        path={["/admin/clubs/:id/report", "/club/report"]}
                         component={ClubBudget}
                     />
                     <ProtectedRoute

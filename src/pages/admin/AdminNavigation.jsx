@@ -8,7 +8,7 @@ const AdminNavigation = ({ children }) => {
     const tabs = [
         { to: "/clubs", title: "Clubs" },
         { to: "/users", title: "Users" },
-        { to: "/budgets", title: "Budgets" },
+        { to: "/reports", title: "Reports" },
     ];
 
     const currentPath = () => {
