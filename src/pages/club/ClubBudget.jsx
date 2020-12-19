@@ -38,35 +38,37 @@ const ClubBudget = (props) => {
                                 {formatDateTime(proposals[0].datetime).datetime}
                             </div>
                             <Row>
-                                <Col lg="9" className="proposal-alert-link mt-3">
-                                    <InputGroup>
-                                        <Input
-                                            bsSize="lg"
-                                            type="text"
-                                            value={proposals[0].link}
-                                            readonly
-                                        />
-                                        <InputGroupAddon
-                                            addonType="append"
-                                            className="proposal-link-btn"
-                                        >
-                                            <Button
-                                                color="success"
-                                                className="common-btn"
-                                                onClick={() =>
-                                                    window.open(proposals[0].link, "_blank")
-                                                }
+                                {proposals[0].link ? (
+                                    <Col lg="9" className="proposal-alert-link mt-3">
+                                        <InputGroup>
+                                            <Input
+                                                bsSize="lg"
+                                                type="text"
+                                                value={proposals[0].link}
+                                                readonly
+                                            />
+                                            <InputGroupAddon
+                                                addonType="append"
+                                                className="proposal-link-btn"
                                             >
-                                                <img
-                                                    src="/open-18.svg"
-                                                    className="btn-icon mb-1 mr-1"
-                                                    alt="O"
-                                                />
-                                                <span> OPEN </span>
-                                            </Button>
-                                        </InputGroupAddon>
-                                    </InputGroup>
-                                </Col>
+                                                <Button
+                                                    color="success"
+                                                    className="common-btn"
+                                                    onClick={() =>
+                                                        window.open(proposals[0].link, "_blank")
+                                                    }
+                                                >
+                                                    <img
+                                                        src="/open-18.svg"
+                                                        className="btn-icon mb-1 mr-1"
+                                                        alt="O"
+                                                    />
+                                                    <span> OPEN </span>
+                                                </Button>
+                                            </InputGroupAddon>
+                                        </InputGroup>
+                                    </Col>
+                                ) : null}
                                 <Col className="proposal-alert-pdf mt-3">
                                     <Button
                                         color="danger"
