@@ -6,7 +6,7 @@ import Topbar from "../Topbar";
 
 export const PageContext = createContext(null);
 
-const PageContainer = ({ title, children }) => {
+const PageContainer = ({ title, privilege, children }) => {
     const [searchContent, setSearchContent] = useState(null);
 
     return (
@@ -14,7 +14,7 @@ const PageContainer = ({ title, children }) => {
             <div className="navigation-container">
                 <Navigation />
             </div>
-            <PageContext.Provider value={{ searchContent, setSearchContent }}>
+            <PageContext.Provider value={{ privilege, searchContent, setSearchContent }}>
                 <div className="main-container">
                     <div className="topbar-container">
                         <Topbar title={title} />

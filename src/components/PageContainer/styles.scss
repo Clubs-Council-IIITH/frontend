@@ -21,13 +21,14 @@
 
 .topbar-container {
     height: 70px;
+    padding: 0 20px;
 }
 
 .content-container {
     flex-grow: 1;
     margin: 20px;
     margin-top: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: $light;
+    padding: 10px 20px;
+    border-radius: 6px;
+    overflow-y: auto;
 }
