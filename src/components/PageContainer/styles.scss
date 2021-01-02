@@ -1,0 +1,32 @@
+@import "theme.scss";
+
+.page-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: $dark;
+}
+
+.navigation-container {
+    height: 100vh;
+    width: 250px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.topbar-container {
+    height: 50px;
+}
+
+.content-container {
+    flex-grow: 1;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: $light;
+}
