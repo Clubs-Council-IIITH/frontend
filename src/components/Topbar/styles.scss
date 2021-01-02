@@ -1,11 +1,16 @@
 @import "theme.scss";
 
+.topbar-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    margin: 0 20px;
 }
 
 .title-display {

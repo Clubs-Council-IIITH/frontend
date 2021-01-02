@@ -21,14 +21,36 @@
 
 .topbar-container {
     height: 70px;
-    padding: 10px 20px 0 20px;
+    padding: 10px 35px 0 35px;
 }
 
 .content-container {
     flex-grow: 1;
-    margin: 20px;
-    margin-top: 10px;
+    margin: 10px 20px 20px 20px;
     padding: 0 20px 10px 20px;
     border-radius: 6px;
     overflow-y: auto;
+}
+
+// styles for tablet (lg)
+@media (max-width: 992px) {
+    .navigation-container {
+        width: 80px;
+    }
+}
+
+// styles for mobile (md)
+@media (max-width: 768px) {
+    .navigation-container {
+        display: none;
+    }
+
+    .content-container {
+        margin: 10px 0;
+    }
+
+    .topbar-container {
+        height: 150px;
+        padding: 10px 15px 0 15px;
+    }
 }
