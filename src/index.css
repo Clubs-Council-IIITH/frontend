@@ -1,13 +1,17 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* Error: Can't find stylesheet to import.
+ *    ,
+ * 22 | @import "~bootstrap/scss/bootstrap";
+ *    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   frontend_new/src/index.scss 22:9  root stylesheet */
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a    \2577 \a 22 \2502  @import \"~bootstrap/scss/bootstrap\";\a    \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   frontend_new/src/index.scss 22:9  root stylesheet";
 }
