@@ -1,7 +1,7 @@
-import PageContainer from "components/PageContainer";
+import Clubs from "pages/Clubs";
 
 const App = () => {
-    return <PageContainer>hi</PageContainer>;
+    return <Clubs />;
 };
 
 export default App;
