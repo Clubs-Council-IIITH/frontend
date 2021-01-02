@@ -1,32 +1,7 @@
-import logo from "./logo.svg";
-import "./App.css";
+import PageContainer from "components/PageContainer";
 
-import { Button } from "reactstrap";
-
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-                <Button color="primary"> test </Button>
-                <Button color="success"> test </Button>
-                <Button color="warning"> test </Button>
-                <Button color="danger"> test </Button>
-                <Button color="info"> test </Button>
-            </header>
-        </div>
-    );
-}
+const App = () => {
+    return <PageContainer>hi</PageContainer>;
+};
 
 export default App;
