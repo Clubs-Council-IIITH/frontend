@@ -1,3 +1,11 @@
+/**
+ * Component to display list of clubs
+ *
+ * context:
+ *  - setContent (`list`): List of club objects to render, set by an API call.
+ *  - searchContent (`list`): Filtered list as output by the searchbar.
+ */
+
 import { useEffect, useContext } from "react";
 import { Row, Col } from "reactstrap";
 

@@ -1,3 +1,16 @@
+/**
+ * View component to render a single club item.
+ *
+ * props:
+ *  - id (`int`): Unique identifier of the club.
+ *  - name (`string`): Name of the club.
+ *  - img (`string`): Club image's source.
+ *
+ * context:
+ *  - privilege (`string`): Optional, must belong to ["admin", ].
+ *                          If "admin", renders action buttons.
+ */
+
 import "./styles.scss";
 import { useContext } from "react";
 import { Button, Card, CardImg, CardBody, CardFooter } from "reactstrap";

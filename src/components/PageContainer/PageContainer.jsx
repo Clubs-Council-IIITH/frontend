@@ -1,3 +1,16 @@
+/**
+ * Universal Page Container Component
+ *
+ * props:
+ *  - children (`component`): Required.
+ *  - title (`string`): Optional, rendered in Topbar.
+ *  - privilege (`string`): Optional, must belong to ["admin", ].
+ *                          Conditionally renders some components.
+ *  - searchAttr (`function`): Optional. Must extract attribute from the
+ *                             content object passed to it. Enables search
+ *                             for the content rendered.
+ */
+
 import { useState, useEffect, createContext } from "react";
 import "./styles.scss";
 
