@@ -1,20 +1,27 @@
+import { useState, createContext } from "react";
 import "./styles.scss";
 
 import Navigation from "../Navigation";
 import Topbar from "../Topbar";
 
+export const PageContext = createContext(null);
+
 const PageContainer = ({ title, children }) => {
+    const [searchContent, setSearchContent] = useState(null);
+
     return (
         <div className="page-container">
             <div className="navigation-container">
                 <Navigation />
             </div>
-            <div className="main-container">
-                <div className="topbar-container">
-                    <Topbar title={title} />
+            <PageContext.Provider value={{ searchContent, setSearchContent }}>
+                <div className="main-container">
+                    <div className="topbar-container">
+                        <Topbar title={title} />
+                    </div>
+                    <div className="content-container">{children}</div>
                 </div>
-                <div className="content-container">{children}</div>
-            </div>
+            </PageContext.Provider>
         </div>
     );
 };
