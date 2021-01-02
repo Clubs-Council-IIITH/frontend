@@ -5,5 +5,20 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    margin: 0 20px;
+    margin: 5px 20px 0 20px;
+}
+
+.title-display {
+    font-weight: 700;
+    color: $light;
+    font-size: calc(1em + 100%);
+}
+
+.updates-display {
+    margin: 5px;
+}
+
+.updates-icon {
+    height: 1.8em;
+    filter: invert(1);
 }

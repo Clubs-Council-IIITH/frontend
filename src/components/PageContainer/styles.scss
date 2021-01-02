@@ -20,12 +20,13 @@
 }
 
 .topbar-container {
-    height: 50px;
+    height: 70px;
 }
 
 .content-container {
     flex-grow: 1;
     margin: 20px;
+    margin-top: 10px;
     padding: 10px;
     border-radius: 8px;
     background-color: $light;
