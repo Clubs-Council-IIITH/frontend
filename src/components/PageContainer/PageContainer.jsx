@@ -41,7 +41,7 @@ const PageContainer = ({ title, privilege, searchAttr, children }) => {
                 }}
             >
                 <div className="main-container">
-                    <div className="topbar-container">
+                    <div className="topbar-container my-1">
                         <Topbar title={title} />
                     </div>
                     <div className="content-container">{children}</div>

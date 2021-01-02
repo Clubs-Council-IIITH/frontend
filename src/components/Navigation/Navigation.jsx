@@ -1,3 +1,7 @@
+/**
+ * Navbar component that holds logo, buttons and logged in user profile.
+ */
+
 import "./styles.scss";
 
 import CCLogo from "./assets/cc_logo.svg";

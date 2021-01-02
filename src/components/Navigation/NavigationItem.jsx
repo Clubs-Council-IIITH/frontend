@@ -1,3 +1,12 @@
+/**
+ * View component to render a single navigation item.
+ *
+ * props:
+ *  - title (`string`): Button text.
+ *  - link (`string`): To where the button leads.
+ *  - icon (`image`): Icon prefixing the text.
+ */
+
 import { NavItem, NavLink } from "reactstrap";
 
 const NavigationItem = ({ title, link, icon }) => {
