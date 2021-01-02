@@ -3,7 +3,7 @@ import ClubsList from "components/ClubsList";
 
 const Clubs = () => {
     return (
-        <PageContainer title="Clubs" privilege="admin">
+        <PageContainer title="Clubs" searchAttr={(o) => o.name}>
             <ClubsList />
         </PageContainer>
     );

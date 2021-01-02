@@ -9,6 +9,8 @@
 }
 
 .title-display {
+    display: flex;
+    align-items: center;
     font-weight: 700;
     color: $dark;
     font-size: calc(1.5em + 100%);

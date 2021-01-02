@@ -9,16 +9,16 @@ import { PageContext } from "components/PageContainer";
 import ClubItem from "./ClubItem";
 
 const ClubsList = () => {
-    const { searchContent, setSearchContent } = useContext(PageContext);
+    const { setContent, searchContent } = useContext(PageContext);
 
     useEffect(() => {
         const fetchClubs = async () => {
             const res = await handleView(clubs.VIEW, {});
-            setSearchContent(res.data);
+            setContent(res.data);
         };
 
         fetchClubs();
-    }, [setSearchContent]);
+    }, [setContent]);
 
     return (
         <Row className="d-flex">
