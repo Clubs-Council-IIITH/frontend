@@ -1,0 +1,43 @@
+@import "theme.scss";
+
+.navigation-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.navitems-container {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 85% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.navprofile-container {
+    background-color: $black;
+    height: 10%;
+    border-radius: 8px;
+}
+
+.navlogo {
+    height: 40px;
+}
+
+.navitem {
+    display: flex !important;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.navitem-icon {
+    height: 1.4em;
+}
+
+.navitem-title {
+    color: $secondary;
+    font-family: $font-secondary;
+    font-weight: 600;
+    text-transform: uppercase;
+}
