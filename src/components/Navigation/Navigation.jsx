@@ -1,4 +1,5 @@
 import "./styles.scss";
+
 import CCLogo from "./assets/cc_logo.svg";
 import CCLogoSmall from "./assets/cc_logo_sm.svg";
 import HomeIcon from "./assets/home.svg";
@@ -6,6 +7,7 @@ import ClubsIcon from "./assets/clubs.svg";
 import CalendarIcon from "./assets/calendar.svg";
 
 import { Nav } from "reactstrap";
+import { useWindowDimensions } from "utils/WindowDimensions";
 
 import NavigationItem from "./NavigationItem";
 
@@ -28,11 +30,17 @@ const NavItems = [
 ];
 
 const Navigation = () => {
+    const { width } = useWindowDimensions();
+
     return (
         <div className="navigation-col text-light">
             <div className="d-flex flex-column justify-content-between p-4 h-100">
                 <div>
-                    <img src={CCLogo} alt="Clubs Council" className="navlogo" />
+                    <img
+                        src={width < 992 ? CCLogoSmall : CCLogo}
+                        alt="Clubs Council"
+                        className="navlogo"
+                    />
                 </div>
                 <Nav className="navitems-container p-0 m-0">
                     {NavItems.map((item, idx) => (
