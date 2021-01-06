@@ -35,16 +35,17 @@
     text-transform: uppercase;
 }
 
+.navitem:hover {
+    color: $secondary !important;
+    filter: brightness(1.5);
+}
+
 .navitem-active {
-    filter: brightness(2);
+    filter: brightness(2) !important;
 }
 
 .navitem-icon {
     height: 1.4em;
-}
-
-.navitem-title {
-    color: inherit;
 }
 
 @media (max-width: 992px) {
