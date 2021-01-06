@@ -1,7 +1,7 @@
-import Clubs from "pages/Clubs";
+import * as Public from "pages/public";
 
 const App = () => {
-    return <Clubs />;
+    return <Public.Clubs />;
 };
 
 export default App;
