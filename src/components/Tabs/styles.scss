@@ -1,0 +1,20 @@
+@import "theme.scss";
+
+.react-tabs__tab {
+    color: $secondary;
+    font-size: 1.2em;
+    font-family: $font-secondary !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 2%;
+    border: none;
+}
+
+.react-tabs__tab--selected {
+    color: $dark;
+    border-bottom: 2px solid $dark !important;
+}
+
+.react-tabs__tab-list {
+    border-bottom: 2px solid $light !important;
+}
