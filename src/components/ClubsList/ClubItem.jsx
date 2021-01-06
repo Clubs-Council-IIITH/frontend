@@ -13,6 +13,7 @@
 
 import "./styles.scss";
 import { useContext } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 import { Button, Card, CardImg, CardBody, CardFooter } from "reactstrap";
 
 import { PageContext } from "components/PageContainer";
@@ -20,13 +21,16 @@ import placeholderImg from "./assets/club-img-placeholder.jpg";
 
 const ClubItem = ({ id, name, img }) => {
     const { privilege } = useContext(PageContext);
+    const { path } = useRouteMatch();
 
     return (
         <Card className="d-flex flex-fill club-item elevate clickable">
-            <CardImg src={img || placeholderImg} alt={name} height="180px" />
-            <CardBody className="d-flex flex-fill justify-content-end align-items-center pb-3">
-                <div className="h4 text-right font-weight-bold">{name}</div>
-            </CardBody>
+            <Link to={`${path}/${id}`} className="invisible-link">
+                <CardImg src={img || placeholderImg} alt={name} height="180px" />
+                <CardBody className="d-flex flex-fill justify-content-end align-items-center pb-3">
+                    <div className="h4 text-right font-weight-bold">{name}</div>
+                </CardBody>
+            </Link>
 
             {/* display actions only to admins */}
             {privilege === "admin" ? (
