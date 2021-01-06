@@ -26,10 +26,26 @@
 
 .content-container {
     flex-grow: 1;
-    margin: 10px 20px 20px 20px;
+    margin: 0 10px;
     padding: 0 20px 10px 20px;
     border-radius: 6px;
     overflow-y: auto;
+}
+
+.updates-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 38px;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    z-index: 999;
+}
+
+.updates-icon {
+    height: 1.8em;
 }
 
 // styles for tablet (lg)
@@ -46,11 +62,16 @@
     }
 
     .content-container {
-        margin: 10px 0;
+        margin: 0 0;
+        padding: 0 15px;
     }
 
-    .topbar-container {
+    .topbar-expand {
         height: 150px;
         padding: 10px 15px 0 15px;
+    }
+
+    .updates-btn {
+        right: 20px;
     }
 }

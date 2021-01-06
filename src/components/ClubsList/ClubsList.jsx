@@ -29,7 +29,7 @@ const ClubsList = () => {
     }, [setContent]);
 
     return (
-        <Row className="d-flex">
+        <Row className="d-flex mt-2">
             {searchContent
                 ? searchContent.map((club, idx) => (
                       <Col

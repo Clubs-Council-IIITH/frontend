@@ -11,8 +11,10 @@
  */
 
 import { useState, useEffect, createContext } from "react";
+import updatesIcon from "./assets/updates.svg";
 import "./styles.scss";
 
+import { Button } from "reactstrap";
 import Navigation from "../Navigation";
 import Topbar from "../Topbar";
 
@@ -39,9 +41,14 @@ const PageContainer = ({ title, privilege, component, children }) => {
                 }}
             >
                 <div className="main-container">
-                    <div className="topbar-container my-1">
-                        <Topbar title={title} component={component} />
-                    </div>
+                    <Button color="light" className="updates-btn rounded-circle">
+                        <img src={updatesIcon} alt="updates" className="updates-icon" />
+                    </Button>
+                    {(title || component) && (
+                        <div className={`topbar-container my-1 ${component && "topbar-expand"}`}>
+                            <Topbar title={title} component={component} />
+                        </div>
+                    )}
                     <div className="content-container">{children}</div>
                 </div>
             </PageContext.Provider>

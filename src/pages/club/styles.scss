@@ -1,0 +1,26 @@
+@import "theme.scss";
+
+.clubtitle {
+    font-size: 4.5rem;
+}
+
+.clubimg-cover {
+    position: relative;
+}
+
+.clubimg-bg {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0 0 10px 10px;
+}
+
+@media (max-width: 768px) {
+    .clubimg-bg {
+        height: 150px;
+    }
+
+    .clubtitle {
+        font-size: 2.4rem;
+    }
+}
