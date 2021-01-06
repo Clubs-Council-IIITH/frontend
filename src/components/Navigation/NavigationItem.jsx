@@ -3,16 +3,23 @@
  *
  * props:
  *  - title (`string`): Button text.
- *  - link (`string`): To where the button leads.
+ *  - path (`string`): To where the button leads.
  *  - icon (`image`): Icon prefixing the text.
  */
 
+import { NavLink as Link } from "react-router-dom";
 import { NavItem, NavLink } from "reactstrap";
 
-const NavigationItem = ({ title, link, icon }) => {
+const NavigationItem = ({ icon, title, path, exact }) => {
     return (
         <NavItem>
-            <NavLink to={link} className="navitem my-3">
+            <NavLink
+                tag={Link}
+                to={path}
+                exact={exact}
+                activeClassName="active navitem-active"
+                className="navitem my-3"
+            >
                 <img src={icon} alt={title} className="navitem-icon mx-auto mx-lg-0" />
                 <div className="d-none d-lg-block">
                     <div className="navitem-title ml-3">{title}</div>

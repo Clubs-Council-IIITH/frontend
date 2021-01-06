@@ -29,6 +29,14 @@
     display: flex !important;
     align-items: center;
     padding: 0 !important;
+    color: $secondary;
+    font-family: $font-secondary;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.navitem-active {
+    filter: brightness(2);
 }
 
 .navitem-icon {
@@ -36,10 +44,7 @@
 }
 
 .navitem-title {
-    color: $secondary;
-    font-family: $font-secondary;
-    font-weight: 600;
-    text-transform: uppercase;
+    color: inherit;
 }
 
 @media (max-width: 992px) {

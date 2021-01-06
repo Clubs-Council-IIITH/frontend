@@ -18,17 +18,18 @@ import NavigationItem from "./NavigationItem";
 const NavItems = [
     {
         title: "home",
-        link: "/",
+        path: "/",
+        exact: true,
         icon: HomeIcon,
     },
     {
         title: "clubs",
-        link: "/clubs",
+        path: "/clubs",
         icon: ClubsIcon,
     },
     {
         title: "calendar",
-        link: "/calendar",
+        path: "/calendar",
         icon: CalendarIcon,
     },
 ];
