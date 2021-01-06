@@ -1,10 +1,11 @@
 /**
  * Searchbar Component to filter rendered content on input.
  *
- * context:
- *  - content (`list`): Complete list of objects to be rendered.
+ * props:
  *  - searchAttr (`function`): Function that extracts search attribute
  *                             when given an object.
+ * context:
+ *  - content (`list`): Complete list of objects to be rendered.
  *  - setSearchContent (`hook`): To update the rendered content list.
  */
 
@@ -14,8 +15,8 @@ import { Input } from "reactstrap";
 
 import { PageContext } from "components/PageContainer";
 
-const Searchbar = () => {
-    const { content, searchAttr, setSearchContent } = useContext(PageContext);
+const Searchbar = ({ searchAttr }) => {
+    const { content, setSearchContent } = useContext(PageContext);
 
     const updateSearch = (e) => {
         if (!content) return null;

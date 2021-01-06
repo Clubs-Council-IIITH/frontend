@@ -6,9 +6,8 @@
  *  - title (`string`): Optional, rendered in Topbar.
  *  - privilege (`string`): Optional, must belong to ["admin", ].
  *                          Conditionally renders some components.
- *  - searchAttr (`function`): Optional. Must extract attribute from the
- *                             content object passed to it. Enables search
- *                             for the content rendered.
+ *  - component (`component`): Optional. Custom component to render
+ *                             on the topbar.
  */
 
 import { useState, useEffect, createContext } from "react";
@@ -19,7 +18,7 @@ import Topbar from "../Topbar";
 
 export const PageContext = createContext(null);
 
-const PageContainer = ({ title, privilege, searchAttr, children }) => {
+const PageContainer = ({ title, privilege, component, children }) => {
     const [content, setContent] = useState(null);
     const [searchContent, setSearchContent] = useState(null);
 
@@ -35,14 +34,13 @@ const PageContainer = ({ title, privilege, searchAttr, children }) => {
                     privilege,
                     content,
                     setContent,
-                    searchAttr,
                     searchContent,
                     setSearchContent,
                 }}
             >
                 <div className="main-container">
                     <div className="topbar-container my-1">
-                        <Topbar title={title} />
+                        <Topbar title={title} component={component} />
                     </div>
                     <div className="content-container">{children}</div>
                 </div>
