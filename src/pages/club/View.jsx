@@ -17,9 +17,6 @@ const View = ({ tabs }) => {
     const [{ loading, data: club, error }, fetchClub] = HandleView(clubs.VIEW, { id: id });
     useEffect(() => fetchClub(), []); // eslint-disable-line
 
-    // TODO: introduce failed load page
-    // TODO: implement routed tabs using nested routing on this page
-
     return (
         <PageContainer>
             {loading ? (

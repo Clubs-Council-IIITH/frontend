@@ -4,15 +4,18 @@ import PageContainer from "components/PageContainer";
 import ClubsList from "components/ClubsList";
 import Searchbar from "components/Searchbar";
 
+import About from "pages/club/About";
+import Events from "pages/club/Events";
+import Members from "pages/club/Members";
 import View from "pages/club/View";
 
 const Clubs = () => {
     const { path } = useRouteMatch();
 
     const viewTabs = [
-        { title: "About", component: <h1> about </h1> },
-        { title: "Events", component: <h1> events </h1> },
-        { title: "Members", component: <h1> members </h1> },
+        { title: "About", path: "/about", component: <About /> },
+        { title: "Events", path: "/events", component: <Events /> },
+        { title: "Members", path: "/members", component: <Members /> },
     ];
 
     return (

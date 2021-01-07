@@ -1,12 +1,5 @@
-import { useState } from "react";
-import ClubContainer from "./ClubContainer";
-
 const About = () => {
-    return (
-        <ClubContainer>
-            <h1> about </h1>
-        </ClubContainer>
-    );
+    return <h1> about </h1>;
 };
 
 export default About;
