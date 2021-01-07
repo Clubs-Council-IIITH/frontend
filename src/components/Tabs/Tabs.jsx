@@ -9,7 +9,8 @@ const TabBar = ({ tabs }) => {
         <>
             <RoutedTabs
                 startPathWith={url}
-                tabClassName="react-tabs__tab"
+                className="react-tabs__tab-list"
+                tabClassName="react-tabs__tab invisible-link"
                 activeTabClassName="react-tabs__tab--selected"
             >
                 {tabs.map((tab, key) => (
