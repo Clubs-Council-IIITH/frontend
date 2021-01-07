@@ -5,15 +5,16 @@ import "./styles.scss";
 import { clubs } from "api/endpoints";
 import { HandleView } from "api/methods";
 
-import PageContainer from "components/PageContainer";
 import TabBar from "components/Tabs";
+import Loading from "components/Loading";
+import PageContainer from "components/PageContainer";
 import ClubImgPlaceholder from "./assets/club-img-placeholder.jpg";
 
 const View = ({ tabs }) => {
     const { id } = useParams();
 
     const [{ loading, data: club, error }, fetchClub] = HandleView(clubs.VIEW, { id: id });
-    useEffect(() => fetchClub(), []);
+    useEffect(() => fetchClub(), []); // eslint-disable-line
 
     // TODO: introduce failed load page
     // TODO: implement routed tabs using nested routing on this page
@@ -22,11 +23,19 @@ const View = ({ tabs }) => {
     if (error) return "error";
     return (
         <PageContainer>
-            <div className="clubimg-cover mb-3 mb-md-4">
-                <img src={ClubImgPlaceholder} alt="" className="clubimg-bg" />
-                <h1 className="clubtitle font-weight-bold mt-3 mt-md-4">{club[0].name}</h1>
-            </div>
-            <TabBar tabs={tabs} />
+            {loading ? (
+                <Loading />
+            ) : error ? (
+                "error"
+            ) : (
+                <>
+                    <div className="clubimg-cover mb-3 mb-md-4">
+                        <img src={ClubImgPlaceholder} alt="" className="clubimg-bg" />
+                        <h1 className="clubtitle font-weight-bold mt-3 mt-md-4">{club[0].name}</h1>
+                    </div>
+                    <TabBar tabs={tabs} />
+                </>
+            )}
         </PageContainer>
     );
 };

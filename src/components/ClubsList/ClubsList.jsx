@@ -15,18 +15,19 @@ import { HandleView } from "api/methods";
 import { PageContext } from "components/PageContainer";
 
 import ClubItem from "./ClubItem";
+import Loading from "components/Loading";
 
 const ClubsList = () => {
     const { setContent, searchContent } = useContext(PageContext);
 
     const [{ loading, data: clubsList, error }, fetchClubs] = HandleView(clubs.VIEW, {});
-    useEffect(() => fetchClubs(), []);
+    useEffect(() => fetchClubs(), []); // eslint-disable-line
 
     useEffect(() => {
         setContent(clubsList);
     }, [clubsList, setContent]);
 
-    if (loading) return "loading";
+    if (loading) return <Loading />;
     if (error) return "error";
     return (
         <Row className="d-flex mt-2">
