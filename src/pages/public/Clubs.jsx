@@ -1,21 +1,19 @@
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import PageContainer from "components/PageContainer";
+import ClubDisplay from "components/ClubDisplay";
 import ClubsList from "components/ClubsList";
 import Searchbar from "components/Searchbar";
 
-import About from "pages/club/About";
-import Events from "pages/club/Events";
-import Members from "pages/club/Members";
-import View from "pages/club/View";
+import * as Club from "pages/club";
 
 const Clubs = () => {
     const { path } = useRouteMatch();
 
     const viewTabs = [
-        { title: "About", path: "/about", component: <About /> },
-        { title: "Events", path: "/events", component: <Events /> },
-        { title: "Members", path: "/members", component: <Members /> },
+        { title: "About", path: "/about", component: <Club.About /> },
+        { title: "Events", path: "/events", component: <Club.Events /> },
+        { title: "Members", path: "/members", component: <Club.Members /> },
     ];
 
     return (
@@ -26,7 +24,7 @@ const Clubs = () => {
                 </PageContainer>
             </Route>
             <Route path={`${path}/:id`}>
-                <View tabs={viewTabs} />
+                <ClubDisplay tabs={viewTabs} />
             </Route>
         </Switch>
     );
