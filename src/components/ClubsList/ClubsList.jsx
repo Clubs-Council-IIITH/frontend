@@ -10,7 +10,7 @@ import { useEffect, useContext } from "react";
 import { Row, Col } from "reactstrap";
 
 import { clubs } from "api/endpoints";
-import { handleView } from "api/methods";
+import { HandleView } from "api/methods";
 
 import { PageContext } from "components/PageContainer";
 
@@ -19,15 +19,15 @@ import ClubItem from "./ClubItem";
 const ClubsList = () => {
     const { setContent, searchContent } = useContext(PageContext);
 
+    const [{ loading, data: clubsList, error }, fetchClubs] = HandleView(clubs.VIEW, {});
+    useEffect(() => fetchClubs(), []);
+
     useEffect(() => {
-        const fetchClubs = async () => {
-            const res = await handleView(clubs.VIEW, {});
-            setContent(res.data);
-        };
+        setContent(clubsList);
+    }, [clubsList, setContent]);
 
-        fetchClubs();
-    }, [setContent]);
-
+    if (loading) return "loading";
+    if (error) return "error";
     return (
         <Row className="d-flex mt-2">
             {searchContent
