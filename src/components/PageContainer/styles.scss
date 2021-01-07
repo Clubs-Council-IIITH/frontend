@@ -32,46 +32,10 @@
     overflow-y: auto;
 }
 
-.updates-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 38px;
-    width: 38px;
-    position: absolute;
-    top: 25px;
-    right: 50px;
-    z-index: 999;
-}
-
-.updates-icon {
-    height: 1.8em;
-}
-
-.back-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 38px;
-    width: 38px;
-    position: absolute;
-    top: 25px;
-    left: calc(280px + 10px);
-    z-index: 999;
-}
-
-.back-icon {
-    height: 1.8em;
-}
-
 // styles for tablet (lg)
 @media (max-width: 992px) {
     .navigation-container {
         width: 80px;
-    }
-
-    .back-btn {
-        left: calc(80px + 50px);
     }
 }
 
@@ -89,17 +53,5 @@
     .topbar-expand {
         height: 150px;
         padding: 10px 15px 0 15px;
-    }
-
-    .updates-btn {
-        height: 34px;
-        width: 34px;
-        right: 20px;
-    }
-
-    .back-btn {
-        height: 34px;
-        width: 34px;
-        left: 20px;
     }
 }

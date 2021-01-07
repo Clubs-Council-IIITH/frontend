@@ -1,0 +1,26 @@
+@import "theme.scss";
+
+.updates-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 38px;
+    position: absolute;
+    top: 25px;
+    right: 50px;
+    z-index: 999;
+}
+
+.updates-icon {
+    height: 1.8em;
+}
+
+// styles for mobile (md)
+@media (max-width: 768px) {
+    .updates-btn {
+        height: 34px;
+        width: 34px;
+        right: 20px;
+    }
+}

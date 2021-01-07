@@ -4,6 +4,7 @@
  * props:
  *  - children (`component`): Required.
  *  - title (`string`): Optional, rendered in Topbar.
+ *  - back (`bool`): Option, renders back button instead of menu.
  *  - privilege (`string`): Optional, must belong to ["admin", ].
  *                          Conditionally renders some components.
  *  - component (`component`): Optional. Custom component to render
@@ -11,13 +12,13 @@
  */
 
 import { useState, useEffect, createContext } from "react";
-import updatesIcon from "./assets/updates.svg";
-import backIcon from "./assets/back.svg";
 import "./styles.scss";
 
-import { Button } from "reactstrap";
 import Navigation from "../Navigation";
 import Topbar from "../Topbar";
+
+import Updates from "components/Updates";
+import BackButton from "components/BackButton";
 
 export const PageContext = createContext(null);
 
@@ -42,19 +43,20 @@ const PageContainer = ({ title, back, privilege, component, children }) => {
                 }}
             >
                 <div className="main-container">
-                    {back && (
-                        <Button color="light" className="back-btn rounded-circle">
-                            <img src={backIcon} alt="back" className="back-icon" />
-                        </Button>
-                    )}
-                    <Button color="light" className="updates-btn rounded-circle">
-                        <img src={updatesIcon} alt="updates" className="updates-icon" />
-                    </Button>
+                    {/* conditionally render back button */}
+                    {back && <BackButton />}
+
+                    {/* display updates button icon */}
+                    <Updates />
+
+                    {/* if a title or component has been passed, render topbar */}
                     {(title || component) && (
                         <div className={`topbar-container my-1 ${component && "topbar-expand"}`}>
                             <Topbar title={title} component={component} />
                         </div>
                     )}
+
+                    {/* render children */}
                     <div className="content-container">{children}</div>
                 </div>
             </PageContext.Provider>
