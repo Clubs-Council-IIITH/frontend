@@ -16,6 +16,7 @@ import { PageContext } from "components/PageContainer";
 
 import ClubItem from "./ClubItem";
 import Loading from "components/Loading";
+import ErrorPage from "components/ErrorPage";
 
 const ClubsList = () => {
     const { setContent, searchContent } = useContext(PageContext);
@@ -28,7 +29,7 @@ const ClubsList = () => {
     }, [clubsList, setContent]);
 
     if (loading) return <Loading />;
-    if (error) return "error";
+    if (error) return <ErrorPage {...error} />;
     return (
         <Row className="d-flex mt-2">
             {searchContent

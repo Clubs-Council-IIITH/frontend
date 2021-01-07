@@ -1,10 +1,10 @@
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+
 import PageContainer from "components/PageContainer";
 import ClubsList from "components/ClubsList";
 import Searchbar from "components/Searchbar";
 
 import View from "pages/club/View";
-
-import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 const Clubs = () => {
     const { path } = useRouteMatch();

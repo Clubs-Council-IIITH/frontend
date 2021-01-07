@@ -7,6 +7,7 @@ import { HandleView } from "api/methods";
 
 import TabBar from "components/Tabs";
 import Loading from "components/Loading";
+import ErrorPage from "components/ErrorPage";
 import PageContainer from "components/PageContainer";
 import ClubImgPlaceholder from "./assets/club-img-placeholder.jpg";
 
@@ -19,14 +20,12 @@ const View = ({ tabs }) => {
     // TODO: introduce failed load page
     // TODO: implement routed tabs using nested routing on this page
 
-    if (loading) return "loading";
-    if (error) return "error";
     return (
         <PageContainer>
             {loading ? (
                 <Loading />
             ) : error ? (
-                "error"
+                <ErrorPage {...error} />
             ) : (
                 <>
                     <div className="clubimg-cover mb-3 mb-md-4">
