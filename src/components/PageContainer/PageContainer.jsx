@@ -12,6 +12,7 @@
 
 import { useState, useEffect, createContext } from "react";
 import updatesIcon from "./assets/updates.svg";
+import backIcon from "./assets/back.svg";
 import "./styles.scss";
 
 import { Button } from "reactstrap";
@@ -20,7 +21,7 @@ import Topbar from "../Topbar";
 
 export const PageContext = createContext(null);
 
-const PageContainer = ({ title, privilege, component, children }) => {
+const PageContainer = ({ title, back, privilege, component, children }) => {
     const [content, setContent] = useState(null);
     const [searchContent, setSearchContent] = useState(null);
 
@@ -41,6 +42,11 @@ const PageContainer = ({ title, privilege, component, children }) => {
                 }}
             >
                 <div className="main-container">
+                    {back && (
+                        <Button color="light" className="back-btn rounded-circle">
+                            <img src={backIcon} alt="back" className="back-icon" />
+                        </Button>
+                    )}
                     <Button color="light" className="updates-btn rounded-circle">
                         <img src={updatesIcon} alt="updates" className="updates-icon" />
                     </Button>

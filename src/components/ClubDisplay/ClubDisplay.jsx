@@ -18,7 +18,7 @@ const View = ({ tabs }) => {
     useEffect(() => fetchClub(), []); // eslint-disable-line
 
     return (
-        <PageContainer>
+        <PageContainer back>
             {loading ? (
                 <Loading />
             ) : error ? (
