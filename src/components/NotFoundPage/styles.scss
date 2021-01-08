@@ -1,0 +1,20 @@
+@import "theme.scss";
+
+.notfound-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-family: $font-secondary;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.notfound-msg {
+    font-size: 0.8em;
+    max-width: 500px;
+    text-align: center;
+    color: $secondary;
+}

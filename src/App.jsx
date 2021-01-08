@@ -1,5 +1,5 @@
 import { useEffect, createContext } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { ManageSession } from "api/session";
 
 import * as Public from "pages/public";
@@ -24,6 +24,10 @@ const App = () => {
                 <Route path="/calendar">
                     <Public.Calendar />
                 </Route>
+                <Route path="/404">
+                    <Public.NotFound />
+                </Route>
+                <Redirect to="/404" />
             </Switch>
         </SessionContext.Provider>
     );
