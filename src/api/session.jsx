@@ -70,7 +70,7 @@ const reducer = (state = initial, { type, response } = {}) => {
     }
 };
 
-export const HandleSession = () => {
+export const ManageSession = () => {
     const [state, dispatch] = useReducer(reducer, initial);
 
     const makeRequest = useCallback(async () => {
