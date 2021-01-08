@@ -2,6 +2,9 @@
  * Navbar component that holds logo, buttons and logged in user profile.
  */
 
+import { useContext } from "react";
+
+import { Nav } from "reactstrap";
 import "./styles.scss";
 
 import CCLogo from "./assets/cc_logo.svg";
@@ -9,8 +12,9 @@ import CCLogoSmall from "./assets/cc_logo_sm.svg";
 import HomeIcon from "./assets/home.svg";
 import ClubsIcon from "./assets/clubs.svg";
 import CalendarIcon from "./assets/calendar.svg";
+import DashboardIcon from "./assets/dashboard.svg";
 
-import { Nav } from "reactstrap";
+import { SessionContext } from "App";
 import { useWindowDimensions } from "utils/WindowDimensions";
 
 import Profile from "../Profile";
@@ -35,6 +39,26 @@ const NavItems = [
     },
 ];
 
+const ContextNavItem = () => {
+    const { session } = useContext(SessionContext);
+
+    const ContextItems = {
+        cc_admin: {
+            title: "dashboard",
+            path: "/admin",
+            icon: DashboardIcon,
+        },
+        organizer: {
+            title: "manage club",
+            path: "/club",
+            icon: DashboardIcon,
+        },
+    };
+
+    if (!session.user.group) return null;
+    return <NavigationItem {...ContextItems[session.user.group]} />;
+};
+
 const Navigation = () => {
     const { width } = useWindowDimensions();
 
@@ -52,9 +76,10 @@ const Navigation = () => {
                     {NavItems.map((item, idx) => (
                         <NavigationItem {...item} key={idx} />
                     ))}
+                    <ContextNavItem />
                 </Nav>
             </div>
-            <div className="navprofile-container">
+            <div className="navprofile-container d-none d-lg-block">
                 <Profile />
             </div>
         </div>
