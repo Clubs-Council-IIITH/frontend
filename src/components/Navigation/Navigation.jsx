@@ -13,6 +13,7 @@ import CalendarIcon from "./assets/calendar.svg";
 import { Nav } from "reactstrap";
 import { useWindowDimensions } from "utils/WindowDimensions";
 
+import Profile from "../Profile";
 import NavigationItem from "./NavigationItem";
 
 const NavItems = [
@@ -39,7 +40,7 @@ const Navigation = () => {
 
     return (
         <div className="navigation-col text-light">
-            <div className="d-flex flex-column justify-content-between p-4 h-100">
+            <div className="d-flex flex-column justify-content-start p-4 h-100">
                 <div>
                     <img
                         src={width < 992 ? CCLogoSmall : CCLogo}
@@ -47,13 +48,15 @@ const Navigation = () => {
                         className="navlogo"
                     />
                 </div>
-                <Nav className="navitems-container p-0 m-0">
+                <Nav className="navitems-container p-0 mt-5">
                     {NavItems.map((item, idx) => (
                         <NavigationItem {...item} key={idx} />
                     ))}
                 </Nav>
             </div>
-            <div className="navprofile-container p-3">profile</div>
+            <div className="navprofile-container">
+                <Profile />
+            </div>
         </div>
     );
 };

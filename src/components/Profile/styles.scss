@@ -1,0 +1,35 @@
+@import "theme.scss";
+
+.profile-container {
+    font-family: $font-secondary;
+    font-weight: 700;
+    background-color: $black !important;
+    height: 100%;
+    width: 100%;
+}
+
+.profile-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+}
+
+.profile-caret {
+    filter: invert(1);
+}
+
+.profile-item-name {
+    max-width: 200px;
+    font-size: 1em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.profile-item-mail {
+    max-width: 200px;
+    font-size: 0.8em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}

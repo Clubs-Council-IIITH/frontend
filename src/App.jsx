@@ -15,10 +15,6 @@ const App = () => {
     return (
         <SessionContext.Provider value={{ session, dispatchSession }}>
             <Switch>
-                {/* <div> */}
-                {/*     <Button onClick={() => dispatchSession({ type: "LOGIN" })}> login </Button> */}
-                {/*     <Button onClick={() => dispatchSession({ type: "LOGOUT" })}> logout </Button> */}
-                {/* </div> */}
                 <Route exact path="/">
                     <Public.Home />
                 </Route>
