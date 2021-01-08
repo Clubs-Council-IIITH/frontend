@@ -31,7 +31,7 @@ const ClubsList = () => {
     if (loading) return <Loading />;
     if (error) return <ErrorPage {...error} />;
     return (
-        <Row className="d-flex mt-2">
+        <Row className="d-flex mt-2 px-2 px-md-0">
             {searchContent
                 ? searchContent.map((club, idx) => (
                       <Col

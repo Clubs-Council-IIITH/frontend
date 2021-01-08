@@ -13,8 +13,8 @@ const Topbar = ({ title, component }) => {
     return (
         <div className="topbar-column">
             <div className="topbar text-light">
-                <div className="title-display">
-                    {title && <div className="mr-4">{title}</div>}
+                <div className="title-display d-flex align-items-center">
+                    {title ? <div className="mr-4">{title}</div> : <div className="my-5" />}
                     {component && <div className="d-none d-md-block">{component}</div>}
                 </div>
             </div>
