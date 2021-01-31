@@ -26,7 +26,12 @@ const ClubItem = ({ id, name, img }) => {
     return (
         <Card className="d-flex flex-fill club-item elevate clickable">
             <Link to={`${path}/${id}`} className="invisible-link d-flex flex-column flex-fill">
-                <CardImg src={img || placeholderImg} alt={name} height="180px" />
+                <CardImg
+                    src={img || placeholderImg}
+                    alt={name}
+                    height="180px"
+                    className="club-img"
+                />
                 <CardBody className="d-flex flex-fill justify-content-end align-items-center pb-3">
                     <div className="h4 text-right font-weight-bold">{name}</div>
                 </CardBody>
