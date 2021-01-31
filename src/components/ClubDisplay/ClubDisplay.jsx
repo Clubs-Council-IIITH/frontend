@@ -26,7 +26,11 @@ const View = ({ tabs }) => {
             ) : (
                 <>
                     <div className="clubimg-cover mb-3 mb-md-4">
-                        <img src={ClubImgPlaceholder} alt="" className="clubimg-bg" />
+                        <img
+                            src={club[0].img || ClubImgPlaceholder}
+                            alt=""
+                            className="clubimg-bg"
+                        />
                         <h1 className="clubtitle font-weight-bold mt-3 mt-md-4">{club[0].name}</h1>
                     </div>
                     <TabBar tabs={tabs} />
