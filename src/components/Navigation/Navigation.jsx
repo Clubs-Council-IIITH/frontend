@@ -1,11 +1,14 @@
 import clsx from "clsx";
 
+import { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Box, Drawer, List, IconButton } from "@material-ui/core";
+import { Box, Drawer, Divider, List, IconButton } from "@material-ui/core";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 import NavigationItem from "./NavigationItem";
+
+import { NavigationContext } from "components/Navigation/NavigationContext";
 
 // styles {{{
 const drawerWidth = 240;
@@ -71,16 +74,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-const Navigation = ({ navigation, open, setOpen }) => {
+const Navigation = ({ controller: [open, setOpen] }) => {
     const classes = useStyles();
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const { navigation } = useContext(NavigationContext);
 
     return (
         <Drawer
@@ -97,7 +93,7 @@ const Navigation = ({ navigation, open, setOpen }) => {
             }}
         >
             <div className={classes.toolbar}>
-                <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
+                <IconButton onClick={() => setOpen(!open)}>
                     {open ? (
                         <ChevronLeft style={{ color: "black" }} />
                     ) : (
@@ -106,11 +102,16 @@ const Navigation = ({ navigation, open, setOpen }) => {
                 </IconButton>
             </div>
             <Box my={4}>
-                <List>
-                    {navigation.map((item, idx) => (
-                        <NavigationItem key={idx} {...item} />
-                    ))}
-                </List>
+                {Object.keys(navigation).map((category, cidx) => (
+                    <div key={cidx}>
+                        {cidx ? <Divider /> : null}
+                        <List>
+                            {navigation[category].map((item, iidx) => (
+                                <NavigationItem key={iidx} {...item} />
+                            ))}
+                        </List>
+                    </div>
+                ))}
             </Box>
         </Drawer>
     );

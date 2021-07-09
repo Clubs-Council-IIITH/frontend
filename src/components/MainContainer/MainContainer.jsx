@@ -27,17 +27,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-const MainContainer = ({ navigation, children }) => {
+const MainContainer = ({ children }) => {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Navigation navigation={navigation} open={open} setOpen={setOpen} />
+            <Navigation controller={[open, setOpen]} />
 
             <AppBar
-                color="white"
+                color="transparent"
                 elevation={0}
                 position="fixed"
                 className={clsx(classes.appBar, {

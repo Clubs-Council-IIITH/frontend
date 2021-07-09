@@ -1,3 +1,4 @@
+import { useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 // theme overrides
@@ -11,6 +12,7 @@ import {
     CalendarTodayOutlined,
     DashboardOutlined,
 } from "@material-ui/icons";
+import { NavigationContext } from "components/Navigation/NavigationContext";
 import MainContainer from "components/MainContainer";
 
 // pages
@@ -19,53 +21,63 @@ import Clubs from "pages/Clubs";
 import Calendar from "pages/Calendar";
 import Dashboard from "pages/Dashboard";
 
-// site navigation
-const navigation = [
-    {
-        title: "Home",
-        path: "/",
-        icon: HomeOutlined,
-        component: <Home />,
-    },
-    {
-        title: "Clubs",
-        path: "/clubs",
-        icon: ExploreOutlined,
-        component: <Clubs />,
-    },
-    {
-        title: "Calendar",
-        path: "/calendar",
-        icon: CalendarTodayOutlined,
-        component: <Calendar />,
-    },
-    {
-        title: "Dashboard",
-        path: "/dashboard",
-        icon: DashboardOutlined,
-        component: <Dashboard />,
-    },
-];
-
 const App = () => {
+    const { navigation, setNavigation } = useContext(NavigationContext);
+
+    // site navigation
+    useEffect(() => {
+        setNavigation({
+            common: [
+                {
+                    title: "Home",
+                    path: "/",
+                    icon: HomeOutlined,
+                    component: <Home />,
+                },
+                {
+                    title: "Clubs",
+                    path: "/clubs",
+                    icon: ExploreOutlined,
+                    component: <Clubs />,
+                },
+                {
+                    title: "Calendar",
+                    path: "/calendar",
+                    icon: CalendarTodayOutlined,
+                    component: <Calendar />,
+                },
+            ],
+            actions: [
+                {
+                    title: "Dashboard",
+                    path: "/dashboard",
+                    icon: DashboardOutlined,
+                    component: <Dashboard />,
+                },
+            ],
+        });
+    }, []);
+
     return (
         <MuiThemeProvider theme={Theme}>
             <BrowserRouter>
-                <MainContainer navigation={navigation}>
-                    <div>
+                <MainContainer>
+                    {!!Object.values(navigation).flat().length && (
                         <Switch>
-                            {navigation.map((route) => (
-                                <Route exact path={route.path}>
-                                    {route.component}
-                                </Route>
-                            ))}
+                            {Object.values(navigation)
+                                .flat()
+                                .map((route, idx) => (
+                                    <Route exact path={route.path} key={idx}>
+                                        {route.component}
+                                    </Route>
+                                ))}
 
                             <Route path="/404">
                                 <div> PAGE NOT FOUND </div>
                             </Route>
                             <Redirect to="/404" />
                         </Switch>
-                    </div>
+                    )}
                 </MainContainer>
             </BrowserRouter>
         </MuiThemeProvider>
