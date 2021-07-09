@@ -13,31 +13,37 @@ import {
 } from "@material-ui/icons";
 import MainContainer from "components/MainContainer";
 
+// pages
+import Home from "pages/Home";
+import Clubs from "pages/Clubs";
+import Calendar from "pages/Calendar";
+import Dashboard from "pages/Dashboard";
+
 // site navigation
 const navigation = [
     {
         title: "Home",
         path: "/",
         icon: HomeOutlined,
-        component: <div> home </div>,
+        component: <Home />,
     },
     {
         title: "Clubs",
         path: "/clubs",
         icon: ExploreOutlined,
-        component: <div> clubs </div>,
+        component: <Clubs />,
     },
     {
         title: "Calendar",
         path: "/calendar",
         icon: CalendarTodayOutlined,
-        component: <div> calendar </div>,
+        component: <Calendar />,
     },
     {
         title: "Dashboard",
         path: "/dashboard",
         icon: DashboardOutlined,
-        component: <div> dashboard </div>,
+        component: <Dashboard />,
     },
 ];
 
