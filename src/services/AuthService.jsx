@@ -9,7 +9,7 @@ export default class AuthService {
         try {
             var res = await axios.get(`${route}/`, { headers });
             return {
-                usergroup: res.data.usergroup,
+                user: res.data.user,
                 is_authenticated: res.data.is_authenticated,
                 error: null,
             };
@@ -17,9 +17,9 @@ export default class AuthService {
             localStorage.removeItem("token");
             localStorage.removeItem("expiration_date");
             return {
-                usergroup: null,
+                user: null,
                 is_authenticated: false,
-                error: err.response,
+                error: e.response,
             };
         }
     }
@@ -38,12 +38,13 @@ export default class AuthService {
         try {
             await axios.get("/api/endsession");
             return {
-                usergroup: null,
+                user: null,
                 is_authenticated: false,
+                error: null,
             };
         } catch (e) {
             return {
-                usergroup: null,
+                user: null,
                 is_authenticated: false,
                 error: e.response,
             };

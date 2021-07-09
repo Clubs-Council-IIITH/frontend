@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import NavigationContextProvider from "components/Navigation/NavigationContext";
+import NavigationContextProvider from "contexts/NavigationContext";
+import SessionContextProvider from "contexts/SessionContext";
 
 ReactDOM.render(
     <React.StrictMode>
-        <NavigationContextProvider>
-            <App />
-        </NavigationContextProvider>
+        <SessionContextProvider>
+            <NavigationContextProvider>
+                <App />
+            </NavigationContextProvider>
+        </SessionContextProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

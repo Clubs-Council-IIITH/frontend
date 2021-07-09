@@ -5,6 +5,13 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { Theme } from "theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
+// constants
+import { userRoles } from "constants/userRoles";
+
+// contexts
+import { NavigationContext } from "contexts/NavigationContext";
+import { SessionContext } from "contexts/SessionContext";
+
 // components
 import {
     HomeOutlined,
@@ -12,7 +19,6 @@ import {
     CalendarTodayOutlined,
     DashboardOutlined,
 } from "@material-ui/icons";
-import { NavigationContext } from "components/Navigation/NavigationContext";
 import MainContainer from "components/MainContainer";
 
 // pages
@@ -22,41 +28,67 @@ import Calendar from "pages/Calendar";
 import Dashboard from "pages/Dashboard";
 
 const App = () => {
+    const { session } = useContext(SessionContext);
     const { navigation, setNavigation } = useContext(NavigationContext);
 
     // site navigation
     useEffect(() => {
+        const common = [
+            {
+                title: "Home",
+                path: "/",
+                icon: HomeOutlined,
+                component: <Home />,
+            },
+            {
+                title: "Clubs",
+                path: "/clubs",
+                icon: ExploreOutlined,
+                component: <Clubs />,
+            },
+            {
+                title: "Calendar",
+                path: "/calendar",
+                icon: CalendarTodayOutlined,
+                component: <Calendar />,
+            },
+        ];
+
+        console.log("session", session);
+
+        const actions =
+            session?.user.group === userRoles.admin
+                ? [
+                      {
+                          title: "Dashboard",
+                          path: "/dashboard",
+                          icon: DashboardOutlined,
+                          component: <Dashboard />,
+                      },
+                  ]
+                : session?.user.group === userRoles.coordinator
+                ? [
+                      {
+                          title: "Manage Club",
+                          path: "/dashboard",
+                          icon: DashboardOutlined,
+                          component: <Dashboard />,
+                      },
+                  ]
+                : [
+                      {
+                          title: "Test Item",
+                          path: "/test",
+                          icon: DashboardOutlined,
+                          component: <Dashboard />,
+                      },
+                  ];
+
         setNavigation({
-            common: [
-                {
-                    title: "Home",
-                    path: "/",
-                    icon: HomeOutlined,
-                    component: <Home />,
-                },
-                {
-                    title: "Clubs",
-                    path: "/clubs",
-                    icon: ExploreOutlined,
-                    component: <Clubs />,
-                },
-                {
-                    title: "Calendar",
-                    path: "/calendar",
-                    icon: CalendarTodayOutlined,
-                    component: <Calendar />,
-                },
-            ],
-            actions: [
-                {
-                    title: "Dashboard",
-                    path: "/dashboard",
-                    icon: DashboardOutlined,
-                    component: <Dashboard />,
-                },
-            ],
+            common,
+            actions,
         });
-    }, []);
+    }, [session]);
 
     return (
         <MuiThemeProvider theme={Theme}>
