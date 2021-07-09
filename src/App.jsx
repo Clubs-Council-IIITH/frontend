@@ -33,7 +33,7 @@ const App = () => {
 
     // site navigation
     useEffect(() => {
-        const common = [
+        const publicRoutes = [
             {
                 title: "Home",
                 path: "/",
@@ -54,10 +54,8 @@ const App = () => {
             },
         ];
 
-        console.log("session", session);
-
-        const actions =
-            session?.user.group === userRoles.admin
+        const protectedRoutes =
+            session?.user?.group === userRoles.admin
                 ? [
                       {
                           title: "Dashboard",
@@ -66,7 +64,7 @@ const App = () => {
                           component: <Dashboard />,
                       },
                   ]
-                : session?.user.group === userRoles.coordinator
+                : session?.user?.group === userRoles.coordinator
                 ? [
                       {
                           title: "Manage Club",
@@ -75,18 +73,11 @@ const App = () => {
                           component: <Dashboard />,
                       },
                   ]
-                : [
-                      {
-                          title: "Test Item",
-                          path: "/test",
-                          icon: DashboardOutlined,
-                          component: <Dashboard />,
-                      },
-                  ];
+                : [];
 
         setNavigation({
-            common,
-            actions,
+            publicRoutes,
+            protectedRoutes,
         });
     }, [session]);
 
@@ -96,16 +87,26 @@ const App = () => {
                 <MainContainer>
                     {!!Object.values(navigation).flat().length && (
                         <Switch>
-                            {Object.values(navigation)
-                                .flat()
-                                .map((route, idx) => (
-                                    <Route exact path={route.path} key={idx}>
-                                        {route.component}
-                                    </Route>
-                                ))}
+                            {/* public routes */}
+                            {Object.values(navigation.publicRoutes).map((route, idx) => (
+                                <Route exact path={route.path} key={idx}>
+                                    {route.component}
+                                </Route>
+                            ))}
 
-                            <Route path="/404">
-                                <div> PAGE NOT FOUND </div>
+                            {/* protected routes */}
+                            {Object.values(navigation.protectedRoutes).map((route, idx) => (
+                                <Route exact path={route.path} key={idx}>
+                                    {route.component}
+                                </Route>
+                            ))}
+
+                            {/* error routes */}
+                            <Route exact path="/404">
+                                <h1> 404: Not Found </h1>
+                            </Route>
+                            <Route exact path="/401">
+                                <h1> 401: Unauthorized </h1>
                             </Route>
                             <Redirect to="/404" />
                         </Switch>
