@@ -1,25 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// theme overrides
+import { Theme } from "theme";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+
+// components
+import {
+    HomeOutlined,
+    ExploreOutlined,
+    CalendarTodayOutlined,
+    DashboardOutlined,
+} from "@material-ui/icons";
+import MainContainer from "components/MainContainer";
+
+// site navigation
+const navigation = [
+    {
+        title: "Home",
+        path: "/",
+        icon: HomeOutlined,
+        component: <div> home </div>,
+    },
+    {
+        title: "Clubs",
+        path: "/clubs",
+        icon: ExploreOutlined,
+        component: <div> clubs </div>,
+    },
+    {
+        title: "Calendar",
+        path: "/calendar",
+        icon: CalendarTodayOutlined,
+        component: <div> calendar </div>,
+    },
+    {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: DashboardOutlined,
+        component: <div> dashboard </div>,
+    },
+];
+
+const App = () => {
+    return (
+        <MuiThemeProvider theme={Theme}>
+            <BrowserRouter>
+                <MainContainer navigation={navigation}>
+                    <div>
+                        <Switch>
+                            {navigation.map((route) => (
+                                <Route exact path={route.path}>
+                                    {route.component}
+                                </Route>
+                            ))}
+
+                            <Route path="/404">
+                                <div> PAGE NOT FOUND </div>
+                            </Route>
+                            <Redirect to="/404" />
+                        </Switch>
+                    </div>
+                </MainContainer>
+            </BrowserRouter>
+        </MuiThemeProvider>
+    );
+};
 
 export default App;
