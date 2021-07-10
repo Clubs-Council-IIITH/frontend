@@ -18,14 +18,14 @@ import {
     ExploreOutlined,
     CalendarTodayOutlined,
     DashboardOutlined,
+    GroupOutlined,
 } from "@material-ui/icons";
 import MainContainer from "components/MainContainer";
 
 // pages
-import Home from "pages/Home";
-import Clubs from "pages/Clubs";
-import Calendar from "pages/Calendar";
-import Dashboard from "pages/Dashboard";
+import * as Public from "pages/Public";
+import * as Admin from "pages/Admin";
+import * as Club from "pages/Club";
 
 const App = () => {
     const { session } = useContext(SessionContext);
@@ -38,19 +38,19 @@ const App = () => {
                 title: "Home",
                 path: "/",
                 icon: HomeOutlined,
-                component: <Home />,
+                component: <Public.Home />,
             },
             {
                 title: "Clubs",
                 path: "/clubs",
                 icon: ExploreOutlined,
-                component: <Clubs />,
+                component: <Public.Clubs />,
             },
             {
                 title: "Calendar",
                 path: "/calendar",
                 icon: CalendarTodayOutlined,
-                component: <Calendar />,
+                component: <Public.Calendar />,
             },
         ];
 
@@ -58,19 +58,25 @@ const App = () => {
             session?.user?.group === userRoles.admin
                 ? [
                       {
-                          title: "Dashboard",
-                          path: "/dashboard",
+                          title: "Manage Clubs",
+                          path: "/admin/clubs",
                           icon: DashboardOutlined,
-                          component: <Dashboard />,
+                          component: <Admin.Clubs />,
+                      },
+                      {
+                          title: "Manage Users",
+                          path: "/admin/users",
+                          icon: GroupOutlined,
+                          component: <Admin.Users />,
                       },
                   ]
                 : session?.user?.group === userRoles.coordinator
                 ? [
                       {
                           title: "Manage Club",
-                          path: "/dashboard",
+                          path: "/manage/club",
                           icon: DashboardOutlined,
-                          component: <Dashboard />,
+                          component: <Club.About />,
                       },
                   ]
                 : [];

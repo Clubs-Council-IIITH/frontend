@@ -19,7 +19,7 @@ const Clubs = () => {
     //     })();
     // }, []);
 
-    return <h1> CLUBS </h1>;
+    return <h1> Public : Clubs </h1>;
 };
 
 export default Clubs;

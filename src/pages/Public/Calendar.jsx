@@ -1,5 +1,5 @@
 const Calendar = () => {
-    return <h1> CALENDAR </h1>;
+    return <h1> Public : Calendar </h1>;
 };
 
 export default Calendar;
