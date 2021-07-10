@@ -4,7 +4,7 @@ const Page = ({ header, loading, empty, children }) => {
     return (
         <Container maxWidth={null}>
             <Typography variant="h2"> {header} </Typography>
-            <Box my={8}>
+            <Box mt={8} mb={3}>
                 {loading ? (
                     <div> loading... </div>
                 ) : empty ? (
