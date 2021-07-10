@@ -3,15 +3,13 @@ import clsx from "clsx";
 import { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { SessionContext } from "contexts/SessionContext";
 import { NavigationContext } from "contexts/NavigationContext";
 
-import { Button, Box, Drawer, Divider, List, IconButton } from "@material-ui/core";
+import { Collapse, Box, Drawer, Divider, List, IconButton } from "@material-ui/core";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
-import AuthService from "services/AuthService";
-
 import NavigationItem from "./NavigationItem";
+import Profile from "./Profile";
 
 // styles {{{
 const drawerWidth = 240;
@@ -80,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
 const Navigation = ({ controller: [open, setOpen] }) => {
     const classes = useStyles();
 
-    const { session } = useContext(SessionContext);
     const { navigation } = useContext(NavigationContext);
 
     return (
@@ -122,15 +119,7 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                 )}
             </Box>
             <Box display="flex" flexDirection="column" justifyContent="flex-end" flexGrow={1}>
-                <Box m={3}>
-                    {session?.is_authenticated ? (
-                        <>{session.user.name}</>
-                    ) : (
-                        <Button fullWidth variant="outlined" onClick={() => AuthService.login()}>
-                            Login
-                        </Button>
-                    )}
-                </Box>
+                <Collapse in={open}>{!!open && <Profile />}</Collapse>
             </Box>
         </Drawer>
     );
