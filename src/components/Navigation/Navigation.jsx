@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
-import { Collapse, Box, Drawer, Divider, List, IconButton } from "@material-ui/core";
+import { Collapse, Box, Drawer, Divider, Fade, List, IconButton } from "@material-ui/core";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 import NavigationItem from "./NavigationItem";
@@ -109,11 +109,13 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                         !!navigation[category].length && (
                             <div key={cidx}>
                                 {cidx ? <Divider /> : null}
-                                <List>
-                                    {navigation[category].map((item, iidx) => (
-                                        <NavigationItem key={iidx} {...item} />
-                                    ))}
-                                </List>
+                                <Fade in>
+                                    <List>
+                                        {navigation[category].map((item, iidx) => (
+                                            <NavigationItem key={iidx} {...item} />
+                                        ))}
+                                    </List>
+                                </Fade>
                             </div>
                         )
                 )}
