@@ -23,26 +23,6 @@ const Clubs = () => {
                         <ClubListItem {...club} />
                     </Grid>
                 ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={6} key={idx}>
-                        <ClubListItem {...club} />
-                    </Grid>
-                ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={6} key={idx}>
-                        <ClubListItem {...club} />
-                    </Grid>
-                ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={6} key={idx}>
-                        <ClubListItem {...club} />
-                    </Grid>
-                ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={6} key={idx}>
-                        <ClubListItem {...club} />
-                    </Grid>
-                ))}
             </Grid>
         </Page>
     );

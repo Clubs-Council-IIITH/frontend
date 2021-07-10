@@ -1,5 +1,11 @@
+import Page from "components/Page";
+
 const Calendar = () => {
-    return <h1> Public : Calendar </h1>;
+    return (
+        <Page header={"Calendar"} loading={false} empty={false}>
+            <h1> TODO </h1>
+        </Page>
+    );
 };
 
 export default Calendar;
