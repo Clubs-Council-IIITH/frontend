@@ -23,26 +23,26 @@ const Clubs = () => {
                         <ClubCard {...club} />
                     </Grid>
                 ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={4} lg={3} key={idx}>
-                        <ClubCard {...club} />
-                    </Grid>
-                ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={4} lg={3} key={idx}>
-                        <ClubCard {...club} />
-                    </Grid>
-                ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={4} lg={3} key={idx}>
-                        <ClubCard {...club} />
-                    </Grid>
-                ))}
-                {clubs?.data?.map((club, idx) => (
-                    <Grid item md={4} lg={3} key={idx}>
-                        <ClubCard {...club} />
-                    </Grid>
-                ))}
+                {/* {clubs?.data?.map((club, idx) => ( */}
+                {/*     <Grid item md={4} lg={3} key={idx}> */}
+                {/*         <ClubCard {...club} /> */}
+                {/*     </Grid> */}
+                {/* ))} */}
+                {/* {clubs?.data?.map((club, idx) => ( */}
+                {/*     <Grid item md={4} lg={3} key={idx}> */}
+                {/*         <ClubCard {...club} /> */}
+                {/*     </Grid> */}
+                {/* ))} */}
+                {/* {clubs?.data?.map((club, idx) => ( */}
+                {/*     <Grid item md={4} lg={3} key={idx}> */}
+                {/*         <ClubCard {...club} /> */}
+                {/*     </Grid> */}
+                {/* ))} */}
+                {/* {clubs?.data?.map((club, idx) => ( */}
+                {/*     <Grid item md={4} lg={3} key={idx}> */}
+                {/*         <ClubCard {...club} /> */}
+                {/*     </Grid> */}
+                {/* ))} */}
             </Grid>
         </Page>
     );
