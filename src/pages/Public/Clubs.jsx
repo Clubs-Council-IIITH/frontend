@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-import { Box, Grid, Container, Typography, Grow } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+
+import Page from "components/Page";
+import ClubCard from "components/ClubCard";
 
 import ClubService from "services/ClubService";
-
-import ClubCard from "components/ClubCard";
 
 const Clubs = () => {
     const [clubs, setClubs] = useState({ loading: true });
@@ -15,46 +16,35 @@ const Clubs = () => {
     }, []);
 
     return (
-        <Container maxWidth={null}>
-            <Typography variant="h2"> Clubs </Typography>
-            <Box my={4}>
-                {clubs?.loading ? (
-                    <div> loading... </div>
-                ) : !clubs?.data.length ? (
-                    <div> empty! </div>
-                ) : (
-                    <Grow in timeout={250} style={{ transformOrigin: "50vw 0" }}>
-                        <Grid container spacing={2}>
-                            {clubs?.data.map((club, idx) => (
-                                <Grid item md={4} lg={3} key={idx}>
-                                    <ClubCard {...club} />
-                                </Grid>
-                            ))}
-                            {clubs?.data.map((club, idx) => (
-                                <Grid item md={4} lg={3} key={idx}>
-                                    <ClubCard {...club} />
-                                </Grid>
-                            ))}
-                            {clubs?.data.map((club, idx) => (
-                                <Grid item md={4} lg={3} key={idx}>
-                                    <ClubCard {...club} />
-                                </Grid>
-                            ))}
-                            {clubs?.data.map((club, idx) => (
-                                <Grid item md={4} lg={3} key={idx}>
-                                    <ClubCard {...club} />
-                                </Grid>
-                            ))}
-                            {clubs?.data.map((club, idx) => (
-                                <Grid item md={4} lg={3} key={idx}>
-                                    <ClubCard {...club} />
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </Grow>
-                )}
-            </Box>
-        </Container>
+        <Page header={"Clubs"} loading={clubs?.loading} empty={!clubs?.data?.length}>
+            <Grid container spacing={2}>
+                {clubs?.data?.map((club, idx) => (
+                    <Grid item md={4} lg={3} key={idx}>
+                        <ClubCard {...club} />
+                    </Grid>
+                ))}
+                {clubs?.data?.map((club, idx) => (
+                    <Grid item md={4} lg={3} key={idx}>
+                        <ClubCard {...club} />
+                    </Grid>
+                ))}
+                {clubs?.data?.map((club, idx) => (
+                    <Grid item md={4} lg={3} key={idx}>
+                        <ClubCard {...club} />
+                    </Grid>
+                ))}
+                {clubs?.data?.map((club, idx) => (
+                    <Grid item md={4} lg={3} key={idx}>
+                        <ClubCard {...club} />
+                    </Grid>
+                ))}
+                {clubs?.data?.map((club, idx) => (
+                    <Grid item md={4} lg={3} key={idx}>
+                        <ClubCard {...club} />
+                    </Grid>
+                ))}
+            </Grid>
+        </Page>
     );
 };
 
