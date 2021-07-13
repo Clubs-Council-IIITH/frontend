@@ -39,6 +39,7 @@ const publicRoutes = [
         path: "/",
         icon: HomeOutlined,
         component: <Public.Home />,
+        exact: true,
     },
     {
         title: "Clubs",
@@ -106,14 +107,14 @@ const App = () => {
                         <Switch>
                             {/* public routes */}
                             {publicRoutes.map((route, idx) => (
-                                <Route exact path={route.path} key={idx}>
+                                <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
                                 </Route>
                             ))}
 
                             {/* protected routes */}
                             {[...adminRoutes, ...clubRoutes].map((route, idx) => (
-                                <Route exact path={route.path} key={idx}>
+                                <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
                                 </Route>
                             ))}

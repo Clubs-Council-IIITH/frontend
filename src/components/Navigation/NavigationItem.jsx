@@ -1,6 +1,7 @@
 import clsx from "clsx";
 
-import { useLocation, useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useHistory, matchPath } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Box, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
@@ -29,14 +30,21 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
     const location = useLocation();
     const classes = useStyles();
 
+    const [selected, setSelected] = useState(false);
+    useEffect(() => {
+        setSelected(
+            location.pathname === path || !!matchPath(location.pathname, { path: `${path}/:etc` })
+        );
+    }, [location.pathname]);
+
     return (
         <ListItem
             button
-            selected={location.pathname === path}
+            selected={selected}
             onClick={() => history.push(path)}
             className={clsx({
-                [classes.navigationItemActive]: location.pathname === path,
-                [classes.navigationItemInactive]: location.pathname !== path,
+                [classes.navigationItemActive]: selected,
+                [classes.navigationItemInactive]: !selected,
             })}
         >
             <Box display="flex" alignItems="center" mx={2}>
