@@ -5,6 +5,9 @@ export const Theme = createTheme({
         background: {
             default: "#fff",
         },
+        primary: {
+            main: "#000",
+        },
     },
     typography: {
         fontFamily: `'Jost', sans-serif`,
