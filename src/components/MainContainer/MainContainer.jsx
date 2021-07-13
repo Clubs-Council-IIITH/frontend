@@ -12,18 +12,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
     },
-    toolbar: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        padding: theme.spacing(0, 2),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(2),
-    },
 }));
 // }}}
 
@@ -47,10 +35,7 @@ const MainContainer = ({ children }) => {
                 <Toolbar />
             </AppBar>
 
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                {children}
-            </main>
+            <>{children}</>
         </div>
     );
 };

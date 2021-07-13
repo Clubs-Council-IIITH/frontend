@@ -1,21 +1,47 @@
+import clsx from "clsx";
+
+import { makeStyles } from "@material-ui/core/styles";
+
 import { Box, Container, Typography, Fade } from "@material-ui/core";
 
-const Page = ({ header, loading, empty, children }) => {
+// styles {{{
+const useStyles = makeStyles((theme) => ({
+    toolbar: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        padding: theme.spacing(0, 2),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(2),
+    },
+}));
+// }}}
+
+const Page = ({ header, loading, empty, full, children }) => {
+    const classes = useStyles();
+
     return (
-        <Container maxWidth={null}>
-            <Typography variant="h2"> {header} </Typography>
-            <Box mt={8} mb={3}>
-                {loading ? (
-                    <div> loading... </div>
-                ) : empty ? (
-                    <div> empty! </div>
-                ) : (
-                    <Fade in timeout={250}>
-                        {children}
-                    </Fade>
-                )}
-            </Box>
-        </Container>
+        <main className={clsx({ [classes.content]: !full })}>
+            <div className={clsx({ [classes.toolbar]: !full })} />
+            <Container maxWidth={null} disableGutters={full}>
+                <Typography variant="h2"> {header} </Typography>
+                <Box mt={full ? 0 : 8} mb={full ? 0 : 3}>
+                    {loading ? (
+                        <div> loading... </div>
+                    ) : empty ? (
+                        <div> empty! </div>
+                    ) : (
+                        <Fade in timeout={250}>
+                            {children}
+                        </Fade>
+                    )}
+                </Box>
+            </Container>
+        </main>
     );
 };
 
