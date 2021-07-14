@@ -27,51 +27,6 @@ const Events = () => {
                             <EventCard manage {...event} />
                         </Grid>
                     ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
-                            <EventCard {...event} />
-                        </Grid>
-                    ))}
                 </Grid>
             </Box>
         </Page>

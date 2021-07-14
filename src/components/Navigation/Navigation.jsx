@@ -5,7 +5,16 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
-import { Collapse, Box, Drawer, Divider, Fade, List, IconButton } from "@material-ui/core";
+import {
+    Collapse,
+    Box,
+    Drawer,
+    Divider,
+    Fade,
+    List,
+    IconButton,
+    Typography,
+} from "@material-ui/core";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 import NavigationItem from "./NavigationItem";
@@ -96,11 +105,14 @@ const Navigation = ({ controller: [open, setOpen] }) => {
         >
             <div className={classes.toolbar}>
                 <IconButton onClick={() => setOpen(!open)}>
-                    {open ? (
-                        <ChevronLeft style={{ color: "black" }} />
-                    ) : (
-                        <ChevronRight style={{ color: "black" }} />
-                    )}
+                    <Typography color="textPrimary" variant="h5">
+                        <Box fontWeight={500}>CC</Box>
+                    </Typography>
+                    {/* {open ? ( */}
+                    {/*     <ChevronLeft style={{ color: "black" }} /> */}
+                    {/* ) : ( */}
+                    {/*     <ChevronRight style={{ color: "black" }} /> */}
+                    {/* )} */}
                 </IconButton>
             </div>
             <Box my={4}>
