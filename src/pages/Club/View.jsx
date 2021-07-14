@@ -10,7 +10,7 @@ import ClubService from "services/ClubService";
 
 import About from "./About";
 import Events from "./Events";
-import Members from "./Members";
+// import Members from "./Members";
 
 const tabs = [
     {
@@ -23,11 +23,11 @@ const tabs = [
         panel: <Events />,
         route: "/events",
     },
-    {
-        title: "Members",
-        panel: <Members />,
-        route: "/members",
-    },
+    // {
+    //     title: "Members",
+    //     panel: <Members />,
+    //     route: "/members",
+    // },
 ];
 
 const View = () => {
@@ -37,13 +37,13 @@ const View = () => {
 
     // fetch club details from API
     useEffect(() => {
-        (async () => setClub(await ClubService.getClub(clubId)))();
+        (async () => setClub(await ClubService.getClubById(clubId)))();
     }, [clubId]);
 
     const tabController = useState(0);
 
     return (
-        <Page full header={""} loading={club?.loading} empty={null}>
+        <Page full loading={club?.loading}>
             <img
                 src={club?.data?.img}
                 alt={club?.data?.name}

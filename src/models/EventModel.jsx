@@ -1,7 +1,9 @@
 import { BaseModel } from "sjs-base-model";
+import ClubModel from "./ClubModel";
 
 export default class EventModel extends BaseModel {
-    club = "";
+    id = "";
+    club = ClubModel;
     datetime = "";
     name = "";
     last_edited_by = "";

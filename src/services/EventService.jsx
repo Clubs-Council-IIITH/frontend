@@ -27,7 +27,7 @@ export default class EventService {
         try {
             var res = await axios.get(`${route}/`, { headers, params: { club } });
             return {
-                data: new EventModel(res.data[0]),
+                data: res.data.map((o) => new EventModel(o)),
                 error: null,
             };
         } catch (e) {

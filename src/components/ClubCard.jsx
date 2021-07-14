@@ -6,9 +6,6 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mater
 
 // styles {{{
 const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
     media: {
         height: 200,
     },
@@ -25,7 +22,7 @@ const ClubCard = ({ id, img, name, description, state }) => {
             <CardActionArea onClick={() => history.push(`${match.url}/${id}`)}>
                 <CardMedia className={classes.media} image={img} title="Contemplative Reptile" />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h5">
                         {name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
