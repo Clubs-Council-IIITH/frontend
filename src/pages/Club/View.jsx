@@ -8,20 +8,24 @@ import { TabBar, TabPanels } from "components/Tabs";
 
 import ClubService from "services/ClubService";
 
+import About from "./About";
+import Events from "./Events";
+import Members from "./Members";
+
 const tabs = [
     {
         title: "About",
-        panel: <h1> about </h1>,
+        panel: <About />,
         route: "/about",
     },
     {
         title: "Events",
-        panel: <h1> events </h1>,
+        panel: <Events />,
         route: "/events",
     },
     {
         title: "Members",
-        panel: <h1> members </h1>,
+        panel: <Members />,
         route: "/members",
     },
 ];
