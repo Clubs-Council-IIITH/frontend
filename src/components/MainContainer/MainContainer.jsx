@@ -5,12 +5,32 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { AppBar, Toolbar, CssBaseline } from "@material-ui/core";
 
-import Navigation from "components/Navigation";
+import Navigation, { drawerWidth } from "components/Navigation";
+import BackButton from "components/BackButton";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+        width: `calc(100% - ${theme.spacing(7) + 1}px)`,
+        [theme.breakpoints.up("sm")]: {
+            width: `calc(100% - ${theme.spacing(11) + 1}px)`,
+        },
+        transition: theme.transitions.create(["width", "margin"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    appBarShift: {
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(["width", "margin"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
 }));
 // }}}
@@ -32,7 +52,9 @@ const MainContainer = ({ children }) => {
                     [classes.appBarShift]: open,
                 })}
             >
-                <Toolbar />
+                <Toolbar style={{ height: "80px" }}>
+                    <BackButton />
+                </Toolbar>
             </AppBar>
 
             <>{children}</>
