@@ -1,17 +1,17 @@
 import axios from "axios";
 import { headers } from "./config";
 
-import ClubModel from "models/ClubModel";
+import EventModel from "models/EventModel";
 
-const route = "/api/clubs";
+const route = "/api/events";
 
-export default class ClubService {
-    // get all clubs
-    static async getClubs() {
+export default class EventService {
+    // get all events
+    static async getEvents() {
         try {
             var res = await axios.get(`${route}/`, { headers });
             return {
-                data: res.data.map((o) => new ClubModel(o)),
+                data: res.data.map((o) => new EventModel(o)),
                 error: null,
             };
         } catch (e) {
@@ -22,12 +22,28 @@ export default class ClubService {
         }
     }
 
-    // get club with id
-    static async getClubById(id) {
+    // get events of a club
+    static async getEventsByClubId(club) {
+        try {
+            var res = await axios.get(`${route}/`, { headers, params: { club } });
+            return {
+                data: new EventModel(res.data[0]),
+                error: null,
+            };
+        } catch (e) {
+            return {
+                data: null,
+                error: e.response,
+            };
+        }
+    }
+
+    // get event with id
+    static async getEventById(id) {
         try {
             var res = await axios.get(`${route}/`, { headers, params: { id } });
             return {
-                data: new ClubModel(res.data[0]),
+                data: new EventModel(res.data[0]),
                 error: null,
             };
         } catch (e) {
@@ -38,8 +54,8 @@ export default class ClubService {
         }
     }
 
-    // add new club
-    static async addClub(data) {
+    // add new event
+    static async addEvent(data) {
         try {
             var res = await axios.post(`${route}/new/`, data, { headers });
             return {
@@ -54,8 +70,8 @@ export default class ClubService {
         }
     }
 
-    // update existing club
-    static async updateClub(id, data) {
+    // update existing event
+    static async updateEvent(id, data) {
         try {
             var res = await axios.post(`${route}/edit/${id}/`, data, { headers });
             return {
@@ -70,8 +86,8 @@ export default class ClubService {
         }
     }
 
-    // delete club
-    static async deleteClub(id) {
+    // delete event
+    static async deleteEvent(id) {
         try {
             var res = await axios.post(
                 `${route}/delete/${id}/`,
