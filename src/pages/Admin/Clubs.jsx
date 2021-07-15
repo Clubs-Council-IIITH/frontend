@@ -99,14 +99,6 @@ const Clubs = () => {
             {/*     edit asec */}
             {/* </Button> */}
 
-            {/* TODO: convert this into a table */}
-            {/* <Grid container spacing={1}> */}
-            {/*     {clubs?.data?.map((club, idx) => ( */}
-            {/*         <Grid item md={12} key={idx}> */}
-            {/*             <ClubListItem {...club} /> */}
-            {/*         </Grid> */}
-            {/*     ))} */}
-            {/* </Grid> */}
             <TableContainer component={(props) => <Card {...props} variant="outlined" />}>
                 <Table stickyHeader className={classes.table}>
                     <TableHead>
@@ -133,7 +125,14 @@ const Clubs = () => {
                                     >
                                         <ViewIcon />
                                     </Button>
-                                    <Button variant="text" className={classes.editButton}>
+                                    <Button
+                                        variant="text"
+                                        className={classes.editButton}
+                                        onClick={() => {
+                                            setClubFormProps({ club });
+                                            setClubFormModal(true);
+                                        }}
+                                    >
                                         <EditIcon />
                                     </Button>
                                     <Button variant="text" className={classes.deleteButton}>

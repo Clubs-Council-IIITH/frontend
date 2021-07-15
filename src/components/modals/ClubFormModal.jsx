@@ -18,7 +18,10 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
     };
 
     const onSubmit = async (data) => {
-        const { error } = await ClubService.addClub(data);
+        // update or create new instance of data
+        const { error } = await (club
+            ? ClubService.updateClub(club.id, data)
+            : ClubService.addClub(data));
 
         // show response toast based on form submission status
         setToast({ open: true, error });
