@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 
-import { Grid } from "@material-ui/core";
+import { Button, Box, Grid } from "@material-ui/core";
+
+import { Add } from "@material-ui/icons";
 
 import Page from "components/Page";
 import ClubListItem from "components/ClubListItem";
+import ClubFormModal from "components/modals/ClubFormModal";
 
 import ClubService from "services/ClubService";
 
 const Clubs = () => {
     const [clubs, setClubs] = useState({ loading: true });
+
+    const [clubFormModal, setClubFormModal] = useState(null);
+    const [clubFormProps, setClubFormProps] = useState({});
 
     // fetch list of clubs from API
     useEffect(() => {
@@ -16,10 +22,31 @@ const Clubs = () => {
     }, []);
 
     return (
-        <Page header={"Manage Clubs"} loading={clubs?.loading} empty={!clubs?.data?.length}>
-            <Grid container spacing={2}>
+        <Page
+            header={
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    Manage Clubs
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        size="large"
+                        onClick={() => {
+                            setClubFormProps({});
+                            setClubFormModal(true);
+                        }}
+                    >
+                        <Add fontSize="small" />
+                        New Club
+                    </Button>
+                </Box>
+            }
+            loading={clubs?.loading}
+            empty={!clubs?.data?.length}
+        >
+            <ClubFormModal controller={[clubFormModal, setClubFormModal]} {...clubFormProps} />
+            <Grid container spacing={1}>
                 {clubs?.data?.map((club, idx) => (
-                    <Grid item md={6} key={idx}>
+                    <Grid item md={12} key={idx}>
                         <ClubListItem {...club} />
                     </Grid>
                 ))}
