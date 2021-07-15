@@ -88,11 +88,6 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                     <Typography color="textPrimary" variant="h5">
                         <Box fontWeight={500}>CC</Box>
                     </Typography>
-                    {/* {open ? ( */}
-                    {/*     <ChevronLeft style={{ color: "black" }} /> */}
-                    {/* ) : ( */}
-                    {/*     <ChevronRight style={{ color: "black" }} /> */}
-                    {/* )} */}
                 </IconButton>
             </div>
             <Box my={4}>

@@ -6,8 +6,24 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mater
 
 // styles {{{
 const useStyles = makeStyles({
+    card: {
+        height: "100%",
+    },
+    actionArea: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+    },
+    content: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        flexGrow: 2,
+    },
     media: {
         height: 200,
+        width: "100%",
     },
 });
 // }}}
@@ -18,10 +34,13 @@ const ClubCard = ({ id, img, name, description, state }) => {
     const match = useRouteMatch();
 
     return (
-        <Card variant="outlined">
-            <CardActionArea onClick={() => history.push(`${match.url}/${id}`)}>
+        <Card variant="outlined" className={classes.card}>
+            <CardActionArea
+                className={classes.actionArea}
+                onClick={() => history.push(`${match.url}/${id}`)}
+            >
                 <CardMedia className={classes.media} image={img} title="Contemplative Reptile" />
-                <CardContent>
+                <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h5" component="h5">
                         {name}
                     </Typography>

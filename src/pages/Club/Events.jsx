@@ -23,7 +23,7 @@ const Events = () => {
             <Box p={3}>
                 <Grid container spacing={2}>
                     {events?.data?.map((event, idx) => (
-                        <Grid item md={4} lg={3} key={idx}>
+                        <Grid item md={4} key={idx}>
                             <EventCard manage {...event} />
                         </Grid>
                     ))}

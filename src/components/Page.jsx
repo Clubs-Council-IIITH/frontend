@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(2),
+        padding: theme.spacing(2, 1),
     },
 }));
 // }}}
@@ -29,7 +29,7 @@ const Page = ({ header, loading, empty, full, children }) => {
             <div className={clsx({ [classes.toolbar]: !full })} />
             <Container maxWidth={null} disableGutters={full}>
                 <Typography variant="h2"> {header} </Typography>
-                <Box mt={full ? 0 : 8} mb={full ? 0 : 3}>
+                <Box mt={full ? 0 : 5} mb={full ? 0 : 3}>
                     {loading ? (
                         <div> loading... </div>
                     ) : empty ? (
