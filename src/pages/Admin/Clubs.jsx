@@ -13,8 +13,8 @@ import ClubService from "services/ClubService";
 const Clubs = () => {
     const [clubs, setClubs] = useState({ loading: true });
 
-    const [clubFormModal, setClubFormModal] = useState(null);
     const [clubFormProps, setClubFormProps] = useState({});
+    const [clubFormModal, setClubFormModal] = useState(null);
 
     // fetch list of clubs from API
     useEffect(() => {
@@ -44,6 +44,16 @@ const Clubs = () => {
             empty={!clubs?.data?.length}
         >
             <ClubFormModal controller={[clubFormModal, setClubFormModal]} {...clubFormProps} />
+            {/* <Button */}
+            {/*     onClick={() => { */}
+            {/*         setClubFormProps({ club: clubs?.data[0] }); */}
+            {/*         setClubFormModal(true); */}
+            {/*     }} */}
+            {/* > */}
+            {/*     edit asec */}
+            {/* </Button> */}
+
+            {/* TODO: convert this into a table */}
             <Grid container spacing={1}>
                 {clubs?.data?.map((club, idx) => (
                     <Grid item md={12} key={idx}>
