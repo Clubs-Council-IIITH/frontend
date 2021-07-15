@@ -1,6 +1,8 @@
 import axios from "axios";
 import { headers } from "./config";
 
+import { JSONtoFormData } from "utils/FormUtil";
+
 import ClubModel from "models/ClubModel";
 
 const route = "/api/clubs";
@@ -41,7 +43,7 @@ export default class ClubService {
     // add new club
     static async addClub(data) {
         try {
-            var res = await axios.post(`${route}/new/`, data, { headers });
+            var res = await axios.post(`${route}/new/`, JSONtoFormData(data), { headers });
             return {
                 data: res.data,
                 error: null,
@@ -57,7 +59,7 @@ export default class ClubService {
     // update existing club
     static async updateClub(id, data) {
         try {
-            var res = await axios.post(`${route}/edit/${id}/`, data, { headers });
+            var res = await axios.post(`${route}/edit/${id}/`, JSONtoFormData(data), { headers });
             return {
                 data: res.data,
                 error: null,
