@@ -56,7 +56,7 @@ export const Modal = ({ controller: [open, setOpen], children }) => {
 
 export const ModalHeader = ({ controller: [_, setOpen], title, actions }) => {
     return (
-        <Box px={1} py={2} display="flex" alignItems="center">
+        <Box px={2} p={3} display="flex" alignItems="center">
             <IconButton onClick={() => setOpen(false)}>
                 <Close />
             </IconButton>
