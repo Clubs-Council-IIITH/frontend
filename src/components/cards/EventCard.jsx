@@ -4,9 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Box, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { green, blue, red, amber, deepPurple } from "@material-ui/core/colors";
-import { EditOutlined as EditIcon } from "@material-ui/icons";
+import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@material-ui/icons";
 
-import { EditButton } from "components/buttons";
+import { EditButton, DeleteButton } from "components/buttons";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-const EventCard = ({ id, name, datetime, state, manage = false, toggleEditModal }) => {
+const EventCard = ({ id, name, datetime, state, triggerEdit, triggerDelete, manage = false }) => {
     const classes = useStyles();
 
     return (
@@ -84,19 +84,34 @@ const EventCard = ({ id, name, datetime, state, manage = false, toggleEditModal 
                         >
                             <Box display="flex" alignItems="center" justifyContent="space-between">
                                 <Typography className={classes.statusText}>{state}</Typography>
-                                <EditButton
-                                    noPadding
-                                    onMouseDown={(e) => {
-                                        e.stopPropagation();
-                                    }}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        e.preventDefault();
-                                        toggleEditModal(id);
-                                    }}
-                                >
-                                    <EditIcon />
-                                </EditButton>
+                                <Box>
+                                    <EditButton
+                                        noPadding
+                                        onMouseDown={(e) => {
+                                            e.stopPropagation();
+                                        }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            triggerEdit(id);
+                                        }}
+                                    >
+                                        <EditIcon />
+                                    </EditButton>
+                                    <DeleteButton
+                                        noPadding
+                                        onMouseDown={(e) => {
+                                            e.stopPropagation();
+                                        }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            triggerDelete(id);
+                                        }}
+                                    >
+                                        <DeleteIcon />
+                                    </DeleteButton>
+                                </Box>
                             </Box>
                         </Box>
                     )}
