@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import { Alert } from "@material-ui/lab";
-import { Button, Box, TextField, Snackbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { Button, Box, TextField } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
+import { blue } from "@material-ui/core/colors";
+
 import ClubService from "services/ClubService";
+import ResponseToast from "components/ResponseToast";
+
+// styles {{{
+const useStyles = makeStyles({
+    saveButton: {
+        borderColor: blue["A700"],
+        color: blue["A700"],
+    },
+});
+// }}}
 
 const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
+    const classes = useStyles();
+
     const { control, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
-
-    const handleClose = (_, reason) => {
-        if (reason === "clickaway") return;
-        setToast({ ...toast, open: false });
-    };
 
     const onSubmit = async (data) => {
         // update or create new instance of data
@@ -33,7 +43,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
             <Modal controller={[open, setOpen]}>
                 <ModalHeader controller={[open, setOpen]} title="Add a new club" />
 
-                <ModalBody half>
+                <ModalBody mini>
                     <form id="ClubForm" onSubmit={handleSubmit(onSubmit)}>
                         <Box mb={2}>
                             <Controller
@@ -140,8 +150,8 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                             type="submit"
                             form="ClubForm"
                             variant="outlined"
-                            color="primary"
                             size="large"
+                            className={classes.saveButton}
                         >
                             <Box px={2}>Save</Box>
                         </Button>
@@ -149,17 +159,10 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                 </ModalFooter>
             </Modal>
 
-            <Snackbar open={toast.open} autoHideDuration={5000} onClose={handleClose}>
-                {toast.error ? (
-                    <Alert variant="outlined" severity="error">
-                        An error occurred. Try again later.
-                    </Alert>
-                ) : (
-                    <Alert variant="outlined" severity="success">
-                        Club created successfully!
-                    </Alert>
-                )}
-            </Snackbar>
+            <ResponseToast
+                controller={[toast, setToast]}
+                successText={`Club ${club ? "edited" : "created"} successfully.`}
+            />
         </>
     );
 };

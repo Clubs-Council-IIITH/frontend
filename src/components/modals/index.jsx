@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         height: "60vh",
         width: "75vw",
     },
-    half: {
+    mini: {
         width: "40vw",
     },
 }));
@@ -68,11 +68,11 @@ export const ModalHeader = ({ controller: [_, setOpen], title, actions }) => {
     );
 };
 
-export const ModalBody = ({ full, half, children }) => {
+export const ModalBody = ({ full, mini, children }) => {
     const classes = useStyles();
 
     return (
-        <Box p={3} className={`${classes.body} ${full && classes.full} ${half && classes.half}`}>
+        <Box p={3} className={`${classes.body} ${full && classes.full} ${mini && classes.mini}`}>
             {children}
         </Box>
     );

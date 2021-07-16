@@ -25,10 +25,11 @@ import {
     DeleteForeverOutlined as DeleteIcon,
 } from "@material-ui/icons";
 
+import ClubService from "services/ClubService";
+
 import Page from "components/Page";
 import ClubFormModal from "components/modals/ClubFormModal";
-
-import ClubService from "services/ClubService";
+import ClubDeleteModal from "components/modals/ClubDeleteModal";
 
 // styles {{{
 const useStyles = makeStyles({
@@ -59,8 +60,13 @@ const Clubs = () => {
 
     const [clubs, setClubs] = useState({ loading: true });
 
-    const [clubFormProps, setClubFormProps] = useState({});
-    const [clubFormModal, setClubFormModal] = useState(null);
+    // create/edit club form modal
+    const [formProps, setFormProps] = useState({});
+    const [formModal, setFormModal] = useState(null);
+
+    // delete confirmation modal
+    const [deleteProps, setDeleteProps] = useState({});
+    const [deleteModal, setDeleteModal] = useState(null);
 
     // fetch list of clubs from API
     useEffect(() => {
@@ -77,8 +83,8 @@ const Clubs = () => {
                         color="primary"
                         size="large"
                         onClick={() => {
-                            setClubFormProps({});
-                            setClubFormModal(true);
+                            setFormProps({});
+                            setFormModal(true);
                         }}
                     >
                         <AddIcon fontSize="small" />
@@ -89,15 +95,8 @@ const Clubs = () => {
             loading={clubs?.loading}
             empty={!clubs?.data?.length}
         >
-            <ClubFormModal controller={[clubFormModal, setClubFormModal]} {...clubFormProps} />
-            {/* <Button */}
-            {/*     onClick={() => { */}
-            {/*         setClubFormProps({ club: clubs?.data[0] }); */}
-            {/*         setClubFormModal(true); */}
-            {/*     }} */}
-            {/* > */}
-            {/*     edit asec */}
-            {/* </Button> */}
+            <ClubFormModal controller={[formModal, setFormModal]} {...formProps} />
+            <ClubDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
 
             <TableContainer component={(props) => <Card {...props} variant="outlined" />}>
                 <Table stickyHeader className={classes.table}>
@@ -129,13 +128,20 @@ const Clubs = () => {
                                         variant="text"
                                         className={classes.editButton}
                                         onClick={() => {
-                                            setClubFormProps({ club });
-                                            setClubFormModal(true);
+                                            setFormProps({ club });
+                                            setFormModal(true);
                                         }}
                                     >
                                         <EditIcon />
                                     </Button>
-                                    <Button variant="text" className={classes.deleteButton}>
+                                    <Button
+                                        variant="text"
+                                        className={classes.deleteButton}
+                                        onClick={() => {
+                                            setDeleteProps({ club });
+                                            setDeleteModal(true);
+                                        }}
+                                    >
                                         <DeleteIcon />
                                     </Button>
                                 </TableCell>
