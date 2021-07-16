@@ -23,6 +23,12 @@ const Events = ({ manage, setActions }) => {
     const [formProps, setFormProps] = useState({});
     const [formModal, setFormModal] = useState(null);
 
+    // open edit modal and autofill data of event with given `id`
+    const toggleEditModal = (id) => {
+        setFormProps({ event: events?.data?.find((event) => event.id === id) });
+        setFormModal(true);
+    };
+
     // fetch list of events from API
     useEffect(() => {
         (async () => {
@@ -57,6 +63,11 @@ const Events = ({ manage, setActions }) => {
         );
     }, [manage]);
 
+    const cardProps = {
+        manage,
+        toggleEditModal,
+    };
+
     return (
         <Page full loading={events?.loading} empty={!events?.data?.length}>
             <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
@@ -64,7 +75,7 @@ const Events = ({ manage, setActions }) => {
                 <Grid container spacing={2}>
                     {events?.data?.map((event, idx) => (
                         <Grid item md={4} key={idx}>
-                            <EventCard manage={manage} {...event} />
+                            <EventCard {...event} {...cardProps} />
                         </Grid>
                     ))}
                 </Grid>

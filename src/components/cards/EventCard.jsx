@@ -4,6 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Box, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { green, blue, red, amber, deepPurple } from "@material-ui/core/colors";
+import { EditOutlined as EditIcon } from "@material-ui/icons";
+
+import { EditButton } from "components/buttons";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 
@@ -47,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-const EventCard = ({ id, name, datetime, state, manage = false }) => {
+const EventCard = ({ id, name, datetime, state, manage = false, toggleEditModal }) => {
     const classes = useStyles();
 
     return (
@@ -79,7 +82,22 @@ const EventCard = ({ id, name, datetime, state, manage = false }) => {
                             flexDirection="column"
                             justifyContent="flex-end"
                         >
-                            <Typography className={classes.statusText}>{state}</Typography>
+                            <Box display="flex" alignItems="center" justifyContent="space-between">
+                                <Typography className={classes.statusText}>{state}</Typography>
+                                <EditButton
+                                    noPadding
+                                    onMouseDown={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        toggleEditModal(id);
+                                    }}
+                                >
+                                    <EditIcon />
+                                </EditButton>
+                            </Box>
                         </Box>
                     )}
                 </CardContent>

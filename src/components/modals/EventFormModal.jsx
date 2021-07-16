@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import EventService from "services/EventService";
@@ -14,6 +14,9 @@ import {
     Checkbox,
 } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
+
+import { ISOtoHTML } from "utils/DateTimeUtil";
+import { AudienceStringtoDict } from "utils/FormUtil";
 
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
@@ -79,12 +82,12 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                 </Box>
                                 <Box mb={2}>
                                     <Grid container spacing={2}>
-                                        <Grid item xs={12} lg={6}>
+                                        <Grid item xs={12} lg={7}>
                                             <Controller
                                                 name="datetime"
                                                 control={control}
                                                 shouldUnregister={true}
-                                                defaultValue={event?.datetime || ""}
+                                                defaultValue={ISOtoHTML(event?.datetime)}
                                                 render={({
                                                     field: { onChange, value },
                                                     fieldState: { error },
@@ -194,7 +197,10 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                 <Controller
                                                     name={"audience"}
                                                     control={control}
-                                                    defaultValue={{}}
+                                                    shouldUnregister={true}
+                                                    defaultValue={AudienceStringtoDict(
+                                                        event?.audience
+                                                    )}
                                                     render={({ field }) =>
                                                         [
                                                             { value: "ug1", label: "UG1" },
@@ -216,7 +222,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                                         checked={
                                                                             field.value[
                                                                                 audience.value
-                                                                            ] || ""
+                                                                            ]
                                                                         }
                                                                         onChange={(e) =>
                                                                             field.onChange({

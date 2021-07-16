@@ -5,3 +5,10 @@ export const JSONtoFormData = (object) => {
         return formData;
     }, new FormData());
 };
+
+// convert audience string from API response to a dict
+export const AudienceStringtoDict = (audienceString) => {
+    var audienceMap = {};
+    audienceString?.split(",")?.forEach((value) => (audienceMap[value] = true));
+    return audienceMap;
+};
