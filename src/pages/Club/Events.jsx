@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import EventService from "services/EventService";
+
 import { Box, Grid } from "@material-ui/core";
 
 import Page from "components/Page";
-import EventCard from "components/EventCard";
-
-import EventService from "services/EventService";
+import { EventCard } from "components/cards";
 
 const Events = () => {
     const { clubId } = useParams();

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
+import ClubService from "services/ClubService";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
-    Button,
     Box,
     Table,
     TableBody,
@@ -16,8 +17,6 @@ import {
     Typography,
 } from "@material-ui/core";
 
-import { blue, amber, red } from "@material-ui/core/colors";
-
 import {
     AddOutlined as AddIcon,
     VisibilityOutlined as ViewIcon,
@@ -25,11 +24,15 @@ import {
     DeleteForeverOutlined as DeleteIcon,
 } from "@material-ui/icons";
 
-import ClubService from "services/ClubService";
-
 import Page from "components/Page";
 import ClubFormModal from "components/modals/ClubFormModal";
 import ClubDeleteModal from "components/modals/ClubDeleteModal";
+import {
+    PrimaryActionButton,
+    SecondaryActionButton,
+    EditButton,
+    DeleteButton,
+} from "components/buttons";
 
 // styles {{{
 const useStyles = makeStyles({
@@ -38,18 +41,6 @@ const useStyles = makeStyles({
     },
     cell: {
         fontSize: "1.4em",
-    },
-    viewButton: {
-        borderColor: blue["A700"],
-        color: blue["A700"],
-    },
-    editButton: {
-        borderColor: amber["A700"],
-        color: amber["A700"],
-    },
-    deleteButton: {
-        borderColor: red["A700"],
-        color: red["A700"],
     },
 });
 // }}}
@@ -78,7 +69,8 @@ const Clubs = () => {
             header={
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                     Manage Clubs
-                    <Button
+                    <SecondaryActionButton
+                        noPadding
                         variant="outlined"
                         color="primary"
                         size="large"
@@ -89,7 +81,7 @@ const Clubs = () => {
                     >
                         <AddIcon fontSize="small" />
                         New Club
-                    </Button>
+                    </SecondaryActionButton>
                 </Box>
             }
             loading={clubs?.loading}
@@ -117,33 +109,32 @@ const Clubs = () => {
                                     <Typography color="textSecondary">{club.mail}</Typography>
                                 </TableCell>
                                 <TableCell align="right" className={classes.cell}>
-                                    <Button
-                                        variant="text"
-                                        className={classes.viewButton}
-                                        onClick={() => history.push(`/clubs/${club.id}`)}
+                                    <PrimaryActionButton
+                                        noPadding
+                                        onClick={() => {
+                                            history.push(`/clubs/${club.id}`);
+                                        }}
                                     >
                                         <ViewIcon />
-                                    </Button>
-                                    <Button
-                                        variant="text"
-                                        className={classes.editButton}
+                                    </PrimaryActionButton>
+                                    <EditButton
+                                        noPadding
                                         onClick={() => {
                                             setFormProps({ club });
                                             setFormModal(true);
                                         }}
                                     >
                                         <EditIcon />
-                                    </Button>
-                                    <Button
-                                        variant="text"
-                                        className={classes.deleteButton}
+                                    </EditButton>
+                                    <DeleteButton
+                                        noPadding
                                         onClick={() => {
                                             setDeleteProps({ club });
                                             setDeleteModal(true);
                                         }}
                                     >
                                         <DeleteIcon />
-                                    </Button>
+                                    </DeleteButton>
                                 </TableCell>
                             </TableRow>
                         ))}

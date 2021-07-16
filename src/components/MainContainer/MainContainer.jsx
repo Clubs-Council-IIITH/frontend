@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, CssBaseline } from "@material-ui/core";
 
 import Navigation, { drawerWidth } from "components/Navigation";
-import BackButton from "components/BackButton";
+import { BackButton } from "components/buttons";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
+import ClubService from "services/ClubService";
+
 import { Grid } from "@material-ui/core";
 
 import Page from "components/Page";
-import ClubCard from "components/ClubCard";
-
-import ClubService from "services/ClubService";
+import { ClubCard } from "components/cards";
 
 import { View as ViewClub } from "pages/Club";
 

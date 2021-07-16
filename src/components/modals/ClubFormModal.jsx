@@ -1,28 +1,15 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import { makeStyles } from "@material-ui/core/styles";
+import ClubService from "services/ClubService";
 
-import { Button, Box, TextField } from "@material-ui/core";
+import { Box, TextField } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
-import { blue } from "@material-ui/core/colors";
-
-import ClubService from "services/ClubService";
 import ResponseToast from "components/ResponseToast";
-
-// styles {{{
-const useStyles = makeStyles({
-    saveButton: {
-        borderColor: blue["A700"],
-        color: blue["A700"],
-    },
-});
-// }}}
+import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
-    const classes = useStyles();
-
     const { control, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
@@ -136,25 +123,19 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
 
                 <ModalFooter rightAligned>
                     <Box mr={1}>
-                        <Button
-                            variant="text"
-                            color="primary"
-                            size="large"
-                            onClick={() => setOpen(false)}
-                        >
-                            <Box px={2}>Cancel</Box>
-                        </Button>
+                        <SecondaryActionButton size="large" onClick={() => setOpen(false)}>
+                            Cancel
+                        </SecondaryActionButton>
                     </Box>
                     <Box>
-                        <Button
+                        <PrimaryActionButton
                             type="submit"
                             form="ClubForm"
                             variant="outlined"
                             size="large"
-                            className={classes.saveButton}
                         >
-                            <Box px={2}>Save</Box>
-                        </Button>
+                            Save
+                        </PrimaryActionButton>
                     </Box>
                 </ModalFooter>
             </Modal>

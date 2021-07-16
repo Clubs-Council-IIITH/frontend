@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import ClubService from "services/ClubService";
+
 import { Box, Typography, Divider } from "@material-ui/core";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
-
-import ClubService from "services/ClubService";
 
 import About from "./About";
 import Events from "./Events";

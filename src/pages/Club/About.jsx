@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Page from "components/Page";
+import ClubService from "services/ClubService";
+
 import { Box, Typography } from "@material-ui/core";
 
-import ClubService from "services/ClubService";
+import Page from "components/Page";
 
 const About = () => {
     const { clubId } = useParams();
