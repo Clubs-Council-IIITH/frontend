@@ -10,6 +10,7 @@ import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
+import EventFormModal from "components/modals/EventFormModal";
 import { EventCard } from "components/cards";
 
 const Events = ({ manage, setActions }) => {
@@ -17,6 +18,10 @@ const Events = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const [events, setEvents] = useState({ loading: true });
+
+    // create/edit event form modal
+    const [formProps, setFormProps] = useState({});
+    const [formModal, setFormModal] = useState(null);
 
     // fetch list of events from API
     useEffect(() => {
@@ -33,7 +38,16 @@ const Events = ({ manage, setActions }) => {
     useEffect(() => {
         setActions(
             manage ? (
-                <SecondaryActionButton noPadding size="large" variant="outlined" color="primary">
+                <SecondaryActionButton
+                    noPadding
+                    size="large"
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => {
+                        setFormProps({});
+                        setFormModal(true);
+                    }}
+                >
                     <Box display="flex" mr={1}>
                         <AddIcon fontSize="small" />
                     </Box>
@@ -45,6 +59,7 @@ const Events = ({ manage, setActions }) => {
 
     return (
         <Page full loading={events?.loading} empty={!events?.data?.length}>
+            <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
             <Box p={3}>
                 <Grid container spacing={2}>
                     {events?.data?.map((event, idx) => (

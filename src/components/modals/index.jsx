@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "75vw",
     },
     full: {
-        height: "60vh",
         width: "75vw",
     },
     mini: {

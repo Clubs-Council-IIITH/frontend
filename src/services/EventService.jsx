@@ -1,6 +1,8 @@
 import axios from "axios";
 import { headers } from "./config";
 
+import { JSONtoFormData } from "utils/FormUtil";
+
 import EventModel from "models/EventModel";
 
 const route = "/api/events";
@@ -57,7 +59,7 @@ export default class EventService {
     // add new event
     static async addEvent(data) {
         try {
-            var res = await axios.post(`${route}/new/`, data, { headers });
+            var res = await axios.post(`${route}/new/`, JSONtoFormData(data), { headers });
             return {
                 data: res.data,
                 error: null,
@@ -73,7 +75,7 @@ export default class EventService {
     // update existing event
     static async updateEvent(id, data) {
         try {
-            var res = await axios.post(`${route}/edit/${id}/`, data, { headers });
+            var res = await axios.post(`${route}/edit/${id}/`, JSONtoFormData(data), { headers });
             return {
                 data: res.data,
                 error: null,
