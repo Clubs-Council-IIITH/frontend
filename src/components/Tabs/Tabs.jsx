@@ -1,6 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { useEffect, cloneElement } from "react";
 
-import { useEffect } from "react";
 import {
     useLocation,
     useHistory,
@@ -10,6 +9,8 @@ import {
     Route,
     matchPath,
 } from "react-router-dom";
+
+import { makeStyles } from "@material-ui/core/styles";
 
 import { Tabs, Tab, Box } from "@material-ui/core";
 
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-export const TabBar = ({ tabs, controller: [value, setValue], routed }) => {
+export const TabBar = ({ tabs, controller: [value, setValue], tabProps, routed }) => {
     const classes = useStyles();
     const history = useHistory();
     const match = useRouteMatch();
@@ -89,7 +90,7 @@ export const TabBar = ({ tabs, controller: [value, setValue], routed }) => {
     );
 };
 
-export const TabPanels = ({ tabs, controller: [value], routed, ...props }) => {
+export const TabPanels = ({ tabs, controller: [value], routed, tabProps, ...props }) => {
     const match = useRouteMatch();
 
     return routed ? (
@@ -104,7 +105,7 @@ export const TabPanels = ({ tabs, controller: [value], routed, ...props }) => {
                         id={`wrapped-tabpanel-${key}`}
                         {...props}
                     >
-                        {value === key && <Box>{tab.panel}</Box>}
+                        {value === key && <Box>{cloneElement(tab.panel, tabProps)}</Box>}
                     </div>
                 </Route>
             ))}
@@ -122,7 +123,7 @@ export const TabPanels = ({ tabs, controller: [value], routed, ...props }) => {
                 id={`wrapped-tabpanel-${key}`}
                 {...props}
             >
-                {value === key && <Box>{tab.panel}</Box>}
+                {value === key && <Box>{cloneElement(tab.panel, tabProps)}</Box>}
             </div>
         ))
     );

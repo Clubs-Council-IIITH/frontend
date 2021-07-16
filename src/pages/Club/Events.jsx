@@ -1,22 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import EventService from "services/EventService";
 
 import { Box, Grid } from "@material-ui/core";
+import { AddOutlined as AddIcon } from "@material-ui/icons";
+
+import { SessionContext } from "contexts/SessionContext";
+import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import { EventCard } from "components/cards";
 
-const Events = () => {
+const Events = ({ manage, setActions }) => {
     const { clubId } = useParams();
+    const { session } = useContext(SessionContext);
 
     const [events, setEvents] = useState({ loading: true });
 
     // fetch list of events from API
     useEffect(() => {
-        (async () => setEvents(await EventService.getEventsByClubId(clubId)))();
-    }, [clubId]);
+        (async () => {
+            if (manage && session?.user?.club) {
+                setEvents(await EventService.getEventsByClubId(session.user.club));
+            } else {
+                setEvents(await EventService.getEventsByClubId(clubId));
+            }
+        })();
+    }, [clubId, manage, session?.user?.club]);
+
+    // set/clear action buttons if `manage` is set
+    useEffect(() => {
+        setActions(
+            manage ? (
+                <SecondaryActionButton noPadding size="large" variant="outlined" color="primary">
+                    <Box display="flex" mr={1}>
+                        <AddIcon fontSize="small" />
+                    </Box>
+                    New Event
+                </SecondaryActionButton>
+            ) : null
+        );
+    }, [manage]);
 
     return (
         <Page full loading={events?.loading} empty={!events?.data?.length}>
@@ -24,7 +49,7 @@ const Events = () => {
                 <Grid container spacing={2}>
                     {events?.data?.map((event, idx) => (
                         <Grid item md={4} key={idx}>
-                            <EventCard manage {...event} />
+                            <EventCard manage={manage} {...event} />
                         </Grid>
                     ))}
                 </Grid>

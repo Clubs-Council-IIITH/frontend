@@ -26,13 +26,15 @@ const ClubDeleteModal = ({ club = null, controller: [open, setOpen] }) => {
         <>
             <Modal controller={[open, setOpen]}>
                 <ModalBody mini>
-                    <Typography variant="h5">
-                        Are you sure you want to delete{" "}
-                        <Box component="span" fontWeight={500}>
-                            {club?.name}
-                        </Box>
-                        ?
-                    </Typography>
+                    <Box p={1}>
+                        <Typography variant="h5">
+                            Are you sure you want to delete{" "}
+                            <Box component="span" fontWeight={500}>
+                                {club?.name}
+                            </Box>
+                            ?
+                        </Typography>
+                    </Box>
                 </ModalBody>
 
                 <ModalFooter rightAligned>

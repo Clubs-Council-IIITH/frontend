@@ -75,7 +75,7 @@ const clubRoutes = [
         title: "Manage Club",
         path: "/manage/club",
         icon: DashboardOutlined,
-        component: <Club.About />,
+        component: <Club.View manage />,
     },
 ];
 // }}}
