@@ -11,7 +11,7 @@ import { ClubCard } from "components/cards";
 import { View as ViewClub } from "pages/Club";
 
 const Clubs = () => {
-    const { path } = useRouteMatch();
+    const match = useRouteMatch();
 
     const [clubs, setClubs] = useState({ loading: true });
 
@@ -22,7 +22,7 @@ const Clubs = () => {
 
     return (
         <Switch>
-            <Route exact path={path}>
+            <Route exact path={match.path}>
                 <Page header={"Clubs"} loading={clubs?.loading} empty={!clubs?.data?.length}>
                     <Grid container spacing={2}>
                         {clubs?.data?.map((club, idx) => (
@@ -33,7 +33,7 @@ const Clubs = () => {
                     </Grid>
                 </Page>
             </Route>
-            <Route path={`${path}/:clubId`}>
+            <Route path={`${match.path}/:clubId`}>
                 <ViewClub />
             </Route>
         </Switch>
