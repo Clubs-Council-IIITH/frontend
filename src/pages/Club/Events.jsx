@@ -81,20 +81,21 @@ const Events = ({ manage, setActions }) => {
     };
 
     return (
-        <Page full loading={events?.loading} empty={!events?.data?.length}>
+        <>
             <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
             <EventDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
-
-            <Box p={3}>
-                <Grid container spacing={2}>
-                    {events?.data?.map((event, idx) => (
-                        <Grid item md={4} key={idx}>
-                            <EventCard {...event} {...cardProps} />
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
-        </Page>
+            <Page full loading={events?.loading} empty={!events?.data?.length}>
+                <Box p={3}>
+                    <Grid container spacing={2}>
+                        {events?.data?.map((event, idx) => (
+                            <Grid item md={4} key={idx}>
+                                <EventCard {...event} {...cardProps} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+            </Page>
+        </>
     );
 };
 
