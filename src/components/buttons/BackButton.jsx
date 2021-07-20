@@ -9,7 +9,7 @@ const BackButton = () => {
 
     // render back button only if 2 path levels deep
     return !!matchPath(location.pathname, { path: "/:one/:two" }) ? (
-        <IconButton onClick={history.goBack}>
+        <IconButton style={{ backgroundColor: "#ffffff" }} onClick={history.goBack}>
             <BackIcon />
         </IconButton>
     ) : null;
