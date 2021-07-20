@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(0, 1),
+        overflowX: "hidden",
+    },
+    contentFull: {
+        flexGrow: 1,
+        overflowX: "hidden",
     },
 }));
 // }}}
@@ -25,7 +30,7 @@ const Page = ({ header, loading, empty, full, children }) => {
     const classes = useStyles();
 
     return (
-        <main className={clsx({ [classes.content]: !full })}>
+        <main className={clsx({ [classes.content]: !full, [classes.contentFull]: full })}>
             <div className={clsx({ [classes.toolbar]: !full })} />
             <Container maxWidth={null} disableGutters={full}>
                 <Typography variant="h2"> {header} </Typography>
