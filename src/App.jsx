@@ -121,10 +121,10 @@ const App = () => {
 
                             {/* error routes */}
                             <Route exact path="/404">
-                                <h1> 404: Not Found </h1>
+                                <Public.Error404 />
                             </Route>
                             <Route exact path="/401">
-                                <h1> 401: Unauthorized </h1>
+                                <Public.Error401 />
                             </Route>
                             <Redirect to="/404" />
                         </Switch>
