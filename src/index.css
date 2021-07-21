@@ -21,3 +21,12 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.elevate {
+    transition: all 0.2s ease-out;
+}
+
+.elevate:hover {
+    transition: all 0.2s ease-out;
+    box-shadow: 0 8px 10px 0 rgba(168, 182, 191, 0.6);
+}

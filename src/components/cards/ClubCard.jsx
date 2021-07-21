@@ -35,7 +35,7 @@ const ClubCard = ({ id, img, name, description, state }) => {
     const match = useRouteMatch();
 
     return (
-        <Card variant="outlined" className={classes.card}>
+        <Card variant="outlined" className={`${classes.card} elevate`}>
             <CardActionArea
                 className={classes.actionArea}
                 onClick={() => history.push(`${match.url}/${id}`)}
