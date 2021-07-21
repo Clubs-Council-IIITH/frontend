@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
+import useSWR from "swr";
 import EventService from "services/EventService";
 
 import { Box, Grid } from "@material-ui/core";
@@ -18,7 +19,12 @@ const Events = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
-    const [events, setEvents] = useState({ loading: true });
+    const targetId = manage && session?.user?.club ? session.user.club : clubId;
+    const {
+        data: events,
+        mutate,
+        isValidating,
+    } = useSWR(`events/${targetId}`, () => EventService.getEventsByClubId(targetId));
 
     // create/edit event form modal
     const [formProps, setFormProps] = useState({});
@@ -39,17 +45,6 @@ const Events = ({ manage, setActions }) => {
         setDeleteProps({ event: events?.data?.find((event) => event.id === id) });
         setDeleteModal(true);
     };
-
-    // fetch list of events from API
-    useEffect(() => {
-        (async () => {
-            if (manage && session?.user?.club) {
-                setEvents(await EventService.getEventsByClubId(session.user.club));
-            } else {
-                setEvents(await EventService.getEventsByClubId(clubId));
-            }
-        })();
-    }, [clubId, manage, session?.user?.club]);
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
@@ -82,12 +77,16 @@ const Events = ({ manage, setActions }) => {
 
     return (
         <>
-            <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
-            <EventDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
-            <Page full loading={events?.loading} empty={!events?.data?.length}>
+            <EventFormModal mutate={mutate} controller={[formModal, setFormModal]} {...formProps} />
+            <EventDeleteModal
+                mutate={mutate}
+                controller={[deleteModal, setDeleteModal]}
+                {...deleteProps}
+            />
+            <Page full loading={isValidating} empty={!events?.length}>
                 <Box p={3}>
                     <Grid container spacing={2}>
-                        {events?.data?.map((event, idx) => (
+                        {events?.map((event, idx) => (
                             <Grid item md={4} key={idx}>
                                 <EventCard {...event} {...cardProps} />
                             </Grid>

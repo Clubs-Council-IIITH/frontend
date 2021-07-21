@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
+import useSWR from "swr";
 import ClubService from "services/ClubService";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,7 +53,7 @@ const Clubs = () => {
     const history = useHistory();
     const match = useRouteMatch();
 
-    const [clubs, setClubs] = useState({ loading: true });
+    const { data: clubs, mutate, isValidating } = useSWR("allClubs", ClubService.getClubs);
 
     // create/edit club form modal
     const [formProps, setFormProps] = useState({});
@@ -62,17 +63,20 @@ const Clubs = () => {
     const [deleteProps, setDeleteProps] = useState({});
     const [deleteModal, setDeleteModal] = useState(null);
 
-    // fetch list of clubs from API
-    useEffect(() => {
-        (async () => setClubs(await ClubService.getClubs()))();
-    }, []);
-
     return (
         <Switch>
             <Route exact path={match.path}>
                 <>
-                    <ClubFormModal controller={[formModal, setFormModal]} {...formProps} />
-                    <ClubDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
+                    <ClubFormModal
+                        mutate={mutate}
+                        controller={[formModal, setFormModal]}
+                        {...formProps}
+                    />
+                    <ClubDeleteModal
+                        mutate={mutate}
+                        controller={[deleteModal, setDeleteModal]}
+                        {...deleteProps}
+                    />
                     <Page
                         header={
                             <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -92,8 +96,8 @@ const Clubs = () => {
                                 </SecondaryActionButton>
                             </Box>
                         }
-                        loading={clubs?.loading}
-                        empty={!clubs?.data?.length}
+                        loading={isValidating}
+                        empty={!clubs?.length}
                     >
                         <TableContainer
                             component={(props) => <Card {...props} variant="outlined" />}
@@ -107,7 +111,7 @@ const Clubs = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {clubs?.data?.map((club) => (
+                                    {clubs?.map((club) => (
                                         <TableRow key={club.id}>
                                             <TableCell
                                                 component="th"

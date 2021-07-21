@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import EventService from "services/EventService";
@@ -21,7 +21,7 @@ import { AudienceStringtoDict } from "utils/FormUtil";
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
-const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
+const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) => {
     const { control, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
@@ -35,12 +35,13 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                 .join(","),
         };
 
-        console.log(transformedData);
-
         // update or create new instance of data
         const { error } = await (event
             ? EventService.updateEvent(event.id, transformedData)
             : EventService.addEvent(transformedData));
+
+        // revalidate local data
+        mutate();
 
         // show response toast based on form submission status
         setToast({ open: true, error });

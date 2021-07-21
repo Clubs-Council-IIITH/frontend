@@ -8,13 +8,16 @@ import { Modal, ModalBody, ModalFooter } from "components/modals";
 import ResponseToast from "components/ResponseToast";
 import { DeleteButton, SecondaryActionButton } from "components/buttons";
 
-const ClubDeleteModal = ({ club = null, controller: [open, setOpen] }) => {
+const ClubDeleteModal = ({ club = null, mutate, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
     const onSubmit = async () => {
         if (club?.id) {
             // delete instance of club
             const { error } = await ClubService.deleteClub(club.id);
+
+            // revalidate local data
+            mutate();
 
             // show response toast based on form submission status
             setToast({ open: true, error });

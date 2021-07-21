@@ -1,6 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
+import useSWR from "swr";
 import ClubService from "services/ClubService";
 
 import { Box, Typography } from "@material-ui/core";
@@ -15,18 +16,10 @@ const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
-    const [club, setClub] = useState({ loading: true });
-
-    // fetch club details from API
-    useEffect(() => {
-        (async () => {
-            if (manage && session?.user?.club) {
-                setClub(await ClubService.getClubById(session.user.club));
-            } else {
-                setClub(await ClubService.getClubById(clubId));
-            }
-        })();
-    }, [clubId, manage, session?.user?.club]);
+    const targetId = manage && session?.user?.club ? session.user.club : clubId;
+    const { data: club, isValidating } = useSWR(`clubs/${targetId}/about`, () =>
+        ClubService.getClubById(targetId)
+    );
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
@@ -43,9 +36,9 @@ const About = ({ manage, setActions }) => {
     }, [manage]);
 
     return (
-        <Page full>
+        <Page full loading={isValidating}>
             <Box py={4} px={3}>
-                <Typography>{club?.data?.description}</Typography>
+                <Typography>{club?.description}</Typography>
             </Box>
         </Page>
     );

@@ -1,74 +1,53 @@
 import axios from "axios";
+
 import { headers } from "./config";
 
 import { JSONtoFormData } from "utils/FormUtil";
 
 import ClubModel from "models/ClubModel";
 
-const route = "/api/clubs";
+const endpoint = "/api/clubs";
 
 export default class ClubService {
     // get all clubs
     static async getClubs() {
         try {
-            var res = await axios.get(`${route}/`, { headers });
-            return {
-                data: res.data.map((o) => new ClubModel(o)),
-                error: null,
-            };
+            var res = await axios.get(`${endpoint}/`, { headers });
+            return res.data.map((o) => new ClubModel(o));
         } catch (e) {
-            return {
-                data: null,
-                error: e.response,
-            };
+            throw e.response;
         }
     }
 
     // get club with id
     static async getClubById(id) {
         try {
-            var res = await axios.get(`${route}/`, { headers, params: { id } });
-            return {
-                data: new ClubModel(res.data[0]),
-                error: null,
-            };
+            var res = await axios.get(`${endpoint}/`, { headers, params: { id } });
+            return new ClubModel(res.data[0]);
         } catch (e) {
-            return {
-                data: null,
-                error: e.response,
-            };
+            throw e.response;
         }
     }
 
     // add new club
     static async addClub(data) {
         try {
-            var res = await axios.post(`${route}/new/`, JSONtoFormData(data), { headers });
-            return {
-                data: res.data,
-                error: null,
-            };
+            var res = await axios.post(`${endpoint}/new/`, JSONtoFormData(data), { headers });
+            return res.data;
         } catch (e) {
-            return {
-                data: null,
-                error: e.response,
-            };
+            throw e.response;
         }
     }
 
     // update existing club
     static async updateClub(id, data) {
         try {
-            var res = await axios.post(`${route}/edit/${id}/`, JSONtoFormData(data), { headers });
-            return {
-                data: res.data,
-                error: null,
-            };
+            var res = await axios.post(`${endpoint}/edit/${id}/`, JSONtoFormData(data), {
+                headers,
+            });
+            return res.data;
         } catch (e) {
-            return {
-                data: null,
-                error: e.response,
-            };
+            throw e.response;
         }
     }
 
@@ -76,19 +55,13 @@ export default class ClubService {
     static async deleteClub(id) {
         try {
             var res = await axios.post(
-                `${route}/delete/${id}/`,
+                `${endpoint}/delete/${id}/`,
                 {},
                 { headers: { Authorization: headers.Authorization } }
             );
-            return {
-                data: res.data,
-                error: null,
-            };
+            return res.data;
         } catch (e) {
-            return {
-                data: null,
-                error: e.response,
-            };
+            throw e.response;
         }
     }
 }

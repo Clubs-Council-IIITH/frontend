@@ -8,13 +8,16 @@ import { Modal, ModalBody, ModalFooter } from "components/modals";
 import ResponseToast from "components/ResponseToast";
 import { DeleteButton, SecondaryActionButton } from "components/buttons";
 
-const EventDeleteModal = ({ event = null, controller: [open, setOpen] }) => {
+const EventDeleteModal = ({ event = null, mutate, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
     const onSubmit = async () => {
         if (event?.id) {
             // delete instance of event
             const { error } = await EventService.deleteEvent(event.id);
+
+            // revalidate local data
+            mutate();
 
             // show response toast based on form submission status
             setToast({ open: true, error });

@@ -3,7 +3,7 @@ import { headers } from "./config";
 
 import { loginUrl } from "constants/authUrls";
 
-const route = "/api/session";
+const endpoint = "/api/session";
 
 export default class AuthService {
     // get current session
@@ -17,7 +17,7 @@ export default class AuthService {
         } else {
             // query session from server
             try {
-                var res = await axios.get(`${route}/`, { headers });
+                var res = await axios.get(`${endpoint}/`, { headers });
                 return {
                     user: res.data.user,
                     is_authenticated: res.data.is_authenticated,

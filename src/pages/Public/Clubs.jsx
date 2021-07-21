@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
+import useSWR from "swr";
 import ClubService from "services/ClubService";
 
 import { Grid } from "@material-ui/core";
@@ -12,20 +12,14 @@ import { View as ViewClub } from "pages/Club";
 
 const Clubs = () => {
     const match = useRouteMatch();
-
-    const [clubs, setClubs] = useState({ loading: true });
-
-    // fetch list of clubs from API
-    useEffect(() => {
-        (async () => setClubs(await ClubService.getClubs()))();
-    }, []);
+    const { data: clubs, isValidating } = useSWR("allClubs", ClubService.getClubs);
 
     return (
         <Switch>
             <Route exact path={match.path}>
-                <Page header={"Clubs"} loading={clubs?.loading} empty={!clubs?.data?.length}>
+                <Page header={"Clubs"} loading={isValidating} empty={!clubs?.length}>
                     <Grid container spacing={2}>
-                        {clubs?.data?.map((club, idx) => (
+                        {clubs?.map((club, idx) => (
                             <Grid item md={4} lg={3} key={idx}>
                                 <ClubCard {...club} />
                             </Grid>

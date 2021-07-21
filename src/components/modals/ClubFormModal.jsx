@@ -9,7 +9,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
-const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
+const ClubFormModal = ({ club = null, mutate, controller: [open, setOpen] }) => {
     const { control, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
@@ -19,6 +19,9 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
         const { error } = await (club
             ? ClubService.updateClub(club.id, data)
             : ClubService.addClub(data));
+
+        // revalidate local data
+        mutate();
 
         // show response toast based on form submission status
         setToast({ open: true, error });
