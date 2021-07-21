@@ -53,10 +53,8 @@ const View = ({ manage }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.user?.club ? session.user.club : clubId;
-    const { data: club, isValidating } = useSWR(
-        `clubs/${targetId}`,
-        () => ClubService.getClubById(targetId),
-        { revalidateOnFocus: false }
+    const { data: club, isValidating } = useSWR(`clubs/${targetId}`, () =>
+        ClubService.getClubById(targetId)
     );
 
     const [actions, setActions] = useState(null);
