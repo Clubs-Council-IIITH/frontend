@@ -12,7 +12,9 @@ import { View as ViewClub } from "pages/Club";
 
 const Clubs = () => {
     const match = useRouteMatch();
-    const { data: clubs, isValidating } = useSWR("allClubs", ClubService.getClubs);
+    const { data: clubs, isValidating } = useSWR("clubs", ClubService.getClubs, {
+        revalidateOnFocus: false,
+    });
 
     return (
         <Switch>

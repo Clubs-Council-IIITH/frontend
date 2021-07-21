@@ -53,7 +53,7 @@ const Clubs = () => {
     const history = useHistory();
     const match = useRouteMatch();
 
-    const { data: clubs, mutate, isValidating } = useSWR("allClubs", ClubService.getClubs);
+    const { data: clubs, mutate, isValidating } = useSWR("clubs", ClubService.getClubs);
 
     // create/edit club form modal
     const [formProps, setFormProps] = useState({});
