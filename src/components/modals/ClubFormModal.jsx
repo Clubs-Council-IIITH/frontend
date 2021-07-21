@@ -3,22 +3,27 @@ import { useForm, Controller } from "react-hook-form";
 
 import ClubService from "services/ClubService";
 
-import { Box, TextField } from "@material-ui/core";
+import { Box, TextField, Button } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 const ClubFormModal = ({ club = null, mutate, controller: [open, setOpen] }) => {
-    const { control, handleSubmit } = useForm();
+    const { control, register, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
 
     const onSubmit = async (data) => {
+        const transformedData = {
+            ...data,
+            img: data.img[0],
+        };
+
         // update or create new instance of data
         const { error } = await (club
-            ? ClubService.updateClub(club.id, data)
-            : ClubService.addClub(data));
+            ? ClubService.updateClub(club.id, transformedData)
+            : ClubService.addClub(transformedData));
 
         // revalidate local data
         mutate();
@@ -35,6 +40,18 @@ const ClubFormModal = ({ club = null, mutate, controller: [open, setOpen] }) => 
 
                 <ModalBody mini>
                     <form id="ClubForm" onSubmit={handleSubmit(onSubmit)}>
+                        <Box mb={3}>
+                            <Button variant="outlined" component="label">
+                                {club?.img ? "Update" : "Add"} Cover Image
+                                <input
+                                    {...register("img")}
+                                    name="img"
+                                    type="file"
+                                    accept="image/png, image/jpeg, image/jpg"
+                                    hidden
+                                />
+                            </Button>
+                        </Box>
                         <Box mb={2}>
                             <Controller
                                 name="name"

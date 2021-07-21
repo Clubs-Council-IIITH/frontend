@@ -16,7 +16,5 @@ export default class ClubModel extends BaseModel {
 
     update(data) {
         super.update(data);
-        this.description =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
     }
 }

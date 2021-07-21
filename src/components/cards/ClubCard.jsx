@@ -19,7 +19,6 @@ const useStyles = makeStyles({
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         flexGrow: 2,
     },
     media: {
@@ -29,7 +28,7 @@ const useStyles = makeStyles({
 });
 // }}}
 
-const ClubCard = ({ id, img, name, description, state }) => {
+const ClubCard = ({ id, img, name, description }) => {
     const classes = useStyles();
     const history = useHistory();
     const match = useRouteMatch();
@@ -42,16 +41,12 @@ const ClubCard = ({ id, img, name, description, state }) => {
             >
                 <CardMedia className={classes.media} image={img} title="Contemplative Reptile" />
                 <CardContent className={classes.content}>
-                    <Typography
-                        // gutterBottom
-                        variant="h5"
-                        component="h5"
-                    >
+                    <Typography gutterBottom variant="h5" component="h5">
                         {name}
                     </Typography>
-                    {/* <Typography variant="body2" color="textSecondary" component="p"> */}
-                    {/*     {description} */}
-                    {/* </Typography> */}
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {description}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
         </Card>
