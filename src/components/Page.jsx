@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box, Container, Typography, Fade } from "@material-ui/core";
 
 import Loading from "components/Loading";
+import Empty from "components/Empty";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +41,7 @@ const Page = ({ header, loading, empty, full, children }) => {
                     {loading ? (
                         <Loading />
                     ) : empty ? (
-                        <Loading />
+                        <Empty />
                     ) : (
                         <Fade in timeout={250}>
                             <div>{children}</div>
