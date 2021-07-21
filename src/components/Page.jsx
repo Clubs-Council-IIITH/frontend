@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Box, Container, Typography, Fade } from "@material-ui/core";
 
+import Loading from "components/Loading";
+
 // styles {{{
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -36,9 +38,9 @@ const Page = ({ header, loading, empty, full, children }) => {
                 <Typography variant="h2"> {header} </Typography>
                 <Box mt={full ? 0 : 5} mb={full ? 0 : 3}>
                     {loading ? (
-                        <div> loading... </div>
+                        <Loading />
                     ) : empty ? (
-                        <div> empty! </div>
+                        <Loading />
                     ) : (
                         <Fade in timeout={250}>
                             <div>{children}</div>
