@@ -1,29 +1,61 @@
-/**
- * View component to render a single navigation item.
- *
- * props:
- *  - title (`string`): Button text.
- *  - path (`string`): To where the button leads.
- *  - icon (`image`): Icon prefixing the text.
- */
+import clsx from "clsx";
 
-import { NavLink as Link } from "react-router-dom";
-import { NavItem, NavLink } from "reactstrap";
+import { useState, useEffect } from "react";
+import { useLocation, useHistory, matchPath } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
-const NavigationItem = ({ icon, title, path, exact }) => {
+import { Box, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+
+// styles {{{
+const useStyles = makeStyles((theme) => ({
+    navigationItemInactive: {
+        borderLeft: "3px solid #00000000",
+    },
+    navigationItemActive: {
+        borderLeft: "3px solid #000000ff",
+    },
+    navigationItemIcon: {
+        color: "black",
+    },
+    navigationItemText: {
+        fontFamily: theme.typography.fontFamilySecondary,
+        fontWeight: 600,
+        textTransform: "capitalize",
+    },
+}));
+// }}}
+
+const NavigationItem = ({ title, path, icon: Icon }) => {
+    const history = useHistory();
+    const location = useLocation();
+    const classes = useStyles();
+
+    const [selected, setSelected] = useState(false);
+    useEffect(() => {
+        setSelected(
+            location.pathname === path || !!matchPath(location.pathname, { path: `${path}/:etc` })
+        );
+    }, [location.pathname]);
+
     return (
-        <NavItem>
-            <NavLink
-                tag={Link}
-                to={path}
-                exact={exact}
-                activeClassName="active navitem-active"
-                className="navitem my-3"
-            >
-                <img src={icon} alt={title} className="navitem-icon mx-auto mx-lg-0" />
-                <div className="navitem-title ml-3 d-none d-lg-block">{title}</div>
-            </NavLink>
-        </NavItem>
+        <ListItem
+            button
+            selected={selected}
+            onClick={() => history.push(path)}
+            className={clsx({
+                [classes.navigationItemActive]: selected,
+                [classes.navigationItemInactive]: !selected,
+            })}
+        >
+            <Box display="flex" alignItems="center" mx={2}>
+                <ListItemIcon>
+                    <Icon classes={{ root: classes.navigationItemIcon }} />
+                </ListItemIcon>
+                <ListItemText classes={{ primary: classes.navigationItemText }}>
+                    {title}
+                </ListItemText>
+            </Box>
+        </ListItem>
     );
 };
 

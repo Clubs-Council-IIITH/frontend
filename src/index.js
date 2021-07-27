@@ -1,15 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
+import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+
+import { SWRConfig } from "swr";
+
+import NavigationContextProvider from "contexts/NavigationContext";
+import SessionContextProvider from "contexts/SessionContext";
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <SWRConfig value={{ revalidateOnFocus: false }}>
+            <SessionContextProvider>
+                <NavigationContextProvider>
+                    <App />
+                </NavigationContextProvider>
+            </SessionContextProvider>
+        </SWRConfig>
     </React.StrictMode>,
     document.getElementById("root")
 );
