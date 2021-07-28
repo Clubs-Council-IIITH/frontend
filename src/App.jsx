@@ -34,25 +34,25 @@ import * as Club from "pages/Club";
 
 // routes {{{
 const publicRoutes = [
-    {
-        title: "Home",
-        path: "/",
-        icon: HomeOutlined,
-        component: <Public.Home />,
-        exact: true,
-    },
+    // {
+    //     title: "Home",
+    //     path: "/",
+    //     icon: HomeOutlined,
+    //     component: <Public.Home />,
+    //     exact: true,
+    // },
     {
         title: "Clubs",
         path: "/clubs",
         icon: ExploreOutlined,
         component: <Public.Clubs />,
     },
-    {
-        title: "Calendar",
-        path: "/calendar",
-        icon: CalendarTodayOutlined,
-        component: <Public.Calendar />,
-    },
+    // {
+    //     title: "Calendar",
+    //     path: "/calendar",
+    //     icon: CalendarTodayOutlined,
+    //     component: <Public.Calendar />,
+    // },
 ];
 
 const adminRoutes = [
