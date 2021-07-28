@@ -18,8 +18,10 @@ const Profile = () => {
                             src=""
                             style={{ backgroundColor: "#111", width: "1.8em", height: "1.8em" }}
                         />
-                        <Box mx={2}>
-                            <Box fontSize="1.4em">{session.user.name.split("@")[0]}</Box>
+                        <Box mx={1}>
+                            <Box fontSize="1.4em" lineHeight="1.1em">
+                                {session.user.name.split("@")[0]}
+                            </Box>
                             <Box>@{session.user.name.split("@")[1]}</Box>
                         </Box>
                     </Box>

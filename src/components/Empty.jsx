@@ -12,7 +12,7 @@ const Empty = () => {
             alignItems="center"
         >
             <Box mb={1}>
-                <img src={ShrugSVG} alt="" width="160px" />
+                <img src={ShrugSVG} alt="" width="200px" />
             </Box>
             <Typography color="textSecondary">there's nothing here... yet.</Typography>
         </Box>
