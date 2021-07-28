@@ -34,13 +34,13 @@ import * as Club from "pages/Club";
 
 // routes {{{
 const publicRoutes = [
-    // {
-    //     title: "Home",
-    //     path: "/",
-    //     icon: HomeOutlined,
-    //     component: <Public.Home />,
-    //     exact: true,
-    // },
+    {
+        title: "Home",
+        path: "/",
+        icon: HomeOutlined,
+        component: <Public.Home />,
+        exact: true,
+    },
     {
         title: "Clubs",
         path: "/clubs",
