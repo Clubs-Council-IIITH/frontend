@@ -1,67 +1,58 @@
-import axios from "axios";
-
-import { headers } from "./config";
-
-import { JSONtoFormData } from "utils/FormUtil";
+import { useQuery, useMutation } from "@apollo/client";
+import {
+    GET_ALL_CLUBS,
+    GET_CLUB_BY_ID,
+    CREATE_CLUB,
+    UPDATE_CLUB,
+    DELETE_CLUB,
+} from "queries/clubs";
 
 import ClubModel from "models/ClubModel";
 
-const endpoint = "/api/clubs";
+// get all clubs
+export const GetAllClubs = () => {
+    const { data: response, ...rest } = useQuery(GET_ALL_CLUBS);
+    return {
+        data: response?.clubs?.map((o) => new ClubModel(o)),
+        ...rest,
+    };
+};
 
-export default class ClubService {
-    // get all clubs
-    static async getClubs() {
-        try {
-            var res = await axios.get(`${endpoint}/`, { headers });
-            return res.data.map((o) => new ClubModel(o));
-        } catch (e) {
-            throw e.response;
-        }
-    }
+// get specific club with id
+export const GetClubById = (id) => {
+    const { data: response, ...rest } = useQuery(GET_CLUB_BY_ID, { variables: { id } });
+    return {
+        data: new ClubModel(response?.club),
+        ...rest,
+    };
+};
 
-    // get club with id
-    static async getClubById(id) {
-        try {
-            var res = await axios.get(`${endpoint}/`, { headers, params: { id } });
-            return new ClubModel(res.data[0]);
-        } catch (e) {
-            throw e.response;
-        }
-    }
+// add new club
+export const CreateClub = (data) => {
+    const [executeCreate, { data: response, ...rest }] = useMutation(CREATE_CLUB);
+    executeCreate({ variables: { clubData: data } });
+    return {
+        data: new ClubModel(response?.club),
+        ...rest,
+    };
+};
 
-    // add new club
-    static async addClub(data) {
-        try {
-            var res = await axios.post(`${endpoint}/new/`, JSONtoFormData(data), { headers });
-            return res.data;
-        } catch (e) {
-            throw e.response;
-        }
-    }
+// update existing club
+export const UpdateClub = (id, data) => {
+    const [executeUpdate, { data: response, ...rest }] = useMutation(UPDATE_CLUB);
+    executeUpdate({ variables: { clubData: { ...data, id } } });
+    return {
+        data: new ClubModel(response?.club),
+        ...rest,
+    };
+};
 
-    // update existing club
-    static async updateClub(id, data) {
-        try {
-            var res = await axios.post(`${endpoint}/edit/${id}/`, JSONtoFormData(data), {
-                headers,
-            });
-            return res.data;
-        } catch (e) {
-            throw e.response;
-        }
-    }
-
-    // delete club
-    static async deleteClub(id) {
-        try {
-            var res = await axios.post(
-                `${endpoint}/delete/${id}/`,
-                {},
-                { headers: { Authorization: headers.Authorization } }
-            );
-            return res.data;
-        } catch (e) {
-            throw e.response;
-        }
-    }
-}
+// delete club
+export const DeleteClub = (id) => {
+    const [executeDelete, { data: response, ...rest }] = useMutation(DELETE_CLUB);
+    executeDelete({ variables: { clubData: { id } } });
+    return {
+        data: new ClubModel(response?.club),
+        ...rest,
+    };
+};

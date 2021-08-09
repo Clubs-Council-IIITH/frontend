@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import useSWR from "swr";
-import ClubService from "services/ClubService";
+// import useSWR from "swr";
+import { GetClubById } from "services/ClubService";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Divider } from "@material-ui/core";
@@ -53,9 +53,10 @@ const View = ({ manage }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.user?.club ? session.user.club : clubId;
-    const { data: club, isValidating } = useSWR(`clubs/${targetId}`, () =>
-        ClubService.getClubById(targetId)
-    );
+    // const { data: club, isValidating } = useSWR(`clubs/${targetId}`, () =>
+    //     ClubService.getClubById(targetId)
+    // );
+    const { data: club, loading } = GetClubById(targetId);
 
     const [actions, setActions] = useState(null);
 
@@ -67,7 +68,7 @@ const View = ({ manage }) => {
     };
 
     return (
-        <Page full loading={isValidating}>
+        <Page full loading={loading}>
             <img src={club?.img} alt={club?.name} className={classes.cover} />
             <Box px={3} pt={4} pb={3} display="flex" justifyContent="space-between">
                 <Typography variant="h2">{club?.name}</Typography>

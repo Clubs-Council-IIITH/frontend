@@ -4,20 +4,29 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { SWRConfig } from "swr";
+// import { SWRConfig } from "swr";
 
 import NavigationContextProvider from "contexts/NavigationContext";
 import SessionContextProvider from "contexts/SessionContext";
 
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client";
+
+const client = new ApolloClient({
+    uri: "/graphql",
+    cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
     <React.StrictMode>
-        <SWRConfig value={{ revalidateOnFocus: false }}>
+        {/* <SWRConfig value={{ revalidateOnFocus: false }}> */}
+        <ApolloProvider client={client}>
             <SessionContextProvider>
                 <NavigationContextProvider>
                     <App />
                 </NavigationContextProvider>
             </SessionContextProvider>
-        </SWRConfig>
+        </ApolloProvider>
+        {/* </SWRConfig> */}
     </React.StrictMode>,
     document.getElementById("root")
 );

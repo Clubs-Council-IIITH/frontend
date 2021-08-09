@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import ClubService from "services/ClubService";
+import { CreateClub, UpdateClub } from "services/ClubService";
 
 import { Box, TextField, Button } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
@@ -9,7 +9,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
-const ClubFormModal = ({ club = null, mutate, controller: [open, setOpen] }) => {
+const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) => {
     const { control, register, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
@@ -21,12 +21,13 @@ const ClubFormModal = ({ club = null, mutate, controller: [open, setOpen] }) => 
         };
 
         // update or create new instance of data
-        const { error } = await (club
-            ? ClubService.updateClub(club.id, transformedData)
-            : ClubService.addClub(transformedData));
+        const { error } = club ? UpdateClub(club.id, transformedData) : CreateClub(transformedData);
+        // const { error } = await (club
+        //     ? ClubService.updateClub(club.id, transformedData)
+        //     : ClubService.addClub(transformedData));
 
         // revalidate local data
-        mutate();
+        refetch();
 
         // show response toast based on form submission status
         setToast({ open: true, error });

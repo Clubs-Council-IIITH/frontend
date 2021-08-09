@@ -6,8 +6,9 @@ export default class ClubModel extends BaseModel {
     name = "";
     mail = "";
     website = "";
+    category = "";
     state = "";
-    description = "";
+    description = ""; // TODO: remove
 
     constructor(data) {
         super();

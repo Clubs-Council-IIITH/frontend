@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import ClubService from "services/ClubService";
+// import ClubService from "services/ClubService";
+import { DeleteClub } from "services/ClubService";
 
 import { Box, Typography } from "@material-ui/core";
 import { Modal, ModalBody, ModalFooter } from "components/modals";
@@ -8,16 +9,17 @@ import { Modal, ModalBody, ModalFooter } from "components/modals";
 import ResponseToast from "components/ResponseToast";
 import { DeleteButton, SecondaryActionButton } from "components/buttons";
 
-const ClubDeleteModal = ({ club = null, mutate, controller: [open, setOpen] }) => {
+const ClubDeleteModal = ({ club = null, refetch, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
     const onSubmit = async () => {
         if (club?.id) {
             // delete instance of club
-            const { error } = await ClubService.deleteClub(club.id);
+            // const { error } = await ClubService.deleteClub(club.id);
+            const { error } = DeleteClub(club.id);
 
             // revalidate local data
-            mutate();
+            refetch();
 
             // show response toast based on form submission status
             setToast({ open: true, error });

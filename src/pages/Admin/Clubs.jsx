@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
-import useSWR from "swr";
-import ClubService from "services/ClubService";
+// import useSWR from "swr";
+// import ClubService from "services/ClubService";
+import { GetAllClubs } from "services/ClubService";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -53,7 +54,8 @@ const Clubs = () => {
     const history = useHistory();
     const match = useRouteMatch();
 
-    const { data: clubs, mutate, isValidating } = useSWR("clubs", ClubService.getClubs);
+    // const { data: clubs, refetch, isValidating } = useSWR("clubs", ClubService.getClubs);
+    const { data: clubs, loading, refetch } = GetAllClubs();
 
     // create/edit club form modal
     const [formProps, setFormProps] = useState({});
@@ -68,12 +70,12 @@ const Clubs = () => {
             <Route exact path={match.path}>
                 <>
                     <ClubFormModal
-                        mutate={mutate}
+                        refetch={refetch}
                         controller={[formModal, setFormModal]}
                         {...formProps}
                     />
                     <ClubDeleteModal
-                        mutate={mutate}
+                        refetch={refetch}
                         controller={[deleteModal, setDeleteModal]}
                         {...deleteProps}
                     />
@@ -96,7 +98,7 @@ const Clubs = () => {
                                 </SecondaryActionButton>
                             </Box>
                         }
-                        loading={isValidating}
+                        loading={loading}
                         empty={!clubs?.length}
                     >
                         <TableContainer

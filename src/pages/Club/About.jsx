@@ -1,8 +1,9 @@
 import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import useSWR from "swr";
-import ClubService from "services/ClubService";
+// import useSWR from "swr";
+// import ClubService from "services/ClubService";
+import { GetClubById } from "services/ClubService";
 
 import { Box, Typography } from "@material-ui/core";
 import { EditOutlined as EditIcon } from "@material-ui/icons";
@@ -17,9 +18,10 @@ const About = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.user?.club ? session.user.club : clubId;
-    const { data: club, isValidating } = useSWR(`clubs/${targetId}/about`, () =>
-        ClubService.getClubById(targetId)
-    );
+    // const { data: club, isValidating } = useSWR(`clubs/${targetId}/about`, () =>
+    //     ClubService.getClubById(targetId)
+    // );
+    const { data: club, loading } = GetClubById(targetId);
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
@@ -36,7 +38,7 @@ const About = ({ manage, setActions }) => {
     }, [manage]);
 
     return (
-        <Page full loading={isValidating}>
+        <Page full loading={loading}>
             <Box py={4} px={3}>
                 <Typography>{club?.description}</Typography>
             </Box>
