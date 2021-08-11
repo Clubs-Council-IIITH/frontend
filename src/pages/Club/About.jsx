@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 // import ClubService from "services/ClubService";
 import { GetClubById } from "services/ClubService";
 
+import { userRoles } from "constants/userRoles";
+
 import { Box, Typography } from "@material-ui/core";
 import { EditOutlined as EditIcon } from "@material-ui/icons";
 
@@ -17,7 +19,7 @@ const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
-    const targetId = manage && session?.user?.club ? session.user.club : clubId;
+    const targetId = manage && session?.group === userRoles.club ? session.props.club.id : clubId;
     // const { data: club, isValidating } = useSWR(`clubs/${targetId}/about`, () =>
     //     ClubService.getClubById(targetId)
     // );

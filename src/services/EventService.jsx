@@ -1,11 +1,12 @@
 import axios from "axios";
-import { headers } from "./config";
 
 import { JSONtoFormData } from "utils/FormUtil";
 
 import EventModel from "models/EventModel";
 
 const endpoint = "/api/events";
+
+const headers = {};
 
 export default class EventService {
     // get all events

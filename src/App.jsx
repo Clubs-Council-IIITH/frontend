@@ -87,9 +87,9 @@ const App = () => {
     // site navigation
     useEffect(() => {
         const protectedRoutes =
-            session?.user?.group === userRoles.admin
+            session?.group === userRoles.admin
                 ? adminRoutes
-                : session?.user?.group === userRoles.coordinator
+                : session?.group === userRoles.club
                 ? clubRoutes
                 : [];
 

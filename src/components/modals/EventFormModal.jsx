@@ -173,12 +173,11 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                             fieldState: { error },
                                         }) => (
                                             <TextField
+                                                multiline
                                                 fullWidth
                                                 label="Description"
                                                 placeholder="Some very long description about the event."
                                                 variant="outlined"
-                                                multiline
-                                                fullWidth
                                                 rows={6}
                                                 value={value}
                                                 onChange={onChange}
@@ -256,12 +255,11 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                             fieldState: { error },
                                         }) => (
                                             <TextField
+                                                multiline
                                                 fullWidth
                                                 label="Financial Requirements"
                                                 placeholder="A boatload of money."
                                                 variant="outlined"
-                                                multiline
-                                                fullWidth
                                                 rows={8}
                                                 value={value}
                                                 onChange={onChange}

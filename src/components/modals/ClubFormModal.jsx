@@ -124,12 +124,11 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
                                 defaultValue={club?.description || ""}
                                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                                     <TextField
+                                        multiline
                                         fullWidth
                                         label="Description"
                                         placeholder="Some very long description about the club."
                                         variant="outlined"
-                                        multiline
-                                        fullWidth
                                         rows={6}
                                         value={value}
                                         onChange={onChange}

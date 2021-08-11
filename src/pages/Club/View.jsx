@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-// import useSWR from "swr";
 import { GetClubById } from "services/ClubService";
+
+import { userRoles } from "constants/userRoles";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Divider } from "@material-ui/core";
@@ -52,7 +53,7 @@ const View = ({ manage }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
-    const targetId = manage && session?.user?.club ? session.user.club : clubId;
+    const targetId = manage && session?.group === userRoles.club ? session.props.club.id : clubId;
     // const { data: club, isValidating } = useSWR(`clubs/${targetId}`, () =>
     //     ClubService.getClubById(targetId)
     // );

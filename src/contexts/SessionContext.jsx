@@ -1,15 +1,12 @@
-import { useState, useEffect, createContext } from "react";
-
-import AuthService from "services/AuthService";
+import { useEffect, createContext } from "react";
+import { Session } from "services/AuthServiceJWT";
 
 export const SessionContext = createContext();
 
 const SessionContextProvider = ({ children }) => {
-    const [session, setSession] = useState(null);
+    const { data: session } = Session();
 
-    useEffect(() => {
-        (async () => setSession(await AuthService.getSession()))();
-    }, []);
+    useEffect(() => console.log("session:", session), [session]);
 
     return <SessionContext.Provider value={{ session }}>{children}</SessionContext.Provider>;
 };

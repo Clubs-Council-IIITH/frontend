@@ -9,7 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import NavigationContextProvider from "contexts/NavigationContext";
 import SessionContextProvider from "contexts/SessionContext";
 
-import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
     uri: "/graphql",

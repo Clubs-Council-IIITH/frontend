@@ -1,4 +1,4 @@
 export const userRoles = {
-    coordinator: "organizer",
-    admin: "cc_admin",
+    admin: "clubs_council",
+    club: "club",
 };

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import EventService from "services/EventService";
 
+import { userRoles } from "constants/userRoles";
+
 import { Box, Grid } from "@material-ui/core";
 import { AddOutlined as AddIcon } from "@material-ui/icons";
 
@@ -19,7 +21,7 @@ const Events = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
-    const targetId = manage && session?.user?.club ? session.user.club : clubId;
+    const targetId = manage && session?.group === userRoles.club ? session.props.club.id : clubId;
     const {
         data: events,
         mutate,
