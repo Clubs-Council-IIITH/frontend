@@ -1,11 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
-import {
-    GET_ALL_CLUBS,
-    GET_CLUB_BY_ID,
-    CREATE_CLUB,
-    UPDATE_CLUB,
-    DELETE_CLUB,
-} from "queries/clubs";
+import { GET_ALL_CLUBS, GET_CLUB_BY_ID } from "queries/clubs";
+import { CREATE_CLUB, UPDATE_CLUB, DELETE_CLUB } from "mutations/clubs";
 
 import ClubModel from "models/ClubModel";
 

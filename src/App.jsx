@@ -7,7 +7,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 // }}}
 
 // constants {{{
-import { userRoles } from "constants/userRoles";
+import { UserGroups } from "constants/UserGroups";
 // }}}
 
 // contexts {{{
@@ -87,9 +87,9 @@ const App = () => {
     // site navigation
     useEffect(() => {
         const protectedRoutes =
-            session?.group === userRoles.admin
+            session?.group === UserGroups.admin
                 ? adminRoutes
-                : session?.group === userRoles.club
+                : session?.group === UserGroups.club
                 ? clubRoutes
                 : [];
 
