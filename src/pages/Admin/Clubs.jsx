@@ -1,14 +1,17 @@
+import clsx from "clsx";
+
 import { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
-import { GET_ALL_CLUBS } from "queries/clubs";
+import { ADMIN_GET_ALL_CLUBS } from "queries/clubs";
 import ClubModel from "models/ClubModel";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
     Box,
+    Chip,
     Table,
     TableBody,
     TableCell,
@@ -18,6 +21,7 @@ import {
     Card,
     Typography,
 } from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
 
 import {
     AddOutlined as AddIcon,
@@ -46,6 +50,12 @@ const useStyles = makeStyles({
     cell: {
         fontSize: "1.4em",
     },
+    activeChip: {
+        backgroundColor: green["200"],
+    },
+    deletedChip: {
+        backgroundColor: red["200"],
+    },
 });
 // }}}
 
@@ -55,9 +65,9 @@ const Clubs = () => {
     const match = useRouteMatch();
 
     // fetch all clubs
-    const { data, loading } = useQuery(GET_ALL_CLUBS);
+    const { data, loading } = useQuery(ADMIN_GET_ALL_CLUBS);
     const [clubs, setClubs] = useState([]);
-    useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
+    useEffect(() => setClubs(data?.adminClubs?.map((o) => new ClubModel(o))), [data]);
 
     // create/edit club form modal
     const [formProps, setFormProps] = useState({});
@@ -103,6 +113,7 @@ const Clubs = () => {
                                     <TableRow>
                                         <TableCell>Name</TableCell>
                                         <TableCell align="left">Email</TableCell>
+                                        <TableCell align="left">Status</TableCell>
                                         <TableCell align="right"></TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -120,6 +131,17 @@ const Clubs = () => {
                                                 <Typography color="textSecondary">
                                                     {club.mail}
                                                 </Typography>
+                                            </TableCell>
+                                            <TableCell align="left" className={classes.cell}>
+                                                <Chip
+                                                    label={club.state}
+                                                    className={clsx({
+                                                        [classes.activeChip]:
+                                                            club.state === "ACTIVE",
+                                                        [classes.deletedChip]:
+                                                            club.state === "DELETED",
+                                                    })}
+                                                />
                                             </TableCell>
                                             <TableCell align="right" className={classes.cell}>
                                                 <PrimaryActionButton

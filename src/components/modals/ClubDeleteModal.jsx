@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useMutation } from "@apollo/client";
 import { DELETE_CLUB } from "mutations/clubs";
-import { GET_ALL_CLUBS } from "queries/clubs";
+import { ADMIN_GET_ALL_CLUBS, GET_ALL_CLUBS } from "queries/clubs";
 
 import { Box, Typography } from "@material-ui/core";
 import { Modal, ModalBody, ModalFooter } from "components/modals";
@@ -14,7 +14,7 @@ const ClubDeleteModal = ({ club = null, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
     const [deleteClub, { error: deleteError }] = useMutation(DELETE_CLUB, {
-        refetchQueries: [GET_ALL_CLUBS],
+        refetchQueries: [GET_ALL_CLUBS, ADMIN_GET_ALL_CLUBS],
     });
 
     const onSubmit = async () => {

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
 import { CREATE_CLUB, UPDATE_CLUB } from "mutations/clubs";
-import { GET_ALL_CLUBS, GET_CLUB_BY_ID } from "queries/clubs";
+import { ADMIN_GET_ALL_CLUBS, GET_ALL_CLUBS, GET_CLUB_BY_ID } from "queries/clubs";
 import ClubCategories from "constants/ClubCategories";
 
 import { Box, TextField, MenuItem, Button } from "@material-ui/core";
@@ -18,7 +18,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
     const [createClub, { error: createError }] = useMutation(CREATE_CLUB, {
-        refetchQueries: [GET_ALL_CLUBS],
+        refetchQueries: [GET_ALL_CLUBS, ADMIN_GET_ALL_CLUBS],
     });
     const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB, {
         refetchQueries: [{ query: GET_CLUB_BY_ID, variables: { id: club?.id } }],
