@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     body: {
         overflowY: "auto",
-        maxHeight: "60vh",
+        maxHeight: "80vh",
         maxWidth: "75vw",
     },
     full: {

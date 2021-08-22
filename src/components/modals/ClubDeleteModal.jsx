@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useMutation } from "@apollo/client";
 import { DELETE_CLUB } from "mutations/clubs";
+import { GET_ALL_CLUBS } from "queries/clubs";
 
 import { Box, Typography } from "@material-ui/core";
 import { Modal, ModalBody, ModalFooter } from "components/modals";
@@ -9,18 +10,17 @@ import { Modal, ModalBody, ModalFooter } from "components/modals";
 import ResponseToast from "components/ResponseToast";
 import { DeleteButton, SecondaryActionButton } from "components/buttons";
 
-const ClubDeleteModal = ({ club = null, refetch, controller: [open, setOpen] }) => {
+const ClubDeleteModal = ({ club = null, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
-    const [deleteClub, { error: deleteError }] = useMutation(DELETE_CLUB);
+    const [deleteClub, { error: deleteError }] = useMutation(DELETE_CLUB, {
+        refetchQueries: [GET_ALL_CLUBS],
+    });
 
     const onSubmit = async () => {
         if (club?.id) {
             // delete instance of club
             await deleteClub({ variables: { id: club.id } });
-
-            // revalidate local data
-            refetch();
 
             // show response toast based on form submission status
             setToast({ open: true, error: deleteError });

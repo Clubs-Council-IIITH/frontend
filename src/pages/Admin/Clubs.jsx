@@ -55,7 +55,7 @@ const Clubs = () => {
     const match = useRouteMatch();
 
     // fetch all clubs
-    const { data, loading, refetch } = useQuery(GET_ALL_CLUBS);
+    const { data, loading } = useQuery(GET_ALL_CLUBS);
     const [clubs, setClubs] = useState([]);
     useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
 
@@ -71,16 +71,8 @@ const Clubs = () => {
         <Switch>
             <Route exact path={match.path}>
                 <>
-                    <ClubFormModal
-                        refetch={refetch}
-                        controller={[formModal, setFormModal]}
-                        {...formProps}
-                    />
-                    <ClubDeleteModal
-                        refetch={refetch}
-                        controller={[deleteModal, setDeleteModal]}
-                        {...deleteProps}
-                    />
+                    <ClubFormModal controller={[formModal, setFormModal]} {...formProps} />
+                    <ClubDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
                     <Page
                         header={
                             <Box display="flex" justifyContent="space-between" alignItems="center">

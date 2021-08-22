@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
-import { CREATE_CLUB, UPDATE_CLUB, DELETE_CLUB } from "mutations/clubs";
+import { CREATE_CLUB, UPDATE_CLUB } from "mutations/clubs";
+import { GET_ALL_CLUBS, GET_CLUB_BY_ID } from "queries/clubs";
+import ClubCategories from "constants/ClubCategories";
 
-import { Box, TextField, Button } from "@material-ui/core";
+import { Box, TextField, MenuItem, Button } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
-const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) => {
+const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
     const { control, register, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
 
-    const [createClub, { error: createError }] = useMutation(CREATE_CLUB);
-    const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB);
+    const [createClub, { error: createError }] = useMutation(CREATE_CLUB, {
+        refetchQueries: [GET_ALL_CLUBS],
+    });
+    const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB, {
+        refetchQueries: [{ query: GET_CLUB_BY_ID, variables: { id: club?.id } }],
+    });
 
     const onSubmit = async (data) => {
         const transformedData = {
@@ -28,9 +34,6 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
         await (club
             ? updateClub({ variables: { ...transformedData, id: club.id } })
             : createClub({ variables: { ...transformedData } }));
-
-        // revalidate local data
-        refetch();
 
         // show response toast based on form submission status
         setToast({ open: true, error: createError || updateError });
@@ -65,8 +68,8 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
                                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                                     <TextField
                                         fullWidth
-                                        label="Name"
-                                        placeholder="The Greatest Club of All Time"
+                                        label="Name*"
+                                        placeholder="My Club"
                                         variant="outlined"
                                         value={value}
                                         onChange={onChange}
@@ -86,7 +89,7 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
                                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                                     <TextField
                                         fullWidth
-                                        label="Email"
+                                        label="Email*"
                                         type="email"
                                         placeholder="club.name@students.iiit.ac.in"
                                         variant="outlined"
@@ -101,6 +104,35 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
                         </Box>
                         <Box mb={2}>
                             <Controller
+                                name="category"
+                                control={control}
+                                shouldUnregister={true}
+                                defaultValue={
+                                    club?.category?.toLowerCase() || Object.keys(ClubCategories)[0]
+                                }
+                                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                    <TextField
+                                        select
+                                        fullWidth
+                                        label="Category*"
+                                        variant="outlined"
+                                        value={value}
+                                        onChange={onChange}
+                                        error={!!error}
+                                        helperText={error ? error.message : null}
+                                    >
+                                        {Object.entries(ClubCategories).map(([value, label]) => (
+                                            <MenuItem key={value} value={value}>
+                                                {label}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                )}
+                                rules={{ required: "Club category can not be empty!" }}
+                            />
+                        </Box>
+                        <Box mb={2}>
+                            <Controller
                                 name="website"
                                 control={control}
                                 shouldUnregister={true}
@@ -110,6 +142,26 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
                                         fullWidth
                                         label="Website"
                                         placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                                        variant="outlined"
+                                        value={value}
+                                        onChange={onChange}
+                                        error={!!error}
+                                        helperText={error ? error.message : null}
+                                    />
+                                )}
+                            />
+                        </Box>
+                        <Box mb={2}>
+                            <Controller
+                                name="tagline"
+                                control={control}
+                                shouldUnregister={true}
+                                defaultValue={club?.tagline || ""}
+                                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                    <TextField
+                                        fullWidth
+                                        label="Tagline"
+                                        placeholder="This is the greatest club of all time"
                                         variant="outlined"
                                         value={value}
                                         onChange={onChange}
@@ -133,7 +185,7 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
                                         placeholder="Some very long description about the club."
                                         variant="outlined"
                                         rows={6}
-                                        value={value}
+                                        value={value || null}
                                         onChange={onChange}
                                         error={!!error}
                                         helperText={error ? error.message : null}

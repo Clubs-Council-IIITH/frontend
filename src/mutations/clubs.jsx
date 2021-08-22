@@ -2,28 +2,37 @@ import { gql } from "@apollo/client";
 
 export const CREATE_CLUB = gql`
     mutation createClubMutation(
+        $img: Upload
         $name: String!
         $mail: String!
         $website: String
         $category: String
         $state: String
+        $tagline: String
+        $description: String
     ) {
         createClub(
             clubData: {
+                img: $img
                 name: $name
                 mail: $mail
                 website: $website
                 category: $category
                 state: $state
+                tagline: $tagline
+                description: $description
             }
         ) {
             club {
                 id
+                img
                 name
                 mail
                 website
                 category
                 state
+                tagline
+                description
             }
         }
     }
@@ -32,20 +41,36 @@ export const CREATE_CLUB = gql`
 export const UPDATE_CLUB = gql`
     mutation updateClubMutation(
         $id: ID!
+        $img: Upload
         $name: String!
         $mail: String!
         $website: String
         $category: String
+        $tagline: String
+        $description: String
     ) {
         updateClub(
-            clubData: { id: $id, name: $name, mail: $mail, website: $website, category: $category }
+            clubData: {
+                id: $id
+                img: $img
+                name: $name
+                mail: $mail
+                website: $website
+                category: $category
+                tagline: $tagline
+                description: $description
+            }
         ) {
             club {
                 id
+                img
                 name
                 mail
                 website
                 category
+                state
+                tagline
+                description
             }
         }
     }
@@ -56,11 +81,14 @@ export const DELETE_CLUB = gql`
         deleteClub(clubData: { id: $id }) {
             club {
                 id
+                img
                 name
                 mail
                 website
                 category
                 state
+                tagline
+                description
             }
         }
     }
