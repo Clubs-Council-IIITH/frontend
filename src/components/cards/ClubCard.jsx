@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 });
 // }}}
 
-const ClubCard = ({ id, img, name, description }) => {
+const ClubCard = ({ id, img, name, tagline }) => {
     const classes = useStyles();
     const history = useHistory();
     const match = useRouteMatch();
@@ -45,7 +45,7 @@ const ClubCard = ({ id, img, name, description }) => {
                         {name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {description}
+                        {tagline}
                     </Typography>
                 </CardContent>
             </CardActionArea>

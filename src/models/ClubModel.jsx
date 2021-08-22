@@ -8,7 +8,8 @@ export default class ClubModel extends BaseModel {
     website = "";
     category = "";
     state = "";
-    description = ""; // TODO: remove
+    tagline = "";
+    description = "";
 
     constructor(data) {
         super();
