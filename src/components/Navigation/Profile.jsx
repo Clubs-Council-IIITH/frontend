@@ -1,11 +1,15 @@
 import { useContext } from "react";
 
+import AuthEndpoints from "constants/AuthEndpoints";
+
 import { Button, Box, Avatar } from "@material-ui/core";
 
 import { SessionContext } from "contexts/SessionContext";
 
 // TODO: implement logout
-import { Login } from "services/AuthServiceJWT";
+const Login = async () => {
+    window.location.href = AuthEndpoints.login;
+};
 
 const Profile = () => {
     const { session } = useContext(SessionContext);

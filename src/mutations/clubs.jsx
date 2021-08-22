@@ -52,8 +52,8 @@ export const UPDATE_CLUB = gql`
 `;
 
 export const DELETE_CLUB = gql`
-    mutation updateClubMutation($id: ID!) {
-        updateClub(clubData: { id: $id }) {
+    mutation deleteClubMutation($id: ID!) {
+        deleteClub(clubData: { id: $id }) {
             club {
                 id
                 name

@@ -7,7 +7,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 // }}}
 
 // constants {{{
-import { UserGroups } from "constants/UserGroups";
+import UserGroups from "constants/UserGroups";
 // }}}
 
 // contexts {{{

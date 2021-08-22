@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
-// import useSWR from "swr";
-// import ClubService from "services/ClubService";
-import { GetAllClubs } from "services/ClubService";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_CLUBS } from "queries/clubs";
+import ClubModel from "models/ClubModel";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -54,16 +54,18 @@ const Clubs = () => {
     const history = useHistory();
     const match = useRouteMatch();
 
-    // const { data: clubs, refetch, isValidating } = useSWR("clubs", ClubService.getClubs);
-    const { data: clubs, loading, refetch } = GetAllClubs();
+    // fetch all clubs
+    const { data, loading, refetch } = useQuery(GET_ALL_CLUBS);
+    const [clubs, setClubs] = useState([]);
+    useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
 
     // create/edit club form modal
     const [formProps, setFormProps] = useState({});
-    const [formModal, setFormModal] = useState(null);
+    const [formModal, setFormModal] = useState(false);
 
     // delete confirmation modal
     const [deleteProps, setDeleteProps] = useState({});
-    const [deleteModal, setDeleteModal] = useState(null);
+    const [deleteModal, setDeleteModal] = useState(false);
 
     return (
         <Switch>

@@ -1,11 +1,11 @@
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-// import useSWR from "swr";
-// import ClubService from "services/ClubService";
-import { GetClubById } from "services/ClubService";
+import { useQuery } from "@apollo/client";
+import { GET_CLUB_BY_ID } from "queries/clubs";
+import ClubModel from "models/ClubModel";
 
-import { UserGroups } from "constants/UserGroups";
+import UserGroups from "constants/UserGroups";
 
 import { Box, Typography } from "@material-ui/core";
 import { EditOutlined as EditIcon } from "@material-ui/icons";
@@ -20,10 +20,11 @@ const About = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
-    // const { data: club, isValidating } = useSWR(`clubs/${targetId}/about`, () =>
-    //     ClubService.getClubById(targetId)
-    // );
-    const { data: club, loading } = GetClubById(targetId);
+
+    // fetch club
+    const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
+    const [club, setClub] = useState([]);
+    useEffect(() => setClub(new ClubModel(data?.club)), [data]);
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {

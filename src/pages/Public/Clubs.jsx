@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-// import useSWR from "swr";
-// import ClubService from "services/ClubService";
-import { GetAllClubs } from "services/ClubService";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_CLUBS } from "queries/clubs";
+import ClubModel from "models/ClubModel";
 
 import { Grid } from "@material-ui/core";
 
@@ -14,7 +15,10 @@ import { View as ViewClub } from "pages/Club";
 const Clubs = () => {
     const match = useRouteMatch();
 
-    const { data: clubs, loading } = GetAllClubs();
+    // fetch all clubs
+    const { data, loading } = useQuery(GET_ALL_CLUBS);
+    const [clubs, setClubs] = useState([]);
+    useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
 
     return (
         <Switch>

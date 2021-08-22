@@ -1,9 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import { GetClubById } from "services/ClubService";
+import { useQuery } from "@apollo/client";
+import { GET_CLUB_BY_ID } from "queries/clubs";
+import ClubModel from "models/ClubModel";
 
-import { UserGroups } from "constants/UserGroups";
+import UserGroups from "constants/UserGroups";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Divider } from "@material-ui/core";
@@ -54,10 +56,11 @@ const View = ({ manage }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
-    // const { data: club, isValidating } = useSWR(`clubs/${targetId}`, () =>
-    //     ClubService.getClubById(targetId)
-    // );
-    const { data: club, loading } = GetClubById(targetId);
+
+    // fetch club
+    const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
+    const [club, setClub] = useState([]);
+    useEffect(() => setClub(new ClubModel(data?.club)), [data]);
 
     const [actions, setActions] = useState(null);
 

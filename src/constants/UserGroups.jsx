@@ -1,4 +1,4 @@
-export const UserGroups = {
+export default {
     admin: "clubs_council",
     club: "club",
     finance: "finance_council",

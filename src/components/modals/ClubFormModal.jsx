@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import { CreateClub, UpdateClub } from "services/ClubService";
+import { useMutation } from "@apollo/client";
+import { CREATE_CLUB, UPDATE_CLUB, DELETE_CLUB } from "mutations/clubs";
 
 import { Box, TextField, Button } from "@material-ui/core";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
@@ -14,6 +15,9 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
 
     const [toast, setToast] = useState({ open: false });
 
+    const [createClub, { error: createError }] = useMutation(CREATE_CLUB);
+    const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB);
+
     const onSubmit = async (data) => {
         const transformedData = {
             ...data,
@@ -21,16 +25,15 @@ const ClubFormModal = ({ club = null, refetch, controller: [open, setOpen] }) =>
         };
 
         // update or create new instance of data
-        const { error } = club ? UpdateClub(club.id, transformedData) : CreateClub(transformedData);
-        // const { error } = await (club
-        //     ? ClubService.updateClub(club.id, transformedData)
-        //     : ClubService.addClub(transformedData));
+        await (club
+            ? updateClub({ variables: { ...transformedData, id: club.id } })
+            : createClub({ variables: { ...transformedData } }));
 
         // revalidate local data
         refetch();
 
         // show response toast based on form submission status
-        setToast({ open: true, error });
+        setToast({ open: true, error: createError || updateError });
         setOpen(false);
     };
 

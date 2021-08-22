@@ -1,10 +1,15 @@
-import { useEffect, createContext } from "react";
-import { Session } from "services/AuthServiceJWT";
+import { useState, useEffect, createContext } from "react";
+
+import { useQuery } from "@apollo/client";
+import { GET_SESSION } from "queries/auth";
+import UserModel from "models/UserModel";
 
 export const SessionContext = createContext();
 
 const SessionContextProvider = ({ children }) => {
-    const { data: session } = Session();
+    const { data } = useQuery(GET_SESSION);
+    const [session, setSession] = useState(null);
+    useEffect(() => setSession(new UserModel(data?.payload)), [data]);
 
     useEffect(() => console.log("session:", session), [session]);
 

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import EventService from "services/EventService";
 
-import { UserGroups } from "constants/UserGroups";
+import UserGroups from "constants/UserGroups";
 
 import { Box, Grid } from "@material-ui/core";
 import { AddOutlined as AddIcon } from "@material-ui/icons";
