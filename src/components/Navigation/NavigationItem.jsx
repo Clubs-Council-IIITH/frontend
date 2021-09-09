@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useHistory, matchPath } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Box, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({
@@ -21,12 +21,12 @@ const useStyles = makeStyles((theme) => ({
         "&.Mui-selected": {
             backgroundColor: "#212121ff",
             "&:hover": {
-                backgroundColor: "#26262666",
+                backgroundColor: "#212121ff",
             },
         },
     },
     navigationItemIcon: {
-        color: "#666666",
+        color: "#777777",
     },
     navigationItemIconActive: {
         color: "#fefefe",
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: theme.typography.fontFamilySecondary,
         fontWeight: 600,
         textTransform: "capitalize",
-        color: "#666666",
+        color: "#777777",
     },
     navigationItemTextActive: {
         color: "#fefefe",
@@ -58,6 +58,7 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
     return (
         <ListItem
             button
+            disableRipple
             selected={selected}
             onClick={() => history.push(path)}
             className={clsx(classes.navigationItem, {

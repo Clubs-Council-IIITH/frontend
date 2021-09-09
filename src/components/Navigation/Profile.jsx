@@ -1,41 +1,75 @@
 import { useContext } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
-import AuthEndpoints from "constants/AuthEndpoints";
-
-import { Button, Box, Avatar } from "@material-ui/core";
+import { Button, Box, Avatar, IconButton } from "@material-ui/core";
+import { ExitToAppOutlined as AuthIcon } from "@material-ui/icons";
 
 import { SessionContext } from "contexts/SessionContext";
 
-// TODO: implement logout
+import AuthEndpoints from "constants/AuthEndpoints";
+
+// styles {{{
+const useStyles = makeStyles(() => ({
+    profile: {
+        backgroundColor: "#181818",
+    },
+    avatar: {
+        width: "1.6em",
+        height: "1.6em",
+        backgroundColor: "#fefefe",
+        color: "#888888",
+    },
+    name: {
+        fontSize: "1.05em",
+        fontWeight: 500,
+        color: "#fefefe",
+    },
+    email: {
+        lineHeight: "1.2em",
+        fontSize: "1em",
+        color: "#a3a3a3",
+    },
+}));
+// }}}
+
 const Login = async () => {
     window.location.href = AuthEndpoints.login;
 };
 
+const Logout = async () => {
+    window.location.href = AuthEndpoints.logout;
+};
+
 const Profile = () => {
+    const classes = useStyles();
     const { session } = useContext(SessionContext);
 
     return (
-        <Box m={3}>
+        <Box p={1} className={classes.profile}>
             {session?.isAuthenticated ? (
                 <>
-                    <Box my={2} display="flex" alignItems="center">
-                        <Avatar
-                            src=""
-                            style={{ backgroundColor: "#111", width: "1.8em", height: "1.8em" }}
-                        />
-                        <Box mx={1}>
-                            <Box fontSize="1.4em" lineHeight="1.1em">
-                                {session.username.split("@")[0]}
+                    <Box display="flex" justifyContent="space-between">
+                        <Box my={1} mx={1} display="flex" alignItems="center">
+                            <Avatar src="" className={classes.avatar} />
+                            <Box mx={1.5}>
+                                <Box className={classes.name}>{session.username.split("@")[0]}</Box>
+                                <Box className={classes.email}>
+                                    @{session.username.split("@")[1]}
+                                </Box>
                             </Box>
-                            <Box>@{session.username.split("@")[1]}</Box>
+                        </Box>
+                        <Box display="flex">
+                            <IconButton size="small" onClick={Logout}>
+                                <AuthIcon color="secondary" fontSize="small" />
+                            </IconButton>
                         </Box>
                     </Box>
-                    <Button fullWidth variant="outlined" onClick={() => null}>
-                        Logout
-                    </Button>
                 </>
             ) : (
-                <Button fullWidth variant="outlined" onClick={Login}>
+                <Button fullWidth variant="text" color="secondary" onClick={Login}>
+                    <Box display="flex" mx={0.5}>
+                        <AuthIcon fontSize="small" />
+                    </Box>
                     Login
                 </Button>
             )}
