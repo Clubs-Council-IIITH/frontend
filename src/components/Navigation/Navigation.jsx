@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 0,
         whiteSpace: "nowrap",
     },
+    paper: {
+        backgroundColor: "#111111",
+    },
     drawerOpen: {
         width: drawerWidth,
         overflowX: "hidden",
@@ -61,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
     },
+    brandText: {
+        color: "#fefefe",
+    },
 }));
 // }}}
 
@@ -77,7 +83,7 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                 [classes.drawerClose]: !open,
             })}
             classes={{
-                paper: clsx({
+                paper: clsx(classes.paper, {
                     [classes.drawerOpen]: open,
                     [classes.drawerClose]: !open,
                 }),
@@ -85,7 +91,7 @@ const Navigation = ({ controller: [open, setOpen] }) => {
         >
             <div className={classes.toolbar}>
                 <IconButton onClick={() => setOpen(!open)}>
-                    <Typography color="textPrimary" variant="h5">
+                    <Typography variant="h5" className={classes.brandText}>
                         <Box fontWeight={500}>CC</Box>
                     </Typography>
                 </IconButton>
@@ -97,7 +103,7 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                             <div key={cidx}>
                                 {cidx ? <Divider /> : null}
                                 <Fade in>
-                                    <List>
+                                    <List style={{ margin: "0 1em" }}>
                                         {navigation[category].map((item, iidx) => (
                                             <NavigationItem key={iidx} {...item} />
                                         ))}

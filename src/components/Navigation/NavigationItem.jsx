@@ -8,19 +8,37 @@ import { Box, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({
-    navigationItemInactive: {
-        borderLeft: "3px solid #00000000",
+    navigationItem: {
+        margin: "0.2em 0",
+        borderRadius: "6px",
+        backgroundColor: "#26262600",
+        "&:hover": {
+            backgroundColor: "#26262666",
+        },
     },
     navigationItemActive: {
-        borderLeft: "3px solid #000000ff",
+        backgroundColor: "#212121ff",
+        "&.Mui-selected": {
+            backgroundColor: "#212121ff",
+            "&:hover": {
+                backgroundColor: "#26262666",
+            },
+        },
     },
     navigationItemIcon: {
-        color: "black",
+        color: "#666666",
+    },
+    navigationItemIconActive: {
+        color: "#fefefe",
     },
     navigationItemText: {
         fontFamily: theme.typography.fontFamilySecondary,
         fontWeight: 600,
         textTransform: "capitalize",
+        color: "#666666",
+    },
+    navigationItemTextActive: {
+        color: "#fefefe",
     },
 }));
 // }}}
@@ -42,19 +60,28 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
             button
             selected={selected}
             onClick={() => history.push(path)}
-            className={clsx({
+            className={clsx(classes.navigationItem, {
                 [classes.navigationItemActive]: selected,
-                [classes.navigationItemInactive]: !selected,
             })}
         >
-            <Box display="flex" alignItems="center" mx={2}>
-                <ListItemIcon>
-                    <Icon classes={{ root: classes.navigationItemIcon }} />
-                </ListItemIcon>
-                <ListItemText classes={{ primary: classes.navigationItemText }}>
-                    {title}
-                </ListItemText>
-            </Box>
+            <ListItemIcon>
+                <Icon
+                    classes={{
+                        root: clsx(classes.navigationItemIcon, {
+                            [classes.navigationItemIconActive]: selected,
+                        }),
+                    }}
+                />
+            </ListItemIcon>
+            <ListItemText
+                classes={{
+                    primary: clsx(classes.navigationItemText, {
+                        [classes.navigationItemTextActive]: selected,
+                    }),
+                }}
+            >
+                {title}
+            </ListItemText>
         </ListItem>
     );
 };
