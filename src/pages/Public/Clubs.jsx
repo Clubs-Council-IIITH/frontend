@@ -20,6 +20,8 @@ const Clubs = () => {
     const [clubs, setClubs] = useState([]);
     useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
 
+    useEffect(() => console.log("data:", data), [data]);
+
     return (
         <Switch>
             <Route exact path={match.path}>

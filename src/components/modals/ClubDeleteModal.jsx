@@ -15,6 +15,7 @@ const ClubDeleteModal = ({ club = null, controller: [open, setOpen] }) => {
 
     const [deleteClub, { error: deleteError }] = useMutation(DELETE_CLUB, {
         refetchQueries: [GET_ALL_CLUBS, ADMIN_GET_ALL_CLUBS],
+        awaitRefetchQueries: true,
     });
 
     const onSubmit = async () => {
