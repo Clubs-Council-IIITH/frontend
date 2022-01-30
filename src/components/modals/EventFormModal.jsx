@@ -116,7 +116,8 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                     />
                                                 )}
                                                 rules={{
-                                                    required: "Event datetimeStart can not be empty!",
+                                                    required:
+                                                        "Event datetimeStart can not be empty!",
                                                 }}
                                             />
                                         </Grid>
@@ -282,10 +283,10 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                 </Box>
                                 <Box mb={2}>
                                     <Controller
-                                        name="creator"
+                                        name="lastEditedBy"
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={event?.creator || ""}
+                                        defaultValue={event?.lastEditedBy || ""}
                                         render={({
                                             field: { onChange, value },
                                             fieldState: { error },

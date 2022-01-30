@@ -3,30 +3,30 @@ import { gql } from "@apollo/client";
 export const CREATE_EVENT = gql`
     mutation createEventMutation(
         $poster: Upload
-        $start: DateTime
-        $end: DateTime
+        $datetimeStart: DateTime
+        $datetimeEnd: DateTime
         $name: String!
         $description: String
         $venue: String
         $audience: String
-        $last_edited_by: String!
+        $lastEditedBy: String!
     ) {
         createEvent(
             eventData: {
                 poster: $poster
-                start: $start
-                end: $end
+                datetimeStart: $datetimeStart
+                datetimeEnd: $datetimeEnd
                 name: $name
                 description: $description
                 venue: $venue
                 audience: $audience
-                lastEditedBy: $last_edited_by
+                lastEditedBy: $lastEditedBy
             }
         ) {
             event {
                 poster
-                start
-                end
+                datetimeStart
+                datetimeEnd
                 name
                 description
                 venue

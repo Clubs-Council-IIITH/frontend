@@ -8,6 +8,7 @@ export const GET_ALL_EVENTS = gql`
             club
             poster
             name
+            datetimeStart
             description
             audience
         }
@@ -21,8 +22,8 @@ export const GET_EVENT_BY_ID = gql`
             club
             poster
             name
-            start
-            end
+            datetimeStart
+            datetimeEnd
             description
             venue
             audience
@@ -34,8 +35,8 @@ export const GET_CLUB_EVENTS = gql`
     query getClubEvents($id: Int) {
         clubEvents(clubId: $id) {
             id
-            start
-            end
+            datetimeStart
+            datetimeEnd
             poster
             name
             audience
@@ -51,9 +52,11 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             club
             poster
             name
+            datetimeStart
             description
             audience
             state
+            lastEditedBy
         }
     }
 `;
@@ -62,12 +65,13 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
     query adminGetClubEvents($id: Int) {
         adminClubEvents(clubId: $id) {
             id
-            start
-            end
+            datetimeStart
+            datetimeEnd
             poster
             name
             audience
             state
+            lastEditedBy
         }
     }
 `;
