@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import EventService from "services/EventService";
+import { useMutation } from "@apollo/client";
+import { CREATE_EVENT } from "mutations/events";
+import { ADMIN_GET_ALL_EVENTS, GET_ALL_EVENTS, GET_EVENT_BY_ID } from "queries/events";
+// import EventService from "services/EventService";
 
 import {
     Grid,
@@ -21,10 +24,19 @@ import { AudienceStringtoDict } from "utils/FormUtil";
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
-const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) => {
+const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     const { control, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
+
+    const [createEvent, { error: createError }] = useMutation(CREATE_EVENT, {
+        refetchQueries: [GET_ALL_EVENTS, ADMIN_GET_ALL_EVENTS],
+        awaitRefetchQueries: true,
+    });
+    const [updateEvent, { error: updateError }] = useMutation(CREATE_EVENT, {
+        refetchQueries: [{ query: GET_EVENT_BY_ID, variables: { id: event?.id } }],
+        awaitRefetchQueries: true,
+    });
 
     const onSubmit = async (data) => {
         const transformedData = {
@@ -36,15 +48,12 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
         };
 
         // update or create new instance of data
-        const { error } = await (event
-            ? EventService.updateEvent(event.id, transformedData)
-            : EventService.addEvent(transformedData));
-
-        // revalidate local data
-        mutate();
+        await (event
+            ? updateEvent({ variables: { ...transformedData, id: event.id } })
+            : createEvent({ variables: { ...transformedData } }));
 
         // show response toast based on form submission status
-        setToast({ open: true, error });
+        setToast({ open: true, error: createError || updateError });
         setOpen(false);
     };
 

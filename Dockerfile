@@ -5,4 +5,4 @@ WORKDIR /frontend
 COPY . /frontend
 
 RUN yarn
-RUN yarn build
+# RUN yarn build
