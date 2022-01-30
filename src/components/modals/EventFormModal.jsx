@@ -92,19 +92,19 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                 </Box>
                                 <Box mb={2}>
                                     <Grid container spacing={2}>
-                                        <Grid item xs={12} lg={7}>
+                                        <Grid item xs={12} lg={6}>
                                             <Controller
-                                                name="datetime"
+                                                name="datetimeStart"
                                                 control={control}
                                                 shouldUnregister={true}
-                                                defaultValue={ISOtoHTML(event?.datetime)}
+                                                defaultValue={ISOtoHTML(event?.datetimeStart)}
                                                 render={({
                                                     field: { onChange, value },
                                                     fieldState: { error },
                                                 }) => (
                                                     <TextField
                                                         fullWidth
-                                                        label="Date & Time"
+                                                        label="Start"
                                                         type="datetime-local"
                                                         placeholder=""
                                                         variant="outlined"
@@ -116,33 +116,35 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                     />
                                                 )}
                                                 rules={{
-                                                    required: "Event datetime can not be empty!",
+                                                    required: "Event datetimeStart can not be empty!",
                                                 }}
                                             />
                                         </Grid>
-                                        <Grid item xs lg>
+                                        <Grid item xs={12} lg={6}>
                                             <Controller
-                                                name="duration"
+                                                name="datetimeEnd"
                                                 control={control}
                                                 shouldUnregister={true}
-                                                defaultValue={event?.duration || ""}
+                                                defaultValue={ISOtoHTML(event?.datetimeEnd)}
                                                 render={({
                                                     field: { onChange, value },
                                                     fieldState: { error },
                                                 }) => (
                                                     <TextField
                                                         fullWidth
-                                                        label="Duration"
-                                                        placeholder="4 hours"
+                                                        label="End"
+                                                        type="datetime-local"
+                                                        placeholder=""
                                                         variant="outlined"
                                                         value={value}
                                                         onChange={onChange}
                                                         error={!!error}
+                                                        InputLabelProps={{ shrink: true }}
                                                         helperText={error ? error.message : null}
                                                     />
                                                 )}
                                                 rules={{
-                                                    required: "Event duration can not be empty!",
+                                                    required: "Event datetimeEnd can not be empty!",
                                                 }}
                                             />
                                         </Grid>

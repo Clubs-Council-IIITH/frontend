@@ -5,14 +5,14 @@ export default class EventModel extends BaseModel {
     id = "";
     club = ClubModel;
     poster = "";
-    start = "";
-    end = "";
+    datetimeStart = "";
+    datetimeEnd = "";
     name = "";
     venue = "";
     audience = "";
     state = "";
     description = "";
-    last_edited_by = "";
+    lastEditedBy = "";
 
     constructor(data) {
         super();
