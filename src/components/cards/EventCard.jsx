@@ -59,11 +59,11 @@ const EventCard = ({ id, name, datetime, state, triggerEdit, triggerDelete, mana
             className={
                 manage &&
                 clsx({
-                    [classes.eventApproved]: state === "approved",
-                    [classes.eventScheduled]: state === "scheduled",
-                    [classes.eventPublished]: state === "published",
-                    [classes.eventDeleted]: state === "deleted",
-                    [classes.eventCompleted]: state === "completed",
+                    [classes.eventApproved]: state === "APPROVED",
+                    [classes.eventScheduled]: state === "SCHEDULED",
+                    [classes.eventPublished]: state === "PUBLISHED",
+                    [classes.eventDeleted]: state === "DELETED",
+                    [classes.eventCompleted]: state === "COMPLETED",
                 })
             }
         >

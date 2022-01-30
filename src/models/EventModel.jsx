@@ -4,16 +4,15 @@ import ClubModel from "./ClubModel";
 export default class EventModel extends BaseModel {
     id = "";
     club = ClubModel;
-    datetime = "";
+    poster = "";
+    start = "";
+    end = "";
     name = "";
-    last_edited_by = "";
     venue = "";
-    creator = "";
     audience = "";
     state = "";
-    duration = "";
     description = "";
-    financial_requirements = "";
+    last_edited_by = "";
 
     constructor(data) {
         super();
