@@ -5,12 +5,13 @@ export const GET_ALL_EVENTS = gql`
     query getAllEvents {
         allEvents {
             id
-            club
+            datetimeStart
+            datetimeEnd
             poster
             name
-            datetimeStart
-            description
             audience
+            description
+            venue
         }
     }
 `;
@@ -35,10 +36,13 @@ export const GET_CLUB_EVENTS = gql`
     query getClubEvents($id: Int) {
         clubEvents(clubId: $id) {
             id
-            datetimeStart
-            datetimeEnd
+            club
             poster
             name
+            datetimeStart
+            datetimeEnd
+            description
+            venue
             audience
         }
     }
@@ -72,6 +76,9 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             audience
             state
             lastEditedBy
+            description
+            venue
+            financialRequirements
         }
     }
 `;

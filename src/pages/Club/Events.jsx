@@ -24,6 +24,8 @@ const Events = ({ manage, setActions }) => {
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
+    useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
+
     // fetch events
     const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
     const { data, loading } = useQuery(GET_EVENTS, { variables: { id: targetId } });
@@ -43,13 +45,15 @@ const Events = ({ manage, setActions }) => {
 
     // open edit modal and autofill data of event with given `id`
     const triggerEdit = (id) => {
-        setFormProps({ event: events?.data?.find((event) => event.id === id) });
+        const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
+        setFormProps({ event: targetEvents?.find((event) => event.id === id) });
         setFormModal(true);
     };
 
     // open edit modal and autofill data of event with given `id`
     const triggerDelete = (id) => {
-        setDeleteProps({ event: events?.data?.find((event) => event.id === id) });
+        const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
+        setDeleteProps({ event: targetEvents?.find((event) => event.id === id) });
         setDeleteModal(true);
     };
 

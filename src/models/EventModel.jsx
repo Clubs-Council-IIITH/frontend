@@ -13,6 +13,7 @@ export default class EventModel extends BaseModel {
     state = "";
     description = "";
     lastEditedBy = "";
+    financialRequirements = "";
 
     constructor(data) {
         super();

@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT } from "mutations/events";
 import { ADMIN_GET_ALL_EVENTS, GET_ALL_EVENTS, GET_EVENT_BY_ID } from "queries/events";
-// import EventService from "services/EventService";
 
 import {
     Grid,
@@ -56,6 +55,8 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
         setToast({ open: true, error: createError || updateError });
         setOpen(false);
     };
+
+    useEffect(() => console.log(event), [event]);
 
     return (
         <>
@@ -261,7 +262,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                         name="financialRequirements"
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={event?.description || ""}
+                                        defaultValue={event?.financialRequirements || ""}
                                         render={({
                                             field: { onChange, value },
                                             fieldState: { error },

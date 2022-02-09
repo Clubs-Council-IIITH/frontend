@@ -10,6 +10,7 @@ export const CREATE_EVENT = gql`
         $venue: String
         $audience: String
         $lastEditedBy: String!
+        $financialRequirements: String!
     ) {
         createEvent(
             eventData: {
@@ -21,6 +22,7 @@ export const CREATE_EVENT = gql`
                 venue: $venue
                 audience: $audience
                 lastEditedBy: $lastEditedBy
+                financialRequirements: $financialRequirements
             }
         ) {
             event {
@@ -32,6 +34,7 @@ export const CREATE_EVENT = gql`
                 venue
                 audience
                 lastEditedBy
+                financialRequirements
             }
         }
     }
