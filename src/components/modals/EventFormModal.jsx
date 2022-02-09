@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
-import { CREATE_EVENT } from "mutations/events";
+import { CREATE_EVENT, UPDATE_EVENT } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 
 import {
@@ -32,8 +32,13 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
         refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
     });
-    const [updateEvent, { error: updateError }] = useMutation(CREATE_EVENT, {
-        refetchQueries: [{ query: GET_EVENT_BY_ID, variables: { id: event?.id } }],
+
+    const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT, {
+        refetchQueries: [
+            { query: GET_EVENT_BY_ID, variables: { id: 2 } },
+            GET_CLUB_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+        ],
         awaitRefetchQueries: true,
     });
 

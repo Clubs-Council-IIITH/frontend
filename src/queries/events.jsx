@@ -20,7 +20,10 @@ export const GET_EVENT_BY_ID = gql`
     query getEventById($id: Int) {
         event(eventId: $id) {
             id
-            club
+            club {
+                id
+                name
+            }
             poster
             name
             datetimeStart
@@ -36,7 +39,6 @@ export const GET_CLUB_EVENTS = gql`
     query getClubEvents($id: Int) {
         clubEvents(clubId: $id) {
             id
-            club
             poster
             name
             datetimeStart
@@ -53,7 +55,10 @@ export const ADMIN_GET_ALL_EVENTS = gql`
     query adminAllEvents {
         adminAllEvents {
             id
-            club
+            club {
+                id
+                name
+            }
             poster
             name
             datetimeStart
