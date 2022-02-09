@@ -21,6 +21,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
         refetchQueries: [GET_ALL_CLUBS, ADMIN_GET_ALL_CLUBS],
         awaitRefetchQueries: true,
     });
+
     const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB, {
         refetchQueries: [{ query: GET_CLUB_BY_ID, variables: { id: club?.id } }],
         awaitRefetchQueries: true,

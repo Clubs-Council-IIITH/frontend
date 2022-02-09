@@ -16,7 +16,7 @@ const Clubs = () => {
     const match = useRouteMatch();
 
     // fetch all clubs
-    const { data, loading } = useQuery(GET_ALL_CLUBS);
+    const { data, loading } = useQuery(GET_ALL_CLUBS, { fetchPolicy: "cache-and-network" });
     const [clubs, setClubs] = useState([]);
     useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
 
