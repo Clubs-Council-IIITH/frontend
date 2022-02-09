@@ -79,7 +79,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                         }) => (
                                             <TextField
                                                 fullWidth
-                                                label="Name"
+                                                label="Name*"
                                                 placeholder="The Greatest Event of All Time"
                                                 variant="outlined"
                                                 value={value}
@@ -105,7 +105,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                 }) => (
                                                     <TextField
                                                         fullWidth
-                                                        label="Start"
+                                                        label="Start*"
                                                         type="datetime-local"
                                                         placeholder=""
                                                         variant="outlined"
@@ -133,7 +133,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                 }) => (
                                                     <TextField
                                                         fullWidth
-                                                        label="End"
+                                                        label="End*"
                                                         type="datetime-local"
                                                         placeholder=""
                                                         variant="outlined"
@@ -293,7 +293,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                         }) => (
                                             <TextField
                                                 fullWidth
-                                                label="Your name?"
+                                                label="Your name?*"
                                                 placeholder="Firstname Lastname"
                                                 variant="outlined"
                                                 value={value}
