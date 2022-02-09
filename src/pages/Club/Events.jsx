@@ -6,8 +6,9 @@ import { GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS } from "queries/events";
 import EventModel from "models/EventModel";
 
 import UserGroups from "constants/UserGroups";
+import EventStates from "constants/EventStates";
 
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import { AddOutlined as AddIcon } from "@material-ui/icons";
 
 import { SessionContext } from "contexts/SessionContext";
@@ -86,18 +87,58 @@ const Events = ({ manage, setActions }) => {
         triggerDelete,
     };
 
+    useEffect(() => console.log(events), [events]);
+
     return (
         <>
             <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
             <EventDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
             <Page full loading={loading} empty={!events?.length}>
                 <Box p={3}>
+                    {/* upcoming events */}
+                    <Typography variant="subtitle1" mt={3} mb={1}>
+                        UPCOMING
+                    </Typography>
                     <Grid container spacing={2}>
-                        {events?.map((event, idx) => (
-                            <Grid item md={4} key={idx}>
-                                <EventCard {...event} {...cardProps} />
-                            </Grid>
-                        ))}
+                        {events
+                            ?.filter(
+                                (e) =>
+                                    e.state !== EventStates.completed &&
+                                    e.state !== EventStates.deleted
+                            )
+                            ?.map((event, idx) => (
+                                <Grid item md={4} key={idx}>
+                                    <EventCard actions {...event} {...cardProps} />
+                                </Grid>
+                            ))}
+                    </Grid>
+
+                    {/* completed events */}
+                    <Typography variant="subtitle1" mt={3} mb={1}>
+                        COMPLETED
+                    </Typography>
+                    <Grid container spacing={2}>
+                        {events
+                            ?.filter((e) => e.state == EventStates.completed)
+                            ?.map((event, idx) => (
+                                <Grid item md={4} key={idx}>
+                                    <EventCard {...event} {...cardProps} />
+                                </Grid>
+                            ))}
+                    </Grid>
+
+                    {/* deleted events */}
+                    <Typography variant="subtitle1" mt={3} mb={1}>
+                        DELETED
+                    </Typography>
+                    <Grid container spacing={2}>
+                        {events
+                            ?.filter((e) => e.state == EventStates.deleted)
+                            ?.map((event, idx) => (
+                                <Grid item md={4} key={idx}>
+                                    <EventCard {...event} {...cardProps} />
+                                </Grid>
+                            ))}
                     </Grid>
                 </Box>
             </Page>
