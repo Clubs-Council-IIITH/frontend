@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT } from "mutations/events";
-import { ADMIN_GET_ALL_EVENTS, GET_ALL_EVENTS, GET_EVENT_BY_ID } from "queries/events";
+import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 
 import {
     Grid,
@@ -29,7 +29,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
 
     const [createEvent, { error: createError }] = useMutation(CREATE_EVENT, {
-        refetchQueries: [GET_ALL_EVENTS, ADMIN_GET_ALL_EVENTS],
+        refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
     });
     const [updateEvent, { error: updateError }] = useMutation(CREATE_EVENT, {
@@ -117,8 +117,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                     />
                                                 )}
                                                 rules={{
-                                                    required:
-                                                        "Event datetimeStart can not be empty!",
+                                                    required: "Event start time can not be empty!",
                                                 }}
                                             />
                                         </Grid>
@@ -146,7 +145,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                                                     />
                                                 )}
                                                 rules={{
-                                                    required: "Event datetimeEnd can not be empty!",
+                                                    required: "Event end time can not be empty!",
                                                 }}
                                             />
                                         </Grid>
