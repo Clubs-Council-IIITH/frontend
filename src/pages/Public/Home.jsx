@@ -50,6 +50,10 @@ const Home = () => {
                         Icon={EmojiEventsOutlined}
                     />
                 </Box>
+
+                <Box my={6}>
+                    <HomeCalendar />
+                </Box>
             </Container>
         </Page>
     );
