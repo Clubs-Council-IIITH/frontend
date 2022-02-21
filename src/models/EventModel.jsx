@@ -22,5 +22,6 @@ export default class EventModel extends BaseModel {
 
     update(data) {
         super.update(data);
+        this.poster = "https://i.insider.com/60817ec5354dde0018c06960";
     }
 }

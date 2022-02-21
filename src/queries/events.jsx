@@ -5,6 +5,11 @@ export const GET_ALL_EVENTS = gql`
     query getAllEvents {
         allEvents {
             id
+            club {
+                id
+                name
+                img
+            }
             datetimeStart
             datetimeEnd
             poster
