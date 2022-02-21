@@ -3,8 +3,10 @@ import { Box, Container, Typography } from "@material-ui/core";
 import Page from "components/Page";
 import HomeEvents from "components/HomeEvents";
 import ImageCarousel from "components/ImageCarousel";
+import Banner from "components/Banner";
 
 import CarouselBackgroundOne from "assets/img/carousel/1.png";
+import { EmojiEventsOutlined } from "@material-ui/icons";
 
 const Home = () => {
     const carousel = [
@@ -40,6 +42,13 @@ const Home = () => {
                         </Typography>
                     </Box>
                     <HomeEvents />
+                </Box>
+
+                <Box my={6}>
+                    <Banner
+                        content={"Some statistic about clubs or events here."}
+                        Icon={EmojiEventsOutlined}
+                    />
                 </Box>
             </Container>
         </Page>
