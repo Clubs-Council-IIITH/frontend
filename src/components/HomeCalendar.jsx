@@ -24,18 +24,19 @@ const HomeCalendar = () => {
   const { data, loading } = useQuery(GET_ALL_EVENTS)
   const [events, setEvents] = useState([])
   useEffect(() => {
-	  console.log("a", data)
-    const targetEvents = data?.allEvents
-	  console.log("o", targetEvents)
-    const event_list = targetEvents?.map((e) => new EventModel(e))
-	  console.log("e", event_list)
-    setEvents(event_list == undefined ? event_list : [])
+    setEvents( data?.allEvents?.map((e) => ({
+        start: moment(e.datetimeStart).toDate(),
+        end: moment(e.datetimeEnd).toDate(),
+        title: e.name
+    })) )
   }, [data])
 
   return (
     <Container>
       <div>
         <Calendar
+          defaultDate={new Date()}
+          defaultView="month"
           localizer={localizer}
           events={events}
           style={{ height: "100vh" }}
