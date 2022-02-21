@@ -2,6 +2,7 @@ import { Box, Container, Typography } from "@material-ui/core";
 
 import Page from "components/Page";
 import HomeEvents from "components/HomeEvents";
+import HomeCalendar from "components/HomeCalendar";
 import ImageCarousel from "components/ImageCarousel";
 import Banner from "components/Banner";
 
@@ -30,7 +31,7 @@ const Home = () => {
 
     return (
         <Page header={null} loading={false} empty={false}>
-            <Container maxWidth={null}>
+            <Container maxWidth={null} my={6}>
                 <Box my={6}>
                     <ImageCarousel gradient contents={carousel} />
                 </Box>
@@ -44,14 +45,24 @@ const Home = () => {
                     <HomeEvents />
                 </Box>
 
-                <Box my={6}>
-                    <Banner
-                        content={"Some statistic about clubs or events here."}
-                        Icon={EmojiEventsOutlined}
-                    />
-                </Box>
+                <Banner
+                    content={"Some statistic about clubs or events here."}
+                    Icon={EmojiEventsOutlined}
+                />
 
-                <Box my={6}>
+                <Box
+                    my={6}
+                    style={{
+                        backgroundColor: "#fafafa",
+                        padding: "2em",
+                        borderRadius: "8px",
+                    }}
+                >
+                    <Box my={3} mb={6}>
+                        <Typography variant="h3" style={{ fontWeight: 500 }}>
+                            Event Calendar
+                        </Typography>
+                    </Box>
                     <HomeCalendar />
                 </Box>
             </Container>
