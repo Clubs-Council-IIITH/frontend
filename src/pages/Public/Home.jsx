@@ -1,12 +1,12 @@
 import { Redirect } from "react-router-dom";
 import Page from "components/Page";
+import HomeCalendar from "../../components/HomeCalendar"
 
 const Home = () => {
-    return <Redirect to="/clubs" />;
 
     return (
         <Page header={"Home"} loading={false} empty={false}>
-            <h1> TODO </h1>
+            <HomeCalendar/>
         </Page>
     );
 };
