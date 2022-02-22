@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@material-ui/core";
+import { Box, Container, Typography } from "@mui/material";
 
 import Page from "components/Page";
 import HomeEvents from "components/HomeEvents";
@@ -7,7 +7,7 @@ import ImageCarousel from "components/ImageCarousel";
 import Banner from "components/Banner";
 
 import CarouselBackgroundOne from "assets/img/carousel/1.png";
-import { EmojiEventsOutlined } from "@material-ui/icons";
+import { EmojiEventsOutlined } from "@mui/icons-material";
 
 const Home = () => {
     const carousel = [

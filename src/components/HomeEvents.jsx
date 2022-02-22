@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import EventModel from "models/EventModel";
 
-import { Box, Grid, Card, CardMedia } from "@material-ui/core";
+import { Box, Grid, Card, CardMedia } from "@mui/material";
 
 import { useQuery } from "@apollo/client";
 import { GET_ALL_EVENTS } from "queries/events";

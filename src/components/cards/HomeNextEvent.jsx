@@ -1,8 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Box, Avatar, Card, CardContent, Typography } from "@material-ui/core";
-import { LocationOn, Group } from "@material-ui/icons";
-import { green, blue, red, amber, deepPurple } from "@material-ui/core/colors";
+import { Box, Avatar, Card, CardContent, Typography } from "@mui/material";
+import { LocationOn, Group } from "@mui/icons-material";
+import { green, blue, red, amber, deepPurple } from "@mui/material/colors";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 

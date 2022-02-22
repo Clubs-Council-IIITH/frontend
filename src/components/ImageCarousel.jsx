@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia } from "@material-ui/core";
+import { Box, Card, CardMedia } from "@mui/material";
 
 import Carousel from "react-material-ui-carousel";
 

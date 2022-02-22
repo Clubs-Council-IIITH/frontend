@@ -6,7 +6,7 @@ import { CREATE_CLUB, UPDATE_CLUB } from "mutations/clubs";
 import { ADMIN_GET_ALL_CLUBS, GET_ALL_CLUBS, GET_CLUB_BY_ID } from "queries/clubs";
 import ClubCategories from "constants/ClubCategories";
 
-import { Box, TextField, MenuItem, Button } from "@material-ui/core";
+import { Box, TextField, MenuItem, Button } from "@mui/material";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
 import ResponseToast from "components/ResponseToast";

@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { ADMIN_GET_ALL_CLUBS } from "queries/clubs";
 import ClubModel from "models/ClubModel";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 import {
     Box,
@@ -20,15 +20,15 @@ import {
     TableRow,
     Card,
     Typography,
-} from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+} from "@mui/material";
+import { green, red } from "@mui/material/colors";
 
 import {
     AddOutlined as AddIcon,
     VisibilityOutlined as ViewIcon,
     EditOutlined as EditIcon,
     DeleteForeverOutlined as DeleteIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import Page from "components/Page";
 import ClubFormModal from "components/modals/ClubFormModal";

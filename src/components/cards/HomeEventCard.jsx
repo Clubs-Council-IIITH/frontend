@@ -1,6 +1,6 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { CardMedia, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
+import { CardMedia, Card, CardActionArea, CardContent, Typography } from "@mui/material";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 

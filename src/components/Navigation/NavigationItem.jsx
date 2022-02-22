@@ -2,9 +2,9 @@ import clsx from "clsx";
 
 import { useState, useEffect } from "react";
 import { useLocation, useHistory, matchPath } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({

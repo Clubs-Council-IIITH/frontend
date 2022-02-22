@@ -1,8 +1,8 @@
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 
 // styles {{{
 const useStyles = makeStyles({

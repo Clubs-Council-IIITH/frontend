@@ -1,10 +1,10 @@
 import clsx from "clsx";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Box, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { green, blue, red, amber, deepPurple } from "@material-ui/core/colors";
-import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@material-ui/icons";
+import { Box, Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import { green, blue, red, amber, deepPurple } from "@mui/material/colors";
+import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@mui/icons-material";
 
 import { EditButton, DeleteButton } from "components/buttons";
 

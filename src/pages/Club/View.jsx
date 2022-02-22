@@ -7,8 +7,8 @@ import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
-import { makeStyles } from "@material-ui/core/styles";
-import { Box, Typography, Divider } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
+import { Box, Typography, Divider } from "@mui/material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";

@@ -7,8 +7,8 @@ import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
-import { Box, Typography } from "@material-ui/core";
-import { EditOutlined as EditIcon } from "@material-ui/icons";
+import { Box, Typography } from "@mui/material";
+import { EditOutlined as EditIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";

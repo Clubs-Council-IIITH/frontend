@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography } from "@material-ui/core";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 
 const Banner = ({ content, Icon }) => {
     return (

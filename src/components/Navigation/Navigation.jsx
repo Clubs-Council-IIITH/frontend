@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 import { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
@@ -14,7 +14,7 @@ import {
     List,
     IconButton,
     Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import NavigationItem from "./NavigationItem";
 import Profile from "./Profile";

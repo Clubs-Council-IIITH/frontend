@@ -1,9 +1,9 @@
 import clsx from "clsx";
 
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { AppBar, Toolbar, CssBaseline } from "@material-ui/core";
+import { AppBar, Toolbar, CssBaseline } from "@mui/material";
 
 import Navigation, { drawerWidth } from "components/Navigation";
 import { BackButton } from "components/buttons";

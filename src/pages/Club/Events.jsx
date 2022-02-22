@@ -8,8 +8,8 @@ import EventModel from "models/EventModel";
 import UserGroups from "constants/UserGroups";
 import EventStates from "constants/EventStates";
 
-import { Box, Grid, Typography } from "@material-ui/core";
-import { AddOutlined as AddIcon } from "@material-ui/icons";
+import { Box, Grid, Typography } from "@mui/material";
+import { AddOutlined as AddIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";

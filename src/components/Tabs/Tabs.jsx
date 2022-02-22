@@ -10,9 +10,9 @@ import {
     matchPath,
 } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Tabs, Tab, Box } from "@material-ui/core";
+import { Tabs, Tab, Box } from "@mui/material";
 
 /*
  * `tabs`: [

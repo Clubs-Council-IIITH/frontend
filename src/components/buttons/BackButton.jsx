@@ -1,8 +1,8 @@
 import { useHistory, useLocation, matchPath } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { IconButton } from "@material-ui/core";
-import { ArrowBackOutlined as BackIcon } from "@material-ui/icons";
+import { IconButton } from "@mui/material";
+import { ArrowBackOutlined as BackIcon } from "@mui/icons-material";
 
 // styles {{{
 const useStyles = makeStyles({

@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Button, Box, Avatar, IconButton } from "@material-ui/core";
-import { ExitToAppOutlined as AuthIcon } from "@material-ui/icons";
+import { Button, Box, Avatar, IconButton } from "@mui/material";
+import { ExitToAppOutlined as AuthIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 

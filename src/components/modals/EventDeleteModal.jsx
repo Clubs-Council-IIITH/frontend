@@ -10,7 +10,7 @@ import {
     GET_ALL_EVENTS,
 } from "queries/events";
 
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import { Modal, ModalBody, ModalFooter } from "components/modals";
 
 import ResponseToast from "components/ResponseToast";

@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_CLUBS } from "queries/clubs";
 import ClubModel from "models/ClubModel";
 
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 import Page from "components/Page";
 import { ClubCard } from "components/cards";

@@ -14,7 +14,7 @@ import {
     FormLabel,
     FormControlLabel,
     Checkbox,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
 import { ISOtoHTML } from "utils/DateTimeUtil";
