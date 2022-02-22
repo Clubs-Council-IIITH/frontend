@@ -5,6 +5,7 @@ import { LocationOn, Group } from "@mui/icons-material";
 import { green, blue, red, amber, deepPurple } from "@mui/material/colors";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
+import { AudienceFormatter } from "utils/EventUtil";
 
 // styles {{{
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +99,7 @@ const HomeNextEventCard = ({
                 <Typography className={classes.audience}>
                     <Box display="flex" alignItems="center">
                         <Group />
-                        <Box mx={2}>{audience}</Box>
+                        <Box mx={2}>{AudienceFormatter(audience)}</Box>
                     </Box>
                 </Typography>
 

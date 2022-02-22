@@ -17,6 +17,7 @@ import { SecondaryActionButton } from "components/buttons";
 import Page from "components/Page";
 import EventFormModal from "components/modals/EventFormModal";
 import EventDeleteModal from "components/modals/EventDeleteModal";
+import EventViewModal from "components/modals/EventViewModal";
 import { EventCard } from "components/cards";
 
 const Events = ({ manage, setActions }) => {
@@ -42,18 +43,35 @@ const Events = ({ manage, setActions }) => {
     const [deleteProps, setDeleteProps] = useState({});
     const [deleteModal, setDeleteModal] = useState(null);
 
+    // view modal
+    const [viewProps, setViewProps] = useState({});
+    const [viewModal, setViewModal] = useState(null);
+
     // open edit modal and autofill data of event with given `id`
     const triggerEdit = (id) => {
-        const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
+        const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
+            (o) => new EventModel(o)
+        );
         setFormProps({ event: targetEvents?.find((event) => event.id === id) });
         setFormModal(true);
     };
 
-    // open edit modal and autofill data of event with given `id`
+    // open delete modal
     const triggerDelete = (id) => {
-        const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
+        const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
+            (o) => new EventModel(o)
+        );
         setDeleteProps({ event: targetEvents?.find((event) => event.id === id) });
         setDeleteModal(true);
+    };
+
+    // open view modal
+    const triggerView = (id) => {
+        const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
+            (o) => new EventModel(o)
+        );
+        setViewProps({ event: targetEvents?.find((event) => event.id === id) });
+        setViewModal(true);
     };
 
     // set/clear action buttons if `manage` is set
@@ -83,6 +101,7 @@ const Events = ({ manage, setActions }) => {
         manage,
         triggerEdit,
         triggerDelete,
+        triggerView,
     };
 
     useEffect(() => console.log(events), [events]);
@@ -91,6 +110,7 @@ const Events = ({ manage, setActions }) => {
         <>
             <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
             <EventDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
+            <EventViewModal controller={[viewModal, setViewModal]} {...viewProps} />
             <Page full loading={loading} empty={!events?.length}>
                 <Box p={3}>
                     {/* upcoming events */}

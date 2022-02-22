@@ -44,13 +44,18 @@ export const GET_CLUB_EVENTS = gql`
     query getClubEvents($id: Int) {
         clubEvents(clubId: $id) {
             id
-            poster
-            name
+            club {
+                id
+                name
+                img
+            }
             datetimeStart
             datetimeEnd
+            poster
+            name
+            audience
             description
             venue
-            audience
         }
     }
 `;
@@ -79,16 +84,21 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
     query adminGetClubEvents($id: Int) {
         adminClubEvents(clubId: $id) {
             id
+            club {
+                id
+                name
+                img
+            }
             datetimeStart
             datetimeEnd
             poster
             name
             audience
-            state
-            lastEditedBy
             description
             venue
             financialRequirements
+            state
+            lastEditedBy
         }
     }
 `;

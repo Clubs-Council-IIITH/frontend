@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// import EventService from "services/EventService";
 import { useMutation } from "@apollo/client";
 import { DELETE_EVENT } from "mutations/events";
 import {

@@ -57,6 +57,7 @@ const EventCard = ({
     state,
     triggerEdit,
     triggerDelete,
+    triggerView,
     manage = false,
     actions = false,
 }) => {
@@ -75,7 +76,7 @@ const EventCard = ({
                 })
             }
         >
-            <CardActionArea onClick={null}>
+            <CardActionArea onClick={() => triggerView(id)}>
                 <CardContent className={classes.cardContent}>
                     <Typography gutterBottom color="textSecondary" variant="subtitle2">
                         {ISOtoDT(datetimeStart).datetime}
