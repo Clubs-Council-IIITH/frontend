@@ -1,21 +1,11 @@
-import { makeStyles } from "@mui/styles";
+import { useTheme } from "@mui/styles";
 
 import { CardMedia, Card, CardActionArea, CardContent, Typography } from "@mui/material";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 
-// styles {{{
-const useStyles = makeStyles((theme) => ({
-    cardContent: {
-        minHeight: 100,
-        display: "flex",
-        flexDirection: "column",
-    },
-}));
-// }}}
-
 const HomeEventCard = ({ id, name, poster, datetimeStart }) => {
-    const classes = useStyles();
+    const theme = useTheme();
 
     return (
         <Card variant="outlined" style={{ border: "none" }}>
@@ -25,9 +15,15 @@ const HomeEventCard = ({ id, name, poster, datetimeStart }) => {
                     height="250"
                     image={poster}
                     alt={name}
-                    style={{ borderRadius: "8px" }}
+                    sx={{ borderRadius: theme.borderRadius }}
                 />
-                <CardContent className={classes.cardContent}>
+                <CardContent
+                    sx={{
+                        minHeight: 100,
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
                     <Typography color="textPrimary" variant="h5">
                         {name}
                     </Typography>

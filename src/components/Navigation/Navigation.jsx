@@ -1,14 +1,12 @@
-import clsx from "clsx";
-
 import { useContext } from "react";
-import { makeStyles } from "@mui/styles";
+import { styled, useTheme } from "@mui/material/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
 import {
     Collapse,
     Box,
-    Drawer,
+    Drawer as MuiDrawer,
     Divider,
     Fade,
     List,
@@ -19,83 +17,77 @@ import {
 import NavigationItem from "./NavigationItem";
 import Profile from "./Profile";
 
-// styles {{{
 export const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: 36,
+// styles {{{
+const openedMixin = (theme) => ({
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+    }),
+    overflowX: "hidden",
+    backgroundColor: "#111111",
+});
+
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: "hidden",
+    backgroundColor: "#111111",
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up("sm")]: {
+        width: `calc(${theme.spacing(11)} - 1px)`,
     },
-    hide: {
-        display: "none",
-    },
-    drawer: {
+});
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(
+    ({ theme, open }) => ({
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: "nowrap",
-    },
-    paper: {
-        backgroundColor: "#111111",
-    },
-    drawerOpen: {
-        width: drawerWidth,
-        overflowX: "hidden",
-        transition: theme.transitions.create("width", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
+        boxSizing: "border-box",
+        ...(open && {
+            ...openedMixin(theme),
+            "& .MuiDrawer-paper": openedMixin(theme),
         }),
-    },
-    drawerClose: {
-        transition: theme.transitions.create("width", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
+        ...(!open && {
+            ...closedMixin(theme),
+            "& .MuiDrawer-paper": closedMixin(theme),
         }),
-        overflowX: "hidden",
-        width: theme.spacing(7) + 1,
-        [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(11) - 1,
-        },
-    },
-    toolbar: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        padding: theme.spacing(4, 2, 0),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-    },
-    brandText: {
-        color: "#fefefe",
-    },
-}));
+    })
+);
 // }}}
 
 const Navigation = ({ controller: [open, setOpen] }) => {
-    const classes = useStyles();
-
+    const theme = useTheme();
     const { navigation } = useContext(NavigationContext);
 
     return (
-        <Drawer
-            variant="permanent"
-            className={clsx(classes.drawer, {
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
-            })}
-            classes={{
-                paper: clsx(classes.paper, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                }),
-            }}
-        >
-            <div className={classes.toolbar}>
+        <Drawer variant="permanent" open={open}>
+            {/* drawer header */}
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    padding: theme.spacing(4, 2, 0),
+                    // necessary for content to be below app bar
+                    ...theme.mixins.toolbar,
+                }}
+            >
                 <IconButton onClick={() => setOpen(!open)}>
-                    <Typography variant="h5" className={classes.brandText}>
-                        <Box fontWeight={500}>CC</Box>
+                    <Typography variant="h5">
+                        <Box fontWeight={500} color="#fefefe">
+                            CC
+                        </Box>
                     </Typography>
                 </IconButton>
-            </div>
+            </Box>
+
+            {/* navigation items */}
             <Box my={4}>
                 {Object.keys(navigation).map(
                     (category, cidx) =>
@@ -113,6 +105,8 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                         )
                 )}
             </Box>
+
+            {/* profile */}
             <Box display="flex" flexDirection="column" justifyContent="flex-end" flexGrow={1}>
                 <Collapse in={open}>{!!open && <Profile />}</Collapse>
             </Box>

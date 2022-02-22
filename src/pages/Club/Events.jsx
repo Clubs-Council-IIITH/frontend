@@ -25,8 +25,6 @@ const Events = ({ manage, setActions }) => {
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
-    useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
-
     // fetch events
     const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
     const { data, loading } = useQuery(GET_EVENTS, { variables: { id: targetId } });
@@ -96,7 +94,7 @@ const Events = ({ manage, setActions }) => {
             <Page full loading={loading} empty={!events?.length}>
                 <Box p={3}>
                     {/* upcoming events */}
-                    <Typography variant="subtitle1" mt={3} mb={1}>
+                    <Typography variant="subtitle1" mb={1}>
                         UPCOMING
                     </Typography>
                     <Grid container spacing={2}>

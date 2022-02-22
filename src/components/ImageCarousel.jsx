@@ -1,21 +1,24 @@
 import { Box, Card, CardMedia } from "@mui/material";
+import { useTheme } from "@mui/styles";
 
 import Carousel from "react-material-ui-carousel";
 
 const ImageCarousel = ({ gradient, contents }) => {
+    const theme = useTheme();
+
     return (
         <Carousel indicators={false} navButtonsAlwaysVisible>
             {contents.map((card) => (
                 <Card>
                     {gradient && (
-                        <div
-                            style={{
+                        <Box
+                            sx={{
                                 background:
                                     "linear-gradient(170deg, rgba(17, 17, 17, 0) 12%, rgba(0, 0, 0, 0.37) 45%, #111111 75%)",
                                 height: "100%",
                                 width: "100%",
                                 position: "absolute",
-                                borderRadius: "8px",
+                                borderRadius: theme.borderRadius,
                             }}
                         />
                     )}
@@ -25,7 +28,7 @@ const ImageCarousel = ({ gradient, contents }) => {
                             display="flex"
                             justifyContent="flex-end"
                             alignItems="flex-end"
-                            style={{
+                            sx={{
                                 position: "absolute",
                                 height: "100%",
                                 width: "100%",
@@ -41,7 +44,7 @@ const ImageCarousel = ({ gradient, contents }) => {
                         height="450px"
                         image={card?.image}
                         alt={null}
-                        style={{ borderRadius: "8px" }}
+                        sx={{ borderRadius: theme.borderRadius }}
                     />
                 </Card>
             ))}

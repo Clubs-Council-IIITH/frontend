@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import { useTheme } from "@mui/styles";
 
 import Page from "components/Page";
 import HomeEvents from "components/HomeEvents";
@@ -10,13 +11,15 @@ import CarouselBackgroundOne from "assets/img/carousel/1.png";
 import { EmojiEventsOutlined } from "@mui/icons-material";
 
 const Home = () => {
+    const theme = useTheme();
+
     const carousel = [
         {
             image: CarouselBackgroundOne,
             content: (
-                <Box style={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" style={{ fontWeight: 500 }}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
                             Some Headline Here
                         </Typography>
                     </Box>
@@ -55,7 +58,7 @@ const Home = () => {
                     style={{
                         backgroundColor: "#fafafa",
                         padding: "2em",
-                        borderRadius: "8px",
+                        borderRadius: theme.borderRadius,
                     }}
                 >
                     <Box my={3} mb={6}>

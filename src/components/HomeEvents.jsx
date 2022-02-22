@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { useTheme } from "@mui/styles";
 
 import EventModel from "models/EventModel";
 
-import { Box, Grid, Card, CardMedia } from "@mui/material";
+import { Box, Grid, CardMedia } from "@mui/material";
 
 import { useQuery } from "@apollo/client";
 import { GET_ALL_EVENTS } from "queries/events";
@@ -16,6 +17,8 @@ import HomeEventCard from "./cards/HomeEventCard";
 import HomeNextEventCard from "./cards/HomeNextEvent";
 
 const HomeEvents = () => {
+    const theme = useTheme();
+
     // create/edit event form modal
     const GET_EVENTS = GET_ALL_EVENTS;
     const { data, loading } = useQuery(GET_EVENTS);
@@ -69,7 +72,9 @@ const HomeEvents = () => {
                                     height="500"
                                     image={events?.[0].poster}
                                     alt={events?.[0].name}
-                                    style={{ borderRadius: "8px" }}
+                                    sx={{
+                                        borderRadius: theme.borderRadius,
+                                    }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={7}>
