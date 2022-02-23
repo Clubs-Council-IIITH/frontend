@@ -22,6 +22,9 @@ export default class EventModel extends BaseModel {
 
     update(data) {
         super.update(data);
-        this.poster = "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
+        if (this.poster === "") {
+            this.poster =
+                "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
+        }
     }
 }

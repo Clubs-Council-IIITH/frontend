@@ -8,6 +8,7 @@ import ImageCarousel from "components/ImageCarousel";
 import Banner from "components/Banner";
 
 import CarouselBackgroundOne from "assets/img/carousel/1.png";
+import CarouselBackgroundTwo from "assets/img/carousel/2.jpg";
 import { EmojiEventsOutlined } from "@mui/icons-material";
 
 const Home = () => {
@@ -20,13 +21,26 @@ const Home = () => {
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
                         <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Some Headline Here
+                            Clubs Council
                         </Typography>
                     </Box>
                     <Typography variant="h5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua
+                        Ensuring that student-driven organizations on campus are successful in their
+                        aim to cultivate diverse campus life experiences, since 2017.
                     </Typography>
+                </Box>
+            ),
+        },
+        {
+            image: CarouselBackgroundTwo,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
