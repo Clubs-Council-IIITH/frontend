@@ -63,7 +63,7 @@ const Home = () => {
                 </Box>
 
                 <Banner
-                    content={"Some statistic about clubs or events here."}
+                    content={"Over 310 events have been organized by clubs in 2020-21."}
                     Icon={EmojiEventsOutlined}
                 />
 
