@@ -1,5 +1,3 @@
-import clsx from "clsx";
-
 import { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
@@ -7,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { ADMIN_GET_ALL_CLUBS } from "queries/clubs";
 import ClubModel from "models/ClubModel";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@mui/styles";
 
 import {
     Box,
@@ -20,15 +18,15 @@ import {
     TableRow,
     Card,
     Typography,
-} from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+} from "@mui/material";
+import { green, red } from "@mui/material/colors";
 
 import {
     AddOutlined as AddIcon,
     VisibilityOutlined as ViewIcon,
     EditOutlined as EditIcon,
     DeleteForeverOutlined as DeleteIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import Page from "components/Page";
 import ClubFormModal from "components/modals/ClubFormModal";
@@ -42,25 +40,8 @@ import {
 
 import { View as ViewClub } from "pages/Club";
 
-// styles {{{
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
-    cell: {
-        fontSize: "1.4em",
-    },
-    activeChip: {
-        backgroundColor: green["200"],
-    },
-    deletedChip: {
-        backgroundColor: red["200"],
-    },
-});
-// }}}
-
 const Clubs = () => {
-    const classes = useStyles();
+    const theme = useTheme();
     const history = useHistory();
     const match = useRouteMatch();
 
@@ -106,9 +87,22 @@ const Clubs = () => {
                         empty={!clubs?.length}
                     >
                         <TableContainer
-                            component={(props) => <Card {...props} variant="outlined" />}
+                            component={(props) => (
+                                <Card
+                                    {...props}
+                                    variant="outlined"
+                                    sx={{
+                                        borderRadius: theme.borderRadius,
+                                    }}
+                                />
+                            )}
                         >
-                            <Table stickyHeader className={classes.table}>
+                            <Table
+                                stickyHeader
+                                sx={{
+                                    minWidth: 650,
+                                }}
+                            >
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Name</TableCell>
@@ -123,27 +117,47 @@ const Clubs = () => {
                                             <TableCell
                                                 component="th"
                                                 scope="row"
-                                                className={classes.cell}
+                                                sx={{
+                                                    fontSize: "1.4em",
+                                                }}
                                             >
                                                 {club.name}
                                             </TableCell>
-                                            <TableCell align="left" className={classes.cell}>
+                                            <TableCell
+                                                align="left"
+                                                sx={{
+                                                    fontSize: "1.4em",
+                                                }}
+                                            >
                                                 <Typography color="textSecondary">
                                                     {club.mail}
                                                 </Typography>
                                             </TableCell>
-                                            <TableCell align="left" className={classes.cell}>
+                                            <TableCell
+                                                align="left"
+                                                sx={{
+                                                    fontSize: "1.4em",
+                                                }}
+                                            >
                                                 <Chip
                                                     label={club.state}
-                                                    className={clsx({
-                                                        [classes.activeChip]:
-                                                            club.state === "ACTIVE",
-                                                        [classes.deletedChip]:
-                                                            club.state === "DELETED",
-                                                    })}
+                                                    sx={{
+                                                        ...(club.state === "ACTIVE" && {
+                                                            backgroundColor: green["200"],
+                                                        }),
+
+                                                        ...(club.state === "DELETED" && {
+                                                            backgroundColor: red["200"],
+                                                        }),
+                                                    }}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" className={classes.cell}>
+                                            <TableCell
+                                                align="right"
+                                                sx={{
+                                                    fontSize: "1.4em",
+                                                }}
+                                            >
                                                 <PrimaryActionButton
                                                     noPadding
                                                     onClick={() => {

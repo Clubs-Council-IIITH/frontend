@@ -1,8 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Button, Box } from "@material-ui/core";
+import { Button, Box } from "@mui/material";
 
-import { blue } from "@material-ui/core/colors";
+import { blue } from "@mui/material/colors";
 
 // styles {{{
 const useStyles = makeStyles({

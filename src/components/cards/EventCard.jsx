@@ -1,10 +1,10 @@
 import clsx from "clsx";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import { Box, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { green, blue, red, amber, deepPurple } from "@material-ui/core/colors";
-import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@material-ui/icons";
+import { Box, Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import { green, blue, red, amber, deepPurple } from "@mui/material/colors";
+import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@mui/icons-material";
 
 import { EditButton, DeleteButton } from "components/buttons";
 
@@ -50,32 +50,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-const EventCard = ({ id, name, datetime, state, triggerEdit, triggerDelete, manage = false }) => {
+const EventCard = ({
+    id,
+    name,
+    datetimeStart,
+    state,
+    triggerEdit,
+    triggerDelete,
+    triggerView,
+    manage = false,
+    actions = false,
+}) => {
     const classes = useStyles();
-
     return (
         <Card
             variant="outlined"
             className={
                 manage &&
                 clsx({
-                    [classes.eventApproved]: state === "approved",
-                    [classes.eventScheduled]: state === "scheduled",
-                    [classes.eventPublished]: state === "published",
-                    [classes.eventDeleted]: state === "deleted",
-                    [classes.eventCompleted]: state === "completed",
+                    [classes.eventApproved]: state === "APPROVED",
+                    [classes.eventScheduled]: state === "SCHEDULED",
+                    [classes.eventPublished]: state === "PUBLISHED",
+                    [classes.eventDeleted]: state === "DELETED",
+                    [classes.eventCompleted]: state === "COMPLETED",
                 })
             }
         >
-            <CardActionArea onClick={null}>
+            <CardActionArea onClick={() => triggerView(id)}>
                 <CardContent className={classes.cardContent}>
                     <Typography gutterBottom color="textSecondary" variant="subtitle2">
-                        {ISOtoDT(datetime).datetime}
+                        {ISOtoDT(datetimeStart).datetime}
                     </Typography>
+
                     <Typography color="textPrimary" variant="h4" component="h4">
                         {name}
                     </Typography>
-                    {!!manage && (
+                    {!!manage && !!actions && (
                         <Box
                             display="flex"
                             flexGrow={2}

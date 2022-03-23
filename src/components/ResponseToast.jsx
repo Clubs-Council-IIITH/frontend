@@ -1,5 +1,5 @@
-import { Alert } from "@material-ui/lab";
-import { Snackbar } from "@material-ui/core";
+import { Alert } from "@mui/lab";
+import { Snackbar } from "@mui/material";
 
 const ResponseToast = ({
     controller: [toast, setToast],
@@ -12,13 +12,18 @@ const ResponseToast = ({
     };
 
     return (
-        <Snackbar open={toast.open} autoHideDuration={5000} onClose={handleClose}>
+        <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            open={toast.open}
+            autoHideDuration={5000}
+            onClose={handleClose}
+        >
             {toast.error ? (
-                <Alert variant="outlined" severity="error">
+                <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
                     {errorText}
                 </Alert>
             ) : (
-                <Alert variant="outlined" severity="success">
+                <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
                     {successText}
                 </Alert>
             )}

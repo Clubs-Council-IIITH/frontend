@@ -1,26 +1,40 @@
 import { useState } from "react";
 
-import EventService from "services/EventService";
+import { useMutation } from "@apollo/client";
+import { DELETE_EVENT } from "mutations/events";
+import {
+    ADMIN_GET_CLUB_EVENTS,
+    GET_CLUB_EVENTS,
+    ADMIN_GET_ALL_EVENTS,
+    GET_ALL_EVENTS,
+} from "queries/events";
 
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import { Modal, ModalBody, ModalFooter } from "components/modals";
 
 import ResponseToast from "components/ResponseToast";
 import { DeleteButton, SecondaryActionButton } from "components/buttons";
 
-const EventDeleteModal = ({ event = null, mutate, controller: [open, setOpen] }) => {
+const EventDeleteModal = ({ event = null, controller: [open, setOpen] }) => {
     const [toast, setToast] = useState({ open: false });
+
+    const [deleteEvent, { error: deleteError }] = useMutation(DELETE_EVENT, {
+        refetchQueries: [
+            GET_ALL_EVENTS,
+            ADMIN_GET_ALL_EVENTS,
+            GET_CLUB_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+        ],
+        awaitRefetchQueries: true,
+    });
 
     const onSubmit = async () => {
         if (event?.id) {
             // delete instance of event
-            const { error } = await EventService.deleteEvent(event.id);
-
-            // revalidate local data
-            mutate();
+            await deleteEvent({ variables: { id: event.id } });
 
             // show response toast based on form submission status
-            setToast({ open: true, error });
+            setToast({ open: true, deleteError });
             setOpen(false);
         }
     };

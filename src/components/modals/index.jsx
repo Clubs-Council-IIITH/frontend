@@ -1,38 +1,11 @@
 import { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@mui/styles";
 
-import { Modal as MuiModal, Backdrop, Fade, IconButton, Box, Typography } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
-
-// styles {{{
-const useStyles = makeStyles((theme) => ({
-    modal: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        outline: "none",
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        borderRadius: "8px",
-        outline: "none",
-    },
-    body: {
-        overflowY: "auto",
-        maxHeight: "80vh",
-        maxWidth: "75vw",
-    },
-    full: {
-        width: "75vw",
-    },
-    mini: {
-        width: "40vw",
-    },
-}));
-// }}}
+import { Modal as MuiModal, Fade, IconButton, Box, Typography } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 export const Modal = ({ controller: [open, setOpen], children }) => {
-    const classes = useStyles();
+    const theme = useTheme();
 
     // load modal closed
     useEffect(() => setOpen(false), []);
@@ -42,12 +15,24 @@ export const Modal = ({ controller: [open, setOpen], children }) => {
             open={open}
             onClose={() => setOpen(false)}
             closeAfterTransition
-            className={classes.modal}
-            BackdropComponent={Backdrop}
             BackdropProps={{ timeout: 500 }}
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                outline: "none",
+            }}
         >
             <Fade in={open}>
-                <div className={classes.paper}>{children}</div>
+                <Box
+                    sx={{
+                        backgroundColor: theme.palette.background.paper,
+                        borderRadius: theme.borderRadius,
+                        outline: "none",
+                    }}
+                >
+                    {children}
+                </Box>
             </Fade>
         </MuiModal>
     );
@@ -68,10 +53,26 @@ export const ModalHeader = ({ controller: [_, setOpen], title, actions }) => {
 };
 
 export const ModalBody = ({ full, mini, children }) => {
-    const classes = useStyles();
-
     return (
-        <Box p={3} className={`${classes.body} ${full && classes.full} ${mini && classes.mini}`}>
+        <Box
+            p={3}
+            sx={{
+                // default modal body
+                overflowY: "auto",
+                maxHeight: "80vh",
+                maxWidth: "75vw",
+
+                // full modal
+                ...(full && {
+                    width: "75vw",
+                }),
+
+                // mini modal
+                ...(mini && {
+                    width: "40vw",
+                }),
+            }}
+        >
             {children}
         </Box>
     );

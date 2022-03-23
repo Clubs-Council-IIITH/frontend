@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import { DELETE_CLUB } from "mutations/clubs";
 import { ADMIN_GET_ALL_CLUBS, GET_ALL_CLUBS } from "queries/clubs";
 
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import { Modal, ModalBody, ModalFooter } from "components/modals";
 
 import ResponseToast from "components/ResponseToast";

@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 // theme overrides {{{
 import { Theme } from "theme";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@mui/material/styles";
 // }}}
 
 // constants {{{
@@ -22,7 +22,7 @@ import {
     CalendarTodayOutlined,
     DashboardOutlined,
     GroupOutlined,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import MainContainer from "components/MainContainer";
 // }}}
 
@@ -100,7 +100,7 @@ const App = () => {
     }, [session]);
 
     return (
-        <MuiThemeProvider theme={Theme}>
+        <ThemeProvider theme={Theme}>
             <BrowserRouter>
                 <MainContainer>
                     {!!Object.values(navigation).flat().length && (
@@ -131,7 +131,7 @@ const App = () => {
                     )}
                 </MainContainer>
             </BrowserRouter>
-        </MuiThemeProvider>
+        </ThemeProvider>
     );
 };
 

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import EventService from "services/EventService";
+import { useMutation } from "@apollo/client";
+import { CREATE_EVENT, UPDATE_EVENT } from "mutations/events";
+import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 
 import {
     Grid,
@@ -12,7 +14,7 @@ import {
     FormLabel,
     FormControlLabel,
     Checkbox,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "components/modals";
 
 import { ISOtoHTML } from "utils/DateTimeUtil";
@@ -21,10 +23,24 @@ import { AudienceStringtoDict } from "utils/FormUtil";
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
-const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) => {
+const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     const { control, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
+
+    const [createEvent, { error: createError }] = useMutation(CREATE_EVENT, {
+        refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
+        awaitRefetchQueries: true,
+    });
+
+    const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT, {
+        refetchQueries: [
+            { query: GET_EVENT_BY_ID, variables: { id: 2 } },
+            GET_CLUB_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+        ],
+        awaitRefetchQueries: true,
+    });
 
     const onSubmit = async (data) => {
         const transformedData = {
@@ -36,17 +52,16 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
         };
 
         // update or create new instance of data
-        const { error } = await (event
-            ? EventService.updateEvent(event.id, transformedData)
-            : EventService.addEvent(transformedData));
-
-        // revalidate local data
-        mutate();
+        await (event
+            ? updateEvent({ variables: { ...transformedData, id: event.id } })
+            : createEvent({ variables: { ...transformedData } }));
 
         // show response toast based on form submission status
-        setToast({ open: true, error });
+        setToast({ open: true, error: createError || updateError });
         setOpen(false);
     };
+
+    useEffect(() => console.log(event), [event]);
 
     return (
         <>
@@ -69,7 +84,7 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                         }) => (
                                             <TextField
                                                 fullWidth
-                                                label="Name"
+                                                label="Name*"
                                                 placeholder="The Greatest Event of All Time"
                                                 variant="outlined"
                                                 value={value}
@@ -95,7 +110,7 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                                 }) => (
                                                     <TextField
                                                         fullWidth
-                                                        label="Start"
+                                                        label="Start*"
                                                         type="datetime-local"
                                                         placeholder=""
                                                         variant="outlined"
@@ -107,7 +122,7 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                                     />
                                                 )}
                                                 rules={{
-                                                    required: "Event datetimeStart can not be empty!",
+                                                    required: "Event start time can not be empty!",
                                                 }}
                                             />
                                         </Grid>
@@ -123,7 +138,7 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                                 }) => (
                                                     <TextField
                                                         fullWidth
-                                                        label="End"
+                                                        label="End*"
                                                         type="datetime-local"
                                                         placeholder=""
                                                         variant="outlined"
@@ -135,7 +150,7 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                                     />
                                                 )}
                                                 rules={{
-                                                    required: "Event datetimeEnd can not be empty!",
+                                                    required: "Event end time can not be empty!",
                                                 }}
                                             />
                                         </Grid>
@@ -251,7 +266,7 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                         name="financialRequirements"
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={event?.description || ""}
+                                        defaultValue={event?.financialRequirements || ""}
                                         render={({
                                             field: { onChange, value },
                                             fieldState: { error },
@@ -273,17 +288,17 @@ const EventFormModal = ({ event = null, mutate, controller: [open, setOpen] }) =
                                 </Box>
                                 <Box mb={2}>
                                     <Controller
-                                        name="creator"
+                                        name="lastEditedBy"
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={event?.creator || ""}
+                                        defaultValue={event?.lastEditedBy || ""}
                                         render={({
                                             field: { onChange, value },
                                             fieldState: { error },
                                         }) => (
                                             <TextField
                                                 fullWidth
-                                                label="Your name?"
+                                                label="Your name?*"
                                                 placeholder="Firstname Lastname"
                                                 variant="outlined"
                                                 value={value}

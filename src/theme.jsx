@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
 export const Theme = createTheme({
     palette: {
@@ -6,7 +6,7 @@ export const Theme = createTheme({
             default: "#fff",
         },
         primary: {
-            main: "#000",
+            main: "#111",
         },
         secondary: {
             main: "#eee",
@@ -15,13 +15,10 @@ export const Theme = createTheme({
     typography: {
         fontFamily: `'Jost', sans-serif`,
         fontFamilySecondary: `'Quicksand', sans-serif`,
-    },
-    overrides: {
-        MuiButton: {
-            label: {
-                fontFamily: `'Quicksand', sans-serif`,
-                fontWeight: 600,
-            },
+        button: {
+            fontFamily: `'Quicksand', sans-serif`,
+            fontWeight: 600,
         },
     },
+    borderRadius: "8px",
 });

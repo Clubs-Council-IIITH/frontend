@@ -7,8 +7,8 @@ import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
-import { Box, Typography } from "@material-ui/core";
-import { EditOutlined as EditIcon } from "@material-ui/icons";
+import { Box, Typography } from "@mui/material";
+import { EditOutlined as EditIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
@@ -20,6 +20,7 @@ const About = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
+    useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
 
     // fetch club
     const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });

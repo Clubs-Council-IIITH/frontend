@@ -10,9 +10,9 @@ import {
     matchPath,
 } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@mui/styles";
 
-import { Tabs, Tab, Box } from "@material-ui/core";
+import { Tabs, Tab, Box } from "@mui/material";
 
 /*
  * `tabs`: [
@@ -26,18 +26,8 @@ import { Tabs, Tab, Box } from "@material-ui/core";
  * `routed`: bool
  */
 
-// styles {{{
-const useStyles = makeStyles((theme) => ({
-    tabText: {
-        fontFamily: theme.typography.fontFamilySecondary,
-        fontWeight: 600,
-        fontSize: "1.1em",
-    },
-}));
-// }}}
-
 export const TabBar = ({ tabs, controller: [value, setValue], tabProps, routed }) => {
-    const classes = useStyles();
+    const theme = useTheme();
     const history = useHistory();
     const match = useRouteMatch();
     const location = useLocation();
@@ -77,7 +67,12 @@ export const TabBar = ({ tabs, controller: [value, setValue], tabProps, routed }
                     value={key}
                     label={tab.title}
                     disabled={tab.disabled}
-                    className={classes.tabText}
+                    sx={{
+                        fontFamily: theme.typography.fontFamilySecondary,
+                        fontWeight: 600,
+                        fontSize: "1.0em",
+                        minWidth: "140px",
+                    }}
                     wrapped
                     onClick={() =>
                         routed
