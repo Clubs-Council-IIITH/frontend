@@ -13,7 +13,11 @@ const SessionContextProvider = ({ children }) => {
 
     useEffect(() => console.log("session:", session), [session]);
 
-    return <SessionContext.Provider value={{ session }}>{children}</SessionContext.Provider>;
+    return (
+        <SessionContext.Provider value={{ session, setSession }}>
+            {children}
+        </SessionContext.Provider>
+    );
 };
 
 export default SessionContextProvider;

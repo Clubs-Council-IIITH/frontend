@@ -1,23 +1,30 @@
 import { useContext } from "react";
-import { useTheme } from "@mui/styles";
+import { useMutation } from "@apollo/client";
 
 import { Button, Box, Avatar, IconButton } from "@mui/material";
 import { ExitToAppOutlined as AuthIcon } from "@mui/icons-material";
 
+import { GET_SESSION } from "queries/auth";
+import { DELETE_COOKIE } from "mutations/auth";
 import { SessionContext } from "contexts/SessionContext";
 
 import AuthEndpoints from "constants/AuthEndpoints";
 
-const Login = async () => {
-    window.location.href = AuthEndpoints.login;
-};
-
-const Logout = async () => {
-    window.location.href = AuthEndpoints.logout;
-};
-
 const Profile = () => {
     const { session } = useContext(SessionContext);
+
+    const [deleteCookie, { error: deleteError }] = useMutation(DELETE_COOKIE, {
+        refetchQueries: [GET_SESSION],
+        onCompleted: () => (window.location.href = AuthEndpoints.logout),
+    });
+
+    const Login = async () => {
+        window.location.href = AuthEndpoints.login;
+    };
+
+    const Logout = async () => {
+        deleteCookie();
+    };
 
     return (
         <Box
