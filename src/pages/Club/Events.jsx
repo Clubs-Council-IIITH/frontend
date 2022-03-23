@@ -8,8 +8,21 @@ import EventModel from "models/EventModel";
 import UserGroups from "constants/UserGroups";
 import EventStates from "constants/EventStates";
 
-import { Box, Grid, Typography } from "@mui/material";
-import { AddOutlined as AddIcon } from "@mui/icons-material";
+import {
+    Box,
+    Grid,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    ListItemButton,
+    Collapse,
+} from "@mui/material";
+import {
+    AddOutlined as AddIcon,
+    ChevronRight as CollapsedIcon,
+    ExpandMore as ExpandedIcon,
+} from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
@@ -19,6 +32,17 @@ import EventFormModal from "components/modals/EventFormModal";
 import EventDeleteModal from "components/modals/EventDeleteModal";
 import EventViewModal from "components/modals/EventViewModal";
 import { EventCard } from "components/cards";
+
+const EventStateToggle = ({ stateName, expanded, callback }) => (
+    <ListItem disableGutters sx={{ maxWidth: "fit-content" }}>
+        <ListItemButton onClick={callback} sx={{ borderRadius: "8px" }}>
+            <ListItemText primary={stateName} sx={{ marginRight: 1 }} />
+            <ListItemIcon sx={{ minWidth: 0 }}>
+                {expanded ? <ExpandedIcon /> : <CollapsedIcon />}
+            </ListItemIcon>
+        </ListItemButton>
+    </ListItem>
+);
 
 const Events = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -46,6 +70,19 @@ const Events = ({ manage, setActions }) => {
     // view modal
     const [viewProps, setViewProps] = useState({});
     const [viewModal, setViewModal] = useState(null);
+
+    // event states to expand
+    const [expandUpcoming, setExpandUpcoming] = useState(true);
+    const [expandCompleted, setExpandCompleted] = useState(false);
+    const [expandDeleted, setExpandDeleted] = useState(false);
+
+    // open only one event state at a time
+    const expandState = (setTargetState) => {
+        setExpandUpcoming(false);
+        setExpandCompleted(false);
+        setExpandDeleted(false);
+        setTargetState(true);
+    };
 
     // open edit modal and autofill data of event with given `id`
     const triggerEdit = (id) => {
@@ -113,51 +150,65 @@ const Events = ({ manage, setActions }) => {
             <EventViewModal controller={[viewModal, setViewModal]} {...viewProps} />
             <Page full loading={loading} empty={!events?.length}>
                 <Box p={3}>
-                    {/* upcoming events */}
-                    <Typography variant="subtitle1" mb={1}>
-                        UPCOMING
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {events
-                            ?.filter(
-                                (e) =>
-                                    e.state !== EventStates.completed &&
-                                    e.state !== EventStates.deleted
-                            )
-                            ?.map((event, idx) => (
-                                <Grid item md={4} key={idx}>
-                                    <EventCard actions {...event} {...cardProps} />
-                                </Grid>
-                            ))}
-                    </Grid>
+                    <List>
+                        {/* upcoming events */}
+                        <EventStateToggle
+                            stateName="UPCOMING"
+                            expanded={expandUpcoming}
+                            callback={() => expandState(setExpandUpcoming)}
+                        />
+                        <Collapse in={expandUpcoming}>
+                            <Grid container spacing={2} mb={2}>
+                                {events
+                                    ?.filter(
+                                        (e) =>
+                                            e.state !== EventStates.completed &&
+                                            e.state !== EventStates.deleted
+                                    )
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} key={idx}>
+                                            <EventCard actions {...event} {...cardProps} />
+                                        </Grid>
+                                    ))}
+                            </Grid>
+                        </Collapse>
 
-                    {/* completed events */}
-                    <Typography variant="subtitle1" mt={3} mb={1}>
-                        COMPLETED
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {events
-                            ?.filter((e) => e.state == EventStates.completed)
-                            ?.map((event, idx) => (
-                                <Grid item md={4} key={idx}>
-                                    <EventCard {...event} {...cardProps} />
-                                </Grid>
-                            ))}
-                    </Grid>
+                        {/* completed events */}
+                        <EventStateToggle
+                            stateName="COMPLETED"
+                            expanded={expandCompleted}
+                            callback={() => expandState(setExpandCompleted)}
+                        />
+                        <Collapse in={expandCompleted}>
+                            <Grid container spacing={2}>
+                                {events
+                                    ?.filter((e) => e.state == EventStates.completed)
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} key={idx}>
+                                            <EventCard {...event} {...cardProps} />
+                                        </Grid>
+                                    ))}
+                            </Grid>
+                        </Collapse>
 
-                    {/* deleted events */}
-                    <Typography variant="subtitle1" mt={3} mb={1}>
-                        DELETED
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {events
-                            ?.filter((e) => e.state == EventStates.deleted)
-                            ?.map((event, idx) => (
-                                <Grid item md={4} key={idx}>
-                                    <EventCard {...event} {...cardProps} />
-                                </Grid>
-                            ))}
-                    </Grid>
+                        {/* deleted events */}
+                        <EventStateToggle
+                            stateName="DELETED"
+                            expanded={expandDeleted}
+                            callback={() => expandState(setExpandDeleted)}
+                        />
+                        <Collapse in={expandDeleted}>
+                            <Grid container spacing={2}>
+                                {events
+                                    ?.filter((e) => e.state == EventStates.deleted)
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} key={idx}>
+                                            <EventCard {...event} {...cardProps} />
+                                        </Grid>
+                                    ))}
+                            </Grid>
+                        </Collapse>
+                    </List>
                 </Box>
             </Page>
         </>
