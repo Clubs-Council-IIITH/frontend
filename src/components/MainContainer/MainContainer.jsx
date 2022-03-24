@@ -35,6 +35,9 @@ const MainContainer = ({ children }) => {
                     ...(open && {
                         marginLeft: drawerWidth,
                         width: `calc(100% - ${drawerWidth}px)`,
+                        [theme.breakpoints.up("sm")]: {
+                            width: `calc(100% - ${drawerWidth}px)`,
+                        },
                         transition: theme.transitions.create(["width", "margin"], {
                             easing: theme.transitions.easing.sharp,
                             duration: theme.transitions.duration.enteringScreen,
