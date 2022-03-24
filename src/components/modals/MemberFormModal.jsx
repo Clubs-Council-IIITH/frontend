@@ -285,7 +285,7 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                     name="role"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={member?.role || new Date().getFullYear()}
+                                    defaultValue={member?.role || ""}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -342,7 +342,14 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
 
                 <ModalFooter rightAligned>
                     <Box mr={1}>
-                        <SecondaryActionButton size="large" onClick={() => setOpen(false)}>
+                        <SecondaryActionButton
+                            size="large"
+                            onClick={() => {
+                                setFormProgress(0);
+                                setTargetMail("");
+                                setOpen(false);
+                            }}
+                        >
                             Cancel
                         </SecondaryActionButton>
                     </Box>
