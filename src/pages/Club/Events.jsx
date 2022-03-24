@@ -192,22 +192,26 @@ const Events = ({ manage, setActions }) => {
                         </Collapse>
 
                         {/* deleted events */}
-                        <EventStateToggle
-                            stateName="DELETED"
-                            expanded={expandDeleted}
-                            callback={() => expandState(setExpandDeleted)}
-                        />
-                        <Collapse in={expandDeleted}>
-                            <Grid container spacing={2}>
-                                {events
-                                    ?.filter((e) => e.state == EventStates.deleted)
-                                    ?.map((event, idx) => (
-                                        <Grid item md={4} key={idx}>
-                                            <EventCard {...event} {...cardProps} />
-                                        </Grid>
-                                    ))}
-                            </Grid>
-                        </Collapse>
+                        {manage && (
+                            <>
+                                <EventStateToggle
+                                    stateName="DELETED"
+                                    expanded={expandDeleted}
+                                    callback={() => expandState(setExpandDeleted)}
+                                />
+                                <Collapse in={expandDeleted}>
+                                    <Grid container spacing={2}>
+                                        {events
+                                            ?.filter((e) => e.state == EventStates.deleted)
+                                            ?.map((event, idx) => (
+                                                <Grid item md={4} key={idx}>
+                                                    <EventCard {...event} {...cardProps} />
+                                                </Grid>
+                                            ))}
+                                    </Grid>
+                                </Collapse>
+                            </>
+                        )}
                     </List>
                 </Box>
             </Page>
