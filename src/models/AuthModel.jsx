@@ -1,12 +1,11 @@
 import { BaseModel } from "sjs-base-model";
 
-export default class UserModel extends BaseModel {
+export default class AuthModel extends BaseModel {
     id = "";
-    img = "";
-    firstName = "";
-    lastName = "";
-    mail = "";
-    batch = "";
+    username = "";
+    group = "";
+    isAuthenticated = false;
+    props = {};
 
     constructor(data) {
         super();

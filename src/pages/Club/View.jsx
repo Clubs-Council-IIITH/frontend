@@ -17,7 +17,7 @@ import { SessionContext } from "contexts/SessionContext";
 
 import About from "./About";
 import Events from "./Events";
-// import Members from "./Members";
+import Members from "./Members";
 
 // styles {{{
 const useStyles = makeStyles({
@@ -42,11 +42,11 @@ const tabs = [
         panel: <Events />,
         route: "/events",
     },
-    // {
-    //     title: "Members",
-    //     panel: <Members />,
-    //     route: "/members",
-    // },
+    {
+        title: "Members",
+        panel: <Members />,
+        route: "/members",
+    },
 ];
 
 const View = ({ manage }) => {
