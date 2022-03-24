@@ -14,6 +14,7 @@ import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
+import MemberFormModal from "components/modals/MemberFormModal";
 import { MemberCard } from "components/cards";
 
 const Members = ({ manage, setActions }) => {
@@ -64,6 +65,7 @@ const Members = ({ manage, setActions }) => {
 
     return (
         <>
+            <MemberFormModal controller={[formModal, setFormModal]} {...formProps} />
             <Page full loading={loading} empty={!members?.length}>
                 <Box p={3}>
                     <Typography variant="h5" mb={2}>

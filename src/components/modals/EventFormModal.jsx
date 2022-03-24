@@ -35,7 +35,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
 
     const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT, {
         refetchQueries: [
-            { query: GET_EVENT_BY_ID, variables: { id: 2 } },
+            { query: GET_EVENT_BY_ID, variables: { id: event?.id } },
             GET_CLUB_EVENTS,
             ADMIN_GET_CLUB_EVENTS,
         ],
