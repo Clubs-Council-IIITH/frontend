@@ -8,13 +8,15 @@ import MemberModel from "models/MemberModel";
 import UserGroups from "constants/UserGroups";
 
 import { Box, Grid, Typography } from "@mui/material";
+import { Handshake as HandshakeIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
+import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import { MemberCard } from "components/cards";
 
-const Members = ({ manage }) => {
+const Members = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
@@ -28,6 +30,33 @@ const Members = ({ manage }) => {
         const targetMembers = manage ? data?.adminClubMembers : data?.clubMembers;
         setMembers(targetMembers?.map((o) => new MemberModel(o)));
     }, [data]);
+
+    // add member/create user form modal
+    const [formProps, setFormProps] = useState({});
+    const [formModal, setFormModal] = useState(null);
+
+    // set/clear action buttons if `manage` is set
+    useEffect(() => {
+        setActions(
+            manage ? (
+                <SecondaryActionButton
+                    noPadding
+                    size="large"
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => {
+                        setFormProps({});
+                        setFormModal(true);
+                    }}
+                >
+                    <Box display="flex" mr={1}>
+                        <HandshakeIcon fontSize="small" />
+                    </Box>
+                    Add Member
+                </SecondaryActionButton>
+            ) : null
+        );
+    }, [manage]);
 
     const cardProps = {
         manage,
