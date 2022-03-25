@@ -7,8 +7,22 @@ import MemberModel from "models/MemberModel";
 
 import UserGroups from "constants/UserGroups";
 
-import { Box, Grid, Typography } from "@mui/material";
-import { Handshake as HandshakeIcon } from "@mui/icons-material";
+import {
+    Box,
+    Grid,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    ListItemButton,
+    Collapse,
+} from "@mui/material";
+import {
+    AddOutlined as AddIcon,
+    ChevronRight as CollapsedIcon,
+    ExpandMore as ExpandedIcon,
+    Handshake as HandshakeIcon,
+} from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
@@ -16,6 +30,39 @@ import { SecondaryActionButton } from "components/buttons";
 import Page from "components/Page";
 import MemberFormModal from "components/modals/MemberFormModal";
 import { MemberCard } from "components/cards";
+
+const YearMembers = ({ year, members, cardProps }) => {
+    const [expandMembers, setExpandMembers] = useState(year === new Date().getFullYear());
+
+    return (
+        <>
+            <ListItem disableGutters sx={{ maxWidth: "fit-content" }}>
+                <ListItemButton
+                    onClick={() => setExpandMembers(!expandMembers)}
+                    sx={{ borderRadius: "8px" }}
+                >
+                    <ListItemText
+                        primary={`${year} - ${(parseInt(year) + 1) % 1000}`}
+                        sx={{ marginRight: 1 }}
+                    />
+                    <ListItemIcon sx={{ minWidth: 0 }}>
+                        {expandMembers ? <ExpandedIcon /> : <CollapsedIcon />}
+                    </ListItemIcon>
+                </ListItemButton>
+            </ListItem>
+
+            <Collapse in={expandMembers}>
+                <Grid container spacing={2}>
+                    {members?.map((member, idx) => (
+                        <Grid item md={3} key={idx}>
+                            <MemberCard {...member} {...cardProps} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Collapse>
+        </>
+    );
+};
 
 const Members = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -68,16 +115,20 @@ const Members = ({ manage, setActions }) => {
             <MemberFormModal controller={[formModal, setFormModal]} {...formProps} />
             <Page full loading={loading} empty={!members?.length}>
                 <Box p={3}>
-                    <Typography variant="h5" mb={2}>
-                        2021-22
-                    </Typography>
-                    <Grid container spacing={4}>
-                        {members?.map((member, idx) => (
-                            <Grid item md={3} key={idx}>
-                                <MemberCard {...member} {...cardProps} />
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <List>
+                        {/* iterate over a sorted list of unique years and render that year's members */}
+                        {members
+                            ?.map((m) => m.year)
+                            ?.filter((v, i, a) => a.indexOf(v) === i)
+                            ?.sort((a, b) => parseInt(b) - parseInt(a))
+                            ?.map((year) => (
+                                <YearMembers
+                                    year={year}
+                                    members={members?.filter((m) => m.year === year)}
+                                    cardProps={cardProps}
+                                />
+                            ))}
+                    </List>
                 </Box>
             </Page>
         </>
