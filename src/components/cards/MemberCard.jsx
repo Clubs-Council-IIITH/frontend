@@ -1,7 +1,14 @@
 import { Box, Typography, Card, CardContent, Avatar, Tooltip } from "@mui/material";
-import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
+import {
+    EditOutlined as EditIcon,
+    DeleteOutlined as DeleteIcon,
+    Done as ApprovedIcon,
+    Autorenew as PendingIcon,
+} from "@mui/icons-material";
 
-const MemberCard = ({ manage, user, role, approved }) => {
+import { EditButton, DeleteButton } from "components/buttons";
+
+const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, manage = false }) => {
     return (
         <Card variant="none">
             <CardContent
@@ -36,8 +43,37 @@ const MemberCard = ({ manage, user, role, approved }) => {
                         ))}
                 </Box>
 
-                <Box mt={3}>
+                <Box mt={2}>
                     <Typography sx={{ color: "#888888" }}>{user.batch}</Typography>
+                </Box>
+
+                <Box mt={2}>
+                    <EditButton
+                        noPadding
+                        onMouseDown={(e) => {
+                            e.stopPropagation();
+                        }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            triggerEdit(id);
+                        }}
+                    >
+                        <EditIcon />
+                    </EditButton>
+                    <DeleteButton
+                        noPadding
+                        onMouseDown={(e) => {
+                            e.stopPropagation();
+                        }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            triggerDelete(id);
+                        }}
+                    >
+                        <DeleteIcon />
+                    </DeleteButton>
                 </Box>
             </CardContent>
         </Card>

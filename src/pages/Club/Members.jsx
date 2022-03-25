@@ -29,6 +29,7 @@ import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import MemberFormModal from "components/modals/MemberFormModal";
+import MemberDeleteModal from "components/modals/MemberDeleteModal";
 import { MemberCard } from "components/cards";
 
 const YearMembers = ({ year, members, cardProps }) => {
@@ -85,6 +86,28 @@ const Members = ({ manage, setActions }) => {
     const [formProps, setFormProps] = useState({});
     const [formModal, setFormModal] = useState(null);
 
+    // delete confirmation modal
+    const [deleteProps, setDeleteProps] = useState({});
+    const [deleteModal, setDeleteModal] = useState(null);
+
+    // open edit modal and autofill data of member with given `id`
+    const triggerEdit = (id) => {
+        const targetMembers = (manage ? data?.adminClubMembers : data?.clubMembers).map(
+            (o) => new MemberModel(o)
+        );
+        setFormProps({ member: targetMembers?.find((member) => member.id === id) });
+        setFormModal(true);
+    };
+
+    // open delete modal
+    const triggerDelete = (id) => {
+        const targetMembers = (manage ? data?.adminClubMembers : data?.clubMembers).map(
+            (o) => new MemberModel(o)
+        );
+        setDeleteProps({ member: targetMembers?.find((member) => member.id === id) });
+        setDeleteModal(true);
+    };
+
     // set/clear action buttons if `manage` is set
     useEffect(() => {
         setActions(
@@ -110,11 +133,14 @@ const Members = ({ manage, setActions }) => {
 
     const cardProps = {
         manage,
+        triggerEdit,
+        triggerDelete,
     };
 
     return (
         <>
             <MemberFormModal controller={[formModal, setFormModal]} {...formProps} />
+            <MemberDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
             <Page full loading={loading} empty={!members?.length}>
                 <Box p={3}>
                     <List>
