@@ -48,16 +48,18 @@ const Events = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
+    const [events, setEvents] = useState([]);
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
     // fetch events
     const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
-    const { data, loading } = useQuery(GET_EVENTS, { variables: { id: targetId } });
-    const [events, setEvents] = useState([]);
-    useEffect(() => {
-        const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
-        setEvents(targetEvents?.map((o) => new EventModel(o)));
-    }, [data]);
+    const { data, loading } = useQuery(GET_EVENTS, {
+        variables: { id: targetId },
+        onCompleted: (data) => {
+            const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
+            setEvents(targetEvents?.map((o) => new EventModel(o)));
+        },
+    });
 
     // create/edit event form modal
     const [formProps, setFormProps] = useState({});
@@ -140,8 +142,6 @@ const Events = ({ manage, setActions }) => {
         triggerDelete,
         triggerView,
     };
-
-    useEffect(() => console.log(events), [events]);
 
     return (
         <>

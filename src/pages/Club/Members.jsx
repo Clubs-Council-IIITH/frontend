@@ -68,16 +68,18 @@ const Members = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
+    const [members, setMembers] = useState([]);
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
     // fetch members
     const GET_MEMBERS = manage ? ADMIN_GET_CLUB_MEMBERS : GET_CLUB_MEMBERS;
-    const { data, loading } = useQuery(GET_MEMBERS, { variables: { id: targetId } });
-    const [members, setMembers] = useState([]);
-    useEffect(() => {
-        const targetMembers = manage ? data?.adminClubMembers : data?.clubMembers;
-        setMembers(targetMembers?.map((o) => new MemberModel(o)));
-    }, [data]);
+    const { data, loading } = useQuery(GET_MEMBERS, {
+        variables: { id: targetId },
+        onCompleted: (data) => {
+            const targetMembers = manage ? data?.adminClubMembers : data?.clubMembers;
+            setMembers(targetMembers?.map((o) => new MemberModel(o)));
+        },
+    });
 
     // add member/create user form modal
     const [formProps, setFormProps] = useState({});
