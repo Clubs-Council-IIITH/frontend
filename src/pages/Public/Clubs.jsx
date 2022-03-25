@@ -17,12 +17,13 @@ import { View as ViewClub } from "pages/Club";
 const Clubs = () => {
     const match = useRouteMatch();
 
-    // fetch all clubs
-    const { data, loading } = useQuery(GET_ALL_CLUBS, { fetchPolicy: "cache-and-network" });
     const [clubs, setClubs] = useState([]);
-    useEffect(() => setClubs(data?.clubs?.map((o) => new ClubModel(o))), [data]);
 
-    useEffect(() => console.log(data), [data]);
+    // fetch all clubs
+    const { data, loading } = useQuery(GET_ALL_CLUBS, {
+        fetchPolicy: "cache-and-network",
+        onCompleted: (data) => setClubs(data?.clubs?.map((o) => new ClubModel(o))),
+    });
 
     return (
         <Switch>
