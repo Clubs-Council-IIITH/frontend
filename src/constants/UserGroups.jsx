@@ -1,7 +1,7 @@
 export default {
-    admin: "clubs_council",
+    cc: "clubs_council",
     club: "club",
-    finance: "finance_council",
+    fc: "finance_council",
     slo: "slo",
     slc: "slc",
 };

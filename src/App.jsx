@@ -28,7 +28,7 @@ import MainContainer from "components/MainContainer";
 
 // pages {{{
 import * as Public from "pages/Public";
-import * as Admin from "pages/Admin";
+import * as ClubsCouncil from "pages/ClubsCouncil";
 import * as Club from "pages/Club";
 // }}}
 
@@ -55,18 +55,18 @@ const publicRoutes = [
     // },
 ];
 
-const adminRoutes = [
+const ccRoutes = [
     {
         title: "Manage Clubs",
         path: "/admin/clubs",
         icon: DashboardOutlined,
-        component: <Admin.Clubs />,
+        component: <ClubsCouncil.Clubs />,
     },
     {
         title: "Manage Users",
         path: "/admin/users",
         icon: GroupOutlined,
-        component: <Admin.Users />,
+        component: <ClubsCouncil.Users />,
     },
 ];
 
@@ -87,8 +87,8 @@ const App = () => {
     // site navigation
     useEffect(() => {
         const protectedRoutes =
-            session?.group === UserGroups.admin
-                ? adminRoutes
+            session?.group === UserGroups.cc
+                ? ccRoutes
                 : session?.group === UserGroups.club
                 ? clubRoutes
                 : [];
@@ -113,7 +113,7 @@ const App = () => {
                             ))}
 
                             {/* protected routes */}
-                            {[...adminRoutes, ...clubRoutes].map((route, idx) => (
+                            {[...ccRoutes, ...clubRoutes].map((route, idx) => (
                                 <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
                                 </Route>
