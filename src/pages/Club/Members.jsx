@@ -18,7 +18,6 @@ import {
     Collapse,
 } from "@mui/material";
 import {
-    AddOutlined as AddIcon,
     ChevronRight as CollapsedIcon,
     ExpandMore as ExpandedIcon,
     Handshake as HandshakeIcon,
