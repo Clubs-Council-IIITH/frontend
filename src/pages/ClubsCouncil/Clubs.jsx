@@ -7,19 +7,10 @@ import ClubModel from "models/ClubModel";
 
 import { useTheme } from "@mui/styles";
 
-import {
-    Box,
-    Chip,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Card,
-    Typography,
-} from "@mui/material";
+import { Box, Chip, Avatar } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { green, red } from "@mui/material/colors";
+import { renderCellExpand } from "components/GridCellExpand";
 
 import {
     AddOutlined as AddIcon,
@@ -58,6 +49,112 @@ const Clubs = () => {
     const [deleteProps, setDeleteProps] = useState({});
     const [deleteModal, setDeleteModal] = useState(false);
 
+    const columns = [
+        {
+            field: "img",
+            headerName: "",
+            flex: 0.4,
+            editable: false,
+            renderCell: (params) => (
+                <Avatar
+                    src={params.row.img}
+                    sx={{ width: "100%", height: "75%" }}
+                    variant="rounded"
+                />
+            ),
+        },
+        {
+            field: "name",
+            headerName: "Name",
+            flex: 1,
+            editable: true,
+        },
+        {
+            field: "mail",
+            headerName: "Email",
+            flex: 1,
+            editable: true,
+        },
+        {
+            field: "status",
+            headerName: "Status",
+            headerAlign: "center",
+            align: "center",
+            flex: 0.4,
+            editable: false,
+            renderCell: (params) => (
+                <Chip
+                    label={params.row.state}
+                    sx={{
+                        ...(params.row.state === "ACTIVE" && {
+                            backgroundColor: green["200"],
+                        }),
+
+                        ...(params.row.state === "DELETED" && {
+                            backgroundColor: red["200"],
+                        }),
+                    }}
+                />
+            ),
+        },
+        {
+            field: "view",
+            headerName: "",
+            editable: false,
+            sortable: false,
+            align: "center",
+            flex: 0.2,
+            renderCell: (params) => (
+                <PrimaryActionButton
+                    noPadding
+                    onClick={() => {
+                        history.push(`${match.url}/${params.row.id}`);
+                    }}
+                >
+                    <ViewIcon />
+                </PrimaryActionButton>
+            ),
+        },
+        {
+            field: "edit",
+            headerName: "",
+            editable: false,
+            sortable: false,
+            align: "center",
+            flex: 0.2,
+            renderCell: (params) => (
+                <EditButton
+                    noPadding
+                    onClick={() => {
+                        setFormProps({ club: params.row });
+                        setFormModal(true);
+                    }}
+                >
+                    <EditIcon />
+                </EditButton>
+            ),
+        },
+        {
+            field: "delete",
+            headerName: "",
+            editable: false,
+            sortable: false,
+            align: "center",
+            flex: 0.2,
+            renderCell: (params) => (
+                <DeleteButton
+                    noPadding
+                    onClick={() => {
+                        setDeleteProps({ club: params.row });
+                        setDeleteModal(true);
+                    }}
+                >
+                    <DeleteIcon />
+                </DeleteButton>
+            ),
+        },
+    ];
+
     return (
         <Switch>
             <Route exact path={match.path}>
@@ -86,110 +183,16 @@ const Clubs = () => {
                         loading={loading}
                         empty={!clubs?.length}
                     >
-                        <TableContainer
-                            component={(props) => (
-                                <Card
-                                    {...props}
-                                    variant="outlined"
-                                    sx={{
-                                        borderRadius: theme.borderRadius,
-                                    }}
-                                />
-                            )}
-                        >
-                            <Table
-                                stickyHeader
-                                sx={{
-                                    minWidth: 650,
-                                }}
-                            >
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell align="left">Email</TableCell>
-                                        <TableCell align="left">Status</TableCell>
-                                        <TableCell align="right"></TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {clubs?.map((club) => (
-                                        <TableRow key={club.id}>
-                                            <TableCell
-                                                component="th"
-                                                scope="row"
-                                                sx={{
-                                                    fontSize: "1.4em",
-                                                }}
-                                            >
-                                                {club.name}
-                                            </TableCell>
-                                            <TableCell
-                                                align="left"
-                                                sx={{
-                                                    fontSize: "1.4em",
-                                                }}
-                                            >
-                                                <Typography color="textSecondary">
-                                                    {club.mail}
-                                                </Typography>
-                                            </TableCell>
-                                            <TableCell
-                                                align="left"
-                                                sx={{
-                                                    fontSize: "1.4em",
-                                                }}
-                                            >
-                                                <Chip
-                                                    label={club.state}
-                                                    sx={{
-                                                        ...(club.state === "ACTIVE" && {
-                                                            backgroundColor: green["200"],
-                                                        }),
-
-                                                        ...(club.state === "DELETED" && {
-                                                            backgroundColor: red["200"],
-                                                        }),
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            <TableCell
-                                                align="right"
-                                                sx={{
-                                                    fontSize: "1.4em",
-                                                }}
-                                            >
-                                                <PrimaryActionButton
-                                                    noPadding
-                                                    onClick={() => {
-                                                        history.push(`${match.url}/${club.id}`);
-                                                    }}
-                                                >
-                                                    <ViewIcon />
-                                                </PrimaryActionButton>
-                                                <EditButton
-                                                    noPadding
-                                                    onClick={() => {
-                                                        setFormProps({ club });
-                                                        setFormModal(true);
-                                                    }}
-                                                >
-                                                    <EditIcon />
-                                                </EditButton>
-                                                <DeleteButton
-                                                    noPadding
-                                                    onClick={() => {
-                                                        setDeleteProps({ club });
-                                                        setDeleteModal(true);
-                                                    }}
-                                                >
-                                                    <DeleteIcon />
-                                                </DeleteButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                        <DataGrid
+                            rows={clubs}
+                            columns={columns}
+                            autoHeight
+                            pageSize={10}
+                            rowHeight={80}
+                            rowsPerPageOptions={[]}
+                            disableSelectionOnClick
+                            experimentalFeatures={{ newEditingApi: true }}
+                        />
                     </Page>
                 </>
             </Route>

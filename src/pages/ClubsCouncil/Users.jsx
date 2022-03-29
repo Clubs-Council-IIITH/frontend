@@ -3,13 +3,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
 
 import Page from "components/Page";
+import { renderCellExpand } from "components/GridCellExpand";
 
 const columns = [
     {
         field: "img",
         headerName: "",
         flex: 0.2,
-        editable: true,
+        editable: false,
         renderCell: (params) => <Avatar src={params.row.img} sx={{ width: 24, height: 24 }} />,
     },
     {
@@ -25,9 +26,15 @@ const columns = [
         editable: true,
     },
     {
+        field: "email",
+        headerName: "Email",
+        flex: 1.5,
+        editable: true,
+        renderCell: renderCellExpand,
+    },
+    {
         field: "batch",
         headerName: "Batch",
-        flex: 0.4,
         editable: true,
     },
     {
@@ -35,19 +42,21 @@ const columns = [
         headerName: "Club",
         flex: 1,
         editable: false,
+        renderCell: renderCellExpand,
     },
     {
         field: "role",
         headerName: "Role",
         flex: 0.8,
         editable: false,
+        renderCell: renderCellExpand,
     },
     {
         field: "approved",
         headerName: "Status",
         headerAlign: "center",
         align: "center",
-        flex: 0.3,
+        flex: 0.4,
         editable: false,
         renderCell: (params) =>
             params.row.approved ? (
@@ -83,6 +92,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 1,
@@ -92,6 +102,7 @@ const rows = [
         club: "Pentaprism: The Photography Club",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 2,
@@ -101,6 +112,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 3,
@@ -110,6 +122,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 4,
@@ -119,6 +132,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 5,
@@ -128,6 +142,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 6,
@@ -137,6 +152,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 7,
@@ -146,6 +162,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 8,
@@ -155,6 +172,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 9,
@@ -164,6 +182,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
     {
         id: 10,
@@ -173,6 +192,7 @@ const rows = [
         club: "0x1337",
         role: "Coordinator",
         approved: false,
+        email: "firstname.lastname@students.iiit.ac.in",
     },
 ];
 
