@@ -31,6 +31,40 @@ export const GET_CLUB_MEMBERS = gql`
 `;
 
 // admin queries
+export const ADMIN_GET_ALL_USERS = gql`
+    query adminGetAllUsers {
+        adminAllUsers {
+            id
+            firstName
+            lastName
+            mail
+            batch
+        }
+    }
+`;
+
+export const ADMIN_GET_PENDING_MEMBERS = gql`
+    query adminGetPendingMembers {
+        adminPendingMembers {
+            id
+            user {
+                id
+                firstName
+                lastName
+                mail
+                batch
+            }
+            club {
+                id
+                name
+            }
+            role
+            year
+            approved
+        }
+    }
+`;
+
 export const ADMIN_GET_CLUB_MEMBERS = gql`
     query adminGetClubMembers {
         adminClubMembers {

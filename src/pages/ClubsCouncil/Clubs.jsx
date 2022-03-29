@@ -65,13 +65,13 @@ const Clubs = () => {
             field: "name",
             headerName: "Name",
             flex: 1,
-            editable: true,
+            editable: false,
         },
         {
             field: "mail",
             headerName: "Email",
             flex: 1,
-            editable: true,
+            editable: false,
         },
         {
             field: "status",
@@ -95,24 +95,24 @@ const Clubs = () => {
                 />
             ),
         },
-        {
-            field: "view",
-            headerName: "",
-            editable: false,
-            sortable: false,
-            align: "center",
-            flex: 0.2,
-            renderCell: (params) => (
-                <PrimaryActionButton
-                    noPadding
-                    onClick={() => {
-                        history.push(`${match.url}/${params.row.id}`);
-                    }}
-                >
-                    <ViewIcon />
-                </PrimaryActionButton>
-            ),
-        },
+        // {
+        //     field: "view",
+        //     headerName: "",
+        //     editable: false,
+        //     sortable: false,
+        //     align: "center",
+        //     flex: 0.2,
+        //     renderCell: (params) => (
+        //         <PrimaryActionButton
+        //             noPadding
+        //             onClick={() => {
+        //                 history.push(`${match.url}/${params.row.id}`);
+        //             }}
+        //         >
+        //             <ViewIcon />
+        //         </PrimaryActionButton>
+        //     ),
+        // },
         {
             field: "edit",
             headerName: "",
