@@ -20,7 +20,7 @@ const Clubs = () => {
     const [clubs, setClubs] = useState([]);
 
     // fetch all clubs
-    const { data, loading } = useQuery(GET_ALL_CLUBS, {
+    const { loading } = useQuery(GET_ALL_CLUBS, {
         fetchPolicy: "cache-and-network",
         onCompleted: (data) => setClubs(data?.clubs?.map((o) => new ClubModel(o))),
     });
@@ -35,7 +35,7 @@ const Clubs = () => {
                                 {ClubCategories[category].toUpperCase()}
                             </Typography>
 
-                            <Grid container spacing={2} mb={6}>
+                            <Grid container spacing={2} mb={4}>
                                 {clubs
                                     ?.filter((o) => o.category.toLowerCase() === category)
                                     ?.map((club, idx) => (
