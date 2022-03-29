@@ -43,8 +43,8 @@ const About = ({ manage, setActions }) => {
 
     return (
         <Page full loading={loading}>
-            <Box py={4} px={3}>
-                <Typography>{club?.description}</Typography>
+            <Box px={3}>
+                <Typography mt={4}>{club?.description}</Typography>
             </Box>
         </Page>
     );

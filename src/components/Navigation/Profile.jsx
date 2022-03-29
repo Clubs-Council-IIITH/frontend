@@ -49,7 +49,7 @@ const Profile = () => {
                             <Box mx={1.5}>
                                 <Box
                                     sx={{
-                                        fontSize: "1em",
+                                        fontSize: "0.9em",
                                         fontWeight: 500,
                                         color: "#fefefe",
                                     }}
@@ -59,7 +59,7 @@ const Profile = () => {
                                 <Box
                                     sx={{
                                         lineHeight: "1.2em",
-                                        fontSize: "0.9em",
+                                        fontSize: "0.8em",
                                         color: "#a3a3a3",
                                     }}
                                 >

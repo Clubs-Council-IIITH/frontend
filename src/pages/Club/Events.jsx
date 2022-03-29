@@ -149,7 +149,7 @@ const Events = ({ manage, setActions }) => {
             <EventDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
             <EventViewModal controller={[viewModal, setViewModal]} {...viewProps} />
             <Page full loading={loading} empty={!events?.length}>
-                <Box p={3}>
+                <Box px={2}>
                     <List>
                         {/* upcoming events */}
                         <EventStateToggle

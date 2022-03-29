@@ -141,7 +141,7 @@ const Members = ({ manage, setActions }) => {
             <MemberFormModal controller={[formModal, setFormModal]} {...formProps} />
             <MemberDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
             <Page full loading={loading} empty={!members?.length}>
-                <Box p={3}>
+                <Box px={2}>
                     <List>
                         {/* iterate over a sorted list of unique years and render that year's members */}
                         {members

@@ -36,7 +36,9 @@ const Page = ({ header, loading, empty, full, children }) => {
         <main className={clsx({ [classes.content]: !full, [classes.contentFull]: full })}>
             <div className={clsx({ [classes.toolbar]: !full })} />
             <Container maxWidth={null} disableGutters={full}>
-                <Typography variant="h3"> {header} </Typography>
+                <Typography variant="h3" mt={full ? 0 : 2}>
+                    {header}
+                </Typography>
                 <Box mt={full ? 0 : 3} mb={full ? 0 : 3}>
                     {loading ? (
                         <Loading />

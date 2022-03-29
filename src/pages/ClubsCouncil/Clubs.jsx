@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { ADMIN_GET_ALL_CLUBS } from "queries/clubs";
 import ClubModel from "models/ClubModel";
 
-import { useTheme } from "@mui/styles";
-
 import { Box, Chip, Avatar } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { green, red } from "@mui/material/colors";
-import { renderCellExpand } from "components/GridCellExpand";
 
 import {
     AddOutlined as AddIcon,
@@ -32,14 +29,15 @@ import {
 import { View as ViewClub } from "pages/Club";
 
 const Clubs = () => {
-    const theme = useTheme();
     const history = useHistory();
     const match = useRouteMatch();
 
-    // fetch all clubs
-    const { data, loading } = useQuery(ADMIN_GET_ALL_CLUBS);
     const [clubs, setClubs] = useState([]);
-    useEffect(() => setClubs(data?.adminClubs?.map((o) => new ClubModel(o))), [data]);
+
+    // fetch all clubs
+    const { data, loading } = useQuery(ADMIN_GET_ALL_CLUBS, {
+        onCompleted: (data) => setClubs(data?.adminClubs?.map((o) => new ClubModel(o))),
+    });
 
     // create/edit club form modal
     const [formProps, setFormProps] = useState({});

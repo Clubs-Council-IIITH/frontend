@@ -16,22 +16,22 @@ const columns = [
     {
         field: "firstName",
         headerName: "First Name",
-        flex: 1,
+        flex: 1.2,
         editable: true,
     },
     {
         field: "lastName",
         headerName: "Last Name",
-        flex: 1,
+        flex: 1.2,
         editable: true,
     },
-    {
-        field: "email",
-        headerName: "Email",
-        flex: 1.5,
-        editable: true,
-        renderCell: renderCellExpand,
-    },
+    // {
+    //     field: "email",
+    //     headerName: "Email",
+    //     flex: 2,
+    //     editable: true,
+    //     renderCell: renderCellExpand,
+    // },
     {
         field: "batch",
         headerName: "Batch",
@@ -40,7 +40,7 @@ const columns = [
     {
         field: "club",
         headerName: "Club",
-        flex: 1,
+        flex: 1.2,
         editable: false,
         renderCell: renderCellExpand,
     },

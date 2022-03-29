@@ -47,8 +47,8 @@ const Home = () => {
     ];
 
     return (
-        <Page header={null} loading={false} empty={false}>
-            <Container maxWidth={null} my={6}>
+        <Page full header={null} loading={false} empty={false}>
+            <Box px={4}>
                 <Box my={6}>
                     <ImageCarousel gradient contents={carousel} />
                 </Box>
@@ -82,7 +82,7 @@ const Home = () => {
                     </Box>
                     <HomeCalendar />
                 </Box>
-            </Container>
+            </Box>
         </Page>
     );
 };

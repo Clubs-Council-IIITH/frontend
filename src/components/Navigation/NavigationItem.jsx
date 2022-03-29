@@ -16,8 +16,6 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
         );
     }, [location.pathname]);
 
-    useEffect(() => console.log(theme.typography), []);
-
     return (
         <ListItem
             button
@@ -50,6 +48,7 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
                     sx={{
                         // default icon
                         color: "#777777",
+                        fontSize: "1.4em",
 
                         // active icon
                         ...(selected && {
@@ -65,6 +64,7 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
                         fontFamily: theme.typography.fontFamilySecondary,
                         fontWeight: 600,
                         textTransform: "capitalize",
+                        fontSize: "0.9em",
                         color: "#777777",
 
                         // active text
