@@ -14,7 +14,7 @@ const ResponseToast = ({
         <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             open={toast.open}
-            autoHideDuration={5000}
+            autoHideDuration={3000}
             onClose={handleClose}
         >
             {toast.error ? (

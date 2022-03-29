@@ -62,3 +62,13 @@ export const REMOVE_MEMBER = gql`
         }
     }
 `;
+
+export const ADMIN_APPROVE_MEMBER = gql`
+    mutation adminApproveMemberMutation($id: ID!) {
+        adminApproveMember(memberData: { id: $id }) {
+            member {
+                id
+            }
+        }
+    }
+`;
