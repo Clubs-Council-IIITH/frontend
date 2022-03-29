@@ -146,7 +146,7 @@ const Users = () => {
     return (
         <Page header={"Manage Users"} loading={null} empty={null}>
             <Box mb={3}>
-                <Typography color="#888888" mb={1}>
+                <Typography variant="h6" color="#888888" gutterBottom>
                     PENDING MEMBERSHIP REQUESTS
                 </Typography>
                 <Page full loading={pendingMembersLoading} empty={!pendingMembers?.length}>
@@ -167,7 +167,7 @@ const Users = () => {
             </Box>
 
             <Box>
-                <Typography color="#888888" mb={1}>
+                <Typography variant="h6" color="#888888" gutterBottom>
                     ALL USERS
                 </Typography>
                 <Page full loading={allUsersLoading} empty={!allUsers?.length}>

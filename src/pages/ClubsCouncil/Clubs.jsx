@@ -74,6 +74,12 @@ const Clubs = () => {
             editable: false,
         },
         {
+            field: "category",
+            headerName: "Category",
+            flex: 0.6,
+            editable: false,
+        },
+        {
             field: "status",
             headerName: "Status",
             headerAlign: "center",

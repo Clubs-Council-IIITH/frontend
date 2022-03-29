@@ -47,34 +47,36 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
                     <Typography sx={{ color: "#888888" }}>{user.batch}</Typography>
                 </Box>
 
-                <Box mt={2}>
-                    <EditButton
-                        noPadding
-                        onMouseDown={(e) => {
-                            e.stopPropagation();
-                        }}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            triggerEdit(id);
-                        }}
-                    >
-                        <EditIcon />
-                    </EditButton>
-                    <DeleteButton
-                        noPadding
-                        onMouseDown={(e) => {
-                            e.stopPropagation();
-                        }}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            triggerDelete(id);
-                        }}
-                    >
-                        <DeleteIcon />
-                    </DeleteButton>
-                </Box>
+                {manage && (
+                    <Box mt={2}>
+                        <EditButton
+                            noPadding
+                            onMouseDown={(e) => {
+                                e.stopPropagation();
+                            }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                triggerEdit(id);
+                            }}
+                        >
+                            <EditIcon />
+                        </EditButton>
+                        <DeleteButton
+                            noPadding
+                            onMouseDown={(e) => {
+                                e.stopPropagation();
+                            }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                triggerDelete(id);
+                            }}
+                        >
+                            <DeleteIcon />
+                        </DeleteButton>
+                    </Box>
+                )}
             </CardContent>
         </Card>
     );
