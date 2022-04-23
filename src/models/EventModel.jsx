@@ -8,12 +8,10 @@ export default class EventModel extends BaseModel {
     datetimeStart = "";
     datetimeEnd = "";
     name = "";
-    venue = "";
     audience = "";
     state = "";
     description = "";
     lastEditedBy = "";
-    financialRequirements = "";
 
     constructor(data) {
         super();

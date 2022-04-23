@@ -80,7 +80,7 @@ export const ModalBody = ({ full, mini, children }) => {
 
 export const ModalFooter = ({ rightAligned, children }) => {
     return (
-        <Box p={3} display="flex" justifyContent={rightAligned ? "flex-end" : "flex-start"}>
+        <Box p={3} pt={0} display="flex" justifyContent={rightAligned ? "flex-end" : "flex-start"}>
             {children}
         </Box>
     );
