@@ -10,11 +10,12 @@ import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import EventForm from "components/forms/EventForm";
+import FinanceForm from "components/forms/FinanceForm";
 
 const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     const formTabs = [
         { title: "Event details", panel: <EventForm event={event} /> },
-        { title: "Financial Requirements", panel: <EventForm event={event} /> },
+        { title: "Financial Requirements", panel: <FinanceForm event={event} /> },
         { title: "Room Booking", panel: <EventForm event={event} />, disabled: true },
     ];
     const tabController = useState(0);
@@ -28,7 +29,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     return (
         <>
             <Modal controller={[open, setOpen]}>
-                <Box px={3} py={2}>
+                <Box px={3} pt={2}>
                     <TabBar tabs={formTabs} controller={tabController} />
                     <Divider />
                 </Box>

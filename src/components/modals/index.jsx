@@ -59,12 +59,13 @@ export const ModalBody = ({ full, mini, children }) => {
             sx={{
                 // default modal body
                 overflowY: "auto",
-                maxHeight: "80vh",
+                maxHeight: "60vh",
                 maxWidth: "75vw",
 
                 // full modal
                 ...(full && {
                     width: "75vw",
+                    height: "60vh",
                 }),
 
                 // mini modal
