@@ -1,7 +1,8 @@
 import { forwardRef } from "react";
 import NumberFormat from "react-number-format";
+import { Box } from "@mui/material";
 
-const CurrencyFormat = forwardRef(function CurrencyFormat(props, ref) {
+export const CurrencyInput = forwardRef(function CurrencyFormat(props, ref) {
     const { onChange, ...other } = props;
 
     return (
@@ -16,6 +17,7 @@ const CurrencyFormat = forwardRef(function CurrencyFormat(props, ref) {
                     },
                 });
             }}
+            thousandsGroupStyle="lakh"
             thousandSeparator
             isNumericString
             prefix="₹ "
@@ -23,4 +25,20 @@ const CurrencyFormat = forwardRef(function CurrencyFormat(props, ref) {
     );
 });
 
-export default CurrencyFormat;
+export const CurrencyText = ({ value, ...styles }) => {
+    return (
+        <NumberFormat
+            value={value}
+            thousandsGroupStyle="lakh"
+            thousandSeparator
+            isNumericString
+            prefix="₹"
+            displayType={"text"}
+            renderText={(value, props) => (
+                <Box {...props} {...styles}>
+                    {value}
+                </Box>
+            )}
+        />
+    );
+};
