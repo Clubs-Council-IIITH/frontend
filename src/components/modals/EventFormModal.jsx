@@ -1,24 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, cloneElement } from "react";
 
-import { Box, Divider } from "@mui/material";
-import { NavigateNext } from "@mui/icons-material";
+import { Button, Box, Divider, Stepper, Step, StepLabel, Typography } from "@mui/material";
 
 import { Modal, ModalBody, ModalFooter } from "components/modals";
-import { TabBar, TabPanels } from "components/Tabs";
 
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
+
+import EventFormContextProvider from "contexts/EventFormContext";
 
 import EventForm from "components/forms/EventForm";
 import FinanceForm from "components/forms/FinanceForm";
 
 const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
-    const formTabs = [
-        { title: "Event details", panel: <EventForm event={event} /> },
-        { title: "Financial Requirements", panel: <FinanceForm event={event} /> },
-        { title: "Room Booking", panel: <EventForm event={event} />, disabled: true },
+    const formSteps = [
+        {
+            title: "Event Details",
+            form_id: "EventForm",
+            panel: <EventForm event={event} />,
+        },
+        {
+            title: "Financial Requirements",
+            form_id: "FinanceForm",
+            panel: <FinanceForm event={event} />,
+            optional: true,
+        },
+        {
+            title: "Room Booking",
+            form_id: "RoomForm",
+            panel: <EventForm event={event} />,
+            optional: true,
+        },
     ];
-    const tabController = useState(0);
+
+    const [activeStep, setActiveStep] = useState(0);
+
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
 
     const [toast, setToast] = useState({ open: false });
 
@@ -26,42 +49,72 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     // setToast({ open: true, error: createError || updateError });
     // setOpen(false);
 
+    // reset step when modal is reopened
+    useEffect(() => setActiveStep(0), [open]);
+
     return (
-        <>
+        <EventFormContextProvider
+            stepperMethods={{
+                next: handleNext,
+                back: handleBack,
+            }}
+        >
             <Modal controller={[open, setOpen]}>
-                <Box px={3} pt={2}>
-                    <TabBar tabs={formTabs} controller={tabController} />
-                    <Divider />
+                <Box pt={4} pb={1}>
+                    <Stepper nonLinear activeStep={activeStep} alternativeLabel>
+                        {formSteps.map((step, index) => {
+                            const stepProps = {};
+                            const labelProps = {};
+
+                            return (
+                                <Step key={step.title} {...stepProps}>
+                                    <StepLabel {...labelProps}>{step.title}</StepLabel>
+                                </Step>
+                            );
+                        })}
+                    </Stepper>
                 </Box>
 
                 <ModalBody full>
-                    <TabPanels tabs={formTabs} controller={tabController} />
+                    {cloneElement(formSteps[activeStep].panel, {
+                        form_id: formSteps[activeStep].form_id,
+                    })}
                 </ModalBody>
 
-                <ModalFooter rightAligned>
-                    <Box mr={1}>
-                        <SecondaryActionButton size="large" onClick={() => setOpen(false)}>
-                            Cancel
-                        </SecondaryActionButton>
-                    </Box>
-                    <Box>
-                        {tabController === formTabs.length - 1 ? (
+                <ModalFooter>
+                    <Box display="flex" width="100%" justifyContent="space-between">
+                        <Box>
+                            <SecondaryActionButton
+                                noPadding
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                Close
+                            </SecondaryActionButton>
+                        </Box>
+
+                        <Box>
+                            <SecondaryActionButton
+                                noPadding
+                                disabled={activeStep === 0}
+                                onClick={handleBack}
+                                sx={{ mr: 1 }}
+                            >
+                                Back
+                            </SecondaryActionButton>
                             <PrimaryActionButton
                                 type="submit"
-                                form="EventForm"
-                                variant="outlined"
-                                size="large"
+                                form={formSteps[activeStep].form_id}
+                                noPadding
                             >
-                                Save
+                                {activeStep === formSteps.length - 1
+                                    ? "Finish"
+                                    : activeStep === 0
+                                    ? "Save & Continue"
+                                    : "Next"}
                             </PrimaryActionButton>
-                        ) : (
-                            <PrimaryActionButton type="submit" form="EventForm" size="large">
-                                <Box display="flex" alignItems="center">
-                                    Next
-                                    <NavigateNext />
-                                </Box>
-                            </PrimaryActionButton>
-                        )}
+                        </Box>
                     </Box>
                 </ModalFooter>
             </Modal>
@@ -70,7 +123,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
                 controller={[toast, setToast]}
                 successText={`Event ${event ? "edited" : "created"} successfully.`}
             />
-        </>
+        </EventFormContextProvider>
     );
 };
 

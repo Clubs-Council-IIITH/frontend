@@ -96,7 +96,7 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             audience
             description
             venue
-            financialRequirements
+            mode
             state
             lastEditedBy
         }

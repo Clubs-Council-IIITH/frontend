@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@mui/styles";
 
@@ -14,6 +14,8 @@ import {
 
 import Empty from "components/Empty";
 import { CurrencyInput, CurrencyText } from "components/CurrencyFormat";
+
+import { EventFormContext } from "contexts/EventFormContext";
 
 const financeData = [
     { id: 1, amount: 1.0, description: "description 0" },
@@ -127,50 +129,52 @@ const FinanceField = ({ event }) => {
     };
 
     return (
-        <form id="FinanceForm" onSubmit={handleSubmit(onSubmit)}>
-            <Box display="flex">
-                <Controller
-                    name="amount"
-                    control={control}
-                    shouldUnregister={true}
-                    defaultValue=""
-                    render={({ field: { onChange, value }, fieldState: { error } }) => (
-                        <TextField
-                            label="Amount*"
-                            placeholder="₹ 0"
-                            InputProps={{
-                                inputComponent: CurrencyInput,
-                            }}
-                            variant="outlined"
-                            value={value}
-                            onChange={onChange}
-                            error={!!error}
-                            helperText={error ? error.message : null}
-                            sx={{ margin: 1 }}
-                        />
-                    )}
-                    rules={{ required: "Amount can not be empty!" }}
-                />
-                <Controller
-                    name="description"
-                    control={control}
-                    shouldUnregister={true}
-                    defaultValue=""
-                    render={({ field: { onChange, value }, fieldState: { error } }) => (
-                        <TextField
-                            fullWidth
-                            label="Description*"
-                            placeholder="What is this money for?"
-                            variant="outlined"
-                            value={value}
-                            onChange={onChange}
-                            error={!!error}
-                            helperText={error ? error.message : null}
-                            sx={{ margin: 1 }}
-                        />
-                    )}
-                    rules={{ required: "Description can not be empty!" }}
-                />
+        <form id="FinanceField" onSubmit={handleSubmit(onSubmit)}>
+            <Box display="flex" alignItems="center">
+                <Box display="flex" width="100%">
+                    <Controller
+                        name="amount"
+                        control={control}
+                        shouldUnregister={true}
+                        defaultValue=""
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <TextField
+                                label="Amount*"
+                                placeholder="₹ 0"
+                                InputProps={{
+                                    inputComponent: CurrencyInput,
+                                }}
+                                variant="outlined"
+                                value={value}
+                                onChange={onChange}
+                                error={!!error}
+                                helperText={error ? error.message : null}
+                                sx={{ margin: 1 }}
+                            />
+                        )}
+                        rules={{ required: "Amount can not be empty!" }}
+                    />
+                    <Controller
+                        name="description"
+                        control={control}
+                        shouldUnregister={true}
+                        defaultValue=""
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <TextField
+                                fullWidth
+                                label="Description*"
+                                placeholder="What is this money for?"
+                                variant="outlined"
+                                value={value}
+                                onChange={onChange}
+                                error={!!error}
+                                helperText={error ? error.message : null}
+                                sx={{ margin: 1 }}
+                            />
+                        )}
+                        rules={{ required: "Description can not be empty!" }}
+                    />
+                </Box>
                 <Box display="flex" alignItems="center" mx={1}>
                     <IconButton type="submit" color="success">
                         <AddIcon />
@@ -184,31 +188,42 @@ const FinanceField = ({ event }) => {
     );
 };
 
-const FinanceForm = ({ event = null }) => {
+const FinanceForm = ({ form_id, event = null }) => {
+    const { stepper } = useContext(EventFormContext);
+
+    const { handleSubmit } = useForm();
+
+    const onSubmit = async (data) => {
+        // move to the next page
+        stepper.next();
+    };
+
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <FinanceHeader items={financeData} />
+        <form id={form_id} onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <FinanceHeader items={financeData} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Box mb={2}>
+                        <Typography m={1} variant="h6">
+                            Add a requirement
+                        </Typography>
+                        <FinanceField event={event} />
+                    </Box>
+                    <Box>
+                        <Typography m={1} variant="h6">
+                            Current budget breakdown
+                        </Typography>
+                        {financeData.length === 0 ? (
+                            <Empty />
+                        ) : (
+                            financeData.map((item) => <FinanceItem item={item} />)
+                        )}
+                    </Box>
+                </Grid>
             </Grid>
-            <Grid item xs={12}>
-                <Box mb={2}>
-                    <Typography m={1} variant="h6">
-                        Add a requirement
-                    </Typography>
-                    <FinanceField event={event} />
-                </Box>
-                <Box>
-                    <Typography m={1} variant="h6">
-                        Current budget breakdown
-                    </Typography>
-                    {financeData.length === 0 ? (
-                        <Empty />
-                    ) : (
-                        financeData.map((item) => <FinanceItem item={item} />)
-                    )}
-                </Box>
-            </Grid>
-        </Grid>
+        </form>
     );
 };
 

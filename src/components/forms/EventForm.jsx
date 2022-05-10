@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
@@ -13,12 +14,17 @@ import {
     FormLabel,
     FormControlLabel,
     Checkbox,
+    Radio,
+    RadioGroup,
 } from "@mui/material";
 
 import { ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
 
-const EventForm = ({ event = null }) => {
+import { EventFormContext } from "contexts/EventFormContext";
+
+const EventForm = ({ form_id, event = null }) => {
+    const { stepper } = useContext(EventFormContext);
     const { control, handleSubmit } = useForm();
 
     const [createEvent, { error: createError }] = useMutation(CREATE_EVENT, {
@@ -48,10 +54,13 @@ const EventForm = ({ event = null }) => {
         await (event
             ? updateEvent({ variables: { ...transformedData, id: event.id } })
             : createEvent({ variables: { ...transformedData } }));
+
+        // move to the next page
+        stepper.next();
     };
 
     return (
-        <form id="EventForm" onSubmit={handleSubmit(onSubmit)}>
+        <form id={form_id} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
                 <Grid item xs={12} lg={6}>
                     <Box mb={2}>
@@ -183,6 +192,42 @@ const EventForm = ({ event = null }) => {
                             </FormGroup>
                         </FormControl>
                     </Box>
+                    <Box mx={1}>
+                        <FormLabel component="legend">Mode</FormLabel>
+                        <FormGroup>
+                            <Box mt={0.8} mb={1}>
+                                <Controller
+                                    name={"mode"}
+                                    control={control}
+                                    shouldUnregister={true}
+                                    defaultValue={"offline"}
+                                    render={({ field: { onChange, value } }) => (
+                                        <FormControl>
+                                            <RadioGroup
+                                                row
+                                                value={value}
+                                                onChange={onChange}
+                                                name="mode-radio"
+                                            >
+                                                <FormControlLabel
+                                                    sx={{ display: "flex" }}
+                                                    value="offline"
+                                                    control={<Radio />}
+                                                    label="Offline"
+                                                />
+                                                <FormControlLabel
+                                                    sx={{ display: "flex" }}
+                                                    value="online"
+                                                    control={<Radio />}
+                                                    label="Online"
+                                                />
+                                            </RadioGroup>
+                                        </FormControl>
+                                    )}
+                                />
+                            </Box>
+                        </FormGroup>
+                    </Box>
                 </Grid>
                 <Grid item md>
                     <Box mb={2}>
@@ -198,7 +243,7 @@ const EventForm = ({ event = null }) => {
                                     label="Description"
                                     placeholder="Some very long description about the event."
                                     variant="outlined"
-                                    rows={6}
+                                    rows={8}
                                     value={value}
                                     onChange={onChange}
                                     error={!!error}

@@ -10,7 +10,7 @@ export const CREATE_EVENT = gql`
         $venue: String
         $audience: String
         $lastEditedBy: String!
-        $financialRequirements: String!
+        $mode: String!
     ) {
         createEvent(
             eventData: {
@@ -22,7 +22,7 @@ export const CREATE_EVENT = gql`
                 venue: $venue
                 audience: $audience
                 lastEditedBy: $lastEditedBy
-                financialRequirements: $financialRequirements
+                mode: $mode
             }
         ) {
             event {
@@ -34,7 +34,7 @@ export const CREATE_EVENT = gql`
                 venue
                 audience
                 lastEditedBy
-                financialRequirements
+                mode
             }
         }
     }
@@ -51,7 +51,7 @@ export const UPDATE_EVENT = gql`
         $venue: String
         $audience: String
         $lastEditedBy: String!
-        $financialRequirements: String!
+        $mode: String!
     ) {
         updateEvent(
             eventData: {
@@ -64,7 +64,7 @@ export const UPDATE_EVENT = gql`
                 venue: $venue
                 audience: $audience
                 lastEditedBy: $lastEditedBy
-                financialRequirements: $financialRequirements
+                mode: $mode
             }
         ) {
             event {
@@ -77,7 +77,7 @@ export const UPDATE_EVENT = gql`
                 venue
                 audience
                 lastEditedBy
-                financialRequirements
+                mode
             }
         }
     }
@@ -96,7 +96,7 @@ export const DELETE_EVENT = gql`
                 venue
                 audience
                 lastEditedBy
-                financialRequirements
+                mode
                 state
             }
         }
