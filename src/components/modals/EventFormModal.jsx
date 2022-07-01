@@ -1,10 +1,9 @@
-import { useState, useEffect, cloneElement } from "react";
+import { Fragment, useState, useEffect, cloneElement } from "react";
 
-import { Button, Box, Divider, Stepper, Step, StepLabel, Typography } from "@mui/material";
+import { Box, Stepper, Step, StepLabel } from "@mui/material";
 
 import { Modal, ModalBody, ModalFooter } from "components/modals";
 
-import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import EventFormContextProvider from "contexts/EventFormContext";
@@ -27,7 +26,7 @@ const formSteps = [
     {
         title: "Room Booking",
         form_id: "RoomForm",
-        panel: <EventForm />,
+        panel: <Fragment />,
         optional: true,
     },
 ];

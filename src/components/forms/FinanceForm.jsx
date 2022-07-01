@@ -6,11 +6,24 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_GET_EVENT_BUDGET } from "queries/finance";
 import { CREATE_BUDGET_REQUIREMENT, DELETE_BUDGET_REQUIREMENT } from "mutations/finance";
 
-import { Card, IconButton, Button, Grid, Box, TextField, Typography } from "@mui/material";
+import {
+    Card,
+    IconButton,
+    Grid,
+    Box,
+    TextField,
+    Typography,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+} from "@mui/material";
 import {
     Done as AddIcon,
     Close as ClearIcon,
-    EditOutlined as EditIcon,
     DeleteOutlined as DeleteIcon,
 } from "@mui/icons-material";
 
@@ -75,6 +88,22 @@ const FinanceItem = ({ item, event }) => {
     const handleDelete = async () => {
         await deleteRequirement({ variables: { eventId: event.id, id: item.id } });
     };
+
+    return (
+        <TableRow onMouseOver={() => setShowActions(true)} onMouseOut={() => setShowActions(false)}>
+            <TableCell sx={{ fontSize: "1em" }}>
+                <CurrencyText value={item?.amount} />
+            </TableCell>
+            <TableCell sx={{ fontSize: "1em" }}>{item?.description}</TableCell>
+            <TableCell align="right">
+                <Box visibility={showActions ? "visible" : "hidden"}>
+                    <IconButton type="button" color="error" onClick={handleDelete}>
+                        <DeleteIcon fontSize="small" />
+                    </IconButton>
+                </Box>
+            </TableCell>
+        </TableRow>
+    );
 
     return (
         <Grid container spacing={2}>
@@ -233,9 +262,26 @@ const FinanceForm = ({ form_id }) => {
                                 {data?.adminEventBudget?.length === 0 ? (
                                     <Empty />
                                 ) : (
-                                    data?.adminEventBudget?.map((item) => (
-                                        <FinanceItem item={item} event={activeEvent} />
-                                    ))
+                                    <TableContainer
+                                        component={Paper}
+                                        variant="outlined"
+                                        sx={{ mx: 1, my: 2 }}
+                                    >
+                                        <Table>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell> Amount </TableCell>
+                                                    <TableCell> Description </TableCell>
+                                                    <TableCell align="right"> </TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {data?.adminEventBudget?.map((item) => (
+                                                    <FinanceItem item={item} event={activeEvent} />
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
                                 )}
                             </Box>
                         </Grid>
