@@ -16,7 +16,7 @@ export const GET_ALL_EVENTS = gql`
             name
             audience
             description
-            venue
+            mode
         }
     }
 `;
@@ -34,8 +34,9 @@ export const GET_EVENT_BY_ID = gql`
             datetimeStart
             datetimeEnd
             description
-            venue
             audience
+            description
+            mode
         }
     }
 `;
@@ -55,7 +56,7 @@ export const GET_CLUB_EVENTS = gql`
             name
             audience
             description
-            venue
+            mode
         }
     }
 `;
@@ -75,7 +76,7 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             description
             audience
             state
-            lastEditedBy
+            mode
         }
     }
 `;
@@ -95,10 +96,8 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             name
             audience
             description
-            venue
             mode
             state
-            lastEditedBy
         }
     }
 `;

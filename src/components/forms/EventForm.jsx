@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
@@ -21,24 +21,26 @@ import {
 import { ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
 
+import EventModel from "models/EventModel";
 import { EventFormContext } from "contexts/EventFormContext";
 
-const EventForm = ({ form_id, event = null }) => {
-    const { stepper } = useContext(EventFormContext);
+const EventForm = ({ form_id }) => {
+    const { stepper, activeEvent, setActiveEvent } = useContext(EventFormContext);
     const { control, handleSubmit } = useForm();
 
     const [createEvent, { error: createError }] = useMutation(CREATE_EVENT, {
-        refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
+        refetchQueries: [ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
+        onCompleted: ({ createEvent: { event } }) => setActiveEvent(new EventModel(event)),
     });
 
     const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT, {
         refetchQueries: [
-            { query: GET_EVENT_BY_ID, variables: { id: event?.id } },
-            GET_CLUB_EVENTS,
+            { query: GET_EVENT_BY_ID, variables: { id: activeEvent?.id } },
             ADMIN_GET_CLUB_EVENTS,
         ],
         awaitRefetchQueries: true,
+        onCompleted: ({ updateEvent: { event } }) => setActiveEvent(new EventModel(event)),
     });
 
     const onSubmit = async (data) => {
@@ -51,8 +53,8 @@ const EventForm = ({ form_id, event = null }) => {
         };
 
         // update or create new instance of data
-        await (event
-            ? updateEvent({ variables: { ...transformedData, id: event.id } })
+        await (activeEvent
+            ? updateEvent({ variables: { ...transformedData, id: activeEvent.id } })
             : createEvent({ variables: { ...transformedData } }));
 
         // move to the next page
@@ -68,7 +70,7 @@ const EventForm = ({ form_id, event = null }) => {
                             name="name"
                             control={control}
                             shouldUnregister={true}
-                            defaultValue={event?.name || ""}
+                            defaultValue={activeEvent?.name || ""}
                             render={({ field: { onChange, value }, fieldState: { error } }) => (
                                 <TextField
                                     fullWidth
@@ -84,6 +86,7 @@ const EventForm = ({ form_id, event = null }) => {
                             rules={{ required: "Event name can not be empty!" }}
                         />
                     </Box>
+
                     <Box mb={2}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} lg={6}>
@@ -91,7 +94,7 @@ const EventForm = ({ form_id, event = null }) => {
                                     name="datetimeStart"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={ISOtoHTML(event?.datetimeStart)}
+                                    defaultValue={ISOtoHTML(activeEvent?.datetimeStart)}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -119,7 +122,7 @@ const EventForm = ({ form_id, event = null }) => {
                                     name="datetimeEnd"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={ISOtoHTML(event?.datetimeEnd)}
+                                    defaultValue={ISOtoHTML(activeEvent?.datetimeEnd)}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -144,6 +147,7 @@ const EventForm = ({ form_id, event = null }) => {
                             </Grid>
                         </Grid>
                     </Box>
+
                     <Box mx={1} mt={2}>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Target Audience</FormLabel>
@@ -153,7 +157,7 @@ const EventForm = ({ form_id, event = null }) => {
                                         name={"audience"}
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={AudienceStringtoDict(event?.audience)}
+                                        defaultValue={AudienceStringtoDict(activeEvent?.audience)}
                                         render={({ field }) =>
                                             [
                                                 { value: "ug1", label: "UG1" },
@@ -192,6 +196,7 @@ const EventForm = ({ form_id, event = null }) => {
                             </FormGroup>
                         </FormControl>
                     </Box>
+
                     <Box mx={1}>
                         <FormLabel component="legend">Mode</FormLabel>
                         <FormGroup>
@@ -200,7 +205,7 @@ const EventForm = ({ form_id, event = null }) => {
                                     name={"mode"}
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={"offline"}
+                                    defaultValue={activeEvent?.mode?.toLowerCase() || "offline"}
                                     render={({ field: { onChange, value } }) => (
                                         <FormControl>
                                             <RadioGroup
@@ -229,13 +234,14 @@ const EventForm = ({ form_id, event = null }) => {
                         </FormGroup>
                     </Box>
                 </Grid>
+
                 <Grid item md>
                     <Box mb={2}>
                         <Controller
                             name="description"
                             control={control}
                             shouldUnregister={true}
-                            defaultValue={event?.description || ""}
+                            defaultValue={activeEvent?.description || ""}
                             render={({ field: { onChange, value }, fieldState: { error } }) => (
                                 <TextField
                                     multiline
@@ -243,34 +249,13 @@ const EventForm = ({ form_id, event = null }) => {
                                     label="Description"
                                     placeholder="Some very long description about the event."
                                     variant="outlined"
-                                    rows={8}
+                                    rows={10}
                                     value={value}
                                     onChange={onChange}
                                     error={!!error}
                                     helperText={error ? error.message : null}
                                 />
                             )}
-                        />
-                    </Box>
-                    <Box mb={2}>
-                        <Controller
-                            name="lastEditedBy"
-                            control={control}
-                            shouldUnregister={true}
-                            defaultValue={event?.lastEditedBy || ""}
-                            render={({ field: { onChange, value }, fieldState: { error } }) => (
-                                <TextField
-                                    fullWidth
-                                    label="Your name?*"
-                                    placeholder="Firstname Lastname"
-                                    variant="outlined"
-                                    value={value}
-                                    onChange={onChange}
-                                    error={!!error}
-                                    helperText={error ? error.message : null}
-                                />
-                            )}
-                            rules={{ required: "Your name is required." }}
                         />
                     </Box>
                 </Grid>

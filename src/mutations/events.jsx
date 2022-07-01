@@ -7,9 +7,7 @@ export const CREATE_EVENT = gql`
         $datetimeEnd: DateTime
         $name: String!
         $description: String
-        $venue: String
         $audience: String
-        $lastEditedBy: String!
         $mode: String!
     ) {
         createEvent(
@@ -19,21 +17,22 @@ export const CREATE_EVENT = gql`
                 datetimeEnd: $datetimeEnd
                 name: $name
                 description: $description
-                venue: $venue
                 audience: $audience
-                lastEditedBy: $lastEditedBy
                 mode: $mode
             }
         ) {
             event {
+                id
+                club {
+                    id
+                    name
+                }
                 poster
                 datetimeStart
                 datetimeEnd
                 name
                 description
-                venue
                 audience
-                lastEditedBy
                 mode
             }
         }
@@ -48,9 +47,7 @@ export const UPDATE_EVENT = gql`
         $datetimeEnd: DateTime
         $name: String!
         $description: String
-        $venue: String
         $audience: String
-        $lastEditedBy: String!
         $mode: String!
     ) {
         updateEvent(
@@ -61,9 +58,7 @@ export const UPDATE_EVENT = gql`
                 datetimeEnd: $datetimeEnd
                 name: $name
                 description: $description
-                venue: $venue
                 audience: $audience
-                lastEditedBy: $lastEditedBy
                 mode: $mode
             }
         ) {
@@ -74,9 +69,7 @@ export const UPDATE_EVENT = gql`
                 datetimeEnd
                 name
                 description
-                venue
                 audience
-                lastEditedBy
                 mode
             }
         }
@@ -93,9 +86,7 @@ export const DELETE_EVENT = gql`
                 datetimeEnd
                 name
                 description
-                venue
                 audience
-                lastEditedBy
                 mode
                 state
             }

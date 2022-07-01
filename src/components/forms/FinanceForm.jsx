@@ -1,8 +1,10 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@mui/styles";
 
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADMIN_GET_EVENT_BUDGET } from "queries/finance";
+import { CREATE_BUDGET_REQUIREMENT, DELETE_BUDGET_REQUIREMENT } from "mutations/finance";
 
 import { Card, IconButton, Button, Grid, Box, TextField, Typography } from "@mui/material";
 import {
@@ -12,23 +14,12 @@ import {
     DeleteOutlined as DeleteIcon,
 } from "@mui/icons-material";
 
+import Loading from "components/Loading";
 import Empty from "components/Empty";
+
 import { CurrencyInput, CurrencyText } from "components/CurrencyFormat";
 
 import { EventFormContext } from "contexts/EventFormContext";
-
-const financeData = [
-    { id: 1, amount: 1.0, description: "description 0" },
-    { id: 2, amount: 2.0, description: "description 1" },
-    { id: 3, amount: 3.0, description: "description 2" },
-    { id: 4, amount: 4.0, description: "description 3" },
-    // {
-    //     id: 5,
-    //     amount: 12345.0,
-    //     description:
-    //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    // },
-];
 
 const FinanceHeader = ({ items }) => {
     const theme = useTheme();
@@ -37,7 +28,7 @@ const FinanceHeader = ({ items }) => {
         <Grid container spacing={4}>
             <Grid item>
                 <Card variant="none">
-                    <Box display="flex" flexDirection="column" m={2}>
+                    <Box display="flex" flexDirection="column" mx={2}>
                         <Typography
                             variant="body"
                             sx={{ color: theme.palette.success.light }}
@@ -46,14 +37,16 @@ const FinanceHeader = ({ items }) => {
                             Total Budget
                         </Typography>
                         <Typography variant="h3" sx={{ color: theme.palette.success.light }}>
-                            <CurrencyText value={items.reduce((sum, i) => sum + i.amount, 0)} />
+                            <CurrencyText
+                                value={items?.reduce((sum, i) => sum + parseFloat(i.amount), 0)}
+                            />
                         </Typography>
                     </Box>
                 </Card>
             </Grid>
             <Grid item>
                 <Card variant="none">
-                    <Box display="flex" flexDirection="column" m={2}>
+                    <Box display="flex" flexDirection="column" mx={2}>
                         <Typography
                             variant="body"
                             sx={{ color: theme.palette.secondary.dark }}
@@ -62,7 +55,7 @@ const FinanceHeader = ({ items }) => {
                             Requirements
                         </Typography>
                         <Typography variant="h3" sx={{ color: theme.palette.secondary.dark }}>
-                            {items.length}
+                            {items?.length}
                         </Typography>
                     </Box>
                 </Card>
@@ -71,20 +64,21 @@ const FinanceHeader = ({ items }) => {
     );
 };
 
-const FinanceItem = ({ item }) => {
+const FinanceItem = ({ item, event }) => {
     const [showActions, setShowActions] = useState(false);
+
+    const [deleteRequirement, { error: deleteError }] = useMutation(DELETE_BUDGET_REQUIREMENT, {
+        refetchQueries: [ADMIN_GET_EVENT_BUDGET],
+        awaitRefetchQueries: true,
+    });
+
+    const handleDelete = async () => {
+        await deleteRequirement({ variables: { eventId: event.id, id: item.id } });
+    };
 
     return (
         <Grid container spacing={2}>
-            <Grid
-                item
-                mx={1}
-                my={1}
-                xs={2}
-                display="flex"
-                alignItems="center"
-                justifyContent="flex-end"
-            >
+            <Grid item m={1} xs={2} display="flex" alignItems="center" justifyContent="flex-end">
                 <CurrencyText value={item.amount} fontSize="1.2em" fontWeight={700} />
             </Grid>
             <Grid
@@ -98,10 +92,7 @@ const FinanceItem = ({ item }) => {
             >
                 <Box>{item.description}</Box>
                 <Box mx={3} visibility={showActions ? "visible" : "hidden"}>
-                    <IconButton type="button" color="warning">
-                        <EditIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton type="button" color="error">
+                    <IconButton type="button" color="error" onClick={handleDelete}>
                         <DeleteIcon fontSize="small" />
                     </IconButton>
                 </Box>
@@ -111,89 +102,108 @@ const FinanceItem = ({ item }) => {
 };
 
 const FinanceField = ({ event }) => {
-    const { control, handleSubmit, reset } = useForm();
+    const {
+        control,
+        handleSubmit,
+        reset,
+        formState: { isSubmitSuccessful },
+    } = useForm();
+
+    const [createRequirement, { error: createError }] = useMutation(CREATE_BUDGET_REQUIREMENT, {
+        refetchQueries: [ADMIN_GET_EVENT_BUDGET],
+        awaitRefetchQueries: true,
+    });
+
+    // clear input values
+    const clearForm = () => {
+        reset(
+            {},
+            {
+                keepDefaultValues: true,
+            }
+        );
+    };
 
     const onSubmit = async (data) => {
-        // TODO: make api calls, clear fields
-        console.log(data);
+        const transformedData = {
+            ...data,
+            eventId: event?.id,
+        };
 
-        // clear input values
-        clearForm();
+        await createRequirement({ variables: { ...transformedData } });
     };
 
-    const clearForm = () => {
-        reset({
-            amount: "",
-            description: "",
-        });
-    };
+    // clear input values on form submit
+    useEffect(clearForm, [isSubmitSuccessful]);
 
     return (
-        <form id="FinanceField" onSubmit={handleSubmit(onSubmit)}>
-            <Box display="flex" alignItems="center">
-                <Box display="flex" width="100%">
-                    <Controller
-                        name="amount"
-                        control={control}
-                        shouldUnregister={true}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                label="Amount*"
-                                placeholder="₹ 0"
-                                InputProps={{
-                                    inputComponent: CurrencyInput,
-                                }}
-                                variant="outlined"
-                                value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                helperText={error ? error.message : null}
-                                sx={{ margin: 1 }}
-                            />
-                        )}
-                        rules={{ required: "Amount can not be empty!" }}
-                    />
-                    <Controller
-                        name="description"
-                        control={control}
-                        shouldUnregister={true}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                fullWidth
-                                label="Description*"
-                                placeholder="What is this money for?"
-                                variant="outlined"
-                                value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                helperText={error ? error.message : null}
-                                sx={{ margin: 1 }}
-                            />
-                        )}
-                        rules={{ required: "Description can not be empty!" }}
-                    />
-                </Box>
-                <Box display="flex" alignItems="center" mx={1}>
-                    <IconButton type="submit" color="success">
-                        <AddIcon />
-                    </IconButton>
-                    <IconButton type="button" onClick={clearForm}>
-                        <ClearIcon />
-                    </IconButton>
-                </Box>
+        <Box display="flex" alignItems="center">
+            <Box display="flex" width="100%">
+                <Controller
+                    name="amount"
+                    control={control}
+                    shouldUnregister={true}
+                    defaultValue=""
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <TextField
+                            label="Amount*"
+                            placeholder="₹ 0"
+                            InputProps={{
+                                inputComponent: CurrencyInput,
+                            }}
+                            variant="outlined"
+                            value={value}
+                            onChange={onChange}
+                            error={!!error}
+                            helperText={error ? error.message : null}
+                            sx={{ margin: 1 }}
+                        />
+                    )}
+                    rules={{ required: "Amount can not be empty!" }}
+                />
+                <Controller
+                    name="description"
+                    control={control}
+                    shouldUnregister={true}
+                    defaultValue=""
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <TextField
+                            fullWidth
+                            label="Description*"
+                            placeholder="What is this money for?"
+                            variant="outlined"
+                            value={value}
+                            onChange={onChange}
+                            error={!!error}
+                            helperText={error ? error.message : null}
+                            sx={{ margin: 1 }}
+                        />
+                    )}
+                    rules={{ required: "Description can not be empty!" }}
+                />
             </Box>
-        </form>
+            <Box display="flex" alignItems="center" mx={1}>
+                <IconButton type="button" color="success" onClick={handleSubmit(onSubmit)}>
+                    <AddIcon />
+                </IconButton>
+                <IconButton type="button" onClick={clearForm}>
+                    <ClearIcon />
+                </IconButton>
+            </Box>
+        </Box>
     );
 };
 
-const FinanceForm = ({ form_id, event = null }) => {
-    const { stepper } = useContext(EventFormContext);
+const FinanceForm = ({ form_id }) => {
+    const { stepper, activeEvent } = useContext(EventFormContext);
 
     const { handleSubmit } = useForm();
 
-    const onSubmit = async (data) => {
+    const { data, loading } = useQuery(ADMIN_GET_EVENT_BUDGET, {
+        variables: { eventId: activeEvent?.id },
+    });
+
+    const onSubmit = async () => {
         // move to the next page
         stepper.next();
     };
@@ -201,27 +211,36 @@ const FinanceForm = ({ form_id, event = null }) => {
     return (
         <form id={form_id} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <FinanceHeader items={financeData} />
-                </Grid>
-                <Grid item xs={12}>
-                    <Box mb={2}>
-                        <Typography m={1} variant="h6">
-                            Add a requirement
-                        </Typography>
-                        <FinanceField event={event} />
-                    </Box>
-                    <Box>
-                        <Typography m={1} variant="h6">
-                            Current budget breakdown
-                        </Typography>
-                        {financeData.length === 0 ? (
-                            <Empty />
-                        ) : (
-                            financeData.map((item) => <FinanceItem item={item} />)
-                        )}
-                    </Box>
-                </Grid>
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <>
+                        <Grid item xs={12}>
+                            <FinanceHeader items={data?.adminEventBudget} />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Box mb={2}>
+                                <Typography m={1} variant="h6">
+                                    Add a requirement
+                                </Typography>
+                                <FinanceField event={activeEvent} />
+                            </Box>
+                            <Box>
+                                <Typography m={1} variant="h6">
+                                    Current budget breakdown
+                                </Typography>
+                                {data?.adminEventBudget?.length === 0 ? (
+                                    <Empty />
+                                ) : (
+                                    data?.adminEventBudget?.map((item) => (
+                                        <FinanceItem item={item} event={activeEvent} />
+                                    ))
+                                )}
+                            </Box>
+                        </Grid>
+                    </>
+                )}
             </Grid>
         </form>
     );

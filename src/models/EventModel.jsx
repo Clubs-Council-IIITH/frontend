@@ -10,9 +10,8 @@ export default class EventModel extends BaseModel {
     name = "";
     audience = "";
     state = "";
-    mode = "";
     description = "";
-    lastEditedBy = "";
+    mode = "";
 
     constructor(data) {
         super();
