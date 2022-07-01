@@ -1,131 +1,117 @@
-import clsx from "clsx";
+import { useState } from "react";
+import { styled } from "@mui/material/styles";
 
-import { makeStyles } from "@mui/styles";
-
-import { Box, Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import {
+    Box,
+    Card,
+    CardMedia,
+    CardActionArea,
+    CardContent,
+    Typography,
+    LinearProgress,
+    IconButton,
+} from "@mui/material";
 import { green, blue, red, amber, deepPurple } from "@mui/material/colors";
 import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@mui/icons-material";
-
-import { EditButton, DeleteButton } from "components/buttons";
+import { linearProgressClasses } from "@mui/material/LinearProgress";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 
-// styles {{{
-const useStyles = makeStyles((theme) => ({
-    cardContent: {
-        minHeight: 250,
-        display: "flex",
-        flexDirection: "column",
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 10,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+        backgroundColor: theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
     },
-    statusText: {
-        textTransform: "uppercase",
-        fontFamily: theme.typography.fontFamilySecondary,
-        fontWeight: 700,
-    },
-    eventApproved: {
-        backgroundColor: green[50],
-        borderColor: green[200],
-        color: green[500],
-    },
-    eventScheduled: {
-        backgroundColor: blue[50],
-        borderColor: blue[200],
-        color: blue[500],
-    },
-    eventPublished: {
-        backgroundColor: deepPurple[50],
-        borderColor: deepPurple[200],
-        color: deepPurple[500],
-    },
-    eventDeleted: {
-        backgroundColor: red[50],
-        borderColor: red[200],
-        color: red[500],
-    },
-    eventCompleted: {
-        backgroundColor: amber[50],
-        borderColor: amber[200],
-        color: amber[500],
+    [`& .${linearProgressClasses.bar}`]: {
+        borderRadius: 5,
+        backgroundColor: theme.palette.mode === "light" ? green[500] : green[200],
     },
 }));
-// }}}
 
 const EventCard = ({
     id,
     name,
     datetimeStart,
     state,
+    poster,
     triggerEdit,
     triggerDelete,
     triggerView,
     manage = false,
     actions = false,
 }) => {
-    const classes = useStyles();
+    const [showActions, setShowActions] = useState(false);
+
+    const handleEdit = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        triggerEdit(id);
+    };
+
+    const handleDelete = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        triggerDelete(id);
+    };
+
     return (
         <Card
-            variant="outlined"
-            className={
-                manage &&
-                clsx({
-                    [classes.eventApproved]: state === "APPROVED",
-                    [classes.eventScheduled]: state === "SCHEDULED",
-                    [classes.eventPublished]: state === "PUBLISHED",
-                    [classes.eventDeleted]: state === "DELETED",
-                    [classes.eventCompleted]: state === "COMPLETED",
-                })
-            }
+            variant="none"
+            onMouseOver={() => setShowActions(true)}
+            onMouseOut={() => setShowActions(false)}
+            sx={{ borderRadius: 2 }}
         >
-            <CardActionArea onClick={() => triggerView(id)}>
-                <CardContent className={classes.cardContent}>
+            <CardActionArea onClick={() => triggerView(id)} sx={{ p: 1 }}>
+                <CardMedia
+                    sx={{ borderRadius: 2 }}
+                    component="img"
+                    image={poster}
+                    alt={name}
+                    height={180}
+                />
+
+                <CardContent sx={{ px: 0.5 }}>
                     <Typography gutterBottom color="textSecondary" variant="subtitle2">
                         {ISOtoDT(datetimeStart).datetime}
                     </Typography>
+                    <Typography variant="h4">{name}</Typography>
+                </CardContent>
 
-                    <Typography color="textPrimary" variant="h4" component="h4">
-                        {name}
-                    </Typography>
-                    {!!manage && !!actions && (
+                {!!manage && (
+                    <CardContent sx={{ p: 0.5, pb: 1.5 }}>
                         <Box
                             display="flex"
-                            flexGrow={2}
-                            flexDirection="column"
-                            justifyContent="flex-end"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            height={10}
                         >
-                            <Box display="flex" alignItems="center" justifyContent="space-between">
-                                <Typography className={classes.statusText}>{state}</Typography>
-                                <Box>
-                                    <EditButton
-                                        noPadding
-                                        onMouseDown={(e) => {
-                                            e.stopPropagation();
-                                        }}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            e.preventDefault();
-                                            triggerEdit(id);
-                                        }}
-                                    >
-                                        <EditIcon />
-                                    </EditButton>
-                                    <DeleteButton
-                                        noPadding
-                                        onMouseDown={(e) => {
-                                            e.stopPropagation();
-                                        }}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            e.preventDefault();
-                                            triggerDelete(id);
-                                        }}
-                                    >
-                                        <DeleteIcon />
-                                    </DeleteButton>
-                                </Box>
+                            <Box width={!!actions && showActions ? "75%" : "100%"}>
+                                <BorderLinearProgress value={50} variant="determinate" />
                             </Box>
+                            {!!actions && (
+                                <Box display={showActions ? "flex" : "none"}>
+                                    <IconButton
+                                        type="button"
+                                        color="warning"
+                                        onClick={handleEdit}
+                                        onMouseDown={(e) => e.stopPropagation()}
+                                    >
+                                        <EditIcon fontSize="small" />
+                                    </IconButton>
+                                    <IconButton
+                                        type="button"
+                                        color="error"
+                                        onClick={handleDelete}
+                                        onMouseDown={(e) => e.stopPropagation()}
+                                    >
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                </Box>
+                            )}
                         </Box>
-                    )}
-                </CardContent>
+                    </CardContent>
+                )}
             </CardActionArea>
         </Card>
     );
