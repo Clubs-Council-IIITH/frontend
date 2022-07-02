@@ -75,8 +75,9 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             datetimeStart
             description
             audience
-            state
             mode
+            stateKey
+            stateRemarks
         }
     }
 `;
@@ -97,7 +98,8 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             audience
             description
             mode
-            state
+            stateKey
+            stateRemarks
         }
     }
 `;

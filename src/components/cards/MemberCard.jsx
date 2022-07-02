@@ -58,8 +58,9 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
                             ))}
                     </Box>
 
+                    {/* show edit and delete buttons in manage mode */}
                     {manage && (
-                        <Box display={showActions ? "flex" : "none"} position="static">
+                        <Box display={showActions ? "flex" : "none"}>
                             <IconButton
                                 type="button"
                                 color="warning"

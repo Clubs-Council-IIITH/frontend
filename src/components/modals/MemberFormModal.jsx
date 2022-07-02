@@ -275,14 +275,12 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                             <form id="MemberForm" onSubmit={handleSubmit(onSubmitMember)}>
                                 <Card variant="none">
                                     <CardContent>
-                                        <Grid
-                                            container
-                                            spacing={4}
+                                        <Box
                                             display="flex"
                                             alignItems="center"
-                                            height="15em"
+                                            justifyContent="space-between"
                                         >
-                                            <Grid item md={8}>
+                                            <Box display="flex" flexDirection="column">
                                                 <Typography variant="h4">
                                                     {`${targetUser?.user?.firstName} ${targetUser?.user?.lastName}`}
                                                 </Typography>
@@ -296,11 +294,11 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                                 <Typography variant="subtitle2" mt={4}>
                                                     <code>{targetUser?.user?.mail}</code>
                                                 </Typography>
-                                            </Grid>
-                                            <Grid item md display="flex" alignItems="center">
-                                                <Avatar sx={{ height: "160px", width: "160px" }} />
-                                            </Grid>
-                                        </Grid>
+                                            </Box>
+                                            <Box display="flex">
+                                                <Avatar sx={{ height: 120, width: 120 }} />
+                                            </Box>
+                                        </Box>
                                     </CardContent>
                                 </Card>
 

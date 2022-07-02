@@ -10,14 +10,17 @@ import {
     Typography,
     LinearProgress,
     IconButton,
+    Tooltip,
 } from "@mui/material";
-import { green, blue, red, amber, deepPurple } from "@mui/material/colors";
 import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@mui/icons-material";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
+import { StateProgress } from "utils/EventUtil";
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+const BorderLinearProgress = styled(LinearProgress, {
+    shouldForwardProp: (prop) => prop !== "color",
+})(({ color, theme }) => ({
     height: 10,
     borderRadius: 5,
     [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -25,7 +28,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     },
     [`& .${linearProgressClasses.bar}`]: {
         borderRadius: 5,
-        backgroundColor: theme.palette.mode === "light" ? green[500] : green[200],
+        backgroundColor: theme.palette.mode === "light" ? color[500] : color[200],
     },
 }));
 
@@ -33,7 +36,7 @@ const EventCard = ({
     id,
     name,
     datetimeStart,
-    state,
+    stateKey,
     poster,
     triggerEdit,
     triggerDelete,
@@ -54,6 +57,9 @@ const EventCard = ({
         e.preventDefault();
         triggerDelete(id);
     };
+
+    // get progressbar value and color
+    const stateProgress = StateProgress(stateKey);
 
     return (
         <Card
@@ -87,7 +93,13 @@ const EventCard = ({
                             height={10}
                         >
                             <Box width={!!actions && showActions ? "75%" : "100%"}>
-                                <BorderLinearProgress value={50} variant="determinate" />
+                                <Tooltip title={stateProgress.text} arrow>
+                                    <BorderLinearProgress
+                                        value={stateProgress.value}
+                                        color={stateProgress.color}
+                                        variant="determinate"
+                                    />
+                                </Tooltip>
                             </Box>
                             {!!actions && (
                                 <Box display={showActions ? "flex" : "none"}>

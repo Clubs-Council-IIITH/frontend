@@ -1,8 +1,10 @@
 export default {
-    created: "CREATED",
-    approved: "APPROVED",
-    published: "PUBLISHED",
-    scheduled: "SCHEDULED",
-    completed: "COMPLETED",
-    deleted: "DELETED",
+    cc_pending: "A_0",
+    fc_pending: "A_1",
+    gad_pending: "A_2",
+    slc_pending: "A_3",
+    slo_pending: "A_4",
+    approved: "A_5",
+    completed: "A_6",
+    deleted: "A_7",
 };
