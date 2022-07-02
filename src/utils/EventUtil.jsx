@@ -32,18 +32,18 @@ export const StateProgress = (stateKey) => {
             text: "Waiting for GAD approval",
         };
 
-    if (stateKey === EventStates.slc_pending)
+    if (stateKey === EventStates.slo_pending)
         return {
             value: 4 * (100 / 6),
             color: deepPurple,
-            text: "Waiting for SLC approval",
+            text: "Waiting for SLO approval",
         };
 
-    if (stateKey === EventStates.slo_pending)
+    if (stateKey === EventStates.slc_pending)
         return {
             value: 5 * (100 / 6),
             color: deepPurple,
-            text: "Waiting for SLO approval",
+            text: "Waiting for SLC approval",
         };
 
     if (stateKey === EventStates.approved)
