@@ -88,8 +88,7 @@ export const DELETE_EVENT = gql`
                 description
                 audience
                 mode
-                stateKey
-                stateRemarks
+                state
             }
         }
     }

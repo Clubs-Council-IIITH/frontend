@@ -11,9 +11,7 @@ export default class EventModel extends BaseModel {
     audience = "";
     description = "";
     mode = "";
-
-    stateKey = 0;
-    stateRemarks = "";
+    state = "";
 
     constructor(data) {
         super();

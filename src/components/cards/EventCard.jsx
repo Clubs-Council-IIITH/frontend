@@ -36,7 +36,7 @@ const EventCard = ({
     id,
     name,
     datetimeStart,
-    stateKey,
+    state,
     poster,
     triggerEdit,
     triggerDelete,
@@ -59,7 +59,7 @@ const EventCard = ({
     };
 
     // get progressbar value and color
-    const stateProgress = StateProgress(stateKey);
+    const stateProgress = StateProgress(state);
 
     return (
         <Card

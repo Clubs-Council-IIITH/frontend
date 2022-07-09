@@ -162,8 +162,8 @@ const Events = ({ manage, setActions }) => {
                                 {events
                                     ?.filter(
                                         (e) =>
-                                            e.stateKey !== EventStates.completed &&
-                                            e.stateKey !== EventStates.deleted
+                                            e.state !== EventStates.completed &&
+                                            e.state !== EventStates.deleted
                                     )
                                     ?.map((event, idx) => (
                                         <Grid item md={4} key={idx}>
@@ -182,7 +182,7 @@ const Events = ({ manage, setActions }) => {
                         <Collapse in={expandCompleted}>
                             <Grid container spacing={2}>
                                 {events
-                                    ?.filter((e) => e.stateKey == EventStates.completed)
+                                    ?.filter((e) => e.state == EventStates.completed)
                                     ?.map((event, idx) => (
                                         <Grid item md={4} key={idx}>
                                             <EventCard {...event} {...cardProps} />
@@ -202,7 +202,7 @@ const Events = ({ manage, setActions }) => {
                                 <Collapse in={expandDeleted}>
                                     <Grid container spacing={2}>
                                         {events
-                                            ?.filter((e) => e.stateKey == EventStates.deleted)
+                                            ?.filter((e) => e.state == EventStates.deleted)
                                             ?.map((event, idx) => (
                                                 <Grid item md={4} key={idx}>
                                                     <EventCard {...event} {...cardProps} />
