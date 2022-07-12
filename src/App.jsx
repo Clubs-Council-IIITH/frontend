@@ -19,6 +19,7 @@ import { SessionContext } from "contexts/SessionContext";
 import {
     HomeOutlined,
     ExploreOutlined,
+    EventOutlined,
     CalendarTodayOutlined,
     DashboardOutlined,
     GroupOutlined,
@@ -56,6 +57,12 @@ const publicRoutes = [
 ];
 
 const ccRoutes = [
+    {
+        title: "Manage Events",
+        path: "/admin/events",
+        icon: EventOutlined,
+        component: <ClubsCouncil.Events />,
+    },
     {
         title: "Manage Clubs",
         path: "/admin/clubs",

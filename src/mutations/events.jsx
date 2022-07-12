@@ -93,3 +93,32 @@ export const DELETE_EVENT = gql`
         }
     }
 `;
+
+export const PROGRESS_EVENT = gql`
+    mutation progressEventMutation($id: ID!) {
+        progressEvent(eventData: { id: $id }) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+                mode
+                state
+            }
+        }
+    }
+`;
+
+export const ADD_EVENT_FEEDBACK = gql`
+    mutation addEventFeedback($eventId: ID!, $message: String!) {
+        addEventFeedback(feedbackData: { eventId: $eventId, message: $message }) {
+            feedback {
+                message
+                timestamp
+            }
+        }
+    }
+`;

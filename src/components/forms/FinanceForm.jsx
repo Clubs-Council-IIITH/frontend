@@ -104,30 +104,6 @@ const FinanceItem = ({ item, event }) => {
             </TableCell>
         </TableRow>
     );
-
-    return (
-        <Grid container spacing={2}>
-            <Grid item m={1} xs={2} display="flex" alignItems="center" justifyContent="flex-end">
-                <CurrencyText value={item.amount} fontSize="1.2em" fontWeight={700} />
-            </Grid>
-            <Grid
-                item
-                my={1}
-                xs
-                display="flex"
-                alignItems="center"
-                onMouseOver={() => setShowActions(true)}
-                onMouseOut={() => setShowActions(false)}
-            >
-                <Box>{item.description}</Box>
-                <Box mx={3} visibility={showActions ? "visible" : "hidden"}>
-                    <IconButton type="button" color="error" onClick={handleDelete}>
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
-                </Box>
-            </Grid>
-        </Grid>
-    );
 };
 
 const FinanceField = ({ event }) => {

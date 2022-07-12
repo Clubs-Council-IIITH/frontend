@@ -101,3 +101,120 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
         }
     }
 `;
+
+export const ADMIN_GET_EVENT_FEEDBACK = gql`
+    query adminEventFeedbackThread($eventId: Int) {
+        eventFeedbackThread(eventId: $eventId) {
+            user {
+                username
+            }
+            timestamp
+            message
+        }
+    }
+`;
+
+export const ADMIN_CC_PENDING_EVENTS = gql`
+    query adminCcPendingEvents {
+        adminCcPendingEvents {
+            id
+            club {
+                id
+                name
+                img
+            }
+            datetimeStart
+            datetimeEnd
+            poster
+            name
+            audience
+            description
+            mode
+            state
+        }
+    }
+`;
+
+export const ADMIN_FC_PENDING_EVENTS = gql`
+    query adminFcPendingEvents {
+        adminFcPendingEvents {
+            id
+            club {
+                id
+                name
+                img
+            }
+            datetimeStart
+            datetimeEnd
+            poster
+            name
+            audience
+            description
+            mode
+            state
+        }
+    }
+`;
+
+export const ADMIN_GAD_PENDING_EVENTS = gql`
+    query adminGadPendingEvents {
+        adminGadPendingEvents {
+            id
+            club {
+                id
+                name
+                img
+            }
+            datetimeStart
+            datetimeEnd
+            poster
+            name
+            audience
+            description
+            mode
+            state
+        }
+    }
+`;
+
+export const ADMIN_SLO_PENDING_EVENTS = gql`
+    query adminSloPendingEvents {
+        adminSloPendingEvents {
+            id
+            club {
+                id
+                name
+                img
+            }
+            datetimeStart
+            datetimeEnd
+            poster
+            name
+            audience
+            description
+            mode
+            state
+        }
+    }
+`;
+
+export const ADMIN_SLC_PENDING_EVENTS = gql`
+    query adminSlcPendingEvents {
+        adminSlcPendingEvents {
+            id
+            club {
+                id
+                name
+                img
+            }
+            datetimeStart
+            datetimeEnd
+            poster
+            name
+            audience
+            description
+            mode
+            state
+        }
+    }
+`;
