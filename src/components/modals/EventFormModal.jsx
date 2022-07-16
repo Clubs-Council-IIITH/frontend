@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, cloneElement } from "react";
+import { useState, useEffect, cloneElement } from "react";
 
 import { Box, Stepper, Step, StepLabel } from "@mui/material";
 
@@ -10,6 +10,7 @@ import EventFormContextProvider from "contexts/EventFormContext";
 
 import EventForm from "components/forms/EventForm";
 import FinanceForm from "components/forms/FinanceForm";
+import RoomForm from "components/forms/RoomForm";
 
 const formSteps = [
     {
@@ -26,7 +27,7 @@ const formSteps = [
     {
         title: "Room Booking",
         form_id: "RoomForm",
-        panel: <Fragment />,
+        panel: <RoomForm />,
         optional: true,
     },
 ];
@@ -49,6 +50,7 @@ const EventFormModal = ({ event = null, controller: [open, setOpen] }) => {
     return (
         <EventFormContextProvider
             open={open}
+            setOpen={setOpen}
             event={event}
             stepperMethods={{
                 next: handleNext,
