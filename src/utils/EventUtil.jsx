@@ -18,7 +18,7 @@ export const StateProgress = (state) => {
             text: "Waiting for Clubs Council approval",
         };
 
-    if (state === EventStates.fc_pending)
+    if (state === EventStates.fc_pending || EventStates.fc_gad_pending)
         return {
             value: 2 * (100 / 6),
             color: blue,
