@@ -2,7 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { EventFormContext } from "contexts/EventFormContext";
-import EventRooms from "constants/EventRooms";
+
+import { useMutation, useQuery } from "@apollo/client";
+import { ADMIN_GET_ROOMS } from "queries/room";
+import { ADMIN_BOOK_ROOM } from "mutations/room";
 
 import { Grid, Box, TextField, Typography, Select, InputLabel, MenuItem } from "@mui/material";
 
@@ -11,26 +14,33 @@ const RoomForm = ({ form_id }) => {
 
     const { control, handleSubmit } = useForm();
 
-    // TODO: populate with API call
-    const roomList = [
-        { room: "none", available: true },
-        { room: "himalaya_101", available: true },
-        { room: "himalaya_102", available: true },
-        { room: "himalaya_103", available: false },
-        { room: "himalaya_104", available: true },
-        { room: "himalaya_105", available: false },
-        { room: "vindhya_sh1", available: true },
-        { room: "vindhya_sh2", available: true },
-        { room: "amphitheatre", available: true },
-    ];
+    const [ rooms, setRooms ] = useState([]);
+
+    const { loading } = useQuery(ADMIN_GET_ROOMS, {
+        variables: { eventId: activeEvent?.id },
+        onCompleted: (data) => {
+            setRooms(data?.adminGetRooms);
+        },
+    });
+
+    const [ bookRoom ] = useMutation(ADMIN_BOOK_ROOM, {
+        refetchQueries: [
+            ADMIN_GET_ROOMS,
+        ],
+        awaitRefetchQueries: true,
+    });
+
 
     const [selectedRoom, setSelectedRoom] = useState("none");
 
     const onSubmit = async (data) => {
-        console.log(selectedRoom);
-        console.log(data);
+        const transformedData = {
+            ...data,
+            room: selectedRoom,
+            eventId: activeEvent?.id,
+        };
 
-        // TODO: API calls
+        await bookRoom({ variables: { ...transformedData } });
 
         // close modal
         setOpen(false);
@@ -50,9 +60,9 @@ const RoomForm = ({ form_id }) => {
                             value={selectedRoom}
                             onChange={(e) => setSelectedRoom(e.target.value)}
                         >
-                            {roomList.map(({ room, available }) => (
+                            {rooms?.map(({ room, available }) => (
                                 <MenuItem value={room} disabled={!available}>
-                                    {EventRooms[room]}
+                                    {room}
                                 </MenuItem>
                             ))}
                         </Select>
