@@ -10,7 +10,6 @@ export default class EventModel extends BaseModel {
     name = "";
     audience = "";
     description = "";
-    mode = "";
     state = "";
 
     constructor(data) {

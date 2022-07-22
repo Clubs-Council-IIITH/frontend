@@ -16,7 +16,6 @@ export const GET_ALL_EVENTS = gql`
             name
             audience
             description
-            mode
         }
     }
 `;
@@ -36,7 +35,6 @@ export const GET_EVENT_BY_ID = gql`
             description
             audience
             description
-            mode
         }
     }
 `;
@@ -56,7 +54,6 @@ export const GET_CLUB_EVENTS = gql`
             name
             audience
             description
-            mode
         }
     }
 `;
@@ -75,7 +72,6 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             datetimeStart
             description
             audience
-            mode
             state
         }
     }
@@ -96,7 +92,6 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             name
             audience
             description
-            mode
             state
         }
     }
@@ -129,7 +124,6 @@ export const ADMIN_CC_PENDING_EVENTS = gql`
             name
             audience
             description
-            mode
             state
         }
     }
@@ -150,7 +144,6 @@ export const ADMIN_FC_PENDING_EVENTS = gql`
             name
             audience
             description
-            mode
             state
         }
     }
@@ -171,7 +164,6 @@ export const ADMIN_GAD_PENDING_EVENTS = gql`
             name
             audience
             description
-            mode
             state
         }
     }
@@ -192,7 +184,6 @@ export const ADMIN_SLO_PENDING_EVENTS = gql`
             name
             audience
             description
-            mode
             state
         }
     }
@@ -213,7 +204,6 @@ export const ADMIN_SLC_PENDING_EVENTS = gql`
             name
             audience
             description
-            mode
             state
         }
     }

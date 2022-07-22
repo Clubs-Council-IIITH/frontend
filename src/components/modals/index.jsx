@@ -55,7 +55,6 @@ export const ModalHeader = ({ controller: [_, setOpen], title, actions }) => {
 export const ModalBody = ({ full, mini, children }) => {
     return (
         <Box
-            p={3}
             sx={{
                 // default modal body
                 overflowY: "auto",

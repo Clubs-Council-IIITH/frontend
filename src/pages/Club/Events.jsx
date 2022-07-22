@@ -28,9 +28,7 @@ import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
-import EventFormModal from "components/modals/EventFormModal";
-import EventDeleteModal from "components/modals/EventDeleteModal";
-import EventViewModal from "components/modals/EventViewModal";
+import EventModal from "components/modals/EventModal";
 import { EventCard } from "components/cards";
 
 const EventStateToggle = ({ stateName, expanded, callback }) => (
@@ -61,15 +59,7 @@ const Events = ({ manage, setActions }) => {
         },
     });
 
-    // create/edit event form modal
-    const [formProps, setFormProps] = useState({});
-    const [formModal, setFormModal] = useState(null);
-
-    // delete confirmation modal
-    const [deleteProps, setDeleteProps] = useState({});
-    const [deleteModal, setDeleteModal] = useState(null);
-
-    // view modal
+    // event modal
     const [viewProps, setViewProps] = useState({});
     const [viewModal, setViewModal] = useState(null);
 
@@ -86,30 +76,19 @@ const Events = ({ manage, setActions }) => {
         setTargetState(true);
     };
 
-    // open edit modal and autofill data of event with given `id`
-    const triggerEdit = (id) => {
-        const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
-            (o) => new EventModel(o)
-        );
-        setFormProps({ event: targetEvents?.find((event) => event.id === id) });
-        setFormModal(true);
-    };
-
-    // open delete modal
-    const triggerDelete = (id) => {
-        const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
-            (o) => new EventModel(o)
-        );
-        setDeleteProps({ event: targetEvents?.find((event) => event.id === id) });
-        setDeleteModal(true);
-    };
-
     // open view modal
     const triggerView = (id) => {
         const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
             (o) => new EventModel(o)
         );
-        setViewProps({ event: targetEvents?.find((event) => event.id === id) });
+
+        // TODO: stop passing whole event as prop
+        setViewProps({
+            manage: manage,
+            event: targetEvents?.find((event) => event.id === id),
+            eventId: id,
+            actions: manage ? ["edit", "delete"] : [],
+        });
         setViewModal(true);
     };
 
@@ -123,8 +102,12 @@ const Events = ({ manage, setActions }) => {
                     variant="outlined"
                     color="primary"
                     onClick={() => {
-                        setFormProps({});
-                        setFormModal(true);
+                        setViewProps({
+                            manage: manage,
+                            eventId: null,
+                            actions: ["edit", "delete"],
+                        });
+                        setViewModal(true);
                     }}
                 >
                     <Box display="flex" mr={1}>
@@ -138,16 +121,12 @@ const Events = ({ manage, setActions }) => {
 
     const cardProps = {
         manage,
-        triggerEdit,
-        triggerDelete,
         triggerView,
     };
 
     return (
         <>
-            <EventFormModal controller={[formModal, setFormModal]} {...formProps} />
-            <EventDeleteModal controller={[deleteModal, setDeleteModal]} {...deleteProps} />
-            <EventViewModal controller={[viewModal, setViewModal]} {...viewProps} />
+            <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
             <Page full loading={loading} empty={!events?.length}>
                 <Box px={2}>
                     <List>

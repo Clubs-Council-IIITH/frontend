@@ -32,42 +32,12 @@ const BorderLinearProgress = styled(LinearProgress, {
     },
 }));
 
-const EventCard = ({
-    id,
-    name,
-    datetimeStart,
-    state,
-    poster,
-    triggerEdit,
-    triggerDelete,
-    triggerView,
-    manage = false,
-    actions = false,
-}) => {
-    const [showActions, setShowActions] = useState(false);
-
-    const handleEdit = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        triggerEdit(id);
-    };
-
-    const handleDelete = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        triggerDelete(id);
-    };
-
+const EventCard = ({ id, name, datetimeStart, state, poster, triggerView, manage = false }) => {
     // get progressbar value and color
     const stateProgress = StateProgress(state);
 
     return (
-        <Card
-            variant="none"
-            onMouseOver={() => setShowActions(true)}
-            onMouseOut={() => setShowActions(false)}
-            sx={{ borderRadius: 2 }}
-        >
+        <Card variant="none" sx={{ borderRadius: 2 }}>
             <CardActionArea onClick={() => triggerView(id)} sx={{ p: 1 }}>
                 <CardMedia
                     sx={{ borderRadius: 2 }}
@@ -92,7 +62,7 @@ const EventCard = ({
                             justifyContent="space-between"
                             height={10}
                         >
-                            <Box width={!!actions && showActions ? "75%" : "100%"}>
+                            <Box width={"100%"}>
                                 <Tooltip title={stateProgress.text} arrow>
                                     <BorderLinearProgress
                                         value={stateProgress.value}
@@ -101,26 +71,6 @@ const EventCard = ({
                                     />
                                 </Tooltip>
                             </Box>
-                            {!!actions && (
-                                <Box display={showActions ? "flex" : "none"}>
-                                    <IconButton
-                                        type="button"
-                                        color="warning"
-                                        onClick={handleEdit}
-                                        onMouseDown={(e) => e.stopPropagation()}
-                                    >
-                                        <EditIcon fontSize="small" />
-                                    </IconButton>
-                                    <IconButton
-                                        type="button"
-                                        color="error"
-                                        onClick={handleDelete}
-                                        onMouseDown={(e) => e.stopPropagation()}
-                                    >
-                                        <DeleteIcon fontSize="small" />
-                                    </IconButton>
-                                </Box>
-                            )}
                         </Box>
                     </CardContent>
                 )}
