@@ -8,7 +8,6 @@ export const CREATE_EVENT = gql`
         $name: String!
         $description: String
         $audience: String
-        $mode: String!
     ) {
         createEvent(
             eventData: {
@@ -18,7 +17,6 @@ export const CREATE_EVENT = gql`
                 name: $name
                 description: $description
                 audience: $audience
-                mode: $mode
             }
         ) {
             event {
@@ -33,7 +31,6 @@ export const CREATE_EVENT = gql`
                 name
                 description
                 audience
-                mode
             }
         }
     }
@@ -48,7 +45,6 @@ export const UPDATE_EVENT = gql`
         $name: String!
         $description: String
         $audience: String
-        $mode: String!
     ) {
         updateEvent(
             eventData: {
@@ -59,7 +55,6 @@ export const UPDATE_EVENT = gql`
                 name: $name
                 description: $description
                 audience: $audience
-                mode: $mode
             }
         ) {
             event {
@@ -70,7 +65,6 @@ export const UPDATE_EVENT = gql`
                 name
                 description
                 audience
-                mode
             }
         }
     }
@@ -87,7 +81,6 @@ export const DELETE_EVENT = gql`
                 name
                 description
                 audience
-                mode
                 state
             }
         }
@@ -105,7 +98,6 @@ export const PROGRESS_EVENT = gql`
                 name
                 description
                 audience
-                mode
                 state
             }
         }

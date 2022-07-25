@@ -59,7 +59,6 @@ const Details = ({
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
                 .join(","),
-            mode: "offline",
         };
 
         // update or create new instance of data
@@ -176,6 +175,7 @@ const Details = ({
                                         type="text"
                                         placeholder="The Greatest Event of All Time"
                                         variant="standard"
+                                        autoComplete="off"
                                         value={value}
                                         onChange={onChange}
                                         error={error}
@@ -284,7 +284,9 @@ const Details = ({
                         ) : eventData?.event?.audience ? (
                             AudienceFormatter(eventData?.event?.audience)
                                 .split(",")
-                                .map((audience,key) => <Chip key={key} label={audience} sx={{ mx: 0.5 }} />)
+                                .map((audience, key) => (
+                                    <Chip key={key} label={audience} sx={{ mx: 0.5 }} />
+                                ))
                         ) : (
                             <Box mx={1}>—</Box>
                         )}
