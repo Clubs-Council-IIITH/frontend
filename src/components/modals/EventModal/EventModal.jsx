@@ -188,10 +188,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                             <Box display="flex" justifyContent="flex-end" width="100%">
                                 <CardActions sx={{ p: 0, m: 0 }}>
                                     {!activeEventId || editing ? (
-                                        <>
-                                            {actionButtons["cancel"]}
-                                            {actionButtons["save"]}
-                                        </>
+                                        <>{actionButtons["save"]}</>
                                     ) : deleting ? (
                                         <>
                                             {actionButtons["cancel"]}

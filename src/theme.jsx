@@ -21,4 +21,13 @@ export const Theme = createTheme({
         },
     },
     borderRadius: "8px",
+    overrides: {
+        MuiTableRow: {
+            root: {
+                "&:last-child td": {
+                    borderBottom: 0,
+                },
+            },
+        },
+    },
 });

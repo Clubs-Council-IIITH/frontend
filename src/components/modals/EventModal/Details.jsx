@@ -65,6 +65,9 @@ const Details = ({
         await (activeEventId
             ? updateEvent({ variables: { ...transformedData, id: activeEventId } })
             : createEvent({ variables: { ...transformedData } }));
+
+        // stop editing
+        setEditing(false);
     };
 
     const audienceSelect = [
@@ -81,7 +84,13 @@ const Details = ({
     ];
 
     return (
-        <form id="ActiveEventForm" onSubmit={handleSubmit(onSubmit)}>
+        <form
+            id="ActiveEventForm"
+            onSubmit={handleSubmit(onSubmit)}
+            onKeyPress={(e) => {
+                e.key === "Enter" && e.preventDefault();
+            }}
+        >
             <Grid container p={3} spacing={2}>
                 <Grid item xs={12}>
                     <Box display="flex" alignItems="center">
