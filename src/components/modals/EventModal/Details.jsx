@@ -169,7 +169,7 @@ const Details = ({
                                 name="name"
                                 control={control}
                                 shouldUnregister={true}
-                                defaultValue={eventData?.event?.name}
+                                defaultValue={eventData?.event?.name || ""}
                                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                                     <TextField
                                         label="Name*"
@@ -190,7 +190,7 @@ const Details = ({
                                 }}
                             />
                         ) : (
-                            eventData?.event?.name
+                            eventData?.event?.name || ""
                         )}
                     </Typography>
                 </Grid>
@@ -204,7 +204,7 @@ const Details = ({
                                 name="description"
                                 control={control}
                                 shouldUnregister={true}
-                                defaultValue={eventData?.event?.description}
+                                defaultValue={eventData?.event?.description || ""}
                                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                                     <TextField
                                         fullWidth
@@ -224,7 +224,7 @@ const Details = ({
                                 )}
                             />
                         ) : (
-                            eventData?.event?.description
+                            eventData?.event?.description || ""
                         )}
                     </Typography>
                 </Grid>
@@ -255,6 +255,7 @@ const Details = ({
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
                                                     <FormControlLabel
+                                                        key={idx}
                                                         control={
                                                             <Checkbox
                                                                 key={idx}
@@ -283,7 +284,7 @@ const Details = ({
                         ) : eventData?.event?.audience ? (
                             AudienceFormatter(eventData?.event?.audience)
                                 .split(",")
-                                .map((audience) => <Chip label={audience} sx={{ mx: 0.5 }} />)
+                                .map((audience,key) => <Chip key={key} label={audience} sx={{ mx: 0.5 }} />)
                         ) : (
                             <Box mx={1}>—</Box>
                         )}

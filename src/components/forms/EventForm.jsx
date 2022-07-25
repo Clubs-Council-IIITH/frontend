@@ -157,7 +157,7 @@ const EventForm = ({ form_id }) => {
                                         name={"audience"}
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={AudienceStringtoDict(activeEvent?.audience)}
+                                        defaultValue={AudienceStringtoDict(activeEvent?.audience || "")}
                                         render={({ field }) =>
                                             [
                                                 { value: "ug1", label: "UG1" },
@@ -166,12 +166,10 @@ const EventForm = ({ form_id }) => {
                                                 { value: "ugx", label: "UG4+" },
                                                 { value: "pg", label: "PG" },
                                                 { value: "staff", label: "Staff" },
-                                                {
-                                                    value: "faculty",
-                                                    label: "Faculty",
-                                                },
+                                                { value: "faculty", label: "Faculty" },
                                             ].map((audience, idx) => (
                                                 <FormControlLabel
+                                                    key={idx}
                                                     control={
                                                         <Checkbox
                                                             key={idx}

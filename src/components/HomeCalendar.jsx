@@ -23,7 +23,7 @@ const HomeCalendar = () => {
                 start: moment(e.datetimeStart).toDate(),
                 end: moment(e.datetimeEnd).toDate(),
                 title: e.name,
-            }))
+            })) || []
         );
     }, [data]);
 

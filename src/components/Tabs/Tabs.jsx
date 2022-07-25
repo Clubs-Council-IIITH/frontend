@@ -91,7 +91,7 @@ export const TabPanels = ({ tabs, controller: [value], routed, tabProps, ...prop
     return routed ? (
         <Switch>
             {tabs.map((tab, key) => (
-                <Route path={`${match.path !== "/" ? match.path : ""}${tab.route}`}>
+                <Route path={`${match.path !== "/" ? match.path : ""}${tab.route}`} key={key}>
                     <div
                         style={{ zIndex: -2 }}
                         key={key}

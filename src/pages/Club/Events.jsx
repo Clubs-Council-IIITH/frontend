@@ -61,7 +61,7 @@ const Events = ({ manage, setActions }) => {
 
     // event modal
     const [viewProps, setViewProps] = useState({});
-    const [viewModal, setViewModal] = useState(null);
+    const [viewModal, setViewModal] = useState(false);
 
     // event states to expand
     const [expandUpcoming, setExpandUpcoming] = useState(true);

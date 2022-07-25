@@ -83,11 +83,11 @@ const Members = ({ manage, setActions }) => {
 
     // add member/create user form modal
     const [formProps, setFormProps] = useState({});
-    const [formModal, setFormModal] = useState(null);
+    const [formModal, setFormModal] = useState(false);
 
     // delete confirmation modal
     const [deleteProps, setDeleteProps] = useState({});
-    const [deleteModal, setDeleteModal] = useState(null);
+    const [deleteModal, setDeleteModal] = useState(false);
 
     // open edit modal and autofill data of member with given `id`
     const triggerEdit = (id) => {

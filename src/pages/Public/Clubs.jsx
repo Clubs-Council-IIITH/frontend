@@ -29,8 +29,8 @@ const Clubs = () => {
         <Switch>
             <Route exact path={match.path}>
                 <Page header={"Clubs"} loading={loading} empty={!clubs?.length}>
-                    {Object.keys(ClubCategories).map((category) => (
-                        <>
+                    {Object.keys(ClubCategories).map((category,key) => (
+                        <div key={key}>
                             <Typography variant="h6" color="#888888" gutterBottom>
                                 {ClubCategories[category].toUpperCase()}
                             </Typography>
@@ -44,7 +44,7 @@ const Clubs = () => {
                                         </Grid>
                                     ))}
                             </Grid>
-                        </>
+                        </div>
                     ))}
                 </Page>
             </Route>

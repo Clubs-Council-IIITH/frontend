@@ -8,8 +8,8 @@ const ImageCarousel = ({ gradient, contents }) => {
 
     return (
         <Carousel indicators={false} navButtonsAlwaysVisible>
-            {contents.map((card) => (
-                <Card>
+            {contents.map((card, idx) => (
+                <Card key={idx}>
                     {gradient && (
                         <Box
                             sx={{
