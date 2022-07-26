@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@mui/styles";
 
@@ -38,7 +38,7 @@ const BudgetHeader = ({ items, loading }) => {
     return (
         <Grid container spacing={2}>
             <Grid item>
-                <Card variant="outlined" sx={{ p: 3 }}>
+                <Card variant="none" sx={{ p: 1 }}>
                     <Box display="flex" flexDirection="column">
                         <Typography
                             variant="body"
@@ -60,7 +60,7 @@ const BudgetHeader = ({ items, loading }) => {
                 </Card>
             </Grid>
             <Grid item>
-                <Card variant="outlined" sx={{ p: 3 }}>
+                <Card variant="none" sx={{ p: 1 }}>
                     <Box display="flex" flexDirection="column">
                         <Typography
                             variant="body"

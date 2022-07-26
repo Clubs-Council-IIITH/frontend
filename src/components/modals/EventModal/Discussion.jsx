@@ -5,24 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_CC_PENDING_EVENTS, ADMIN_GET_EVENT_FEEDBACK } from "queries/events";
 import { PROGRESS_EVENT, ADD_EVENT_FEEDBACK } from "mutations/events";
 
-import {
-    Button,
-    Grid,
-    Box,
-    Collapse,
-    Divider,
-    IconButton,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TextField,
-    TableRow,
-    Typography,
-    Paper,
-    Card,
-} from "@mui/material";
+import { Button, Box, TextField, Typography, Card } from "@mui/material";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 

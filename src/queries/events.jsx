@@ -109,6 +109,15 @@ export const ADMIN_GET_EVENT_FEEDBACK = gql`
     }
 `;
 
+export const ADMIN_GET_EVENT_STATE = gql`
+    query getEventById($id: Int) {
+        event(eventId: $id) {
+            id
+            state
+        }
+    }
+`;
+
 export const ADMIN_CC_PENDING_EVENTS = gql`
     query adminCcPendingEvents {
         adminCcPendingEvents {

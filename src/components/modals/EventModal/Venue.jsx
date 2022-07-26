@@ -5,7 +5,19 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_GET_ROOMS } from "queries/room";
 import { ADMIN_BOOK_ROOM } from "mutations/room";
 
-import { Grid, Skeleton, TextField, Typography, Select, FormLabel, MenuItem } from "@mui/material";
+import {
+    Grid,
+    Box,
+    Skeleton,
+    TextField,
+    Typography,
+    Select,
+    FormLabel,
+    MenuItem,
+    Tooltip,
+} from "@mui/material";
+
+import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
 
 import EventRooms from "constants/EventRooms";
 
@@ -45,6 +57,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
         population: 300,
         equipment: "Microphones and Projector",
         additional: "Access to venue required at least 1 hour before the event",
+        approved: true,
     };
     useEffect(() => setSelectedRoom(currentBooking.venue), []); // mutation onComplete hook
 
@@ -91,7 +104,18 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                             {currentBookingLoading ? (
                                 <Skeleton animation="wave" />
                             ) : currentBooking ? (
-                                EventRooms[currentBooking.venue] // TODO: approval status icon and tooltip
+                                <Box display="flex" alignItems="center">
+                                    <Box mr={1}>{EventRooms[currentBooking.venue]}</Box>
+                                    {currentBooking.approved ? (
+                                        <Tooltip arrow title="Approved">
+                                            <ApprovedIcon fontSize="small" color="success" />
+                                        </Tooltip>
+                                    ) : (
+                                        <Tooltip arrow title="Pending Approval">
+                                            <PendingIcon fontSize="small" color="warning" />
+                                        </Tooltip>
+                                    )}
+                                </Box>
                             ) : (
                                 "None"
                             )}
@@ -107,7 +131,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="population"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={null}
+                                    defaultValue={currentBooking?.population}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -151,7 +175,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="equipment"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={""}
+                                    defaultValue={currentBooking?.equipment}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -193,7 +217,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="additional"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={""}
+                                    defaultValue={currentBooking?.additional}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
