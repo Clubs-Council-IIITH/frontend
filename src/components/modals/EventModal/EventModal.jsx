@@ -33,6 +33,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         { title: "Discussion", panel: <Discussion /> },
     ];
     const tabController = useState(0);
+    useEffect(() => open && tabController[1](0), [open]);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] =
