@@ -60,7 +60,7 @@ const Discussion = ({ activeEventId, editing, setEditing }) => {
     };
 
     return (
-        <Box display="flex" flexDirection="column" overflow="hidden" height="100%">
+        <Box display="flex" flexDirection="column" overflow="hidden" height="300px" p={3}>
             <Box overflow="auto">
                 {discussionData?.eventFeedbackThread?.length === 0 ? (
                     <Empty />

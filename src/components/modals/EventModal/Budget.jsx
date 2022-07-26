@@ -163,10 +163,11 @@ const BudgetField = ({ activeEventId }) => {
                                 InputProps={{
                                     inputComponent: CurrencyInput,
                                 }}
-                                variant="outlined"
+                                variant="standard"
                                 value={value}
                                 onChange={onChange}
                                 error={!!error}
+                                InputLabelProps={{ shrink: true }}
                                 helperText={error ? error.message : null}
                                 sx={{ margin: 1 }}
                             />
@@ -183,10 +184,11 @@ const BudgetField = ({ activeEventId }) => {
                                 fullWidth
                                 label="Description*"
                                 placeholder="What is this money for?"
-                                variant="outlined"
+                                variant="standard"
                                 value={value}
                                 onChange={onChange}
                                 error={!!error}
+                                InputLabelProps={{ shrink: true }}
                                 helperText={error ? error.message : null}
                                 sx={{ margin: 1 }}
                             />

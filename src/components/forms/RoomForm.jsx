@@ -14,7 +14,7 @@ const RoomForm = ({ form_id }) => {
 
     const { control, handleSubmit } = useForm();
 
-    const [ rooms, setRooms ] = useState([]);
+    const [rooms, setRooms] = useState([]);
 
     const { loading } = useQuery(ADMIN_GET_ROOMS, {
         variables: { eventId: activeEvent?.id },
@@ -23,13 +23,10 @@ const RoomForm = ({ form_id }) => {
         },
     });
 
-    const [ bookRoom ] = useMutation(ADMIN_BOOK_ROOM, {
-        refetchQueries: [
-            ADMIN_GET_ROOMS,
-        ],
+    const [bookRoom] = useMutation(ADMIN_BOOK_ROOM, {
+        refetchQueries: [ADMIN_GET_ROOMS],
         awaitRefetchQueries: true,
     });
-
 
     const [selectedRoom, setSelectedRoom] = useState("none");
 
