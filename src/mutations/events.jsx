@@ -114,3 +114,22 @@ export const ADD_EVENT_FEEDBACK = gql`
         }
     }
 `;
+
+export const CHANGE_POSTER = gql`
+    mutation ChangePoster(
+        $eventId: ID!
+        $poster: Upload!
+    ) {
+        changePoster(
+            eventData: {
+                id: $eventId
+                poster: $poster
+            }
+        ) {
+            event {
+                eventId: id
+                poster
+            }
+        }
+    }
+`;

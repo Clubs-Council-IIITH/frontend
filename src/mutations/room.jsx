@@ -18,10 +18,7 @@ export const ADMIN_BOOK_ROOM = gql`
             }
         ) {
             event {
-                roomId
-                population
-                equipment
-                additional
+                id
             }
         }
     }

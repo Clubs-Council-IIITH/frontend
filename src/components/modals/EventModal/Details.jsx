@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
-import { CREATE_EVENT, UPDATE_EVENT } from "mutations/events";
+import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 
 import {
@@ -9,6 +9,7 @@ import {
     Chip,
     Box,
     Grid,
+    Button,
     Typography,
     TextField,
     FormControl,
@@ -17,7 +18,7 @@ import {
     FormControlLabel,
     Checkbox,
 } from "@mui/material";
-import { EventOutlined as DatetimeIcon, GroupOutlined as AudienceIcon } from "@mui/icons-material";
+import { EventOutlined as DatetimeIcon, GroupOutlined as AudienceIcon, Wallpaper as PosterIcon } from "@mui/icons-material";
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
@@ -38,7 +39,6 @@ const Details = ({
         awaitRefetchQueries: true,
         onCompleted: ({ createEvent: { event } }) => {
             setActiveEventId(event.id);
-            setEditing(false);
         },
     });
 
@@ -48,6 +48,12 @@ const Details = ({
             GET_CLUB_EVENTS,
             ADMIN_GET_CLUB_EVENTS,
         ],
+        awaitRefetchQueries: true,
+    });
+
+    // send the new poster
+    const [changePoster] = useMutation(CHANGE_POSTER, {
+        refetchQueries: [GET_EVENT_BY_ID],
         awaitRefetchQueries: true,
     });
 
@@ -301,6 +307,47 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
+
+                {editing ? (
+                    <Grid item xs={12} mt={2}>
+                        <Box display="flex" alignItems="center">
+                            <PosterIcon sx={{ mr: 1 }} />
+                            {eventLoading ? (
+                                <Skeleton animation="wave" width={200} />
+                            ) : (
+                                <FormControl component="fieldset" sx={{ ml: 1 }}>
+                                    <FormGroup>
+                                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
+                                            Event Poster
+                                        </FormLabel>
+                                        <Box>
+                                            <Controller
+                                                name="poster"
+                                                control={control}
+                                                shouldUnregister={true}
+                                                defaultValue={{}}
+                                                render={({ field }) =>
+                                                    <Button
+                                                        variant="outlined"
+                                                        component="label">
+                                                            Upload
+                                                            <input
+                                                                name="poster"
+                                                                type="file"
+                                                                accept="image/png, image/jpeg, image/jpg"
+                                                                onChange={(e) => field.onChange( e?.target?.files[0] )}
+                                                                hidden
+                                                            />
+                                                    </Button>
+                                                }
+                                            />
+                                        </Box>
+                                    </FormGroup>
+                                </FormControl>
+                            )}
+                        </Box>
+                    </Grid>
+                ) : null}
 
                 {/* <Grid item xs={12}> */}
                 {/*     venue */}
