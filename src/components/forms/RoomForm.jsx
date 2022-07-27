@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { EventFormContext } from "contexts/EventFormContext";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { ADMIN_GET_ROOMS } from "queries/room";
+import { ADMIN_AVAILABLE_ROOMS, ADMIN_ROOM_BY_EVENT_ID } from "queries/room";
 import { ADMIN_BOOK_ROOM } from "mutations/room";
 
 import { Grid, Box, TextField, Typography, Select, InputLabel, MenuItem } from "@mui/material";
@@ -15,25 +15,31 @@ const RoomForm = ({ form_id }) => {
     const { control, handleSubmit } = useForm();
 
     const [rooms, setRooms] = useState([]);
+    const [selectedRoom, setSelectedRoom] = useState({});
 
-    const { loading } = useQuery(ADMIN_GET_ROOMS, {
+    const { loading } = useQuery(ADMIN_AVAILABLE_ROOMS, {
         variables: { eventId: activeEvent?.id },
         onCompleted: (data) => {
-            setRooms(data?.adminGetRooms);
+            setRooms(data?.availableRooms || []);
+        },
+    });
+
+    const { loading: roomsLoading } = useQuery(ADMIN_ROOM_BY_EVENT_ID, {
+        variables: { eventId: activeEvent?.id },
+        onCompleted: (data) => {
+            setSelectedRoom(data?.room || {});
         },
     });
 
     const [bookRoom] = useMutation(ADMIN_BOOK_ROOM, {
-        refetchQueries: [ADMIN_GET_ROOMS],
+        refetchQueries: [ADMIN_ROOM_BY_EVENT_ID],
         awaitRefetchQueries: true,
     });
-
-    const [selectedRoom, setSelectedRoom] = useState("none");
 
     const onSubmit = async (data) => {
         const transformedData = {
             ...data,
-            room: selectedRoom,
+            room: selectedRoom?.room,
             eventId: activeEvent?.id,
         };
 
@@ -54,8 +60,8 @@ const RoomForm = ({ form_id }) => {
                         <Select
                             fullWidth
                             name="venue"
-                            value={selectedRoom}
-                            onChange={(e) => setSelectedRoom(e.target.value)}
+                            value={selectedRoom?.room}
+                            onChange={(e) => setSelectedRoom({...selectedRoom, room: e.target.value})}
                         >
                             {rooms?.map(({ room, available }) => (
                                 <MenuItem value={room} disabled={!available}>
@@ -65,14 +71,14 @@ const RoomForm = ({ form_id }) => {
                         </Select>
                     </Grid>
 
-                    {selectedRoom !== "none" && (
+                    {selectedRoom?.room !== "none" && (
                         <>
                             <Grid item xs={12}>
                                 <Controller
                                     name="population"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={null}
+                                    defaultValue={selectedRoom?.population || ""}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -100,7 +106,7 @@ const RoomForm = ({ form_id }) => {
                                     name="equipment"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={""}
+                                    defaultValue={selectedRoom?.equipment || ""}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -126,7 +132,7 @@ const RoomForm = ({ form_id }) => {
                                     name="additional"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={""}
+                                    defaultValue={selectedRoom?.additional || ""}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },

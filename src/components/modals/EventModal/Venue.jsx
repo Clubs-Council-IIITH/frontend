@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { ADMIN_GET_ROOMS } from "queries/room";
+import { ADMIN_AVAILABLE_ROOMS, ADMIN_ROOM_BY_EVENT_ID } from "queries/room";
 import { ADMIN_BOOK_ROOM } from "mutations/room";
 
 import {
@@ -19,22 +19,26 @@ import {
 
 import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
 
-import EventRooms from "constants/EventRooms";
-
 const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) => {
     const { control, handleSubmit } = useForm();
 
-    const { data: roomsData, loading: roomsLoading } = useQuery(ADMIN_GET_ROOMS, {
+    const [selectedRoom, setSelectedRoom] = useState("none");
+
+    const { data: rooms, loading: roomsLoading } = useQuery(ADMIN_AVAILABLE_ROOMS, {
         variables: { eventId: activeEventId },
     });
 
-    const [bookRoom] = useMutation(ADMIN_BOOK_ROOM, {
-        refetchQueries: [ADMIN_GET_ROOMS],
-        awaitRefetchQueries: true,
+    const { data: currentBooking, loading: currentBookingLoading } = useQuery(ADMIN_ROOM_BY_EVENT_ID, {
+        variables: { eventId: activeEventId },
+        onCompleted: (data) => {
+            setSelectedRoom(data?.adminRoomByEventId?.room || "none");
+        },
     });
 
-    // currently selected room
-    const [selectedRoom, setSelectedRoom] = useState("none");
+    const [bookRoom] = useMutation(ADMIN_BOOK_ROOM, {
+        refetchQueries: [ADMIN_ROOM_BY_EVENT_ID],
+        awaitRefetchQueries: true,
+    });
 
     const onSubmit = async (data) => {
         const transformedData = {
@@ -49,17 +53,6 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
         // stop editing
         setEditing(false);
     };
-
-    // TODO: replace with API Call
-    const currentBookingLoading = false;
-    const currentBooking = {
-        venue: "Vindhya_sh1",
-        population: 300,
-        equipment: "Microphones and Projector",
-        additional: "Access to venue required at least 1 hour before the event",
-        approved: true,
-    };
-    useEffect(() => setSelectedRoom(currentBooking.venue), []); // mutation onComplete hook
 
     return (
         <form
@@ -92,9 +85,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     </MenuItem>
                                 </>
                             ) : (
-                                roomsData?.adminGetRooms?.map(({ room, available }, idx) => (
+                                rooms?.adminAvailableRooms?.map(({ room, available }, idx) => (
                                     <MenuItem key={idx} value={room} disabled={!available}>
-                                        {EventRooms[room]}
+                                        {room}
                                     </MenuItem>
                                 ))
                             )}
@@ -103,27 +96,18 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                         <Typography variant="h5" mt={1}>
                             {currentBookingLoading ? (
                                 <Skeleton animation="wave" />
-                            ) : currentBooking ? (
+                            ) : currentBooking?.adminRoomByEventId?.room ? (
                                 <Box display="flex" alignItems="center">
-                                    <Box mr={1}>{EventRooms[currentBooking.venue]}</Box>
-                                    {currentBooking.approved ? (
-                                        <Tooltip arrow title="Approved">
-                                            <ApprovedIcon fontSize="small" color="success" />
-                                        </Tooltip>
-                                    ) : (
-                                        <Tooltip arrow title="Pending Approval">
-                                            <PendingIcon fontSize="small" color="warning" />
-                                        </Tooltip>
-                                    )}
+                                    <Box mr={1}>{currentBooking.adminRoomByEventId.room}</Box>
                                 </Box>
                             ) : (
-                                "None"
+                                "none"
                             )}
                         </Typography>
                     )}
                 </Grid>
 
-                {selectedRoom !== "none" && (
+                { (( editing && selectedRoom && selectedRoom !== "none" ) || ( !editing && !currentBookingLoading && currentBooking?.adminRoomByEventId?.room && currentBooking?.adminRoomByEventId?.room !== "none" )) && (
                     <Grid item container mt={0} spacing={3}>
                         <Grid item xs={12}>
                             {editing ? (
@@ -131,7 +115,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="population"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={currentBooking?.population}
+                                    defaultValue={currentBooking?.adminRoomByEventId?.population || ""}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -161,9 +145,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     <Typography variant="body1">
                                         {currentBookingLoading ? (
                                             <Skeleton animation="wave" />
-                                        ) : currentBooking ? (
-                                            currentBooking.population
-                                        ) : null}
+                                        ) : currentBooking?.adminRoomByEventId?.population ? (
+                                            currentBooking.adminRoomByEventId.population
+                                        ) : ""}
                                     </Typography>
                                 </>
                             )}
@@ -175,7 +159,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="equipment"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={currentBooking?.equipment}
+                                    defaultValue={currentBooking?.adminRoomByEventId?.equipment || ""}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -203,9 +187,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     <Typography variant="body1">
                                         {currentBookingLoading ? (
                                             <Skeleton animation="wave" />
-                                        ) : currentBooking ? (
-                                            currentBooking.equipment
-                                        ) : null}
+                                        ) : currentBooking?.adminRoomByEventId?.equipment ? (
+                                            currentBooking.adminRoomByEventId.equipment
+                                        ) : ""}
                                     </Typography>
                                 </>
                             )}
@@ -217,7 +201,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="additional"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={currentBooking?.additional}
+                                    defaultValue={currentBooking?.adminRoomByEventId?.additional}
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -245,9 +229,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     <Typography variant="body1">
                                         {currentBookingLoading ? (
                                             <Skeleton animation="wave" />
-                                        ) : currentBooking ? (
-                                            currentBooking.additional
-                                        ) : null}
+                                        ) : currentBooking?.adminRoomByEventId?.additional ? (
+                                            currentBooking.adminRoomByEventId.additional
+                                        ) : ""}
                                     </Typography>
                                 </>
                             )}
