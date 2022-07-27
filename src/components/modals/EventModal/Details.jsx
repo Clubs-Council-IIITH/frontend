@@ -22,6 +22,7 @@ import {
     EventOutlined as DatetimeIcon,
     GroupOutlined as AudienceIcon,
     Wallpaper as PosterIcon,
+    DeleteOutline as TrashIcon
 } from "@mui/icons-material";
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
@@ -49,7 +50,7 @@ const Details = ({
 
     const [updateEvent] = useMutation(UPDATE_EVENT, {
         refetchQueries: [
-            { query: GET_EVENT_BY_ID, variables: { id: activeEventId } },
+            GET_EVENT_BY_ID,
             GET_CLUB_EVENTS,
             ADMIN_GET_CLUB_EVENTS,
         ],
@@ -349,6 +350,54 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
+
+                {editing ? (
+                    <Grid item xs={12} mt={2}>
+                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
+                            Poster
+                        </FormLabel>
+
+                        <Box display="flex" alignItems="center">
+                            <PosterIcon sx={{ mr: 1 }} />
+                            {eventLoading ? (
+                                <Skeleton animation="wave" width={200} />
+                            ) : (
+                                <FormControl component="fieldset" sx={{ ml: 1 }}>
+                                    <FormGroup>
+                                        <Box>
+                                            <Controller
+                                                name="poster"
+                                                control={control}
+                                                shouldUnregister={true}
+                                                defaultValue={null}
+                                                render={({ field }) => <>
+                                                    <Button
+                                                        variant="outlined"
+                                                        component="label">
+                                                            Upload
+                                                            <input
+                                                                name="poster"
+                                                                type="file"
+                                                                accept="image/png, image/jpeg, image/jpg"
+                                                                onChange={(e) => field.onChange( e?.target?.files[0] )}
+                                                                hidden
+                                                            />
+                                                    </Button>
+                                                    <Button
+                                                        variant="text"
+                                                        onClick={(e) => field.onChange(null)}
+                                                        component="label">
+                                                            <TrashIcon/>
+                                                    </Button>
+                                                </>}
+                                            />
+                                        </Box>
+                                    </FormGroup>
+                                </FormControl>
+                            )}
+                        </Box>
+                    </Grid>
+                ) : null}
             </Grid>
         </form>
     );
