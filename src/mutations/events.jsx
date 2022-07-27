@@ -2,7 +2,6 @@ import { gql } from "@apollo/client";
 
 export const CREATE_EVENT = gql`
     mutation createEventMutation(
-        $poster: Upload
         $datetimeStart: DateTime
         $datetimeEnd: DateTime
         $name: String!
@@ -11,7 +10,6 @@ export const CREATE_EVENT = gql`
     ) {
         createEvent(
             eventData: {
-                poster: $poster
                 datetimeStart: $datetimeStart
                 datetimeEnd: $datetimeEnd
                 name: $name
@@ -39,7 +37,6 @@ export const CREATE_EVENT = gql`
 export const UPDATE_EVENT = gql`
     mutation updateEventMutation(
         $id: ID!
-        $poster: Upload
         $datetimeStart: DateTime
         $datetimeEnd: DateTime
         $name: String!
@@ -49,7 +46,6 @@ export const UPDATE_EVENT = gql`
         updateEvent(
             eventData: {
                 id: $id
-                poster: $poster
                 datetimeStart: $datetimeStart
                 datetimeEnd: $datetimeEnd
                 name: $name
@@ -118,12 +114,14 @@ export const ADD_EVENT_FEEDBACK = gql`
 export const CHANGE_POSTER = gql`
     mutation ChangePoster(
         $eventId: ID!
-        $poster: Upload
+        $img: Upload
+        $deletePrev: Boolean
     ) {
         changePoster(
-            eventData: {
-                id: $eventId
-                poster: $poster
+            posterData: {
+                eventId: $eventId
+                img: $img
+                deletePrev: $deletePrev
             }
         ) {
             event {

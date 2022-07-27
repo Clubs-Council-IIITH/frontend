@@ -65,8 +65,10 @@ const Details = ({
 
     // submit form
     const onSubmit = async (data) => {
+        // remove rawPoster from the data and format audience
         const transformedData = {
             ...data,
+            rawPoster: null,
             audience: Object.entries(data.audience)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
@@ -77,6 +79,9 @@ const Details = ({
         await (activeEventId
             ? updateEvent({ variables: { ...transformedData, id: activeEventId } })
             : createEvent({ variables: { ...transformedData } }));
+
+        // add the poster
+        await changePoster({ variables: { ...data?.rawPoster, eventId: activeEventId } })
 
         // stop editing
         setEditing(false);
@@ -366,30 +371,42 @@ const Details = ({
                                     <FormGroup>
                                         <Box>
                                             <Controller
-                                                name="poster"
+                                                name="rawPoster"
                                                 control={control}
                                                 shouldUnregister={true}
-                                                defaultValue={null}
-                                                render={({ field }) => <>
+                                                defaultValue={{ img: null, deletePrev: false }}
+                                                render={({ field }) =>
+                                                    <>
                                                     <Button
                                                         variant="outlined"
-                                                        component="label">
-                                                            Upload
-                                                            <input
-                                                                name="poster"
-                                                                type="file"
-                                                                accept="image/png, image/jpeg, image/jpg"
-                                                                onChange={(e) => field.onChange( e?.target?.files[0] )}
-                                                                hidden
-                                                            />
+                                                        component="label"
+                                                    >
+                                                        Upload
+                                                        <input
+                                                            name="poster"
+                                                            type="file"
+                                                            accept="image/png, image/jpeg, image/jpg"
+                                                            onChange={(e) => field.onChange( {
+                                                                img: e?.target?.files[0],
+                                                                deletePrev: true,
+                                                            } )}
+                                                            hidden
+                                                        />
                                                     </Button>
-                                                    <Button
-                                                        variant="text"
-                                                        onClick={(e) => field.onChange(null)}
-                                                        component="label">
+                                                    { field?.value?.img !== null || ( !field?.value?.deletePrev && !!eventData?.event?.poster ) ? (
+                                                        <Button
+                                                            variant="text"
+                                                            component="label"
+                                                            onClick={(e) => field.onChange( {
+                                                                img: null,
+                                                                deletePrev: true,
+                                                            } )}
+                                                        >
                                                             <TrashIcon/>
-                                                    </Button>
-                                                </>}
+                                                        </Button>
+                                                    ) : null }
+                                                    </>
+                                                }
                                             />
                                         </Box>
                                     </FormGroup>
