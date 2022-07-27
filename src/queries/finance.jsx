@@ -7,6 +7,7 @@ export const ADMIN_GET_EVENT_BUDGET = gql`
             id
             amount
             description
+            reimbursable
         }
     }
 `;

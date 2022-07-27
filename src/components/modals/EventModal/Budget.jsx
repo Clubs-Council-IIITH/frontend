@@ -21,6 +21,11 @@ import {
     TableHead,
     TableRow,
     Paper,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    Radio,
+    FormControlLabel,
 } from "@mui/material";
 import {
     Done as AddIcon,
@@ -101,6 +106,9 @@ const BudgetItem = ({ item, activeEventId, editing }) => {
                 <CurrencyText value={item?.amount} />
             </TableCell>
             <TableCell sx={{ fontSize: "1em" }}>{item?.description}</TableCell>
+            <TableCell sx={{ fontSize: "1em" }}>
+                {item?.reimbursable ? "Reimbursement" : "Advance"}
+            </TableCell>
             <TableCell align="right">
                 <Box visibility={editing ? "visible" : "hidden"}>
                     <IconButton type="button" color="error" onClick={handleDelete}>
@@ -150,52 +158,88 @@ const BudgetField = ({ activeEventId }) => {
             }}
         >
             <Box display="flex" alignItems="center">
-                <Box display="flex" width="100%">
-                    <Controller
-                        name="amount"
-                        control={control}
-                        shouldUnregister={true}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                label="Amount*"
-                                placeholder="₹ 0"
-                                InputProps={{
-                                    inputComponent: CurrencyInput,
-                                }}
-                                variant="standard"
-                                value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                InputLabelProps={{ shrink: true }}
-                                helperText={error ? error.message : null}
-                                sx={{ margin: 1 }}
-                            />
-                        )}
-                        rules={{ required: "Amount can not be empty!" }}
-                    />
-                    <Controller
-                        name="description"
-                        control={control}
-                        shouldUnregister={true}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                fullWidth
-                                label="Description*"
-                                placeholder="What is this money for?"
-                                variant="standard"
-                                value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                InputLabelProps={{ shrink: true }}
-                                helperText={error ? error.message : null}
-                                sx={{ margin: 1 }}
-                            />
-                        )}
-                        rules={{ required: "Description can not be empty!" }}
-                    />
-                </Box>
+                <Grid container px={1} spacing={2}>
+                    <Grid item xs={3}>
+                        <Controller
+                            name="amount"
+                            control={control}
+                            shouldUnregister={true}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    label="Amount*"
+                                    placeholder="₹ 0"
+                                    InputProps={{
+                                        inputComponent: CurrencyInput,
+                                    }}
+                                    variant="standard"
+                                    value={value}
+                                    onChange={onChange}
+                                    error={!!error}
+                                    InputLabelProps={{ shrink: true }}
+                                    helperText={error ? error.message : null}
+                                />
+                            )}
+                            rules={{ required: "Amount can not be empty!" }}
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Controller
+                            name="description"
+                            control={control}
+                            shouldUnregister={true}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    fullWidth
+                                    label="Description*"
+                                    placeholder="What is this money for?"
+                                    variant="standard"
+                                    value={value}
+                                    onChange={onChange}
+                                    error={!!error}
+                                    InputLabelProps={{ shrink: true }}
+                                    helperText={error ? error.message : null}
+                                />
+                            )}
+                            rules={{ required: "Description can not be empty!" }}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Controller
+                            name="reimbursable"
+                            control={control}
+                            shouldUnregister={true}
+                            defaultValue={false}
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <Box display="flex" justifyContent="center" width="100%">
+                                    <FormControl>
+                                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
+                                            Type
+                                        </FormLabel>
+                                        <RadioGroup
+                                            row
+                                            name="reimbursable"
+                                            value={value}
+                                            onChange={onChange}
+                                        >
+                                            <FormControlLabel
+                                                value={false}
+                                                control={<Radio />}
+                                                label="Advance"
+                                            />
+                                            <FormControlLabel
+                                                value={true}
+                                                control={<Radio />}
+                                                label="Reimbursement"
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Box>
+                            )}
+                        />
+                    </Grid>
+                </Grid>
                 <Box display="flex" alignItems="center" mx={1}>
                     <IconButton type="button" color="success" onClick={handleSubmit(onSubmit)}>
                         <AddIcon />
@@ -254,6 +298,7 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
                                     <TableRow>
                                         <TableCell> Amount </TableCell>
                                         <TableCell> Description </TableCell>
+                                        <TableCell> Type </TableCell>
                                         <TableCell align="right"> </TableCell>
                                     </TableRow>
                                 </TableHead>
