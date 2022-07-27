@@ -35,23 +35,26 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const tabController = useState(0);
     useEffect(() => open && tabController[1](0), [open]);
 
-
     // modal states
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
+    const [currentPoster, setCurrentPoster] = useState(EVENT_POSTER_PLACEHOLDER);
 
     // fetch event details
-    const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(GET_EVENT_BY_ID, {
-        variables: {
-            id: activeEventId,
-        },
-    });
+    const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
+        GET_EVENT_BY_ID,
+        { variables: { id: activeEventId } }
+    );
 
     // update all states whenever eventId changes
     useEffect(() => setActiveEventId(eventId), [eventId, open]);
     useEffect(() => setEditing(!eventId), [eventId, open]);
     useEffect(() => setDeleting(false), [eventId, open]);
+    useEffect(
+        () => setCurrentPoster(eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER),
+        [eventData, open]
+    );
 
     // fetch new event details whenever active event id changes
     useEffect(() => getEventData(), [activeEventId]);
@@ -66,6 +69,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setEditing,
         deleting,
         setDeleting,
+        currentPoster,
+        setCurrentPoster,
     };
 
     // action handlers
@@ -141,15 +146,13 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     return (
         <Modal controller={[open, setOpen]}>
             <Card variant="none">
-                <CardMedia
-                    component="img"
-                    height={140}
-                    image={
-                        eventLoading
-                        ?   EVENT_POSTER_PLACEHOLDER
-                        :   eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER
-                    }
-                />
+                <Box component={editing ? "div" : CardActionArea}>
+                    <CardMedia
+                        component="img"
+                        height={140}
+                        image={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
+                    />
+                </Box>
 
                 <ModalBody full>
                     {manage && activeEventId ? (

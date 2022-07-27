@@ -18,7 +18,11 @@ import {
     FormControlLabel,
     Checkbox,
 } from "@mui/material";
-import { EventOutlined as DatetimeIcon, GroupOutlined as AudienceIcon, Wallpaper as PosterIcon } from "@mui/icons-material";
+import {
+    EventOutlined as DatetimeIcon,
+    GroupOutlined as AudienceIcon,
+    Wallpaper as PosterIcon,
+} from "@mui/icons-material";
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
@@ -31,6 +35,7 @@ const Details = ({
     eventLoading,
     editing,
     setEditing,
+    setCurrentPoster,
 }) => {
     const { control, handleSubmit } = useForm();
 
@@ -99,78 +104,115 @@ const Details = ({
         >
             <Grid container p={3} spacing={2}>
                 <Grid item xs={12}>
-                    <Box display="flex" alignItems="center">
-                        <DatetimeIcon fontSize="small" sx={{ mr: 1 }} />
+                    <Box display="flex" justifyContent="space-between">
+                        <Box display="flex" alignItems="center">
+                            <DatetimeIcon fontSize="small" sx={{ mr: 1 }} />
 
-                        <Typography variant="subtitle1">
-                            {eventLoading ? (
-                                <Skeleton animation="wave" width={100} />
-                            ) : editing ? (
-                                <Controller
-                                    name="datetimeStart"
-                                    control={control}
-                                    shouldUnregister={true}
-                                    defaultValue={ISOtoHTML(eventData?.event?.datetimeStart)}
-                                    render={({
-                                        field: { onChange, value },
-                                        fieldState: { error },
-                                    }) => (
-                                        <TextField
-                                            label="From*"
-                                            type="datetime-local"
-                                            placeholder=""
-                                            variant="standard"
-                                            value={value}
-                                            onChange={onChange}
-                                            error={error}
-                                            InputLabelProps={{ shrink: true }}
-                                            helperText={error ? error.message : null}
+                            <Typography variant="subtitle1">
+                                {eventLoading ? (
+                                    <Skeleton animation="wave" width={100} />
+                                ) : editing ? (
+                                    <Controller
+                                        name="datetimeStart"
+                                        control={control}
+                                        shouldUnregister={true}
+                                        defaultValue={ISOtoHTML(eventData?.event?.datetimeStart)}
+                                        render={({
+                                            field: { onChange, value },
+                                            fieldState: { error },
+                                        }) => (
+                                            <TextField
+                                                label="From*"
+                                                type="datetime-local"
+                                                placeholder=""
+                                                variant="standard"
+                                                value={value}
+                                                onChange={onChange}
+                                                error={error}
+                                                InputLabelProps={{ shrink: true }}
+                                                helperText={error ? error.message : null}
+                                            />
+                                        )}
+                                        rules={{
+                                            required: "Event start time can not be empty!",
+                                        }}
+                                    />
+                                ) : (
+                                    ISOtoDT(eventData?.event?.datetimeStart).datetime
+                                )}
+                            </Typography>
+
+                            <Box mx={1}>—</Box>
+
+                            <Typography variant="subtitle1">
+                                {eventLoading ? (
+                                    <Skeleton animation="wave" width={100} />
+                                ) : editing ? (
+                                    <Controller
+                                        name="datetimeEnd"
+                                        control={control}
+                                        shouldUnregister={true}
+                                        defaultValue={ISOtoHTML(eventData?.event?.datetimeEnd)}
+                                        render={({
+                                            field: { onChange, value },
+                                            fieldState: { error },
+                                        }) => (
+                                            <TextField
+                                                label="To*"
+                                                type="datetime-local"
+                                                placeholder=""
+                                                variant="standard"
+                                                value={value}
+                                                onChange={onChange}
+                                                error={error}
+                                                InputLabelProps={{ shrink: true }}
+                                                helperText={error ? error.message : null}
+                                            />
+                                        )}
+                                        rules={{
+                                            required: "Event end time can not be empty!",
+                                        }}
+                                    />
+                                ) : (
+                                    ISOtoDT(eventData?.event?.datetimeEnd).datetime
+                                )}
+                            </Typography>
+                        </Box>
+
+                        {editing ? (
+                            <Box display="flex" alignItems="center">
+                                <PosterIcon sx={{ mr: 1 }} />
+                                <FormControl component="fieldset">
+                                    <FormGroup>
+                                        <Controller
+                                            name="poster"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={null}
+                                            render={({ field }) => (
+                                                <Button variant="outlined" component="label">
+                                                    Upload Poster
+                                                    <input
+                                                        name="poster"
+                                                        type="file"
+                                                        accept="image/png, image/jpeg, image/jpg"
+                                                        onChange={(e) => {
+                                                            field.onChange(e?.target?.files[0]);
+                                                            setCurrentPoster(
+                                                                URL.createObjectURL(
+                                                                    e?.target?.files[0]
+                                                                )
+                                                            );
+                                                        }}
+                                                        hidden
+                                                    />
+                                                </Button>
+                                            )}
                                         />
-                                    )}
-                                    rules={{
-                                        required: "Event start time can not be empty!",
-                                    }}
-                                />
-                            ) : (
-                                ISOtoDT(eventData?.event?.datetimeStart).datetime
-                            )}
-                        </Typography>
-
-                        <Box mx={1}>—</Box>
-
-                        <Typography variant="subtitle1">
-                            {eventLoading ? (
-                                <Skeleton animation="wave" width={100} />
-                            ) : editing ? (
-                                <Controller
-                                    name="datetimeEnd"
-                                    control={control}
-                                    shouldUnregister={true}
-                                    defaultValue={ISOtoHTML(eventData?.event?.datetimeEnd)}
-                                    render={({
-                                        field: { onChange, value },
-                                        fieldState: { error },
-                                    }) => (
-                                        <TextField
-                                            label="To*"
-                                            type="datetime-local"
-                                            placeholder=""
-                                            variant="standard"
-                                            value={value}
-                                            onChange={onChange}
-                                            error={error}
-                                            InputLabelProps={{ shrink: true }}
-                                            helperText={error ? error.message : null}
-                                        />
-                                    )}
-                                    rules={{
-                                        required: "Event end time can not be empty!",
-                                    }}
-                                />
-                            ) : (
-                                ISOtoDT(eventData?.event?.datetimeEnd).datetime
-                            )}
-                        </Typography>
+                                    </FormGroup>
+                                </FormControl>
+                            </Box>
+                        ) : null}
                     </Box>
                 </Grid>
 
@@ -307,51 +349,6 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
-
-                {editing ? (
-                    <Grid item xs={12} mt={2}>
-                        <Box display="flex" alignItems="center">
-                            <PosterIcon sx={{ mr: 1 }} />
-                            {eventLoading ? (
-                                <Skeleton animation="wave" width={200} />
-                            ) : (
-                                <FormControl component="fieldset" sx={{ ml: 1 }}>
-                                    <FormGroup>
-                                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                                            Event Poster
-                                        </FormLabel>
-                                        <Box>
-                                            <Controller
-                                                name="poster"
-                                                control={control}
-                                                shouldUnregister={true}
-                                                defaultValue={{}}
-                                                render={({ field }) =>
-                                                    <Button
-                                                        variant="outlined"
-                                                        component="label">
-                                                            Upload
-                                                            <input
-                                                                name="poster"
-                                                                type="file"
-                                                                accept="image/png, image/jpeg, image/jpg"
-                                                                onChange={(e) => field.onChange( e?.target?.files[0] )}
-                                                                hidden
-                                                            />
-                                                    </Button>
-                                                }
-                                            />
-                                        </Box>
-                                    </FormGroup>
-                                </FormControl>
-                            )}
-                        </Box>
-                    </Grid>
-                ) : null}
-
-                {/* <Grid item xs={12}> */}
-                {/*     venue */}
-                {/* </Grid> */}
             </Grid>
         </form>
     );
