@@ -4,7 +4,7 @@ import { useTheme } from "@mui/styles";
 import { Modal as MuiModal, Fade, IconButton, Box, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
-export const Modal = ({ controller: [open, setOpen], children }) => {
+export const Modal = ({ controller: [open, setOpen], transparent = false, children }) => {
     const theme = useTheme();
 
     // load modal closed
@@ -26,7 +26,7 @@ export const Modal = ({ controller: [open, setOpen], children }) => {
             <Fade in={open}>
                 <Box
                     sx={{
-                        backgroundColor: theme.palette.background.paper,
+                        backgroundColor: transparent ? "none" : theme.palette.background.paper,
                         borderRadius: theme.borderRadius,
                         outline: "none",
                     }}
