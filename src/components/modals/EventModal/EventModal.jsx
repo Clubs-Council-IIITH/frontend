@@ -35,14 +35,18 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const tabController = useState(0);
     useEffect(() => open && tabController[1](0), [open]);
 
-    // fetch event details
-    const [getEventData, { data: eventData, loading: eventLoading }] =
-        useLazyQuery(GET_EVENT_BY_ID);
 
     // modal states
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
+
+    // fetch event details
+    const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(GET_EVENT_BY_ID, {
+        variables: {
+            id: activeEventId,
+        },
+    });
 
     // update all states whenever eventId changes
     useEffect(() => setActiveEventId(eventId), [eventId, open]);
@@ -50,7 +54,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     useEffect(() => setDeleting(false), [eventId, open]);
 
     // fetch new event details whenever active event id changes
-    useEffect(() => getEventData({ variables: { id: activeEventId } }), [activeEventId]);
+    useEffect(() => getEventData(), [activeEventId]);
 
     // pass down props to each tab
     const tabProps = {
@@ -137,39 +141,15 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     return (
         <Modal controller={[open, setOpen]}>
             <Card variant="none">
-                {editing ? (
-                    eventLoading ? (
-                        <Skeleton variant="rectangular" animation="wave" height={140} />
-                    ) : (
-                        <Box position="relative">
-                            <CardMedia
-                                component="img"
-                                height={140}
-                                image={eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER}
-                            />
-
-                            <Button
-                                variant="contained"
-                                disableElevation
-                                sx={{ position: "absolute", bottom: 0, right: 0, m: 2 }}
-                            >
-                                Upload Poster
-                            </Button>
-                        </Box>
-                    )
-                ) : (
-                    <CardActionArea>
-                        {eventLoading ? (
-                            <Skeleton variant="rectangular" animation="wave" height={140} />
-                        ) : (
-                            <CardMedia
-                                component="img"
-                                height={140}
-                                image={eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER}
-                            />
-                        )}
-                    </CardActionArea>
-                )}
+                <CardMedia
+                    component="img"
+                    height={140}
+                    image={
+                        eventLoading
+                        ?   EVENT_POSTER_PLACEHOLDER
+                        :   eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER
+                    }
+                />
 
                 <ModalBody full>
                     {manage && activeEventId ? (
