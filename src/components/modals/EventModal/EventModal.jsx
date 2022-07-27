@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-    Skeleton,
+    Typography,
     Divider,
     Button,
     Box,
@@ -8,10 +8,19 @@ import {
     CardMedia,
     CardActionArea,
     CardActions,
+    Fade,
 } from "@mui/material";
+import { ArrowBack as BackIcon } from "@mui/icons-material";
 
-import { useLazyQuery } from "@apollo/client";
-import { GET_EVENT_BY_ID } from "queries/events";
+import { useMutation, useLazyQuery } from "@apollo/client";
+import { DELETE_EVENT } from "mutations/events";
+import {
+    ADMIN_GET_CLUB_EVENTS,
+    GET_CLUB_EVENTS,
+    ADMIN_GET_ALL_EVENTS,
+    GET_ALL_EVENTS,
+    GET_EVENT_BY_ID,
+} from "queries/events";
 
 import { Modal, ModalBody, ModalFooter } from "components/modals";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -40,6 +49,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
     const [currentPoster, setCurrentPoster] = useState(EVENT_POSTER_PLACEHOLDER);
+    const [expandPoster, setExpandPoster] = useState(false);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
@@ -47,14 +57,26 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         { variables: { id: activeEventId } }
     );
 
+    // delete event
+    const [deleteEvent, { error: deleteError }] = useMutation(DELETE_EVENT, {
+        refetchQueries: [
+            GET_ALL_EVENTS,
+            ADMIN_GET_ALL_EVENTS,
+            GET_CLUB_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+        ],
+        awaitRefetchQueries: true,
+    });
+
     // update all states whenever eventId changes
-    useEffect(() => setActiveEventId(eventId), [eventId, open]);
-    useEffect(() => setEditing(!eventId), [eventId, open]);
-    useEffect(() => setDeleting(false), [eventId, open]);
+    useEffect(() => open && setActiveEventId(eventId), [eventId, open]);
+    useEffect(() => open && setEditing(!eventId), [eventId, open]);
+    useEffect(() => open && setDeleting(false), [eventId, open]);
     useEffect(
-        () => setCurrentPoster(eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER),
+        () => open && setCurrentPoster(eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER),
         [eventData, open]
     );
+    useEffect(() => open && setExpandPoster(false), [eventId, open]);
 
     // fetch new event details whenever active event id changes
     useEffect(() => getEventData(), [activeEventId]);
@@ -88,8 +110,12 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setDeleting(true);
     };
 
-    const handleDeleteConfirm = () => {
-        handleCancel();
+    const handleDeleteConfirm = async () => {
+        // delete instance of event
+        await deleteEvent({ variables: { id: eventId } });
+
+        // close modal
+        setOpen(false);
     };
 
     const handleApprove = () => {
@@ -144,32 +170,85 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     };
 
     return (
-        <Modal controller={[open, setOpen]}>
-            <Card variant="none">
-                <Box component={editing ? "div" : CardActionArea}>
-                    <CardMedia
-                        component="img"
-                        height={140}
-                        image={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
-                    />
+        <Modal transparent controller={[open, setOpen]}>
+            <Fade in={expandPoster} unmountOnExit>
+                <Box position="absolute" top={0} left={0} height="100vh" width="100vw" zIndex={999}>
+                    <Box
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        height="100%"
+                        width="100%"
+                    >
+                        <Box
+                            component="img"
+                            sx={{ maxHeight: "75vh", maxWidth: "75vw", borderRadius: 2 }}
+                            src={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
+                        />
+                        <Button
+                            disableElevation
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => setExpandPoster(false)}
+                            sx={{ mt: 2 }}
+                        >
+                            <BackIcon fontSize="small" sx={{ mr: 1 }} />
+                            Back to event
+                        </Button>
+                    </Box>
                 </Box>
+            </Fade>
+            <Fade in={!expandPoster} unmountOnExit>
+                <Card variant="none">
+                    <Box
+                        component={editing ? "div" : CardActionArea}
+                        onClick={editing ? null : () => setExpandPoster(true)}
+                    >
+                        <CardMedia
+                            component="img"
+                            height={140}
+                            image={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
+                        />
+                    </Box>
 
-                <ModalBody full>
-                    {manage && activeEventId ? (
+                    <ModalBody full>
+                        {deleting ? (
+                            <Box display="flex" p={5}>
+                                <Typography variant="h5">
+                                    Are you sure you want to delete{" "}
+                                    <Box component="span" fontWeight={500}>
+                                        {eventData?.event?.name}
+                                    </Box>
+                                    ?
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <Box>
+                                {manage && activeEventId ? (
+                                    <>
+                                        <TabBar
+                                            tabs={tabs}
+                                            controller={tabController}
+                                            tabProps={tabProps}
+                                        />
+                                        <Divider />
+                                    </>
+                                ) : null}
+
+                                <TabPanels
+                                    tabs={tabs}
+                                    controller={tabController}
+                                    tabProps={tabProps}
+                                />
+                            </Box>
+                        )}
+                    </ModalBody>
+
+                    {editing || deleting || actions.length ? (
                         <>
-                            <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} />
                             <Divider />
-                        </>
-                    ) : null}
-
-                    <TabPanels tabs={tabs} controller={tabController} tabProps={tabProps} />
-                </ModalBody>
-
-                {editing || deleting || actions.length ? (
-                    <>
-                        <Divider />
-                        <ModalFooter>
-                            <Box display="flex" justifyContent="flex-end" width="100%">
+                            <ModalFooter rightAligned>
                                 <CardActions sx={{ p: 0, m: 0 }}>
                                     {!activeEventId || editing ? (
                                         <>{actionButtons["save"]}</>
@@ -182,11 +261,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         actions.map((action) => actionButtons[action])
                                     )}
                                 </CardActions>
-                            </Box>
-                        </ModalFooter>
-                    </>
-                ) : null}
-            </Card>
+                            </ModalFooter>
+                        </>
+                    ) : null}
+                </Card>
+            </Fade>
         </Modal>
     );
 };
