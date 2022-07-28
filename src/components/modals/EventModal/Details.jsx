@@ -76,12 +76,14 @@ const Details = ({
         };
 
         // update or create new instance of data
-        await (activeEventId
+        let returnedEvent = await (activeEventId
             ? updateEvent({ variables: { ...transformedData, id: activeEventId } })
             : createEvent({ variables: { ...transformedData } }));
 
+        let id = activeEventId || returnedEvent.data.createEvent.event.id;
+
         // add the poster
-        await changePoster({ variables: { ...data?.rawPoster, eventId: activeEventId } })
+        await changePoster({ variables: { ...data?.rawPoster, eventId: id } })
 
         // stop editing
         setEditing(false);
@@ -191,11 +193,12 @@ const Details = ({
                                 <FormControl component="fieldset">
                                     <FormGroup>
                                         <Controller
-                                            name="poster"
+                                            name="rawPoster"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={null}
-                                            render={({ field }) => (
+                                            defaultValue={{ img: null, deletePrev: false }}
+                                            render={({ field }) =>
+                                                <>
                                                 <Button variant="outlined" component="label">
                                                     Upload Poster
                                                     <input
@@ -203,7 +206,10 @@ const Details = ({
                                                         type="file"
                                                         accept="image/png, image/jpeg, image/jpg"
                                                         onChange={(e) => {
-                                                            field.onChange(e?.target?.files[0]);
+                                                            field.onChange( {
+                                                                img: e?.target?.files[0],
+                                                                deletePrev: true,
+                                                            } )
                                                             setCurrentPoster(
                                                                 URL.createObjectURL(
                                                                     e?.target?.files[0]
@@ -213,12 +219,29 @@ const Details = ({
                                                         hidden
                                                     />
                                                 </Button>
-                                            )}
+                                                { field?.value?.img !== null || ( !field?.value?.deletePrev && !!eventData?.event?.poster ) ? (
+                                                    <Button
+                                                        variant="text"
+                                                        component="label"
+                                                        onClick={(e) => {
+                                                            field.onChange( {
+                                                                img: null,
+                                                                deletePrev: true,
+                                                            } )
+                                                            setCurrentPoster(null)
+                                                        }}
+                                                        >
+                                                        <TrashIcon/>
+                                                    </Button>
+                                                ) : null }
+                                                </>
+                                            }
                                         />
                                     </FormGroup>
                                 </FormControl>
                             </Box>
                         ) : null}
+
                     </Box>
                 </Grid>
 
@@ -356,65 +379,6 @@ const Details = ({
                     </Box>
                 </Grid>
 
-                {editing ? (
-                    <Grid item xs={12} mt={2}>
-                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                            Poster
-                        </FormLabel>
-
-                        <Box display="flex" alignItems="center">
-                            <PosterIcon sx={{ mr: 1 }} />
-                            {eventLoading ? (
-                                <Skeleton animation="wave" width={200} />
-                            ) : (
-                                <FormControl component="fieldset" sx={{ ml: 1 }}>
-                                    <FormGroup>
-                                        <Box>
-                                            <Controller
-                                                name="rawPoster"
-                                                control={control}
-                                                shouldUnregister={true}
-                                                defaultValue={{ img: null, deletePrev: false }}
-                                                render={({ field }) =>
-                                                    <>
-                                                    <Button
-                                                        variant="outlined"
-                                                        component="label"
-                                                    >
-                                                        Upload
-                                                        <input
-                                                            name="poster"
-                                                            type="file"
-                                                            accept="image/png, image/jpeg, image/jpg"
-                                                            onChange={(e) => field.onChange( {
-                                                                img: e?.target?.files[0],
-                                                                deletePrev: true,
-                                                            } )}
-                                                            hidden
-                                                        />
-                                                    </Button>
-                                                    { field?.value?.img !== null || ( !field?.value?.deletePrev && !!eventData?.event?.poster ) ? (
-                                                        <Button
-                                                            variant="text"
-                                                            component="label"
-                                                            onClick={(e) => field.onChange( {
-                                                                img: null,
-                                                                deletePrev: true,
-                                                            } )}
-                                                        >
-                                                            <TrashIcon/>
-                                                        </Button>
-                                                    ) : null }
-                                                    </>
-                                                }
-                                            />
-                                        </Box>
-                                    </FormGroup>
-                                </FormControl>
-                            )}
-                        </Box>
-                    </Grid>
-                ) : null}
             </Grid>
         </form>
     );

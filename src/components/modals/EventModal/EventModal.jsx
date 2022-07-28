@@ -39,7 +39,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
-    const [currentPoster, setCurrentPoster] = useState(EVENT_POSTER_PLACEHOLDER);
+    const [currentPoster, setCurrentPoster] = useState("");
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
@@ -52,7 +52,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     useEffect(() => setEditing(!eventId), [eventId, open]);
     useEffect(() => setDeleting(false), [eventId, open]);
     useEffect(
-        () => setCurrentPoster(eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER),
+        () => setCurrentPoster(eventData?.event?.poster || ""),
         [eventData, open]
     );
 
@@ -150,7 +150,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                     <CardMedia
                         component="img"
                         height={140}
-                        image={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
+                        image={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster || EVENT_POSTER_PLACEHOLDER}
                     />
                 </Box>
 
