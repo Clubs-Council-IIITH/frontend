@@ -48,7 +48,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
-    const [currentPoster, setCurrentPoster] = useState(EVENT_POSTER_PLACEHOLDER);
+    const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
 
     // fetch event details
@@ -72,10 +72,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     useEffect(() => open && setActiveEventId(eventId), [eventId, open]);
     useEffect(() => open && setEditing(!eventId), [eventId, open]);
     useEffect(() => open && setDeleting(false), [eventId, open]);
-    useEffect(
-        () => open && setCurrentPoster(eventData?.event?.poster || EVENT_POSTER_PLACEHOLDER),
-        [eventData, open]
-    );
+    useEffect(() => open && setCurrentPoster(eventData?.event?.poster || ""), [eventData, open]);
     useEffect(() => open && setExpandPoster(false), [eventId, open]);
 
     // fetch new event details whenever active event id changes
@@ -184,7 +181,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                         <Box
                             component="img"
                             sx={{ maxHeight: "75vh", maxWidth: "75vw", borderRadius: 2 }}
-                            src={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
+                            src={
+                                eventLoading
+                                    ? EVENT_POSTER_PLACEHOLDER
+                                    : currentPoster || EVENT_POSTER_PLACEHOLDER
+                            }
                         />
                         <Button
                             disableElevation
@@ -208,7 +209,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                         <CardMedia
                             component="img"
                             height={140}
-                            image={eventLoading ? EVENT_POSTER_PLACEHOLDER : currentPoster}
+                            image={
+                                eventLoading
+                                    ? EVENT_POSTER_PLACEHOLDER
+                                    : currentPoster || EVENT_POSTER_PLACEHOLDER
+                            }
                         />
                     </Box>
 

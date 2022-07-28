@@ -22,6 +22,7 @@ import {
     EventOutlined as DatetimeIcon,
     GroupOutlined as AudienceIcon,
     Wallpaper as PosterIcon,
+    DeleteOutline as TrashIcon
 } from "@mui/icons-material";
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
@@ -49,7 +50,7 @@ const Details = ({
 
     const [updateEvent] = useMutation(UPDATE_EVENT, {
         refetchQueries: [
-            { query: GET_EVENT_BY_ID, variables: { id: activeEventId } },
+            GET_EVENT_BY_ID,
             GET_CLUB_EVENTS,
             ADMIN_GET_CLUB_EVENTS,
         ],
@@ -64,8 +65,10 @@ const Details = ({
 
     // submit form
     const onSubmit = async (data) => {
+        // remove rawPoster from the data and format audience
         const transformedData = {
             ...data,
+            rawPoster: null,
             audience: Object.entries(data.audience)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
@@ -73,9 +76,14 @@ const Details = ({
         };
 
         // update or create new instance of data
-        await (activeEventId
+        let returnedEvent = await (activeEventId
             ? updateEvent({ variables: { ...transformedData, id: activeEventId } })
             : createEvent({ variables: { ...transformedData } }));
+
+        let id = activeEventId || returnedEvent.data.createEvent.event.id;
+
+        // add the poster
+        await changePoster({ variables: { ...data?.rawPoster, eventId: id } })
 
         // stop editing
         setEditing(false);
@@ -185,11 +193,12 @@ const Details = ({
                                 <FormControl component="fieldset">
                                     <FormGroup>
                                         <Controller
-                                            name="poster"
+                                            name="rawPoster"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={null}
-                                            render={({ field }) => (
+                                            defaultValue={{ img: null, deletePrev: false }}
+                                            render={({ field }) =>
+                                                <>
                                                 <Button variant="outlined" component="label">
                                                     Upload Poster
                                                     <input
@@ -197,7 +206,10 @@ const Details = ({
                                                         type="file"
                                                         accept="image/png, image/jpeg, image/jpg"
                                                         onChange={(e) => {
-                                                            field.onChange(e?.target?.files[0]);
+                                                            field.onChange( {
+                                                                img: e?.target?.files[0],
+                                                                deletePrev: true,
+                                                            } )
                                                             setCurrentPoster(
                                                                 URL.createObjectURL(
                                                                     e?.target?.files[0]
@@ -207,12 +219,29 @@ const Details = ({
                                                         hidden
                                                     />
                                                 </Button>
-                                            )}
+                                                { field?.value?.img !== null || ( !field?.value?.deletePrev && !!eventData?.event?.poster ) ? (
+                                                    <Button
+                                                        variant="text"
+                                                        component="label"
+                                                        onClick={(e) => {
+                                                            field.onChange( {
+                                                                img: null,
+                                                                deletePrev: true,
+                                                            } )
+                                                            setCurrentPoster(null)
+                                                        }}
+                                                        >
+                                                        <TrashIcon/>
+                                                    </Button>
+                                                ) : null }
+                                                </>
+                                            }
                                         />
                                     </FormGroup>
                                 </FormControl>
                             </Box>
                         ) : null}
+
                     </Box>
                 </Grid>
 
@@ -349,6 +378,7 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
+
             </Grid>
         </form>
     );
