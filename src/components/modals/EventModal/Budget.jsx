@@ -273,7 +273,7 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
                 e.key === "Enter" && e.preventDefault();
             }}
         >
-            <Grid container p={3} spacing={2}>
+            <Grid container p={2} spacing={2}>
                 <Grid item xs={12}>
                     <BudgetHeader items={budgetData?.adminEventBudget} loading={budgetLoading} />
                 </Grid>

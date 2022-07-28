@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useTheme } from "@mui/styles";
 import {
+    Grid,
     Typography,
     Divider,
     Button,
@@ -9,6 +11,7 @@ import {
     CardActionArea,
     CardActions,
     Fade,
+    Modal,
 } from "@mui/material";
 import { ArrowBack as BackIcon } from "@mui/icons-material";
 
@@ -22,7 +25,6 @@ import {
     GET_EVENT_BY_ID,
 } from "queries/events";
 
-import { Modal, ModalBody, ModalFooter } from "components/modals";
 import { TabBar, TabPanels } from "components/Tabs";
 
 import Details from "./Details";
@@ -33,13 +35,20 @@ import Discussion from "./Discussion";
 const EVENT_POSTER_PLACEHOLDER =
     "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
 
+const MODAL_HEIGHT = "60vh";
+const MODAL_WIDTH = "80vw";
+const POSTER_MAXHEIGHT = "75vh";
+const POSTER_MAXWIDTH = "75vw";
+
 const EventModal = ({ manage, eventId = null, actions = [], controller: [open, setOpen] }) => {
+    const theme = useTheme();
+
     // tab list and controller
     const tabs = [
         { title: "Details", panel: <Details /> },
         { title: "Budget", panel: <Budget /> },
         { title: "Venue", panel: <Venue /> },
-        { title: "Discussion", panel: <Discussion /> },
+        // { title: "Discussion", panel: <Discussion /> },
     ];
     const tabController = useState(0);
     useEffect(() => open && tabController[1](0), [open]);
@@ -167,109 +176,161 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     };
 
     return (
-        <Modal transparent controller={[open, setOpen]}>
-            <Fade in={expandPoster} unmountOnExit>
-                <Box position="absolute" top={0} left={0} height="100vh" width="100vw" zIndex={999}>
-                    <Box
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        height="100%"
-                        width="100%"
-                    >
+        <Modal
+            open={open}
+            onClose={() => setOpen(false)}
+            closeAfterTransition
+            BackdropProps={{ timeout: 500 }}
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                outline: "none",
+            }}
+        >
+            <Fade in={open}>
+                <Box
+                    sx={{
+                        backgroundColor: "none",
+                        borderRadius: theme.borderRadius,
+                        outline: "none",
+                        width: MODAL_WIDTH,
+                    }}
+                >
+                    <Fade in={expandPoster} unmountOnExit>
                         <Box
-                            component="img"
-                            sx={{ maxHeight: "75vh", maxWidth: "75vw", borderRadius: 2 }}
-                            src={
-                                eventLoading
-                                    ? EVENT_POSTER_PLACEHOLDER
-                                    : currentPoster || EVENT_POSTER_PLACEHOLDER
-                            }
-                        />
-                        <Button
-                            disableElevation
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => setExpandPoster(false)}
-                            sx={{ mt: 2 }}
+                            position="absolute"
+                            top={0}
+                            left={0}
+                            height="100vh"
+                            width="100vw"
+                            zIndex={999}
                         >
-                            <BackIcon fontSize="small" sx={{ mr: 1 }} />
-                            Back to event
-                        </Button>
-                    </Box>
-                </Box>
-            </Fade>
-            <Fade in={!expandPoster} unmountOnExit>
-                <Card variant="none">
-                    <Box
-                        component={editing ? "div" : CardActionArea}
-                        onClick={editing ? null : () => setExpandPoster(true)}
-                    >
-                        <CardMedia
-                            component="img"
-                            height={140}
-                            image={
-                                eventLoading
-                                    ? EVENT_POSTER_PLACEHOLDER
-                                    : currentPoster || EVENT_POSTER_PLACEHOLDER
-                            }
-                        />
-                    </Box>
-
-                    <ModalBody full>
-                        {deleting ? (
-                            <Box display="flex" p={5}>
-                                <Typography variant="h5">
-                                    Are you sure you want to delete{" "}
-                                    <Box component="span" fontWeight={500}>
-                                        {eventData?.event?.name}
-                                    </Box>
-                                    ?
-                                </Typography>
-                            </Box>
-                        ) : (
-                            <Box>
-                                {manage && activeEventId ? (
-                                    <>
-                                        <TabBar
-                                            tabs={tabs}
-                                            controller={tabController}
-                                            tabProps={tabProps}
-                                        />
-                                        <Divider />
-                                    </>
-                                ) : null}
-
-                                <TabPanels
-                                    tabs={tabs}
-                                    controller={tabController}
-                                    tabProps={tabProps}
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                                justifyContent="center"
+                                alignItems="center"
+                                height="100%"
+                                width="100%"
+                            >
+                                <Box
+                                    component="img"
+                                    sx={{
+                                        maxHeight: POSTER_MAXHEIGHT,
+                                        maxWidth: POSTER_MAXWIDTH,
+                                        borderRadius: 2,
+                                    }}
+                                    src={
+                                        eventLoading
+                                            ? EVENT_POSTER_PLACEHOLDER
+                                            : currentPoster || EVENT_POSTER_PLACEHOLDER
+                                    }
                                 />
+                                <Button
+                                    disableElevation
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => setExpandPoster(false)}
+                                    sx={{ mt: 2 }}
+                                >
+                                    <BackIcon fontSize="small" sx={{ mr: 1 }} />
+                                    Back to event
+                                </Button>
                             </Box>
-                        )}
-                    </ModalBody>
+                        </Box>
+                    </Fade>
+                    <Fade in={!expandPoster} unmountOnExit>
+                        <Grid container spacing={1}>
+                            <Grid item xs={activeEventId ? 8 : 12}>
+                                <Card variant="none">
+                                    <Box
+                                        component={editing ? "div" : CardActionArea}
+                                        onClick={editing ? null : () => setExpandPoster(true)}
+                                    >
+                                        <CardMedia
+                                            component="img"
+                                            height={140}
+                                            image={
+                                                eventLoading
+                                                    ? EVENT_POSTER_PLACEHOLDER
+                                                    : currentPoster || EVENT_POSTER_PLACEHOLDER
+                                            }
+                                        />
+                                    </Box>
 
-                    {editing || deleting || actions.length ? (
-                        <>
-                            <Divider />
-                            <ModalFooter rightAligned>
-                                <CardActions sx={{ p: 0, m: 0 }}>
-                                    {!activeEventId || editing ? (
-                                        <>{actionButtons["save"]}</>
-                                    ) : deleting ? (
+                                    <Box
+                                        height={MODAL_HEIGHT}
+                                        maxHeight={MODAL_HEIGHT}
+                                        sx={{ overflowY: "auto" }}
+                                    >
+                                        {deleting ? (
+                                            <Box display="flex" p={5}>
+                                                <Typography variant="h5">
+                                                    Are you sure you want to delete{" "}
+                                                    <Box component="span" fontWeight={500}>
+                                                        {eventData?.event?.name}
+                                                    </Box>
+                                                    ?
+                                                </Typography>
+                                            </Box>
+                                        ) : (
+                                            <Box>
+                                                {manage && activeEventId ? (
+                                                    <>
+                                                        <TabBar
+                                                            tabs={tabs}
+                                                            controller={tabController}
+                                                            tabProps={tabProps}
+                                                        />
+                                                        <Divider />
+                                                    </>
+                                                ) : null}
+
+                                                <TabPanels
+                                                    tabs={tabs}
+                                                    controller={tabController}
+                                                    tabProps={tabProps}
+                                                />
+                                            </Box>
+                                        )}
+                                    </Box>
+
+                                    {editing || deleting || actions.length ? (
                                         <>
-                                            {actionButtons["cancel"]}
-                                            {actionButtons["deleteConfirm"]}
+                                            <Divider />
+                                            <Box p={1} display="flex" justifyContent="flex-end">
+                                                <CardActions sx={{ p: 0, m: 0 }}>
+                                                    {!activeEventId || editing ? (
+                                                        <>{actionButtons["save"]}</>
+                                                    ) : deleting ? (
+                                                        <>
+                                                            {actionButtons["cancel"]}
+                                                            {actionButtons["deleteConfirm"]}
+                                                        </>
+                                                    ) : (
+                                                        actions.map(
+                                                            (action) => actionButtons[action]
+                                                        )
+                                                    )}
+                                                </CardActions>
+                                            </Box>
                                         </>
-                                    ) : (
-                                        actions.map((action) => actionButtons[action])
-                                    )}
-                                </CardActions>
-                            </ModalFooter>
-                        </>
-                    ) : null}
-                </Card>
+                                    ) : null}
+                                </Card>
+                            </Grid>
+                            {activeEventId ? (
+                                <Grid item xs>
+                                    <Box height="100%">
+                                        <Card variant="outlined" sx={{ height: "100%" }}>
+                                            <Discussion activeEventId={activeEventId} open={open} />
+                                        </Card>
+                                    </Box>
+                                </Grid>
+                            ) : null}
+                        </Grid>
+                    </Fade>
+                </Box>
             </Fade>
         </Modal>
     );

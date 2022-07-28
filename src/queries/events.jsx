@@ -102,6 +102,7 @@ export const ADMIN_GET_EVENT_FEEDBACK = gql`
         eventFeedbackThread(eventId: $eventId) {
             user {
                 username
+                firstName
             }
             timestamp
             message

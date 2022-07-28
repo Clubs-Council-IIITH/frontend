@@ -22,7 +22,7 @@ import {
     EventOutlined as DatetimeIcon,
     GroupOutlined as AudienceIcon,
     Wallpaper as PosterIcon,
-    DeleteOutline as TrashIcon
+    DeleteOutline as TrashIcon,
 } from "@mui/icons-material";
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
@@ -49,11 +49,7 @@ const Details = ({
     });
 
     const [updateEvent] = useMutation(UPDATE_EVENT, {
-        refetchQueries: [
-            GET_EVENT_BY_ID,
-            GET_CLUB_EVENTS,
-            ADMIN_GET_CLUB_EVENTS,
-        ],
+        refetchQueries: [GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
     });
 
@@ -83,7 +79,7 @@ const Details = ({
         let id = activeEventId || returnedEvent.data.createEvent.event.id;
 
         // add the poster
-        await changePoster({ variables: { ...data?.rawPoster, eventId: id } })
+        await changePoster({ variables: { ...data?.rawPoster, eventId: id } });
 
         // stop editing
         setEditing(false);
@@ -197,51 +193,52 @@ const Details = ({
                                             control={control}
                                             shouldUnregister={true}
                                             defaultValue={{ img: null, deletePrev: false }}
-                                            render={({ field }) =>
+                                            render={({ field }) => (
                                                 <>
-                                                <Button variant="outlined" component="label">
-                                                    Upload Poster
-                                                    <input
-                                                        name="poster"
-                                                        type="file"
-                                                        accept="image/png, image/jpeg, image/jpg"
-                                                        onChange={(e) => {
-                                                            field.onChange( {
-                                                                img: e?.target?.files[0],
-                                                                deletePrev: true,
-                                                            } )
-                                                            setCurrentPoster(
-                                                                URL.createObjectURL(
-                                                                    e?.target?.files[0]
-                                                                )
-                                                            );
-                                                        }}
-                                                        hidden
-                                                    />
-                                                </Button>
-                                                { field?.value?.img !== null || ( !field?.value?.deletePrev && !!eventData?.event?.poster ) ? (
-                                                    <Button
-                                                        variant="text"
-                                                        component="label"
-                                                        onClick={(e) => {
-                                                            field.onChange( {
-                                                                img: null,
-                                                                deletePrev: true,
-                                                            } )
-                                                            setCurrentPoster(null)
-                                                        }}
-                                                        >
-                                                        <TrashIcon/>
+                                                    <Button variant="outlined" component="label">
+                                                        Upload Poster
+                                                        <input
+                                                            name="poster"
+                                                            type="file"
+                                                            accept="image/png, image/jpeg, image/jpg"
+                                                            onChange={(e) => {
+                                                                field.onChange({
+                                                                    img: e?.target?.files[0],
+                                                                    deletePrev: true,
+                                                                });
+                                                                setCurrentPoster(
+                                                                    URL.createObjectURL(
+                                                                        e?.target?.files[0]
+                                                                    )
+                                                                );
+                                                            }}
+                                                            hidden
+                                                        />
                                                     </Button>
-                                                ) : null }
+                                                    {field?.value?.img !== null ||
+                                                    (!field?.value?.deletePrev &&
+                                                        !!eventData?.event?.poster) ? (
+                                                        <Button
+                                                            variant="text"
+                                                            component="label"
+                                                            onClick={(e) => {
+                                                                field.onChange({
+                                                                    img: null,
+                                                                    deletePrev: true,
+                                                                });
+                                                                setCurrentPoster(null);
+                                                            }}
+                                                        >
+                                                            <TrashIcon />
+                                                        </Button>
+                                                    ) : null}
                                                 </>
-                                            }
+                                            )}
                                         />
                                     </FormGroup>
                                 </FormControl>
                             </Box>
                         ) : null}
-
                     </Box>
                 </Grid>
 
@@ -299,7 +296,7 @@ const Details = ({
                                         placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                                         variant="standard"
                                         multiline
-                                        rows={4}
+                                        rows={3}
                                         value={value}
                                         onChange={onChange}
                                         error={error}
@@ -378,7 +375,6 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
-
             </Grid>
         </form>
     );
