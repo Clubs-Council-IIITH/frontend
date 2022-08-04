@@ -1,4 +1,4 @@
-FROM node:16.4.1-alpine3.11
+FROM node:16.10.0-alpine3.11
 USER root
 
 WORKDIR /frontend
