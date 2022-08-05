@@ -1,6 +1,8 @@
 import { useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-
+// mui x datetime
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 // theme overrides {{{
 import { Theme } from "theme";
 import { ThemeProvider } from "@mui/material/styles";
@@ -97,8 +99,8 @@ const App = () => {
             session?.group === UserGroups.cc
                 ? ccRoutes
                 : session?.group === UserGroups.club
-                ? clubRoutes
-                : [];
+                    ? clubRoutes
+                    : [];
 
         setNavigation({
             publicRoutes,
@@ -108,36 +110,38 @@ const App = () => {
 
     return (
         <ThemeProvider theme={Theme}>
-            <BrowserRouter>
-                <MainContainer>
-                    {!!Object.values(navigation).flat().length && (
-                        <Switch>
-                            {/* public routes */}
-                            {publicRoutes.map((route, idx) => (
-                                <Route exact={route.exact} path={route.path} key={idx}>
-                                    {route.component}
-                                </Route>
-                            ))}
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+                <BrowserRouter>
+                    <MainContainer>
+                        {!!Object.values(navigation).flat().length && (
+                            <Switch>
+                                {/* public routes */}
+                                {publicRoutes.map((route, idx) => (
+                                    <Route exact={route.exact} path={route.path} key={idx}>
+                                        {route.component}
+                                    </Route>
+                                ))}
 
-                            {/* protected routes */}
-                            {[...ccRoutes, ...clubRoutes].map((route, idx) => (
-                                <Route exact={route.exact} path={route.path} key={idx}>
-                                    {route.component}
-                                </Route>
-                            ))}
+                                {/* protected routes */}
+                                {[...ccRoutes, ...clubRoutes].map((route, idx) => (
+                                    <Route exact={route.exact} path={route.path} key={idx}>
+                                        {route.component}
+                                    </Route>
+                                ))}
 
-                            {/* error routes */}
-                            <Route exact path="/404">
-                                <Public.Error404 />
-                            </Route>
-                            <Route exact path="/401">
-                                <Public.Error401 />
-                            </Route>
-                            <Redirect to="/404" />
-                        </Switch>
-                    )}
-                </MainContainer>
-            </BrowserRouter>
+                                {/* error routes */}
+                                <Route exact path="/404">
+                                    <Public.Error404 />
+                                </Route>
+                                <Route exact path="/401">
+                                    <Public.Error401 />
+                                </Route>
+                                <Redirect to="/404" />
+                            </Switch>
+                        )}
+                    </MainContainer>
+                </BrowserRouter>
+            </LocalizationProvider>
         </ThemeProvider>
     );
 };
