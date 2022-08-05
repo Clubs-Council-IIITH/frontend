@@ -97,9 +97,9 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
     }
 `;
 
-export const ADMIN_GET_EVENT_FEEDBACK = gql`
-    query adminEventFeedbackThread($eventId: Int) {
-        eventFeedbackThread(eventId: $eventId) {
+export const ADMIN_GET_EVENT_DISCUSSION = gql`
+    query adminEventDiscussionThread($eventId: Int) {
+        eventDiscussionThread(eventId: $eventId) {
             user {
                 username
                 firstName
