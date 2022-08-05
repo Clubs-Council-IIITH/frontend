@@ -1,9 +1,9 @@
 import { useForm, Controller } from "react-hook-form";
-import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
     Skeleton,
     Chip,
@@ -28,7 +28,8 @@ import {
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+
+import enLocale from "date-fns/locale/en-IN";
 
 const Details = ({
     activeEventId,
@@ -113,13 +114,12 @@ const Details = ({
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
-                            <DatetimeIcon fontSize="small" sx={{ mr: 1 }} />
+                            {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 1 }} /> : null}
 
                             <Typography variant="subtitle1">
                                 {eventLoading ? (
                                     <Skeleton animation="wave" width={100} />
                                 ) : editing ? (
-
                                     <Controller
                                         name="datetimeStart"
                                         control={control}
@@ -129,21 +129,29 @@ const Details = ({
                                             field: { onChange, value },
                                             fieldState: { error },
                                         }) => (
-                                            <DateTimePicker
-                                                renderInput={(props) => <TextField {...props}
-                                                    error={error}
-                                                    InputLabelProps={{ shrink: true }}
-                                                    helperText={error ? error.message : null}
-                                                    label="From*"
-                                                    type="datetime-local"
-                                                    placeholder=""
-                                                    variant="standard"
-                                                />}
-
-                                                value={value}
-                                                onChange={onChange}
-
-                                            />
+                                            <LocalizationProvider
+                                                dateAdapter={AdapterDateFns}
+                                                adapterLocale={enLocale}
+                                            >
+                                                <DateTimePicker
+                                                    renderInput={(props) => (
+                                                        <TextField
+                                                            {...props}
+                                                            error={error}
+                                                            InputLabelProps={{ shrink: true }}
+                                                            helperText={
+                                                                error ? error.message : null
+                                                            }
+                                                            label="From*"
+                                                            type="datetime-local"
+                                                            placeholder=""
+                                                            variant="standard"
+                                                        />
+                                                    )}
+                                                    value={value}
+                                                    onChange={onChange}
+                                                />
+                                            </LocalizationProvider>
                                         )}
                                         rules={{
                                             required: "Event start time can not be empty!",
@@ -169,21 +177,29 @@ const Details = ({
                                             field: { onChange, value },
                                             fieldState: { error },
                                         }) => (
-                                            <DateTimePicker
-                                                renderInput={(props) => <TextField {...props}
-                                                    error={error}
-                                                    InputLabelProps={{ shrink: true }}
-                                                    helperText={error ? error.message : null}
-                                                    label="To*"
-                                                    type="datetime-local"
-                                                    placeholder=""
-                                                    variant="standard"
-                                                />}
-
-                                                value={value}
-                                                onChange={onChange}
-
-                                            />
+                                            <LocalizationProvider
+                                                dateAdapter={AdapterDateFns}
+                                                adapterLocale={enLocale}
+                                            >
+                                                <DateTimePicker
+                                                    renderInput={(props) => (
+                                                        <TextField
+                                                            {...props}
+                                                            error={error}
+                                                            InputLabelProps={{ shrink: true }}
+                                                            helperText={
+                                                                error ? error.message : null
+                                                            }
+                                                            label="To*"
+                                                            type="datetime-local"
+                                                            placeholder=""
+                                                            variant="standard"
+                                                        />
+                                                    )}
+                                                    value={value}
+                                                    onChange={onChange}
+                                                />
+                                            </LocalizationProvider>
                                         )}
                                         rules={{
                                             required: "Event end time can not be empty!",
@@ -228,8 +244,8 @@ const Details = ({
                                                         />
                                                     </Button>
                                                     {field?.value?.img !== null ||
-                                                        (!field?.value?.deletePrev &&
-                                                            !!eventData?.event?.poster) ? (
+                                                    (!field?.value?.deletePrev &&
+                                                        !!eventData?.event?.poster) ? (
                                                         <Button
                                                             variant="text"
                                                             component="label"
@@ -345,7 +361,7 @@ const Details = ({
                                             shouldUnregister={true}
                                             defaultValue={AudienceStringtoDict(
                                                 eventData?.event?.audience ||
-                                                audienceSelect.map((o) => o.value).join(",")
+                                                    audienceSelect.map((o) => o.value).join(",")
                                             )}
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
