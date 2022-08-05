@@ -1,9 +1,9 @@
 import { useForm, Controller } from "react-hook-form";
-
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
-
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import {
     Skeleton,
     Chip,
@@ -28,6 +28,7 @@ import {
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 const Details = ({
     activeEventId,
@@ -98,6 +99,8 @@ const Details = ({
         },
     ];
 
+    //datetime
+
     return (
         <form
             id="ActiveEventForm"
@@ -116,6 +119,7 @@ const Details = ({
                                 {eventLoading ? (
                                     <Skeleton animation="wave" width={100} />
                                 ) : editing ? (
+
                                     <Controller
                                         name="datetimeStart"
                                         control={control}
@@ -125,16 +129,20 @@ const Details = ({
                                             field: { onChange, value },
                                             fieldState: { error },
                                         }) => (
-                                            <TextField
-                                                label="From*"
-                                                type="datetime-local"
-                                                placeholder=""
-                                                variant="standard"
+                                            <DateTimePicker
+                                                renderInput={(props) => <TextField {...props}
+                                                    error={error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                    label="From*"
+                                                    type="datetime-local"
+                                                    placeholder=""
+                                                    variant="standard"
+                                                />}
+
                                                 value={value}
                                                 onChange={onChange}
-                                                error={error}
-                                                InputLabelProps={{ shrink: true }}
-                                                helperText={error ? error.message : null}
+
                                             />
                                         )}
                                         rules={{
@@ -161,16 +169,20 @@ const Details = ({
                                             field: { onChange, value },
                                             fieldState: { error },
                                         }) => (
-                                            <TextField
-                                                label="To*"
-                                                type="datetime-local"
-                                                placeholder=""
-                                                variant="standard"
+                                            <DateTimePicker
+                                                renderInput={(props) => <TextField {...props}
+                                                    error={error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                    label="To*"
+                                                    type="datetime-local"
+                                                    placeholder=""
+                                                    variant="standard"
+                                                />}
+
                                                 value={value}
                                                 onChange={onChange}
-                                                error={error}
-                                                InputLabelProps={{ shrink: true }}
-                                                helperText={error ? error.message : null}
+
                                             />
                                         )}
                                         rules={{
@@ -216,8 +228,8 @@ const Details = ({
                                                         />
                                                     </Button>
                                                     {field?.value?.img !== null ||
-                                                    (!field?.value?.deletePrev &&
-                                                        !!eventData?.event?.poster) ? (
+                                                        (!field?.value?.deletePrev &&
+                                                            !!eventData?.event?.poster) ? (
                                                         <Button
                                                             variant="text"
                                                             component="label"
@@ -333,7 +345,7 @@ const Details = ({
                                             shouldUnregister={true}
                                             defaultValue={AudienceStringtoDict(
                                                 eventData?.event?.audience ||
-                                                    audienceSelect.map((o) => o.value).join(",")
+                                                audienceSelect.map((o) => o.value).join(",")
                                             )}
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
