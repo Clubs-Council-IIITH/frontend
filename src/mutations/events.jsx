@@ -100,10 +100,10 @@ export const PROGRESS_EVENT = gql`
     }
 `;
 
-export const ADD_EVENT_FEEDBACK = gql`
-    mutation addEventFeedback($eventId: ID!, $message: String!) {
-        addEventFeedback(feedbackData: { eventId: $eventId, message: $message }) {
-            feedback {
+export const SEND_DISCUSSION_MESSAGE = gql`
+    mutation sendDiscussionMessage($eventId: ID!, $message: String!) {
+        sendDiscussionMessage(discussionData: { eventId: $eventId, message: $message }) {
+            discussion {
                 message
                 timestamp
             }
@@ -112,18 +112,8 @@ export const ADD_EVENT_FEEDBACK = gql`
 `;
 
 export const CHANGE_POSTER = gql`
-    mutation ChangePoster(
-        $eventId: ID!
-        $img: Upload
-        $deletePrev: Boolean
-    ) {
-        changePoster(
-            posterData: {
-                eventId: $eventId
-                img: $img
-                deletePrev: $deletePrev
-            }
-        ) {
+    mutation ChangePoster($eventId: ID!, $img: Upload, $deletePrev: Boolean) {
+        changePoster(posterData: { eventId: $eventId, img: $img, deletePrev: $deletePrev }) {
             event {
                 eventId: id
                 poster

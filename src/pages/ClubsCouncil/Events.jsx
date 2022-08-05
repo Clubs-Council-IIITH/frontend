@@ -3,8 +3,8 @@ import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_GET_EVENT_BUDGET } from "queries/finance";
-import { ADMIN_CC_PENDING_EVENTS, ADMIN_GET_EVENT_FEEDBACK } from "queries/events";
-import { PROGRESS_EVENT, ADD_EVENT_FEEDBACK } from "mutations/events";
+import { ADMIN_CC_PENDING_EVENTS, ADMIN_GET_EVENT_DISCUSSION } from "queries/events";
+import { PROGRESS_EVENT, SEND_DISCUSSION_MESSAGE } from "mutations/events";
 
 import Page from "components/Page";
 import ResponseToast from "components/ResponseToast";
@@ -68,7 +68,7 @@ const EventItem = ({ item, toastController: [toast, setToast] }) => {
     });
 
     const { data: discussionData, loading: discussionLoading } = useQuery(
-        ADMIN_GET_EVENT_FEEDBACK,
+        ADMIN_GET_EVENT_DISCUSSION,
         {
             variables: { eventId: item?.id },
         }
@@ -83,8 +83,8 @@ const EventItem = ({ item, toastController: [toast, setToast] }) => {
     });
 
     // send message
-    const [addFeedback] = useMutation(ADD_EVENT_FEEDBACK, {
-        refetchQueries: [ADMIN_GET_EVENT_FEEDBACK],
+    const [addDiscussion] = useMutation(SEND_DISCUSSION_MESSAGE, {
+        refetchQueries: [ADMIN_GET_EVENT_DISCUSSION],
         awaitRefetchQueries: true,
         onError: (error) => setToast({ open: true, error: error }),
     });
@@ -95,7 +95,7 @@ const EventItem = ({ item, toastController: [toast, setToast] }) => {
             eventId: item?.id,
         };
 
-        await addFeedback({ variables: transformedData });
+        await addDiscussion({ variables: transformedData });
     };
 
     return (
@@ -219,10 +219,10 @@ const EventItem = ({ item, toastController: [toast, setToast] }) => {
                         <Box my={2}>
                             <Typography variant="subtitle2"> DISCUSSION </Typography>
                             <Box>
-                                {discussionData?.eventFeedbackThread?.length === 0 ? (
+                                {discussionData?.eventDiscussionThread?.length === 0 ? (
                                     <Empty />
                                 ) : (
-                                    discussionData?.eventFeedbackThread?.map((discussion) => (
+                                    discussionData?.eventDiscussionThread?.map((discussion) => (
                                         <Card variant="outlined" sx={{ mt: 1 }}>
                                             <Box p={2}>
                                                 <Typography variant="subtitle2">

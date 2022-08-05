@@ -2,11 +2,11 @@ import { useContext, useEffect, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { ADMIN_CC_PENDING_EVENTS, ADMIN_GET_EVENT_FEEDBACK } from "queries/events";
-import { PROGRESS_EVENT, ADD_EVENT_FEEDBACK } from "mutations/events";
+import { ADMIN_GET_EVENT_DISCUSSION } from "queries/events";
+import { SEND_DISCUSSION_MESSAGE } from "mutations/events";
 
 import { useTheme } from "@mui/styles";
-import { Button, Box, TextField, Typography, Card, IconButton, Divider } from "@mui/material";
+import { Box, TextField, Typography, Card, IconButton, Divider } from "@mui/material";
 import { Send as SendIcon } from "@mui/icons-material";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
@@ -64,7 +64,7 @@ const DiscussionBox = ({ discussionData }) => {
     const endOfDiscussion = useRef(null);
     useEffect(
         () => endOfDiscussion?.current?.scrollIntoView(),
-        [discussionData?.eventFeedbackThread]
+        [discussionData?.eventDiscussionThread]
     );
 
     return (
@@ -76,16 +76,16 @@ const DiscussionBox = ({ discussionData }) => {
                 flex: "1 1 auto",
             }}
         >
-            {discussionData?.eventFeedbackThread?.map((discussion, idx) => (
+            {discussionData?.eventDiscussionThread?.map((discussion, idx) => (
                 <DiscussionBubble
                     key={idx}
                     user={discussion?.user}
                     datetime={discussion?.timestamp}
                     message={discussion?.message}
-                    outgoing={discussion?.user?.username == session?.username}
+                    outgoing={discussion?.user?.username === session?.username}
                     printDate={
-                        idx == 0 ||
-                        ISOtoDT(discussionData?.eventFeedbackThread[idx - 1]?.timestamp).date !==
+                        idx === 0 ||
+                        ISOtoDT(discussionData?.eventDiscussionThread[idx - 1]?.timestamp).date !==
                             ISOtoDT(discussion?.timestamp).date
                     }
                 />
@@ -99,13 +99,13 @@ const Discussion = ({ activeEventId, open }) => {
     const { control, handleSubmit, reset } = useForm();
 
     const { data: discussionData, loading: discussionLoading } = useQuery(
-        ADMIN_GET_EVENT_FEEDBACK,
+        ADMIN_GET_EVENT_DISCUSSION,
         { variables: { eventId: activeEventId } }
     );
 
     // send message
-    const [sendMessage] = useMutation(ADD_EVENT_FEEDBACK, {
-        refetchQueries: [ADMIN_GET_EVENT_FEEDBACK],
+    const [sendMessage] = useMutation(SEND_DISCUSSION_MESSAGE, {
+        refetchQueries: [ADMIN_GET_EVENT_DISCUSSION],
         awaitRefetchQueries: true,
     });
 
@@ -126,7 +126,7 @@ const Discussion = ({ activeEventId, open }) => {
             <Typography p={1} variant="button" fontSize="1em">
                 DISCUSSION
             </Typography>
-            {discussionData?.eventFeedbackThread?.length === 0 ? (
+            {discussionData?.eventDiscussionThread?.length === 0 ? (
                 <Empty />
             ) : (
                 <>
