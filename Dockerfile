@@ -1,5 +1,5 @@
 # [base] image
-FROM node:16.16.0-slim as base
+FROM node:18.7.0-slim as base
 
 WORKDIR /frontend
 
