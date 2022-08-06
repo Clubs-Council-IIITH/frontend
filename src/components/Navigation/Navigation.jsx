@@ -66,7 +66,12 @@ const Navigation = () => {
     const { navigation, expanded, setExpanded } = useContext(NavigationContext);
 
     return (
-        <Drawer variant="permanent" open={expanded}>
+        <Drawer
+            variant="permanent"
+            open={expanded}
+            onMouseOver={() => setExpanded(true)}
+            onMouseLeave={() => setExpanded(false)}
+        >
             {/* drawer header */}
             <Box
                 sx={{
@@ -78,7 +83,7 @@ const Navigation = () => {
                     ...theme.mixins.toolbar,
                 }}
             >
-                <IconButton onClick={() => setExpanded(!expanded)}>
+                <IconButton onClick={null}>
                     <Typography variant="h5">
                         <Box fontWeight={500} color="#fefefe">
                             CC
