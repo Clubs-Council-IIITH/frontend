@@ -118,7 +118,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
 
     const handleDeleteConfirm = async () => {
         // delete instance of event
-        await deleteEvent({ variables: { id: eventId } });
+        await deleteEvent({ variables: { id: activeEventId } });
 
         // close modal
         setOpen(false);
