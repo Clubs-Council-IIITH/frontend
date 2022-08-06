@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTheme } from "@mui/styles";
 
 import { AppBar, Box, Toolbar, CssBaseline } from "@mui/material";
@@ -32,6 +32,7 @@ const MainContainer = ({ children }) => {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
                     }),
+                    pointerEvents: "none",
 
                     // expanded appbar styles
                     ...(expanded && {
@@ -48,7 +49,7 @@ const MainContainer = ({ children }) => {
                 }}
             >
                 <Toolbar sx={{ height: "80px" }}>
-                    <BackButton />
+                    <BackButton sx={{ pointerEvents: "auto" }} />
                 </Toolbar>
             </AppBar>
 

@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 // }}}
 
-const Page = ({ header, loading, empty, full, children }) => {
+const Page = ({ header, loading, empty, full, noToolbar, children }) => {
     const classes = useStyles();
 
     return (
         <main className={clsx({ [classes.content]: !full, [classes.contentFull]: full })}>
-            <div className={clsx({ [classes.toolbar]: !full })} />
+            <div className={clsx({ [classes.toolbar]: !full && !noToolbar })} />
             <Container maxWidth={null} disableGutters={full}>
-                <Typography variant="h3" mt={full ? 0 : 2}>
+                <Typography variant="h3" mt={full ? 0 : noToolbar ? 3 : 2}>
                     {header}
                 </Typography>
                 <Box mt={full ? 0 : 3} mb={full ? 0 : 3}>
