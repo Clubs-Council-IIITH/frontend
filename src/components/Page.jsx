@@ -46,7 +46,7 @@ const Page = ({ header, loading, empty, full, noToolbar, children }) => {
                         <Empty />
                     ) : (
                         <Fade in timeout={250}>
-                            <div>{children}</div>
+                            <Box>{children}</Box>
                         </Fade>
                     )}
                 </Box>
