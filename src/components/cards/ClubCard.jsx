@@ -30,7 +30,7 @@ const ClubCard = ({ id, img, name, tagline }) => {
                         width: "100%",
                     }}
                     image={img}
-                    title="Contemplative Reptile"
+                    title={name}
                 />
                 <CardContent
                     sx={{

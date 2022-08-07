@@ -8,6 +8,19 @@ import CarouselBackgroundTwo from "assets/img/carousel/2.jpg";
 const Carousel = () => {
     const carousel = [
         {
+            image: CarouselBackgroundTwo,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
+        {
             image: CarouselBackgroundOne,
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
@@ -20,19 +33,6 @@ const Carousel = () => {
                         Ensuring that student-driven organizations on campus are successful in their
                         aim to cultivate diverse campus life experiences, since 2017.
                     </Typography>
-                </Box>
-            ),
-        },
-        {
-            image: CarouselBackgroundTwo,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
