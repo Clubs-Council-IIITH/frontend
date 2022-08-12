@@ -64,6 +64,7 @@ const View = ({ manage }) => {
 
     const [actions, setActions] = useState(null);
 
+    
     const tabController = useState(0);
 
     const tabProps = {
@@ -76,7 +77,7 @@ const View = ({ manage }) => {
             <img src={club?.img} alt={club?.name} className={classes.cover} />
             <Box px={3} pt={4} pb={3} display="flex" justifyContent="space-between">
                 <Typography variant="h2">{club?.name}</Typography>
-                <Box>{actions || null}</Box>
+                <Box>{actions || null}</Box>   {/*edit details button*/}
             </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />

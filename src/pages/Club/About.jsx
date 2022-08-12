@@ -13,7 +13,9 @@ import { EditOutlined as EditIcon } from "@mui/icons-material";
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
 
+
 import Page from "components/Page";
+import RichTextEditor from "components/TextEditors/AboutText";
 
 const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -22,16 +24,21 @@ const About = ({ manage, setActions }) => {
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
     useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
 
+
     // fetch club
     const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
     const [club, setClub] = useState([]);
     useEffect(() => setClub(new ClubModel(data?.club)), [data]);
+    
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
         setActions(
             manage ? (
-                <SecondaryActionButton noPadding size="large" variant="outlined" color="primary">
+                <SecondaryActionButton noPadding size="large" variant="outlined" color="primary"
+                    onClick={() => {
+                    }}
+                >
                     <Box display="flex" mr={1}>
                         <EditIcon fontSize="small" />
                     </Box>
@@ -40,13 +47,17 @@ const About = ({ manage, setActions }) => {
             ) : null
         );
     }, [manage]);
-
+    
     return (
-        <Page full loading={loading}>
-            <Box px={3}>
-                <Typography mt={4}>{club?.description}</Typography>
-            </Box>
-        </Page>
+        <>
+            <Page full loading={loading}>
+                <Box pt={2} px={3}>
+                    <RichTextEditor>
+                            {club?.description}
+                    </RichTextEditor>
+                </Box>
+            </Page>
+        </>
     );
 };
 
