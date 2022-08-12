@@ -4,7 +4,7 @@ import Carousel from "./Carousel.jsx";
 import Upcoming from "./Upcoming.jsx";
 import About from "./About.jsx";
 import Gallery from "./Gallery.jsx";
-import Calendar from "./Calendar.jsx";
+import Footer from "./Footer.jsx";
 
 const Home = () => {
     return (
@@ -13,8 +13,7 @@ const Home = () => {
             <Upcoming />
             <About />
             <Gallery />
-
-            <Calendar />
+            <Footer />
         </Page>
     );
 };

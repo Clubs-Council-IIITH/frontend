@@ -6,7 +6,7 @@ const About = () => {
     const theme = useTheme();
 
     return (
-        <Box p={5} backgroundColor={theme.palette.primary.main}>
+        <Box px={5} py={8} backgroundColor={theme.palette.primary.main}>
             <Typography variant="h4" color="secondary" fontWeight={500} mb={4}>
                 Clubs @ IIITH
             </Typography>

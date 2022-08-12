@@ -242,7 +242,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                     </Fade>
                     <Fade in={!expandPoster} unmountOnExit>
                         <Grid container spacing={1}>
-                            <Grid item xs={activeEventId ? 8 : 12}>
+                            <Grid item xs={manage && activeEventId ? 8 : 12}>
                                 <Card variant="none">
                                     <Box
                                         component={editing ? "div" : CardActionArea}
@@ -319,7 +319,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     ) : null}
                                 </Card>
                             </Grid>
-                            {activeEventId ? (
+                            {manage && activeEventId ? (
                                 <Grid item xs>
                                     <Box height="100%">
                                         <Card variant="outlined" sx={{ height: "100%" }}>
