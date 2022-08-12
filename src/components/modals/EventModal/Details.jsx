@@ -392,7 +392,7 @@ const Details = ({
                                     </Box>
                                 </FormGroup>
                             </FormControl>
-                        ) : eventData?.event?.audience ? (
+                        ) : eventData?.event?.audience !== "none" ? (
                             AudienceFormatter(eventData?.event?.audience)
                                 .split(",")
                                 .map((audience, key) => (

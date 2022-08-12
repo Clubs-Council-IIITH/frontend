@@ -61,12 +61,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 );
 // }}}
 
-const Navigation = ({ controller: [open, setOpen] }) => {
+const Navigation = () => {
     const theme = useTheme();
-    const { navigation } = useContext(NavigationContext);
+    const { navigation, expanded, setExpanded } = useContext(NavigationContext);
 
     return (
-        <Drawer variant="permanent" open={open}>
+        <Drawer
+            variant="permanent"
+            open={expanded}
+            onMouseOver={() => setExpanded(true)}
+            onMouseLeave={() => setExpanded(false)}
+        >
             {/* drawer header */}
             <Box
                 sx={{
@@ -78,7 +83,7 @@ const Navigation = ({ controller: [open, setOpen] }) => {
                     ...theme.mixins.toolbar,
                 }}
             >
-                <IconButton onClick={() => setOpen(!open)}>
+                <IconButton onClick={null}>
                     <Typography variant="h5">
                         <Box fontWeight={500} color="#fefefe">
                             CC
@@ -108,7 +113,7 @@ const Navigation = ({ controller: [open, setOpen] }) => {
 
             {/* profile */}
             <Box display="flex" flexDirection="column" justifyContent="flex-end" flexGrow={1}>
-                <Collapse in={open}>{!!open && <Profile />}</Collapse>
+                <Collapse in={expanded}>{!!expanded && <Profile />}</Collapse>
             </Box>
         </Drawer>
     );

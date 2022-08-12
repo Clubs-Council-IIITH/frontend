@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import EventModel from "models/EventModel";
-
 import { Box } from "@mui/material";
 
 import { useQuery } from "@apollo/client";
@@ -12,7 +10,7 @@ import moment from "moment";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const HomeCalendar = () => {
+const EventCalendar = () => {
     const localizer = momentLocalizer(moment);
 
     const { data, loading } = useQuery(GET_ALL_EVENTS);
@@ -40,4 +38,4 @@ const HomeCalendar = () => {
     );
 };
 
-export default HomeCalendar;
+export default EventCalendar;

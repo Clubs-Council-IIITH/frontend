@@ -1,15 +1,12 @@
 import { Box, Card, CardMedia } from "@mui/material";
-import { useTheme } from "@mui/styles";
 
 import Carousel from "react-material-ui-carousel";
 
-const ImageCarousel = ({ gradient, contents }) => {
-    const theme = useTheme();
-
+const ImageCarousel = ({ height, gradient, contents }) => {
     return (
-        <Carousel indicators={false} navButtonsAlwaysVisible>
+        <Carousel height={height} indicators={false} stopAutoPlayOnHover={false} animation="slide">
             {contents.map((card, idx) => (
-                <Card key={idx}>
+                <Card key={idx} sx={{ borderRadius: 0 }}>
                     {gradient && (
                         <Box
                             sx={{
@@ -18,7 +15,6 @@ const ImageCarousel = ({ gradient, contents }) => {
                                 height: "100%",
                                 width: "100%",
                                 position: "absolute",
-                                borderRadius: theme.borderRadius,
                             }}
                         />
                     )}
@@ -41,10 +37,13 @@ const ImageCarousel = ({ gradient, contents }) => {
 
                     <CardMedia
                         component="img"
-                        height="450px"
                         image={card?.image}
                         alt={null}
-                        sx={{ borderRadius: theme.borderRadius }}
+                        sx={{
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            height: "100vh",
+                        }}
                     />
                 </Card>
             ))}
