@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS } from "queries/events";
-import EventModel from "models/EventModel";
 
 import UserGroups from "constants/UserGroups";
 import EventStates from "constants/EventStates";
@@ -46,17 +45,13 @@ const Events = ({ manage, setActions }) => {
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
-    const [events, setEvents] = useState([]);
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
+    const targetEvents = manage ? "adminClubEvents" : "clubEvents";
 
     // fetch events
     const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
-    const { data, loading } = useQuery(GET_EVENTS, {
+    const { data: eventsData, loading: eventsLoading } = useQuery(GET_EVENTS, {
         variables: { id: targetId },
-        onCompleted: (data) => {
-            const targetEvents = manage ? data?.adminClubEvents : data?.clubEvents;
-            setEvents(targetEvents?.map((o) => new EventModel(o)));
-        },
     });
 
     // event modal
@@ -78,14 +73,8 @@ const Events = ({ manage, setActions }) => {
 
     // open view modal
     const triggerView = (id) => {
-        const targetEvents = (manage ? data?.adminClubEvents : data?.clubEvents).map(
-            (o) => new EventModel(o)
-        );
-
-        // TODO: stop passing whole event as prop
         setViewProps({
             manage: manage,
-            event: targetEvents?.find((event) => event.id === id),
             eventId: id,
             actions: manage ? ["edit", "delete"] : [],
         });
@@ -127,7 +116,7 @@ const Events = ({ manage, setActions }) => {
     return (
         <>
             <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
-            <Page full loading={loading} empty={!events?.length}>
+            <Page full empty={!eventsLoading && !eventsData?.[targetEvents]?.length}>
                 <Box px={2}>
                     <List>
                         {/* upcoming events */}
@@ -138,17 +127,23 @@ const Events = ({ manage, setActions }) => {
                         />
                         <Collapse in={expandUpcoming}>
                             <Grid container spacing={2} mb={2}>
-                                {events
-                                    ?.filter(
-                                        (e) =>
-                                            e.state !== EventStates.completed &&
-                                            e.state !== EventStates.deleted
-                                    )
-                                    ?.map((event, idx) => (
-                                        <Grid item md={4} key={idx}>
-                                            <EventCard actions {...event} {...cardProps} />
-                                        </Grid>
-                                    ))}
+                                {eventsLoading
+                                    ? [...Array(6).keys()].map((idx) => (
+                                          <Grid item md={4} lg={3} key={idx}>
+                                              <EventCard skeleton />
+                                          </Grid>
+                                      ))
+                                    : eventsData?.[targetEvents]
+                                          ?.filter(
+                                              (e) =>
+                                                  e.state !== EventStates.completed &&
+                                                  e.state !== EventStates.deleted
+                                          )
+                                          ?.map((event, idx) => (
+                                              <Grid item md={4} lg={3} key={idx}>
+                                                  <EventCard actions {...event} {...cardProps} />
+                                              </Grid>
+                                          ))}
                             </Grid>
                         </Collapse>
 
@@ -160,10 +155,10 @@ const Events = ({ manage, setActions }) => {
                         />
                         <Collapse in={expandCompleted}>
                             <Grid container spacing={2}>
-                                {events
+                                {eventsData?.[targetEvents]
                                     ?.filter((e) => e.state == EventStates.completed)
                                     ?.map((event, idx) => (
-                                        <Grid item md={4} key={idx}>
+                                        <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardProps} />
                                         </Grid>
                                     ))}
@@ -180,10 +175,10 @@ const Events = ({ manage, setActions }) => {
                                 />
                                 <Collapse in={expandDeleted}>
                                     <Grid container spacing={2}>
-                                        {events
+                                        {eventsData?.[targetEvents]
                                             ?.filter((e) => e.state == EventStates.deleted)
                                             ?.map((event, idx) => (
-                                                <Grid item md={4} key={idx}>
+                                                <Grid item md={4} lg={3} key={idx}>
                                                     <EventCard {...event} {...cardProps} />
                                                 </Grid>
                                             ))}
