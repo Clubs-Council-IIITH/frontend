@@ -20,7 +20,6 @@ const About = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
-    useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
 
     // fetch club
     const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
@@ -29,16 +28,17 @@ const About = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(
-            manage ? (
-                <SecondaryActionButton noPadding size="large" variant="outlined" color="primary">
-                    <Box display="flex" mr={1}>
-                        <EditIcon fontSize="small" />
-                    </Box>
-                    Edit Details
-                </SecondaryActionButton>
-            ) : null
-        );
+        setActions(null); // TODO: remove once rich text editor is done
+        // setActions(
+        //     manage ? (
+        //         <SecondaryActionButton noPadding size="large" variant="outlined" color="primary">
+        //             <Box display="flex" mr={1}>
+        //                 <EditIcon fontSize="small" />
+        //             </Box>
+        //             Edit Details
+        //         </SecondaryActionButton>
+        //     ) : null
+        // );
     }, [manage]);
 
     return (
