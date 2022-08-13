@@ -132,6 +132,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
 
     // map action keys to buttons
     const actionButtons = {
+        close: (
+            <Button key="cancel" variant="outlined" onClick={() => setOpen(false)}>
+                Close
+            </Button>
+        ),
         cancel: (
             <Button key="cancel" variant="outlined" onClick={handleCancel}>
                 Cancel
@@ -307,11 +312,12 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         )}
                                     </Box>
 
-                                    {(editing || deleting || actions.length) &&
-                                    eventData?.event?.state !== EventStates.deleted ? (
-                                        <>
-                                            <Divider />
-                                            <Box p={1} display="flex" justifyContent="flex-end">
+                                    <>
+                                        <Divider />
+                                        <Box p={1} display="flex" justifyContent="space-between">
+                                            {actionButtons["close"]}
+                                            {(editing || deleting || actions.length) &&
+                                            eventData?.event?.state !== EventStates.deleted ? (
                                                 <CardActions sx={{ p: 0, m: 0 }}>
                                                     {!activeEventId || editing ? (
                                                         <>{actionButtons["save"]}</>
@@ -326,9 +332,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                                         )
                                                     )}
                                                 </CardActions>
-                                            </Box>
-                                        </>
-                                    ) : null}
+                                            ) : null}
+                                        </Box>
+                                    </>
                                 </Card>
                             </Grid>
                             {manage &&
