@@ -32,6 +32,8 @@ import Budget from "./Budget";
 import Venue from "./Venue";
 import Discussion from "./Discussion";
 
+import EventStates from "constants/EventStates";
+
 const EVENT_POSTER_PLACEHOLDER =
     "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
 
@@ -242,7 +244,16 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                     </Fade>
                     <Fade in={!expandPoster} unmountOnExit>
                         <Grid container spacing={1}>
-                            <Grid item xs={manage && activeEventId ? 8 : 12}>
+                            <Grid
+                                item
+                                xs={
+                                    manage &&
+                                    activeEventId &&
+                                    eventData?.event?.state !== EventStates.deleted
+                                        ? 8
+                                        : 12
+                                }
+                            >
                                 <Card variant="none">
                                     <Box
                                         component={editing ? "div" : CardActionArea}
@@ -296,7 +307,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         )}
                                     </Box>
 
-                                    {editing || deleting || actions.length ? (
+                                    {(editing || deleting || actions.length) &&
+                                    eventData?.event?.state !== EventStates.deleted ? (
                                         <>
                                             <Divider />
                                             <Box p={1} display="flex" justifyContent="flex-end">
@@ -319,7 +331,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     ) : null}
                                 </Card>
                             </Grid>
-                            {manage && activeEventId ? (
+                            {manage &&
+                            activeEventId &&
+                            eventData?.event?.state !== EventStates.deleted ? (
                                 <Grid item xs>
                                     <Box height="100%">
                                         <Card variant="outlined" sx={{ height: "100%" }}>
