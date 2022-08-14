@@ -33,10 +33,12 @@ const About = () => {
                     Clubs @ IIITH
                 </Typography>
                 <Typography variant="h6" color="secondary" fontWeight={400} mt={1}>
-                   The clubs of IIIT-H conduct various captivating events throughout the year. 
-                   Students across all UG /PG  batches engage in the events, which tells how lively the campus life is! 
-                   The  23 clubs at IIITH are divided into technical and cultural categories. Clubs on campus are run by students, for the students. 
-                   Club activities help develop new hobbies and interests in students and thereby contributing to the all around development of the students.
+                    The clubs of IIIT-H conduct various captivating events throughout the year.
+                    Students across all UG /PG  batches engage in the events, which tells how lively
+                    the campus life is! The  23 clubs at IIITH are divided into technical and
+                    cultural categories. Clubs on campus are run by students, for the students. Club
+                    activities help develop new hobbies and interests in students and thereby
+                    contributing to the all around development of the students.
                 </Typography>
                 <Grid container spacing={2} mt={1}>
                     <Grid item>
@@ -58,15 +60,6 @@ const About = () => {
                     associate student-led Clubs, Groups & Societies.
                 </Typography>
                 <Grid container spacing={2} mt={1}>
-                    <Grid item>
-                        <Statistic number="2" title="Secretaries" />
-                    </Grid>
-                    <Grid item>
-                        <Statistic number="5" title="Undersecretaries" />
-                    </Grid>
-                    <Grid item>
-                        <Statistic number="3" title="Tech Team Members" />
-                    </Grid>
                     <Grid item>
                         <Statistic number="23+" title="Student-Constituent Groups" />
                     </Grid>

@@ -15,6 +15,19 @@ import CarouselBackground9 from "assets/img/carousel/9.jpg";
 const Carousel = () => {
     const carousel = [
         {
+            image: CarouselBackground2,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
+        {
             image: CarouselBackground1,
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
@@ -31,26 +44,11 @@ const Carousel = () => {
             ),
         },
         {
-            image: CarouselBackground2,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
-        },
-        {
             image: CarouselBackground3,
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                             
-                        </Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
                     </Box>
                     <Typography variant="h5"></Typography>
                 </Box>
@@ -74,9 +72,7 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            
-                        </Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
                     </Box>
                     <Typography variant="h5"> </Typography>
                 </Box>
@@ -100,9 +96,7 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-
-                        </Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
                     </Box>
                     <Typography variant="h5"> </Typography>
                 </Box>
@@ -113,9 +107,7 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-
-                        </Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
                     </Box>
                     <Typography variant="h5"> </Typography>
                 </Box>
@@ -126,9 +118,7 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-
-                        </Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
                     </Box>
                     <Typography variant="h5"> </Typography>
                 </Box>
