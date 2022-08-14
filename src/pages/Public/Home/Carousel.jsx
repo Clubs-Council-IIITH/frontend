@@ -2,13 +2,17 @@ import { Box, Typography } from "@mui/material";
 
 import ImageCarousel from "components/ImageCarousel";
 
-import CarouselBackgroundOne from "assets/img/carousel/1.png";
-import CarouselBackgroundTwo from "assets/img/carousel/2.jpg";
+import CarouselBackground1 from "assets/img/carousel/1.png";
+import CarouselBackground2 from "assets/img/carousel/2.jpg";
+import CarouselBackground3 from "assets/img/carousel/3.jpg";
+import CarouselBackground4 from "assets/img/carousel/4.jpeg";
+import CarouselBackground5 from "assets/img/carousel/5.jpg";
+import CarouselBackground6 from "assets/img/carousel/6.jpg";
 
 const Carousel = () => {
     const carousel = [
         {
-            image: CarouselBackgroundTwo,
+            image: CarouselBackground2,
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
@@ -21,7 +25,7 @@ const Carousel = () => {
             ),
         },
         {
-            image: CarouselBackgroundOne,
+            image: CarouselBackground1,
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
