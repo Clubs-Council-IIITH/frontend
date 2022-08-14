@@ -81,6 +81,7 @@ const EventCard = ({
                     <CardMedia
                         sx={{ borderRadius: theme.borderRadius }}
                         component="img"
+                        loading="lazy"
                         image={poster || FALLBACK_EVENT_POSTER}
                         alt={name}
                         height={200}

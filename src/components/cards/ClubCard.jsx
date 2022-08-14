@@ -36,6 +36,8 @@ const ClubCard = ({ id, img, name, tagline, skeleton = false }) => {
                         }}
                         image={img}
                         title={name}
+                        component="img"
+                        loading="lazy"
                     />
                 )}
                 <CardContent
