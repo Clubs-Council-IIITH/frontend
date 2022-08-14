@@ -47,12 +47,12 @@ const publicRoutes = [
         icon: ExploreOutlined,
         component: <Public.Clubs />,
     },
-    // {
-    //     title: "Calendar",
-    //     path: "/calendar",
-    //     icon: CalendarTodayOutlined,
-    //     component: <Public.Calendar />,
-    // },
+    {
+        title: "Calendar",
+        path: "/calendar",
+        icon: CalendarTodayOutlined,
+        component: <Public.Calendar />,
+    },
 ];
 
 const ccRoutes = [
