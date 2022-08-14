@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useTheme } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 
 import {
@@ -9,14 +9,16 @@ import {
     CardContent,
     Typography,
     LinearProgress,
-    IconButton,
+    Skeleton,
     Tooltip,
 } from "@mui/material";
-import { EditOutlined as EditIcon, DeleteOutlined as DeleteIcon } from "@mui/icons-material";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 import { StateProgress } from "utils/EventUtil";
+
+const FALLBACK_EVENT_POSTER =
+    "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
 
 const BorderLinearProgress = styled(LinearProgress, {
     shouldForwardProp: (prop) => prop !== "color",
@@ -32,37 +34,88 @@ const BorderLinearProgress = styled(LinearProgress, {
     },
 }));
 
-const EventCard = ({ id, name, datetimeStart, state, poster, triggerView, manage = false }) => {
+const EventCard = ({
+    id,
+    name,
+    datetimeStart,
+    state,
+    poster,
+    triggerView,
+    manage = false,
+    skeleton = false,
+}) => {
+    const theme = useTheme();
+
     // get progressbar value and color
     const stateProgress = StateProgress(state);
 
     return (
-        <Card variant="none" sx={{ borderRadius: 2 }}>
-            <CardActionArea onClick={() => triggerView(id)} sx={{ p: 1 }}>
-                <CardMedia
-                    sx={{ borderRadius: 2 }}
-                    component="img"
-                    image={poster}
-                    alt={name}
-                    height={180}
-                />
+        <Card
+            variant="outlined"
+            className="elevate"
+            sx={{
+                height: "100%",
+                borderRadius: theme.borderRadius,
+            }}
+        >
+            <CardActionArea
+                sx={{
+                    p: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    height: "100%",
+                    width: "100%",
+                }}
+                onClick={() => triggerView(id)}
+            >
+                {skeleton ? (
+                    <Skeleton
+                        sx={{ borderRadius: theme.borderRadius }}
+                        height={180}
+                        width="100%"
+                        variant="rectangular"
+                        animation="wave"
+                    />
+                ) : (
+                    <CardMedia
+                        sx={{ borderRadius: theme.borderRadius }}
+                        component="img"
+                        loading="lazy"
+                        image={poster || FALLBACK_EVENT_POSTER}
+                        alt={name}
+                        height={200}
+                    />
+                )}
 
-                <CardContent sx={{ px: 0.5 }}>
-                    <Typography gutterBottom color="textSecondary" variant="subtitle2">
-                        {ISOtoDT(datetimeStart).datetime}
-                    </Typography>
-                    <Typography variant="h4">{name}</Typography>
-                </CardContent>
+                <CardContent
+                    sx={{
+                        px: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        flexGrow: 2,
+                        width: "100%",
+                    }}
+                >
+                    <Box>
+                        <Typography gutterBottom color="textSecondary" variant="subtitle2">
+                            {skeleton ? (
+                                <Skeleton animation="wave" />
+                            ) : (
+                                ISOtoDT(datetimeStart).datetime
+                            )}
+                        </Typography>
+                        <Typography variant="h5">
+                            {skeleton ? <Skeleton animation="wave" /> : name}
+                        </Typography>
+                    </Box>
 
-                {!!manage && (
-                    <CardContent sx={{ p: 0.5, pb: 1.5 }}>
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="space-between"
-                            height={10}
-                        >
-                            <Box width={"100%"}>
+                    {!!manage && (
+                        <Box width="100%" pt={3}>
+                            {skeleton ? (
+                                <Skeleton animation="wave" />
+                            ) : (
                                 <Tooltip title={stateProgress.text} arrow>
                                     <BorderLinearProgress
                                         value={stateProgress.value}
@@ -70,10 +123,10 @@ const EventCard = ({ id, name, datetimeStart, state, poster, triggerView, manage
                                         variant="determinate"
                                     />
                                 </Tooltip>
-                            </Box>
+                            )}
                         </Box>
-                    </CardContent>
-                )}
+                    )}
+                </CardContent>
             </CardActionArea>
         </Card>
     );

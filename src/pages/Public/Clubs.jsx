@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useTheme } from "@mui/styles";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { GET_ALL_CLUBS } from "queries/clubs";
-import ClubModel from "models/ClubModel";
 
 import { Grid, Typography } from "@mui/material";
 
@@ -15,37 +14,47 @@ import { ClubCard } from "components/cards";
 import { View as ViewClub } from "pages/Club";
 
 const Clubs = () => {
+    const theme = useTheme();
     const match = useRouteMatch();
 
-    const [clubs, setClubs] = useState([]);
-
-    // fetch all clubs
-    const { loading } = useQuery(GET_ALL_CLUBS, {
+    // fetch all clubs (TODO: optimize to fetch 'technical' & 'cultural' clubs)
+    const { data: clubsData, loading: clubsLoading } = useQuery(GET_ALL_CLUBS, {
         fetchPolicy: "cache-and-network",
-        onCompleted: (data) => setClubs(data?.clubs?.map((o) => new ClubModel(o))),
     });
 
     return (
         <Switch>
             <Route exact path={match.path}>
-                <Page header={"Clubs"} loading={loading} empty={!clubs?.length}>
-                    {Object.keys(ClubCategories).map((category,key) => (
-                        <div key={key}>
-                            <Typography variant="h6" color="#888888" gutterBottom>
-                                {ClubCategories[category].toUpperCase()}
-                            </Typography>
+                <Page noToolbar header={"Clubs"} empty={!clubsLoading && !clubsData?.clubs?.length}>
+                    {Object.keys(ClubCategories)
+                        .slice(0, 2)
+                        .map((category, key) => (
+                            <div key={key}>
+                                <Typography
+                                    variant="h6"
+                                    color={theme.palette.grey[500]}
+                                    gutterBottom
+                                >
+                                    {ClubCategories[category].toUpperCase()}
+                                </Typography>
 
-                            <Grid container spacing={2} mb={4}>
-                                {clubs
-                                    ?.filter((o) => o.category.toLowerCase() === category)
-                                    ?.map((club, idx) => (
-                                        <Grid item md={4} lg={3} key={idx}>
-                                            <ClubCard {...club} />
-                                        </Grid>
-                                    ))}
-                            </Grid>
-                        </div>
-                    ))}
+                                <Grid container spacing={2} mb={4}>
+                                    {clubsLoading
+                                        ? [...Array(6).keys()].map((idx) => (
+                                              <Grid item md={4} lg={3} key={idx}>
+                                                  <ClubCard skeleton />
+                                              </Grid>
+                                          ))
+                                        : clubsData?.clubs
+                                              ?.filter((o) => o.category.toLowerCase() === category)
+                                              ?.map((club, idx) => (
+                                                  <Grid item md={4} lg={3} key={idx}>
+                                                      <ClubCard {...club} />
+                                                  </Grid>
+                                              ))}
+                                </Grid>
+                            </div>
+                        ))}
                 </Page>
             </Route>
             <Route path={`${match.path}/:clubId`}>

@@ -25,11 +25,10 @@ const About = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
-    useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
 
 
     // fetch club
-    const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
+    const { dataCloses additional part of 40, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
     const [club, setClub] = useState([]);
     const [saved, setSaved] = useState(true);
     useEffect(() => setClub(new ClubModel(data?.club)), [data]);
