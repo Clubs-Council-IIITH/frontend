@@ -296,7 +296,10 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                                 </Typography>
                                             </Box>
                                             <Box display="flex">
-                                                <Avatar sx={{ height: 120, width: 120 }} />
+                                                <Avatar
+                                                    sx={{ height: 120, width: 120 }}
+                                                    src={targetUser?.user?.img}
+                                                />
                                             </Box>
                                         </Box>
                                     </CardContent>

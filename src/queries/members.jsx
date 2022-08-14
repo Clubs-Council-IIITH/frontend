@@ -5,6 +5,7 @@ export const GET_USER = gql`
     query getUser($mail: String!) {
         user(mail: $mail) {
             id
+            img
             firstName
             lastName
             mail
@@ -19,6 +20,7 @@ export const GET_CLUB_MEMBERS = gql`
             id
             user {
                 id
+                img
                 firstName
                 lastName
                 mail
@@ -35,6 +37,7 @@ export const ADMIN_GET_ALL_USERS = gql`
     query adminGetAllUsers {
         adminAllUsers {
             id
+            img
             firstName
             lastName
             mail
@@ -49,6 +52,7 @@ export const ADMIN_GET_PENDING_MEMBERS = gql`
             id
             user {
                 id
+                img
                 firstName
                 lastName
                 mail
@@ -71,6 +75,7 @@ export const ADMIN_GET_CLUB_MEMBERS = gql`
             id
             user {
                 id
+                img
                 firstName
                 lastName
                 mail
