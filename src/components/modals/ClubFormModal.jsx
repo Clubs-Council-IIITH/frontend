@@ -297,24 +297,6 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                 </CardActions>
                             </Box>
                         </Card>
-
-                        {/* <Box> */}
-                        {/*     <Box mr={1}> */}
-                        {/*         <SecondaryActionButton size="large" onClick={() => setOpen(false)}> */}
-                        {/*             Cancel */}
-                        {/*         </SecondaryActionButton> */}
-                        {/*     </Box> */}
-                        {/*     <Box> */}
-                        {/*         <PrimaryActionButton */}
-                        {/*             type="submit" */}
-                        {/*             form="ClubForm" */}
-                        {/*             variant="outlined" */}
-                        {/*             size="large" */}
-                        {/*         > */}
-                        {/*             Save */}
-                        {/*         </PrimaryActionButton> */}
-                        {/*     </Box> */}
-                        {/* </Box> */}
                     </Box>
                 </Fade>
             </Modal>
