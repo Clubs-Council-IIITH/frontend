@@ -33,13 +33,10 @@ const Carousel = () => {
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
                         <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Clubs Council
+                            Life at IIITH
                         </Typography>
                     </Box>
-                    <Typography variant="h5">
-                        Ensuring that student-driven organizations on campus are successful in their
-                        aim to cultivate diverse campus life experiences, since 2017.
-                    </Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -48,9 +45,11 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
                     </Box>
-                    <Typography variant="h5"></Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -60,10 +59,10 @@ const Carousel = () => {
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
                         <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Bonding
+                            Life at IIITH
                         </Typography>
                     </Box>
-                    <Typography variant="h5">Cheer, cherish and clap together</Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -72,9 +71,11 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
                     </Box>
-                    <Typography variant="h5"> </Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -84,10 +85,10 @@ const Carousel = () => {
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
                         <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Night Life
+                            Life at IIITH
                         </Typography>
                     </Box>
-                    <Typography variant="h5">Who said Night needed to be Quiet?</Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -96,9 +97,11 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
                     </Box>
-                    <Typography variant="h5"> </Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -107,9 +110,11 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
                     </Box>
-                    <Typography variant="h5"> </Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },
@@ -118,9 +123,11 @@ const Carousel = () => {
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}></Typography>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
                     </Box>
-                    <Typography variant="h5"> </Typography>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
                 </Box>
             ),
         },

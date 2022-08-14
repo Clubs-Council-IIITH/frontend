@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { useTheme } from "@mui/styles";
 
-import { useMutation, useQuery } from "@apollo/client";
-import { ADMIN_GET_EVENT_BUDGET } from "queries/finance";
-import {
-    ADMIN_CC_PENDING_EVENTS,
-    ADMIN_APPROVED_EVENTS,
-    ADMIN_GET_EVENT_DISCUSSION,
-} from "queries/events";
-import { PROGRESS_EVENT, SEND_DISCUSSION_MESSAGE } from "mutations/events";
+import { useQuery } from "@apollo/client";
+import { ADMIN_CC_PENDING_EVENTS, ADMIN_APPROVED_EVENTS } from "queries/events";
 
 import { Box, Grid, Typography } from "@mui/material";
 
@@ -21,8 +15,10 @@ import { EventCard } from "components/cards";
 const Events = () => {
     const theme = useTheme();
 
-    const { data: pendingEventsData, loading: pendingEventsLoading } = useQuery(ADMIN_CC_PENDING_EVENTS);
-    const { data: approvedEventsData, loading: approvedEventsLoading } = useQuery(ADMIN_APPROVED_EVENTS);
+    const { data: pendingEventsData, loading: pendingEventsLoading } =
+        useQuery(ADMIN_CC_PENDING_EVENTS);
+    const { data: approvedEventsData, loading: approvedEventsLoading } =
+        useQuery(ADMIN_APPROVED_EVENTS);
 
     // event modal
     const [viewProps, setViewProps] = useState({});
@@ -84,7 +80,13 @@ const Events = () => {
                     <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
                         APPROVED EVENTS
                     </Typography>
-                    <Page full empty={!approvedEventsLoading && !approvedEventsData?.adminApprovedEvents?.length}>
+                    <Page
+                        full
+                        empty={
+                            !approvedEventsLoading &&
+                            !approvedEventsData?.adminApprovedEvents?.length
+                        }
+                    >
                         <Grid container spacing={2} mb={2}>
                             {approvedEventsLoading
                                 ? [...Array(6).keys()].map((idx) => (

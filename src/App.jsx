@@ -169,13 +169,17 @@ const App = () => {
                             ))}
 
                             {/* protected routes */}
-                            {[...ccRoutes, ...slcRoutes, ...sloRoutes, ...clubRoutes].map(
-                                (route, idx) => (
-                                    <Route exact={route.exact} path={route.path} key={idx}>
-                                        {route.component}
-                                    </Route>
-                                )
-                            )}
+                            {[
+                                ...ccRoutes,
+                                ...slcRoutes,
+                                ...sloRoutes,
+                                ...gadRoutes,
+                                ...clubRoutes,
+                            ].map((route, idx) => (
+                                <Route exact={route.exact} path={route.path} key={idx}>
+                                    {route.component}
+                                </Route>
+                            ))}
 
                             {/* error routes */}
                             <Route exact path="/404">

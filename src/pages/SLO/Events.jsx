@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTheme } from "@mui/styles";
 
 import { useQuery } from "@apollo/client";
-import { ADMIN_SLO_PENDING_EVENTS, ADMIN_GET_ALL_EVENTS } from "queries/events";
+import { ADMIN_SLO_PENDING_EVENTS, ADMIN_APPROVED_EVENTS } from "queries/events";
 
 import { Box, Grid, Typography } from "@mui/material";
 
@@ -17,8 +17,8 @@ const Events = () => {
 
     const { data: pendingEventsData, loading: pendingEventsLoading } =
         useQuery(ADMIN_SLO_PENDING_EVENTS);
-
-    const { data: allEventsData, loading: allEventsLoading } = useQuery(ADMIN_GET_ALL_EVENTS);
+    const { data: approvedEventsData, loading: approvedEventsLoading } =
+        useQuery(ADMIN_APPROVED_EVENTS);
 
     // event modal
     const [viewProps, setViewProps] = useState({});
@@ -80,15 +80,21 @@ const Events = () => {
                     <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
                         APPROVED EVENTS
                     </Typography>
-                    <Page full empty={!allEventsLoading && !allEventsData?.adminAllEvents?.length}>
+                    <Page
+                        full
+                        empty={
+                            !approvedEventsLoading &&
+                            !approvedEventsData?.adminApprovedEvents?.length
+                        }
+                    >
                         <Grid container spacing={2} mb={2}>
-                            {allEventsLoading
+                            {approvedEventsLoading
                                 ? [...Array(6).keys()].map((idx) => (
                                       <Grid item md={4} lg={3} key={idx}>
                                           <EventCard skeleton showClub />
                                       </Grid>
                                   ))
-                                : allEventsData?.adminAllEvents?.map((event, idx) => (
+                                : approvedEventsData?.adminApprovedEvents?.map((event, idx) => (
                                       <Grid item md={4} lg={3} key={idx}>
                                           <EventCard {...event} {...cardPropsApproved} />
                                       </Grid>
