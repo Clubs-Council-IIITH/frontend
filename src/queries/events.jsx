@@ -79,6 +79,25 @@ export const ADMIN_GET_ALL_EVENTS = gql`
     }
 `;
 
+export const ADMIN_APPROVED_EVENTS = gql`
+    query adminApprovedEvents {
+        adminApprovedEvents {
+            id
+            club {
+                id
+                img
+                name
+            }
+            poster
+            name
+            datetimeStart
+            description
+            audience
+            state
+        }
+    }
+`;
+
 export const ADMIN_GET_CLUB_EVENTS = gql`
     query adminGetClubEvents($id: Int) {
         adminClubEvents(clubId: $id) {
