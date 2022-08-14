@@ -13,7 +13,6 @@ import Img8 from "assets/img/gallery/8.jpg";
 import Img9 from "assets/img/gallery/9.jpg";
 import Img10 from "assets/img/gallery/10.jpg";
 
-
 const itemData = [
     {
         img: Img1,
@@ -55,7 +54,6 @@ const itemData = [
         img: Img10,
         title: "Group-Pic-Debsoc",
     },
-    
 ];
 
 const Gallery = () => {
@@ -63,7 +61,7 @@ const Gallery = () => {
 
     return (
         <Box p={5} pt={1} backgroundColor={theme.palette.primary.main}>
-            <ImageList variant="masonry" cols={4} gap={12}>
+            <ImageList variant="masonry" cols={3} gap={12}>
                 {itemData.map((item) => (
                     <ImageListItem key={item.img}>
                         <img
