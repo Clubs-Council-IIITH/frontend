@@ -31,6 +31,9 @@ import MainContainer from "components/MainContainer";
 // pages {{{
 import * as Public from "pages/Public";
 import * as ClubsCouncil from "pages/ClubsCouncil";
+import * as SLC from "pages/SLC";
+import * as SLO from "pages/SLO";
+import * as GAD from "pages/GAD";
 import * as Club from "pages/Club";
 // }}}
 
@@ -72,21 +75,48 @@ const publicRoutes = [
 const ccRoutes = [
     {
         title: "Manage Events",
-        path: "/admin/events",
+        path: "/admin/cc/events",
         icon: EventOutlined,
         component: <ClubsCouncil.Events />,
     },
     {
         title: "Manage Clubs",
-        path: "/admin/clubs",
+        path: "/admin/cc/clubs",
         icon: DashboardOutlined,
         component: <ClubsCouncil.Clubs />,
     },
     {
         title: "Manage Users",
-        path: "/admin/users",
+        path: "/admin/cc/users",
         icon: AdminPanelSettingsOutlined,
         component: <ClubsCouncil.Users />,
+    },
+];
+
+const slcRoutes = [
+    {
+        title: "Manage Events",
+        path: "/admin/slc/events",
+        icon: EventOutlined,
+        component: <SLC.Events />,
+    },
+];
+
+const sloRoutes = [
+    {
+        title: "Manage Events",
+        path: "/admin/slo/events",
+        icon: EventOutlined,
+        component: <SLO.Events />,
+    },
+];
+
+const gadRoutes = [
+    {
+        title: "Manage Events",
+        path: "/admin/gad/events",
+        icon: EventOutlined,
+        component: <GAD.Events />,
     },
 ];
 
@@ -109,6 +139,12 @@ const App = () => {
         const protectedRoutes =
             session?.group === UserGroups.cc
                 ? ccRoutes
+                : session?.group === UserGroups.slc
+                ? slcRoutes
+                : session?.group === UserGroups.slo
+                ? sloRoutes
+                : session?.group === UserGroups.gad
+                ? gadRoutes
                 : session?.group === UserGroups.club
                 ? clubRoutes
                 : [];
@@ -133,11 +169,13 @@ const App = () => {
                             ))}
 
                             {/* protected routes */}
-                            {[...ccRoutes, ...clubRoutes].map((route, idx) => (
-                                <Route exact={route.exact} path={route.path} key={idx}>
-                                    {route.component}
-                                </Route>
-                            ))}
+                            {[...ccRoutes, ...slcRoutes, ...sloRoutes, ...clubRoutes].map(
+                                (route, idx) => (
+                                    <Route exact={route.exact} path={route.path} key={idx}>
+                                        {route.component}
+                                    </Route>
+                                )
+                            )}
 
                             {/* error routes */}
                             <Route exact path="/404">
