@@ -22,6 +22,8 @@ import {
     CalendarTodayOutlined,
     DashboardOutlined,
     GroupOutlined,
+    AdminPanelSettingsOutlined,
+    InfoOutlined,
 } from "@mui/icons-material";
 import MainContainer from "components/MainContainer";
 // }}}
@@ -35,6 +37,12 @@ import * as Club from "pages/Club";
 // routes {{{
 const publicRoutes = [
     {
+        title: "About",
+        path: "/about",
+        icon: InfoOutlined,
+        component: <Public.About />,
+    },
+    {
         title: "Home",
         path: "/",
         icon: HomeOutlined,
@@ -47,12 +55,18 @@ const publicRoutes = [
         icon: ExploreOutlined,
         component: <Public.Clubs />,
     },
-    // {
-    //     title: "Calendar",
-    //     path: "/calendar",
-    //     icon: CalendarTodayOutlined,
-    //     component: <Public.Calendar />,
-    // },
+    {
+        title: "Student Bodies",
+        path: "/student-bodies",
+        icon: GroupOutlined,
+        component: <Public.StudentBodies />,
+    },
+    {
+        title: "Calendar",
+        path: "/calendar",
+        icon: CalendarTodayOutlined,
+        component: <Public.Calendar />,
+    },
 ];
 
 const ccRoutes = [
@@ -71,7 +85,7 @@ const ccRoutes = [
     {
         title: "Manage Users",
         path: "/admin/users",
-        icon: GroupOutlined,
+        icon: AdminPanelSettingsOutlined,
         component: <ClubsCouncil.Users />,
     },
 ];

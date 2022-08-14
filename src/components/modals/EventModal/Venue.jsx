@@ -17,6 +17,7 @@ import {
     Tooltip,
 } from "@mui/material";
 
+import EventVenues from "constants/EventVenues";
 import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
 
 const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) => {
@@ -28,12 +29,15 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
         variables: { eventId: activeEventId },
     });
 
-    const { data: currentBooking, loading: currentBookingLoading } = useQuery(ADMIN_ROOM_BY_EVENT_ID, {
-        variables: { eventId: activeEventId },
-        onCompleted: (data) => {
-            setSelectedRoom(data?.adminRoomByEventId?.room || "none");
-        },
-    });
+    const { data: currentBooking, loading: currentBookingLoading } = useQuery(
+        ADMIN_ROOM_BY_EVENT_ID,
+        {
+            variables: { eventId: activeEventId },
+            onCompleted: (data) => {
+                setSelectedRoom(data?.adminRoomByEventId?.room || "none");
+            },
+        }
+    );
 
     const [bookRoom] = useMutation(ADMIN_BOOK_ROOM, {
         refetchQueries: [ADMIN_ROOM_BY_EVENT_ID],
@@ -87,7 +91,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                             ) : (
                                 rooms?.adminAvailableRooms?.map(({ room, available }, idx) => (
                                     <MenuItem key={idx} value={room} disabled={!available}>
-                                        {room}
+                                        {EventVenues[room]}
                                     </MenuItem>
                                 ))
                             )}
@@ -98,7 +102,10 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                 <Skeleton animation="wave" />
                             ) : currentBooking?.adminRoomByEventId?.room ? (
                                 <Box display="flex" alignItems="center">
-                                    <Box mr={1}>{currentBooking.adminRoomByEventId.room}</Box>
+                                    <Box mr={1}>
+                                        {EventVenues[currentBooking?.adminRoomByEventId?.room] ||
+                                            "None"}
+                                    </Box>
                                 </Box>
                             ) : (
                                 "none"
@@ -107,7 +114,11 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                     )}
                 </Grid>
 
-                { (( editing && selectedRoom && selectedRoom !== "none" ) || ( !editing && !currentBookingLoading && currentBooking?.adminRoomByEventId?.room && currentBooking?.adminRoomByEventId?.room !== "none" )) && (
+                {((editing && selectedRoom && selectedRoom !== "none") ||
+                    (!editing &&
+                        !currentBookingLoading &&
+                        currentBooking?.adminRoomByEventId?.room &&
+                        currentBooking?.adminRoomByEventId?.room !== "none")) && (
                     <Grid item container mt={0} spacing={3}>
                         <Grid item xs={12}>
                             {editing ? (
@@ -115,7 +126,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="population"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={currentBooking?.adminRoomByEventId?.population || ""}
+                                    defaultValue={
+                                        currentBooking?.adminRoomByEventId?.population || ""
+                                    }
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -130,6 +143,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                             onChange={onChange}
                                             error={!!error}
                                             InputLabelProps={{ shrink: true }}
+                                            InputProps={{ inputProps: { min: 0 } }}
                                             helperText={error ? error.message : null}
                                         />
                                     )}
@@ -147,7 +161,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                             <Skeleton animation="wave" />
                                         ) : currentBooking?.adminRoomByEventId?.population ? (
                                             currentBooking.adminRoomByEventId.population
-                                        ) : ""}
+                                        ) : (
+                                            ""
+                                        )}
                                     </Typography>
                                 </>
                             )}
@@ -159,7 +175,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                     name="equipment"
                                     control={control}
                                     shouldUnregister={true}
-                                    defaultValue={currentBooking?.adminRoomByEventId?.equipment || ""}
+                                    defaultValue={
+                                        currentBooking?.adminRoomByEventId?.equipment || ""
+                                    }
                                     render={({
                                         field: { onChange, value },
                                         fieldState: { error },
@@ -189,7 +207,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                             <Skeleton animation="wave" />
                                         ) : currentBooking?.adminRoomByEventId?.equipment ? (
                                             currentBooking.adminRoomByEventId.equipment
-                                        ) : ""}
+                                        ) : (
+                                            ""
+                                        )}
                                     </Typography>
                                 </>
                             )}
@@ -231,7 +251,9 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                             <Skeleton animation="wave" />
                                         ) : currentBooking?.adminRoomByEventId?.additional ? (
                                             currentBooking.adminRoomByEventId.additional
-                                        ) : ""}
+                                        ) : (
+                                            ""
+                                        )}
                                     </Typography>
                                 </>
                             )}

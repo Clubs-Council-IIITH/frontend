@@ -34,7 +34,7 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
                         alignItems: "center",
                     }}
                 >
-                    <Avatar sx={{ width: "180px", height: "180px" }} />
+                    <Avatar sx={{ width: "180px", height: "180px" }} src={user?.img} />
 
                     <Typography variant="h5" mb={1} mt={2} sx={{ textAlign: "center" }}>
                         {`${user.firstName} ${user.lastName}`}

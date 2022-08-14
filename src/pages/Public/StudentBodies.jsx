@@ -13,11 +13,11 @@ import { ClubCard } from "components/cards";
 
 import { View as ViewClub } from "pages/Club";
 
-const Clubs = () => {
+const StudentBodies = () => {
     const theme = useTheme();
     const match = useRouteMatch();
 
-    // fetch all clubs (TODO: optimize to fetch 'technical' & 'cultural' clubs)
+    // fetch all clubs (TODO: optimize to fetch only 'other' clubs)
     const { data: clubsData, loading: clubsLoading } = useQuery(GET_ALL_CLUBS, {
         fetchPolicy: "cache-and-network",
     });
@@ -25,19 +25,15 @@ const Clubs = () => {
     return (
         <Switch>
             <Route exact path={match.path}>
-                <Page noToolbar header={"Clubs"} empty={!clubsLoading && !clubsData?.clubs?.length}>
+                <Page
+                    noToolbar
+                    header={"Student Bodies"}
+                    empty={!clubsLoading && !clubsData?.clubs?.length}
+                >
                     {Object.keys(ClubCategories)
-                        .slice(0, 2)
+                        .slice(2)
                         .map((category, key) => (
                             <div key={key}>
-                                <Typography
-                                    variant="h6"
-                                    color={theme.palette.grey[500]}
-                                    gutterBottom
-                                >
-                                    {ClubCategories[category].toUpperCase()}
-                                </Typography>
-
                                 <Grid container spacing={2} mb={4}>
                                     {clubsLoading
                                         ? [...Array(6).keys()].map((idx) => (
@@ -64,4 +60,4 @@ const Clubs = () => {
     );
 };
 
-export default Clubs;
+export default StudentBodies;

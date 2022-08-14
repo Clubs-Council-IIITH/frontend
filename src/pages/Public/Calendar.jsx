@@ -1,9 +1,11 @@
 import Page from "components/Page";
 
+import EventCalendar from "components/EventCalendar";
+
 const Calendar = () => {
     return (
-        <Page header={"Calendar"} loading={false} empty={false}>
-            <h1> TODO </h1>
+        <Page noToolbar header={"Event Calendar"} loading={false} empty={false}>
+            <EventCalendar />
         </Page>
     );
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTheme } from "@mui/styles";
 
 import { useQuery } from "@apollo/client";

@@ -59,7 +59,7 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
 
     // on query completion, proceed to phase 1 if target user doesn't exist, else directly to phase 2
     const [getTargetUser, { data: targetUser }] = useLazyQuery(GET_USER, {
-        onCompleted: () => setFormProgress(targetUser?.user ? 2 : 1),
+        onCompleted: (data) => setFormProgress(data?.user ? 2 : 1),
     });
 
     // reset form progress and close modal
@@ -296,7 +296,10 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                                 </Typography>
                                             </Box>
                                             <Box display="flex">
-                                                <Avatar sx={{ height: 120, width: 120 }} />
+                                                <Avatar
+                                                    sx={{ height: 120, width: 120 }}
+                                                    src={targetUser?.user?.img}
+                                                />
                                             </Box>
                                         </Box>
                                     </CardContent>
