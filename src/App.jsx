@@ -23,6 +23,7 @@ import {
     DashboardOutlined,
     GroupOutlined,
     AdminPanelSettingsOutlined,
+    InfoOutlined,
 } from "@mui/icons-material";
 import MainContainer from "components/MainContainer";
 // }}}
@@ -35,6 +36,12 @@ import * as Club from "pages/Club";
 
 // routes {{{
 const publicRoutes = [
+    {
+        title: "About",
+        path: "/about",
+        icon: InfoOutlined,
+        component: <Public.About />,
+    },
     {
         title: "Home",
         path: "/",
