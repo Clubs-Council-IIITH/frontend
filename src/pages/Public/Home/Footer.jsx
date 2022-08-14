@@ -19,7 +19,7 @@ const Footer = () => {
         <Box px={5} backgroundColor={theme.palette.primary.main}>
             <Divider sx={{ borderColor: theme.palette.grey[800] }} />
             <Box px={3}>
-                <Grid container py={8}>
+                <Grid container py={6}>
                     <Grid item xs={4} alignItems="flex-start">
                         <Box display="flex" alignItems="center">
                             <Box mr={3}>
@@ -59,7 +59,7 @@ const Footer = () => {
                         </Box>
                     </Grid>
                 </Grid>
-                <Grid container pb={8}>
+                <Grid container pb={6}>
                     <Grid item xs={4}>
                         <Typography
                             variant="body1"
