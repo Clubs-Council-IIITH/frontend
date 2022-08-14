@@ -6,11 +6,13 @@ import IIITLogo from "assets/img/iiit_logo_white.png";
 import TwitterIcon from "assets/img/twitter.png";
 import FacebookIcon from "assets/img/facebook.png";
 import InstagramIcon from "assets/img/instagram.png";
+import DiscordIcon from "assets/img/discord.png";
 
 const PRIVACY_POLICY_URL = "https://www.iiit.ac.in/privacy-policy/";
 const TWITTER_URL = "https://twitter.com/iiit_hyderabad";
 const FACEBOOK_URL = "https://www.facebook.com/IIITH";
 const INSTAGRAM_URL = "https://www.instagram.com/iiit.hyderabad/";
+const DISCORD_URL = "https://discord.gg/KFU6SHceYn/";
 
 const Footer = () => {
     const theme = useTheme();
@@ -32,6 +34,14 @@ const Footer = () => {
                     </Grid>
                     <Grid item xs>
                         <Box width="100%" display="flex" justifyContent="flex-end">
+                            <IconButton
+                                component="a"
+                                href={DISCORD_URL}
+                                color="secondary"
+                                sx={{ mx: 1 }}
+                            >
+                                <img src={DiscordIcon} height={20} />
+                            </IconButton>
                             <IconButton
                                 component="a"
                                 href={TWITTER_URL}
@@ -89,3 +99,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
