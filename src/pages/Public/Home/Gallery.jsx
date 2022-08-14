@@ -10,6 +10,8 @@ import Img5 from "assets/img/gallery/5.jpg";
 import Img6 from "assets/img/gallery/6.jpeg";
 import Img7 from "assets/img/gallery/7.jpg";
 import Img8 from "assets/img/gallery/8.jpg";
+import Img9 from "assets/img/gallery/9.jpg";
+import Img10 from "assets/img/gallery/10.jpg";
 
 
 const itemData = [
@@ -31,7 +33,7 @@ const itemData = [
     },
     {
         img: Img5,
-        title: "Singing",
+        title: "FHC",
     },
     {
         img: Img6,
@@ -44,6 +46,14 @@ const itemData = [
     {
         img: Img8,
         title: "Drum-Set",
+    },
+    {
+        img: Img9,
+        title: "Singing",
+    },
+    {
+        img: Img10,
+        title: "Group-Pic-Debsoc",
     },
     
 ];
