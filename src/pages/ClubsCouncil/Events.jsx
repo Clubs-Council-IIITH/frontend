@@ -7,7 +7,6 @@ import {
     ADMIN_CC_PENDING_EVENTS,
     ADMIN_APPROVED_EVENTS,
     ADMIN_GET_EVENT_DISCUSSION,
-    ADMIN_GET_ALL_EVENTS,
 } from "queries/events";
 import { PROGRESS_EVENT, SEND_DISCUSSION_MESSAGE } from "mutations/events";
 
@@ -24,8 +23,6 @@ const Events = () => {
 
     const { data: pendingEventsData, loading: pendingEventsLoading } = useQuery(ADMIN_CC_PENDING_EVENTS);
     const { data: approvedEventsData, loading: approvedEventsLoading } = useQuery(ADMIN_APPROVED_EVENTS);
-
-    const { data: allEventsData, loading: allEventsLoading } = useQuery(ADMIN_GET_ALL_EVENTS);
 
     // event modal
     const [viewProps, setViewProps] = useState({});

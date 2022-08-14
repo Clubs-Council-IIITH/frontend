@@ -24,6 +24,7 @@ import {
     GET_ALL_EVENTS,
     GET_EVENT_BY_ID,
     ADMIN_CC_PENDING_EVENTS,
+    ADMIN_APPROVED_EVENTS,
 } from "queries/events";
 
 import { TabBar, TabPanels } from "components/Tabs";
@@ -90,6 +91,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [approveEvent] = useMutation(PROGRESS_EVENT, {
         refetchQueries: [
             ADMIN_CC_PENDING_EVENTS,
+            ADMIN_APPROVED_EVENTS,
             GET_ALL_EVENTS,
             ADMIN_GET_ALL_EVENTS,
             GET_CLUB_EVENTS,
