@@ -66,6 +66,7 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             id
             club {
                 id
+                img
                 name
             }
             poster

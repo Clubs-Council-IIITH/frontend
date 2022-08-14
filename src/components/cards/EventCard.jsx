@@ -2,6 +2,7 @@ import { useTheme } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 
 import {
+    Avatar,
     Box,
     Card,
     CardMedia,
@@ -40,9 +41,11 @@ const EventCard = ({
     datetimeStart,
     state,
     poster,
+    club,
     triggerView,
     manage = false,
     skeleton = false,
+    showClub = false,
 }) => {
     const theme = useTheme();
 
@@ -111,21 +114,42 @@ const EventCard = ({
                         </Typography>
                     </Box>
 
-                    {!!manage && (
-                        <Box width="100%" pt={3}>
-                            {skeleton ? (
-                                <Skeleton animation="wave" />
-                            ) : (
-                                <Tooltip title={stateProgress.text} arrow>
-                                    <BorderLinearProgress
-                                        value={stateProgress.value}
-                                        color={stateProgress.color}
-                                        variant="determinate"
+                    <Box>
+                        {showClub ? (
+                            <Box display="flex" alignItems="center" pt={3}>
+                                {skeleton ? (
+                                    <Skeleton
+                                        animation="wave"
+                                        variant="circular"
+                                        height={16}
+                                        width={16}
+                                        sx={{ mr: 1 }}
                                     />
-                                </Tooltip>
-                            )}
-                        </Box>
-                    )}
+                                ) : (
+                                    <Avatar src={club?.img} sx={{ height: 16, width: 16, mr: 1 }} />
+                                )}
+                                <Typography variant="body2" sx={{ width: "100%" }}>
+                                    {skeleton ? <Skeleton animation="wave" /> : club.name}
+                                </Typography>
+                            </Box>
+                        ) : null}
+
+                        {!!manage && (
+                            <Box width="100%" pt={3}>
+                                {skeleton ? (
+                                    <Skeleton animation="wave" />
+                                ) : (
+                                    <Tooltip title={stateProgress.text} arrow>
+                                        <BorderLinearProgress
+                                            value={stateProgress.value}
+                                            color={stateProgress.color}
+                                            variant="determinate"
+                                        />
+                                    </Tooltip>
+                                )}
+                            </Box>
+                        )}
+                    </Box>
                 </CardContent>
             </CardActionArea>
         </Card>

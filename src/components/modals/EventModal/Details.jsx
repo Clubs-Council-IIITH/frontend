@@ -270,7 +270,7 @@ const Details = ({
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} mt={1}>
+                <Grid item xs={12} mt={0}>
                     <Typography variant="h4">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
