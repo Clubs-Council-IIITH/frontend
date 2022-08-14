@@ -1,0 +1,124 @@
+[
+    {
+        "id": "1",
+        "name": {
+            "title": "Mr",
+            "first": "Naren",
+            "last": "Akash RJ"
+        },
+        "role": "Advisor",
+        "email": "naren.akash@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/27.jpg"
+    },
+    {
+        "id": "2",
+        "name": {
+            "title": "Mr",
+            "first": "Radheshyam",
+            "last": "Thiyagarajan"
+        },
+        "role": "Secretary",
+        "email": "radheshyam.t@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/28.jpg"
+    },
+    {
+        "id": "3",
+        "name": {
+            "title": "Mr",
+            "first": "Hariharan",
+            "last": "Kalimuthu"
+        },
+        "role": "Secretary",
+        "email": "hariharan.k@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/25.jpg"
+    },
+    {
+        "id": "4",
+        "name": {
+            "title": "Mr",
+            "first": "Bhav",
+            "last": "Beri"
+        },
+        "role": "Undersecretary",
+        "email": "bhav.beri@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/18.jpg"
+    },
+    {
+        "id": "5",
+        "name": {
+            "title": "Mr",
+            "first": "Gnaneswar",
+            "last": "Kulindala"
+        },
+        "role": "Undersecretary",
+        "email": "gnaneswar.kulindala@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/19.jpg"
+    },
+    {
+        "id": "6",
+        "name": {
+            "title": "Ms",
+            "first": "Vrinda",
+            "last": "Agarwal"
+        },
+        "role": "Undersecretary",
+        "email": "vrinda.agarwal@students.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/women/18.jpg"
+    },
+    {
+        "id": "7",
+        "name": {
+            "title": "Ms",
+            "first": "Mihika",
+            "last": "Sanghi"
+        },
+        "role": "Undersecretary",
+        "email": "mihika.sanghi@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/women/19.jpg"
+    },
+    {
+        "id": "8",
+        "name": {
+            "title": "Mr",
+            "first": "Advaith",
+            "last": "Bhaskararama Sahishna Malladi"
+        },
+        "role": "Undersecretary",
+        "email": "advaith.malladi@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/18.jpg"
+    },
+    {
+        "id": "9",
+        "name": {
+            "title": "Mr",
+            "first": "Vishva",
+            "last": "Saravanan"
+        },
+        "role": "Tech Team Lead",
+        "email": "vishva.saravanan@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/38.jpg"
+    },
+    {
+        "id": "10",
+        "name": {
+            "title": "Mr",
+            "first": "Anirudh",
+            "last": "Kaushik"
+        },
+        "role": "Tech Team Member",
+        "email": "anirudh.ka@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/39.jpg"
+    },
+    {
+        "id": "11",
+        "name": {
+            "title": "Mr",
+            "first": "Mihir",
+            "last": "Rawat"
+        },
+        "role": "Tech Team Member",
+        "email": "mihir.r@research.iiit.ac.in",
+        "img": "https://randomuser.me/api/portraits/men/33.jpg"
+    }
+]
+
