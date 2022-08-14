@@ -40,6 +40,58 @@ const Carousel = () => {
                 </Box>
             ),
         },
+        {
+            image: CarouselBackground3,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
+        {
+            image: CarouselBackground4,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
+        {
+            image: CarouselBackground5,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
+        {
+            image: CarouselBackground6,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
     ];
 
     return <ImageCarousel gradient height="100vh" contents={carousel} />;
