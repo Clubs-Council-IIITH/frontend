@@ -310,7 +310,6 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         >
                                             <CardMedia
                                                 component="img"
-                                                loading="lazy"
                                                 height={140}
                                                 image={
                                                     eventLoading

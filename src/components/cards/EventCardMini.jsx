@@ -42,7 +42,6 @@ const EventCardMini = ({
                         ) : (
                             <CardMedia
                                 component="img"
-                                loading="lazy"
                                 image={poster}
                                 height={EVENT_POSTER_HEIGHT}
                             />

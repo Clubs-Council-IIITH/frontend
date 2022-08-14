@@ -93,7 +93,7 @@ const Navigation = () => {
             </Box>
 
             {/* navigation items */}
-            <Box my={2}>
+            <Box my={4}>
                 {Object.keys(navigation).map(
                     (category, cidx) =>
                         !!navigation[category].length && (
