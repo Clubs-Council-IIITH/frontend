@@ -12,7 +12,7 @@ const PRIVACY_POLICY_URL = "https://www.iiit.ac.in/privacy-policy/";
 const TWITTER_URL = "https://twitter.com/iiit_hyderabad";
 const FACEBOOK_URL = "https://www.facebook.com/IIITH";
 const INSTAGRAM_URL = "https://www.instagram.com/iiit.hyderabad/";
-const DISCORD_URL = "https://discord.gg/KFU6SHceYn/";
+const DISCORD_URL = "https://discord.gg/V8C7QSRtat";
 
 const Footer = () => {
     const theme = useTheme();
