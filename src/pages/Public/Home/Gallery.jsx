@@ -17,6 +17,9 @@ import Img12 from "assets/img/gallery/12.jpeg";
 import Img13 from "assets/img/gallery/13.jpg";
 import Img14 from "assets/img/gallery/14.jpg";
 import Img15 from "assets/img/gallery/15.jpeg";
+import Img16 from "assets/img/gallery/16.jpg";
+import Img17 from "assets/img/gallery/17.jpg";
+import Img18 from "assets/img/gallery/18.jpg";
 
 import CarouselBackground1 from "assets/img/carousel/1.png";
 import CarouselBackground2 from "assets/img/carousel/2.jpg";
@@ -27,6 +30,8 @@ import CarouselBackground6 from "assets/img/carousel/6.jpg";
 import CarouselBackground7 from "assets/img/carousel/7.jpg";
 import CarouselBackground8 from "assets/img/carousel/8.jpeg";
 import CarouselBackground9 from "assets/img/carousel/9.jpg";
+import CarouselBackground10 from "assets/img/carousel/10.jpg";
+import CarouselBackground11 from "assets/img/carousel/11.jpg";
 
 const itemData = [
     {
@@ -90,6 +95,18 @@ const itemData = [
         title: "Freshers-Dance",
     },
     {
+        img: Img16,
+        title: "Hooting",
+    },
+    {
+        img: Img17,
+        title: "Flag-Hoisting",
+    },
+    {
+        img: Img18,
+        title: "Independence-Day-Songs",
+    },
+    {
         img: CarouselBackground1,
         title: "Into-to-Clubs",
     },
@@ -125,6 +142,14 @@ const itemData = [
         img: CarouselBackground9,
         title: "Himalaya",
     },
+    {
+        img: CarouselBackground10,
+        title: "CC-Website-Launch",
+    },
+    {
+        img: CarouselBackground11,
+        title: "Flag-and-Aftab-sir",
+    },
 ];
 
 const Gallery = () => {
@@ -149,3 +174,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
