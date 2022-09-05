@@ -65,6 +65,7 @@ const View = ({ manage }) => {
 
     const [actions, setActions] = useState(null);
 
+    
     const tabController = useState(0);
 
     const tabProps = {
@@ -75,6 +76,7 @@ const View = ({ manage }) => {
     return (
         <Page full loading={loading}>
             <img src={club?.img} alt={club?.name} className={classes.cover} />
+
             <Box px={3} pt={4} pb={2} display="flex" justifyContent="space-between">
                 <Box>
                     <Typography variant="h3">{club?.name}</Typography>

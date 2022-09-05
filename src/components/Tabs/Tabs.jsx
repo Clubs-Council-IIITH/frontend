@@ -13,6 +13,7 @@ import {
 import { useTheme } from "@mui/styles";
 
 import { Tabs, Tab, Box } from "@mui/material";
+import { parseValue } from "graphql";
 
 /*
  * `tabs`: [
@@ -87,7 +88,6 @@ export const TabBar = ({ tabs, controller: [value, setValue], tabProps, routed }
 
 export const TabPanels = ({ tabs, controller: [value], routed, tabProps, ...props }) => {
     const match = useRouteMatch();
-
     return routed ? (
         <Switch>
             {tabs.map((tab, key) => (

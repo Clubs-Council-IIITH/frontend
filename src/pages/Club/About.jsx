@@ -6,13 +6,14 @@ import { GET_CLUB_BY_ID } from "queries/clubs";
 
 import UserGroups from "constants/UserGroups";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { EditOutlined as EditIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
-import { SecondaryActionButton } from "components/buttons";
+import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
+import RichTextEditor from "components/TextEditors/AboutText";
 
 const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -20,32 +21,70 @@ const About = ({ manage, setActions }) => {
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
+    // set editor state
+    const [editing, setEditing] = useState(false);
+
+    // track input in state variable
+    const [editorValue, setEditorValue] = useState(
+        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
+    );
+
     // fetch club
     const { data: clubData, loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
         variables: { id: targetId },
     });
 
+    // update club description
+    const updateDescription = () => {
+        console.log(editorValue);
+    };
+
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(null); // TODO: remove once rich text editor is done
-        // setActions(
-        //     manage ? (
-        //         <SecondaryActionButton noPadding size="large" variant="outlined" color="primary">
-        //             <Box display="flex" mr={1}>
-        //                 <EditIcon fontSize="small" />
-        //             </Box>
-        //             Edit Details
-        //         </SecondaryActionButton>
-        //     ) : null
-        // );
-    }, [manage]);
+
+        if (manage) {
+            if (editing) {
+                setActions(
+                    <PrimaryActionButton
+                        noPadding
+                        size="large"
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            setEditing(false);
+                            updateDescription();
+                        }}
+                    >
+                        Save
+                    </PrimaryActionButton>
+                );
+            } else {
+                setActions(
+                    <SecondaryActionButton
+                        noPadding
+                        size="large"
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => setEditing(true)}
+                    >
+                        <Box display="flex" mr={1}>
+                            <EditIcon fontSize="small" />
+                        </Box>
+                        Edit Details
+                    </SecondaryActionButton>
+                );
+            }
+        }
+    }, [manage, editing, editorValue]);
 
     return (
-        <Page full loading={clubLoading}>
-            <Box px={3}>
-                <Typography mt={4}>{clubData?.club?.description}</Typography>
-            </Box>
-        </Page>
+        <>
+            <Page full loading={loading}>
+                <Box pt={2} px={3}>
+                    <RichTextEditor editing={editing} editorState={[editorValue, setEditorValue]} />
+                </Box>
+            </Page>
+        </>
     );
 };
 
