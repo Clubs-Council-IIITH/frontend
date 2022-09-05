@@ -41,7 +41,6 @@ const About = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-
         if (manage) {
             if (editing) {
                 setActions(
@@ -79,7 +78,7 @@ const About = ({ manage, setActions }) => {
 
     return (
         <>
-            <Page full loading={loading}>
+            <Page full loading={clubLoading}>
                 <Box pt={2} px={3}>
                     <RichTextEditor editing={editing} editorState={[editorValue, setEditorValue]} />
                 </Box>

@@ -59,7 +59,10 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         // { title: "Discussion", panel: <Discussion /> },
     ];
     const tabController = useState(0);
-    useEffect(() => open && tabController[1](0), [open]);
+
+    useEffect(() => {
+        if (open) tabController[1](0);
+    }, [open]);
 
     // response toast
     const [toast, setToast] = useState({ open: false });
@@ -114,14 +117,21 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     });
 
     // update all states whenever eventId changes
-    useEffect(() => open && setActiveEventId(eventId), [eventId, open]);
-    useEffect(() => open && setEditing(!eventId), [eventId, open]);
-    useEffect(() => open && setDeleting(false), [eventId, open]);
-    useEffect(() => open && setCurrentPoster(eventData?.event?.poster || ""), [eventData, open]);
-    useEffect(() => open && setExpandPoster(false), [eventId, open]);
+    useEffect(() => {
+        if (open) {
+            setActiveEventId(eventId);
+            setEditing(!eventId);
+            setDeleting(false);
+            setCurrentPoster(eventData?.event?.poster | "");
+            setExpandPoster(false);
+        }
+    }, [eventId, open]);
 
     // fetch new event details whenever active event id changes
-    useEffect(() => getEventData(), [activeEventId]);
+    useEffect(() => {
+        getEventData();
+        return undefined; // this effect does not require a cleanup
+    }, [activeEventId]);
 
     // pass down props to each tab
     const tabProps = {

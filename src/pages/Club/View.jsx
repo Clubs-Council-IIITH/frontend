@@ -65,7 +65,6 @@ const View = ({ manage }) => {
 
     const [actions, setActions] = useState(null);
 
-    
     const tabController = useState(0);
 
     const tabProps = {
@@ -80,7 +79,7 @@ const View = ({ manage }) => {
             <Box px={3} pt={4} pb={2} display="flex" justifyContent="space-between">
                 <Box>
                     <Typography variant="h3">{club?.name}</Typography>
-                    <Typography variant="h6" color={theme.palette.secondary.dark}>
+                    <Typography variant="h6" color={theme.palette.secondary.dark} mt={1}>
                         {club?.tagline}
                     </Typography>
                 </Box>
