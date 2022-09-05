@@ -11,7 +11,7 @@ import { Box } from "@mui/material";
 import { EditOutlined as EditIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
-import { SecondaryActionButton } from "components/buttons";
+import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import RichTextEditor from "components/TextEditors/AboutText";
@@ -35,23 +35,28 @@ const About = ({ manage, setActions }) => {
     const [club, setClub] = useState([]);
     useEffect(() => setClub(new ClubModel(data?.club)), [data]);
 
+    // update club description
+    const updateDescription = () => {
+        console.log(editorValue);
+    };
+
     // set/clear action buttons if `manage` is set
     useEffect(() => {
         if (manage) {
             if (editing) {
                 setActions(
-                    <SecondaryActionButton
+                    <PrimaryActionButton
                         noPadding
                         size="large"
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            console.log(editorValue);
                             setEditing(false);
+                            updateDescription();
                         }}
                     >
                         Save
-                    </SecondaryActionButton>
+                    </PrimaryActionButton>
                 );
             } else {
                 setActions(
