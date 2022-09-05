@@ -7,12 +7,11 @@ import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { EditOutlined as EditIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { SecondaryActionButton } from "components/buttons";
-
 
 import Page from "components/Page";
 import RichTextEditor from "components/TextEditors/AboutText";
@@ -22,39 +21,62 @@ const About = ({ manage, setActions }) => {
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
-    useEffect(() => console.log(`targetId: ${targetId}`), [targetId]);
 
+    // set editor state
+    const [editing, setEditing] = useState(false);
+
+    // track input in state variable
+    const [editorValue, setEditorValue] = useState(
+        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
+    );
 
     // fetch club
     const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
     const [club, setClub] = useState([]);
     useEffect(() => setClub(new ClubModel(data?.club)), [data]);
-    
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(
-            manage ? (
-                <SecondaryActionButton noPadding size="large" variant="outlined" color="primary"
-                    onClick={() => {
-                    }}
-                >
-                    <Box display="flex" mr={1}>
-                        <EditIcon fontSize="small" />
-                    </Box>
-                    Edit Details
-                </SecondaryActionButton>
-            ) : null
-        );
-    }, [manage]);
-    
+        if (manage) {
+            if (editing) {
+                setActions(
+                    <SecondaryActionButton
+                        noPadding
+                        size="large"
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            console.log(editorValue);
+                            setEditing(false);
+                        }}
+                    >
+                        Save
+                    </SecondaryActionButton>
+                );
+            } else {
+                setActions(
+                    <SecondaryActionButton
+                        noPadding
+                        size="large"
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => setEditing(true)}
+                    >
+                        <Box display="flex" mr={1}>
+                            <EditIcon fontSize="small" />
+                        </Box>
+                        Edit Details
+                    </SecondaryActionButton>
+                );
+            }
+        }
+    }, [manage, editing, editorValue]);
+
     return (
         <>
             <Page full loading={loading}>
                 <Box pt={2} px={3}>
-                    <RichTextEditor>
-                            {club?.description}
-                    </RichTextEditor>
+                    <RichTextEditor editing={editing} editorState={[editorValue, setEditorValue]} />
                 </Box>
             </Page>
         </>
