@@ -53,7 +53,7 @@ const About = ({ manage, setActions }) => {
             if (editing) {
                 setActions(
                     <Box>
-                        <Button variant="outlined" component="label" size="large" sx={{ mx: 1 }}>
+                        <Button variant="outlined" component="label" size="large" sx={{ mr: 1 }}>
                             Update Cover
                             <input
                                 hidden
