@@ -68,9 +68,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
         >
             <Grid container p={3}>
                 <Grid item xs={12}>
-                    <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                        Requested Venue
-                    </FormLabel>
+                    <FormLabel component="legend">Requested Venue</FormLabel>
                     {editing ? (
                         <Select
                             fullWidth
@@ -153,9 +151,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                 />
                             ) : (
                                 <>
-                                    <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                                        Expected Population
-                                    </FormLabel>
+                                    <FormLabel component="legend">Expected Population</FormLabel>
                                     <Typography variant="body1">
                                         {currentBookingLoading ? (
                                             <Skeleton animation="wave" />
@@ -199,9 +195,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                 />
                             ) : (
                                 <>
-                                    <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                                        Equipment Required
-                                    </FormLabel>
+                                    <FormLabel component="legend">Equipment Required</FormLabel>
                                     <Typography variant="body1">
                                         {currentBookingLoading ? (
                                             <Skeleton animation="wave" />
@@ -243,7 +237,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                 />
                             ) : (
                                 <>
-                                    <FormLabel component="legend" sx={{ fontSize: 12 }}>
+                                    <FormLabel component="legend">
                                         Additional Requirements
                                     </FormLabel>
                                     <Typography variant="body1">
