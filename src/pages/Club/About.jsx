@@ -6,7 +6,7 @@ import { GET_CLUB_BY_ID } from "queries/clubs";
 
 import UserGroups from "constants/UserGroups";
 
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { EditOutlined as EditIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
@@ -30,13 +30,21 @@ const About = ({ manage, setActions }) => {
     );
 
     // fetch club
-    const { data: clubData, loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
+    const { loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
         variables: { id: targetId },
+        onCompleted: (data) => setEditorValue(data?.club?.description),
     });
 
     // update club description
     const updateDescription = () => {
+        // TODO: mutation to update description
         console.log(editorValue);
+    };
+
+    // update club cover
+    const updateCover = (src) => {
+        // TODO: mutation to update cover
+        console.log(src);
     };
 
     // set/clear action buttons if `manage` is set
@@ -44,18 +52,32 @@ const About = ({ manage, setActions }) => {
         if (manage) {
             if (editing) {
                 setActions(
-                    <PrimaryActionButton
-                        noPadding
-                        size="large"
-                        variant="outlined"
-                        color="primary"
-                        onClick={() => {
-                            setEditing(false);
-                            updateDescription();
-                        }}
-                    >
-                        Save
-                    </PrimaryActionButton>
+                    <Box>
+                        <Button variant="outlined" component="label" size="large" sx={{ mx: 1 }}>
+                            Update Cover
+                            <input
+                                hidden
+                                name="cover"
+                                type="file"
+                                accept="image/png, image/jpeg, image/jpg"
+                                onChange={(e) => {
+                                    updateCover(URL.createObjectURL(e?.target?.files[0]));
+                                }}
+                            />
+                        </Button>
+                        <PrimaryActionButton
+                            noPadding
+                            size="large"
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => {
+                                setEditing(false);
+                                updateDescription();
+                            }}
+                        >
+                            Save
+                        </PrimaryActionButton>
+                    </Box>
                 );
             } else {
                 setActions(

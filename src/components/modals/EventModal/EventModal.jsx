@@ -56,7 +56,6 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         { title: "Details", panel: <Details /> },
         { title: "Budget", panel: <Budget /> },
         { title: "Venue", panel: <Venue /> },
-        // { title: "Discussion", panel: <Discussion /> },
     ];
     const tabController = useState(0);
 

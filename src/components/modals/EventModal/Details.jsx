@@ -224,7 +224,7 @@ const Details = ({
                                             render={({ field }) => (
                                                 <>
                                                     <Button variant="outlined" component="label">
-                                                        Upload Poster
+                                                        Update Poster
                                                         <input
                                                             name="poster"
                                                             type="file"
