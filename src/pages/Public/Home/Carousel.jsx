@@ -2,8 +2,8 @@ import { Box, Typography } from "@mui/material";
 
 import ImageCarousel from "components/ImageCarousel";
 
-import CarouselBackground1 from "assets/img/carousel/1.png";
-import CarouselBackground2 from "assets/img/carousel/2.jpg";
+import CarouselBackground1 from "assets/img/carousel/1.jpg";
+import CarouselBackground2 from "assets/img/carousel/2.png";
 import CarouselBackground3 from "assets/img/carousel/3.jpg";
 import CarouselBackground4 from "assets/img/carousel/4.jpeg";
 import CarouselBackground5 from "assets/img/carousel/5.jpg";
@@ -165,4 +165,3 @@ const Carousel = () => {
 };
 
 export default Carousel;
-

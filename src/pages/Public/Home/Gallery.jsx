@@ -21,8 +21,8 @@ import Img16 from "assets/img/gallery/16.jpg";
 import Img17 from "assets/img/gallery/17.jpg";
 import Img18 from "assets/img/gallery/18.jpg";
 
-import CarouselBackground1 from "assets/img/carousel/1.png";
-import CarouselBackground2 from "assets/img/carousel/2.jpg";
+import CarouselBackground1 from "assets/img/carousel/1.jpg";
+import CarouselBackground2 from "assets/img/carousel/2.png";
 import CarouselBackground3 from "assets/img/carousel/3.jpg";
 import CarouselBackground4 from "assets/img/carousel/4.jpeg";
 import CarouselBackground5 from "assets/img/carousel/5.jpg";
@@ -174,4 +174,3 @@ const Gallery = () => {
 };
 
 export default Gallery;
-
