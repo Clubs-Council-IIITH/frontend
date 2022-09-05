@@ -25,18 +25,18 @@ export const StateProgress = (state) => {
             text: "Waiting for Finance Council approval",
         };
 
-    if (state === EventStates.slo_pending)
+    if (state === EventStates.slc_pending)
         return {
             value: 3 * (100 / 6),
             color: deepPurple,
-            text: "Waiting for SLO approval",
+            text: "Waiting for SLC approval",
         };
 
-    if (state === EventStates.slc_pending)
+    if (state === EventStates.slo_pending)
         return {
             value: 4 * (100 / 6),
             color: deepPurple,
-            text: "Waiting for SLC approval",
+            text: "Waiting for SLO approval",
         };
 
     if (state === EventStates.gad_pending)

@@ -4,4 +4,5 @@ export default {
     fc: "finance_council",
     slo: "slo",
     slc: "slc",
+    gad: "gad",
 };

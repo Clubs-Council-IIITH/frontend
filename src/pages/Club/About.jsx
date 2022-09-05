@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { GET_CLUB_BY_ID } from "queries/clubs";
-import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
@@ -31,9 +30,9 @@ const About = ({ manage, setActions }) => {
     );
 
     // fetch club
-    const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
-    const [club, setClub] = useState([]);
-    useEffect(() => setClub(new ClubModel(data?.club)), [data]);
+    const { data: clubData, loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
+        variables: { id: targetId },
+    });
 
     // update club description
     const updateDescription = () => {
@@ -42,6 +41,7 @@ const About = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
+
         if (manage) {
             if (editing) {
                 setActions(

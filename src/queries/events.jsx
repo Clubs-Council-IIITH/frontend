@@ -35,6 +35,7 @@ export const GET_EVENT_BY_ID = gql`
             description
             audience
             description
+            state
         }
     }
 `;
@@ -65,6 +66,26 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             id
             club {
                 id
+                img
+                name
+            }
+            poster
+            name
+            datetimeStart
+            description
+            audience
+            state
+        }
+    }
+`;
+
+export const ADMIN_APPROVED_EVENTS = gql`
+    query adminApprovedEvents {
+        adminApprovedEvents {
+            id
+            club {
+                id
+                img
                 name
             }
             poster

@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { useTheme } from "@mui/styles";
 
 import { AppBar, Box, Toolbar, CssBaseline } from "@mui/material";
+
+import { NavigationContext } from "contexts/NavigationContext";
 
 import Navigation, { drawerWidth } from "components/Navigation";
 import { BackButton } from "components/buttons";
 
 const MainContainer = ({ children }) => {
     const theme = useTheme();
-    const [open, setOpen] = useState(true);
+    const { expanded } = useContext(NavigationContext);
 
     return (
         <Box display="flex">
             <CssBaseline />
-            <Navigation controller={[open, setOpen]} />
+            <Navigation />
 
             <AppBar
                 color="transparent"
@@ -30,9 +32,10 @@ const MainContainer = ({ children }) => {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
                     }),
+                    pointerEvents: "none",
 
-                    // open appbar styles
-                    ...(open && {
+                    // expanded appbar styles
+                    ...(expanded && {
                         marginLeft: drawerWidth,
                         width: `calc(100% - ${drawerWidth}px)`,
                         [theme.breakpoints.up("sm")]: {
@@ -46,7 +49,7 @@ const MainContainer = ({ children }) => {
                 }}
             >
                 <Toolbar sx={{ height: "80px" }}>
-                    <BackButton />
+                    <BackButton sx={{ pointerEvents: "auto" }} />
                 </Toolbar>
             </AppBar>
 

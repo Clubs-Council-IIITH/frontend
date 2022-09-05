@@ -1,0 +1,130 @@
+{
+    "results": [
+        {
+            "id": "1",
+            "name": {
+                "title": "Mr",
+                "first": "Naren",
+                "last": "Akash RJ"
+            },
+            "Role": "Advisor",
+            "email":"naren.akash@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/27.jpg"
+        },
+        {
+            "id": "2",
+            "name": {
+                "title": "Mr",
+                "first": "Radheshyam",
+                "last": "Thiyagarajan"
+            },
+            "Role": "Secretary",
+            "email": "radheshyam.t@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/28.jpg"
+        },
+        {
+            "id": "3",
+            "name": {
+                "title": "Mr",
+                "first": "Hariharan",
+                "last": "Kalimuthu"
+            },
+            "Role": "Secretary",
+            "email": "hariharan.k@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/25.jpg"
+        },
+        {
+            "id": "4",
+            "name": {
+                "title": "Mr",
+                "first": "Bhav",
+                "last": "Beri"
+            },
+            "Role": "Under-Secretary",
+            "email": "bhav.beri@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/18.jpg"
+        },
+        {
+            "id": "5",
+            "name": {
+                "title": "Mr",
+                "first": "Gnaneswar",
+                "last": "Kulindala"
+            },
+            "Role": "Under-Secretary",
+            "email": "gnaneswar.kulindala@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/19.jpg"
+        },
+        {
+            "id": "6",
+            "name": {
+                "title": "Ms",
+                "first": "Vrinda",
+                "last": "Agarwal"
+            },
+            "Role": "Under-Secretary",
+            "email": "vrinda.agarwal@students.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/women/18.jpg"
+        },
+        {
+            "id": "7",
+            "name": {
+                "title": "Ms",
+                "first": "Mihika",
+                "last": "Sanghi"
+            },
+            "Role": "Under-Secretary",
+            "email": "mihika.sanghi@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/women/19.jpg"
+        },
+        {
+            "id": "8",
+            "name": {
+                "title": "Mr",
+                "first": "Advaith",
+                "last": "Bhaskararama Sahishna Malladi"
+            },
+            "Role": "Under-Secretary",
+            "email": "advaith.malladi@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/18.jpg"
+        },
+        {
+            "id": "9",
+            "name": {
+                "title": "Mr",
+                "first": "Vishva",
+                "last": "Saravanan"
+            },
+            "Role": "Tech Team Lead",
+            "email": "vishva.saravanan@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/38.jpg"
+        },
+        {
+            "id": "10",
+            "name": {
+                "title": "Mr",
+                "first": "Anirudh",
+                "last": "Kaushik"
+            },
+            "Role": "Tech Team",
+            "email": "anirudh.ka@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/39.jpg"
+        },
+        {
+            "id": "11",
+            "name": {
+                "title": "Mr",
+                "first": "Mihir",
+                "last": "Rawat"
+            },
+            "Role": "Tech Team",
+            "email": "mihir.r@research.iiit.ac.in",
+            "picture": "https://randomuser.me/api/portraits/men/33.jpg"
+        }
+    ],
+    "info": {
+        "results": 11,
+        "version": "1.0",
+        "Last Updated": "2022-08-15T05:07:29.254Z"
+    }
+}

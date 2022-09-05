@@ -7,7 +7,7 @@ import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
-import { makeStyles } from "@mui/styles";
+import { makeStyles, useTheme } from "@mui/styles";
 import { Box, Typography, Divider } from "@mui/material";
 
 import Page from "components/Page";
@@ -51,6 +51,7 @@ const tabs = [
 
 const View = ({ manage }) => {
     const classes = useStyles();
+    const theme = useTheme();
 
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
@@ -75,9 +76,15 @@ const View = ({ manage }) => {
     return (
         <Page full loading={loading}>
             <img src={club?.img} alt={club?.name} className={classes.cover} />
-            <Box px={3} pt={4} pb={3} display="flex" justifyContent="space-between">
-                <Typography variant="h2">{club?.name}</Typography>
-                <Box>{actions || null}</Box>   {/*edit details button*/}
+
+            <Box px={3} pt={4} pb={2} display="flex" justifyContent="space-between">
+                <Box>
+                    <Typography variant="h3">{club?.name}</Typography>
+                    <Typography variant="h6" color={theme.palette.secondary.dark}>
+                        {club?.tagline}
+                    </Typography>
+                </Box>
+                <Box>{actions || null}</Box>
             </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />

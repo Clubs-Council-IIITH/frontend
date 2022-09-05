@@ -19,11 +19,11 @@ const ResponseToast = ({
         >
             {toast.error ? (
                 <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-                    {errorText}
+                    {toast.errorText || errorText}
                 </Alert>
             ) : (
                 <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-                    {successText}
+                    {toast.successText || successText}
                 </Alert>
             )}
         </Snackbar>
