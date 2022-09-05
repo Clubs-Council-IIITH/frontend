@@ -13,7 +13,7 @@ import { SessionContext } from "contexts/SessionContext";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
-import RichTextEditor from "components/TextEditors/AboutText";
+import RichTextEditor from "components/RichTextEditor";
 
 const About = ({ manage, setActions }) => {
     const { clubId } = useParams();

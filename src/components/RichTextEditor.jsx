@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 import { createEditor, Editor, Transforms, Text } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
