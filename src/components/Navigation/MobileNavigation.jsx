@@ -22,9 +22,7 @@ import { MoreVert as ManageIcon } from "@mui/icons-material";
 
 import Profile from "./Profile";
 
-export const topbarHeight = 60;
-
-const MobileNavigation = () => {
+const MobileNavigation = ({ topbarHeight }) => {
     const { navigation } = useContext(NavigationContext);
 
     const theme = useTheme();
