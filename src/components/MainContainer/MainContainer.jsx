@@ -70,7 +70,14 @@ const MainContainer = ({ children }) => {
                 </Toolbar>
             </AppBar>
 
-            <Box sx={{ mt: `${isTabletOrMobile ? topbarHeight : 0}px` }}>{children}</Box>
+            <Box
+                sx={{
+                    mt: `${isTabletOrMobile ? topbarHeight : 0}px`,
+                    mb: isTabletOrMobile ? 5 : 0,
+                }}
+            >
+                {children}
+            </Box>
         </Box>
     );
 };
