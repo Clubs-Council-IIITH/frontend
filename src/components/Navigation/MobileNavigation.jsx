@@ -4,9 +4,13 @@ import { useTheme } from "@mui/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { Typography, Box, BottomNavigation, BottomNavigationAction } from "@mui/material";
 
-import { SettingsOutlined as ManageIcon } from "@mui/icons-material";
+import { MoreVert as ManageIcon, InfoOutlined as InfoIcon } from "@mui/icons-material";
+
+import Profile from "./Profile";
+
+export const topbarHeight = 60;
 
 const MobileNavigation = () => {
     const { navigation } = useContext(NavigationContext);
@@ -23,40 +27,64 @@ const MobileNavigation = () => {
     const navItems = ["Home", "Clubs", "Student Bodies", "Calendar"];
 
     return (
-        <BottomNavigation
-            value={value}
-            onChange={(_, path) => history.push(path)}
-            sx={{ position: "fixed", left: 0, right: 0, bottom: 0, zIndex: 999 }}
-        >
-            {navigation?.publicRoutes
-                ?.filter((item) => navItems.includes(item.title))
-                ?.map(({ path, icon: Icon }, idx) => (
-                    <BottomNavigationAction
-                        key={idx}
-                        value={path}
-                        icon={<Icon />}
-                        sx={{
-                            "&.MuiBottomNavigationAction-root": {
-                                color: theme.palette.secondary.dark,
-                            },
-                            "&.Mui-selected": {
-                                color: theme.palette.primary.main,
-                            },
-                        }}
-                    />
-                ))}
-            <BottomNavigationAction
-                icon={<ManageIcon />}
+        <>
+            <Box
                 sx={{
-                    "&.MuiBottomNavigationAction-root": {
-                        color: theme.palette.secondary.dark,
-                    },
-                    "&.Mui-selected": {
-                        color: theme.palette.primary.main,
-                    },
+                    height: topbarHeight,
+                    color: theme.palette.secondary.main,
+                    backgroundColor: "black",
+                    position: "fixed",
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    zIndex: 999,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                 }}
-            />
-        </BottomNavigation>
+            >
+                <Typography variant="h5" fontWeight={500} mx={2}>
+                    CC
+                </Typography>
+                <Box mx={2}>
+                    <Profile />
+                </Box>
+            </Box>
+            <BottomNavigation
+                value={value}
+                onChange={(_, path) => history.push(path)}
+                sx={{ position: "fixed", left: 0, right: 0, bottom: 0, zIndex: 999 }}
+            >
+                {navigation?.publicRoutes
+                    ?.filter((item) => navItems.includes(item.title))
+                    ?.map(({ path, icon: Icon }, idx) => (
+                        <BottomNavigationAction
+                            key={idx}
+                            value={path}
+                            icon={<Icon />}
+                            sx={{
+                                "&.MuiBottomNavigationAction-root": {
+                                    color: theme.palette.secondary.dark,
+                                },
+                                "&.Mui-selected": {
+                                    color: theme.palette.primary.main,
+                                },
+                            }}
+                        />
+                    ))}
+                <BottomNavigationAction
+                    icon={<ManageIcon />}
+                    sx={{
+                        "&.MuiBottomNavigationAction-root": {
+                            color: theme.palette.secondary.dark,
+                        },
+                        "&.Mui-selected": {
+                            color: theme.palette.primary.main,
+                        },
+                    }}
+                />
+            </BottomNavigation>
+        </>
     );
 };
 
