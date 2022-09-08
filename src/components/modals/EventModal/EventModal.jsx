@@ -322,7 +322,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     xs={
                                         manage &&
                                         activeEventId &&
-                                        eventData?.event?.state !== EventStates.deleted
+                                        eventData?.event?.state !== EventStates.deleted &&
+                                        !isTabletOrMobile
                                             ? 8
                                             : 12
                                     }
@@ -334,7 +335,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         >
                                             <CardMedia
                                                 component="img"
-                                                height={140}
+                                                height={isTabletOrMobile ? 180 : 140}
                                                 image={
                                                     eventLoading
                                                         ? EVENT_POSTER_PLACEHOLDER
@@ -409,9 +410,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         </>
                                     </Card>
                                 </Grid>
+
                                 {manage &&
                                 activeEventId &&
-                                eventData?.event?.state !== EventStates.deleted ? (
+                                eventData?.event?.state !== EventStates.deleted &&
+                                !isTabletOrMobile ? (
                                     <Grid item xs>
                                         <Box height="100%">
                                             <Card variant="outlined" sx={{ height: "100%" }}>
