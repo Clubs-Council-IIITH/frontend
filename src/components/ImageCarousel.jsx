@@ -6,7 +6,7 @@ const ImageCarousel = ({ height, gradient, contents }) => {
     return (
         <Carousel height={height} indicators={false} stopAutoPlayOnHover={false} animation="slide">
             {contents.map((card, idx) => (
-                <Card key={idx} sx={{ borderRadius: 0 }}>
+                <Card key={idx} sx={{ borderRadius: 0, height: "100%" }}>
                     {gradient && (
                         <Box
                             sx={{
@@ -28,7 +28,7 @@ const ImageCarousel = ({ height, gradient, contents }) => {
                                 position: "absolute",
                                 height: "100%",
                                 width: "100%",
-                                padding: "2.4em",
+                                padding: 3,
                             }}
                         >
                             {card?.content}
@@ -40,9 +40,9 @@ const ImageCarousel = ({ height, gradient, contents }) => {
                         image={card?.image}
                         alt={null}
                         sx={{
-                            backgroundSize: "cover",
+                            objectFit: "cover",
                             backgroundPosition: "center",
-                            height: "100vh",
+                            height: "100%",
                         }}
                     />
                 </Card>

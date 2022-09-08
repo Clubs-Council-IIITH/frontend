@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useTheme } from "@mui/styles";
 
 import { useQuery } from "@apollo/client";
 import { GET_ALL_EVENTS } from "queries/events";
 
 import { Grid, Box, Typography, Stack, Pagination } from "@mui/material";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import Empty from "components/Empty";
 import EventModal from "components/modals/EventModal";
 import EventCardMini from "components/cards/EventCardMini";
 
-const EVENTS_PER_ROW = 4;
-
 const Upcoming = () => {
     const theme = useTheme();
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
+    // control number of events per row
+    const EVENTS_PER_ROW = isTabletOrMobile ? 1 : 4;
 
     // scrolling page
     const [page, setPage] = useState(1);
@@ -38,7 +41,7 @@ const Upcoming = () => {
     return (
         <>
             <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
-            <Box px={3} py={4} backgroundColor={theme.palette.grey[100]}>
+            <Box p={3} backgroundColor={theme.palette.grey[100]}>
                 <Box pb={3} display="flex" justifyContent="space-between" alignItem="center">
                     <Typography variant="h5" fontWeight={500}>
                         Upcoming Events

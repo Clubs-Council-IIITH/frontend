@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { Box, Typography } from "@mui/material";
+
+import { NavigationContext } from "contexts/NavigationContext";
 
 import ImageCarousel from "components/ImageCarousel";
 
@@ -14,154 +17,74 @@ import CarouselBackground9 from "assets/img/carousel/9.jpg";
 import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
 
+const CarouselItem = ({ title, subtitle }) => {
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
+    return (
+        <Box textAlign="right" color="white" width="100%">
+            <Typography variant={isTabletOrMobile ? "h4" : "h2"} fontWeight={500}>
+                {title}
+            </Typography>
+            <Typography mt={1} variant={isTabletOrMobile ? "body1" : "h5"}>
+                {subtitle}
+            </Typography>
+        </Box>
+    );
+};
+
 const Carousel = () => {
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
     const carousel = [
         {
             image: CarouselBackground1,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground2,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground3,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground4,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground5,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground6,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground7,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground8,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground9,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground10,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground11,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
     ];
 
-    return <ImageCarousel gradient height="100vh" contents={carousel} />;
+    return (
+        <ImageCarousel gradient height={isTabletOrMobile ? "60vh" : "100vh"} contents={carousel} />
+    );
 };
 
 export default Carousel;
