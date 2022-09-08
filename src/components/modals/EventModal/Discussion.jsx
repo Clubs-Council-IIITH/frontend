@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 
+import ScrollableFeed from "react-scrollable-feed";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_GET_EVENT_DISCUSSION } from "queries/events";
 import { SEND_DISCUSSION_MESSAGE } from "mutations/events";
@@ -27,32 +28,35 @@ const DiscussionBubble = ({ user, datetime, message, outgoing = false, printDate
                     </Typography>
                 </Box>
             ) : null}
-            <Card
-                variant="none"
-                sx={{
-                    mb: 1,
-                    p: 1.5,
-                    backgroundColor: outgoing
-                        ? theme.palette.primary.main
-                        : theme.palette.secondary.main,
-                    color: outgoing
-                        ? theme.palette.primary.contrastText
-                        : theme.palette.secondary.contrastText,
-                    borderRadius: theme.borderRadius,
-                }}
-            >
-                <Box display="flex" alignItems="center" justifyContent="space-between">
-                    <Typography variant="body2" fontWeight={500}>
-                        {user?.firstName}
-                    </Typography>
-                    <Typography variant="subtitle1" fontSize="0.8em">
-                        {ISOtoDT(datetime).time}
-                    </Typography>
-                </Box>
-                <Box mt={1}>
-                    <Typography variant="body1">{message}</Typography>
-                </Box>
-            </Card>
+            <Box width="100%" display="flex" justifyContent={outgoing ? "flex-end" : "flex-start"}>
+                <Card
+                    variant="none"
+                    sx={{
+                        maxWidth: "90%",
+                        mb: 1,
+                        p: 1.5,
+                        backgroundColor: outgoing
+                            ? theme.palette.primary.main
+                            : theme.palette.secondary.main,
+                        color: outgoing
+                            ? theme.palette.primary.contrastText
+                            : theme.palette.secondary.contrastText,
+                        borderRadius: outgoing ? `12px 0 12px 12px` : "0 12px 12px 12px",
+                    }}
+                >
+                    <Box display="flex" alignItems="center" justifyContent="space-between">
+                        <Typography variant="body2" fontWeight={500}>
+                            {user?.firstName}
+                        </Typography>
+                        <Typography variant="subtitle1" fontSize="0.8em" ml={2}>
+                            {ISOtoDT(datetime).time}
+                        </Typography>
+                    </Box>
+                    <Box mt={1}>
+                        <Typography variant="body1">{message}</Typography>
+                    </Box>
+                </Card>
+            </Box>
         </>
     );
 };
@@ -60,37 +64,32 @@ const DiscussionBubble = ({ user, datetime, message, outgoing = false, printDate
 const DiscussionBox = ({ discussionData }) => {
     const { session } = useContext(SessionContext);
 
-    // track end of discussion and scroll to it on load
-    const endOfDiscussion = useRef(null);
-    useEffect(
-        () => endOfDiscussion?.current?.scrollIntoView(),
-        [discussionData?.eventDiscussionThread]
-    );
-
     return (
         <Box
-            p={1}
             sx={{
-                overflowY: "auto",
-                height: "100px",
+                maxHeight: "70vh",
                 flex: "1 1 auto",
+                position: "relative",
             }}
         >
-            {discussionData?.eventDiscussionThread?.map((discussion, idx) => (
-                <DiscussionBubble
-                    key={idx}
-                    user={discussion?.user}
-                    datetime={discussion?.timestamp}
-                    message={discussion?.message}
-                    outgoing={discussion?.user?.username === session?.username}
-                    printDate={
-                        idx === 0 ||
-                        ISOtoDT(discussionData?.eventDiscussionThread[idx - 1]?.timestamp).date !==
-                            ISOtoDT(discussion?.timestamp).date
-                    }
-                />
-            ))}
-            <Box ref={endOfDiscussion} />
+            <ScrollableFeed>
+                {discussionData?.eventDiscussionThread?.map((discussion, idx) => (
+                    <Box px={1}>
+                        <DiscussionBubble
+                            key={idx}
+                            user={discussion?.user}
+                            datetime={discussion?.timestamp}
+                            message={discussion?.message}
+                            outgoing={discussion?.user?.username === session?.username}
+                            printDate={
+                                idx === 0 ||
+                                ISOtoDT(discussionData?.eventDiscussionThread[idx - 1]?.timestamp)
+                                    .date !== ISOtoDT(discussion?.timestamp).date
+                            }
+                        />
+                    </Box>
+                ))}
+            </ScrollableFeed>
         </Box>
     );
 };
@@ -110,6 +109,8 @@ const Discussion = ({ activeEventId, open }) => {
     });
 
     const onSubmit = async (data) => {
+        if (!data.message) return;
+
         const transformedData = {
             ...data,
             eventId: activeEventId,
@@ -123,7 +124,7 @@ const Discussion = ({ activeEventId, open }) => {
 
     return (
         <Box display="flex" flexDirection="column" justifyContent="space-between" height="100%">
-            <Typography p={1} variant="button" fontSize="1em">
+            <Typography p={1.5} variant="button" fontSize="1em" textAlign="center">
                 DISCUSSION
             </Typography>
             {discussionData?.eventDiscussionThread?.length === 0 ? (
@@ -144,6 +145,7 @@ const Discussion = ({ activeEventId, open }) => {
                         render={({ field: { onChange, value } }) => (
                             <TextField
                                 fullWidth
+                                type="text"
                                 size="small"
                                 placeholder="Type a message..."
                                 variant="outlined"

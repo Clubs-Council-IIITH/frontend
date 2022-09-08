@@ -48,7 +48,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const theme = useTheme();
     const { isTabletOrMobile } = useContext(NavigationContext);
 
-    const MODAL_HEIGHT = isTabletOrMobile ? "60vh" : "60vh";
+    const MODAL_HEIGHT = isTabletOrMobile ? "50vh" : "60vh";
     const MODAL_WIDTH = isTabletOrMobile ? "95vw" : "80vw";
     const POSTER_MAXHEIGHT = "75vh";
     const POSTER_MAXWIDTH = "75vw";
@@ -258,9 +258,13 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 BackdropProps={{ timeout: 500 }}
                 sx={{
                     display: "flex",
+                    flexDirection: "column",
+                    justifyContent: isTabletOrMobile ? "flex-start" : "center",
                     alignItems: "center",
-                    justifyContent: "center",
                     outline: "none",
+                    overflowY: isTabletOrMobile ? "auto" : "none",
+                    my: 2,
+                    py: 6,
                 }}
             >
                 <Fade in={open}>
@@ -413,8 +417,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
 
                                 {manage &&
                                 activeEventId &&
-                                eventData?.event?.state !== EventStates.deleted &&
-                                !isTabletOrMobile ? (
+                                eventData?.event?.state !== EventStates.deleted ? (
                                     <Grid item xs>
                                         <Box height="100%">
                                             <Card variant="outlined" sx={{ height: "100%" }}>
