@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import moment from "moment";
+
+import { useContext, useState, useEffect } from "react";
 
 import { Box } from "@mui/material";
 
@@ -6,12 +8,14 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_EVENTS } from "queries/events";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+
+import { NavigationContext } from "contexts/NavigationContext";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const EventCalendar = () => {
     const localizer = momentLocalizer(moment);
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     const { data, loading } = useQuery(GET_ALL_EVENTS);
     const [events, setEvents] = useState([]);
@@ -29,7 +33,7 @@ const EventCalendar = () => {
         <Box>
             <Calendar
                 defaultDate={new Date()}
-                defaultView="month"
+                defaultView={isTabletOrMobile ? "agenda" : "month"}
                 localizer={localizer}
                 events={events}
                 style={{ height: "80vh" }}
