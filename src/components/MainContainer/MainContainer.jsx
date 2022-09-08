@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { useTheme } from "@mui/styles";
-import { useMediaQuery } from "react-responsive";
 
 import { AppBar, Box, Toolbar, CssBaseline } from "@mui/material";
 
@@ -11,9 +10,7 @@ import { BackButton } from "components/buttons";
 
 const MainContainer = ({ children }) => {
     const theme = useTheme();
-    const { expanded } = useContext(NavigationContext);
-
-    const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+    const { isTabletOrMobile, expanded } = useContext(NavigationContext);
 
     return (
         <Box display="flex">

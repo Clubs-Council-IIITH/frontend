@@ -1,4 +1,5 @@
-import { useMediaQuery } from "react-responsive";
+import { useContext } from "react";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import DesktopNavigation from "./DesktopNavigation";
 import MobileNavigation from "./MobileNavigation";
@@ -7,7 +8,7 @@ export const drawerWidth = 240;
 export const topbarHeight = 60;
 
 const Navigation = () => {
-    const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     return isTabletOrMobile ? (
         <MobileNavigation topbarHeight={topbarHeight} />

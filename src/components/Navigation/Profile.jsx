@@ -1,4 +1,5 @@
-import { useMediaQuery } from "react-responsive";
+import { useContext } from "react";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import { useMutation } from "@apollo/client";
 
@@ -24,7 +25,7 @@ const Profile = () => {
         deleteCookie();
     };
 
-    const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     return isTabletOrMobile ? (
         <MobileProfile Login={Login} Logout={Logout} />
