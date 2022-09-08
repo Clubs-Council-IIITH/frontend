@@ -117,9 +117,9 @@ const View = ({ manage }) => {
                     </Typography>
                 </Box>
                 <Box
-                    display="flex"
-                    flexDirection="column"
                     position={isTabletOrMobile ? "fixed" : "static"}
+                    display={isTabletOrMobile ? "flex" : "block"}
+                    flexDirection="column"
                     bottom={70}
                     right={10}
                     sx={{
