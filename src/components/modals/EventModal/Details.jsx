@@ -114,101 +114,117 @@ const Details = ({
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
-                            {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 1 }} /> : null}
+                            {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 2 }} /> : null}
 
-                            <Typography variant="subtitle1">
-                                {eventLoading ? (
-                                    <Skeleton animation="wave" width={100} />
-                                ) : editing ? (
-                                    <Controller
-                                        name="datetimeStart"
-                                        control={control}
-                                        shouldUnregister={true}
-                                        defaultValue={ISOtoHTML(eventData?.event?.datetimeStart)}
-                                        render={({
-                                            field: { onChange, value },
-                                            fieldState: { error },
-                                        }) => (
-                                            <LocalizationProvider
-                                                dateAdapter={AdapterDateFns}
-                                                adapterLocale={enLocale}
-                                            >
-                                                <DateTimePicker
-                                                    renderInput={(props) => (
-                                                        <TextField
-                                                            {...props}
-                                                            error={error}
-                                                            InputLabelProps={{ shrink: true }}
-                                                            helperText={
-                                                                error ? error.message : null
-                                                            }
-                                                            label="From*"
-                                                            type="datetime-local"
-                                                            placeholder=""
-                                                            variant="standard"
+                            <Grid container alignItems="center">
+                                <Grid item>
+                                    <Typography variant="subtitle1">
+                                        {eventLoading ? (
+                                            <Skeleton animation="wave" width={100} />
+                                        ) : editing ? (
+                                            <Controller
+                                                name="datetimeStart"
+                                                control={control}
+                                                shouldUnregister={true}
+                                                defaultValue={ISOtoHTML(
+                                                    eventData?.event?.datetimeStart
+                                                )}
+                                                render={({
+                                                    field: { onChange, value },
+                                                    fieldState: { error },
+                                                }) => (
+                                                    <LocalizationProvider
+                                                        dateAdapter={AdapterDateFns}
+                                                        adapterLocale={enLocale}
+                                                    >
+                                                        <DateTimePicker
+                                                            renderInput={(props) => (
+                                                                <TextField
+                                                                    {...props}
+                                                                    error={error}
+                                                                    InputLabelProps={{
+                                                                        shrink: true,
+                                                                    }}
+                                                                    helperText={
+                                                                        error ? error.message : null
+                                                                    }
+                                                                    label="From*"
+                                                                    type="datetime-local"
+                                                                    placeholder=""
+                                                                    variant="standard"
+                                                                />
+                                                            )}
+                                                            value={value}
+                                                            onChange={onChange}
                                                         />
-                                                    )}
-                                                    value={value}
-                                                    onChange={onChange}
-                                                />
-                                            </LocalizationProvider>
+                                                    </LocalizationProvider>
+                                                )}
+                                                rules={{
+                                                    required: "Event start time can not be empty!",
+                                                }}
+                                            />
+                                        ) : (
+                                            ISOtoDT(eventData?.event?.datetimeStart).datetime
                                         )}
-                                        rules={{
-                                            required: "Event start time can not be empty!",
-                                        }}
-                                    />
-                                ) : (
-                                    ISOtoDT(eventData?.event?.datetimeStart).datetime
-                                )}
-                            </Typography>
+                                    </Typography>
+                                </Grid>
 
-                            <Box mx={1}>—</Box>
+                                <Grid item>
+                                    <Box mx={1}>—</Box>
+                                </Grid>
 
-                            <Typography variant="subtitle1">
-                                {eventLoading ? (
-                                    <Skeleton animation="wave" width={100} />
-                                ) : editing ? (
-                                    <Controller
-                                        name="datetimeEnd"
-                                        control={control}
-                                        shouldUnregister={true}
-                                        defaultValue={ISOtoHTML(eventData?.event?.datetimeEnd)}
-                                        render={({
-                                            field: { onChange, value },
-                                            fieldState: { error },
-                                        }) => (
-                                            <LocalizationProvider
-                                                dateAdapter={AdapterDateFns}
-                                                adapterLocale={enLocale}
-                                            >
-                                                <DateTimePicker
-                                                    renderInput={(props) => (
-                                                        <TextField
-                                                            {...props}
-                                                            error={error}
-                                                            InputLabelProps={{ shrink: true }}
-                                                            helperText={
-                                                                error ? error.message : null
-                                                            }
-                                                            label="To*"
-                                                            type="datetime-local"
-                                                            placeholder=""
-                                                            variant="standard"
+                                <Grid item>
+                                    <Typography variant="subtitle1">
+                                        {eventLoading ? (
+                                            <Skeleton animation="wave" width={100} />
+                                        ) : editing ? (
+                                            <Controller
+                                                name="datetimeEnd"
+                                                control={control}
+                                                shouldUnregister={true}
+                                                defaultValue={ISOtoHTML(
+                                                    eventData?.event?.datetimeEnd
+                                                )}
+                                                render={({
+                                                    field: { onChange, value },
+                                                    fieldState: { error },
+                                                }) => (
+                                                    <LocalizationProvider
+                                                        dateAdapter={AdapterDateFns}
+                                                        adapterLocale={enLocale}
+                                                    >
+                                                        <DateTimePicker
+                                                            renderInput={(props) => (
+                                                                <TextField
+                                                                    {...props}
+                                                                    error={error}
+                                                                    InputLabelProps={{
+                                                                        shrink: true,
+                                                                    }}
+                                                                    helperText={
+                                                                        error ? error.message : null
+                                                                    }
+                                                                    label="To*"
+                                                                    type="datetime-local"
+                                                                    placeholder=""
+                                                                    variant="standard"
+                                                                />
+                                                            )}
+                                                            value={value}
+                                                            onChange={onChange}
                                                         />
-                                                    )}
-                                                    value={value}
-                                                    onChange={onChange}
-                                                />
-                                            </LocalizationProvider>
+                                                    </LocalizationProvider>
+                                                )}
+                                                rules={{
+                                                    required: "Event end time can not be empty!",
+                                                }}
+                                            />
+                                        ) : (
+                                            ISOtoDT(eventData?.event?.datetimeEnd).datetime
                                         )}
-                                        rules={{
-                                            required: "Event end time can not be empty!",
-                                        }}
-                                    />
-                                ) : (
-                                    ISOtoDT(eventData?.event?.datetimeEnd).datetime
-                                )}
-                            </Typography>
+                                    </Typography>
+                                </Grid>
+                            </Grid>
                         </Box>
 
                         {editing ? (
@@ -249,7 +265,7 @@ const Details = ({
                                                         <Button
                                                             variant="text"
                                                             component="label"
-                                                            onClick={(e) => {
+                                                            onClick={(_) => {
                                                                 field.onChange({
                                                                     img: null,
                                                                     deletePrev: true,
@@ -347,8 +363,8 @@ const Details = ({
                         </FormLabel>
                     ) : null}
 
-                    <Box display="flex" alignItems="center">
-                        <AudienceIcon sx={{ mr: 1 }} />
+                    <Box display="flex" alignItems="flex-start">
+                        <AudienceIcon sx={{ my: 0.5, mr: 2 }} />
                         {eventLoading ? (
                             <Skeleton animation="wave" width={200} />
                         ) : editing ? (
@@ -393,11 +409,15 @@ const Details = ({
                                 </FormGroup>
                             </FormControl>
                         ) : eventData?.event?.audience !== "none" ? (
-                            AudienceFormatter(eventData?.event?.audience)
-                                .split(",")
-                                .map((audience, key) => (
-                                    <Chip key={key} label={audience} sx={{ mx: 0.5 }} />
-                                ))
+                            <Grid container spacing={1}>
+                                {AudienceFormatter(eventData?.event?.audience)
+                                    .split(",")
+                                    .map((audience, key) => (
+                                        <Grid item>
+                                            <Chip key={key} label={audience} />
+                                        </Grid>
+                                    ))}
+                            </Grid>
                         ) : (
                             <Box mx={1}>—</Box>
                         )}

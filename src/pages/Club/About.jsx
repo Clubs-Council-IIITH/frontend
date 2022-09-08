@@ -7,7 +7,11 @@ import { GET_CLUB_BY_ID } from "queries/clubs";
 import UserGroups from "constants/UserGroups";
 
 import { Box, Button } from "@mui/material";
-import { EditOutlined as EditIcon } from "@mui/icons-material";
+import {
+    EditOutlined as EditIcon,
+    SaveOutlined as SaveIcon,
+    UploadOutlined as UploadIcon,
+} from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
@@ -51,49 +55,43 @@ const About = ({ manage, setActions }) => {
     useEffect(() => {
         if (manage) {
             if (editing) {
-                setActions(
-                    <Box>
-                        <Button variant="outlined" component="label" size="large" sx={{ mr: 1 }}>
-                            Update Cover
-                            <input
-                                hidden
-                                name="cover"
-                                type="file"
-                                accept="image/png, image/jpeg, image/jpg"
-                                onChange={(e) => {
-                                    updateCover(URL.createObjectURL(e?.target?.files[0]));
-                                }}
-                            />
-                        </Button>
-                        <PrimaryActionButton
-                            noPadding
-                            size="large"
-                            variant="outlined"
-                            color="primary"
-                            onClick={() => {
-                                setEditing(false);
-                                updateDescription();
-                            }}
-                        >
-                            Save
-                        </PrimaryActionButton>
-                    </Box>
-                );
+                setActions([
+                    {
+                        title: (
+                            <>
+                                Update Cover
+                                <input
+                                    hidden
+                                    name="cover"
+                                    type="file"
+                                    accept="image/png, image/jpeg, image/jpg"
+                                    onChange={(e) => {
+                                        updateCover(URL.createObjectURL(e?.target?.files[0]));
+                                    }}
+                                />
+                            </>
+                        ),
+                        icon: UploadIcon,
+                        component: "label",
+                    },
+                    {
+                        title: "Save",
+                        icon: SaveIcon,
+                        color: "info",
+                        onClick: () => {
+                            setEditing(false);
+                            updateDescription();
+                        },
+                    },
+                ]);
             } else {
-                setActions(
-                    <SecondaryActionButton
-                        noPadding
-                        size="large"
-                        variant="outlined"
-                        color="primary"
-                        onClick={() => setEditing(true)}
-                    >
-                        <Box display="flex" mr={1}>
-                            <EditIcon fontSize="small" />
-                        </Box>
-                        Edit Details
-                    </SecondaryActionButton>
-                );
+                setActions([
+                    {
+                        title: "Edit Details",
+                        icon: EditIcon,
+                        onClick: () => setEditing(true),
+                    },
+                ]);
             }
         }
     }, [manage, editing, editorValue]);

@@ -4,7 +4,7 @@ export const ISOtoDT = (timestamp) => {
     var day = DT.getDate();
     var month = DT.toLocaleString("default", { month: "short" });
     var year = DT.getFullYear();
-    var date = `${day} ${month} ${year}`;
+    var date = year == new Date().getFullYear() ? `${day} ${month}` : `${day} ${month} ${year}`;
     var time = DT.toLocaleString("en-US", {
         hour: "numeric",
         minute: "numeric",

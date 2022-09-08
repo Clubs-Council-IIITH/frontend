@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useTheme } from "@mui/styles";
 import {
     Grid,
@@ -31,6 +31,7 @@ import {
 } from "queries/events";
 
 import { TabBar, TabPanels } from "components/Tabs";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import Details from "./Details";
 import Budget from "./Budget";
@@ -43,13 +44,14 @@ import ResponseToast from "components/ResponseToast";
 const EVENT_POSTER_PLACEHOLDER =
     "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
 
-const MODAL_HEIGHT = "60vh";
-const MODAL_WIDTH = "80vw";
-const POSTER_MAXHEIGHT = "75vh";
-const POSTER_MAXWIDTH = "75vw";
-
 const EventModal = ({ manage, eventId = null, actions = [], controller: [open, setOpen] }) => {
     const theme = useTheme();
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
+    const MODAL_HEIGHT = isTabletOrMobile ? "60vh" : "60vh";
+    const MODAL_WIDTH = isTabletOrMobile ? "95vw" : "80vw";
+    const POSTER_MAXHEIGHT = "75vh";
+    const POSTER_MAXWIDTH = "75vw";
 
     // tab list and controller
     const tabs = [
@@ -121,10 +123,10 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             setActiveEventId(eventId);
             setEditing(!eventId);
             setDeleting(false);
-            setCurrentPoster(eventData?.event?.poster | "");
+            setCurrentPoster(eventData?.event?.poster || "");
             setExpandPoster(false);
         }
-    }, [eventId, open]);
+    }, [eventData, eventId, open]);
 
     // fetch new event details whenever active event id changes
     useEffect(() => {

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
@@ -7,7 +7,7 @@ import { GET_CLUB_BY_ID } from "queries/clubs";
 import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
-import { Box, Typography, Divider } from "@mui/material";
+import { Button, Box, Typography, Divider } from "@mui/material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -49,6 +49,23 @@ const tabs = [
     },
 ];
 
+const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component = "button" }) => {
+    return (
+        <Button
+            disableElevation
+            variant="contained"
+            size="large"
+            color={color}
+            onClick={onClick}
+            component={component}
+            sx={{ ml: 1 }}
+        >
+            <Icon fontSize="small" sx={{ mr: 1 }} />
+            {title}
+        </Button>
+    );
+};
+
 const View = ({ manage }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -65,7 +82,9 @@ const View = ({ manage }) => {
         variables: { id: targetId },
     });
 
-    const [actions, setActions] = useState(null);
+    const [actions, setActions] = useState([]);
+
+    useEffect(() => console.log(actions), [actions]);
 
     const tabController = useState(0);
 
@@ -91,7 +110,11 @@ const View = ({ manage }) => {
                         {clubData?.club?.tagline}
                     </Typography>
                 </Box>
-                <Box>{actions || null}</Box>
+                <Box>
+                    {actions?.map((action) => (
+                        <ActionButton {...action} />
+                    ))}
+                </Box>
             </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />

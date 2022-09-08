@@ -109,25 +109,18 @@ const Members = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(
-            manage ? (
-                <SecondaryActionButton
-                    noPadding
-                    size="large"
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => {
+        if (manage) {
+            setActions([
+                {
+                    title: "Add Member",
+                    icon: HandshakeIcon,
+                    onClick: () => {
                         setFormProps({});
                         setFormModal(true);
-                    }}
-                >
-                    <Box display="flex" mr={1}>
-                        <HandshakeIcon fontSize="small" />
-                    </Box>
-                    Add Member
-                </SecondaryActionButton>
-            ) : null
-        );
+                    },
+                },
+            ]);
+        }
     }, [manage]);
 
     const cardProps = {

@@ -83,29 +83,22 @@ const Events = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(
-            manage ? (
-                <SecondaryActionButton
-                    noPadding
-                    size="large"
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => {
+        if (manage) {
+            setActions([
+                {
+                    title: "New Event",
+                    icon: AddIcon,
+                    onClick: () => {
                         setViewProps({
                             manage: manage,
                             eventId: null,
                             actions: ["edit", "delete"],
                         });
                         setViewModal(true);
-                    }}
-                >
-                    <Box display="flex" mr={1}>
-                        <AddIcon fontSize="small" />
-                    </Box>
-                    New Event
-                </SecondaryActionButton>
-            ) : null
-        );
+                    },
+                },
+            ]);
+        }
     }, [manage]);
 
     const cardProps = {
