@@ -71,6 +71,7 @@ const MainContainer = ({ children }) => {
             </AppBar>
 
             <Box
+                width="100%"
                 sx={{
                     mt: `${isTabletOrMobile ? topbarHeight : 0}px`,
                     mb: isTabletOrMobile ? 5 : 0,
