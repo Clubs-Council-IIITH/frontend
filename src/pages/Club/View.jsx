@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { GET_CLUB_BY_ID } from "queries/clubs";
-import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
@@ -14,6 +13,7 @@ import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
 
 import { SessionContext } from "contexts/SessionContext";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import About from "./About";
 import Events from "./Events";
@@ -53,15 +53,17 @@ const View = ({ manage }) => {
     const classes = useStyles();
     const theme = useTheme();
 
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
 
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
     // fetch club
-    const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
-    const [club, setClub] = useState([]);
-    useEffect(() => setClub(new ClubModel(data?.club)), [data]);
+    const { data: clubData, loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
+        variables: { id: targetId },
+    });
 
     const [actions, setActions] = useState(null);
 
@@ -73,14 +75,20 @@ const View = ({ manage }) => {
     };
 
     return (
-        <Page full loading={loading}>
-            <img src={club?.img} alt={club?.name} className={classes.cover} />
+        <Page full loading={clubLoading}>
+            <img src={clubData?.club?.img} alt={clubData?.club?.name} className={classes.cover} />
 
-            <Box px={3} pt={4} pb={2} display="flex" justifyContent="space-between">
+            <Box p={3} pb={2} display="flex" justifyContent="space-between">
                 <Box>
-                    <Typography variant="h3">{club?.name}</Typography>
-                    <Typography variant="h6" color={theme.palette.secondary.dark} mt={1}>
-                        {club?.tagline}
+                    <Typography variant={isTabletOrMobile ? "h4" : "h3"}>
+                        {clubData?.club?.name}
+                    </Typography>
+                    <Typography
+                        variant={isTabletOrMobile ? "body1" : "h6"}
+                        color={theme.palette.secondary.dark}
+                        mt={1}
+                    >
+                        {clubData?.club?.tagline}
                     </Typography>
                 </Box>
                 <Box>{actions || null}</Box>
