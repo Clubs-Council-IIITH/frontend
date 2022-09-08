@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, matchPath } from "react-router-dom";
 import { useTheme } from "@mui/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
@@ -42,8 +42,15 @@ const MobileNavigation = ({ topbarHeight }) => {
             ?.filter((i) => navItems?.includes(i.title))
             ?.map((i) => i.path);
 
-        // if current path belongs to navItems activate its icon; else activate 'more'
-        setValue(navPaths?.includes(location.pathname) ? location.pathname : "more");
+        // if current path matches any navItems path activate its icon; else activate 'more'
+        setValue("more");
+        navPaths?.forEach((path) => {
+            if (
+                location.pathname === path ||
+                matchPath(location.pathname, { path: `${path}/:etc` })
+            )
+                setValue(path);
+        });
     }, [location.pathname, navigation]);
 
     return (
