@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
@@ -7,7 +7,7 @@ import { GET_CLUB_BY_ID } from "queries/clubs";
 import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
-import { Button, Box, Typography, Divider } from "@mui/material";
+import { Fab, Button, Box, Typography, Divider, Zoom } from "@mui/material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -50,7 +50,16 @@ const tabs = [
 ];
 
 const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component = "button" }) => {
-    return (
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
+    return isTabletOrMobile ? (
+        <Zoom key={title} in={true}>
+            <Fab variant="extended" color={color} onClick={onClick} component={component}>
+                <Icon fontSize="small" sx={{ mr: 1 }} />
+                {title}
+            </Fab>
+        </Zoom>
+    ) : (
         <Button
             disableElevation
             variant="contained"
@@ -58,7 +67,6 @@ const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component
             color={color}
             onClick={onClick}
             component={component}
-            sx={{ ml: 1 }}
         >
             <Icon fontSize="small" sx={{ mr: 1 }} />
             {title}
@@ -84,8 +92,6 @@ const View = ({ manage }) => {
 
     const [actions, setActions] = useState([]);
 
-    useEffect(() => console.log(actions), [actions]);
-
     const tabController = useState(0);
 
     const tabProps = {
@@ -110,7 +116,17 @@ const View = ({ manage }) => {
                         {clubData?.club?.tagline}
                     </Typography>
                 </Box>
-                <Box>
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    position={isTabletOrMobile ? "fixed" : "static"}
+                    bottom={70}
+                    right={10}
+                    sx={{
+                        "& > :not(style)": { m: 1 },
+                        zIndex: 999,
+                    }}
+                >
                     {actions?.map((action) => (
                         <ActionButton {...action} />
                     ))}
