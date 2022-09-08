@@ -205,42 +205,40 @@ const BudgetField = ({ activeEventId }) => {
                             rules={{ required: "Description can not be empty!" }}
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12}>
                         <Controller
                             name="reimbursable"
                             control={control}
                             shouldUnregister={true}
                             defaultValue={false}
                             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                                <Box display="flex" justifyContent="center" width="100%">
-                                    <FormControl>
-                                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                                            Type
-                                        </FormLabel>
-                                        <RadioGroup
-                                            row
-                                            name="reimbursable"
-                                            value={value}
-                                            onChange={onChange}
-                                        >
-                                            <FormControlLabel
-                                                value={false}
-                                                control={<Radio />}
-                                                label="Advance"
-                                            />
-                                            <FormControlLabel
-                                                value={true}
-                                                control={<Radio />}
-                                                label="Reimbursement"
-                                            />
-                                        </RadioGroup>
-                                    </FormControl>
-                                </Box>
+                                <FormControl>
+                                    <FormLabel component="legend" sx={{ fontSize: 12 }}>
+                                        Type
+                                    </FormLabel>
+                                    <RadioGroup
+                                        row
+                                        name="reimbursable"
+                                        value={value}
+                                        onChange={onChange}
+                                    >
+                                        <FormControlLabel
+                                            value={false}
+                                            control={<Radio />}
+                                            label="Advance"
+                                        />
+                                        <FormControlLabel
+                                            value={true}
+                                            control={<Radio />}
+                                            label="Reimbursement"
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
                             )}
                         />
                     </Grid>
                 </Grid>
-                <Box display="flex" alignItems="center" mx={1}>
+                <Box height="100%" display="flex" alignItems="flex-start" mx={1}>
                     <IconButton type="button" color="success" onClick={handleSubmit(onSubmit)}>
                         <AddIcon />
                     </IconButton>
@@ -289,7 +287,7 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
                     <Typography m={1} variant="h6">
                         Current budget breakdown
                     </Typography>
-                    <TableContainer component={Paper} variant="outlined" sx={{ mx: 1, my: 2 }}>
+                    <TableContainer component={Paper} variant="outlined">
                         {budgetData?.adminEventBudget?.length === 0 ? (
                             <Empty />
                         ) : (
