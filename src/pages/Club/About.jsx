@@ -2,7 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { GET_CLUB_BY_ID } from "queries/clubs";
+import { UPDATE_CLUB } from "mutations/clubs";
 
 import UserGroups from "constants/UserGroups";
 
@@ -39,16 +41,23 @@ const About = ({ manage, setActions }) => {
         onCompleted: (data) => setEditorValue(data?.club?.description),
     });
 
+    const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB, {
+        refetchQueries: [{ query: GET_CLUB_BY_ID, variables: { id: targetId } }],
+        awaitRefetchQueries: true,
+    });
+
     // update club description
-    const updateDescription = () => {
-        // TODO: mutation to update description
+    const updateDescription = async () => {
+        await updateClub({ variables: { description: editorValue, id: targetId } });
         console.log(editorValue);
+        console.log(updateError);
     };
 
     // update club cover
-    const updateCover = (src) => {
-        // TODO: mutation to update cover
+    const updateCover = async (src) => {
+        await updateClub({ variables: { img: src, id: targetId, mail: session?.username } });
         console.log(src);
+        console.log(updateError);
     };
 
     // set/clear action buttons if `manage` is set
@@ -61,13 +70,13 @@ const About = ({ manage, setActions }) => {
                             <>
                                 Update Cover
                                 <input
-                                    hidden
                                     name="cover"
                                     type="file"
                                     accept="image/png, image/jpeg, image/jpg"
                                     onChange={(e) => {
-                                        updateCover(URL.createObjectURL(e?.target?.files[0]));
+                                        updateCover(e?.target?.files[0]);
                                     }}
+                                    hidden
                                 />
                             </>
                         ),

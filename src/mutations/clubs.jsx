@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_CLUB = gql`
-    mutation createClubMutation(
+export const ADMIN_CREATE_CLUB = gql`
+    mutation AdminCreateClubMutation(
         $img: Upload
         $name: String!
         $mail: String!
@@ -11,7 +11,7 @@ export const CREATE_CLUB = gql`
         $tagline: String
         $description: String
     ) {
-        createClub(
+        adminCreateClub(
             clubData: {
                 img: $img
                 name: $name
@@ -38,8 +38,8 @@ export const CREATE_CLUB = gql`
     }
 `;
 
-export const UPDATE_CLUB = gql`
-    mutation updateClubMutation(
+export const ADMIN_UPDATE_CLUB = gql`
+    mutation adminUpdateClubMutation(
         $id: ID!
         $img: Upload
         $name: String!
@@ -49,7 +49,7 @@ export const UPDATE_CLUB = gql`
         $tagline: String
         $description: String
     ) {
-        updateClub(
+        adminUpdateClub(
             clubData: {
                 id: $id
                 img: $img
@@ -76,9 +76,40 @@ export const UPDATE_CLUB = gql`
     }
 `;
 
-export const DELETE_CLUB = gql`
-    mutation deleteClubMutation($id: ID!) {
-        deleteClub(clubData: { id: $id }) {
+export const UPDATE_CLUB = gql`
+    mutation updateClubMutation(
+        $id: ID!
+        $img: Upload
+        $name: String
+        $website: String
+        $tagline: String
+        $description: String
+    ) {
+        updateClub(
+            clubData: {
+                id: $id
+                img: $img
+                name: $name
+                website: $website
+                tagline: $tagline
+                description: $description
+            }
+        ) {
+            club {
+                id
+                img
+                name
+                website
+                tagline
+                description
+            }
+        }
+    }
+`;
+
+export const ADMIN_DELETE_CLUB = gql`
+    mutation adminDeleteClubMutation($id: ID!) {
+        adminDeleteClub(clubData: { id: $id }) {
             club {
                 id
                 img
