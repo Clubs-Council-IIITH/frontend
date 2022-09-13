@@ -102,6 +102,8 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
             <Slate
                 editor={editor}
                 value={initialValue}
+                label="Description"
+
                 onChange={(val) => {
                     const isAstChange = editor.operations.some((op) => "set_selection" !== op.type);
                     if (isAstChange) {
