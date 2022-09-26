@@ -28,7 +28,7 @@ const MODAL_WIDTH = "50vw";
 const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
     const theme = useTheme();
 
-    const { control, register, handleSubmit } = useForm();
+    const { control, register, handleSubmit, reset } = useForm();
 
     const [toast, setToast] = useState({ open: false });
 
@@ -81,6 +81,7 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
     };
 
     const onSubmitUser = async (data) => {
+        console.log("image = ", data.img);
         const transformedData = {
             ...data,
             img: data.img[0],
@@ -112,6 +113,9 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
         // show response toast based on form submission status
         setToast({ open: true, error: addError || updateError });
         cancelAll();
+        reset(data);
+        reset(transformedData);
+
     };
 
     return (
