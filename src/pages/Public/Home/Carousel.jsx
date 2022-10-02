@@ -13,6 +13,7 @@ import CarouselBackground8 from "assets/img/carousel/8.jpeg";
 import CarouselBackground9 from "assets/img/carousel/9.jpg";
 import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
+import CarouselBackground12 from "assets/img/carousel/12.jpg";
 
 const Carousel = () => {
     const carousel = [
@@ -148,6 +149,19 @@ const Carousel = () => {
         },
         {
             image: CarouselBackground11,
+            content: (
+                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
+                    <Box my={2}>
+                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
+                            Life at IIITH
+                        </Typography>
+                    </Box>
+                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
+                </Box>
+            ),
+        },
+        {
+            image: CarouselBackground12,
             content: (
                 <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
                     <Box my={2}>
