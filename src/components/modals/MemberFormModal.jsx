@@ -81,15 +81,15 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
     };
 
     const onSubmitUser = async (data) => {
-        console.log("image = ", data.img);
+        console.log("data = ", data);
         const transformedData = {
             ...data,
             img: data.img[0],
         };
-
         // create new user
         await createUser({ variables: { ...transformedData } });
-
+        // reset(transformedData);
+        reset({});
         if (createError) {
             // show response toast based on form submission status
             setToast({ open: true, error: createError });
@@ -112,9 +112,7 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
 
         // show response toast based on form submission status
         setToast({ open: true, error: addError || updateError });
-        cancelAll();
-        reset(data);
-        reset(transformedData);
+        cancelAll();        
 
     };
 
