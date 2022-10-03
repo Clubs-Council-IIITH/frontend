@@ -24,6 +24,7 @@ import {
     GroupOutlined,
     AdminPanelSettingsOutlined,
     InfoOutlined,
+    BugReportOutlined,
 } from "@mui/icons-material";
 import MainContainer from "components/MainContainer";
 // }}}
@@ -69,6 +70,14 @@ const publicRoutes = [
         path: "/calendar",
         icon: CalendarTodayOutlined,
         component: <Public.Calendar />,
+    },
+];
+
+const bugFormRoutes = [
+    {
+        title: "Bug Report Form",
+        path: "/bug",
+        icon: BugReportOutlined,
     },
 ];
 
@@ -140,17 +149,18 @@ const App = () => {
             session?.group === UserGroups.cc
                 ? ccRoutes
                 : session?.group === UserGroups.slc
-                ? slcRoutes
-                : session?.group === UserGroups.slo
-                ? sloRoutes
-                : session?.group === UserGroups.gad
-                ? gadRoutes
-                : session?.group === UserGroups.club
-                ? clubRoutes
-                : [];
+                    ? slcRoutes
+                    : session?.group === UserGroups.slo
+                        ? sloRoutes
+                        : session?.group === UserGroups.gad
+                            ? gadRoutes
+                            : session?.group === UserGroups.club
+                                ? clubRoutes
+                                : [];
 
         setNavigation({
             publicRoutes,
+            bugFormRoutes,
             protectedRoutes,
         });
     }, [session]);
@@ -165,6 +175,14 @@ const App = () => {
                             {publicRoutes.map((route, idx) => (
                                 <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
+                                </Route>
+                            ))}
+
+                            {bugFormRoutes.map((route, idx) => (
+                                <Route exact={route.exact} path={route.path} key={idx} component={() => {
+                                    window.location.href = 'https://forms.office.com/r/zBLuvbBPXZ';
+                                    return null;
+                                }}>
                                 </Route>
                             ))}
 
