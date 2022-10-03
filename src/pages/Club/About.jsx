@@ -77,11 +77,12 @@ const About = ({ manage, setActions }) => {
                         >
                             Save
                         </PrimaryActionButton>
+                        <br/><br/>
                     </Box>
                 );
             } else {
                 setActions(
-                    <SecondaryActionButton
+                    <><SecondaryActionButton
                         noPadding
                         size="large"
                         variant="outlined"
@@ -92,7 +93,8 @@ const About = ({ manage, setActions }) => {
                             <EditIcon fontSize="small" />
                         </Box>
                         Edit Details
-                    </SecondaryActionButton>
+                    </SecondaryActionButton> &nbsp;
+                    </>
                 );
             }
         }

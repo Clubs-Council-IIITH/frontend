@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect, Route, useNavigate } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { GET_CLUB_BY_ID } from "queries/clubs";
@@ -8,7 +8,7 @@ import ClubModel from "models/ClubModel";
 import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
-import { Box, Typography, Divider } from "@mui/material";
+import { Box, Typography, Divider, Button } from "@mui/material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -72,6 +72,13 @@ const View = ({ manage }) => {
         setActions,
     };
 
+    let web = club?.website;
+
+    function websiteHandle() {
+        window.open(web, '_blank', 'noopener,noreferrer');
+    }
+
+
     return (
         <Page full loading={loading}>
             <img src={club?.img} alt={club?.name} className={classes.cover} />
@@ -83,12 +90,23 @@ const View = ({ manage }) => {
                         {club?.tagline}
                     </Typography>
                 </Box>
-                <Box>{actions || null}</Box>
-            </Box>
+                <Box>
+                    {actions || null}
+                    <Button
+                        variant="outlined"
+                        component="label"
+                        size="large" sx={{ mr: 1 }}
+                        onClick={(e) => websiteHandle(e)}
+                        disabled={web == ''}
+                    >
+                        Club Website
+                    </Button>
+                </Box>
+            </Box >
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />
             <TabPanels tabs={tabs} controller={tabController} tabProps={tabProps} routed />
-        </Page>
+        </Page >
     );
 };
 
