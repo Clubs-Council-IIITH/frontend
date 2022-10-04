@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
@@ -69,17 +69,23 @@ const Details = ({
         awaitRefetchQueries: true,
     });
 
+    // track description input in state variable
+    const [editorValue, setEditorValue] = useState(eventData?.event?.description);
+
     // submit form
     const onSubmit = async (data) => {
         // remove rawPoster from the data and format audience
         const transformedData = {
             ...data,
             rawPoster: null,
+            description: editorValue,
             audience: Object.entries(data.audience)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
                 .join(","),
         };
+
+        console.log(transformedData);
 
         // update or create new instance of data
         let returnedEvent = await (activeEventId
@@ -107,12 +113,6 @@ const Details = ({
             label: "Faculty",
         },
     ];
-
-    const [editorValue, setEditorValue] = useState(
-        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
-    );
-
-    //datetime
 
     return (
         <form
@@ -338,21 +338,18 @@ const Details = ({
                 </Grid>
 
                 <Grid item xs={12}>
-                    <FormLabel component="legend" sx={{ fontSize: 12, mb: 1 }}>
-                        Description
-                    </FormLabel>
+                    {editing ? (
+                        <FormLabel component="legend" sx={{ fontSize: 12, mb: 1 }}>
+                            Description
+                        </FormLabel>
+                    ) : null}
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
                         ) : (
                             <RichTextEditor
                                 editing={editing}
-                                editorState={[
-                                    eventData?.event?.description ||
-                                        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]',
-                                    setEditorValue,
-                                ]}
-                                style={{ height: "100%" }}
+                                editorState={[editorValue, setEditorValue]}
                             />
                         )}
                     </Typography>

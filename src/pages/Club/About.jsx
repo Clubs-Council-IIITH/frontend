@@ -16,11 +16,9 @@ import {
 } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
-import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import RichTextEditor from "components/RichTextEditor";
-import { InputLabel } from "@mui/material";
 
 const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -32,14 +30,18 @@ const About = ({ manage, setActions }) => {
     const [editing, setEditing] = useState(false);
 
     // track input in state variable
-    const [editorValue, setEditorValue] = useState(
-        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
-    );
+    const [editorValue, setEditorValue] = useState([
+        { type: "paragraph", children: [{ text: "No description provided." }] },
+    ]);
 
     // fetch club
     const { loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
         variables: { id: targetId },
-        onCompleted: (data) => setEditorValue(data?.club?.description),
+        onCompleted: (data) => {
+            if (data?.club?.description) {
+                setEditorValue(JSON.parse(data?.club?.description));
+            }
+        },
     });
 
     const [updateClub, { error: updateError }] = useMutation(UPDATE_CLUB, {
@@ -49,7 +51,7 @@ const About = ({ manage, setActions }) => {
 
     // update club description
     const updateDescription = async () => {
-        await updateClub({ variables: { description: editorValue, id: targetId } });
+        await updateClub({ variables: { description: JSON.stringify(editorValue), id: targetId } });
         console.log(editorValue);
         console.log(updateError);
     };

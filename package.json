@@ -5,7 +5,8 @@
     "dependencies": {
         "@apollo/client": "^3.4.5",
         "@date-io/jalaali": "^2.14.0",
-        "@emotion/react": "^11.8.1",
+        "@emotion/css": "^11.10.0",
+        "@emotion/react": "^11.10.4",
         "@emotion/styled": "^11.8.1",
         "@mui/icons-material": "^5.4.2",
         "@mui/lab": "^5.0.0-alpha.70",
@@ -21,6 +22,7 @@
         "date-fns": "^2.29.1",
         "graphql": "^15.5.1",
         "http-proxy-middleware": "^2.0.1",
+        "material-icons": "^1.12.0",
         "moment": "^2.29.4",
         "moment-jalaali": "^0.9.6",
         "react": "^18.2.0",

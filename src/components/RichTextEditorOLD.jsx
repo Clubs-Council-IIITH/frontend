@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 import { createEditor, Editor, Transforms, Text } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
@@ -21,16 +21,15 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
     const [editor] = useState(() => withReact(createEditor()));
 
     const theme = useTheme();
-    // parse input initial value or use fallback value
-    const initialValue = useMemo(
-        () =>
-            JSON.parse(value) || [
-                {
-                    type: "paragraph",
-                    children: [{ text: "No description provided." }],
-                },
-            ]
-    );
+
+    // // parse input initial value or use fallback value
+    // const [initialValue, setInitialValue] = useState
+    // (
+    // );
+
+    // useEffect(() => {
+    //     if (value) setInitialValue(JSON.parse(value));
+    // }, [value]);
 
     const renderElement = ({ attributes, children, element }) => {
         const style = { textAlign: element.align };
@@ -102,11 +101,20 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                 borderRadius: editing ? theme.borderRadius : "none",
                 minHeight: editing ? "25em" : "none",
             }}
-            p={1}
+            p={editing ? 1 : 0}
         >
             <Slate
                 editor={editor}
-                value={initialValue}
+                value={
+                    value
+                        ? JSON.parse(value)
+                        : [
+                              {
+                                  type: "paragraph",
+                                  children: [{ text: "No description provided." }],
+                              },
+                          ]
+                }
                 label="Description"
                 onChange={(val) => {
                     const isAstChange = editor.operations.some((op) => "set_selection" !== op.type);
@@ -227,7 +235,7 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                     </Box>
                 ) : null}
 
-                <Box px={1}>
+                <Box>
                     <Editable
                         readOnly={!editing}
                         editor={editor}
