@@ -20,6 +20,7 @@ import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import RichTextEditor from "components/RichTextEditor";
+import { InputLabel } from "@mui/material";
 
 const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -108,7 +109,7 @@ const About = ({ manage, setActions }) => {
     return (
         <>
             <Page full loading={clubLoading}>
-                <Box pt={2} px={3}>
+                <Box pt={2} px={2}>
                     <RichTextEditor editing={editing} editorState={[editorValue, setEditorValue]} />
                 </Box>
             </Page>

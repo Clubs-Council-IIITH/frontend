@@ -24,6 +24,7 @@ import {
     GroupOutlined,
     AdminPanelSettingsOutlined,
     InfoOutlined,
+    BugReportOutlined,
 } from "@mui/icons-material";
 import MainContainer from "components/MainContainer";
 // }}}
@@ -69,6 +70,14 @@ const publicRoutes = [
         path: "/calendar",
         icon: CalendarTodayOutlined,
         component: <Public.Calendar />,
+    },
+];
+
+const bugFormRoutes = [
+    {
+        title: "Report Bugs",
+        path: "/bug",
+        icon: BugReportOutlined,
     },
 ];
 
@@ -152,6 +161,7 @@ const App = () => {
         setNavigation({
             publicRoutes,
             protectedRoutes,
+            bugFormRoutes,
         });
     }, [session]);
 
@@ -179,6 +189,19 @@ const App = () => {
                                 <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
                                 </Route>
+                            ))}
+
+                            {bugFormRoutes.map((route, idx) => (
+                                <Route
+                                    exact={route.exact}
+                                    path={route.path}
+                                    key={idx}
+                                    component={() => {
+                                        window.location.href =
+                                            "https://forms.office.com/r/zBLuvbBPXZ";
+                                        return null;
+                                    }}
+                                ></Route>
                             ))}
 
                             {/* error routes */}

@@ -23,6 +23,10 @@ import Img15 from "assets/img/gallery/15.jpeg";
 import Img16 from "assets/img/gallery/16.jpg";
 import Img17 from "assets/img/gallery/17.jpg";
 import Img18 from "assets/img/gallery/18.jpg";
+import Img19 from "assets/img/gallery/19.jpg";
+import Img20 from "assets/img/gallery/20.jpg";
+import Img21 from "assets/img/gallery/21.jpg";
+import Img22 from "assets/img/gallery/22.jpg";
 
 import CarouselBackground1 from "assets/img/carousel/1.jpg";
 import CarouselBackground2 from "assets/img/carousel/2.png";
@@ -35,8 +39,13 @@ import CarouselBackground8 from "assets/img/carousel/8.jpeg";
 import CarouselBackground9 from "assets/img/carousel/9.jpg";
 import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
+import CarouselBackground12 from "assets/img/carousel/12.jpg";
 
 const itemData = [
+    {
+        img: Img19,
+        title: "Silver-Jubilee Launch",
+    },
     {
         img: Img1,
         title: "Music-Stage",
@@ -110,6 +119,18 @@ const itemData = [
         title: "Independence-Day-Songs",
     },
     {
+        img: Img21,
+        title: "Sreyas Photography",
+    },
+    {
+        img: Img20,
+        title: "ERC Workshop",
+    },
+    {
+        img: Img22,
+        title: "Aditya Nair",
+    },
+    {
         img: CarouselBackground1,
         title: "Into-to-Clubs",
     },
@@ -152,6 +173,10 @@ const itemData = [
     {
         img: CarouselBackground11,
         title: "Flag-and-Aftab-sir",
+    },
+    {
+        img: CarouselBackground12,
+        title: "FHC Open-Mic",
     },
 ];
 

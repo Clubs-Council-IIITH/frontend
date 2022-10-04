@@ -8,6 +8,7 @@ import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
 import { Fab, Button, Box, Typography, Divider, Zoom } from "@mui/material";
+import { LanguageOutlined as WebsiteIcon } from "@mui/icons-material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -54,7 +55,13 @@ const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component
 
     return isTabletOrMobile ? (
         <Zoom key={title} in={true}>
-            <Fab variant="extended" color={color} onClick={onClick} component={component}>
+            <Fab
+                variant="extended"
+                color={color}
+                onClick={onClick}
+                component={component}
+                sx={{ ml: 1 }}
+            >
                 <Icon fontSize="small" sx={{ mr: 1 }} />
                 {title}
             </Fab>
@@ -67,6 +74,7 @@ const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component
             color={color}
             onClick={onClick}
             component={component}
+            sx={{ ml: 1 }}
         >
             <Icon fontSize="small" sx={{ mr: 1 }} />
             {title}
@@ -99,6 +107,12 @@ const View = ({ manage }) => {
         setActions,
     };
 
+    const web = clubData?.club?.website;
+
+    function websiteHandle() {
+        window.open(web, "_blank", "noopener,noreferrer");
+    }
+
     return (
         <Page full loading={clubLoading}>
             <img src={clubData?.club?.img} alt={clubData?.club?.name} className={classes.cover} />
@@ -127,9 +141,19 @@ const View = ({ manage }) => {
                         zIndex: 999,
                     }}
                 >
-                    {actions?.map((action) => (
-                        <ActionButton {...action} />
-                    ))}
+                    <Box>
+                        {actions?.map((action) => (
+                            <ActionButton {...action} />
+                        ))}
+                        {web ? (
+                            <ActionButton
+                                title="Visit Website"
+                                color="info"
+                                icon={WebsiteIcon}
+                                onClick={(e) => websiteHandle(e)}
+                            />
+                        ) : null}
+                    </Box>
                 </Box>
             </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />

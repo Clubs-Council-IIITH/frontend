@@ -15,10 +15,12 @@ import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import { useTheme } from "@mui/styles";
 
 const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => {
     const [editor] = useState(() => withReact(createEditor()));
 
+    const theme = useTheme();
     // parse input initial value or use fallback value
     const initialValue = useMemo(
         () =>
@@ -82,123 +84,176 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
     const [code, setCode] = useState(false);
+    const [bold, setBold] = useState(false);
+    const [italic, setItalic] = useState(false);
+    const [underlined, setUnderlined] = useState(false);
+    const [h1, setH1] = useState(false);
+    const [h2, setH2] = useState(false);
+    const [quote, setQuote] = useState(false);
+    const [num, setNum] = useState(false);
+    const [bul, setBul] = useState(false);
 
     return (
         // Add a toolbar with buttons that call the same methods.
-        <Slate
-            editor={editor}
-            value={initialValue}
-            onChange={(val) => {
-                const isAstChange = editor.operations.some((op) => "set_selection" !== op.type);
-                if (isAstChange) {
-                    // Store value in the state variable
-                    const content = JSON.stringify(val);
-                    setValue(content);
-                }
+        <Box
+            sx={{
+                border: editing ? "2px solid" : "none",
+                borderColor: editing ? theme.palette.secondary.main : "none",
+                borderRadius: editing ? theme.borderRadius : "none",
+                minHeight: editing ? "25em" : "none",
             }}
+            p={1}
         >
-            {editing ? (
-                <Box>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleBoldMark(editor);
-                        }}
-                    >
-                        <FormatBoldIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleItalicMark(editor);
-                        }}
-                    >
-                        <FormatItalicIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleUnderlinedMark(editor);
-                        }}
-                    >
-                        <FormatUnderlinedIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleH1Block(editor);
-                        }}
-                    >
-                        <LooksOneIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleH2Block(editor);
-                        }}
-                    >
-                        <LooksTwoIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleQuoteBlock(editor);
-                        }}
-                    >
-                        <FormatQuoteIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleNumBlock(editor);
-                        }}
-                    >
-                        <FormatListNumberedIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleBulBlock(editor);
-                        }}
-                    >
-                        <FormatListBulletedIcon />
-                    </IconButton>
-                    <IconButton
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleCodeBlock(editor);
-                            setCode(CustomEditor.isCodeBlockActive(editor));
-                        }}
-                    >
-                        {code ? <CodeOffIcon /> : <CodeIcon />}
-                    </IconButton>
-                </Box>
-            ) : null}
-
-            <Editable
-                readOnly={!editing}
+            <Slate
                 editor={editor}
-                renderElement={renderElement}
-                renderLeaf={renderLeaf}
-                onKeyDown={(event) => {
-                    if (!event.ctrlKey) return;
-
-                    switch (event.key) {
-                        case "`": {
-                            event.preventDefault();
-                            CustomEditor.toggleCodeBlock(editor);
-                            break;
-                        }
-
-                        case "b": {
-                            event.preventDefault();
-                            CustomEditor.toggleBoldMark(editor);
-                            break;
-                        }
+                value={initialValue}
+                label="Description"
+                onChange={(val) => {
+                    const isAstChange = editor.operations.some((op) => "set_selection" !== op.type);
+                    if (isAstChange) {
+                        // Store value in the state variable
+                        const content = JSON.stringify(val);
+                        setValue(content);
                     }
                 }}
-            />
-        </Slate>
+            >
+                {editing ? (
+                    <Box>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleBoldMark(editor);
+                                setBold(CustomEditor.isBoldMarkActive(editor));
+                            }}
+                        >
+                            {bold ? (
+                                <FormatBoldIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatBoldIcon />
+                            )}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleItalicMark(editor);
+                                setItalic(CustomEditor.isItalicMarkActive(editor));
+                            }}
+                        >
+                            {italic ? (
+                                <FormatItalicIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatItalicIcon />
+                            )}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleUnderlinedMark(editor);
+                                setUnderlined(CustomEditor.isUnderlinedMarkActive(editor));
+                            }}
+                        >
+                            {underlined ? (
+                                <FormatUnderlinedIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatUnderlinedIcon />
+                            )}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleH1Block(editor);
+                                setH1(CustomEditor.isH1Active(editor));
+                            }}
+                        >
+                            {h1 ? <LooksOneIcon style={{ fill: "#000000" }} /> : <LooksOneIcon />}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleH2Block(editor);
+                                setH2(CustomEditor.isH2Active(editor));
+                            }}
+                        >
+                            {h2 ? <LooksTwoIcon style={{ fill: "#000000" }} /> : <LooksTwoIcon />}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleQuoteBlock(editor);
+                                setQuote(CustomEditor.isQuoteActive(editor));
+                            }}
+                        >
+                            {quote ? (
+                                <FormatQuoteIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatQuoteIcon />
+                            )}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleNumBlock(editor);
+                                setNum(CustomEditor.isNumActive(editor));
+                            }}
+                        >
+                            {num ? (
+                                <FormatListNumberedIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatListNumberedIcon />
+                            )}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleBulBlock(editor);
+                                setBul(CustomEditor.isBulActive(editor));
+                            }}
+                        >
+                            {bul ? (
+                                <FormatListBulletedIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatListBulletedIcon />
+                            )}
+                        </IconButton>
+                        <IconButton
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                CustomEditor.toggleCodeBlock(editor);
+                                setCode(CustomEditor.isCodeBlockActive(editor));
+                            }}
+                        >
+                            {code ? <CodeOffIcon /> : <CodeIcon />}
+                        </IconButton>
+                    </Box>
+                ) : null}
+
+                <Box px={1}>
+                    <Editable
+                        readOnly={!editing}
+                        editor={editor}
+                        renderElement={renderElement}
+                        renderLeaf={renderLeaf}
+                        onKeyDown={(event) => {
+                            if (!event.ctrlKey) return;
+
+                            switch (event.key) {
+                                case "`": {
+                                    event.preventDefault();
+                                    CustomEditor.toggleCodeBlock(editor);
+                                    break;
+                                }
+
+                                case "b": {
+                                    event.preventDefault();
+                                    CustomEditor.toggleBoldMark(editor);
+                                    break;
+                                }
+                            }
+                        }}
+                    />
+                </Box>
+            </Slate>
+        </Box>
     );
 };
 
