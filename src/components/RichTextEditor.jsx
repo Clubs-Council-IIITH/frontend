@@ -93,17 +93,21 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
     const [num, setNum] = useState(false);
     const [bul, setBul] = useState(false);
 
-
-
-
     return (
         // Add a toolbar with buttons that call the same methods.
-        <Box style={{ border: editing? '2px solid': 'none', borderColor:editing? theme.palette.secondary.main : 'none', borderRadius:editing? theme.borderRadius : 'none', padding:editing? "10px" : 'none', minHeight:editing? '25em' : 'none' }}>
+        <Box
+            sx={{
+                border: editing ? "2px solid" : "none",
+                borderColor: editing ? theme.palette.secondary.main : "none",
+                borderRadius: editing ? theme.borderRadius : "none",
+                minHeight: editing ? "25em" : "none",
+            }}
+            p={1}
+        >
             <Slate
                 editor={editor}
                 value={initialValue}
                 label="Description"
-
                 onChange={(val) => {
                     const isAstChange = editor.operations.some((op) => "set_selection" !== op.type);
                     if (isAstChange) {
@@ -122,7 +126,11 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setBold(CustomEditor.isBoldMarkActive(editor));
                             }}
                         >
-                            {bold? <FormatBoldIcon style={{fill: "#000000"}}/> : <FormatBoldIcon />}
+                            {bold ? (
+                                <FormatBoldIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatBoldIcon />
+                            )}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -131,7 +139,11 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setItalic(CustomEditor.isItalicMarkActive(editor));
                             }}
                         >
-                            {italic? <FormatItalicIcon style={{fill: "#000000"}}/>: <FormatItalicIcon />}
+                            {italic ? (
+                                <FormatItalicIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatItalicIcon />
+                            )}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -140,7 +152,11 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setUnderlined(CustomEditor.isUnderlinedMarkActive(editor));
                             }}
                         >
-                            {underlined? <FormatUnderlinedIcon style={{fill: "#000000"}}/>: <FormatUnderlinedIcon />}
+                            {underlined ? (
+                                <FormatUnderlinedIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatUnderlinedIcon />
+                            )}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -149,7 +165,7 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setH1(CustomEditor.isH1Active(editor));
                             }}
                         >
-                            {h1? <LooksOneIcon style={{fill: "#000000"}}/>: <LooksOneIcon />}
+                            {h1 ? <LooksOneIcon style={{ fill: "#000000" }} /> : <LooksOneIcon />}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -158,7 +174,7 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setH2(CustomEditor.isH2Active(editor));
                             }}
                         >
-                            {h2? <LooksTwoIcon style={{fill: "#000000"}}/>: <LooksTwoIcon />}
+                            {h2 ? <LooksTwoIcon style={{ fill: "#000000" }} /> : <LooksTwoIcon />}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -167,7 +183,11 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setQuote(CustomEditor.isQuoteActive(editor));
                             }}
                         >
-                            {quote? <FormatQuoteIcon style={{fill: "#000000"}}/>: <FormatQuoteIcon />}
+                            {quote ? (
+                                <FormatQuoteIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatQuoteIcon />
+                            )}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -176,7 +196,11 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setNum(CustomEditor.isNumActive(editor));
                             }}
                         >
-                            {num? <FormatListNumberedIcon style={{fill: "#000000"}}/>: <FormatListNumberedIcon />}
+                            {num ? (
+                                <FormatListNumberedIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatListNumberedIcon />
+                            )}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -185,7 +209,11 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                                 setBul(CustomEditor.isBulActive(editor));
                             }}
                         >
-                            {bul? <FormatListBulletedIcon style={{fill: "#000000"}}/>: <FormatListBulletedIcon />}
+                            {bul ? (
+                                <FormatListBulletedIcon style={{ fill: "#000000" }} />
+                            ) : (
+                                <FormatListBulletedIcon />
+                            )}
                         </IconButton>
                         <IconButton
                             onMouseDown={(event) => {
@@ -199,31 +227,33 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                     </Box>
                 ) : null}
 
-                <Editable
-                    readOnly={!editing}
-                    editor={editor}
-                    renderElement={renderElement}
-                    renderLeaf={renderLeaf}
-                    onKeyDown={(event) => {
-                        if (!event.ctrlKey) return;
+                <Box px={1}>
+                    <Editable
+                        readOnly={!editing}
+                        editor={editor}
+                        renderElement={renderElement}
+                        renderLeaf={renderLeaf}
+                        onKeyDown={(event) => {
+                            if (!event.ctrlKey) return;
 
-                        switch (event.key) {
-                            case "`": {
-                                event.preventDefault();
-                                CustomEditor.toggleCodeBlock(editor);
-                                break;
-                            }
+                            switch (event.key) {
+                                case "`": {
+                                    event.preventDefault();
+                                    CustomEditor.toggleCodeBlock(editor);
+                                    break;
+                                }
 
-                            case "b": {
-                                event.preventDefault();
-                                CustomEditor.toggleBoldMark(editor);
-                                break;
+                                case "b": {
+                                    event.preventDefault();
+                                    CustomEditor.toggleBoldMark(editor);
+                                    break;
+                                }
                             }
-                        }
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Slate>
-        </Box >
+        </Box>
     );
 };
 
