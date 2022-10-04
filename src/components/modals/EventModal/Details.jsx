@@ -105,7 +105,6 @@ const Details = ({
         },
     ];
 
-
     const [editorValue, setEditorValue] = useState(
         '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
     );
@@ -254,8 +253,8 @@ const Details = ({
                                                         />
                                                     </Button>
                                                     {field?.value?.img !== null ||
-                                                        (!field?.value?.deletePrev &&
-                                                            !!eventData?.event?.poster) ? (
+                                                    (!field?.value?.deletePrev &&
+                                                        !!eventData?.event?.poster) ? (
                                                         <Button
                                                             variant="text"
                                                             component="label"
@@ -317,17 +316,20 @@ const Details = ({
                 </Grid>
 
                 <Grid item xs={12}>
+                    <FormLabel component="legend" sx={{ fontSize: 12, mb: 1 }}>
+                        Description
+                    </FormLabel>
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : (
-                            <>
-                                <InputLabel htmlFor="my-input" shrink={true} >Description</InputLabel>
-                                <RichTextEditor editing={editing} editorState={[(eventData?.event?.description || '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'), setEditorValue]} style={{ height: "100%" }} />
-                            </>
+                        ) : editing ? (
+                            <RichTextEditor 
+                                editing={editing} 
+                                editorState={[(eventData?.event?.description || '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'), setEditorValue]} 
+                                style={{ height: "100%" }} 
+                             />
                         )}
                     </Typography>
-
                 </Grid>
 
                 <Grid item xs={12} mt={2}>
@@ -351,7 +353,7 @@ const Details = ({
                                             shouldUnregister={true}
                                             defaultValue={AudienceStringtoDict(
                                                 eventData?.event?.audience ||
-                                                audienceSelect.map((o) => o.value).join(",")
+                                                    audienceSelect.map((o) => o.value).join(",")
                                             )}
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
