@@ -60,7 +60,7 @@ const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component
                 color={color}
                 onClick={onClick}
                 component={component}
-                sx={{ ml: 1 }}
+                sx={{ ml: 1, mt: 1 }}
             >
                 <Icon fontSize="small" sx={{ mr: 1 }} />
                 {title}
@@ -142,17 +142,17 @@ const View = ({ manage }) => {
                     }}
                 >
                     <Box>
-                        {actions?.map((action) => (
-                            <ActionButton {...action} />
-                        ))}
                         {web ? (
                             <ActionButton
                                 title="Visit Website"
-                                color="info"
+                                color="success"
                                 icon={WebsiteIcon}
                                 onClick={(e) => websiteHandle(e)}
                             />
                         ) : null}
+                        {actions?.map((action) => (
+                            <ActionButton {...action} />
+                        ))}
                     </Box>
                 </Box>
             </Box>

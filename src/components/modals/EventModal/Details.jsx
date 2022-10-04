@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
@@ -29,6 +30,7 @@ import {
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import enLocale from "date-fns/locale/en-IN";
 import { useState } from "react";
@@ -46,6 +48,7 @@ const Details = ({
     setCurrentPoster,
 }) => {
     const { control, handleSubmit } = useForm();
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     const [createEvent] = useMutation(CREATE_EVENT, {
         refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
@@ -125,8 +128,8 @@ const Details = ({
                         <Box display="flex" alignItems="center">
                             {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 2 }} /> : null}
 
-                            <Grid container alignItems="center">
-                                <Grid item>
+                            <Grid container>
+                                <Grid item xs={12} md={5.5} mb={isTabletOrMobile ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
@@ -147,9 +150,10 @@ const Details = ({
                                                         adapterLocale={enLocale}
                                                     >
                                                         <DateTimePicker
-                                                            renderInput={(props) => (
+                                                            label="From*"
+                                                            renderInput={(params) => (
                                                                 <TextField
-                                                                    {...props}
+                                                                    {...params}
                                                                     error={error}
                                                                     InputLabelProps={{
                                                                         shrink: true,
@@ -157,9 +161,6 @@ const Details = ({
                                                                     helperText={
                                                                         error ? error.message : null
                                                                     }
-                                                                    label="From*"
-                                                                    type="datetime-local"
-                                                                    placeholder=""
                                                                     variant="standard"
                                                                 />
                                                             )}
@@ -178,11 +179,13 @@ const Details = ({
                                     </Typography>
                                 </Grid>
 
-                                <Grid item>
-                                    <Box mx={1}>—</Box>
-                                </Grid>
+                                {!isTabletOrMobile ? (
+                                    <Grid item>
+                                        <Box mx={1}>—</Box>
+                                    </Grid>
+                                ) : null}
 
-                                <Grid item>
+                                <Grid item xs={12} md={5.5}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
@@ -203,9 +206,10 @@ const Details = ({
                                                         adapterLocale={enLocale}
                                                     >
                                                         <DateTimePicker
-                                                            renderInput={(props) => (
+                                                            label="To*"
+                                                            renderInput={(params) => (
                                                                 <TextField
-                                                                    {...props}
+                                                                    {...params}
                                                                     error={error}
                                                                     InputLabelProps={{
                                                                         shrink: true,
@@ -213,9 +217,6 @@ const Details = ({
                                                                     helperText={
                                                                         error ? error.message : null
                                                                     }
-                                                                    label="To*"
-                                                                    type="datetime-local"
-                                                                    placeholder=""
                                                                     variant="standard"
                                                                 />
                                                             )}
@@ -237,8 +238,7 @@ const Details = ({
                         </Box>
 
                         {editing ? (
-                            <Box display="flex" alignItems="center">
-                                <PosterIcon sx={{ mr: 1 }} />
+                            <Box display="flex">
                                 <FormControl component="fieldset">
                                     <FormGroup>
                                         <Controller
@@ -249,6 +249,10 @@ const Details = ({
                                             render={({ field }) => (
                                                 <>
                                                     <Button variant="outlined" component="label">
+                                                        <PosterIcon
+                                                            fontSize="small"
+                                                            sx={{ mr: 1 }}
+                                                        />
                                                         Update Poster
                                                         <input
                                                             name="poster"
@@ -317,8 +321,10 @@ const Details = ({
                                         error={error}
                                         InputLabelProps={{ shrink: true }}
                                         helperText={error ? error.message : null}
-                                        inputProps={{ style: { fontSize: 35 } }}
-                                        sx={{ width: "50%" }}
+                                        inputProps={{
+                                            style: { fontSize: isTabletOrMobile ? 25 : 35 },
+                                        }}
+                                        sx={{ width: isTabletOrMobile ? "100%" : "50%" }}
                                     />
                                 )}
                                 rules={{
