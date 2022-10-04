@@ -17,6 +17,7 @@ import {
     FormGroup,
     FormControlLabel,
     Checkbox,
+    InputLabel,
 } from "@mui/material";
 import {
     EventOutlined as DatetimeIcon,
@@ -321,14 +322,16 @@ const Details = ({
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing ? (
+                        ) : (
                             <RichTextEditor
                                 editing={editing}
-                                editorState={[editorValue, setEditorValue]}
+                                editorState={[
+                                    eventData?.event?.description ||
+                                        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]',
+                                    setEditorValue,
+                                ]}
                                 style={{ height: "100%" }}
                             />
-                        ) : (
-                            eventData?.event?.description || ""
                         )}
                     </Typography>
                 </Grid>
