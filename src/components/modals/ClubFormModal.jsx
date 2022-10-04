@@ -18,15 +18,12 @@ import {
     Button,
     Fade,
     Modal,
-    FormControl,
     InputLabel,
 } from "@mui/material";
 
 import ResponseToast from "components/ResponseToast";
 import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 import RichTextEditor from "components/RichTextEditor";
-// import { FormHelperText } from '@mui/material';
-import {FormControlLabel} from "@mui/material";
 
 const MODAL_HEIGHT = "60vh";
 const MODAL_WIDTH = "50vw";
@@ -255,10 +252,13 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             )}
                                         />
                                     </Box>
-                                    
+
                                     <Box>
-                                        <InputLabel htmlFor="my-input" shrink="true" >Description</InputLabel>
-                                        <RichTextEditor editing={true} editorState={[editorValue, setEditorValue]} />
+                                        <InputLabel htmlFor="my-input" shrink={true} >Description</InputLabel>
+                                        <RichTextEditor
+                                            editing={true}
+                                            editorState={[(club?.description || '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'), setEditorValue]}
+                                        />
                                     </Box>
                                 </Box>
                             </Box>
