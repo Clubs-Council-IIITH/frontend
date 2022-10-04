@@ -322,12 +322,16 @@ const Details = ({
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing ? (
-                            <RichTextEditor 
-                                editing={editing} 
-                                editorState={[(eventData?.event?.description || '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'), setEditorValue]} 
-                                style={{ height: "100%" }} 
-                             />
+                        ) : (
+                            <RichTextEditor
+                                editing={editing}
+                                editorState={[
+                                    eventData?.event?.description ||
+                                        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]',
+                                    setEditorValue,
+                                ]}
+                                style={{ height: "100%" }}
+                            />
                         )}
                     </Typography>
                 </Grid>
