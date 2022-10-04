@@ -176,45 +176,45 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
                         >
                             {h2 ? <LooksTwoIcon style={{ fill: "#000000" }} /> : <LooksTwoIcon />}
                         </IconButton>
-                        <IconButton
-                            onMouseDown={(event) => {
-                                event.preventDefault();
-                                CustomEditor.toggleQuoteBlock(editor);
-                                setQuote(CustomEditor.isQuoteActive(editor));
-                            }}
-                        >
-                            {quote ? (
-                                <FormatQuoteIcon style={{ fill: "#000000" }} />
-                            ) : (
-                                <FormatQuoteIcon />
-                            )}
-                        </IconButton>
-                        <IconButton
-                            onMouseDown={(event) => {
-                                event.preventDefault();
-                                CustomEditor.toggleNumBlock(editor);
-                                setNum(CustomEditor.isNumActive(editor));
-                            }}
-                        >
-                            {num ? (
-                                <FormatListNumberedIcon style={{ fill: "#000000" }} />
-                            ) : (
-                                <FormatListNumberedIcon />
-                            )}
-                        </IconButton>
-                        <IconButton
-                            onMouseDown={(event) => {
-                                event.preventDefault();
-                                CustomEditor.toggleBulBlock(editor);
-                                setBul(CustomEditor.isBulActive(editor));
-                            }}
-                        >
-                            {bul ? (
-                                <FormatListBulletedIcon style={{ fill: "#000000" }} />
-                            ) : (
-                                <FormatListBulletedIcon />
-                            )}
-                        </IconButton>
+                        {/* <IconButton */}
+                        {/*     onMouseDown={(event) => { */}
+                        {/*         event.preventDefault(); */}
+                        {/*         CustomEditor.toggleQuoteBlock(editor); */}
+                        {/*         setQuote(CustomEditor.isQuoteActive(editor)); */}
+                        {/*     }} */}
+                        {/* > */}
+                        {/*     {quote ? ( */}
+                        {/*         <FormatQuoteIcon style={{ fill: "#000000" }} /> */}
+                        {/*     ) : ( */}
+                        {/*         <FormatQuoteIcon /> */}
+                        {/*     )} */}
+                        {/* </IconButton> */}
+                        {/* <IconButton */}
+                        {/*     onMouseDown={(event) => { */}
+                        {/*         event.preventDefault(); */}
+                        {/*         CustomEditor.toggleNumBlock(editor); */}
+                        {/*         setNum(CustomEditor.isNumActive(editor)); */}
+                        {/*     }} */}
+                        {/* > */}
+                        {/*     {num ? ( */}
+                        {/*         <FormatListNumberedIcon style={{ fill: "#000000" }} /> */}
+                        {/*     ) : ( */}
+                        {/*         <FormatListNumberedIcon /> */}
+                        {/*     )} */}
+                        {/* </IconButton> */}
+                        {/* <IconButton */}
+                        {/*     onMouseDown={(event) => { */}
+                        {/*         event.preventDefault(); */}
+                        {/*         CustomEditor.toggleBulBlock(editor); */}
+                        {/*         setBul(CustomEditor.isBulActive(editor)); */}
+                        {/*     }} */}
+                        {/* > */}
+                        {/*     {bul ? ( */}
+                        {/*         <FormatListBulletedIcon style={{ fill: "#000000" }} /> */}
+                        {/*     ) : ( */}
+                        {/*         <FormatListBulletedIcon /> */}
+                        {/*     )} */}
+                        {/* </IconButton> */}
                         <IconButton
                             onMouseDown={(event) => {
                                 event.preventDefault();
