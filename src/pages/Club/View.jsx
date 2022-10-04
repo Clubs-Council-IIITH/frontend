@@ -90,9 +90,9 @@ const View = ({ manage }) => {
                         {club?.tagline}
                     </Typography>
                 </Box>
-                {web ? (
                     <Box>
                         {actions || null}
+                        {web ? (
                         <Button
                             variant="outlined"
                             component="label"
@@ -103,8 +103,8 @@ const View = ({ manage }) => {
                             <WebsiteIcon fontSize="small" sx={{ mr: 1 }} />
                             Visit Website
                         </Button>
-                    </Box>
-                ) : null}
+                     ) : null}
+                </Box>
             </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />
