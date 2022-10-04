@@ -405,10 +405,10 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                                         <Box display="flex" alignItems="center">
                                                             <TextField
                                                                 type="number"
-                                                                min="2000"
+                                                                min="1998"
                                                                 max="3000"
                                                                 label="Year*"
-                                                                placeholder="2022"
+                                                                placeholder={new Date().getFullYear()}
                                                                 variant="standard"
                                                                 value={value}
                                                                 onChange={onChange}
@@ -424,7 +424,7 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                                             </Box>
                                                         </Box>
                                                     )}
-                                                    rules={{ required: "Year can not be empty!" }}
+                                                    rules={{ required: "Year can not be empty!", max: "3000", min: "1998" }}
                                                 />
                                             </Box>
                                         </form>
