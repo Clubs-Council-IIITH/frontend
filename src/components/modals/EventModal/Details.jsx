@@ -46,6 +46,8 @@ const Details = ({
     editing,
     setEditing,
     setCurrentPoster,
+    editorValue,
+    setEditorValue,
 }) => {
     const { control, handleSubmit } = useForm();
     const { isTabletOrMobile } = useContext(NavigationContext);
@@ -69,23 +71,18 @@ const Details = ({
         awaitRefetchQueries: true,
     });
 
-    // track description input in state variable
-    const [editorValue, setEditorValue] = useState(eventData?.event?.description);
-
     // submit form
     const onSubmit = async (data) => {
         // remove rawPoster from the data and format audience
         const transformedData = {
             ...data,
             rawPoster: null,
-            description: editorValue,
+            description: JSON.stringify(editorValue),
             audience: Object.entries(data.audience)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
                 .join(","),
         };
-
-        console.log(transformedData);
 
         // update or create new instance of data
         let returnedEvent = await (activeEventId

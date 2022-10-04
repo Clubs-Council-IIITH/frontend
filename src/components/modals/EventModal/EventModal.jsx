@@ -74,11 +74,21 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [deleting, setDeleting] = useState(false);
     const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
+    const [editorValue, setEditorValue] = useState([
+        { type: "paragraph", children: [{ text: "No description provided." }] },
+    ]);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
         GET_EVENT_BY_ID,
-        { variables: { id: activeEventId } }
+        {
+            variables: { id: activeEventId },
+            onCompleted: (data) => {
+                if (data?.event?.description) {
+                    setEditorValue(JSON.parse(data?.event?.description));
+                }
+            },
+        }
     );
 
     // delete event
@@ -146,6 +156,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setDeleting,
         currentPoster,
         setCurrentPoster,
+        editorValue,
+        setEditorValue,
     };
 
     // action handlers
