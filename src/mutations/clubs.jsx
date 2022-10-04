@@ -10,6 +10,12 @@ export const ADMIN_CREATE_CLUB = gql`
         $state: String
         $tagline: String
         $description: String
+        $instagram: String
+        $facebook: String
+        $youtube: String
+        $twitter: String
+        $linkedin: String
+        $discord: String
     ) {
         adminCreateClub(
             clubData: {
@@ -21,6 +27,12 @@ export const ADMIN_CREATE_CLUB = gql`
                 state: $state
                 tagline: $tagline
                 description: $description
+                instagram: $instagram
+                facebook: $facebook
+                youtube: $youtube
+                twitter: $twitter
+                linkedin: $linkedin
+                discord: $discord
             }
         ) {
             club {
@@ -33,6 +45,12 @@ export const ADMIN_CREATE_CLUB = gql`
                 state
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }
@@ -48,6 +66,12 @@ export const ADMIN_UPDATE_CLUB = gql`
         $category: String
         $tagline: String
         $description: String
+        $instagram: String
+        $facebook: String
+        $youtube: String
+        $twitter: String
+        $linkedin: String
+        $discord: String
     ) {
         adminUpdateClub(
             clubData: {
@@ -59,6 +83,12 @@ export const ADMIN_UPDATE_CLUB = gql`
                 category: $category
                 tagline: $tagline
                 description: $description
+                instagram: $instagram
+                facebook: $facebook
+                youtube: $youtube
+                twitter: $twitter
+                linkedin: $linkedin
+                discord: $discord
             }
         ) {
             club {
@@ -71,6 +101,12 @@ export const ADMIN_UPDATE_CLUB = gql`
                 state
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }
@@ -84,6 +120,12 @@ export const UPDATE_CLUB = gql`
         $website: String
         $tagline: String
         $description: String
+        $instagram: String
+        $facebook: String
+        $youtube: String
+        $twitter: String
+        $linkedin: String
+        $discord: String
     ) {
         updateClub(
             clubData: {
@@ -93,6 +135,12 @@ export const UPDATE_CLUB = gql`
                 website: $website
                 tagline: $tagline
                 description: $description
+                instagram: $instagram
+                facebook: $facebook
+                youtube: $youtube
+                twitter: $twitter
+                linkedin: $linkedin
+                discord: $discord
             }
         ) {
             club {
@@ -102,6 +150,12 @@ export const UPDATE_CLUB = gql`
                 website
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }
@@ -120,6 +174,12 @@ export const ADMIN_DELETE_CLUB = gql`
                 state
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }

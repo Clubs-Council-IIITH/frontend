@@ -22,7 +22,6 @@ import {
 } from "@mui/material";
 
 import ResponseToast from "components/ResponseToast";
-import { PrimaryActionButton, SecondaryActionButton } from "components/buttons";
 import RichTextEditor from "components/RichTextEditor";
 
 const MODAL_HEIGHT = "60vh";
@@ -206,30 +205,6 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                     </Box>
                                     <Box mb={2}>
                                         <Controller
-                                            name="website"
-                                            control={control}
-                                            shouldUnregister={true}
-                                            defaultValue={club?.website || ""}
-                                            render={({
-                                                field: { onChange, value },
-                                                fieldState: { error },
-                                            }) => (
-                                                <TextField
-                                                    fullWidth
-                                                    label="Website"
-                                                    placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                                                    variant="standard"
-                                                    value={value}
-                                                    onChange={onChange}
-                                                    error={!!error}
-                                                    InputLabelProps={{ shrink: true }}
-                                                    helperText={error ? error.message : null}
-                                                />
-                                            )}
-                                        />
-                                    </Box>
-                                    <Box mb={2}>
-                                        <Controller
                                             name="tagline"
                                             control={control}
                                             shouldUnregister={true}
@@ -242,6 +217,174 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                                     fullWidth
                                                     label="Tagline"
                                                     placeholder="This is the greatest club of all time"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="website"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.website || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="Website"
+                                                    placeholder="https://club.clubs.iiit.ac.in"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="instagram"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.instagram || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="Instagram"
+                                                    placeholder="https://instagram.com/username"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="facebook"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.facebook || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="Facebook"
+                                                    placeholder="https://facebook.com"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="youtube"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.youtube || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="Youtube"
+                                                    placeholder="https://youtube.com/username"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="twitter"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.twitter || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="Twitter"
+                                                    placeholder="https://twitter.com"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="linkedin"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.linkedin || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="LinkedIn"
+                                                    placeholder="https://linkedin.com/username"
+                                                    variant="standard"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    error={!!error}
+                                                    InputLabelProps={{ shrink: true }}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                        />
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Controller
+                                            name="discord"
+                                            control={control}
+                                            shouldUnregister={true}
+                                            defaultValue={club?.discord || ""}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    fullWidth
+                                                    label="Discord Server"
+                                                    placeholder="https://discord.com"
                                                     variant="standard"
                                                     value={value}
                                                     onChange={onChange}
