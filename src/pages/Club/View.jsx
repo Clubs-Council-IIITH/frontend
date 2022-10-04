@@ -50,7 +50,14 @@ const tabs = [
     },
 ];
 
-const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component = "button" }) => {
+const ActionButton = ({
+    title,
+    onClick,
+    icon: Icon,
+    color = "primary",
+    component = "button",
+    disabled = false,
+}) => {
     const { isTabletOrMobile } = useContext(NavigationContext);
 
     return isTabletOrMobile ? (
@@ -60,6 +67,7 @@ const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component
                 color={color}
                 onClick={onClick}
                 component={component}
+                disabled={disabled}
                 sx={{ ml: 1, mt: 1 }}
             >
                 <Icon fontSize="small" sx={{ mr: 1 }} />
@@ -74,6 +82,7 @@ const ActionButton = ({ title, onClick, icon: Icon, color = "primary", component
             color={color}
             onClick={onClick}
             component={component}
+            disabled={disabled}
             sx={{ ml: 1 }}
         >
             <Icon fontSize="small" sx={{ mr: 1 }} />

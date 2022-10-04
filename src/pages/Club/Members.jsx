@@ -112,12 +112,13 @@ const Members = ({ manage, setActions }) => {
         if (manage) {
             setActions([
                 {
-                    title: "Add Member",
+                    title: "Add Member (Coming Soon!)",
                     icon: HandshakeIcon,
-                    onClick: () => {
-                        setFormProps({});
-                        setFormModal(true);
-                    },
+                    disabled: true,
+                    // onClick: () => {
+                    //     setFormProps({});
+                    //     setFormModal(true);
+                    // },
                 },
             ]);
         }
