@@ -9,6 +9,7 @@ import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
 import { Box, Typography, Divider, Button } from "@mui/material";
+import { LanguageOutlined as WebsiteIcon } from "@mui/icons-material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -75,9 +76,8 @@ const View = ({ manage }) => {
     let web = club?.website;
 
     function websiteHandle() {
-        window.open(web, '_blank', 'noopener,noreferrer');
+        window.open(web, "_blank", "noopener,noreferrer");
     }
-
 
     return (
         <Page full loading={loading}>
@@ -90,23 +90,26 @@ const View = ({ manage }) => {
                         {club?.tagline}
                     </Typography>
                 </Box>
-                <Box>
-                    {actions || null}
-                    <Button
-                        variant="outlined"
-                        component="label"
-                        size="large" sx={{ mr: 1 }}
-                        onClick={(e) => websiteHandle(e)}
-                        disabled={web == ''}
-                    >
-                        Club Website
-                    </Button>
-                </Box>
-            </Box >
+                {web ? (
+                    <Box>
+                        {actions || null}
+                        <Button
+                            variant="outlined"
+                            component="label"
+                            size="large"
+                            sx={{ mr: 1 }}
+                            onClick={(e) => websiteHandle(e)}
+                        >
+                            <WebsiteIcon fontSize="small" sx={{ mr: 1 }} />
+                            Visit Website
+                        </Button>
+                    </Box>
+                ) : null}
+            </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />
             <TabPanels tabs={tabs} controller={tabController} tabProps={tabProps} routed />
-        </Page >
+        </Page>
     );
 };
 
