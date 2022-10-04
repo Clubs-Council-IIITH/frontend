@@ -125,8 +125,8 @@ const Details = ({
                         <Box display="flex" alignItems="center">
                             {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 2 }} /> : null}
 
-                            <Grid container>
-                                <Grid item xs={12} md={5.5} mb={isTabletOrMobile ? 2 : 0}>
+                            <Grid container alignItems="center">
+                                <Grid item>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
@@ -176,13 +176,13 @@ const Details = ({
                                     </Typography>
                                 </Grid>
 
-                                {!isTabletOrMobile ? (
+                                {!(isTabletOrMobile && editing) ? (
                                     <Grid item>
                                         <Box mx={1}>—</Box>
                                     </Grid>
                                 ) : null}
 
-                                <Grid item xs={12} md={5.5}>
+                                <Grid item mt={isTabletOrMobile && editing ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
