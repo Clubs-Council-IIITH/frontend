@@ -10,6 +10,12 @@ export default class ClubModel extends BaseModel {
     state = "";
     tagline = "";
     description = "";
+    instagram = "";
+    facebook = "";
+    youtube = "";
+    twitter = "";
+    linkedin = "";
+    discord = "";
 
     constructor(data) {
         super();
