@@ -75,7 +75,7 @@ const publicRoutes = [
 
 const bugFormRoutes = [
     {
-        title: "Bug Report Form",
+        title: "Report Bugs",
         path: "/bug",
         icon: BugReportOutlined,
     },
@@ -149,19 +149,19 @@ const App = () => {
             session?.group === UserGroups.cc
                 ? ccRoutes
                 : session?.group === UserGroups.slc
-                    ? slcRoutes
-                    : session?.group === UserGroups.slo
-                        ? sloRoutes
-                        : session?.group === UserGroups.gad
-                            ? gadRoutes
-                            : session?.group === UserGroups.club
-                                ? clubRoutes
-                                : [];
+                ? slcRoutes
+                : session?.group === UserGroups.slo
+                ? sloRoutes
+                : session?.group === UserGroups.gad
+                ? gadRoutes
+                : session?.group === UserGroups.club
+                ? clubRoutes
+                : [];
 
         setNavigation({
             publicRoutes,
-            bugFormRoutes,
             protectedRoutes,
+            bugFormRoutes,
         });
     }, [session]);
 
@@ -178,14 +178,6 @@ const App = () => {
                                 </Route>
                             ))}
 
-                            {bugFormRoutes.map((route, idx) => (
-                                <Route exact={route.exact} path={route.path} key={idx} component={() => {
-                                    window.location.href = 'https://forms.office.com/r/zBLuvbBPXZ';
-                                    return null;
-                                }}>
-                                </Route>
-                            ))}
-
                             {/* protected routes */}
                             {[
                                 ...ccRoutes,
@@ -197,6 +189,19 @@ const App = () => {
                                 <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
                                 </Route>
+                            ))}
+
+                            {bugFormRoutes.map((route, idx) => (
+                                <Route
+                                    exact={route.exact}
+                                    path={route.path}
+                                    key={idx}
+                                    component={() => {
+                                        window.location.href =
+                                            "https://forms.office.com/r/zBLuvbBPXZ";
+                                        return null;
+                                    }}
+                                ></Route>
                             ))}
 
                             {/* error routes */}
