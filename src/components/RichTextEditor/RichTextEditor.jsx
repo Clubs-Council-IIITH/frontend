@@ -22,6 +22,8 @@ import {
     FormatAlignCenter as AlignCenterIcon,
 } from "@mui/icons-material";
 
+import { Divider } from "@mui/material";
+
 const HOTKEYS = {
     "mod+b": "bold",
     "mod+i": "italic",
@@ -49,21 +51,24 @@ const RichTextEditor = ({ editing = false, editorState: [value, setValue] }) => 
             }}
         >
             {editing ? (
-                <Toolbar>
-                    <MarkButton format="bold" icon={BoldIcon} />
-                    <MarkButton format="italic" icon={ItalicIcon} />
-                    <MarkButton format="underline" icon={UnderlinedIcon} />
-                    <MarkButton format="code" icon={CodeIcon} />
-                    <BlockButton format="heading-one" icon={H1Icon} />
-                    <BlockButton format="heading-two" icon={H2Icon} />
-                    {/* <BlockButton format="block-quote" icon={QuoteIcon} /> */}
-                    <BlockButton format="numbered-list" icon={NumberedListIcon} />
-                    <BlockButton format="bulleted-list" icon={BulletedListIcon} />
-                    {/* <BlockButton format="left" icon={AlignLeftIcon} /> */}
-                    {/* <BlockButton format="center" icon={AlignCenterIcon} /> */}
-                    {/* <BlockButton format="right" icon={AlignRightIcon} /> */}
-                    {/* <BlockButton format="justify" icon={AlignJustifyIcon} /> */}
-                </Toolbar>
+                <>
+                    <Toolbar>
+                        <MarkButton format="bold" icon={BoldIcon} />
+                        <MarkButton format="italic" icon={ItalicIcon} />
+                        <MarkButton format="underline" icon={UnderlinedIcon} />
+                        <MarkButton format="code" icon={CodeIcon} />
+                        <BlockButton format="heading-one" icon={H1Icon} />
+                        <BlockButton format="heading-two" icon={H2Icon} />
+                        {/* <BlockButton format="block-quote" icon={QuoteIcon} /> */}
+                        <BlockButton format="numbered-list" icon={NumberedListIcon} />
+                        <BlockButton format="bulleted-list" icon={BulletedListIcon} />
+                        {/* <BlockButton format="left" icon={AlignLeftIcon} /> */}
+                        {/* <BlockButton format="center" icon={AlignCenterIcon} /> */}
+                        {/* <BlockButton format="right" icon={AlignRightIcon} /> */}
+                        {/* <BlockButton format="justify" icon={AlignJustifyIcon} /> */}
+                    </Toolbar>
+                    <Divider />
+                </>
             ) : null}
 
             <Editable
