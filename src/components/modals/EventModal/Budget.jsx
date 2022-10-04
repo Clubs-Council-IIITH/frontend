@@ -157,9 +157,9 @@ const BudgetField = ({ activeEventId }) => {
                 e.key === "Enter" && (await handleSubmit(onSubmit)());
             }}
         >
-            <Box display="flex" alignItems="center">
+            <Box display="flex" alignItems="flex-end">
                 <Grid container px={1} spacing={2}>
-                    <Grid item xs={3}>
+                    <Grid item xs={12}>
                         <Controller
                             name="amount"
                             control={control}
@@ -183,7 +183,7 @@ const BudgetField = ({ activeEventId }) => {
                             rules={{ required: "Amount can not be empty!" }}
                         />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={12}>
                         <Controller
                             name="description"
                             control={control}
@@ -192,6 +192,8 @@ const BudgetField = ({ activeEventId }) => {
                             render={({ field: { onChange, value }, fieldState: { error } }) => (
                                 <TextField
                                     fullWidth
+                                    multiline
+                                    rows={2}
                                     label="Description*"
                                     placeholder="What is this money for?"
                                     variant="standard"
@@ -205,46 +207,44 @@ const BudgetField = ({ activeEventId }) => {
                             rules={{ required: "Description can not be empty!" }}
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12}>
                         <Controller
                             name="reimbursable"
                             control={control}
                             shouldUnregister={true}
                             defaultValue={false}
                             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                                <Box display="flex" justifyContent="center" width="100%">
-                                    <FormControl>
-                                        <FormLabel component="legend" sx={{ fontSize: 12 }}>
-                                            Type
-                                        </FormLabel>
-                                        <RadioGroup
-                                            row
-                                            name="reimbursable"
-                                            value={value}
-                                            onChange={onChange}
-                                        >
-                                            <FormControlLabel
-                                                value={false}
-                                                control={<Radio />}
-                                                label="Advance"
-                                            />
-                                            <FormControlLabel
-                                                value={true}
-                                                control={<Radio />}
-                                                label="Reimbursement"
-                                            />
-                                        </RadioGroup>
-                                    </FormControl>
-                                </Box>
+                                <FormControl>
+                                    <FormLabel component="legend" sx={{ fontSize: 12 }}>
+                                        Type
+                                    </FormLabel>
+                                    <RadioGroup
+                                        row
+                                        name="reimbursable"
+                                        value={value}
+                                        onChange={onChange}
+                                    >
+                                        <FormControlLabel
+                                            value={false}
+                                            control={<Radio />}
+                                            label="Advance"
+                                        />
+                                        <FormControlLabel
+                                            value={true}
+                                            control={<Radio />}
+                                            label="Reimbursement"
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
                             )}
                         />
                     </Grid>
                 </Grid>
-                <Box display="flex" alignItems="center" mx={1}>
+                <Box height="100%" display="flex" mx={1}>
                     <IconButton type="button" color="success" onClick={handleSubmit(onSubmit)}>
                         <AddIcon />
                     </IconButton>
-                    <IconButton type="button" onClick={clearForm}>
+                    <IconButton type="button" onClick={clearForm} sx={{ ml: 1 }}>
                         <ClearIcon />
                     </IconButton>
                 </Box>
@@ -282,14 +282,16 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
                         <Typography m={1} variant="h6">
                             Add a requirement
                         </Typography>
-                        <BudgetField activeEventId={activeEventId} />
+                        <Card variant="outlined" sx={{ px: 1, pt: 2, pb: 1 }}>
+                            <BudgetField activeEventId={activeEventId} />
+                        </Card>
                     </Grid>
                 ) : null}
                 <Grid item xs={12}>
                     <Typography m={1} variant="h6">
                         Current budget breakdown
                     </Typography>
-                    <TableContainer component={Paper} variant="outlined" sx={{ mx: 1, my: 2 }}>
+                    <TableContainer component={Paper} variant="outlined">
                         {budgetData?.adminEventBudget?.length === 0 ? (
                             <Empty />
                         ) : (

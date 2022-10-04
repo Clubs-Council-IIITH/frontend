@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useTheme } from "@mui/styles";
 import {
     Grid,
@@ -31,6 +31,7 @@ import {
 } from "queries/events";
 
 import { TabBar, TabPanels } from "components/Tabs";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import Details from "./Details";
 import Budget from "./Budget";
@@ -43,13 +44,14 @@ import ResponseToast from "components/ResponseToast";
 const EVENT_POSTER_PLACEHOLDER =
     "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
 
-const MODAL_HEIGHT = "60vh";
-const MODAL_WIDTH = "80vw";
-const POSTER_MAXHEIGHT = "75vh";
-const POSTER_MAXWIDTH = "75vw";
-
 const EventModal = ({ manage, eventId = null, actions = [], controller: [open, setOpen] }) => {
     const theme = useTheme();
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
+    const MODAL_HEIGHT = isTabletOrMobile ? "50vh" : "60vh";
+    const MODAL_WIDTH = isTabletOrMobile ? "95vw" : "80vw";
+    const POSTER_MAXHEIGHT = "75vh";
+    const POSTER_MAXWIDTH = "75vw";
 
     // tab list and controller
     const tabs = [
@@ -66,17 +68,28 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     // response toast
     const [toast, setToast] = useState({ open: false });
 
+    // default description editor text
+    const defaultDescription = [{ type: "paragraph", children: [{ text: "" }] }];
+
     // modal states
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
     const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
+    const [editorValue, setEditorValue] = useState(defaultDescription);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
         GET_EVENT_BY_ID,
-        { variables: { id: activeEventId } }
+        {
+            variables: { id: activeEventId },
+            onCompleted: (data) => {
+                if (data?.event?.description) {
+                    setEditorValue(JSON.parse(data?.event?.description));
+                }
+            },
+        }
     );
 
     // delete event
@@ -121,10 +134,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             setActiveEventId(eventId);
             setEditing(!eventId);
             setDeleting(false);
-            setCurrentPoster(eventData?.event?.poster | "");
+            setCurrentPoster(eventData?.event?.poster || "");
             setExpandPoster(false);
+            setEditorValue(defaultDescription);
         }
-    }, [eventId, open]);
+    }, [eventData, eventId, open]);
 
     // fetch new event details whenever active event id changes
     useEffect(() => {
@@ -144,6 +158,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setDeleting,
         currentPoster,
         setCurrentPoster,
+        editorValue,
+        setEditorValue,
     };
 
     // action handlers
@@ -256,9 +272,13 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 BackdropProps={{ timeout: 500 }}
                 sx={{
                     display: "flex",
+                    flexDirection: "column",
+                    justifyContent: isTabletOrMobile ? "flex-start" : "center",
                     alignItems: "center",
-                    justifyContent: "center",
                     outline: "none",
+                    overflowY: isTabletOrMobile ? "auto" : "none",
+                    my: 2,
+                    py: 6,
                 }}
             >
                 <Fade in={open}>
@@ -320,7 +340,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     xs={
                                         manage &&
                                         activeEventId &&
-                                        eventData?.event?.state !== EventStates.deleted
+                                        eventData?.event?.state !== EventStates.deleted &&
+                                        !isTabletOrMobile
                                             ? 8
                                             : 12
                                     }
@@ -332,7 +353,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         >
                                             <CardMedia
                                                 component="img"
-                                                height={140}
+                                                height={isTabletOrMobile ? 180 : 140}
                                                 image={
                                                     eventLoading
                                                         ? EVENT_POSTER_PLACEHOLDER
@@ -407,6 +428,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                         </>
                                     </Card>
                                 </Grid>
+
                                 {manage &&
                                 activeEventId &&
                                 eventData?.event?.state !== EventStates.deleted ? (

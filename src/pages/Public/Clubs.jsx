@@ -41,14 +41,14 @@ const Clubs = () => {
                                 <Grid container spacing={2} mb={4}>
                                     {clubsLoading
                                         ? [...Array(6).keys()].map((idx) => (
-                                              <Grid item md={4} lg={3} key={idx}>
+                                              <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                                   <ClubCard skeleton />
                                               </Grid>
                                           ))
                                         : clubsData?.clubs
                                               ?.filter((o) => o.category.toLowerCase() === category)
                                               ?.map((club, idx) => (
-                                                  <Grid item md={4} lg={3} key={idx}>
+                                                  <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                                       <ClubCard {...club} />
                                                   </Grid>
                                               ))}

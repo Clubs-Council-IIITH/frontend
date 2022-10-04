@@ -54,7 +54,7 @@ const YearMembers = ({ year, members, cardProps }) => {
             <Collapse in={expandMembers}>
                 <Grid container spacing={2}>
                     {members?.map((member, idx) => (
-                        <Grid item md={3} key={idx}>
+                        <Grid item xs={6} md={3} key={idx}>
                             <MemberCard {...member} {...cardProps} />
                         </Grid>
                     ))}
@@ -109,25 +109,19 @@ const Members = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(
-            manage ? (
-                <SecondaryActionButton
-                    noPadding
-                    size="large"
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => {
-                        setFormProps({});
-                        setFormModal(true);
-                    }}
-                >
-                    <Box display="flex" mr={1}>
-                        <HandshakeIcon fontSize="small" />
-                    </Box>
-                    Add Member
-                </SecondaryActionButton>
-            ) : null
-        );
+        if (manage) {
+            setActions([
+                {
+                    title: "Add Member (Coming Soon!)",
+                    icon: HandshakeIcon,
+                    disabled: true,
+                    // onClick: () => {
+                    //     setFormProps({});
+                    //     setFormModal(true);
+                    // },
+                },
+            ]);
+        }
     }, [manage]);
 
     const cardProps = {

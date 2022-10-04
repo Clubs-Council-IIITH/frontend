@@ -12,9 +12,9 @@ const TeamCard = ({ name, img, role, email }) => {
 
     return (
         <Card variant="none">
-            <Box p={3} display="flex" flexDirection="column" alignItems="center">
-                <Avatar src={img} sx={{ height: 190, width: 190 }} />
-                <Typography variant="h6" sx={{ mt: 3, width: "100%", textAlign: "center" }}>
+            <Box p={2} display="flex" flexDirection="column" alignItems="center">
+                <Avatar src={img} sx={{ height: 150, width: 150 }} />
+                <Typography variant="h6" sx={{ mt: 2, width: "100%", textAlign: "center" }}>
                     {`${name.first} ${name.last}`}
                 </Typography>
                 <Typography variant="body1" color={theme.palette.secondary.dark}>
@@ -57,9 +57,9 @@ const About = () => {
             <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom mt={4}>
                 THE TEAM
             </Typography>
-            <Grid container spacing={0}>
+            <Grid container spacing={1}>
                 {TeamJSON.map((member, key) => (
-                    <Grid item xs={3} key={key}>
+                    <Grid item xs={6} sm={4} md={3} key={key}>
                         <TeamCard {...member} />
                     </Grid>
                 ))}

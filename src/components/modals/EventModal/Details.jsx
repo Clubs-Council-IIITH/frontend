@@ -1,3 +1,4 @@
+import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
@@ -29,6 +30,7 @@ import {
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import enLocale from "date-fns/locale/en-IN";
 import { useState } from "react";
@@ -44,8 +46,11 @@ const Details = ({
     editing,
     setEditing,
     setCurrentPoster,
+    editorValue,
+    setEditorValue,
 }) => {
     const { control, handleSubmit } = useForm();
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     const [createEvent] = useMutation(CREATE_EVENT, {
         refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
@@ -72,6 +77,7 @@ const Details = ({
         const transformedData = {
             ...data,
             rawPoster: null,
+            description: JSON.stringify(editorValue),
             audience: Object.entries(data.audience)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
@@ -105,12 +111,6 @@ const Details = ({
         },
     ];
 
-    const [editorValue, setEditorValue] = useState(
-        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
-    );
-
-    //datetime
-
     return (
         <form
             id="ActiveEventForm"
@@ -123,106 +123,119 @@ const Details = ({
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
-                            {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 1 }} /> : null}
+                            {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 2 }} /> : null}
 
-                            <Typography variant="subtitle1">
-                                {eventLoading ? (
-                                    <Skeleton animation="wave" width={100} />
-                                ) : editing ? (
-                                    <Controller
-                                        name="datetimeStart"
-                                        control={control}
-                                        shouldUnregister={true}
-                                        defaultValue={ISOtoHTML(eventData?.event?.datetimeStart)}
-                                        render={({
-                                            field: { onChange, value },
-                                            fieldState: { error },
-                                        }) => (
-                                            <LocalizationProvider
-                                                dateAdapter={AdapterDateFns}
-                                                adapterLocale={enLocale}
-                                            >
-                                                <DateTimePicker
-                                                    renderInput={(props) => (
-                                                        <TextField
-                                                            {...props}
-                                                            error={error}
-                                                            InputLabelProps={{ shrink: true }}
-                                                            helperText={
-                                                                error ? error.message : null
-                                                            }
+                            <Grid container alignItems="center">
+                                <Grid item>
+                                    <Typography variant="subtitle1">
+                                        {eventLoading ? (
+                                            <Skeleton animation="wave" width={100} />
+                                        ) : editing ? (
+                                            <Controller
+                                                name="datetimeStart"
+                                                control={control}
+                                                shouldUnregister={true}
+                                                defaultValue={ISOtoHTML(
+                                                    eventData?.event?.datetimeStart
+                                                )}
+                                                render={({
+                                                    field: { onChange, value },
+                                                    fieldState: { error },
+                                                }) => (
+                                                    <LocalizationProvider
+                                                        dateAdapter={AdapterDateFns}
+                                                        adapterLocale={enLocale}
+                                                    >
+                                                        <DateTimePicker
                                                             label="From*"
-                                                            type="datetime-local"
-                                                            placeholder=""
-                                                            variant="standard"
+                                                            renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    error={error}
+                                                                    InputLabelProps={{
+                                                                        shrink: true,
+                                                                    }}
+                                                                    helperText={
+                                                                        error ? error.message : null
+                                                                    }
+                                                                    variant="standard"
+                                                                />
+                                                            )}
+                                                            value={value}
+                                                            onChange={onChange}
                                                         />
-                                                    )}
-                                                    value={value}
-                                                    onChange={onChange}
-                                                />
-                                            </LocalizationProvider>
+                                                    </LocalizationProvider>
+                                                )}
+                                                rules={{
+                                                    required: "Event start time can not be empty!",
+                                                }}
+                                            />
+                                        ) : (
+                                            ISOtoDT(eventData?.event?.datetimeStart).datetime
                                         )}
-                                        rules={{
-                                            required: "Event start time can not be empty!",
-                                        }}
-                                    />
-                                ) : (
-                                    ISOtoDT(eventData?.event?.datetimeStart).datetime
-                                )}
-                            </Typography>
+                                    </Typography>
+                                </Grid>
 
-                            <Box mx={1}>—</Box>
+                                {!(isTabletOrMobile && editing) ? (
+                                    <Grid item>
+                                        <Box mx={1}>—</Box>
+                                    </Grid>
+                                ) : null}
 
-                            <Typography variant="subtitle1">
-                                {eventLoading ? (
-                                    <Skeleton animation="wave" width={100} />
-                                ) : editing ? (
-                                    <Controller
-                                        name="datetimeEnd"
-                                        control={control}
-                                        shouldUnregister={true}
-                                        defaultValue={ISOtoHTML(eventData?.event?.datetimeEnd)}
-                                        render={({
-                                            field: { onChange, value },
-                                            fieldState: { error },
-                                        }) => (
-                                            <LocalizationProvider
-                                                dateAdapter={AdapterDateFns}
-                                                adapterLocale={enLocale}
-                                            >
-                                                <DateTimePicker
-                                                    renderInput={(props) => (
-                                                        <TextField
-                                                            {...props}
-                                                            error={error}
-                                                            InputLabelProps={{ shrink: true }}
-                                                            helperText={
-                                                                error ? error.message : null
-                                                            }
+                                <Grid item mt={isTabletOrMobile && editing ? 2 : 0}>
+                                    <Typography variant="subtitle1">
+                                        {eventLoading ? (
+                                            <Skeleton animation="wave" width={100} />
+                                        ) : editing ? (
+                                            <Controller
+                                                name="datetimeEnd"
+                                                control={control}
+                                                shouldUnregister={true}
+                                                defaultValue={ISOtoHTML(
+                                                    eventData?.event?.datetimeEnd
+                                                )}
+                                                render={({
+                                                    field: { onChange, value },
+                                                    fieldState: { error },
+                                                }) => (
+                                                    <LocalizationProvider
+                                                        dateAdapter={AdapterDateFns}
+                                                        adapterLocale={enLocale}
+                                                    >
+                                                        <DateTimePicker
                                                             label="To*"
-                                                            type="datetime-local"
-                                                            placeholder=""
-                                                            variant="standard"
+                                                            renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    error={error}
+                                                                    InputLabelProps={{
+                                                                        shrink: true,
+                                                                    }}
+                                                                    helperText={
+                                                                        error ? error.message : null
+                                                                    }
+                                                                    variant="standard"
+                                                                />
+                                                            )}
+                                                            value={value}
+                                                            onChange={onChange}
                                                         />
-                                                    )}
-                                                    value={value}
-                                                    onChange={onChange}
-                                                />
-                                            </LocalizationProvider>
+                                                    </LocalizationProvider>
+                                                )}
+                                                rules={{
+                                                    required: "Event end time can not be empty!",
+                                                }}
+                                            />
+                                        ) : (
+                                            ISOtoDT(eventData?.event?.datetimeEnd).datetime
                                         )}
-                                        rules={{
-                                            required: "Event end time can not be empty!",
-                                        }}
-                                    />
-                                ) : (
-                                    ISOtoDT(eventData?.event?.datetimeEnd).datetime
-                                )}
-                            </Typography>
+                                    </Typography>
+                                </Grid>
+                            </Grid>
                         </Box>
 
                         {editing ? (
-                            <Box display="flex" alignItems="center">
-                                <PosterIcon sx={{ mr: 1 }} />
+                            <Box display="flex">
                                 <FormControl component="fieldset">
                                     <FormGroup>
                                         <Controller
@@ -233,6 +246,10 @@ const Details = ({
                                             render={({ field }) => (
                                                 <>
                                                     <Button variant="outlined" component="label">
+                                                        <PosterIcon
+                                                            fontSize="small"
+                                                            sx={{ mr: 1 }}
+                                                        />
                                                         Update Poster
                                                         <input
                                                             name="poster"
@@ -258,7 +275,7 @@ const Details = ({
                                                         <Button
                                                             variant="text"
                                                             component="label"
-                                                            onClick={(e) => {
+                                                            onClick={(_) => {
                                                                 field.onChange({
                                                                     img: null,
                                                                     deletePrev: true,
@@ -301,8 +318,10 @@ const Details = ({
                                         error={error}
                                         InputLabelProps={{ shrink: true }}
                                         helperText={error ? error.message : null}
-                                        inputProps={{ style: { fontSize: 35 } }}
-                                        sx={{ width: "50%" }}
+                                        inputProps={{
+                                            style: { fontSize: isTabletOrMobile ? 25 : 35 },
+                                        }}
+                                        sx={{ width: isTabletOrMobile ? "100%" : "50%" }}
                                     />
                                 )}
                                 rules={{
@@ -316,21 +335,18 @@ const Details = ({
                 </Grid>
 
                 <Grid item xs={12}>
-                    <FormLabel component="legend" sx={{ fontSize: 12, mb: 1 }}>
-                        Description
-                    </FormLabel>
+                    {editing ? (
+                        <FormLabel component="legend" sx={{ fontSize: 12, mb: 1 }}>
+                            Description
+                        </FormLabel>
+                    ) : null}
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
                         ) : (
                             <RichTextEditor
                                 editing={editing}
-                                editorState={[
-                                    eventData?.event?.description ||
-                                        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]',
-                                    setEditorValue,
-                                ]}
-                                style={{ height: "100%" }}
+                                editorState={[editorValue, setEditorValue]}
                             />
                         )}
                     </Typography>
@@ -343,8 +359,8 @@ const Details = ({
                         </FormLabel>
                     ) : null}
 
-                    <Box display="flex" alignItems="center">
-                        <AudienceIcon sx={{ mr: 1 }} />
+                    <Box display="flex" alignItems="flex-start">
+                        <AudienceIcon sx={{ my: 0.5, mr: 2 }} />
                         {eventLoading ? (
                             <Skeleton animation="wave" width={200} />
                         ) : editing ? (
@@ -389,11 +405,15 @@ const Details = ({
                                 </FormGroup>
                             </FormControl>
                         ) : eventData?.event?.audience !== "none" ? (
-                            AudienceFormatter(eventData?.event?.audience)
-                                .split(",")
-                                .map((audience, key) => (
-                                    <Chip key={key} label={audience} sx={{ mx: 0.5 }} />
-                                ))
+                            <Grid container spacing={1}>
+                                {AudienceFormatter(eventData?.event?.audience)
+                                    .split(",")
+                                    .map((audience, key) => (
+                                        <Grid item>
+                                            <Chip key={key} label={audience} />
+                                        </Grid>
+                                    ))}
+                            </Grid>
                         ) : (
                             <Box mx={1}>—</Box>
                         )}

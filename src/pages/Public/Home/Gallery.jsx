@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { useTheme } from "@mui/styles";
+
+import { NavigationContext } from "contexts/NavigationContext";
 
 import { Box, ImageList, ImageListItem } from "@mui/material";
 
@@ -179,10 +182,11 @@ const itemData = [
 
 const Gallery = () => {
     const theme = useTheme();
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     return (
-        <Box p={5} pt={1} backgroundColor={theme.palette.primary.main}>
-            <ImageList variant="masonry" cols={3} gap={12}>
+        <Box p={3} pt={1} backgroundColor={theme.palette.primary.main}>
+            <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
                 {itemData.map((item) => (
                     <ImageListItem key={item.img}>
                         <img

@@ -13,7 +13,6 @@ import {
 import { useTheme } from "@mui/styles";
 
 import { Tabs, Tab, Box } from "@mui/material";
-import { parseValue } from "graphql";
 
 /*
  * `tabs`: [
@@ -61,6 +60,7 @@ export const TabBar = ({ tabs, controller: [value, setValue], tabProps, routed }
             onChange={(_, n) => setValue(n)}
             indicatorColor="primary"
             scrollButtons="auto"
+            variant="scrollable"
         >
             {tabs.map((tab, key) => (
                 <Tab

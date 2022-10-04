@@ -1,20 +1,20 @@
-import { useState, useEffect, useContext } from "react";
-import { useParams, Redirect, Route, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { GET_CLUB_BY_ID } from "queries/clubs";
-import ClubModel from "models/ClubModel";
 
 import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
-import { Box, Typography, Divider, Button } from "@mui/material";
+import { Fab, Button, Box, Typography, Divider, Zoom } from "@mui/material";
 import { LanguageOutlined as WebsiteIcon } from "@mui/icons-material";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
 
 import { SessionContext } from "contexts/SessionContext";
+import { NavigationContext } from "contexts/NavigationContext";
 
 import About from "./About";
 import Events from "./Events";
@@ -50,9 +50,52 @@ const tabs = [
     },
 ];
 
+const ActionButton = ({
+    title,
+    onClick,
+    icon: Icon,
+    color = "primary",
+    component = "button",
+    disabled = false,
+}) => {
+    const { isTabletOrMobile } = useContext(NavigationContext);
+
+    return isTabletOrMobile ? (
+        <Zoom key={title} in={true}>
+            <Fab
+                variant="extended"
+                color={color}
+                onClick={onClick}
+                component={component}
+                disabled={disabled}
+                sx={{ ml: 1, mt: 1 }}
+            >
+                <Icon fontSize="small" sx={{ mr: 1 }} />
+                {title}
+            </Fab>
+        </Zoom>
+    ) : (
+        <Button
+            disableElevation
+            variant="contained"
+            size="large"
+            color={color}
+            onClick={onClick}
+            component={component}
+            disabled={disabled}
+            sx={{ ml: 1 }}
+        >
+            <Icon fontSize="small" sx={{ mr: 1 }} />
+            {title}
+        </Button>
+    );
+};
+
 const View = ({ manage }) => {
     const classes = useStyles();
     const theme = useTheme();
+
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     const { clubId } = useParams();
     const { session } = useContext(SessionContext);
@@ -60,11 +103,11 @@ const View = ({ manage }) => {
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
 
     // fetch club
-    const { data, loading } = useQuery(GET_CLUB_BY_ID, { variables: { id: targetId } });
-    const [club, setClub] = useState([]);
-    useEffect(() => setClub(new ClubModel(data?.club)), [data]);
+    const { data: clubData, loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
+        variables: { id: targetId },
+    });
 
-    const [actions, setActions] = useState(null);
+    const [actions, setActions] = useState([]);
 
     const tabController = useState(0);
 
@@ -73,37 +116,53 @@ const View = ({ manage }) => {
         setActions,
     };
 
-    let web = club?.website;
+    const web = clubData?.club?.website;
 
     function websiteHandle() {
         window.open(web, "_blank", "noopener,noreferrer");
     }
 
     return (
-        <Page full loading={loading}>
-            <img src={club?.img} alt={club?.name} className={classes.cover} />
+        <Page full loading={clubLoading}>
+            <img src={clubData?.club?.img} alt={clubData?.club?.name} className={classes.cover} />
 
-            <Box px={3} pt={4} pb={2} display="flex" justifyContent="space-between">
+            <Box p={3} pb={2} display="flex" justifyContent="space-between">
                 <Box>
-                    <Typography variant="h3">{club?.name}</Typography>
-                    <Typography variant="h6" color={theme.palette.secondary.dark} mt={1}>
-                        {club?.tagline}
+                    <Typography variant={isTabletOrMobile ? "h4" : "h3"}>
+                        {clubData?.club?.name}
+                    </Typography>
+                    <Typography
+                        variant={isTabletOrMobile ? "body1" : "h6"}
+                        color={theme.palette.secondary.dark}
+                        mt={1}
+                    >
+                        {clubData?.club?.tagline}
                     </Typography>
                 </Box>
+                <Box
+                    position={isTabletOrMobile ? "fixed" : "static"}
+                    display={isTabletOrMobile ? "flex" : "block"}
+                    flexDirection="column"
+                    bottom={70}
+                    right={10}
+                    sx={{
+                        "& > :not(style)": { m: 1 },
+                        zIndex: 999,
+                    }}
+                >
                     <Box>
-                        {actions || null}
                         {web ? (
-                        <Button
-                            variant="outlined"
-                            component="label"
-                            size="large"
-                            sx={{ mr: 1 }}
-                            onClick={(e) => websiteHandle(e)}
-                        >
-                            <WebsiteIcon fontSize="small" sx={{ mr: 1 }} />
-                            Visit Website
-                        </Button>
-                     ) : null}
+                            <ActionButton
+                                title="Visit Website"
+                                color="success"
+                                icon={WebsiteIcon}
+                                onClick={(e) => websiteHandle(e)}
+                            />
+                        ) : null}
+                        {actions?.map((action) => (
+                            <ActionButton {...action} />
+                        ))}
+                    </Box>
                 </Box>
             </Box>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />

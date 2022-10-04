@@ -4,7 +4,7 @@ import { useTheme } from "@mui/styles";
 
 import { Box, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
-const NavigationItem = ({ title, path, icon: Icon }) => {
+const DesktopNavigationItem = ({ title, path, icon: Icon }) => {
     const theme = useTheme();
     const history = useHistory();
     const location = useLocation();
@@ -80,4 +80,4 @@ const NavigationItem = ({ title, path, icon: Icon }) => {
     );
 };
 
-export default NavigationItem;
+export default DesktopNavigationItem;

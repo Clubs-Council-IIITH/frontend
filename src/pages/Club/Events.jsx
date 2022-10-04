@@ -83,29 +83,22 @@ const Events = ({ manage, setActions }) => {
 
     // set/clear action buttons if `manage` is set
     useEffect(() => {
-        setActions(
-            manage ? (
-                <SecondaryActionButton
-                    noPadding
-                    size="large"
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => {
+        if (manage) {
+            setActions([
+                {
+                    title: "New Event",
+                    icon: AddIcon,
+                    onClick: () => {
                         setViewProps({
                             manage: manage,
                             eventId: null,
                             actions: ["edit", "delete"],
                         });
                         setViewModal(true);
-                    }}
-                >
-                    <Box display="flex" mr={1}>
-                        <AddIcon fontSize="small" />
-                    </Box>
-                    New Event
-                </SecondaryActionButton>
-            ) : null
-        );
+                    },
+                },
+            ]);
+        }
     }, [manage]);
 
     const cardProps = {
@@ -129,7 +122,7 @@ const Events = ({ manage, setActions }) => {
                             <Grid container spacing={2} mb={2}>
                                 {eventsLoading
                                     ? [...Array(6).keys()].map((idx) => (
-                                          <Grid item md={4} lg={3} key={idx}>
+                                          <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                               <EventCard skeleton />
                                           </Grid>
                                       ))
@@ -140,7 +133,7 @@ const Events = ({ manage, setActions }) => {
                                                   e.state !== EventStates.deleted
                                           )
                                           ?.map((event, idx) => (
-                                              <Grid item md={4} lg={3} key={idx}>
+                                              <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
                                                   <EventCard actions {...event} {...cardProps} />
                                               </Grid>
                                           ))}

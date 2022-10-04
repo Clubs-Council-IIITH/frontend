@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_CLUB = gql`
-    mutation createClubMutation(
+export const ADMIN_CREATE_CLUB = gql`
+    mutation AdminCreateClubMutation(
         $img: Upload
         $name: String!
         $mail: String!
@@ -10,8 +10,14 @@ export const CREATE_CLUB = gql`
         $state: String
         $tagline: String
         $description: String
+        $instagram: String
+        $facebook: String
+        $youtube: String
+        $twitter: String
+        $linkedin: String
+        $discord: String
     ) {
-        createClub(
+        adminCreateClub(
             clubData: {
                 img: $img
                 name: $name
@@ -21,6 +27,12 @@ export const CREATE_CLUB = gql`
                 state: $state
                 tagline: $tagline
                 description: $description
+                instagram: $instagram
+                facebook: $facebook
+                youtube: $youtube
+                twitter: $twitter
+                linkedin: $linkedin
+                discord: $discord
             }
         ) {
             club {
@@ -33,13 +45,19 @@ export const CREATE_CLUB = gql`
                 state
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }
 `;
 
-export const UPDATE_CLUB = gql`
-    mutation updateClubMutation(
+export const ADMIN_UPDATE_CLUB = gql`
+    mutation adminUpdateClubMutation(
         $id: ID!
         $img: Upload
         $name: String!
@@ -48,8 +66,14 @@ export const UPDATE_CLUB = gql`
         $category: String
         $tagline: String
         $description: String
+        $instagram: String
+        $facebook: String
+        $youtube: String
+        $twitter: String
+        $linkedin: String
+        $discord: String
     ) {
-        updateClub(
+        adminUpdateClub(
             clubData: {
                 id: $id
                 img: $img
@@ -59,6 +83,12 @@ export const UPDATE_CLUB = gql`
                 category: $category
                 tagline: $tagline
                 description: $description
+                instagram: $instagram
+                facebook: $facebook
+                youtube: $youtube
+                twitter: $twitter
+                linkedin: $linkedin
+                discord: $discord
             }
         ) {
             club {
@@ -71,14 +101,69 @@ export const UPDATE_CLUB = gql`
                 state
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }
 `;
 
-export const DELETE_CLUB = gql`
-    mutation deleteClubMutation($id: ID!) {
-        deleteClub(clubData: { id: $id }) {
+export const UPDATE_CLUB = gql`
+    mutation updateClubMutation(
+        $id: ID!
+        $img: Upload
+        $name: String
+        $website: String
+        $tagline: String
+        $description: String
+        $instagram: String
+        $facebook: String
+        $youtube: String
+        $twitter: String
+        $linkedin: String
+        $discord: String
+    ) {
+        updateClub(
+            clubData: {
+                id: $id
+                img: $img
+                name: $name
+                website: $website
+                tagline: $tagline
+                description: $description
+                instagram: $instagram
+                facebook: $facebook
+                youtube: $youtube
+                twitter: $twitter
+                linkedin: $linkedin
+                discord: $discord
+            }
+        ) {
+            club {
+                id
+                img
+                name
+                website
+                tagline
+                description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
+            }
+        }
+    }
+`;
+
+export const ADMIN_DELETE_CLUB = gql`
+    mutation adminDeleteClubMutation($id: ID!) {
+        adminDeleteClub(clubData: { id: $id }) {
             club {
                 id
                 img
@@ -89,6 +174,12 @@ export const DELETE_CLUB = gql`
                 state
                 tagline
                 description
+                instagram
+                facebook
+                youtube
+                twitter
+                linkedin
+                discord
             }
         }
     }

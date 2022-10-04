@@ -12,6 +12,12 @@ export const GET_ALL_CLUBS = gql`
             category
             tagline
             description
+            instagram
+            facebook
+            youtube
+            twitter
+            linkedin
+            discord
         }
     }
 `;
@@ -26,6 +32,12 @@ export const GET_CLUB_BY_ID = gql`
             category
             tagline
             description
+            instagram
+            facebook
+            youtube
+            twitter
+            linkedin
+            discord
         }
     }
 `;
@@ -43,6 +55,12 @@ export const ADMIN_GET_ALL_CLUBS = gql`
             state
             tagline
             description
+            instagram
+            facebook
+            youtube
+            twitter
+            linkedin
+            discord
         }
     }
 `;

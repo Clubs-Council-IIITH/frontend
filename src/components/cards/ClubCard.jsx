@@ -14,15 +14,16 @@ const ClubCard = ({ id, img, name, tagline, skeleton = false }) => {
             className="elevate"
             sx={{
                 height: "100%",
+                width: "100%",
                 borderRadius: theme.borderRadius,
             }}
         >
             <CardActionArea
                 sx={{
+                    height: "100%",
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    height: "100%",
                 }}
                 onClick={() => history.push(`${match.url}/${id}`)}
             >
@@ -48,10 +49,10 @@ const ClubCard = ({ id, img, name, tagline, skeleton = false }) => {
                     }}
                 >
                     <Typography gutterBottom variant="h6" fontWeight={400}>
-                        {skeleton ? <Skeleton animation="wave" /> : name}
+                        {skeleton ? <Skeleton width="100%" animation="wave" /> : name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {skeleton ? <Skeleton animation="wave" /> : tagline}
+                        {skeleton ? <Skeleton width="100%" animation="wave" /> : tagline}
                     </Typography>
                 </CardContent>
             </CardActionArea>

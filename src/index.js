@@ -1,35 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import './index.css';
 
-// import { SWRConfig } from "swr";
+import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {createUploadLink} from 'apollo-upload-client';
+import NavigationContextProvider from 'contexts/NavigationContext';
+import SessionContextProvider from 'contexts/SessionContext';
+import React from 'react';
+import {createRoot} from 'react-dom/client';
 
-import NavigationContextProvider from "contexts/NavigationContext";
-import SessionContextProvider from "contexts/SessionContext";
-
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { createUploadLink } from "apollo-upload-client";
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link: createUploadLink({ uri: "/graphql" }),
+    link: createUploadLink({uri: '/graphql'}),
 });
 
-ReactDOM.render(
-    <React.StrictMode>
-        {/* <SWRConfig value={{ revalidateOnFocus: false }}> */}
-        <ApolloProvider client={client}>
-            <SessionContextProvider>
-                <NavigationContextProvider>
-                    <App />
-                </NavigationContextProvider>
-            </SessionContextProvider>
-        </ApolloProvider>
-        {/* </SWRConfig> */}
-    </React.StrictMode>,
-    document.getElementById("root")
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
+    <ApolloProvider client={client}>
+        <SessionContextProvider>
+            <NavigationContextProvider>
+                <App />
+            </NavigationContextProvider>
+        </SessionContextProvider>
+    </ApolloProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

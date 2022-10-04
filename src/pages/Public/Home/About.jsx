@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { useTheme } from "@mui/styles";
 
-import { Card, CardContent, Grid, Box, Typography } from "@mui/material";
+import { Card, Grid, Box, Typography } from "@mui/material";
+import { NavigationContext } from "contexts/NavigationContext";
 
 const Statistic = ({ number, title }) => {
     const theme = useTheme();
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     return (
         <Card
@@ -15,9 +18,11 @@ const Statistic = ({ number, title }) => {
                 borderColor: theme.palette.secondary.dark,
             }}
         >
-            <Box p={2}>
+            <Box p={isTabletOrMobile ? 1.5 : 2.0}>
                 <Typography variant="h4">{number}</Typography>
-                <Typography variant="subtitle1">{title}</Typography>
+                <Typography variant={isTabletOrMobile ? "subtitle2" : "subtitle1"}>
+                    {title}
+                </Typography>
             </Box>
         </Card>
     );
@@ -25,20 +30,28 @@ const Statistic = ({ number, title }) => {
 
 const About = () => {
     const theme = useTheme();
+    const { isTabletOrMobile } = useContext(NavigationContext);
 
     return (
-        <Box px={5} py={8} backgroundColor={theme.palette.primary.main}>
+        <Box px={3} py={6} backgroundColor={theme.palette.primary.main}>
             <Box>
                 <Typography variant="h4" color="secondary" fontWeight={500} gutterBottom>
                     Clubs @ IIITH
                 </Typography>
-                <Typography variant="h6" color="secondary" fontWeight={400} mt={1}>
+                <Typography
+                    variant={isTabletOrMobile ? "body1" : "h6"}
+                    color="secondary"
+                    fontWeight={400}
+                    mt={1}
+                >
                     The clubs of IIIT-H conduct various captivating events throughout the year.
-                    Students across all UG /PG  batches engage in the events, which tells how lively
-                    the campus life is! The  23 clubs at IIITH are divided into technical and
-                    cultural categories. Clubs on campus are run by students, for the students. Club
-                    activities help develop new hobbies and interests in students and thereby
-                    contributing to the all around development of the students.
+                    Students across all UG/PG batches engage in the events, which tells how lively
+                    the campus life is! The 23 clubs at IIITH are divided into technical and
+                    cultural categories.
+                    <Box my={2} />
+                    Clubs on campus are run by students, for the students. Club activities help
+                    develop new hobbies and interests in students and thereby contributing to the
+                    all around development of the students.
                 </Typography>
                 <Grid container spacing={2} mt={1}>
                     <Grid item>
@@ -50,11 +63,16 @@ const About = () => {
                 </Grid>
             </Box>
 
-            <Box mt={8}>
+            <Box mt={6}>
                 <Typography variant="h4" color="secondary" fontWeight={500} gutterBottom>
                     Clubs Council @ IIITH
                 </Typography>
-                <Typography variant="h6" color="secondary" fontWeight={400} mt={1}>
+                <Typography
+                    variant={isTabletOrMobile ? "body1" : "h6"}
+                    color="secondary"
+                    fontWeight={400}
+                    mt={1}
+                >
                     The Clubs Council is the largest Student Administrative Organization at IIIT
                     Hyderabad, and acts as an umbrella body of all the institute affiliated and
                     associate student-led Clubs, Groups & Societies.
