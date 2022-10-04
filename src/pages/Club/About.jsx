@@ -31,7 +31,7 @@ const About = ({ manage, setActions }) => {
 
     // track input in state variable
     const [editorValue, setEditorValue] = useState([
-        { type: "paragraph", children: [{ text: "No description provided." }] },
+        { type: "paragraph", children: [{ text: "" }] },
     ]);
 
     // fetch club
@@ -111,7 +111,7 @@ const About = ({ manage, setActions }) => {
     return (
         <>
             <Page full loading={clubLoading}>
-                <Box pt={2} px={2}>
+                <Box pt={2} px={3}>
                     <RichTextEditor editing={editing} editorState={[editorValue, setEditorValue]} />
                 </Box>
             </Page>

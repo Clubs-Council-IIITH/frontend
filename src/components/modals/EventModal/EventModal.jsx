@@ -68,15 +68,16 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     // response toast
     const [toast, setToast] = useState({ open: false });
 
+    // default description editor text
+    const defaultDescription = [{ type: "paragraph", children: [{ text: "" }] }];
+
     // modal states
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
     const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
-    const [editorValue, setEditorValue] = useState([
-        { type: "paragraph", children: [{ text: "No description provided." }] },
-    ]);
+    const [editorValue, setEditorValue] = useState(defaultDescription);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
@@ -135,6 +136,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             setDeleting(false);
             setCurrentPoster(eventData?.event?.poster || "");
             setExpandPoster(false);
+            setEditorValue(defaultDescription);
         }
     }, [eventData, eventId, open]);
 
