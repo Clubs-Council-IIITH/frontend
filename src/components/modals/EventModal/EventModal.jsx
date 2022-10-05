@@ -68,27 +68,18 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     // response toast
     const [toast, setToast] = useState({ open: false });
 
-    // default description editor text
-    const defaultDescription = [{ type: "paragraph", children: [{ text: "" }] }];
-
     // modal states
     const [activeEventId, setActiveEventId] = useState(eventId);
     const [editing, setEditing] = useState(!eventId);
     const [deleting, setDeleting] = useState(false);
     const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
-    const [editorValue, setEditorValue] = useState(defaultDescription);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
         GET_EVENT_BY_ID,
         {
             variables: { id: activeEventId },
-            onCompleted: (data) => {
-                if (data?.event?.description) {
-                    setEditorValue(JSON.parse(data?.event?.description));
-                }
-            },
         }
     );
 
@@ -136,15 +127,16 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             setDeleting(false);
             setCurrentPoster(eventData?.event?.poster || "");
             setExpandPoster(false);
-            setEditorValue(defaultDescription);
         }
     }, [eventData, eventId, open]);
 
     // fetch new event details whenever active event id changes
     useEffect(() => {
-        getEventData();
+        if (open) {
+            getEventData();
+        }
         return undefined; // this effect does not require a cleanup
-    }, [activeEventId]);
+    }, [open, activeEventId]);
 
     // pass down props to each tab
     const tabProps = {
@@ -158,8 +150,6 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setDeleting,
         currentPoster,
         setCurrentPoster,
-        editorValue,
-        setEditorValue,
     };
 
     // action handlers

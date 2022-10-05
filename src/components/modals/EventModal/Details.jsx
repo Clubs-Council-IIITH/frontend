@@ -335,19 +335,35 @@ const Details = ({
                 </Grid>
 
                 <Grid item xs={12}>
-                    {editing ? (
-                        <FormLabel component="legend" sx={{ fontSize: 12, mb: 1 }}>
-                            Description
-                        </FormLabel>
-                    ) : null}
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : (
-                            <RichTextEditor
-                                editing={editing}
-                                editorState={[editorValue, setEditorValue]}
+                        ) : editing ? (
+                            <Controller
+                                name="description"
+                                control={control}
+                                shouldUnregister={true}
+                                defaultValue={eventData?.event?.description || ""}
+                                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                    <TextField
+                                        fullWidth
+                                        label="Description"
+                                        type="text"
+                                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                        variant="standard"
+                                        multiline
+                                        rows={3}
+                                        value={value}
+                                        onChange={onChange}
+                                        error={error}
+                                        InputLabelProps={{ shrink: true }}
+                                        helperText={error ? error.message : null}
+                                        sx={{ mt: 1 }}
+                                    />
+                                )}
                             />
+                        ) : (
+                            eventData?.event?.description || "-"
                         )}
                     </Typography>
                 </Grid>
