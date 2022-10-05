@@ -126,7 +126,7 @@ const Details = ({
                             {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 2 }} /> : null}
 
                             <Grid container alignItems="center">
-                                <Grid item>
+                                <Grid item mb={2}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
@@ -180,9 +180,11 @@ const Details = ({
                                     <Grid item>
                                         <Box mx={1}>—</Box>
                                     </Grid>
-                                ) : null}
+                                ) : (
+                                    <Box m={1} />
+                                )}
 
-                                <Grid item mt={isTabletOrMobile && editing ? 2 : 0}>
+                                <Grid item mb={2}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
