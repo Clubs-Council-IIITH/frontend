@@ -35,6 +35,7 @@ const About = ({ manage, setActions }) => {
     // fetch club
     const { loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
         variables: { id: targetId },
+        fetchPolicy: "network-only",
         onCompleted: (data) => {
             if (data?.club?.description) {
                 setEditorValue(JSON.parse(data?.club?.description));
