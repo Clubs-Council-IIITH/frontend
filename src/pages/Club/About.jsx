@@ -30,9 +30,7 @@ const About = ({ manage, setActions }) => {
     const [editing, setEditing] = useState(false);
 
     // track input in state variable
-    const [editorValue, setEditorValue] = useState([
-        { type: "paragraph", children: [{ text: "" }] },
-    ]);
+    const [editorValue, setEditorValue] = useState(null);
 
     // fetch club
     const { loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
@@ -40,6 +38,8 @@ const About = ({ manage, setActions }) => {
         onCompleted: (data) => {
             if (data?.club?.description) {
                 setEditorValue(JSON.parse(data?.club?.description));
+            } else {
+                setEditorValue([{ type: "paragraph", children: [{ text: "" }] }]);
             }
         },
     });
@@ -112,7 +112,12 @@ const About = ({ manage, setActions }) => {
         <>
             <Page full loading={clubLoading}>
                 <Box pt={2} px={3}>
-                    <RichTextEditor editing={editing} editorState={[editorValue, setEditorValue]} />
+                    {editorValue ? (
+                        <RichTextEditor
+                            editing={editing}
+                            editorState={[editorValue, setEditorValue]}
+                        />
+                    ) : null}
                 </Box>
             </Page>
         </>

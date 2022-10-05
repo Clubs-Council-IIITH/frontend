@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@mui/styles";
 
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_CREATE_CLUB, ADMIN_UPDATE_CLUB } from "mutations/clubs";
 import { ADMIN_GET_ALL_CLUBS, GET_ALL_CLUBS, GET_CLUB_BY_ID } from "queries/clubs";
 import ClubCategories from "constants/ClubCategories";
@@ -27,12 +27,27 @@ import RichTextEditor from "components/RichTextEditor";
 const MODAL_HEIGHT = "60vh";
 const MODAL_WIDTH = "50vw";
 
-const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
+const ClubFormModal = ({ clubId, controller: [open, setOpen] }) => {
     const theme = useTheme();
 
     const { control, register, handleSubmit } = useForm();
 
     const [toast, setToast] = useState({ open: false });
+
+    // track input in state variable
+    const [editorValue, setEditorValue] = useState(null);
+
+    // fetch club
+    const { data: clubData, loading: clubLoading } = useQuery(GET_CLUB_BY_ID, {
+        variables: { id: clubId },
+        onCompleted: (data) => {
+            if (data?.club?.description) {
+                setEditorValue(JSON.parse(data?.club?.description));
+            } else {
+                setEditorValue([{ type: "paragraph", children: [{ text: "" }] }]);
+            }
+        },
+    });
 
     const [createClub, { error: createError }] = useMutation(ADMIN_CREATE_CLUB, {
         refetchQueries: [GET_ALL_CLUBS, ADMIN_GET_ALL_CLUBS],
@@ -40,19 +55,20 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
     });
 
     const [updateClub, { error: updateError }] = useMutation(ADMIN_UPDATE_CLUB, {
-        refetchQueries: [{ query: GET_CLUB_BY_ID, variables: { id: club?.id } }],
+        refetchQueries: [{ query: GET_CLUB_BY_ID, variables: { id: clubId } }],
         awaitRefetchQueries: true,
     });
 
     const onSubmit = async (data) => {
         const transformedData = {
             ...data,
+            description: JSON.stringify(editorValue),
             img: data.img[0],
         };
 
         // update or create new instance of data
-        await (club
-            ? updateClub({ variables: { ...transformedData, id: club.id } })
+        await (clubId
+            ? updateClub({ variables: { ...transformedData, id: clubId } })
             : createClub({ variables: { ...transformedData } }));
 
         // show response toast based on form submission status
@@ -60,11 +76,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
         setOpen(false);
     };
 
-    const [editorValue, setEditorValue] = useState(
-        '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'
-    );
-
-    return (
+    return clubLoading ? null : (
         <>
             <Modal
                 open={open}
@@ -106,7 +118,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                 >
                                     <Box mb={2}>
                                         <Button variant="outlined" component="label">
-                                            {club?.img ? "Update" : "Add"} Cover Image
+                                            {clubData?.club?.img ? "Update" : "Add"} Cover Image
                                             <input
                                                 {...register("img")}
                                                 name="img"
@@ -121,7 +133,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="name"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.name || ""}
+                                            defaultValue={clubData?.club?.name || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -146,7 +158,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="mail"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.mail || ""}
+                                            defaultValue={clubData?.club?.mail || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -173,7 +185,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             control={control}
                                             shouldUnregister={true}
                                             defaultValue={
-                                                club?.category?.toLowerCase() ||
+                                                clubData?.club?.category?.toLowerCase() ||
                                                 Object.keys(ClubCategories)[0]
                                             }
                                             render={({
@@ -208,7 +220,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="tagline"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.tagline || ""}
+                                            defaultValue={clubData?.club?.tagline || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -232,7 +244,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="website"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.website || ""}
+                                            defaultValue={clubData?.club?.website || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -256,7 +268,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="instagram"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.instagram || ""}
+                                            defaultValue={clubData?.club?.instagram || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -280,7 +292,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="facebook"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.facebook || ""}
+                                            defaultValue={clubData?.club?.facebook || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -304,7 +316,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="youtube"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.youtube || ""}
+                                            defaultValue={clubData?.club?.youtube || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -328,7 +340,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="twitter"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.twitter || ""}
+                                            defaultValue={clubData?.club?.twitter || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -352,7 +364,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="linkedin"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.linkedin || ""}
+                                            defaultValue={clubData?.club?.linkedin || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -376,7 +388,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                             name="discord"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={club?.discord || ""}
+                                            defaultValue={clubData?.club?.discord || ""}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -397,11 +409,15 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
                                     </Box>
 
                                     <Box>
-                                        <InputLabel htmlFor="my-input" shrink={true} >Description</InputLabel>
-                                        <RichTextEditor
-                                            editing={true}
-                                            editorState={[(club?.description || '[{"type":"paragraph","children":[{"text":"No description provided."}]}]'), setEditorValue]}
-                                        />
+                                        <InputLabel htmlFor="my-input" shrink={true}>
+                                            Description
+                                        </InputLabel>
+                                        {editorValue ? (
+                                            <RichTextEditor
+                                                editing={true}
+                                                editorState={[editorValue, setEditorValue]}
+                                            />
+                                        ) : null}
                                     </Box>
                                 </Box>
                             </Box>
@@ -434,7 +450,7 @@ const ClubFormModal = ({ club = null, controller: [open, setOpen] }) => {
 
             <ResponseToast
                 controller={[toast, setToast]}
-                successText={`Club ${club ? "edited" : "created"} successfully.`}
+                successText={`Club ${clubData ? "edited" : "created"} successfully.`}
             />
         </>
     );
