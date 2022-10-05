@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
@@ -33,10 +33,6 @@ import { AudienceStringtoDict } from "utils/FormUtil";
 import { NavigationContext } from "contexts/NavigationContext";
 
 import enLocale from "date-fns/locale/en-IN";
-import { useState } from "react";
-
-// text editor
-import RichTextEditor from "components/RichTextEditor";
 
 const Details = ({
     activeEventId,
@@ -46,8 +42,6 @@ const Details = ({
     editing,
     setEditing,
     setCurrentPoster,
-    editorValue,
-    setEditorValue,
 }) => {
     const { control, handleSubmit } = useForm();
     const { isTabletOrMobile } = useContext(NavigationContext);
@@ -67,7 +61,7 @@ const Details = ({
 
     // send the new poster
     const [changePoster] = useMutation(CHANGE_POSTER, {
-        refetchQueries: [GET_EVENT_BY_ID],
+        refetchQueries: [GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
     });
 
@@ -77,7 +71,6 @@ const Details = ({
         const transformedData = {
             ...data,
             rawPoster: null,
-            description: JSON.stringify(editorValue),
             audience: Object.entries(data.audience)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
@@ -85,14 +78,21 @@ const Details = ({
         };
 
         // update or create new instance of data
-        let returnedEvent = await (activeEventId
-            ? updateEvent({ variables: { ...transformedData, id: activeEventId } })
-            : createEvent({ variables: { ...transformedData } }));
-
-        let id = activeEventId || returnedEvent.data.createEvent.event.id;
-
-        // add the poster
-        await changePoster({ variables: { ...data?.rawPoster, eventId: id } });
+        await (activeEventId
+            ? updateEvent({
+                  variables: { ...transformedData, id: activeEventId },
+                  onCompleted: async () => {
+                      await changePoster({
+                          variables: { ...data?.rawPoster, eventId: activeEventId },
+                      });
+                  },
+              })
+            : createEvent({
+                  variables: { ...transformedData },
+                  onCompleted: async ({ createEvent: { event } }) => {
+                      await changePoster({ variables: { ...data?.rawPoster, eventId: event.id } });
+                  },
+              }));
 
         // stop editing
         setEditing(false);

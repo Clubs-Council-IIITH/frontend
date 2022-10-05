@@ -125,17 +125,23 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             setActiveEventId(eventId);
             setEditing(!eventId);
             setDeleting(false);
-            setCurrentPoster(eventData?.event?.poster || "");
             setExpandPoster(false);
         }
-    }, [eventData, eventId, open]);
+    }, [eventId, open]);
+
+    // update poster whenever eventData changes
+    useEffect(() => {
+        if (open) {
+            setCurrentPoster(eventData?.event?.poster || "");
+        }
+    }, [eventData, open]);
 
     // fetch new event details whenever active event id changes
     useEffect(() => {
         if (open) {
             getEventData();
+            return undefined; // this effect does not require a cleanup
         }
-        return undefined; // this effect does not require a cleanup
     }, [open, activeEventId]);
 
     // pass down props to each tab
