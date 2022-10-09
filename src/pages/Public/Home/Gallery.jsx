@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useTheme } from "@mui/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
-import { Box, ImageList, ImageListItem } from "@mui/material";
+import { Box, ImageList, ImageListItem, Button } from "@mui/material";
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
 import Img1 from "assets/img/gallery/1.jpg";
 import Img2 from "assets/img/gallery/2.jpg";
@@ -41,7 +42,7 @@ import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
 import CarouselBackground12 from "assets/img/carousel/12.jpg";
 
-const itemData = [
+const fullItemData = [
     {
         img: Img19,
         title: "Silver-Jubilee Launch",
@@ -131,11 +132,11 @@ const itemData = [
         title: "Aditya Nair",
     },
     {
-        img: CarouselBackground1,
-        title: "Into-to-Clubs",
+        img: CarouselBackground2,
+        title: "Intro-to-Clubs",
     },
     {
-        img: CarouselBackground2,
+        img: CarouselBackground1,
         title: "Roadblock",
     },
     {
@@ -180,24 +181,106 @@ const itemData = [
     },
 ];
 
+const reducedItemData = [
+    {
+        img: CarouselBackground2,
+        title: "Intro-to-Clubs",
+    },
+    {
+        img: Img3,
+        title: "Music",
+    },
+    {
+        img: Img4,
+        title: "Dance-Freshers",
+    },
+    {
+        img: Img6,
+        title: "Astronomy",
+    },
+    {
+        img: Img8,
+        title: "Drum-Set",
+    },
+    {
+        img: Img11,
+        title: "Felicity-Dance",
+    },
+    {
+        img: Img12,
+        title: "Sanskrit-Talks",
+    },
+    {
+        img: CarouselBackground4,
+        title: "Fun-in-H105",
+    },
+    {
+        img: Img22,
+        title: "Aditya Nair",
+    },
+    {
+        img: Img16,
+        title: "Hooting",
+    },
+];
+
 const Gallery = () => {
     const theme = useTheme();
     const { isTabletOrMobile } = useContext(NavigationContext);
 
+    const [full_view, set_full_view] = useState(0);
+
     return (
         <Box p={3} pt={1} backgroundColor={theme.palette.primary.main}>
-            <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
-                {itemData.map((item) => (
-                    <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                    </ImageListItem>
-                ))}
-            </ImageList>
+            {full_view ?
+                (
+                    <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
+                        {fullItemData.map((item) => (
+                            <ImageListItem key={item.img}>
+                                <img
+                                    src={`${item.img}?w=248&fit=crop&auto=format`}
+                                    srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                    alt={item.title}
+                                    loading="lazy"
+                                />
+                            </ImageListItem>
+                        ))}
+                    </ImageList>
+                )
+                :
+                (
+                    <>
+                        <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
+                            {reducedItemData.map((item) => (
+                                <ImageListItem key={item.img}>
+                                    <img
+                                        src={`${item.img}?w=248&fit=crop&auto=format`}
+                                        srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                        alt={item.title}
+                                        loading="lazy"
+                                    />
+                                </ImageListItem>
+                            ))}
+                        </ImageList>
+                        <Button
+                            fullWidth
+                            disableElevation
+                            variant="contained"
+                            startIcon={<KeyboardArrowDownOutlinedIcon />}
+                            endIcon={<KeyboardArrowDownOutlinedIcon />}
+                            onClick={(e) => set_full_view(e, 1)}
+                            component={"button"}
+                            disabled={false}
+                            sx={{ ml: 1 }}
+                            style={{
+                                color: "white",
+                            }}
+                        >
+                            More
+                        </Button>
+                    </>
+                )
+            }
         </Box>
     );
 };
