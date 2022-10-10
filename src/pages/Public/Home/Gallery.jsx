@@ -42,7 +42,7 @@ import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
 import CarouselBackground12 from "assets/img/carousel/12.jpg";
 
-const fullItemData = [
+const moreItemData = [
     {
         img: Img19,
         title: "Silver-Jubilee Launch",
@@ -56,28 +56,12 @@ const fullItemData = [
         title: "Big-Events",
     },
     {
-        img: Img3,
-        title: "Music",
-    },
-    {
-        img: Img4,
-        title: "Dance-Freshers",
-    },
-    {
         img: Img5,
         title: "FHC",
     },
     {
-        img: Img6,
-        title: "Astronomy",
-    },
-    {
         img: Img7,
         title: "Felicity-Gaming-2021",
-    },
-    {
-        img: Img8,
-        title: "Drum-Set",
     },
     {
         img: Img9,
@@ -86,14 +70,6 @@ const fullItemData = [
     {
         img: Img10,
         title: "Group-Pic-Debsoc",
-    },
-    {
-        img: Img11,
-        title: "Felicity-Dance",
-    },
-    {
-        img: Img12,
-        title: "Sanskrit-Talks",
     },
     {
         img: Img13,
@@ -108,10 +84,6 @@ const fullItemData = [
         title: "Freshers-Dance",
     },
     {
-        img: Img16,
-        title: "Hooting",
-    },
-    {
         img: Img17,
         title: "Flag-Hoisting",
     },
@@ -120,20 +92,12 @@ const fullItemData = [
         title: "Independence-Day-Songs",
     },
     {
-        img: Img21,
-        title: "Sreyas Photography",
-    },
-    {
         img: Img20,
         title: "ERC Workshop",
     },
     {
-        img: Img22,
-        title: "Aditya Nair",
-    },
-    {
-        img: CarouselBackground2,
-        title: "Intro-to-Clubs",
+        img: Img21,
+        title: "Sreyas Photography",
     },
     {
         img: CarouselBackground1,
@@ -142,10 +106,6 @@ const fullItemData = [
     {
         img: CarouselBackground3,
         title: "Debsoc-LokSabha",
-    },
-    {
-        img: CarouselBackground4,
-        title: "Fun-in-H105",
     },
     {
         img: CarouselBackground5,
@@ -229,6 +189,8 @@ const Gallery = () => {
     const { isTabletOrMobile } = useContext(NavigationContext);
 
     const [full_view, set_full_view] = useState(0);
+
+    const fullItemData = [...reducedItemData, ...moreItemData];
 
     return (
         <Box p={3} pt={1} backgroundColor={theme.palette.primary.main}>
