@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useTheme } from "@mui/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
-import { Box, ImageList, ImageListItem } from "@mui/material";
+import { Box, ImageList, ImageListItem, Button } from "@mui/material";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 import Img1 from "assets/img/gallery/1.jpg";
 import Img2 from "assets/img/gallery/2.jpg";
@@ -41,7 +42,7 @@ import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
 import CarouselBackground12 from "assets/img/carousel/12.jpg";
 
-const itemData = [
+const moreItemData = [
     {
         img: Img19,
         title: "Silver-Jubilee Launch",
@@ -55,28 +56,12 @@ const itemData = [
         title: "Big-Events",
     },
     {
-        img: Img3,
-        title: "Music",
-    },
-    {
-        img: Img4,
-        title: "Dance-Freshers",
-    },
-    {
         img: Img5,
         title: "FHC",
     },
     {
-        img: Img6,
-        title: "Astronomy",
-    },
-    {
         img: Img7,
         title: "Felicity-Gaming-2021",
-    },
-    {
-        img: Img8,
-        title: "Drum-Set",
     },
     {
         img: Img9,
@@ -85,14 +70,6 @@ const itemData = [
     {
         img: Img10,
         title: "Group-Pic-Debsoc",
-    },
-    {
-        img: Img11,
-        title: "Felicity-Dance",
-    },
-    {
-        img: Img12,
-        title: "Sanskrit-Talks",
     },
     {
         img: Img13,
@@ -107,10 +84,6 @@ const itemData = [
         title: "Freshers-Dance",
     },
     {
-        img: Img16,
-        title: "Hooting",
-    },
-    {
         img: Img17,
         title: "Flag-Hoisting",
     },
@@ -119,32 +92,20 @@ const itemData = [
         title: "Independence-Day-Songs",
     },
     {
-        img: Img21,
-        title: "Sreyas Photography",
-    },
-    {
         img: Img20,
         title: "ERC Workshop",
     },
     {
-        img: Img22,
-        title: "Aditya Nair",
+        img: Img21,
+        title: "Sreyas Photography",
     },
     {
         img: CarouselBackground1,
-        title: "Into-to-Clubs",
-    },
-    {
-        img: CarouselBackground2,
         title: "Roadblock",
     },
     {
         img: CarouselBackground3,
         title: "Debsoc-LokSabha",
-    },
-    {
-        img: CarouselBackground4,
-        title: "Fun-in-H105",
     },
     {
         img: CarouselBackground5,
@@ -180,24 +141,98 @@ const itemData = [
     },
 ];
 
+const reducedItemData = [
+    {
+        img: CarouselBackground2,
+        title: "Intro-to-Clubs",
+    },
+    {
+        img: Img3,
+        title: "Music",
+    },
+    {
+        img: Img4,
+        title: "Dance-Freshers",
+    },
+    {
+        img: Img6,
+        title: "Astronomy",
+    },
+    {
+        img: Img8,
+        title: "Drum-Set",
+    },
+    {
+        img: Img11,
+        title: "Felicity-Dance",
+    },
+    {
+        img: Img12,
+        title: "Sanskrit-Talks",
+    },
+    {
+        img: CarouselBackground4,
+        title: "Fun-in-H105",
+    },
+    {
+        img: Img22,
+        title: "Aditya Nair",
+    },
+    {
+        img: Img16,
+        title: "Hooting",
+    },
+];
+
 const Gallery = () => {
     const theme = useTheme();
     const { isTabletOrMobile } = useContext(NavigationContext);
 
+    const [expanded, setExpanded] = useState(false);
+
+    const fullItemData = [...reducedItemData, ...moreItemData];
+
     return (
         <Box p={3} pt={1} backgroundColor={theme.palette.primary.main}>
-            <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
-                {itemData.map((item) => (
-                    <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                    </ImageListItem>
-                ))}
-            </ImageList>
+            {expanded ? (
+                <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
+                    {fullItemData.map((item) => (
+                        <ImageListItem key={item.img}>
+                            <img
+                                src={`${item.img}?w=248&fit=crop&auto=format`}
+                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={item.title}
+                                loading="lazy"
+                            />
+                        </ImageListItem>
+                    ))}
+                </ImageList>
+            ) : (
+                <>
+                    <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
+                        {reducedItemData.map((item) => (
+                            <ImageListItem key={item.img}>
+                                <img
+                                    src={`${item.img}?w=248&fit=crop&auto=format`}
+                                    srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                    alt={item.title}
+                                    loading="lazy"
+                                />
+                            </ImageListItem>
+                        ))}
+                    </ImageList>
+                    <Button
+                        fullWidth
+                        disableElevation
+                        variant="contained"
+                        onClick={() => setExpanded(true)}
+                        sx={{ display: "flex", flexDirection: "column" }}
+                    >
+                        View More
+                        <KeyboardArrowDownOutlinedIcon fontSize="small" />
+                    </Button>
+                </>
+            )}
         </Box>
     );
 };
