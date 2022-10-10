@@ -4,7 +4,7 @@ import { useTheme } from "@mui/styles";
 import { NavigationContext } from "contexts/NavigationContext";
 
 import { Box, ImageList, ImageListItem, Button } from "@mui/material";
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 import Img1 from "assets/img/gallery/1.jpg";
 import Img2 from "assets/img/gallery/2.jpg";
@@ -188,16 +188,29 @@ const Gallery = () => {
     const theme = useTheme();
     const { isTabletOrMobile } = useContext(NavigationContext);
 
-    const [full_view, set_full_view] = useState(0);
+    const [expanded, setExpanded] = useState(false);
 
     const fullItemData = [...reducedItemData, ...moreItemData];
 
     return (
         <Box p={3} pt={1} backgroundColor={theme.palette.primary.main}>
-            {full_view ?
-                (
+            {expanded ? (
+                <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
+                    {fullItemData.map((item) => (
+                        <ImageListItem key={item.img}>
+                            <img
+                                src={`${item.img}?w=248&fit=crop&auto=format`}
+                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={item.title}
+                                loading="lazy"
+                            />
+                        </ImageListItem>
+                    ))}
+                </ImageList>
+            ) : (
+                <>
                     <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
-                        {fullItemData.map((item) => (
+                        {reducedItemData.map((item) => (
                             <ImageListItem key={item.img}>
                                 <img
                                     src={`${item.img}?w=248&fit=crop&auto=format`}
@@ -208,41 +221,18 @@ const Gallery = () => {
                             </ImageListItem>
                         ))}
                     </ImageList>
-                )
-                :
-                (
-                    <>
-                        <ImageList variant="masonry" cols={isTabletOrMobile ? 2 : 3} gap={12}>
-                            {reducedItemData.map((item) => (
-                                <ImageListItem key={item.img}>
-                                    <img
-                                        src={`${item.img}?w=248&fit=crop&auto=format`}
-                                        srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                        alt={item.title}
-                                        loading="lazy"
-                                    />
-                                </ImageListItem>
-                            ))}
-                        </ImageList>
-                        <Button
-                            fullWidth
-                            disableElevation
-                            variant="contained"
-                            startIcon={<KeyboardArrowDownOutlinedIcon />}
-                            endIcon={<KeyboardArrowDownOutlinedIcon />}
-                            onClick={(e) => set_full_view(e, 1)}
-                            component={"button"}
-                            disabled={false}
-                            sx={{ ml: 1 }}
-                            style={{
-                                color: "white",
-                            }}
-                        >
-                            More
-                        </Button>
-                    </>
-                )
-            }
+                    <Button
+                        fullWidth
+                        disableElevation
+                        variant="contained"
+                        onClick={() => setExpanded(true)}
+                        sx={{ display: "flex", flexDirection: "column" }}
+                    >
+                        View More
+                        <KeyboardArrowDownOutlinedIcon fontSize="small" />
+                    </Button>
+                </>
+            )}
         </Box>
     );
 };
