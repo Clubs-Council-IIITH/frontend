@@ -120,14 +120,6 @@ const View = ({ manage }) => {
         setActions,
     };
 
-    const web = !clubData?.club?.website;
-    const instagram = !clubData?.club?.instagram;
-    const facebook = !clubData?.club?.facebook;
-    const youtube = !clubData?.club?.youtube;
-    const twitter = !clubData?.club?.twitter;
-    const linkedin = !clubData?.club?.linkedin;
-    const discord = !clubData?.club?.discord;
-
     function linkHandle(link) {
         window.open(link, "_blank", "noopener,noreferrer");
     }
@@ -161,13 +153,13 @@ const View = ({ manage }) => {
                     }}
                 >
                     <Box>
-                        {web ? (
+                        {clubData?.club?.website ? (
                             <ActionButton
                                 title="Visit Website"
                                 color="success"
                                 icon={WebsiteIcon}
-                                link={web}
-                                onClick={() => linkHandle(web)}
+                                link={clubData?.club?.website}
+                                onClick={() => linkHandle(clubData?.club?.website)}
                             />
                         ) : null}
                         {actions?.map((action) => (
@@ -178,11 +170,11 @@ const View = ({ manage }) => {
             </Box>
             <Box px={2} pb={2} display="flex" justifyContent="space-between">
                 <Box>
-                    {instagram ? (
+                    {clubData?.club?.instagram ? (
                         <IconButton
                             component="a"
                             sx={{ mx: 0, color: "#C13584" }}
-                            onClick={() => linkHandle(instagram)}
+                            onClick={() => linkHandle(clubData?.club?.instagram)}
                         >
                             <SocialIcon
                                 network="instagram"
@@ -192,11 +184,11 @@ const View = ({ manage }) => {
                         </IconButton>
                     ) : null}
 
-                    {facebook ? (
+                    {clubData?.club?.facebook ? (
                         <IconButton
                             component="a"
                             sx={{ mx: 0, color: "#4267B2" }}
-                            onClick={() => linkHandle(facebook)}
+                            onClick={() => linkHandle(clubData?.club?.facebook)}
                         >
                             <SocialIcon
                                 network="facebook"
@@ -206,11 +198,11 @@ const View = ({ manage }) => {
                         </IconButton>
                     ) : null}
 
-                    {youtube ? (
+                    {clubData?.club?.youtube ? (
                         <IconButton
                             component="a"
                             sx={{ mx: 0, color: "#FF0000" }}
-                            onClick={() => linkHandle(youtube)}
+                            onClick={() => linkHandle(clubData?.club?.youtube)}
                         >
                             <SocialIcon
                                 network="youtube"
@@ -220,11 +212,11 @@ const View = ({ manage }) => {
                         </IconButton>
                     ) : null}
 
-                    {twitter ? (
+                    {clubData?.club?.twitter ? (
                         <IconButton
                             component="a"
                             sx={{ mx: 0, color: "#1DA1F2" }}
-                            onClick={() => linkHandle(twitter)}
+                            onClick={() => linkHandle(clubData?.club?.twitter)}
                         >
                             <SocialIcon
                                 network="twitter"
@@ -234,11 +226,11 @@ const View = ({ manage }) => {
                         </IconButton>
                     ) : null}
 
-                    {linkedin ? (
+                    {clubData?.club?.linkedin ? (
                         <IconButton
                             component="a"
                             sx={{ mx: 0, color: "#0077b5" }}
-                            onClick={() => linkHandle(linkedin)}
+                            onClick={() => linkHandle(clubData?.club?.linkedin)}
                         >
                             <SocialIcon
                                 network="linkedin"
@@ -248,11 +240,11 @@ const View = ({ manage }) => {
                         </IconButton>
                     ) : null}
 
-                    {discord ? (
+                    {clubData?.club?.discord ? (
                         <IconButton
                             component="a"
                             sx={{ mx: 0, color: "#5865F2" }}
-                            onClick={() => linkHandle(discord)}
+                            onClick={() => linkHandle(clubData?.club?.discord)}
                         >
                             <SocialIcon
                                 network="discord"
