@@ -9,7 +9,7 @@ import UserGroups from "constants/UserGroups";
 import { makeStyles, useTheme } from "@mui/styles";
 import { Fab, Button, Box, Typography, Divider, Zoom, IconButton } from "@mui/material";
 import { LanguageOutlined as WebsiteIcon } from "@mui/icons-material";
-import { SocialIcon } from 'react-social-icons';
+import { SocialIcon } from "react-social-icons";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -120,14 +120,13 @@ const View = ({ manage }) => {
         setActions,
     };
 
-    const web = clubData?.club?.website;
-    const instagram = clubData?.club?.instagram;
-    const facebook = clubData?.club?.facebook;
-    const youtube = clubData?.club?.youtube;
-    const twitter = clubData?.club?.twitter;
-    const linkedin = clubData?.club?.linkedin;
-    const discord = clubData?.club?.discord;
-    const is_social = instagram || facebook || youtube || twitter || linkedin || discord;
+    const web = !clubData?.club?.website;
+    const instagram = !clubData?.club?.instagram;
+    const facebook = !clubData?.club?.facebook;
+    const youtube = !clubData?.club?.youtube;
+    const twitter = !clubData?.club?.twitter;
+    const linkedin = !clubData?.club?.linkedin;
+    const discord = !clubData?.club?.discord;
 
     function linkHandle(link) {
         window.open(link, "_blank", "noopener,noreferrer");
@@ -168,7 +167,7 @@ const View = ({ manage }) => {
                                 color="success"
                                 icon={WebsiteIcon}
                                 link={web}
-                                onClick={(e) => linkHandle(web)}
+                                onClick={() => linkHandle(web)}
                             />
                         ) : null}
                         {actions?.map((action) => (
@@ -177,69 +176,93 @@ const View = ({ manage }) => {
                     </Box>
                 </Box>
             </Box>
-            {
-                is_social ?
-                    (<Box pl={2} pb={2} display="flex" justifyContent="space-between">
-                        <Box>
-                            {instagram ? (
-                                <IconButton
-                                    component="a"
-                                    sx={{ mx: 0, color: "#C13584" }}
-                                    onClick={() => linkHandle(instagram)}
-                                >
-                                    <SocialIcon network="instagram" title="Instagram" style={{ height: 35, width: 35 }} />
-                                </IconButton>
-                            ) : null}
-                            {facebook ? (
-                                <IconButton
-                                    component="a"
-                                    sx={{ mx: 0, color: "#4267B2" }}
-                                    onClick={() => linkHandle(facebook)}
-                                >
-                                    <SocialIcon network="facebook" title="Facebook" style={{ height: 35, width: 35 }} />
-                                </IconButton>
-                            ) : null}
-                            {youtube ? (
-                                <IconButton
-                                    component="a"
-                                    sx={{ mx: 0, color: "#FF0000" }}
-                                    onClick={() => linkHandle(youtube)}
-                                >
-                                    <SocialIcon network="youtube" title="YouTube" style={{ height: 35, width: 35 }} />
-                                </IconButton>
-                            ) : null}
-                            {twitter ? (
-                                <IconButton
-                                    component="a"
-                                    sx={{ mx: 0, color: "#1DA1F2" }}
-                                    onClick={() => linkHandle(twitter)}
+            <Box px={2} pb={2} display="flex" justifyContent="space-between">
+                <Box>
+                    {instagram ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#C13584" }}
+                            onClick={() => linkHandle(instagram)}
+                        >
+                            <SocialIcon
+                                network="instagram"
+                                title="Instagram"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
 
-                                >
-                                    <SocialIcon network="twitter" title="Twitter" style={{ height: 35, width: 35 }} />
-                                </IconButton>
-                            ) : null}
-                            {linkedin ? (
-                                <IconButton
-                                    component="a"
-                                    sx={{ mx: 0, color: "#0077b5" }}
-                                    onClick={() => linkHandle(linkedin)}
-                                >
-                                    <SocialIcon network="linkedin" title="LinkedIn" style={{ height: 35, width: 35 }} />
-                                </IconButton>
-                            ) : null}
-                            {discord ? (
-                                <IconButton
-                                    component="a"
-                                    sx={{ mx: 0, color: "#5865F2" }}
-                                    onClick={() => linkHandle(discord)}
-                                >
-                                    <SocialIcon network="discord" title="Discord" style={{ height: 35, width: 35 }} />
-                                </IconButton>
-                            ) : null}
-                        </Box>
-                    </Box>)
-                    : null
-            }
+                    {facebook ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#4267B2" }}
+                            onClick={() => linkHandle(facebook)}
+                        >
+                            <SocialIcon
+                                network="facebook"
+                                title="Facebook"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {youtube ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#FF0000" }}
+                            onClick={() => linkHandle(youtube)}
+                        >
+                            <SocialIcon
+                                network="youtube"
+                                title="YouTube"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {twitter ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#1DA1F2" }}
+                            onClick={() => linkHandle(twitter)}
+                        >
+                            <SocialIcon
+                                network="twitter"
+                                title="Twitter"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {linkedin ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#0077b5" }}
+                            onClick={() => linkHandle(linkedin)}
+                        >
+                            <SocialIcon
+                                network="linkedin"
+                                title="LinkedIn"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {discord ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#5865F2" }}
+                            onClick={() => linkHandle(discord)}
+                        >
+                            <SocialIcon
+                                network="discord"
+                                title="Discord"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+                </Box>
+            </Box>
 
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />
@@ -249,4 +272,3 @@ const View = ({ manage }) => {
 };
 
 export default View;
-
