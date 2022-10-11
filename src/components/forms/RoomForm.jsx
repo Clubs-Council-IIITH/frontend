@@ -61,7 +61,7 @@ const RoomForm = ({ form_id }) => {
                             fullWidth
                             name="venue"
                             value={selectedRoom?.room}
-                            onChange={(e) => setSelectedRoom({...selectedRoom, room: e.target.value})}
+                            onChange={(e) => setSelectedRoom({ ...selectedRoom, room: e.target.value })}
                         >
                             {rooms?.map(({ room, available }) => (
                                 <MenuItem value={room} disabled={!available}>
@@ -97,6 +97,8 @@ const RoomForm = ({ form_id }) => {
                                     )}
                                     rules={{
                                         required: "Expected audience population can not be empty!",
+                                        min: "1",
+                                        max: "5000",
                                     }}
                                 />
                             </Grid>
