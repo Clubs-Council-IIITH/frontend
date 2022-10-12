@@ -24,7 +24,6 @@ import {
 } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
-import { SecondaryActionButton } from "components/buttons";
 
 import Page from "components/Page";
 import EventModal from "components/modals/EventModal";
