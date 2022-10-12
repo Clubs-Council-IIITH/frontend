@@ -7,8 +7,9 @@ import { GET_CLUB_BY_ID } from "queries/clubs";
 import UserGroups from "constants/UserGroups";
 
 import { makeStyles, useTheme } from "@mui/styles";
-import { Fab, Button, Box, Typography, Divider, Zoom } from "@mui/material";
+import { Fab, Button, Box, Typography, Divider, Zoom, IconButton } from "@mui/material";
 import { LanguageOutlined as WebsiteIcon } from "@mui/icons-material";
+import { SocialIcon } from "react-social-icons";
 
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
@@ -57,6 +58,7 @@ const ActionButton = ({
     color = "primary",
     component = "button",
     disabled = false,
+    link = null,
 }) => {
     const { isTabletOrMobile } = useContext(NavigationContext);
 
@@ -70,12 +72,14 @@ const ActionButton = ({
                 disabled={disabled}
                 sx={{ ml: 1, mt: 1 }}
             >
-                <Icon fontSize="small" sx={{ mr: 1 }} />
+                <Icon fontsize="small" sx={{ mr: 1 }} />
                 {title}
             </Fab>
         </Zoom>
     ) : (
         <Button
+            title={link}
+            href={link}
             disableElevation
             variant="contained"
             size="large"
@@ -85,7 +89,7 @@ const ActionButton = ({
             disabled={disabled}
             sx={{ ml: 1 }}
         >
-            <Icon fontSize="small" sx={{ mr: 1 }} />
+            <Icon fontsize="small" sx={{ mr: 1 }} />
             {title}
         </Button>
     );
@@ -116,10 +120,8 @@ const View = ({ manage }) => {
         setActions,
     };
 
-    const web = clubData?.club?.website;
-
-    function websiteHandle() {
-        window.open(web, "_blank", "noopener,noreferrer");
+    function linkHandle(link) {
+        window.open(link, "_blank", "noopener,noreferrer");
     }
 
     return (
@@ -151,12 +153,13 @@ const View = ({ manage }) => {
                     }}
                 >
                     <Box>
-                        {web ? (
+                        {clubData?.club?.website ? (
                             <ActionButton
                                 title="Visit Website"
                                 color="success"
                                 icon={WebsiteIcon}
-                                onClick={(e) => websiteHandle(e)}
+                                link={clubData?.club?.website}
+                                onClick={() => linkHandle(clubData?.club?.website)}
                             />
                         ) : null}
                         {actions?.map((action) => (
@@ -165,6 +168,94 @@ const View = ({ manage }) => {
                     </Box>
                 </Box>
             </Box>
+            <Box px={2} pb={2} display="flex" justifyContent="space-between">
+                <Box>
+                    {clubData?.club?.instagram ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#C13584" }}
+                            onClick={() => linkHandle(clubData?.club?.instagram)}
+                        >
+                            <SocialIcon
+                                network="instagram"
+                                title="Instagram"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {clubData?.club?.facebook ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#4267B2" }}
+                            onClick={() => linkHandle(clubData?.club?.facebook)}
+                        >
+                            <SocialIcon
+                                network="facebook"
+                                title="Facebook"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {clubData?.club?.youtube ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#FF0000" }}
+                            onClick={() => linkHandle(clubData?.club?.youtube)}
+                        >
+                            <SocialIcon
+                                network="youtube"
+                                title="YouTube"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {clubData?.club?.twitter ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#1DA1F2" }}
+                            onClick={() => linkHandle(clubData?.club?.twitter)}
+                        >
+                            <SocialIcon
+                                network="twitter"
+                                title="Twitter"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {clubData?.club?.linkedin ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#0077b5" }}
+                            onClick={() => linkHandle(clubData?.club?.linkedin)}
+                        >
+                            <SocialIcon
+                                network="linkedin"
+                                title="LinkedIn"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+
+                    {clubData?.club?.discord ? (
+                        <IconButton
+                            component="a"
+                            sx={{ mx: 0, color: "#5865F2" }}
+                            onClick={() => linkHandle(clubData?.club?.discord)}
+                        >
+                            <SocialIcon
+                                network="discord"
+                                title="Discord"
+                                style={{ height: 35, width: 35 }}
+                            />
+                        </IconButton>
+                    ) : null}
+                </Box>
+            </Box>
+
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />
             <TabPanels tabs={tabs} controller={tabController} tabProps={tabProps} routed />

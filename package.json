@@ -41,7 +41,8 @@
         "slate-history": "^0.66.0",
         "slate-react": "^0.82.0",
         "swr": "^0.5.6",
-        "web-vitals": "^1.0.1"
+        "web-vitals": "^1.0.1",
+        "react-social-icons": "^5.15.0"
     },
     "scripts": {
         "start": "react-scripts start",
