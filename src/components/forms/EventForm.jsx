@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
 import { CREATE_EVENT, UPDATE_EVENT } from "mutations/events";
-import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
+import { ADMIN_GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 
 import {
     Grid,

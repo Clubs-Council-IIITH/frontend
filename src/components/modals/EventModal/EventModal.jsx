@@ -33,6 +33,9 @@ import {
 import { TabBar, TabPanels } from "components/Tabs";
 import { NavigationContext } from "contexts/NavigationContext";
 
+import UserGroups from "constants/UserGroups";
+import { SessionContext } from "contexts/SessionContext";
+
 import Details from "./Details";
 import Budget from "./Budget";
 import Venue from "./Venue";
@@ -47,6 +50,7 @@ const EVENT_POSTER_PLACEHOLDER =
 const EventModal = ({ manage, eventId = null, actions = [], controller: [open, setOpen] }) => {
     const theme = useTheme();
     const { isTabletOrMobile } = useContext(NavigationContext);
+    const { session } = useContext(SessionContext);
 
     const MODAL_HEIGHT = isTabletOrMobile ? "50vh" : "60vh";
     const MODAL_WIDTH = isTabletOrMobile ? "95vw" : "80vw";
@@ -335,9 +339,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     item
                                     xs={
                                         manage &&
-                                        activeEventId &&
-                                        eventData?.event?.state !== EventStates.deleted &&
-                                        !isTabletOrMobile
+                                            activeEventId && (session?.group === UserGroups.club || session?.group === UserGroups.cc) &&
+                                            eventData?.event?.state !== EventStates.deleted &&
+                                            !isTabletOrMobile
                                             ? 8
                                             : 12
                                     }
@@ -404,7 +408,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                             >
                                                 {actionButtons["close"]}
                                                 {(editing || deleting || actions.length) &&
-                                                eventData?.event?.state !== EventStates.deleted ? (
+                                                    eventData?.event?.state !== EventStates.deleted ? (
                                                     <CardActions sx={{ p: 0, m: 0 }}>
                                                         {!activeEventId || editing ? (
                                                             <>{actionButtons["save"]}</>
@@ -425,9 +429,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     </Card>
                                 </Grid>
 
-                                {manage &&
-                                activeEventId &&
-                                eventData?.event?.state !== EventStates.deleted ? (
+                                {manage && (session?.group === UserGroups.club || session?.group === UserGroups.cc) &&
+                                    activeEventId &&
+                                    eventData?.event?.state !== EventStates.deleted ? (
                                     <Grid item xs>
                                         <Box height="100%">
                                             <Card variant="outlined" sx={{ height: "100%" }}>
