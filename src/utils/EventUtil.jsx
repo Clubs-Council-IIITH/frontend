@@ -1,4 +1,4 @@
-import { blueGrey, green, blue, red, amber, deepPurple } from "@mui/material/colors";
+import { blueGrey, green, blue, red, amber, deepPurple, indigo } from "@mui/material/colors";
 
 import EventAudience from "constants/EventAudience";
 import EventStates from "constants/EventStates";
@@ -13,35 +13,35 @@ export const AudienceFormatter = (audienceString) => {
 export const StateProgress = (state) => {
     if (state === EventStates.cc_pending)
         return {
-            value: 1 * (100 / 6),
+            value: 1 * (100 / 5),
             color: blueGrey,
             text: "Waiting for Clubs Council approval",
         };
 
-    if (state === EventStates.fc_pending)
-        return {
-            value: 2 * (100 / 6),
-            color: blue,
-            text: "Waiting for Finance Council approval",
-        };
+    // if (state === EventStates.fc_pending)
+    //     return {
+    //         value: 2 * (100 / 6),
+    //         color: blue,
+    //         text: "Waiting for Finance Council approval",
+    //     };
 
     if (state === EventStates.slc_pending)
         return {
-            value: 3 * (100 / 6),
-            color: deepPurple,
+            value: 2 * (100 / 5),
+            color: indigo,
             text: "Waiting for SLC approval",
         };
 
     if (state === EventStates.slo_pending)
         return {
-            value: 4 * (100 / 6),
+            value: 3 * (100 / 5),
             color: deepPurple,
             text: "Waiting for SLO approval",
         };
 
     if (state === EventStates.gad_pending)
         return {
-            value: 5 * (100 / 6),
+            value: 4 * (100 / 5),
             color: blue,
             text: "Waiting for GAD approval",
         };
