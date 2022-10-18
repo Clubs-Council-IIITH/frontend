@@ -6,13 +6,13 @@ import { NavigationContext } from "contexts/NavigationContext";
 import ImageCarousel from "components/ImageCarousel";
 
 import CarouselBackground1 from "assets/img/carousel/1.jpg";
-import CarouselBackground2 from "assets/img/carousel/2.png";
+import CarouselBackground2 from "assets/img/carousel/2.jpg";
 import CarouselBackground3 from "assets/img/carousel/3.jpg";
-import CarouselBackground4 from "assets/img/carousel/4.jpeg";
+import CarouselBackground4 from "assets/img/carousel/4.jpg";
 import CarouselBackground5 from "assets/img/carousel/5.jpg";
 import CarouselBackground6 from "assets/img/carousel/6.jpg";
 import CarouselBackground7 from "assets/img/carousel/7.jpg";
-import CarouselBackground8 from "assets/img/carousel/8.jpeg";
+import CarouselBackground8 from "assets/img/carousel/8.jpg";
 import CarouselBackground9 from "assets/img/carousel/9.jpg";
 import CarouselBackground10 from "assets/img/carousel/10.jpg";
 import CarouselBackground11 from "assets/img/carousel/11.jpg";
