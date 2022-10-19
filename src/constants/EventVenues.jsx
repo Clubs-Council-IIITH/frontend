@@ -26,9 +26,9 @@ export default {
     himalaya_205: "Himalaya 205**",
     // KRB
     krb_auditorium: "KRB Auditorium**",
-    sm22: "SM-22 (KRB)",
+    sm22: "LM-22 (KRB)",
     sm24: "SM-24 (KRB)",
     sm32: "SM-32 (KRB)",
-    sm34: "SM-34 (KRB)",
+    sm34: "LM-34 (KRB)",
     other: "Other (Mention in additional requirements)",
 };
