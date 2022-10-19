@@ -82,7 +82,7 @@ const DesktopNavigation = ({ drawerWidth }) => {
                     ...theme.mixins.toolbar,
                 }}
             >
-                <IconButton onClick={null}>
+                <IconButton onClick={null} sx={{ cursor: "none" }}>
                     <Typography variant="h5">
                         <Box fontWeight={500} color="#fefefe">
                             CC
