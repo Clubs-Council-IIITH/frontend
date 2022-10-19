@@ -429,7 +429,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     </Card>
                                 </Grid>
 
-                                {manage && (session?.group === UserGroups.club || session?.group === UserGroups.cc) &&
+                                {manage &&
                                     activeEventId &&
                                     eventData?.event?.state !== EventStates.deleted ? (
                                     <Grid item xs>
