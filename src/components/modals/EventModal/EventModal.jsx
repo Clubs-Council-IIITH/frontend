@@ -339,7 +339,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     item
                                     xs={
                                         manage &&
-                                            activeEventId && (session?.group === UserGroups.club || session?.group === UserGroups.cc) &&
+                                            activeEventId &&
                                             eventData?.event?.state !== EventStates.deleted &&
                                             !isTabletOrMobile
                                             ? 8
