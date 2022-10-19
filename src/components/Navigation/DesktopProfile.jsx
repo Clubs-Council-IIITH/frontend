@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { Button, Box, Avatar, IconButton } from "@mui/material";
-import { ExitToAppOutlined as AuthIcon } from "@mui/icons-material";
+import { ExitToAppOutlined as LoginIcon, LogoutOutlined as LogoutIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 
@@ -51,7 +51,7 @@ const DesktopProfile = ({ Login, Logout }) => {
                         </Box>
                         <Box display="flex">
                             <IconButton size="small" onClick={Logout}>
-                                <AuthIcon color="secondary" fontSize="small" />
+                                <LogoutIcon color="secondary" fontSize="small" />
                             </IconButton>
                         </Box>
                     </Box>
@@ -59,7 +59,7 @@ const DesktopProfile = ({ Login, Logout }) => {
             ) : (
                 <Button fullWidth variant="text" color="secondary" onClick={Login}>
                     <Box display="flex" mx={0.5}>
-                        <AuthIcon fontSize="small" />
+                            <LoginIcon fontSize="small" />
                     </Box>
                     Login
                 </Button>

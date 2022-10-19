@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useTheme } from "@mui/styles";
 
 import { Button, Menu, MenuItem, Box, Avatar, IconButton } from "@mui/material";
-import { ExitToAppOutlined as AuthIcon } from "@mui/icons-material";
+import { LoginOutlined as LoginIcon } from "@mui/icons-material";
 
 import { SessionContext } from "contexts/SessionContext";
 
@@ -103,7 +103,7 @@ const MobileProfile = ({ Login, Logout }) => {
         </>
     ) : (
         <IconButton onClick={Login}>
-            <AuthIcon color="secondary" />
+            <LoginIcon color="secondary" />
         </IconButton>
     );
 };
