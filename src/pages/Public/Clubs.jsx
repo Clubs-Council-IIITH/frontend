@@ -20,6 +20,7 @@ const Clubs = () => {
     // fetch all clubs (TODO: optimize to fetch 'technical' & 'cultural' clubs)
     const { data: clubsData, loading: clubsLoading } = useQuery(GET_ALL_CLUBS, {
         fetchPolicy: "cache-and-network",
+        pollInterval: 1000 * 60 * 5, // 5 minutes
     });
 
     return (

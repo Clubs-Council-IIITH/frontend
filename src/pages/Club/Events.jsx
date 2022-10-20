@@ -50,6 +50,7 @@ const Events = ({ manage, setActions }) => {
     // fetch events
     const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
     const { data: eventsData, loading: eventsLoading } = useQuery(GET_EVENTS, {
+        pollInterval: 1000 * 60 * 1, // 1 minute
         variables: { id: targetId },
     });
 

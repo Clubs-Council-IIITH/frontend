@@ -21,7 +21,9 @@ const HomeEvents = () => {
 
     // create/edit event form modal
     const GET_EVENTS = GET_ALL_EVENTS;
-    const { data, loading } = useQuery(GET_EVENTS);
+    const { data, loading } = useQuery(GET_EVENTS, {
+        pollInterval: 1000 * 60 * 3, // 3 minutes
+    });
     const [events, setEvents] = useState([]);
     const [carouselItems, setCarouselItems] = useState([]);
 

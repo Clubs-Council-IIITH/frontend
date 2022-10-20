@@ -20,12 +20,14 @@ const Users = () => {
 
     // fetch pending requests
     const { loading: pendingMembersLoading } = useQuery(ADMIN_GET_PENDING_MEMBERS, {
+        pollInterval: 1000 * 60 * 3, // 3 minutes
         onCompleted: (data) =>
             setPendingMembers(data?.adminPendingMembers?.map((o) => new MemberModel(o))),
     });
 
     // fetch all users
     const { loading: allUsersLoading } = useQuery(ADMIN_GET_ALL_USERS, {
+        pollInterval: 1000 * 60 * 5, // 5 minutes
         onCompleted: (data) => setAllUsers(data?.adminAllUsers?.map((o) => new UserModel(o))),
     });
 

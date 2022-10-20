@@ -17,7 +17,9 @@ const EventCalendar = () => {
     const localizer = momentLocalizer(moment);
     const { isTabletOrMobile } = useContext(NavigationContext);
 
-    const { data, loading } = useQuery(GET_ALL_EVENTS);
+    const { data, loading } = useQuery(GET_ALL_EVENTS, {
+        pollInterval: 1000 * 60 * 5, // 5 minutes
+    });
     const [events, setEvents] = useState([]);
     useEffect(() => {
         setEvents(

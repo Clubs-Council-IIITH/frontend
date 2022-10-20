@@ -16,10 +16,14 @@ const Events = () => {
     const theme = useTheme();
 
     const { data: pendingEventsData, loading: pendingEventsLoading } =
-        useQuery(ADMIN_SLC_PENDING_EVENTS);
+        useQuery(ADMIN_SLC_PENDING_EVENTS, {
+            pollInterval: 1000 * 60 * 2, // 2 minutes
+        });
 
     const { data: approvedEventsData, loading: approvedEventsLoading } =
-        useQuery(ADMIN_APPROVED_EVENTS);
+        useQuery(ADMIN_APPROVED_EVENTS, {
+            pollInterval: 1000 * 60 * 5, // 5 minutes
+        });
 
     // event modal
     const [viewProps, setViewProps] = useState({});
