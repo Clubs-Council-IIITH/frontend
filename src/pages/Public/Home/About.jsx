@@ -38,7 +38,7 @@ const About = () => {
     // fetch all clubs
     const { data: clubsData, loading: clubsLoading } = useQuery(GET_ALL_CLUBS, {
         fetchPolicy: "cache-and-network",
-        pollInterval: 1000,
+        pollInterval: 1000*60*3, // 3 minutes
     });
 
     if (clubsLoading) return null;
