@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { useTheme } from "@mui/styles";
 
+import { useQuery } from "@apollo/client";
+import { GET_ALL_CLUBS } from "queries/clubs";
+
 import { Card, Grid, Box, Typography } from "@mui/material";
 import { NavigationContext } from "contexts/NavigationContext";
 
@@ -32,6 +35,14 @@ const About = () => {
     const theme = useTheme();
     const { isTabletOrMobile } = useContext(NavigationContext);
 
+    // fetch all clubs
+    const { data: clubsData, loading: clubsLoading } = useQuery(GET_ALL_CLUBS, {
+        fetchPolicy: "cache-and-network",
+        pollInterval: 1000,
+    });
+
+    if (clubsLoading) return null;
+
     return (
         <Box px={3} py={6} backgroundColor={theme.palette.primary.main}>
             <Box>
@@ -55,10 +66,14 @@ const About = () => {
                 </Typography>
                 <Grid container spacing={2} mt={1}>
                     <Grid item>
-                        <Statistic number="7" title="Technical Clubs" />
+                        <Statistic number={
+                            (clubsData?.clubs?.filter((o) => o.category.toLowerCase() === "technical").length)
+                        } title="Technical Clubs" />
                     </Grid>
                     <Grid item>
-                        <Statistic number="16" title="Cultural Clubs" />
+                        <Statistic number={
+                            (clubsData?.clubs?.filter((o) => o.category.toLowerCase() === "cultural").length)
+                        } title="Cultural Clubs" />
                     </Grid>
                 </Grid>
             </Box>
@@ -79,7 +94,9 @@ const About = () => {
                 </Typography>
                 <Grid container spacing={2} mt={1}>
                     <Grid item>
-                        <Statistic number="23+" title="Student-Constituent Groups" />
+                        <Statistic number={
+                            (clubsData?.clubs?.filter((o) => o.category.toLowerCase() === "cultural" || o.category.toLowerCase() === "technical").length) + '+'
+                        } title="Student-Constituent Groups" />
                     </Grid>
                     <Grid item>
                         <Statistic number="50+" title="Student Coordinators" />
