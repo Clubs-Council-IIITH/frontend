@@ -99,7 +99,10 @@ const Discussion = ({ activeEventId, open }) => {
 
     const { data: discussionData, loading: discussionLoading } = useQuery(
         ADMIN_GET_EVENT_DISCUSSION,
-        { variables: { eventId: activeEventId } }
+        {
+            variables: { eventId: activeEventId },
+            pollInterval: 1000 * 60 * 1, // 1 Minute
+        }
     );
 
     // send message
