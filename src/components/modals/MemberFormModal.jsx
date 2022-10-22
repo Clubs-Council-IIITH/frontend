@@ -112,7 +112,7 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
 
         // show response toast based on form submission status
         setToast({ open: true, error: addError || updateError });
-        cancelAll();        
+        cancelAll();
 
     };
 
@@ -279,6 +279,37 @@ const MemberFormModal = ({ member = null, controller: [open, setOpen] }) => {
                                                     )}
                                                     rules={{
                                                         required: "User email can not be empty!",
+                                                    }}
+                                                />
+                                            </Box>
+
+                                            <Box mb={2}>
+                                                <Controller
+                                                    name="rollno"
+                                                    control={control}
+                                                    shouldUnregister={true}
+                                                    render={({
+                                                        field: { onChange, value },
+                                                        fieldState: { error },
+                                                    }) => (
+                                                        <TextField
+                                                            fullWidth
+                                                            label="Roll Number*"
+                                                            type="number"
+                                                            placeholder="202*******"
+                                                            variant="standard"
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            error={!!error}
+                                                            InputLabelProps={{ shrink: true }}
+                                                            helperText={
+                                                                error ? error.message : null
+                                                            }
+                                                        />
+                                                    )}
+                                                    rules={{
+                                                        required: "User's roll number can not be empty!",
+                                                        min: "0",
                                                     }}
                                                 />
                                             </Box>

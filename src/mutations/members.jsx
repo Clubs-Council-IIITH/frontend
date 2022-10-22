@@ -6,6 +6,7 @@ export const CREATE_USER = gql`
         $firstName: String!
         $lastName: String!
         $mail: String!
+        $rollno: Int!
         $batch: String!
     ) {
         createUser(
@@ -14,6 +15,7 @@ export const CREATE_USER = gql`
                 firstName: $firstName
                 lastName: $lastName
                 mail: $mail
+                rollno: $rollno
                 batch: $batch
             }
         ) {
@@ -23,6 +25,7 @@ export const CREATE_USER = gql`
                 firstName
                 lastName
                 mail
+                rollno
                 batch
             }
         }

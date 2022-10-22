@@ -8,6 +8,7 @@ export default class MemberModel extends BaseModel {
     club = ClubModel;
     role = "";
     year = "";
+    rollno = 0;
     approved = false;
 
     constructor(data) {

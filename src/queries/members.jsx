@@ -9,6 +9,7 @@ export const GET_USER = gql`
             firstName
             lastName
             mail
+            rollno
             batch
         }
     }
@@ -24,6 +25,7 @@ export const GET_CLUB_MEMBERS = gql`
                 firstName
                 lastName
                 mail
+                rollno
                 batch
             }
             role
@@ -41,6 +43,7 @@ export const ADMIN_GET_ALL_USERS = gql`
             firstName
             lastName
             mail
+            rollno
             batch
         }
     }
@@ -56,6 +59,7 @@ export const ADMIN_GET_PENDING_MEMBERS = gql`
                 firstName
                 lastName
                 mail
+                rollno
                 batch
             }
             club {
@@ -79,6 +83,7 @@ export const ADMIN_GET_CLUB_MEMBERS = gql`
                 firstName
                 lastName
                 mail
+                rollno
                 batch
             }
             role
