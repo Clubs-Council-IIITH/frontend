@@ -43,56 +43,47 @@ const Carousel = () => {
         },
         {
             image: CarouselBackground2,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Clubs Council" subtitle="Ensuring that student-driven campus organizations have successfully cultivated diverse campus life experiences since 2017." />,
         },
         {
             image: CarouselBackground3,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Unrestricted Fun!" subtitle="Join in on fun events!" />,
         },
         {
             image: CarouselBackground4,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Bonding" subtitle="Cheer, cherish and clap together." />,
         },
         {
             image: CarouselBackground5,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Success Stories" subtitle="Witness legends in the making." />,
         },
         {
             image: CarouselBackground6,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Night Life" subtitle="Who said Night needed to be Quiet?" />,
         },
         {
             image: CarouselBackground7,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Challengers" subtitle="Up the potential for fun." />,
         },
         {
             image: CarouselBackground8,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Perform Together" subtitle="Let the beat take over." />,
         },
         {
             image: CarouselBackground9,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Artistry" subtitle="Unleash your creativity." />,
         },
         {
             image: CarouselBackground10,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="CC Website" subtitle="When Tech meets creativity." />,
         },
         {
             image: CarouselBackground11,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Unity in Diversity" subtitle="We are one." />,
         },
         {
             image: CarouselBackground12,
-            content: (
-                <Box sx={{ color: "#fff", textAlign: "right", width: "800px" }}>
-                    <Box my={2}>
-                        <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                            Life at IIITH
-                        </Typography>
-                    </Box>
-                    <Typography variant="h5">Eat. Sleep. Code? Not Quite.</Typography>
-                </Box>
-            ),
+            content: <CarouselItem title="Community" subtitle="College nights like this" />,
         },
     ];
 
