@@ -111,15 +111,15 @@ const Members = ({ manage, setActions }) => {
     useEffect(() => {
         if (manage) {
             setActions([
-                {
-                    title: "Add Member (Coming Soon!)",
-                    icon: HandshakeIcon,
-                    disabled: true,
-                    // onClick: () => {
-                    //     setFormProps({});
-                    //     setFormModal(true);
-                    // },
-                },
+                // {
+                //     title: "Add Member (Coming Soon!)",
+                //     icon: HandshakeIcon,
+                //     disabled: true,
+                //     // onClick: () => {
+                //     //     setFormProps({});
+                //     //     setFormModal(true);
+                //     // },
+                // },
             ]);
         }
     }, [manage]);
