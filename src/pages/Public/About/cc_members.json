@@ -22,16 +22,6 @@
     {
         "name": {
             "title": "Mr",
-            "first": "Vishva",
-            "last": "Saravanan"
-        },
-        "role": "Tech Team Lead",
-        "email": "vishva.saravanan@research.iiit.ac.in",
-        "img": "https://clubs.iiit.ac.in/media/imgs/members/Vishva.jpg"
-    },
-    {
-        "name": {
-            "title": "Mr",
             "first": "Advaith",
             "last": "Malladi"
         },
@@ -82,10 +72,20 @@
     {
         "name": {
             "title": "Mr",
+            "first": "Vishva",
+            "last": "Saravanan"
+        },
+        "role": "Tech Team Lead",
+        "email": "vishva.saravanan@research.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Vishva.jpg"
+    },
+    {
+        "name": {
+            "title": "Mr",
             "first": "Mihir",
             "last": "Rawat"
         },
-        "role": "Tech Team Member",
+        "role": "Tech Team",
         "email": "mihir.r@research.iiit.ac.in",
         "img": "https://clubs.iiit.ac.in/media/imgs/members/Mihir.jpg"
     },
