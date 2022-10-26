@@ -153,7 +153,7 @@ const View = ({ manage }) => {
                     }}
                 >
                     <Box>
-                        {clubData?.club?.website ? (
+                        {/* {clubData?.club?.website ? (
                             <ActionButton
                                 title="Visit Website"
                                 color="success"
@@ -161,7 +161,7 @@ const View = ({ manage }) => {
                                 link={clubData?.club?.website}
                                 onClick={() => linkHandle(clubData?.club?.website)}
                             />
-                        ) : null}
+                        ) : null} */}
                         {actions?.map((action) => (
                             <ActionButton {...action} />
                         ))}
@@ -170,6 +170,17 @@ const View = ({ manage }) => {
             </Box>
             <Box px={2} pb={2} display="flex" justifyContent="space-between">
                 <Box>
+                    {clubData?.club?.website ? (
+                        <IconButton
+                            title="Website"
+                            component="a"
+                            sx={{ mx: 1, backgroundColor: "#097969 !important", color: "#FFFFFF"}}
+                            onClick={() => linkHandle(clubData?.club?.website)}
+                        >
+                            <WebsiteIcon sx={{ height: 20, width: 20 }} />
+                        </IconButton>
+                    ) : null}
+
                     {clubData?.club?.instagram ? (
                         <IconButton
                             component="a"
