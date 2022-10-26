@@ -48,7 +48,7 @@ const DesktopNavigationItem = ({ title, path, icon: Icon }) => {
                     sx={{
                         // default icon
                         color: "#777777",
-                        fontSize: "1.4em",
+                        fontSize: "1.2em",
 
                         // active icon
                         ...(selected && {
@@ -64,7 +64,7 @@ const DesktopNavigationItem = ({ title, path, icon: Icon }) => {
                         fontFamily: theme.typography.fontFamilySecondary,
                         fontWeight: 600,
                         textTransform: "capitalize",
-                        fontSize: "0.9em",
+                        fontSize: "0.85em",
                         color: "#777777",
 
                         // active text

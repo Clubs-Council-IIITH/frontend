@@ -22,13 +22,13 @@ const DesktopProfile = ({ Login, Logout }) => {
                             <Avatar
                                 src=""
                                 sx={{
-                                    width: "1.6em",
-                                    height: "1.6em",
+                                    width: "1.4em",
+                                    height: "1.4em",
                                     backgroundColor: "#fefefe",
                                     color: "#888888",
                                 }}
                             />
-                            <Box mx={1.5}>
+                            <Box mx={2}>
                                 <Box
                                     sx={{
                                         fontSize: "0.9em",
@@ -59,7 +59,7 @@ const DesktopProfile = ({ Login, Logout }) => {
             ) : (
                 <Button fullWidth variant="text" color="secondary" onClick={Login}>
                     <Box display="flex" mx={0.5}>
-                            <LoginIcon fontSize="small" />
+                        <LoginIcon fontSize="small" />
                     </Box>
                     Login
                 </Button>

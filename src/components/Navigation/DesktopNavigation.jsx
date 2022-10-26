@@ -37,7 +37,7 @@ const closedMixin = (theme) => ({
     backgroundColor: "#111111",
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up("sm")]: {
-        width: `calc(${theme.spacing(11)} - 1px)`,
+        width: `calc(${theme.spacing(11)} - 10px)`,
     },
 });
 
@@ -77,7 +77,7 @@ const DesktopNavigation = ({ drawerWidth }) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                    padding: theme.spacing(4, 2, 0),
+                    padding: theme.spacing(3, 2, 0),
                     // necessary for content to be below app bar
                     ...theme.mixins.toolbar,
                 }}
@@ -92,14 +92,14 @@ const DesktopNavigation = ({ drawerWidth }) => {
             </Box>
 
             {/* navigation items */}
-            <Box my={4}>
+            <Box my={1}>
                 {Object.keys(navigation).map(
                     (category, cidx) =>
                         !!navigation[category].length && (
                             <div key={cidx}>
                                 {cidx ? <Divider /> : null}
                                 <Fade in>
-                                    <List style={{ margin: "0 1em" }}>
+                                    <List style={{ margin: "0 0.8em" }}>
                                         {navigation[category].map((item, iidx) => (
                                             <NavigationItem key={iidx} {...item} />
                                         ))}
