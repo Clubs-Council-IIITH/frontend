@@ -26,7 +26,9 @@ const Upcoming = () => {
     const [viewModal, setViewModal] = useState(false);
 
     // fetch upcoming events (TODO: replace query with 'GET_UPCOMING_EVENTS')
-    const { data: upcomingData, loading: upcomingLoading } = useQuery(GET_ALL_EVENTS);
+    const { data: upcomingData, loading: upcomingLoading } = useQuery(GET_ALL_EVENTS, {
+        pollInterval: 1000 * 60 * 2, // 2 minutes
+    });
 
     // open view modal
     const triggerView = (id) => {

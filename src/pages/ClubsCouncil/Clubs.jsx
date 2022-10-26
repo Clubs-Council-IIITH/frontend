@@ -37,6 +37,7 @@ const Clubs = () => {
     // fetch all clubs
     const { data, loading } = useQuery(ADMIN_GET_ALL_CLUBS, {
         onCompleted: (data) => setClubs(data?.adminClubs?.map((o) => new ClubModel(o))),
+        pollInterval: 1000 * 60 * 3, // 3 minutes
     });
 
     // create/edit club form modal
