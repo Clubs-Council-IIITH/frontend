@@ -332,7 +332,7 @@ const EventSchedule = () => {
             <VerticalTimeline lineColor="black">
                 {
                     eventsData.map((member, key) => (
-                        <TimelineElement {...member}>
+                        <TimelineElement {...member} key={key}>
                         </TimelineElement>
                     ))
                 }
