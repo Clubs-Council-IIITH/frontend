@@ -86,3 +86,7 @@ code {
         max-width: 1040px;
     }
 }
+
+.timelineDate{
+    color: #123456;
+}

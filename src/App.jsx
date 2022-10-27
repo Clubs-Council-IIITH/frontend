@@ -25,6 +25,7 @@ import {
     AdminPanelSettingsOutlined,
     InfoOutlined,
     BugReportOutlined,
+    ScheduleOutlined,
 } from "@mui/icons-material";
 import MainContainer from "components/MainContainer";
 // }}}
@@ -78,6 +79,15 @@ const bugFormRoutes = [
         title: "Report Bugs",
         path: "/bug",
         icon: BugReportOutlined,
+    },
+];
+
+const inductionRoutes = [
+    {
+        title: "Induction 2022",
+        path: "/induction",
+        icon: ScheduleOutlined     ,
+        component: <Public.InductionPage/>,
     },
 ];
 
@@ -162,6 +172,7 @@ const App = () => {
             publicRoutes,
             protectedRoutes,
             bugFormRoutes,
+            inductionRoutes,
         });
     }, [session]);
 
@@ -202,6 +213,12 @@ const App = () => {
                                         return null;
                                     }}
                                 ></Route>
+                            ))}
+
+                            {inductionRoutes.map((route, idx) => (
+                                <Route exact={route.exact} path={route.path} key={idx}>
+                                    {route.component}
+                                </Route>
                             ))}
 
                             {/* error routes */}
