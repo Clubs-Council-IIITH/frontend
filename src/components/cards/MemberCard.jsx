@@ -23,6 +23,10 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
         triggerDelete(id);
     };
 
+    const titleCase = (str) => {
+        return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
+    };
+
     return (
         <Box onMouseOver={() => setShowActions(true)} onMouseOut={() => setShowActions(false)}>
             <Card variant="none">
@@ -37,12 +41,12 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
                     <Avatar sx={{ width: "180px", height: "180px" }} src={user?.img} />
 
                     <Typography variant="h5" mb={1} mt={2} sx={{ textAlign: "center" }}>
-                        {`${user.firstName} ${user.lastName}`}
+                        {titleCase(`${user.firstName} ${user.lastName}`)}
                     </Typography>
 
                     <Box display="flex" alignItems="center">
                         <Typography variant="subtitle" mx={1}>
-                            {role}
+                            {titleCase(role)}
                         </Typography>
 
                         {/* show approval status in manage mode */}
@@ -81,7 +85,9 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
                     )}
 
                     <Box mt={2}>
-                        <Typography sx={{ color: "#888888" }}>{user.batch}</Typography>
+                        <Typography sx={{ color: "#888888" }}>
+                            {user.batch?.toUpperCase()}
+                        </Typography>
                     </Box>
                 </CardContent>
             </Card>
