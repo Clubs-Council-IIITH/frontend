@@ -8,7 +8,7 @@ export const CREATE_EVENT = gql`
         $description: String
         $audience: String
     ) {
-        createEvent(
+        newEventDescription(
             eventData: {
                 datetimeStart: $datetimeStart
                 datetimeEnd: $datetimeEnd
@@ -23,38 +23,6 @@ export const CREATE_EVENT = gql`
                     id
                     name
                 }
-                poster
-                datetimeStart
-                datetimeEnd
-                name
-                description
-                audience
-            }
-        }
-    }
-`;
-
-export const UPDATE_EVENT = gql`
-    mutation updateEventMutation(
-        $id: ID!
-        $datetimeStart: DateTime
-        $datetimeEnd: DateTime
-        $name: String!
-        $description: String
-        $audience: String
-    ) {
-        updateEvent(
-            eventData: {
-                id: $id
-                datetimeStart: $datetimeStart
-                datetimeEnd: $datetimeEnd
-                name: $name
-                description: $description
-                audience: $audience
-            }
-        ) {
-            event {
-                id
                 poster
                 datetimeStart
                 datetimeEnd
@@ -117,6 +85,23 @@ export const CHANGE_POSTER = gql`
             event {
                 eventId: id
                 poster
+            }
+        }
+    }
+`;
+
+export const BYPASS_BUDGET = gql`
+    mutation bypassBudget($id: ID!) {
+        bypassBudgetApproval(eventData: { id: $id }) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+                state
             }
         }
     }

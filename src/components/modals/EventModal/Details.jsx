@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@apollo/client";
-import { CREATE_EVENT, UPDATE_EVENT, CHANGE_POSTER } from "mutations/events";
+import { CREATE_EVENT, CHANGE_POSTER } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -18,7 +18,6 @@ import {
     FormGroup,
     FormControlLabel,
     Checkbox,
-    InputLabel,
 } from "@mui/material";
 import {
     EventOutlined as DatetimeIcon,
@@ -49,14 +48,9 @@ const Details = ({
     const [createEvent] = useMutation(CREATE_EVENT, {
         refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
-        onCompleted: ({ createEvent: { event } }) => {
+        onCompleted: ({ newEventDescription: { event } }) => {
             setActiveEventId(event.id);
         },
-    });
-
-    const [updateEvent] = useMutation(UPDATE_EVENT, {
-        refetchQueries: [GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
-        awaitRefetchQueries: true,
     });
 
     // send the new poster
@@ -67,6 +61,10 @@ const Details = ({
 
     // submit form
     const onSubmit = async (data) => {
+        if (activeEventId) {
+            setEditing(false);
+        }
+
         // remove rawPoster from the data and format audience
         const transformedData = {
             ...data,
@@ -78,21 +76,12 @@ const Details = ({
         };
 
         // update or create new instance of data
-        await (activeEventId
-            ? updateEvent({
-                  variables: { ...transformedData, id: activeEventId },
-                  onCompleted: async () => {
-                      await changePoster({
-                          variables: { ...data?.rawPoster, eventId: activeEventId },
-                      });
-                  },
-              })
-            : createEvent({
-                  variables: { ...transformedData },
-                  onCompleted: async ({ createEvent: { event } }) => {
-                      await changePoster({ variables: { ...data?.rawPoster, eventId: event.id } });
-                  },
-              }));
+        await createEvent({
+            variables: { ...transformedData },
+            onCompleted: async ({ newEventDescription: { event } }) => {
+                await changePoster({ variables: { ...data?.rawPoster, eventId: event.id } });
+            },
+        });
 
         // stop editing
         setEditing(false);
@@ -123,14 +112,16 @@ const Details = ({
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
-                            {!editing ? <DatetimeIcon fontSize="small" sx={{ mr: 2 }} /> : null}
+                            {!(editing && !activeEventId) ? (
+                                <DatetimeIcon fontSize="small" sx={{ mr: 2 }} />
+                            ) : null}
 
                             <Grid container alignItems="center">
-                                <Grid item mb={editing ? 2 : 0}>
+                                <Grid item mb={editing && !activeEventId ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
-                                        ) : editing ? (
+                                        ) : editing && !activeEventId ? (
                                             <Controller
                                                 name="datetimeStart"
                                                 control={control}
@@ -176,7 +167,7 @@ const Details = ({
                                     </Typography>
                                 </Grid>
 
-                                {!(isTabletOrMobile && editing) ? (
+                                {!(isTabletOrMobile && editing && !activeEventId) ? (
                                     <Grid item>
                                         <Box mx={1}>—</Box>
                                     </Grid>
@@ -184,11 +175,11 @@ const Details = ({
                                     <Box m={1} />
                                 )}
 
-                                <Grid item mb={editing ? 2 : 0}>
+                                <Grid item mb={editing && !activeEventId ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
-                                        ) : editing ? (
+                                        ) : editing && !activeEventId ? (
                                             <Controller
                                                 name="datetimeEnd"
                                                 control={control}
@@ -236,7 +227,7 @@ const Details = ({
                             </Grid>
                         </Box>
 
-                        {editing ? (
+                        {editing && !activeEventId ? (
                             <Box display="flex">
                                 <FormControl component="fieldset">
                                     <FormGroup>
@@ -244,7 +235,10 @@ const Details = ({
                                             name="rawPoster"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={{ img: null, deletePrev: false }}
+                                            defaultValue={{
+                                                img: null,
+                                                deletePrev: editing && !activeEventId,
+                                            }}
                                             render={({ field }) => (
                                                 <>
                                                     <Button variant="outlined" component="label">
@@ -302,7 +296,7 @@ const Details = ({
                     <Typography variant="h4">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing ? (
+                        ) : editing && !activeEventId ? (
                             <Controller
                                 name="name"
                                 control={control}
@@ -340,7 +334,7 @@ const Details = ({
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing ? (
+                        ) : editing && !activeEventId ? (
                             <Controller
                                 name="description"
                                 control={control}
@@ -371,7 +365,7 @@ const Details = ({
                 </Grid>
 
                 <Grid item xs={12} mt={2}>
-                    {editing ? (
+                    {editing && !activeEventId ? (
                         <FormLabel component="legend" sx={{ fontSize: 12 }}>
                             Target Audience
                         </FormLabel>
@@ -381,7 +375,7 @@ const Details = ({
                         <AudienceIcon sx={{ my: 0.5, mr: 2 }} />
                         {eventLoading ? (
                             <Skeleton animation="wave" width={200} />
-                        ) : editing ? (
+                        ) : editing && !activeEventId ? (
                             <FormControl component="fieldset" sx={{ ml: 1 }}>
                                 <FormGroup>
                                     <Box>

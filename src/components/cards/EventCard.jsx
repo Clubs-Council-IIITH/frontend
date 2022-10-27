@@ -2,6 +2,7 @@ import { useTheme } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 
 import {
+    Alert,
     Avatar,
     Box,
     Card,
@@ -14,6 +15,8 @@ import {
     Tooltip,
 } from "@mui/material";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
+
+import { InfoOutlined as StatusIcon } from "@mui/icons-material";
 
 import { ISOtoDT } from "utils/DateTimeUtil";
 import { StateProgress } from "utils/EventUtil";
@@ -98,6 +101,7 @@ const EventCard = ({
                         justifyContent: "space-between",
                         flexGrow: 2,
                         width: "100%",
+                        pb: 1,
                     }}
                 >
                     <Box>
@@ -138,13 +142,24 @@ const EventCard = ({
                                 {skeleton ? (
                                     <Skeleton animation="wave" />
                                 ) : (
-                                    <Tooltip title={stateProgress.text} arrow>
-                                        <BorderLinearProgress
-                                            value={stateProgress.value}
-                                            color={stateProgress.color}
-                                            variant="determinate"
-                                        />
-                                    </Tooltip>
+                                    <Alert
+                                        icon={
+                                            <StatusIcon
+                                                fontSize="small"
+                                                sx={{ my: "auto", color: stateProgress.color[800] }}
+                                            />
+                                        }
+                                        sx={{
+                                            px: 1,
+                                            py: 0,
+                                            backgroundColor: stateProgress.color[100],
+                                            color: stateProgress.color[800],
+                                        }}
+                                    >
+                                        <Typography variant="body2">
+                                            {stateProgress.text}
+                                        </Typography>
+                                    </Alert>
                                 )}
                             </Box>
                         )}

@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
-import { CREATE_EVENT, UPDATE_EVENT } from "mutations/events";
+import { CREATE_EVENT } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 
 import {
@@ -34,15 +34,6 @@ const EventForm = ({ form_id }) => {
         onCompleted: ({ createEvent: { event } }) => setActiveEvent(new EventModel(event)),
     });
 
-    const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT, {
-        refetchQueries: [
-            { query: GET_EVENT_BY_ID, variables: { id: activeEvent?.id } },
-            ADMIN_GET_CLUB_EVENTS,
-        ],
-        awaitRefetchQueries: true,
-        onCompleted: ({ updateEvent: { event } }) => setActiveEvent(new EventModel(event)),
-    });
-
     const onSubmit = async (data) => {
         const transformedData = {
             ...data,
@@ -53,9 +44,7 @@ const EventForm = ({ form_id }) => {
         };
 
         // update or create new instance of data
-        await (activeEvent
-            ? updateEvent({ variables: { ...transformedData, id: activeEvent.id } })
-            : createEvent({ variables: { ...transformedData } }));
+        await createEvent({ variables: { ...transformedData } });
 
         // move to the next page
         stepper.next();
@@ -157,7 +146,9 @@ const EventForm = ({ form_id }) => {
                                         name={"audience"}
                                         control={control}
                                         shouldUnregister={true}
-                                        defaultValue={AudienceStringtoDict(activeEvent?.audience || "")}
+                                        defaultValue={AudienceStringtoDict(
+                                            activeEvent?.audience || ""
+                                        )}
                                         render={({ field }) =>
                                             [
                                                 { value: "ug1", label: "UG1" },

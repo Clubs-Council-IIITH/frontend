@@ -16,7 +16,7 @@ import {
 import { ArrowBack as BackIcon } from "@mui/icons-material";
 
 import { useMutation, useLazyQuery } from "@apollo/client";
-import { PROGRESS_EVENT, DELETE_EVENT } from "mutations/events";
+import { PROGRESS_EVENT, DELETE_EVENT, BYPASS_BUDGET } from "mutations/events";
 import {
     ADMIN_GET_CLUB_EVENTS,
     GET_CLUB_EVENTS,
@@ -120,7 +120,25 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         ],
         awaitRefetchQueries: true,
         onError: (error) => setToast({ open: true, errorText: error }),
-        onCompleted: () => setToast({ open: true, successText: "Event approved!" }),
+        onCompleted: () => setToast({ open: true, successText: "Done!" }),
+    });
+
+    // approve event budget
+    const [approveEventBudget] = useMutation(BYPASS_BUDGET, {
+        refetchQueries: [
+            ADMIN_CC_PENDING_EVENTS,
+            GET_ALL_EVENTS,
+            ADMIN_GET_ALL_EVENTS,
+            GET_CLUB_EVENTS,
+            ADMIN_APPROVED_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+            ADMIN_CC_PENDING_EVENTS,
+            ADMIN_SLC_PENDING_EVENTS,
+            ADMIN_SLO_PENDING_EVENTS,
+            ADMIN_GAD_PENDING_EVENTS,
+        ],
+        awaitRefetchQueries: true,
+        onError: (error) => setToast({ open: true, errorText: error }),
     });
 
     // update all states whenever eventId changes
@@ -193,6 +211,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setOpen(false);
     };
 
+    const handleApproveBudget = async () => {
+        // approve current event budget
+        await approveEventBudget({ variables: { id: activeEventId } });
+    };
+
     // map action keys to buttons
     const actionButtons = {
         close: (
@@ -259,6 +282,29 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 onClick={handleApprove}
             >
                 Approve
+            </Button>
+        ),
+        submit:
+            eventData?.event?.state === EventStates.incomplete ? (
+                <Button
+                    disableElevation
+                    key="approve"
+                    variant="contained"
+                    color="success"
+                    onClick={handleApprove}
+                >
+                    Submit
+                </Button>
+            ) : null,
+        approveBudget: (
+            <Button
+                disableElevation
+                key="bypass"
+                variant="contained"
+                color="warning"
+                onClick={handleApproveBudget}
+            >
+                Approve Budget
             </Button>
         ),
     };
@@ -339,9 +385,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     item
                                     xs={
                                         manage &&
-                                            activeEventId &&
-                                            eventData?.event?.state !== EventStates.deleted &&
-                                            !isTabletOrMobile
+                                        activeEventId &&
+                                        eventData?.event?.state !== EventStates.deleted &&
+                                        !isTabletOrMobile
                                             ? 8
                                             : 12
                                     }
@@ -408,7 +454,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                             >
                                                 {actionButtons["close"]}
                                                 {(editing || deleting || actions.length) &&
-                                                    eventData?.event?.state !== EventStates.deleted ? (
+                                                eventData?.event?.state !== EventStates.deleted ? (
                                                     <CardActions sx={{ p: 0, m: 0 }}>
                                                         {!activeEventId || editing ? (
                                                             <>{actionButtons["save"]}</>
@@ -430,8 +476,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                 </Grid>
 
                                 {manage &&
-                                    activeEventId &&
-                                    eventData?.event?.state !== EventStates.deleted ? (
+                                activeEventId &&
+                                eventData?.event?.state !== EventStates.deleted ? (
                                     <Grid item xs>
                                         <Box height="100%">
                                             <Card variant="outlined" sx={{ height: "100%" }}>
