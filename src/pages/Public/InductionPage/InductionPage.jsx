@@ -3,7 +3,7 @@ import { useState } from "react";
 import Page from "components/Page";
 import { TabBar, TabPanels } from "components/Tabs";
 
-import { Divider } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 
 import EventSchedule from "./EventsSchedule";
 import COC from "./COC";
@@ -16,19 +16,18 @@ const tabs = [
     //     route: "/handbook",
     // },
     {
-        title: "Events Schedule",
+        title: "Schedule",
         panel: <EventSchedule />,
         route: "/events",
     },
     {
-        title: "Clash of Clusters Points Table",
+        title: "Clash of Clusters",
         panel: <COC />,
         route: "/point-table",
     },
 ];
 
 const InductionPage = () => {
-
     const [actions, setActions] = useState([]);
 
     const tabController = useState(0);
@@ -41,7 +40,10 @@ const InductionPage = () => {
     };
 
     return (
-        <Page header="Induction 2022">
+        <Page full>
+            <Typography variant="h3" pt={12} pb={3} px={4}>
+                Induction 2022
+            </Typography>
             <TabBar tabs={tabs} controller={tabController} tabProps={tabProps} routed />
             <Divider />
             <TabPanels tabs={tabs} controller={tabController} tabProps={tabProps} routed />
