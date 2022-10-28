@@ -77,7 +77,7 @@ const eventsData = [
     {
         "className": "red",
         "date": "2 November, 5pm - 7pm",
-        "title": "Arduino",
+        "title": "Intro to Arduino",
         "subtitle": "ERC",
         "description": "",
         "icon": PrecisionManufacturing

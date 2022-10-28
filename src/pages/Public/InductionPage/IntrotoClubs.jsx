@@ -40,8 +40,8 @@ const table1 = {
     header: "Day 1 (9:00 - 12:30) - Sunday",
     rows: [
         "Clubs Council",
-        "The Art Society",
         "Literary Club",
+        "Ping!",
         "Programming Club",
         "Cyclorama",
         "Skateboarding Club",
@@ -52,7 +52,7 @@ const table1 = {
         "Language Club",
         "Gaming Club",
         "The Debate Society",
-        "Ping!",
+        "The Art Society",
         "NSS",
         "Felicity",
     ],
