@@ -15,6 +15,8 @@ import {
 import { ISOtoDT } from "utils/DateTimeUtil";
 
 const EVENT_POSTER_HEIGHT = 200;
+const FALLBACK_EVENT_POSTER =
+    "https://lands-tube.it.landsd.gov.hk/AVideo/view/img/notfound_portrait.jpg";
 
 const EventCardMini = ({
     id,
@@ -37,12 +39,13 @@ const EventCardMini = ({
                             <Skeleton
                                 variant="rectangular"
                                 animation="wave"
+                                width="100%"
                                 height={EVENT_POSTER_HEIGHT}
                             />
                         ) : (
                             <CardMedia
                                 component="img"
-                                image={poster}
+                                image={poster || FALLBACK_EVENT_POSTER}
                                 height={EVENT_POSTER_HEIGHT}
                             />
                         )}
