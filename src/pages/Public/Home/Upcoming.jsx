@@ -10,6 +10,7 @@ import { NavigationContext } from "contexts/NavigationContext";
 import Empty from "components/Empty";
 import EventModal from "components/modals/EventModal";
 import EventCardMini from "components/cards/EventCardMini";
+import EventStates from "constants/EventStates";
 
 const Upcoming = () => {
     const theme = useTheme();
@@ -70,12 +71,15 @@ const Upcoming = () => {
                                 />
                             ))}
                         </Grid>
-                    ) : upcomingData?.allEvents?.length === 0 ? (
+                    ) : upcomingData?.allEvents?.filter(
+                          (event) => event?.state === EventStates["completed"]
+                      )?.length === 0 ? (
                         <Empty />
                     ) : (
                         <Grid container direction="row" spacing={3}>
                             {upcomingData?.allEvents
                                 ?.slice(EVENTS_PER_ROW * (page - 1), EVENTS_PER_ROW * page)
+                                ?.filter((event) => event?.state === EventStates["completed"])
                                 ?.map((event) => (
                                     <EventCardMini
                                         {...event}

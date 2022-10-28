@@ -55,6 +55,7 @@ export const GET_CLUB_EVENTS = gql`
             name
             audience
             description
+            state
         }
     }
 `;
