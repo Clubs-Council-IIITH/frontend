@@ -7,6 +7,7 @@ import { Divider, Typography } from "@mui/material";
 
 import EventSchedule from "./EventsSchedule";
 import COC from "./COC";
+import IntrotoClubs from "./IntrotoClubs";
 // import Handbook from "./Handbook";
 
 const tabs = [
@@ -19,6 +20,11 @@ const tabs = [
         title: "Schedule",
         panel: <EventSchedule />,
         route: "/events",
+    },
+    {
+        title: "Intro to Student Bodies",
+        panel: <IntrotoClubs />,
+        route: "/intro",
     },
     {
         title: "Clash of Clusters",
