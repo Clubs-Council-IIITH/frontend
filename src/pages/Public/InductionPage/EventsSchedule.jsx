@@ -1,4 +1,4 @@
-import { AbcOutlined, RemoveOutlined, SportsSoccerOutlined, PrecisionManufacturing, EscalatorWarningOutlined, CameraEnhanceOutlined, TodayOutlined, PlayCircleFilledOutlined, Computer, Groups2Outlined, TravelExploreOutlined, VideogameAssetOutlined, PeopleOutlined, NightlifeOutlined, EmojiEmotionsOutlined, BrushOutlined, ColorLensOutlined, PsychologyOutlined, QuizOutlined, BorderColorOutlined, LanguageOutlined } from "@mui/icons-material";
+import { AbcOutlined, RemoveOutlined, SportsSoccerOutlined, PrecisionManufacturing, EscalatorWarningOutlined, CameraEnhanceOutlined, TodayOutlined, PlayCircleFilledOutlined, Computer, Groups2Outlined, TravelExploreOutlined, VideogameAssetOutlined, PeopleOutlined, NightlifeOutlined, EmojiEmotionsOutlined, BrushOutlined, ColorLensOutlined, PsychologyOutlined, QuizOutlined, BorderColorOutlined, LanguageOutlined, MovieCreationOutlined } from "@mui/icons-material";
 import { Divider } from "@mui/material";
 
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
@@ -152,17 +152,25 @@ const eventsData = [
     },
     {
         "className": "blue",
-        "date": "6 November, 4pm - 7:30pm",
+        "date": "6 November, 2pm - 5:30pm",
         "title": "Fresher's Quiz",
         "subtitle": "TVRQC",
         "description": "",
         "icon": QuizOutlined
     },
     {
+        "className": "pink",
+        "date": "6 November, 6pm - 8pm",
+        "title": "Halloween Event",
+        "subtitle": "Language Club",
+        "description": "",
+        "icon": LanguageOutlined
+    },
+    {
         "className": "date"
     },
     {
-        "className": "pink",
+        "className": "red",
         "date": "7 November, 5:30pm - 7:30pm",
         "title": "Futsal",
         "subtitle": "ASEC",
@@ -173,7 +181,7 @@ const eventsData = [
         "className": "date"
     },
     {
-        "className": "pink",
+        "className": "red",
         "date": "8 November, 5:30pm - 7:30pm",
         "title": "Futsal",
         "subtitle": "ASEC",
@@ -208,10 +216,10 @@ const eventsData = [
     {
         "className": "red",
         "date": "11 November, 5:30pm - 7:30pm",
-        "title": "Halloween Event",
-        "subtitle": "Language Club",
+        "title": "Cyclorama Showcase",
+        "subtitle": "Cyclorama",
         "description": "",
-        "icon": LanguageOutlined
+        "icon": MovieCreationOutlined
     },
     {
         "className": "empty"
