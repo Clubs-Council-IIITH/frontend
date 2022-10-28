@@ -55,7 +55,7 @@ const About = () => {
             </Typography>
 
             <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom mt={4}>
-                THE TEAM
+                EXECUTIVE BOARD
             </Typography>
             <Grid container spacing={1}>
                 {TeamJSON.map((member, key) => (
@@ -66,7 +66,7 @@ const About = () => {
             </Grid>
 
             <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom mt={4}>
-                FURTHER MEMBERS
+                THE CC TEAM
             </Typography>
             <Typography variant="body1" fontWeight={400}>
                 The Club Coordinators are an essential part of the Clubs Council, and they come
