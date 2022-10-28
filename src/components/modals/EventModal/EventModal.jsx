@@ -83,6 +83,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
         GET_EVENT_BY_ID,
         {
+            pollInterval: 1000 * 60 * 2, // 2 minutes
             variables: { id: activeEventId },
         }
     );
@@ -297,7 +298,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 </Button>
             ) : null,
         approveBudget: (
-            <Button
+            // TO DO : add this variable in fetching of data from backend
+            (!eventData?.event?.budget_approved) ? (
+                <Button
                 disableElevation
                 key="bypass"
                 variant="contained"
@@ -305,7 +308,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 onClick={handleApproveBudget}
             >
                 Approve Budget
-            </Button>
+                </Button>
+            ) : null
         ),
     };
 
