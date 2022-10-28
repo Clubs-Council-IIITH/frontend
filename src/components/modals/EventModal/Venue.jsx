@@ -69,7 +69,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
             <Grid container p={3}>
                 <Grid item xs={12}>
                     <FormLabel component="legend">Requested Venue</FormLabel>
-                    {editing ? (
+                    {editing && eventData?.event?.state === "A_0" ? (
                         <Select
                             fullWidth
                             name="venue"
@@ -112,14 +112,18 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                     )}
                 </Grid>
 
-                {((editing && selectedRoom && selectedRoom !== "none") ||
+                {((editing &&
+                    eventData?.event?.state === "A_0" &&
+                    selectedRoom &&
+                    selectedRoom !== "none") ||
                     (!editing &&
+                        eventData?.event?.state === "A_0" &&
                         !currentBookingLoading &&
                         currentBooking?.adminRoomByEventId?.room &&
                         currentBooking?.adminRoomByEventId?.room !== "none")) && (
                     <Grid item container mt={0} spacing={3}>
                         <Grid item xs={12}>
-                            {editing ? (
+                            {editing && eventData?.event?.state === "A_0" ? (
                                 <Controller
                                     name="population"
                                     control={control}
@@ -166,7 +170,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                         </Grid>
 
                         <Grid item xs={12}>
-                            {editing ? (
+                            {editing && eventData?.event?.state === "A_0" ? (
                                 <Controller
                                     name="equipment"
                                     control={control}
@@ -210,7 +214,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                         </Grid>
 
                         <Grid item xs={12}>
-                            {editing ? (
+                            {editing && eventData?.event?.state === "A_0" ? (
                                 <Controller
                                     name="additional"
                                     control={control}

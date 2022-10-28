@@ -11,59 +11,41 @@ export const AudienceFormatter = (audienceString) => {
 
 // convert event state into a progressbar percentage
 export const StateProgress = (state) => {
-    if (state === EventStates.cc_pending)
+    if (state === EventStates["incomplete"]) {
         return {
             value: 1 * (100 / 5),
             color: blueGrey,
+            text: "Not submitted",
+        };
+    } else if (state === EventStates["cc_pending"]) {
+        return {
+            value: 1 * (100 / 5),
+            color: blue,
             text: "Waiting for Clubs Council approval",
         };
-
-    // if (state === EventStates.fc_pending)
-    //     return {
-    //         value: 2 * (100 / 6),
-    //         color: blue,
-    //         text: "Waiting for Finance Council approval",
-    //     };
-
-    if (state === EventStates.slc_pending)
+    } else if (state === EventStates["room|budget_pending"]) {
         return {
-            value: 2 * (100 / 5),
-            color: indigo,
-            text: "Waiting for SLC approval",
-        };
-
-    if (state === EventStates.slo_pending)
-        return {
-            value: 3 * (100 / 5),
+            value: 1 * (100 / 5),
             color: deepPurple,
-            text: "Waiting for SLO approval",
+            text: "Waiting for Room/Budget approval",
         };
-
-    if (state === EventStates.gad_pending)
+    } else if (state === EventStates["approved"]) {
         return {
-            value: 4 * (100 / 5),
-            color: blue,
-            text: "Waiting for GAD approval",
-        };
-
-    if (state === EventStates.approved)
-        return {
-            value: 100,
+            value: 1 * (100 / 5),
             color: green,
-            text: "Approved!",
+            text: "Approved",
         };
-
-    if (state === EventStates.completed)
+    } else if (state === EventStates["completed"]) {
         return {
-            value: 100,
+            value: 1 * (100 / 5),
             color: amber,
             text: "Completed",
         };
-
-    if (state === EventStates.deleted)
+    } else if (state === EventStates["deleted"]) {
         return {
-            value: 100,
+            value: 1 * (100 / 5),
             color: red,
             text: "Deleted",
         };
+    }
 };

@@ -15,14 +15,18 @@ import { EventCard } from "components/cards";
 const Events = () => {
     const theme = useTheme();
 
-    const { data: pendingEventsData, loading: pendingEventsLoading } =
-        useQuery(ADMIN_CC_PENDING_EVENTS, {
+    const { data: pendingEventsData, loading: pendingEventsLoading } = useQuery(
+        ADMIN_CC_PENDING_EVENTS,
+        {
             pollInterval: 1000 * 60 * 1, // 1 minute
-        });
-    const { data: approvedEventsData, loading: approvedEventsLoading } =
-        useQuery(ADMIN_APPROVED_EVENTS, {
+        }
+    );
+    const { data: approvedEventsData, loading: approvedEventsLoading } = useQuery(
+        ADMIN_APPROVED_EVENTS,
+        {
             pollInterval: 1000 * 60 * 3, // 3 minutes
-        });
+        }
+    );
 
     // event modal
     const [viewProps, setViewProps] = useState({});
@@ -40,7 +44,7 @@ const Events = () => {
 
     const cardPropsPending = {
         showClub: true,
-        triggerView: (id) => triggerView(id, ["approve"]),
+        triggerView: (id) => triggerView(id, ["approveBudget", "approve"]),
     };
 
     const cardPropsApproved = {

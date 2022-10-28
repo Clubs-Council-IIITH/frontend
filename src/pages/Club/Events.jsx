@@ -76,7 +76,7 @@ const Events = ({ manage, setActions }) => {
         setViewProps({
             manage: manage,
             eventId: id,
-            actions: manage ? ["edit", "delete"] : [],
+            actions: manage ? ["submit", "edit", "delete"] : [],
         });
         setViewModal(true);
     };
@@ -92,7 +92,7 @@ const Events = ({ manage, setActions }) => {
                         setViewProps({
                             manage: manage,
                             eventId: null,
-                            actions: ["edit", "delete"],
+                            actions: ["submit", "edit", "delete"],
                         });
                         setViewModal(true);
                     },
