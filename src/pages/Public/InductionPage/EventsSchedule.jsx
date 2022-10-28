@@ -211,17 +211,6 @@ const eventsData = [
         "icon": PeopleOutlined
     },
     {
-        "className": "date"
-    },
-    {
-        "className": "red",
-        "date": "11 November, 5:30pm - 7:30pm",
-        "title": "Cyclorama Showcase",
-        "subtitle": "Cyclorama",
-        "description": "",
-        "icon": MovieCreationOutlined
-    },
-    {
         "className": "empty"
     },
 ]
