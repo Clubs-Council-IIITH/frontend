@@ -39,11 +39,16 @@ const Carousel = () => {
     const carousel = [
         {
             image: CarouselBackground1,
-            content: <CarouselItem title="Life at IIITH" subtitle="Eat. Sleep. Code? Not Quite." />,
+            content: <CarouselItem title="Life at IIIT" subtitle="Eat. Sleep. Code? Not Quite." />,
         },
         {
             image: CarouselBackground2,
-            content: <CarouselItem title="Clubs Council" subtitle="Ensuring that student-driven campus organizations have successfully cultivated diverse campus life experiences since 2017." />,
+            content: (
+                <CarouselItem
+                    title="Clubs at IIIT"
+                    subtitle="Explore your student life beyond the classroom."
+                />
+            ),
         },
         {
             image: CarouselBackground3,
@@ -51,15 +56,27 @@ const Carousel = () => {
         },
         {
             image: CarouselBackground4,
-            content: <CarouselItem title="Bonding" subtitle="Cheer, cherish and clap together." />,
+            content: (
+                <CarouselItem
+                    title="Connect IIIT"
+                    subtitle="Come together to learn, work, live and play."
+                />
+            ),
         },
         {
             image: CarouselBackground5,
-            content: <CarouselItem title="Success Stories" subtitle="Witness legends in the making." />,
+            content: (
+                <CarouselItem title="Success Stories" subtitle="Witness legends in the making." />
+            ),
         },
         {
             image: CarouselBackground6,
-            content: <CarouselItem title="Night Life" subtitle="Who said Night needed to be Quiet?" />,
+            content: (
+                <CarouselItem
+                    title="Experience IIIT"
+                    subtitle="Expand your mind, explore your passion."
+                />
+            ),
         },
         {
             image: CarouselBackground7,
@@ -73,17 +90,15 @@ const Carousel = () => {
             image: CarouselBackground9,
             content: <CarouselItem title="Artistry" subtitle="Unleash your creativity." />,
         },
-        {
-            image: CarouselBackground10,
-            content: <CarouselItem title="CC Website" subtitle="When Tech meets creativity." />,
-        },
-        {
-            image: CarouselBackground11,
-            content: <CarouselItem title="Unity in Diversity" subtitle="We are one." />,
-        },
+        // {
+        //     image: CarouselBackground11,
+        //     content: <CarouselItem title="Unity in Diversity" subtitle="We are one." />,
+        // },
         {
             image: CarouselBackground12,
-            content: <CarouselItem title="Community" subtitle="College nights like this" />,
+            content: (
+                <CarouselItem title="Campus Life" subtitle="A vibrant residential community." />
+            ),
         },
     ];
 
