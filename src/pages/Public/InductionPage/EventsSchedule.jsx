@@ -11,7 +11,7 @@ const eventsData = [
     },
     {
         "className": "red",
-        "date": "30 October, 9am - 12pm",
+        "date": "30 October, 9am - 12:30pm",
         "title": "Intro to Student Bodies",
         "subtitle": "Session - 1",
         "description": "",

@@ -301,13 +301,13 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             // TO DO : add this variable in fetching of data from backend
             (!eventData?.event?.budget_approved) ? (
                 <Button
-                disableElevation
-                key="bypass"
-                variant="contained"
-                color="warning"
-                onClick={handleApproveBudget}
-            >
-                Approve Budget
+                    disableElevation
+                    key="bypass"
+                    variant="contained"
+                    color="info"
+                    onClick={handleApproveBudget}
+                >
+                    Approve Budget
                 </Button>
             ) : null
         ),
@@ -389,9 +389,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                     item
                                     xs={
                                         manage &&
-                                        activeEventId &&
-                                        eventData?.event?.state !== EventStates.deleted &&
-                                        !isTabletOrMobile
+                                            activeEventId &&
+                                            eventData?.event?.state !== EventStates.deleted &&
+                                            !isTabletOrMobile
                                             ? 8
                                             : 12
                                     }
@@ -458,7 +458,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                             >
                                                 {actionButtons["close"]}
                                                 {(editing || deleting || actions.length) &&
-                                                eventData?.event?.state !== EventStates.deleted ? (
+                                                    eventData?.event?.state !== EventStates.deleted ? (
                                                     <CardActions sx={{ p: 0, m: 0 }}>
                                                         {!activeEventId || editing ? (
                                                             <>{actionButtons["save"]}</>
@@ -480,8 +480,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                 </Grid>
 
                                 {manage &&
-                                activeEventId &&
-                                eventData?.event?.state !== EventStates.deleted ? (
+                                    activeEventId &&
+                                    eventData?.event?.state !== EventStates.deleted ? (
                                     <Grid item xs>
                                         <Box height="100%">
                                             <Card variant="outlined" sx={{ height: "100%" }}>
