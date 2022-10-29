@@ -42,17 +42,17 @@ import * as Club from "pages/Club";
 // routes {{{
 const publicRoutes = [
     {
-        title: "About",
-        path: "/about",
-        icon: InfoOutlined,
-        component: <Public.About />,
-    },
-    {
         title: "Home",
         path: "/",
         icon: HomeOutlined,
         component: <Public.Home />,
         exact: true,
+    },
+    {
+        title: "About",
+        path: "/about",
+        icon: InfoOutlined,
+        component: <Public.About />,
     },
     {
         title: "Clubs",

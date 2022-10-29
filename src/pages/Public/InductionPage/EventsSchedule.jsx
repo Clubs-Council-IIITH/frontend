@@ -47,7 +47,7 @@ const eventsData = [
     {
         "className": "yellow",
         "date": "31 October, 8pm",
-        "title": "Karoke Night",
+        "title": "Karaoke Night",
         "subtitle": "APEX",
         "description": "",
         "icon": PlayCircleFilledOutlined
@@ -68,7 +68,7 @@ const eventsData = [
     },
     {
         "className": "green",
-        "date": "2 November, 2:30pm - 4:30pm",
+        "date": "2 November, 3:30pm - 5:30pm",
         "title": "Clash of Clusters Photo Contest",
         "subtitle": "Pentaprism",
         "description": "",
@@ -76,7 +76,7 @@ const eventsData = [
     },
     {
         "className": "red",
-        "date": "2 November, 5pm - 7pm",
+        "date": "2 November, 5:30pm - 7:30pm",
         "title": "Intro to Arduino",
         "subtitle": "ERC",
         "description": "",
@@ -172,7 +172,7 @@ const eventsData = [
     {
         "className": "red",
         "date": "7 November, 5:30pm - 7:30pm",
-        "title": "Futsal",
+        "title": "Clash of Clusters Futsal",
         "subtitle": "ASEC",
         "description": "Part - 1",
         "icon": SportsSoccerOutlined
@@ -183,7 +183,7 @@ const eventsData = [
     {
         "className": "red",
         "date": "8 November, 5:30pm - 7:30pm",
-        "title": "Futsal",
+        "title": "Clash of Clusters Futsal",
         "subtitle": "ASEC",
         "description": "Part - 2",
         "icon": SportsSoccerOutlined
