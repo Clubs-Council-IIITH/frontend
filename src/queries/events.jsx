@@ -16,6 +16,7 @@ export const GET_ALL_EVENTS = gql`
             name
             audience
             description
+            state
         }
     }
 `;

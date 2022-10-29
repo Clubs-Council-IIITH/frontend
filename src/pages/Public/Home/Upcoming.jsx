@@ -54,7 +54,13 @@ const Upcoming = () => {
                             <Pagination
                                 size="small"
                                 page={page}
-                                count={Math.ceil(upcomingData?.allEvents?.length / EVENTS_PER_ROW)}
+                                count={Math.ceil(
+                                    upcomingData
+                                        ?.allEvents
+                                        ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+                                        ?.filter((event) =>
+                                            event?.state !== EventStates["completed"])
+                                        ?.length / EVENTS_PER_ROW)}
                                 onChange={(_, v) => setPage(v)}
                             />
                         ) : null}
@@ -72,14 +78,15 @@ const Upcoming = () => {
                             ))}
                         </Grid>
                     ) : upcomingData?.allEvents?.filter(
-                          (event) => event?.state === EventStates["completed"]
-                      )?.length === 0 ? (
+                        (event) => event?.state !== EventStates["completed"]
+                    )?.length === 0 ? (
                         <Empty />
                     ) : (
                         <Grid container direction="row" spacing={3}>
                             {upcomingData?.allEvents
+                                ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+                                ?.filter((event) => event?.state === EventStates["approved"])
                                 ?.slice(EVENTS_PER_ROW * (page - 1), EVENTS_PER_ROW * page)
-                                ?.filter((event) => event?.state === EventStates["completed"])
                                 ?.map((event) => (
                                     <EventCardMini
                                         {...event}

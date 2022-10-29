@@ -122,21 +122,22 @@ const Events = ({ manage, setActions }) => {
                             <Grid container spacing={2} mb={2}>
                                 {eventsLoading
                                     ? [...Array(6).keys()].map((idx) => (
-                                          <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                                              <EventCard skeleton />
-                                          </Grid>
-                                      ))
+                                        <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
+                                            <EventCard skeleton />
+                                        </Grid>
+                                    ))
                                     : eventsData?.[targetEvents]
-                                          ?.filter(
-                                              (e) =>
-                                                  e.state !== EventStates.completed &&
-                                                  e.state !== EventStates.deleted
-                                          )
-                                          ?.map((event, idx) => (
-                                              <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                                                  <EventCard actions {...event} {...cardProps} />
-                                              </Grid>
-                                          ))}
+                                        ?.filter(
+                                            (e) =>
+                                                e.state !== EventStates.completed &&
+                                                e.state !== EventStates.deleted
+                                        )
+                                        ?.filter((e) => Date.parse(e?.datetimeEnd) > Date.parse(new Date()))
+                                        ?.map((event, idx) => (
+                                            <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
+                                                <EventCard actions {...event} {...cardProps} />
+                                            </Grid>
+                                        ))}
                             </Grid>
                         </Collapse>
 
@@ -149,7 +150,7 @@ const Events = ({ manage, setActions }) => {
                         <Collapse in={expandCompleted}>
                             <Grid container spacing={2}>
                                 {eventsData?.[targetEvents]
-                                    ?.filter((e) => e.state == EventStates.completed)
+                                    ?.filter((e) => e.state == EventStates.completed || Date.parse(e?.datetimeEnd) < Date.parse(new Date()))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardProps} />
