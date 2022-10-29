@@ -38,7 +38,7 @@ const eventsData = [
     },
     {
         "className": "red",
-        "date": "31 October, 5:30pm - 7:30pm",
+        "date": "31 October, 5:30pm - 8:00pm",
         "title": "Intro to Student Bodies",
         "subtitle": "Session - 2",
         "description": "",
@@ -143,8 +143,16 @@ const eventsData = [
         "className": "date"
     },
     {
+        "className": "blue",
+        "date": "6 November, 9am - 12:30pm",
+        "title": "Fresher's Quiz",
+        "subtitle": "TVRQC",
+        "description": "",
+        "icon": QuizOutlined
+    },
+    {
         "className": "red",
-        "date": "6 November, 9am - 12pm",
+        "date": "6 November, 2:30pm - 5:30pm",
         "title": "Face Painting",
         "subtitle": "Art Society",
         "description": "",
@@ -157,14 +165,6 @@ const eventsData = [
         "subtitle": "Chess Club",
         "description": "",
         "icon": PsychologyOutlined
-    },
-    {
-        "className": "blue",
-        "date": "6 November, 2pm - 5:30pm",
-        "title": "Fresher's Quiz",
-        "subtitle": "TVRQC",
-        "description": "",
-        "icon": QuizOutlined
     },
     {
         "className": "pink",

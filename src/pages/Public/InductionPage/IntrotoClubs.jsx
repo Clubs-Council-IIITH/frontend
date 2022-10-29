@@ -53,7 +53,9 @@ const table1 = {
         "Gaming Club",
         "The Debate Society",
         "The Art Society",
+        "Cultural Council",
         "NSS",
+        "Campus Life Council",
         "Felicity",
     ],
 };
@@ -73,6 +75,7 @@ const table2 = {
         "Astronomy Club",
         "ISAQC",
         "CCC",
+        "Fashion Club",
         "Alumni-cell",
         "E-Cell",
     ],
