@@ -61,21 +61,25 @@ const Events = () => {
                         full
                         empty={
                             !pendingEventsLoading &&
-                            !pendingEventsData?.adminSloPendingEvents?.length
+                            !pendingEventsData?.adminSloPendingEvents
+                                ?.filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
+                                ?.length
                         }
                     >
                         <Grid container spacing={2} mb={2}>
                             {pendingEventsLoading
                                 ? [...Array(6).keys()].map((idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard skeleton showClub />
-                                      </Grid>
-                                  ))
-                                : pendingEventsData?.adminSloPendingEvents?.map((event, idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard {...event} {...cardPropsPending} />
-                                      </Grid>
-                                  ))}
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
+                                : pendingEventsData?.adminSloPendingEvents?.
+                                    filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} lg={3} key={idx}>
+                                            <EventCard {...event} {...cardPropsPending} />
+                                        </Grid>
+                                    ))}
                         </Grid>
                     </Page>
                 </Box>
@@ -94,15 +98,28 @@ const Events = () => {
                         <Grid container spacing={2} mb={2}>
                             {approvedEventsLoading
                                 ? [...Array(6).keys()].map((idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard skeleton showClub />
-                                      </Grid>
-                                  ))
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
                                 : approvedEventsData?.adminApprovedEvents?.map((event, idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard {...event} {...cardPropsApproved} />
-                                      </Grid>
-                                  ))}
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard {...event} {...cardPropsApproved} />
+                                    </Grid>
+                                ))}
+                            {pendingEventsLoading
+                                ? [...Array(6).keys()].map((idx) => (
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
+                                : pendingEventsData?.adminSloPendingEvents?.
+                                    filter((event) => Date.parse(event?.datetimeStart) < Date.parse(new Date()))
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} lg={3} key={idx}>
+                                            <EventCard {...event} {...cardPropsPending} />
+                                        </Grid>
+                                    ))}
                         </Grid>
                     </Page>
                 </Box>

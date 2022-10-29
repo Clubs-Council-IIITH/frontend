@@ -53,6 +53,12 @@ const Events = () => {
         triggerView: (id) => triggerView(id, []),
     };
 
+    const cardPropsDelayed = {
+        manage: true,
+        showClub: true,
+        triggerView: (id) => triggerView(id, ["approve", "delete"]),
+    };
+
     return (
         <>
             <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
@@ -65,21 +71,25 @@ const Events = () => {
                         full
                         empty={
                             !pendingEventsLoading &&
-                            !pendingEventsData?.adminCcPendingEvents?.length
+                            !pendingEventsData?.adminCcPendingEvents
+                                ?.filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
+                                ?.length
                         }
                     >
                         <Grid container spacing={2} mb={2}>
                             {pendingEventsLoading
                                 ? [...Array(6).keys()].map((idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard skeleton showClub />
-                                      </Grid>
-                                  ))
-                                : pendingEventsData?.adminCcPendingEvents?.map((event, idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard {...event} {...cardPropsPending} />
-                                      </Grid>
-                                  ))}
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
+                                : pendingEventsData?.adminCcPendingEvents?.
+                                    filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} lg={3} key={idx}>
+                                            <EventCard {...event} {...cardPropsPending} />
+                                        </Grid>
+                                    ))}
                         </Grid>
                     </Page>
                 </Box>
@@ -98,15 +108,28 @@ const Events = () => {
                         <Grid container spacing={2} mb={2}>
                             {approvedEventsLoading
                                 ? [...Array(6).keys()].map((idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard skeleton showClub />
-                                      </Grid>
-                                  ))
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
                                 : approvedEventsData?.adminApprovedEvents?.map((event, idx) => (
-                                      <Grid item md={4} lg={3} key={idx}>
-                                          <EventCard {...event} {...cardPropsApproved} />
-                                      </Grid>
-                                  ))}
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard {...event} {...cardPropsApproved} />
+                                    </Grid>
+                                ))}
+                            {pendingEventsLoading
+                                ? [...Array(6).keys()].map((idx) => (
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
+                                : pendingEventsData?.adminCcPendingEvents?.
+                                    filter((event) => Date.parse(event?.datetimeStart) < Date.parse(new Date()))
+                                    ?.map((event, idx) => (
+                                        <Grid item md={4} lg={3} key={idx}>
+                                            <EventCard {...event} {...cardPropsDelayed} />
+                                        </Grid>
+                                    ))}
                         </Grid>
                     </Page>
                 </Box>

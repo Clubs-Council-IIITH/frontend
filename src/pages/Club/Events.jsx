@@ -150,7 +150,8 @@ const Events = ({ manage, setActions }) => {
                         <Collapse in={expandCompleted}>
                             <Grid container spacing={2}>
                                 {eventsData?.[targetEvents]
-                                    ?.filter((e) => e.state == EventStates.completed || Date.parse(e?.datetimeEnd) < Date.parse(new Date()))
+                                    ?.filter((e) => e.state == EventStates.completed ||
+                                        (Date.parse(e?.datetimeEnd) < Date.parse(new Date()) && e.state == EventStates.approved))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardProps} />
