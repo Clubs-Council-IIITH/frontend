@@ -46,7 +46,7 @@ const eventsData = [
     },
     {
         "className": "yellow",
-        "date": "31 October, 8pm",
+        "date": "31 October, 9pm",
         "title": "Karaoke Night",
         "subtitle": "APEX",
         "description": "",
@@ -62,6 +62,14 @@ const eventsData = [
         "subtitle": "OSDG",
         "description": "Doubt Session",
         "icon": Computer
+    },
+    {
+        "className": "yellow",
+        "date": "1 November, 9pm",
+        "title": "Spotlight",
+        "subtitle": "APEX",
+        "description": "",
+        "icon": NightlifeOutlined
     },
     {
         "className": "date"
