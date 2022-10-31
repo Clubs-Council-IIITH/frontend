@@ -160,8 +160,8 @@ const eventsData = [
     },
     {
         "className": "green",
-        "date": "6 November, 10am - 12pm",
-        "title": "Chess Competition",
+        "date": "6 November, 3:30pm - 5:30pm",
+        "title": "Puzzle Solving Session ",
         "subtitle": "Chess Club",
         "description": "",
         "icon": PsychologyOutlined
