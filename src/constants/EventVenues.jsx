@@ -22,10 +22,10 @@ export default {
     cie_gaming: "CIE Gaming Room",
     saranga_hall: "Saranga Hall",
     // Academic
-    himalaya_105: "Himalaya 105**",
-    himalaya_205: "Himalaya 205**",
+    himalaya_105: "Himalaya 105^",
+    himalaya_205: "Himalaya 205^",
     // KRB
-    krb_auditorium: "KRB Auditorium**",
+    krb_auditorium: "KRB Auditorium^",
     sm22: "LM-22 (KRB)",
     sm24: "SM-24 (KRB)",
     sm32: "SM-32 (KRB)",
