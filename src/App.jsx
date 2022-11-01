@@ -49,12 +49,6 @@ const publicRoutes = [
         exact: true,
     },
     {
-        title: "About",
-        path: "/about",
-        icon: InfoOutlined,
-        component: <Public.About />,
-    },
-    {
         title: "Clubs",
         path: "/clubs",
         icon: ExploreOutlined,
@@ -75,6 +69,12 @@ const publicRoutes = [
 ];
 
 const bugFormRoutes = [
+    {
+        title: "About",
+        path: "/about",
+        icon: InfoOutlined,
+        component: <Public.About />,
+    },
     {
         title: "Report Bugs",
         path: "/bug",

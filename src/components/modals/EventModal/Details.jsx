@@ -382,6 +382,23 @@ const Details = ({
                 </Grid>
 
                 <Grid item xs={12} mt={2}>
+                    <Typography variant="body1">
+                        {eventLoading || currentBookingLoading ? (
+                            <Skeleton animation="wave" />
+                        ) : editing ||
+                          !activeEventId ||
+                          !selectedRoom ||
+                          selectedRoom === "none" ||
+                          selectedRoom === "other" ? null : (
+                            <Box mr={1} display="flex" alignItems="center">
+                                <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
+                                {EventVenues[currentBooking?.adminRoomByEventId?.room] || ""}
+                            </Box>
+                        )}
+                    </Typography>
+                </Grid>
+
+                <Grid item xs={12}>
                     {editing && !activeEventId ? (
                         <FormLabel component="legend" sx={{ fontSize: 12 }}>
                             Target Audience
@@ -448,27 +465,6 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
-
-                <Grid item xs={12}>
-                    <Typography variant="body1">
-                        {eventLoading || currentBookingLoading ? (
-                            <Skeleton animation="wave" />
-                        ) : editing ||
-                            !activeEventId ||
-                            (!selectedRoom ||
-                                selectedRoom === "none" ||
-                                selectedRoom === "other") ? (
-                            null
-                        ) : (
-                            <Box mr={1}>
-                                <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
-                                {EventVenues[currentBooking?.adminRoomByEventId?.room] ||
-                                    ""}
-                            </Box>
-                        )}
-                    </Typography>
-                </Grid>
-
             </Grid>
         </form>
     );
