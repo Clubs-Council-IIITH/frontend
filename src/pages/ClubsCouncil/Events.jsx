@@ -107,6 +107,33 @@ const Events = () => {
 
                 <Box>
                     <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
+                        INCOMPLETE EVENTS
+                    </Typography>
+                    <Page
+                        full
+                        empty={
+                            !incompleteEventsLoading &&
+                            !incompleteEventsData?.adminIncompleteEvents?.length
+                        }
+                    >
+                        <Grid container spacing={2} mb={2}>
+                            {incompleteEventsLoading
+                                ? [...Array(6).keys()].map((idx) => (
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
+                                : incompleteEventsData?.adminIncompleteEvents?.map((event, idx) => (
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard {...event} {...cardPropsIncomplete} />
+                                    </Grid>
+                                ))}
+                        </Grid>
+                    </Page>
+                </Box>
+
+                <Box>
+                    <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
                         APPROVED EVENTS
                     </Typography>
                     <Page
@@ -145,32 +172,6 @@ const Events = () => {
                     </Page>
                 </Box>
 
-                <Box>
-                    <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
-                        INCOMPLETE EVENTS
-                    </Typography>
-                    <Page
-                        full
-                        empty={
-                            !incompleteEventsLoading &&
-                            !incompleteEventsData?.adminIncompleteEvents?.length
-                        }
-                    >
-                        <Grid container spacing={2} mb={2}>
-                            {incompleteEventsLoading
-                                ? [...Array(6).keys()].map((idx) => (
-                                    <Grid item md={4} lg={3} key={idx}>
-                                        <EventCard skeleton showClub />
-                                    </Grid>
-                                ))
-                                : incompleteEventsData?.adminIncompleteEvents?.map((event, idx) => (
-                                    <Grid item md={4} lg={3} key={idx}>
-                                        <EventCard {...event} {...cardPropsIncomplete} />
-                                    </Grid>
-                                ))}
-                        </Grid>
-                    </Page>
-                </Box>
             </Page>
         </>
     );
