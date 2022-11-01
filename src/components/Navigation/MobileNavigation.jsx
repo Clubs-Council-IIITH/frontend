@@ -5,7 +5,6 @@ import { useTheme } from "@mui/styles";
 import { NavigationContext } from "contexts/NavigationContext";
 
 import {
-    Typography,
     Box,
     BottomNavigation,
     BottomNavigationAction,
@@ -21,6 +20,8 @@ import {
 import { MoreVert as ManageIcon } from "@mui/icons-material";
 
 import Profile from "./Profile";
+
+import LogoMini from "assets/img/logo_mini.svg";
 
 const MobileNavigation = ({ topbarHeight }) => {
     const { navigation } = useContext(NavigationContext);
@@ -70,9 +71,9 @@ const MobileNavigation = ({ topbarHeight }) => {
                     alignItems: "center",
                 }}
             >
-                <Typography variant="h5" fontWeight={500} mx={2}>
-                    CC
-                </Typography>
+                <IconButton onClick={() => history.push("/")} sx={{ height: 40, width: 40, mx: 1 }}>
+                    <Box component="img" src={LogoMini} alt="" width="20px" />
+                </IconButton>
                 <Box mx={2}>
                     <Profile />
                 </Box>

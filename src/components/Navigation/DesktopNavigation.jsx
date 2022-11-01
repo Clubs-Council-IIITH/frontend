@@ -1,21 +1,15 @@
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 
 import { NavigationContext } from "contexts/NavigationContext";
 
-import {
-    Collapse,
-    Box,
-    Drawer as MuiDrawer,
-    Divider,
-    Fade,
-    List,
-    IconButton,
-    Typography,
-} from "@mui/material";
+import { Collapse, Box, Drawer as MuiDrawer, Divider, Fade, List, IconButton } from "@mui/material";
 
 import NavigationItem from "./DesktopNavigationItem";
 import Profile from "./Profile";
+
+import LogoMini from "assets/img/logo_mini.svg";
 
 // styles {{{
 const openedMixin = (theme, width) => ({
@@ -61,6 +55,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 
 const DesktopNavigation = ({ drawerWidth }) => {
     const theme = useTheme();
+    const history = useHistory();
     const { navigation, expanded, setExpanded } = useContext(NavigationContext);
 
     return (
@@ -82,12 +77,8 @@ const DesktopNavigation = ({ drawerWidth }) => {
                     ...theme.mixins.toolbar,
                 }}
             >
-                <IconButton onClick={null} sx={{ cursor: "none" }}>
-                    <Typography variant="h5">
-                        <Box fontWeight={500} color="#fefefe">
-                            CC
-                        </Box>
-                    </Typography>
+                <IconButton onClick={() => history.push("/")} sx={{ height: 40, width: 40 }}>
+                    <Box component="img" src={LogoMini} alt="" width="20px" />
                 </IconButton>
             </Box>
 

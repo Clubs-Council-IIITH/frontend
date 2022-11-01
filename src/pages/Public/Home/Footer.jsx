@@ -11,6 +11,8 @@ import FacebookIcon from "assets/img/facebook.png";
 import InstagramIcon from "assets/img/instagram.png";
 import DiscordIcon from "assets/img/discord.png";
 
+import LogoFull from "assets/img/logo_full.svg";
+
 const PRIVACY_POLICY_URL = "https://www.iiit.ac.in/privacy-policy/";
 const TWITTER_URL = "https://twitter.com/iiit_hyderabad";
 const FACEBOOK_URL = "https://www.facebook.com/IIITH";
@@ -37,9 +39,9 @@ const Footer = () => {
                         <Box mr={3}>
                             <img src={IIITLogo} height={50} />
                         </Box>
-                        <Typography variant="h4" fontWeight={500} color="secondary">
-                            CC
-                        </Typography>
+                        <Box>
+                            <img src={LogoFull} height={50} />
+                        </Box>
                     </Grid>
                     <Grid
                         item
