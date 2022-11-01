@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useMutation } from "@apollo/client";
+
+import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_EVENT, CHANGE_POSTER } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
+import { ADMIN_ROOM_BY_EVENT_ID } from "queries/room";
+
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
@@ -24,12 +27,14 @@ import {
     GroupOutlined as AudienceIcon,
     Wallpaper as PosterIcon,
     DeleteOutline as TrashIcon,
+    LocationOnOutlined,
 } from "@mui/icons-material";
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
 import { NavigationContext } from "contexts/NavigationContext";
+import EventVenues from "constants/EventVenues";
 
 import enLocale from "date-fns/locale/en-IN";
 
@@ -52,6 +57,18 @@ const Details = ({
             setActiveEventId(event.id);
         },
     });
+
+    const [selectedRoom, setSelectedRoom] = useState("none");
+
+    const { data: currentBooking, loading: currentBookingLoading } = useQuery(
+        ADMIN_ROOM_BY_EVENT_ID,
+        {
+            variables: { eventId: activeEventId },
+            onCompleted: (data) => {
+                setSelectedRoom(data?.adminRoomByEventId?.room || "none");
+            },
+        }
+    );
 
     // send the new poster
     const [changePoster] = useMutation(CHANGE_POSTER, {
@@ -431,6 +448,27 @@ const Details = ({
                         )}
                     </Box>
                 </Grid>
+
+                <Grid item xs={12}>
+                    <Typography variant="body1">
+                        {eventLoading || currentBookingLoading ? (
+                            <Skeleton animation="wave" />
+                        ) : editing ||
+                            !activeEventId ||
+                            (!selectedRoom ||
+                                selectedRoom === "none" ||
+                                selectedRoom === "other") ? (
+                            null
+                        ) : (
+                            <Box mr={1}>
+                                <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
+                                {EventVenues[currentBooking?.adminRoomByEventId?.room] ||
+                                    ""}
+                            </Box>
+                        )}
+                    </Typography>
+                </Grid>
+
             </Grid>
         </form>
     );

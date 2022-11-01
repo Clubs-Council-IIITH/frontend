@@ -142,6 +142,26 @@ export const ADMIN_GET_EVENT_STATE = gql`
     }
 `;
 
+export const ADMIN_INCOMPLETE_EVENTS = gql`
+    query adminIncompleteEvents {
+        adminIncompleteEvents {
+            id
+            club {
+                id
+                name
+                img
+            }
+            datetimeStart
+            datetimeEnd
+            poster
+            name
+            audience
+            description
+            state
+        }
+    }
+`;
+
 export const ADMIN_CC_PENDING_EVENTS = gql`
     query adminCcPendingEvents {
         adminCcPendingEvents {

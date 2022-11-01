@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
@@ -33,6 +33,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
         ADMIN_ROOM_BY_EVENT_ID,
         {
             variables: { eventId: activeEventId },
+            pollInterval: 1000 * 60 * 5, // 5 minutes
             onCompleted: (data) => {
                 setSelectedRoom(data?.adminRoomByEventId?.room || "none");
             },
@@ -145,7 +146,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                             onChange={onChange}
                                             error={!!error}
                                             InputLabelProps={{ shrink: true }}
-                                            InputProps={{ inputProps: { min: 0 } }}
+                                            InputProps={{ inputProps: { min: 1 } }}
                                             helperText={error ? error.message : null}
                                         />
                                     )}

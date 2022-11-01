@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useTheme } from "@mui/styles";
 
 import { useQuery } from "@apollo/client";
-import { ADMIN_CC_PENDING_EVENTS, ADMIN_APPROVED_EVENTS } from "queries/events";
+import { ADMIN_CC_PENDING_EVENTS, ADMIN_APPROVED_EVENTS, ADMIN_INCOMPLETE_EVENTS } from "queries/events";
 
 import { Box, Grid, Typography } from "@mui/material";
 
 import Page from "components/Page";
 
-import EventStates from "constants/EventStates";
 import EventModal from "components/modals/EventModal";
 import { EventCard } from "components/cards";
 
@@ -23,6 +22,12 @@ const Events = () => {
     );
     const { data: approvedEventsData, loading: approvedEventsLoading } = useQuery(
         ADMIN_APPROVED_EVENTS,
+        {
+            pollInterval: 1000 * 60 * 3, // 3 minutes
+        }
+    );
+    const { data: incompleteEventsData, loading: incompleteEventsLoading } = useQuery(
+        ADMIN_INCOMPLETE_EVENTS,
         {
             pollInterval: 1000 * 60 * 3, // 3 minutes
         }
@@ -59,6 +64,12 @@ const Events = () => {
         triggerView: (id) => triggerView(id, ["approve", "delete"]),
     };
 
+    const cardPropsIncomplete = {
+        // manage: true,
+        showClub: true,
+        triggerView: (id) => triggerView(id, []),
+    };
+
     return (
         <>
             <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
@@ -83,13 +94,40 @@ const Events = () => {
                                         <EventCard skeleton showClub />
                                     </Grid>
                                 ))
-                                : pendingEventsData?.adminCcPendingEvents?.
-                                    filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
+                                : pendingEventsData?.adminCcPendingEvents
+                                    ?.filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardPropsPending} />
                                         </Grid>
                                     ))}
+                        </Grid>
+                    </Page>
+                </Box>
+
+                <Box>
+                    <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
+                        INCOMPLETE EVENTS
+                    </Typography>
+                    <Page
+                        full
+                        empty={
+                            !incompleteEventsLoading &&
+                            !incompleteEventsData?.adminIncompleteEvents?.length
+                        }
+                    >
+                        <Grid container spacing={2} mb={2}>
+                            {incompleteEventsLoading
+                                ? [...Array(6).keys()].map((idx) => (
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard skeleton showClub />
+                                    </Grid>
+                                ))
+                                : incompleteEventsData?.adminIncompleteEvents?.map((event, idx) => (
+                                    <Grid item md={4} lg={3} key={idx}>
+                                        <EventCard {...event} {...cardPropsIncomplete} />
+                                    </Grid>
+                                ))}
                         </Grid>
                     </Page>
                 </Box>
@@ -123,8 +161,8 @@ const Events = () => {
                                         <EventCard skeleton showClub />
                                     </Grid>
                                 ))
-                                : pendingEventsData?.adminCcPendingEvents?.
-                                    filter((event) => Date.parse(event?.datetimeStart) < Date.parse(new Date()))
+                                : pendingEventsData?.adminCcPendingEvents
+                                    ?.filter((event) => Date.parse(event?.datetimeStart) < Date.parse(new Date()))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardPropsDelayed} />
@@ -133,6 +171,7 @@ const Events = () => {
                         </Grid>
                     </Page>
                 </Box>
+
             </Page>
         </>
     );

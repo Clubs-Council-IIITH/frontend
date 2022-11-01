@@ -77,9 +77,10 @@ const Upcoming = () => {
                                 />
                             ))}
                         </Grid>
-                    ) : upcomingData?.allEvents?.filter(
-                        (event) => event?.state !== EventStates["completed"]
-                    )?.length === 0 ? (
+                    ) : upcomingData?.allEvents
+                        ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+                        ?.filter((event) => event?.state !== EventStates["completed"]
+                        )?.length === 0 ? (
                         <Empty />
                     ) : (
                         <Grid container direction="row" spacing={3}>
