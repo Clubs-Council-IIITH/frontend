@@ -56,21 +56,13 @@ const eventsData = [
         "className": "date"
     },
     {
-        "className": "blue",
-        "date": "1 November, 5:30pm - 7:30pm",
-        "title": "Linux Fest",
-        "subtitle": "OSDG",
-        "description": "Doubt Session",
-        "icon": Computer
-    },
-    {
         "className": "yellow",
-        "date": "1 November, 9pm",
+        "date": "1 November, 5:30pm",
         "title": "Spotlight",
         "subtitle": "APEX",
         "description": "",
         "icon": NightlifeOutlined
-    },
+    },    
     {
         "className": "date"
     },
@@ -91,7 +83,7 @@ const eventsData = [
         "icon": PrecisionManufacturing
     },
     {
-        "className": "blue",
+        "className": "pink",
         "date": "2 November, 7pm",
         "title": "Halloween Gaming Event",
         "subtitle": "Gaming Club",
@@ -99,12 +91,12 @@ const eventsData = [
         "icon": VideogameAssetOutlined
     },
     {
-        "className": "yellow",
-        "date": "2 November, 9:30pm",
-        "title": "Clash of Clusters",
-        "subtitle": "APEX",
-        "description": "",
-        "icon": EscalatorWarningOutlined
+        "className": "blue",
+        "date": "2 November, 8:30pm - 11pm",
+        "title": "Linux Fest",
+        "subtitle": "OSDG",
+        "description": "Doubt Session",
+        "icon": Computer
     },
     {
         "className": "date"
@@ -201,7 +193,7 @@ const eventsData = [
     },
     {
         "className": "green",
-        "date": "9 November, 5:30pm - 7:30pm",
+        "date": "9 November",
         "title": "Shark Tank",
         "subtitle": "E-Cell",
         "description": "",
@@ -212,7 +204,7 @@ const eventsData = [
     },
     {
         "className": "pink",
-        "date": "10 November, 5:30pm - 7:30pm",
+        "date": "10 November",
         "title": "Clash of Clusters Debate",
         "subtitle": "Debate Society",
         "description": "",
