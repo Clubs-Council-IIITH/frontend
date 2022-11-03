@@ -211,6 +211,17 @@ const eventsData = [
         "icon": PeopleOutlined
     },
     {
+        "className": "date"
+    },
+    {
+        "className": "blue",
+        "date": "11 November",
+        "title": "Clash of Clusters Showcase",
+        "subtitle": "Cyclorama",
+        "description": "",
+        "icon": MovieCreationOutlined
+    },
+    {
         "className": "empty"
     },
 ]
