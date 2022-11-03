@@ -70,12 +70,6 @@ const publicRoutes = [
 
 const bugFormRoutes = [
     {
-        title: "About",
-        path: "/about",
-        icon: InfoOutlined,
-        component: <Public.About />,
-    },
-    {
         title: "Report Bugs",
         path: "/bug",
         icon: BugReportOutlined,
@@ -88,6 +82,12 @@ const inductionRoutes = [
         path: "/induction",
         icon: StarOutline,
         component: <Public.InductionPage />,
+    },
+    {
+        title: "About",
+        path: "/about",
+        icon: InfoOutlined,
+        component: <Public.About />,
     },
 ];
 
