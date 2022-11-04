@@ -134,7 +134,7 @@ const Events = () => {
 
                 <Box>
                     <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom>
-                        APPROVED EVENTS
+                        OTHER EVENTS
                     </Typography>
                     <Page
                         full
