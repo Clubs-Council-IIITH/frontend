@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { ArrowBack as BackIcon } from "@mui/icons-material";
 
-import { useMutation, useLazyQuery } from "@apollo/client";
+import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
 import { PROGRESS_EVENT, DELETE_EVENT, BYPASS_BUDGET } from "mutations/events";
 import {
     ADMIN_GET_CLUB_EVENTS,
@@ -29,6 +29,7 @@ import {
     ADMIN_GAD_PENDING_EVENTS,
     ADMIN_APPROVED_EVENTS,
 } from "queries/events";
+import { ADMIN_GET_EVENT_BUDGET } from "queries/finance";
 
 import { TabBar, TabPanels } from "components/Tabs";
 import { NavigationContext } from "contexts/NavigationContext";
@@ -87,6 +88,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             variables: { id: activeEventId },
         }
     );
+
+    const { data: budgetData, loading: budgetLoading } = useQuery(ADMIN_GET_EVENT_BUDGET, {
+        pollInterval: 1000 * 60 * 3, // 3 minutes
+        variables: { eventId: activeEventId },
+    });
 
     // delete event
     const [deleteEvent] = useMutation(DELETE_EVENT, {
@@ -298,18 +304,21 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 </Button>
             ) : null,
         approveBudget: (
-            // TO DO : add this variable in fetching of data from backend
-            (!eventData?.event?.budget_approved) ? (
-                <Button
-                    disableElevation
-                    key="bypass"
-                    variant="contained"
-                    color="info"
-                    onClick={handleApproveBudget}
-                >
-                    Approve Budget
-                </Button>
-            ) : null
+            // TO DO : add budget_approved variable in fetching of data from backend
+            (budgetLoading ||
+                (!eventData?.event?.budget_approved &&
+                    budgetData?.adminEventBudget?.length !== 0))
+                ? (
+                    <Button
+                        disableElevation
+                        key="bypass"
+                        variant="contained"
+                        color="info"
+                        onClick={handleApproveBudget}
+                    >
+                        Approve Budget
+                    </Button>
+                ) : null
         ),
     };
 

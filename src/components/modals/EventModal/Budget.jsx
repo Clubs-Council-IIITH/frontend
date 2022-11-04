@@ -257,6 +257,7 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
     const { handleSubmit } = useForm();
 
     const { data: budgetData, loading: budgetLoading } = useQuery(ADMIN_GET_EVENT_BUDGET, {
+        pollInterval: 1000 * 60 * 3, // 3 minutes
         variables: { eventId: activeEventId },
     });
 
