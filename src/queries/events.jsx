@@ -17,6 +17,8 @@ export const GET_ALL_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -37,6 +39,8 @@ export const GET_EVENT_BY_ID = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -57,6 +61,8 @@ export const GET_CLUB_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -77,6 +83,8 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             description
             audience
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -96,6 +104,8 @@ export const ADMIN_APPROVED_EVENTS = gql`
             description
             audience
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -116,6 +126,8 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -138,6 +150,8 @@ export const ADMIN_GET_EVENT_STATE = gql`
         event(eventId: $id) {
             id
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -158,6 +172,8 @@ export const ADMIN_INCOMPLETE_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -178,6 +194,8 @@ export const ADMIN_CC_PENDING_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -198,6 +216,8 @@ export const ADMIN_FC_PENDING_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -218,6 +238,8 @@ export const ADMIN_GAD_PENDING_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -238,6 +260,8 @@ export const ADMIN_SLO_PENDING_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;
@@ -258,6 +282,8 @@ export const ADMIN_SLC_PENDING_EVENTS = gql`
             audience
             description
             state
+            roomApproved
+            budgetApproved
         }
     }
 `;

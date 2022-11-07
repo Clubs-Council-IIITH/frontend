@@ -304,9 +304,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 </Button>
             ) : null,
         approveBudget: (
-            // TO DO : add budget_approved variable in fetching of data from backend
+            // TO DO : add budgetApproved variable in fetching of data from backend
             (budgetLoading ||
-                (!eventData?.event?.budget_approved &&
+                (!eventData?.event?.budgetApproved &&
                     budgetData?.adminEventBudget?.length !== 0))
                 ? (
                     <Button
