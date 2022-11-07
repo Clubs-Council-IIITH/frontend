@@ -49,7 +49,8 @@ const Events = () => {
 
     const cardPropsPending = {
         showClub: true,
-        triggerView: (id) => triggerView(id, ["approveBudget", "approve", "submit", "edit", "delete"]),
+        // triggerView: (id) => triggerView(id, ["approveBudget", "approve", "submit", "edit", "delete"]),
+        triggerView: (id) => triggerView(id, ["approveBudget", "approve", "submit", "delete"]),
     };
 
     const cardPropsApproved = {

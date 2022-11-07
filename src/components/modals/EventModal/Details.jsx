@@ -34,7 +34,7 @@ import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
 import { NavigationContext } from "contexts/NavigationContext";
-import EventVenues from "constants/EventVenues";
+import EventVenues_Public from "constants/EventVenues_Public";
 
 import enLocale from "date-fns/locale/en-IN";
 
@@ -283,8 +283,8 @@ const Details = ({
                                                         />
                                                     </Button>
                                                     {field?.value?.img !== null ||
-                                                    (!field?.value?.deletePrev &&
-                                                        !!eventData?.event?.poster) ? (
+                                                        (!field?.value?.deletePrev &&
+                                                            !!eventData?.event?.poster) ? (
                                                         <Button
                                                             variant="text"
                                                             component="label"
@@ -386,13 +386,13 @@ const Details = ({
                         {eventLoading || currentBookingLoading ? (
                             <Skeleton animation="wave" />
                         ) : editing ||
-                          !activeEventId ||
-                          !selectedRoom ||
-                          selectedRoom === "none" ||
-                          selectedRoom === "other" ? null : (
+                            !activeEventId ||
+                            !selectedRoom ||
+                            selectedRoom === "none" ||
+                            selectedRoom === "other" ? null : (
                             <Box mr={1} display="flex" alignItems="center">
                                 <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
-                                {EventVenues[currentBooking?.adminRoomByEventId?.room] || ""}
+                                {EventVenues_Public[currentBooking?.adminRoomByEventId?.room] || ""}
                             </Box>
                         )}
                     </Typography>
@@ -419,7 +419,7 @@ const Details = ({
                                             shouldUnregister={true}
                                             defaultValue={AudienceStringtoDict(
                                                 eventData?.event?.audience ||
-                                                    audienceSelect.map((o) => o.value).join(",")
+                                                audienceSelect.map((o) => o.value).join(",")
                                             )}
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
