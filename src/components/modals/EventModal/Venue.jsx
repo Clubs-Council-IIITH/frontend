@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 
 import EventVenues from "constants/EventVenues";
+import EventVenues_Public from "constants/EventVenues_Public";
 import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
 
 const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) => {
@@ -102,7 +103,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                             ) : currentBooking?.adminRoomByEventId?.room ? (
                                 <Box display="flex" alignItems="center">
                                     <Box mr={1}>
-                                        {EventVenues[currentBooking?.adminRoomByEventId?.room] ||
+                                        {EventVenues_Public[currentBooking?.adminRoomByEventId?.room] ||
                                             "None"}
                                     </Box>
                                 </Box>
@@ -122,143 +123,143 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                         !currentBookingLoading &&
                         currentBooking?.adminRoomByEventId?.room &&
                         currentBooking?.adminRoomByEventId?.room !== "none")) && (
-                    <Grid item container mt={0} spacing={3}>
-                        <Grid item xs={12}>
-                            {editing && eventData?.event?.state === "A_0" ? (
-                                <Controller
-                                    name="population"
-                                    control={control}
-                                    shouldUnregister={true}
-                                    defaultValue={
-                                        currentBooking?.adminRoomByEventId?.population || ""
-                                    }
-                                    render={({
-                                        field: { onChange, value },
-                                        fieldState: { error },
-                                    }) => (
-                                        <TextField
-                                            fullWidth
-                                            type="number"
-                                            label="Expected Audience Population*"
-                                            placeholder={100}
-                                            variant="standard"
-                                            value={value}
-                                            onChange={onChange}
-                                            error={!!error}
-                                            InputLabelProps={{ shrink: true }}
-                                            InputProps={{ inputProps: { min: 1 } }}
-                                            helperText={error ? error.message : null}
-                                        />
-                                    )}
-                                    rules={{
-                                        required: "Expected audience population can not be empty!",
-                                    }}
-                                />
-                            ) : (
-                                <>
-                                    <FormLabel component="legend">Expected Population</FormLabel>
-                                    <Typography variant="body1">
-                                        {currentBookingLoading ? (
-                                            <Skeleton animation="wave" />
-                                        ) : currentBooking?.adminRoomByEventId?.population ? (
-                                            currentBooking.adminRoomByEventId.population
-                                        ) : (
-                                            ""
+                        <Grid item container mt={0} spacing={3}>
+                            <Grid item xs={12}>
+                                {editing && eventData?.event?.state === "A_0" ? (
+                                    <Controller
+                                        name="population"
+                                        control={control}
+                                        shouldUnregister={true}
+                                        defaultValue={
+                                            currentBooking?.adminRoomByEventId?.population || ""
+                                        }
+                                        render={({
+                                            field: { onChange, value },
+                                            fieldState: { error },
+                                        }) => (
+                                            <TextField
+                                                fullWidth
+                                                type="number"
+                                                label="Expected Audience Population*"
+                                                placeholder={100}
+                                                variant="standard"
+                                                value={value}
+                                                onChange={onChange}
+                                                error={!!error}
+                                                InputLabelProps={{ shrink: true }}
+                                                InputProps={{ inputProps: { min: 1 } }}
+                                                helperText={error ? error.message : null}
+                                            />
                                         )}
-                                    </Typography>
-                                </>
-                            )}
-                        </Grid>
+                                        rules={{
+                                            required: "Expected audience population can not be empty!",
+                                        }}
+                                    />
+                                ) : (
+                                    <>
+                                        <FormLabel component="legend">Expected Population</FormLabel>
+                                        <Typography variant="body1">
+                                            {currentBookingLoading ? (
+                                                <Skeleton animation="wave" />
+                                            ) : currentBooking?.adminRoomByEventId?.population ? (
+                                                currentBooking.adminRoomByEventId.population
+                                            ) : (
+                                                ""
+                                            )}
+                                        </Typography>
+                                    </>
+                                )}
+                            </Grid>
 
-                        <Grid item xs={12}>
-                            {editing && eventData?.event?.state === "A_0" ? (
-                                <Controller
-                                    name="equipment"
-                                    control={control}
-                                    shouldUnregister={true}
-                                    defaultValue={
-                                        currentBooking?.adminRoomByEventId?.equipment || ""
-                                    }
-                                    render={({
-                                        field: { onChange, value },
-                                        fieldState: { error },
-                                    }) => (
-                                        <TextField
-                                            multiline
-                                            fullWidth
-                                            label="Equipment Required"
-                                            placeholder="Microphones, Projector, etc."
-                                            variant="standard"
-                                            rows={4}
-                                            value={value}
-                                            onChange={onChange}
-                                            error={!!error}
-                                            InputLabelProps={{ shrink: true }}
-                                            helperText={error ? error.message : null}
-                                        />
-                                    )}
-                                />
-                            ) : (
-                                <>
-                                    <FormLabel component="legend">Equipment Required</FormLabel>
-                                    <Typography variant="body1">
-                                        {currentBookingLoading ? (
-                                            <Skeleton animation="wave" />
-                                        ) : currentBooking?.adminRoomByEventId?.equipment ? (
-                                            currentBooking.adminRoomByEventId.equipment
-                                        ) : (
-                                            ""
+                            <Grid item xs={12}>
+                                {editing && eventData?.event?.state === "A_0" ? (
+                                    <Controller
+                                        name="equipment"
+                                        control={control}
+                                        shouldUnregister={true}
+                                        defaultValue={
+                                            currentBooking?.adminRoomByEventId?.equipment || ""
+                                        }
+                                        render={({
+                                            field: { onChange, value },
+                                            fieldState: { error },
+                                        }) => (
+                                            <TextField
+                                                multiline
+                                                fullWidth
+                                                label="Equipment Required"
+                                                placeholder="Microphones, Projector, etc."
+                                                variant="standard"
+                                                rows={4}
+                                                value={value}
+                                                onChange={onChange}
+                                                error={!!error}
+                                                InputLabelProps={{ shrink: true }}
+                                                helperText={error ? error.message : null}
+                                            />
                                         )}
-                                    </Typography>
-                                </>
-                            )}
-                        </Grid>
+                                    />
+                                ) : (
+                                    <>
+                                        <FormLabel component="legend">Equipment Required</FormLabel>
+                                        <Typography variant="body1">
+                                            {currentBookingLoading ? (
+                                                <Skeleton animation="wave" />
+                                            ) : currentBooking?.adminRoomByEventId?.equipment ? (
+                                                currentBooking.adminRoomByEventId.equipment
+                                            ) : (
+                                                ""
+                                            )}
+                                        </Typography>
+                                    </>
+                                )}
+                            </Grid>
 
-                        <Grid item xs={12}>
-                            {editing && eventData?.event?.state === "A_0" ? (
-                                <Controller
-                                    name="additional"
-                                    control={control}
-                                    shouldUnregister={true}
-                                    defaultValue={currentBooking?.adminRoomByEventId?.additional}
-                                    render={({
-                                        field: { onChange, value },
-                                        fieldState: { error },
-                                    }) => (
-                                        <TextField
-                                            multiline
-                                            fullWidth
-                                            label="Additional Requirements"
-                                            placeholder="Access to venue required at least 1 hour before the event"
-                                            variant="standard"
-                                            rows={4}
-                                            value={value}
-                                            onChange={onChange}
-                                            error={!!error}
-                                            InputLabelProps={{ shrink: true }}
-                                            helperText={error ? error.message : null}
-                                        />
-                                    )}
-                                />
-                            ) : (
-                                <>
-                                    <FormLabel component="legend">
-                                        Additional Requirements
-                                    </FormLabel>
-                                    <Typography variant="body1">
-                                        {currentBookingLoading ? (
-                                            <Skeleton animation="wave" />
-                                        ) : currentBooking?.adminRoomByEventId?.additional ? (
-                                            currentBooking.adminRoomByEventId.additional
-                                        ) : (
-                                            ""
+                            <Grid item xs={12}>
+                                {editing && eventData?.event?.state === "A_0" ? (
+                                    <Controller
+                                        name="additional"
+                                        control={control}
+                                        shouldUnregister={true}
+                                        defaultValue={currentBooking?.adminRoomByEventId?.additional}
+                                        render={({
+                                            field: { onChange, value },
+                                            fieldState: { error },
+                                        }) => (
+                                            <TextField
+                                                multiline
+                                                fullWidth
+                                                label="Additional Requirements"
+                                                placeholder="Access to venue required at least 1 hour before the event"
+                                                variant="standard"
+                                                rows={4}
+                                                value={value}
+                                                onChange={onChange}
+                                                error={!!error}
+                                                InputLabelProps={{ shrink: true }}
+                                                helperText={error ? error.message : null}
+                                            />
                                         )}
-                                    </Typography>
-                                </>
-                            )}
+                                    />
+                                ) : (
+                                    <>
+                                        <FormLabel component="legend">
+                                            Additional Requirements
+                                        </FormLabel>
+                                        <Typography variant="body1">
+                                            {currentBookingLoading ? (
+                                                <Skeleton animation="wave" />
+                                            ) : currentBooking?.adminRoomByEventId?.additional ? (
+                                                currentBooking.adminRoomByEventId.additional
+                                            ) : (
+                                                ""
+                                            )}
+                                        </Typography>
+                                    </>
+                                )}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                )}
+                    )}
             </Grid>
         </form>
     );
