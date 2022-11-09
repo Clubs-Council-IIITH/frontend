@@ -170,8 +170,8 @@ const Details = ({
                                                                 />
                                                             )}
                                                             value={value}
-                                                            onChange={onChange}
-                                                            minDateTime={new Date().toISOString()}
+                                                            onChange={onChange} 
+                                                            minDateTime={new Date()}
                                                         />
                                                     </LocalizationProvider>
                                                 )}
@@ -230,7 +230,7 @@ const Details = ({
                                                             )}
                                                             value={value}
                                                             onChange={onChange}
-                                                            minDateTime={new Date().toISOString()}
+                                                            minDateTime={new Date()}
                                                         />
                                                     </LocalizationProvider>
                                                 )}
