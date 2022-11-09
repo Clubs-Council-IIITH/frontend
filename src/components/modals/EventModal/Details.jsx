@@ -47,8 +47,10 @@ const Details = ({
     setEditing,
     setCurrentPoster,
 }) => {
-    const { control, handleSubmit } = useForm();
+    const { watch, control, handleSubmit } = useForm();
     const { isTabletOrMobile } = useContext(NavigationContext);
+
+    const watchdatetimeStart = watch("datetimeStart", (new Date()));
 
     const [createEvent] = useMutation(CREATE_EVENT, {
         refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
@@ -230,12 +232,13 @@ const Details = ({
                                                             )}
                                                             value={value}
                                                             onChange={onChange}
-                                                            minDateTime={new Date()}
+                                                            minDateTime={watchdatetimeStart}
                                                         />
                                                     </LocalizationProvider>
                                                 )}
                                                 rules={{
                                                     required: "Event end time can not be empty!",
+                                                    min: watchdatetimeStart,
                                                 }}
                                             />
                                         ) : (
