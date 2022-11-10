@@ -6,4 +6,5 @@ export default {
     pg: "PG",
     staff: "Staff",
     faculty: "Faculty",
+    internal: "Internal",
 };

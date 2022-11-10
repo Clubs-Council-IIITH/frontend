@@ -113,10 +113,8 @@ const Details = ({
         { value: "ugx", label: "UG4+" },
         { value: "pg", label: "PG" },
         { value: "staff", label: "Staff" },
-        {
-            value: "faculty",
-            label: "Faculty",
-        },
+        { value: "faculty", label: "Faculty" },
+        { value: "internal", label: "Internal/Non-Public" },
     ];
 
     return (
@@ -172,7 +170,7 @@ const Details = ({
                                                                 />
                                                             )}
                                                             value={value}
-                                                            onChange={onChange} 
+                                                            onChange={onChange}
                                                             minDateTime={new Date()}
                                                         />
                                                     </LocalizationProvider>
