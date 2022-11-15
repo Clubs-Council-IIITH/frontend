@@ -56,7 +56,7 @@ const Events = () => {
     const cardPropsApproved = {
         manage: true,
         showClub: true,
-        triggerView: (id) => triggerView(id, []),
+        triggerView: (id) => triggerView(id, ["SLCReminder", "SLOReminder"]),
     };
 
     const cardPropsDelayed = {

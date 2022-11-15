@@ -384,22 +384,26 @@ const Details = ({
                     </Typography>
                 </Grid>
 
-                <Grid item xs={12} mt={2}>
-                    <Typography variant="body1">
-                        {eventLoading || currentBookingLoading ? (
+                {eventLoading || currentBookingLoading ? (
+                    <Grid item xs={12} mt={2}>
+                        <Typography variant="body1">
                             <Skeleton animation="wave" />
-                        ) : editing ||
-                            !activeEventId ||
-                            !selectedRoom ||
-                            selectedRoom === "none" ||
-                            selectedRoom === "other" ? null : (
+                        </Typography>
+                    </Grid>
+                ) : editing ||
+                    !activeEventId ||
+                    !selectedRoom ||
+                    selectedRoom === "none" ||
+                    selectedRoom === "other" ? null : (
+                    <Grid item xs={12} mt={2}>
+                        <Typography variant="body1">
                             <Box mr={1} display="flex" alignItems="center">
                                 <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
                                 {EventVenues_Public[currentBooking?.adminRoomByEventId?.room] || ""}
                             </Box>
-                        )}
-                    </Typography>
-                </Grid>
+                        </Typography>
+                    </Grid>
+                )}
 
                 <Grid item xs={12}>
                     {editing && !activeEventId ? (

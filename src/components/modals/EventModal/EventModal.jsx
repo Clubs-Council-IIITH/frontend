@@ -16,7 +16,7 @@ import {
 import { ArrowBack as BackIcon } from "@mui/icons-material";
 
 import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
-import { PROGRESS_EVENT, DELETE_EVENT, BYPASS_BUDGET } from "mutations/events";
+import { PROGRESS_EVENT, DELETE_EVENT, BYPASS_BUDGET, SLO_REMINDER, SLC_REMINDER } from "mutations/events";
 import {
     ADMIN_GET_CLUB_EVENTS,
     GET_CLUB_EVENTS,
@@ -148,6 +148,42 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         onError: (error) => setToast({ open: true, errorText: error }),
     });
 
+    // Send Reminder email to SLC
+    const [slcReminder] = useMutation(SLC_REMINDER, {
+        refetchQueries: [
+            ADMIN_CC_PENDING_EVENTS,
+            GET_ALL_EVENTS,
+            ADMIN_GET_ALL_EVENTS,
+            GET_CLUB_EVENTS,
+            ADMIN_APPROVED_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+            ADMIN_CC_PENDING_EVENTS,
+            ADMIN_SLC_PENDING_EVENTS,
+            ADMIN_SLO_PENDING_EVENTS,
+            ADMIN_GAD_PENDING_EVENTS,
+        ],
+        awaitRefetchQueries: true,
+        onError: (error) => setToast({ open: true, errorText: error }),
+    });
+
+    // Send Reminder email to SLO
+    const [sloReminder] = useMutation(SLO_REMINDER, {
+        refetchQueries: [
+            ADMIN_CC_PENDING_EVENTS,
+            GET_ALL_EVENTS,
+            ADMIN_GET_ALL_EVENTS,
+            GET_CLUB_EVENTS,
+            ADMIN_APPROVED_EVENTS,
+            ADMIN_GET_CLUB_EVENTS,
+            ADMIN_CC_PENDING_EVENTS,
+            ADMIN_SLC_PENDING_EVENTS,
+            ADMIN_SLO_PENDING_EVENTS,
+            ADMIN_GAD_PENDING_EVENTS,
+        ],
+        awaitRefetchQueries: true,
+        onError: (error) => setToast({ open: true, errorText: error }),
+    });
+
     // update all states whenever eventId changes
     useEffect(() => {
         if (open) {
@@ -221,6 +257,16 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const handleApproveBudget = async () => {
         // approve current event budget
         await approveEventBudget({ variables: { id: activeEventId } });
+    };
+
+    const handleslcReminder = async () => {
+        // approve current event budget
+        await slcReminder({ variables: { id: activeEventId } });
+    };
+
+    const handlesloReminder = async () => {
+        // approve current event budget
+        await sloReminder({ variables: { id: activeEventId } });
     };
 
     // map action keys to buttons
@@ -304,7 +350,6 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 </Button>
             ) : null,
         approveBudget: (
-            // TO DO : add budgetApproved variable in fetching of data from backend
             (budgetLoading ||
                 (!eventData?.event?.budgetApproved &&
                     budgetData?.adminEventBudget?.length !== 0))
@@ -317,6 +362,36 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                         onClick={handleApproveBudget}
                     >
                         Approve Budget
+                    </Button>
+                ) : null
+        ),
+        SLCReminder: (
+            (eventData?.event?.state == EventStates["room|budget_pending"] &&
+                !eventData?.event?.budgetApproved) ?
+                (
+                    <Button
+                        disableElevation
+                        key="slcreminder"
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleslcReminder}
+                    >
+                        Remind SLC
+                    </Button>
+                ) : null
+        ),
+        SLOReminder: (
+            (eventData?.event?.state == EventStates["room|budget_pending"] &&
+                !eventData?.event?.roomApproved) ?
+                (
+                    <Button
+                        disableElevation
+                        key="sloreminder"
+                        variant="contained"
+                        color="secondary"
+                        onClick={handlesloReminder}
+                    >
+                        Remind SLO
                     </Button>
                 ) : null
         ),
