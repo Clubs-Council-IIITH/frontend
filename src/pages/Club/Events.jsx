@@ -62,21 +62,23 @@ const Events = ({ manage, setActions }) => {
     const [expandUpcoming, setExpandUpcoming] = useState(true);
     const [expandCompleted, setExpandCompleted] = useState(false);
     const [expandDeleted, setExpandDeleted] = useState(false);
+    const [expandExpired, setExpandExpired] = useState(false);
 
     // open only one event state at a time
     const expandState = (setTargetState) => {
         setExpandUpcoming(false);
         setExpandCompleted(false);
         setExpandDeleted(false);
+        setExpandExpired(false);
         setTargetState(true);
     };
 
     // open view modal
-    const triggerView = (id) => {
+    const triggerView = (id, actions) => {
         setViewProps({
             manage: manage,
             eventId: id,
-            actions: manage ? ["submit", "edit", "delete"] : [],
+            actions: manage ? actions : [],
         });
         setViewModal(true);
     };
@@ -104,6 +106,15 @@ const Events = ({ manage, setActions }) => {
     const cardProps = {
         manage,
         triggerView,
+    };
+
+    const cardPropsPending = {
+        manage: manage,
+        triggerView: (id) => triggerView(id, ["submit", "edit", "delete"]),
+    };
+
+    const cardPropsDelayed = {
+        triggerView: (id) => triggerView(id, ["delete"]),
     };
 
     return (
@@ -135,7 +146,7 @@ const Events = ({ manage, setActions }) => {
                                         ?.filter((e) => Date.parse(e?.datetimeEnd) > Date.parse(new Date()))
                                         ?.map((event, idx) => (
                                             <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                                                <EventCard actions {...event} {...cardProps} />
+                                                <EventCard actions {...event} {...cardPropsPending} />
                                             </Grid>
                                         ))}
                             </Grid>
@@ -154,7 +165,7 @@ const Events = ({ manage, setActions }) => {
                                         (Date.parse(e?.datetimeEnd) < Date.parse(new Date()) && e.state == EventStates.approved))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
-                                            <EventCard {...event} {...cardProps} />
+                                            <EventCard {...event} {...cardPropsPending} />
                                         </Grid>
                                     ))}
                             </Grid>
@@ -174,9 +185,42 @@ const Events = ({ manage, setActions }) => {
                                             ?.filter((e) => e.state == EventStates.deleted)
                                             ?.map((event, idx) => (
                                                 <Grid item md={4} lg={3} key={idx}>
-                                                    <EventCard {...event} {...cardProps} />
+                                                    <EventCard {...event} {...cardPropsPending} />
                                                 </Grid>
                                             ))}
+                                    </Grid>
+                                </Collapse>
+                            </>
+                        )}
+
+                        {/* Incomplete events */}
+                        {manage && (
+                            <>
+                                <EventStateToggle
+                                    stateName="EXPIRED"
+                                    expanded={expandExpired}
+                                    callback={() => expandState(setExpandExpired)}
+                                />
+                                <Collapse in={expandExpired}>
+                                    <Grid container spacing={2} mb={2}>
+                                        {eventsLoading
+                                            ? [...Array(6).keys()].map((idx) => (
+                                                <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
+                                                    <EventCard skeleton />
+                                                </Grid>
+                                            ))
+                                            : eventsData?.[targetEvents]
+                                                ?.filter(
+                                                    (e) =>
+                                                        e.state !== EventStates.completed &&
+                                                        e.state !== EventStates.deleted
+                                                )
+                                                ?.filter((e) => Date.parse(e?.datetimeEnd) < Date.parse(new Date()))
+                                                ?.map((event, idx) => (
+                                                    <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
+                                                        <EventCard actions {...event} {...cardPropsDelayed} />
+                                                    </Grid>
+                                                ))}
                                     </Grid>
                                 </Collapse>
                             </>
