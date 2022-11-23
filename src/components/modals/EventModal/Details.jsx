@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_EVENT, CHANGE_POSTER } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
-import { ADMIN_ROOM_BY_EVENT_ID } from "queries/room";
+import { ROOM_BY_EVENT_ID } from "queries/room";
 
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -63,11 +63,11 @@ const Details = ({
     const [selectedRoom, setSelectedRoom] = useState("none");
 
     const { data: currentBooking, loading: currentBookingLoading } = useQuery(
-        ADMIN_ROOM_BY_EVENT_ID,
+        ROOM_BY_EVENT_ID,
         {
             variables: { eventId: activeEventId },
             onCompleted: (data) => {
-                setSelectedRoom(data?.adminRoomByEventId?.room || "none");
+                setSelectedRoom(data?.roomByEventId?.room || "none");
             },
         }
     );
@@ -384,22 +384,26 @@ const Details = ({
                     </Typography>
                 </Grid>
 
-                <Grid item xs={12} mt={2}>
-                    <Typography variant="body1">
-                        {eventLoading || currentBookingLoading ? (
+                {eventLoading || currentBookingLoading ? (
+                    <Grid item xs={12} mt={2}>
+                        <Typography variant="body1">
                             <Skeleton animation="wave" />
-                        ) : editing ||
-                            !activeEventId ||
-                            !selectedRoom ||
-                            selectedRoom === "none" ||
-                            selectedRoom === "other" ? null : (
+                        </Typography>
+                    </Grid>
+                ) : editing ||
+                    !activeEventId ||
+                    !selectedRoom ||
+                    selectedRoom === "none" ||
+                    selectedRoom === "other" ? null : (
+                    <Grid item xs={12} mt={2}>
+                        <Typography variant="body1">
                             <Box mr={1} display="flex" alignItems="center">
                                 <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
-                                {EventVenues_Public[currentBooking?.adminRoomByEventId?.room] || ""}
+                                {EventVenues_Public[currentBooking?.roomByEventId?.room] || ""}
                             </Box>
-                        )}
-                    </Typography>
-                </Grid>
+                        </Typography>
+                    </Grid>
+                )}
 
                 <Grid item xs={12}>
                     {editing && !activeEventId ? (
