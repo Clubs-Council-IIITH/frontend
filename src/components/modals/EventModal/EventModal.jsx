@@ -40,6 +40,7 @@ import { SessionContext } from "contexts/SessionContext";
 import Details from "./Details";
 import Budget from "./Budget";
 import Venue from "./Venue";
+import POC from "./POC";
 import Discussion from "./Discussion";
 
 import EventStates from "constants/EventStates";
@@ -63,6 +64,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         { title: "Details", panel: <Details /> },
         { title: "Budget", panel: <Budget /> },
         { title: "Venue", panel: <Venue /> },
+        { title: "POC", panel: <POC /> },
     ];
     const tabController = useState(0);
 
@@ -292,7 +294,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             </Button>
         ),
         submit:
-            eventData?.event?.state === EventStates.incomplete ? (
+            eventData?.event?.state === EventStates.incomplete &&
+            eventData?.event?.pocName ? (
                 <Button
                     disableElevation
                     key="approve"

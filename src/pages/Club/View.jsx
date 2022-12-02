@@ -72,7 +72,7 @@ const ActionButton = ({
                 disabled={disabled}
                 sx={{ ml: 1, mt: 1 }}
             >
-                <Icon fontsize="small" sx={{ mr: 1 }} />
+                <Icon fontSize="small" sx={{ mr: 1 }} />
                 {title}
             </Fab>
         </Zoom>
@@ -89,7 +89,7 @@ const ActionButton = ({
             disabled={disabled}
             sx={{ ml: 1 }}
         >
-            <Icon fontsize="small" sx={{ mr: 1 }} />
+            <Icon fontSize="small" sx={{ mr: 1 }} />
             {title}
         </Button>
     );

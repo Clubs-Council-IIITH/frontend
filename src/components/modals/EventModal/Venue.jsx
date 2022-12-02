@@ -19,7 +19,6 @@ import {
 
 import EventVenues from "constants/EventVenues";
 import EventVenues_Public from "constants/EventVenues_Public";
-import { Done as ApprovedIcon, Autorenew as PendingIcon } from "@mui/icons-material";
 
 const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) => {
     const { control, handleSubmit } = useForm();

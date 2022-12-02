@@ -19,6 +19,7 @@ export const GET_ALL_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -41,6 +42,7 @@ export const GET_EVENT_BY_ID = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -63,6 +65,7 @@ export const GET_CLUB_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -85,6 +88,7 @@ export const ADMIN_GET_ALL_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -106,6 +110,7 @@ export const ADMIN_APPROVED_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -128,6 +133,7 @@ export const ADMIN_GET_CLUB_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -174,6 +180,7 @@ export const ADMIN_INCOMPLETE_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -196,6 +203,7 @@ export const ADMIN_CC_PENDING_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -218,6 +226,7 @@ export const ADMIN_FC_PENDING_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -240,6 +249,7 @@ export const ADMIN_GAD_PENDING_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -262,6 +272,7 @@ export const ADMIN_SLO_PENDING_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
@@ -284,6 +295,7 @@ export const ADMIN_SLC_PENDING_EVENTS = gql`
             state
             roomApproved
             budgetApproved
+            pocName
         }
     }
 `;
