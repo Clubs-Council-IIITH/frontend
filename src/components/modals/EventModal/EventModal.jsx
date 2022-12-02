@@ -12,6 +12,7 @@ import {
     CardActions,
     Fade,
     Modal,
+    Tooltip,
 } from "@mui/material";
 import { ArrowBack as BackIcon } from "@mui/icons-material";
 
@@ -83,7 +84,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [expandPoster, setExpandPoster] = useState(false);
 
     // fetch event details
-    const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
+    const [getEventData, { data: eventData, loading: eventLoading }, refetch] = useLazyQuery(
         GET_EVENT_BY_ID,
         {
             pollInterval: 1000 * 60 * 2, // 2 minutes
@@ -236,6 +237,10 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setEditing(true);
     };
 
+    const handleSave = () => {
+        refetch();
+    };
+
     const handleDelete = () => {
         setDeleting(true);
     };
@@ -291,6 +296,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 variant="contained"
                 color="info"
                 disableElevation
+                onClick={handleSave}
             >
                 Save
             </Button>
@@ -340,17 +346,31 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             </Button>
         ),
         submit:
-            eventData?.event?.state === EventStates.incomplete &&
-            eventData?.event?.pocName ? (
-                <Button
-                    disableElevation
-                    key="approve"
-                    variant="contained"
-                    color="success"
-                    onClick={handleApprove}
-                >
-                    Submit
-                </Button>
+            eventData?.event?.state === EventStates.incomplete ? (
+                eventData?.event?.pocName ? (
+                    <Button
+                        disableElevation
+                        key="approve"
+                        variant="contained"
+                        color="success"
+                        onClick={handleApprove}
+                    >
+                        Submit
+                    </Button>
+                ) : (
+                    <Tooltip title="POC Details not added" followCursor enterDelay={500} leaveDelay={200}>
+                        <Button
+                            disableElevation
+                            key="approve"
+                            variant="outlined"
+                            color="primary"
+                            // disabled={true}
+                            disableRipple={true}
+                        >
+                            Submit
+                        </Button>
+                    </Tooltip>
+                )
             ) : null,
         approveBudget: (
             (budgetLoading ||

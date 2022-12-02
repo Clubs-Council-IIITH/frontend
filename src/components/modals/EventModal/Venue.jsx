@@ -14,7 +14,6 @@ import {
     Select,
     FormLabel,
     MenuItem,
-    Tooltip,
 } from "@mui/material";
 
 import EventVenues from "constants/EventVenues";

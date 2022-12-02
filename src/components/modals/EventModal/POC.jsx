@@ -113,7 +113,7 @@ const POC = ({ activeEventId, eventData, eventLoading, editing, setEditing }) =>
                                     rules={{
                                         required: "Roll number can not be empty!",
                                         min: "2000000000",
-                                        min: "2050000000",
+                                        max: "2050000000",
                                     }}
                                 />
                             </Grid>
