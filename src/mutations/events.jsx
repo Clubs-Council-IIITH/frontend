@@ -68,6 +68,40 @@ export const PROGRESS_EVENT = gql`
     }
 `;
 
+export const SLC_REMINDER = gql`
+    mutation slcReminder($id: ID!) {
+        slcReminder(eventData: { id: $id }) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+                state
+            }
+        }
+    }
+`;
+
+export const SLO_REMINDER = gql`
+    mutation sloReminder($id: ID!) {
+        sloReminder(eventData: { id: $id }) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+                state
+            }
+        }
+    }
+`;
+
 export const SEND_DISCUSSION_MESSAGE = gql`
     mutation sendDiscussionMessage($eventId: ID!, $message: String!) {
         sendDiscussionMessage(discussionData: { eventId: $eventId, message: $message }) {
