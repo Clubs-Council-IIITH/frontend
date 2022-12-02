@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { ADMIN_POC_BY_EVENT_ID } from "queries/poc";
+import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 import { ADMIN_ADD_POC } from "mutations/poc";
 
 import {
@@ -25,7 +26,7 @@ const POC = ({ activeEventId, eventData, eventLoading, editing, setEditing }) =>
     );
 
     const [addPoc] = useMutation(ADMIN_ADD_POC, {
-        refetchQueries: [ADMIN_POC_BY_EVENT_ID],
+        refetchQueries: [ADMIN_POC_BY_EVENT_ID, GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
     });
 
@@ -181,7 +182,7 @@ const POC = ({ activeEventId, eventData, eventLoading, editing, setEditing }) =>
                         </Grid>
                     )}
 
-                {!editing ?
+                {!(editing && eventData?.event?.state === "A_0") ?
                     (
                         <Grid item container mt={0} spacing={3}>
                             <Grid item xs={12}>

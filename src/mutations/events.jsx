@@ -34,6 +34,38 @@ export const CREATE_EVENT = gql`
     }
 `;
 
+export const UPDATE_EVENT = gql`
+    mutation updateEventMutation(
+        $id: ID!
+        $datetimeStart: DateTime
+        $datetimeEnd: DateTime
+        $name: String!
+        $description: String
+        $audience: String
+    ) {
+        updateEvent(
+            eventData: {
+                id: $id
+                datetimeStart: $datetimeStart
+                datetimeEnd: $datetimeEnd
+                name: $name
+                description: $description
+                audience: $audience
+            }
+        ) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+            }
+        }
+    }
+`;
+
 export const DELETE_EVENT = gql`
     mutation deleteEventMutation($id: ID!) {
         deleteEvent(eventData: { id: $id }) {

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_EVENT, CHANGE_POSTER } from "mutations/events";
+import { CREATE_EVENT, CHANGE_POSTER, UPDATE_EVENT } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
 import { ROOM_BY_EVENT_ID } from "queries/room";
 
@@ -60,6 +60,11 @@ const Details = ({
         },
     });
 
+    const [updateEvent] = useMutation(UPDATE_EVENT, {
+        refetchQueries: [GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS, ROOM_BY_EVENT_ID],
+        awaitRefetchQueries: true,
+    });
+
     const [selectedRoom, setSelectedRoom] = useState("none");
 
     const { data: currentBooking, loading: currentBookingLoading } = useQuery(
@@ -95,12 +100,21 @@ const Details = ({
         };
 
         // update or create new instance of data
-        await createEvent({
-            variables: { ...transformedData },
+        await (activeEventId
+            ? updateEvent({
+                variables: { ...transformedData, id: activeEventId },
+                onCompleted: async () => {
+                    await changePoster({
+                        variables: { ...data?.rawPoster, eventId: activeEventId },
+                    });
+                },
+            })
+            : createEvent({
+                variables: { ...transformedData },
             onCompleted: async ({ newEventDescription: { event } }) => {
-                await changePoster({ variables: { ...data?.rawPoster, eventId: event.id } });
-            },
-        });
+                    await changePoster({ variables: { ...data?.rawPoster, eventId: event.id } });
+                },
+            }));
 
         // stop editing
         setEditing(false);
@@ -129,16 +143,16 @@ const Details = ({
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
-                            {!(editing && !activeEventId) ? (
+                            {!editing && eventData?.event?.state === "A_0" ? (
                                 <DatetimeIcon fontSize="small" sx={{ mr: 2 }} />
                             ) : null}
 
                             <Grid container alignItems="center">
-                                <Grid item mb={editing && !activeEventId ? 2 : 0}>
+                                <Grid item mb={editing && eventData?.event?.state === "A_0" ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
-                                        ) : editing && !activeEventId ? (
+                                        ) : editing && eventData?.event?.state === "A_0" ? (
                                             <Controller
                                                 name="datetimeStart"
                                                 control={control}
@@ -185,7 +199,7 @@ const Details = ({
                                     </Typography>
                                 </Grid>
 
-                                {!(isTabletOrMobile && editing && !activeEventId) ? (
+                                {!(isTabletOrMobile && editing && eventData?.event?.state === "A_0") ? (
                                     <Grid item>
                                         <Box mx={1}>—</Box>
                                     </Grid>
@@ -193,11 +207,11 @@ const Details = ({
                                     <Box m={1} />
                                 )}
 
-                                <Grid item mb={editing && !activeEventId ? 2 : 0}>
+                                <Grid item mb={editing && eventData?.event?.state === "A_0" ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
-                                        ) : editing && !activeEventId ? (
+                                        ) : editing && eventData?.event?.state === "A_0" ? (
                                             <Controller
                                                 name="datetimeEnd"
                                                 control={control}
@@ -247,7 +261,7 @@ const Details = ({
                             </Grid>
                         </Box>
 
-                        {editing && !activeEventId ? (
+                        {editing && eventData?.event?.state === "A_0" ? (
                             <Box display="flex">
                                 <FormControl component="fieldset">
                                     <FormGroup>
@@ -257,7 +271,7 @@ const Details = ({
                                             shouldUnregister={true}
                                             defaultValue={{
                                                 img: null,
-                                                deletePrev: editing && !activeEventId,
+                                                deletePrev: editing && eventData?.event?.state === "A_0",
                                             }}
                                             render={({ field }) => (
                                                 <>
@@ -316,7 +330,7 @@ const Details = ({
                     <Typography variant="h4">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing && !activeEventId ? (
+                        ) : editing && eventData?.event?.state === "A_0" ? (
                             <Controller
                                 name="name"
                                 control={control}
@@ -354,7 +368,7 @@ const Details = ({
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing && !activeEventId ? (
+                        ) : editing && eventData?.event?.state === "A_0" ? (
                             <Controller
                                 name="description"
                                 control={control}
@@ -390,7 +404,7 @@ const Details = ({
                             <Skeleton animation="wave" />
                         </Typography>
                     </Grid>
-                ) : editing ||
+                ) : editing && eventData?.event?.state === "A_0" ||
                     !activeEventId ||
                     !selectedRoom ||
                     selectedRoom === "none" ||
@@ -406,7 +420,7 @@ const Details = ({
                 )}
 
                 <Grid item xs={12}>
-                    {editing && !activeEventId ? (
+                    {editing && eventData?.event?.state === "A_0" ? (
                         <FormLabel component="legend" sx={{ fontSize: 12 }}>
                             Target Audience
                         </FormLabel>
@@ -416,7 +430,7 @@ const Details = ({
                         <AudienceIcon sx={{ my: 0.5, mr: 2 }} />
                         {eventLoading ? (
                             <Skeleton animation="wave" width={200} />
-                        ) : editing && !activeEventId ? (
+                        ) : editing && eventData?.event?.state === "A_0" ? (
                             <FormControl component="fieldset" sx={{ ml: 1 }}>
                                 <FormGroup>
                                     <Box>
