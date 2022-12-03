@@ -26,11 +26,11 @@ const tabs = [
         panel: <IntrotoClubs />,
         route: "/intro",
     },
-    {
-        title: "Clash of Clusters",
-        panel: <COC />,
-        route: "/point-table",
-    },
+    // {
+    //     title: "Clash of Clusters",
+    //     panel: <COC />,
+    //     route: "/point-table",
+    // },
 ];
 
 const InductionPage = () => {
