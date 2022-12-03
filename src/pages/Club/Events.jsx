@@ -103,10 +103,10 @@ const Events = ({ manage, setActions }) => {
         }
     }, [manage]);
 
-    const cardProps = {
-        manage,
-        triggerView,
-    };
+    // const cardProps = {
+    //     manage,
+    //     triggerView,
+    // };
 
     const cardPropsPending = {
         manage: manage,
@@ -114,7 +114,7 @@ const Events = ({ manage, setActions }) => {
     };
 
     const cardPropsDelayed = {
-        triggerView: (id) => triggerView(id, ["delete"]),
+        triggerView: (id) => triggerView(id, ["edit", "delete"]),
     };
 
     return (

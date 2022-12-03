@@ -31,11 +31,12 @@ import {
     ADMIN_APPROVED_EVENTS,
 } from "queries/events";
 import { ADMIN_GET_EVENT_BUDGET } from "queries/finance";
+import { ROOM_BY_EVENT_ID } from "queries/room";
 
 import { TabBar, TabPanels } from "components/Tabs";
 import { NavigationContext } from "contexts/NavigationContext";
 
-import UserGroups from "constants/UserGroups";
+// import UserGroups from "constants/UserGroups";
 import { SessionContext } from "contexts/SessionContext";
 
 import Details from "./Details";
@@ -82,13 +83,24 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [deleting, setDeleting] = useState(false);
     const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
+    const [currentRoom, setCurrentRoom] = useState("none");
 
     // fetch event details
-    const [getEventData, { data: eventData, loading: eventLoading }, refetch] = useLazyQuery(
+    const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
         GET_EVENT_BY_ID,
         {
             pollInterval: 1000 * 60 * 2, // 2 minutes
             variables: { id: activeEventId },
+        }
+    );
+
+    const [getRoomData, { data: currentBooking, loading: currentBookingLoading }] = useLazyQuery(
+        ROOM_BY_EVENT_ID,
+        {
+            variables: { eventId: activeEventId },
+            onCompleted: (data) => {
+                setCurrentRoom(data?.roomByEventId?.room || "none");
+            },
         }
     );
 
@@ -208,6 +220,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     useEffect(() => {
         if (open) {
             getEventData();
+            getRoomData();
             return undefined; // this effect does not require a cleanup
         }
     }, [open, activeEventId]);
@@ -224,6 +237,9 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setDeleting,
         currentPoster,
         setCurrentPoster,
+        currentRoom,
+        setCurrentRoom,
+        currentBookingLoading,
     };
 
     // action handlers
@@ -238,7 +254,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     };
 
     const handleSave = () => {
-        refetch();
+        getEventData();
     };
 
     const handleDelete = () => {
@@ -276,6 +292,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         await sloReminder({ variables: { id: activeEventId } });
     };
 
+    console.log(currentRoom);
+
     // map action keys to buttons
     const actionButtons = {
         close: (
@@ -311,6 +329,19 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             >
                 Edit
             </Button>
+        ),
+        editroom: ((session.group === "clubs_council" && currentRoom && currentRoom !== "none") ?
+            (
+                <Button
+                    disableElevation
+                    key="edit"
+                    variant="contained"
+                    color="warning"
+                    onClick={handleEdit}
+                >
+                    Edit Room
+                </Button>
+            ) : null
         ),
         delete: (
             <Button
@@ -389,7 +420,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 ) : null
         ),
         SLCReminder: (
-            (eventData?.event?.state == EventStates["room|budget_pending"] &&
+            (eventData?.event?.state === EventStates["room|budget_pending"] &&
                 !eventData?.event?.budgetApproved) ?
                 (
                     <Button
@@ -404,7 +435,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 ) : null
         ),
         SLOReminder: (
-            (eventData?.event?.state == EventStates["room|budget_pending"] &&
+            (eventData?.event?.state === EventStates["room|budget_pending"] &&
                 !eventData?.event?.roomApproved) ?
                 (
                     <Button

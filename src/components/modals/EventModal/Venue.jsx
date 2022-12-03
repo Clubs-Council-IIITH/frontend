@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation, useQuery } from "@apollo/client";
@@ -18,9 +18,13 @@ import {
 
 import EventVenues from "constants/EventVenues";
 import EventVenues_Public from "constants/EventVenues_Public";
+import { SessionContext } from "contexts/SessionContext";
 
-const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) => {
+const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, currentRoom, setCurrentRoom, }) => {
     const { control, handleSubmit } = useForm();
+    const { session } = useContext(SessionContext);
+
+    // editing = editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council");
 
     const [selectedRoom, setSelectedRoom] = useState("none");
 
@@ -32,9 +36,10 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
         ADMIN_ROOM_BY_EVENT_ID,
         {
             variables: { eventId: activeEventId },
-            pollInterval: 1000 * 60 * 5, // 5 minutes
+            pollInterval: 1000 * 60 * 2, // 2 minutes
             onCompleted: (data) => {
                 setSelectedRoom(data?.adminRoomByEventId?.room || "none");
+                setCurrentRoom(data?.adminRoomByEventId?.room || "none");
             },
         }
     );
@@ -69,7 +74,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
             <Grid container p={3}>
                 <Grid item xs={12}>
                     <FormLabel component="legend">Requested Venue</FormLabel>
-                    {editing && eventData?.event?.state === "A_0" ? (
+                    {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || (session.group === "clubs_council" && currentRoom !== "none"))) ? (
                         <Select
                             fullWidth
                             name="venue"
@@ -122,7 +127,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                         currentBooking?.adminRoomByEventId?.room &&
                         currentBooking?.adminRoomByEventId?.room !== "none")) && (
                         <Grid item container mt={0} spacing={3}>
-                            {editing && eventData?.event?.state === "A_0" ?
+                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council")) ?
                                 (
                                     <Grid item xs={12}>
                                         <Controller
@@ -173,7 +178,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                             }
 
 
-                            {editing && eventData?.event?.state === "A_0" ?
+                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council")) ?
                                 (
                                     <Grid item xs={12}>
 
@@ -221,7 +226,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                                 )
                             }
 
-                            {editing && eventData?.event?.state === "A_0" ?
+                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council")) ?
                                 (
                                     <Grid item xs={12}>
 
@@ -270,7 +275,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing }) 
                         </Grid>
                     )}
 
-                {(!editing &&
+                {(!(editing && eventData?.event?.state === "A_0") &&
                     selectedRoom &&
                     selectedRoom !== "none") ?
                     (<Grid item container mt={0} spacing={3}>

@@ -66,6 +66,30 @@ export const UPDATE_EVENT = gql`
     }
 `;
 
+export const UPDATE_AUDIENCE = gql`
+    mutation updateAudienceMutation(
+        $id: ID!
+        $audience: String
+    ) {
+        updateAudience(
+            eventData: {
+                id: $id
+                audience: $audience
+            }
+        ) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+            }
+        }
+    }
+`;
+
 export const DELETE_EVENT = gql`
     mutation deleteEventMutation($id: ID!) {
         deleteEvent(eventData: { id: $id }) {

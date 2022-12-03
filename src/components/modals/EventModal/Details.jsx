@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_EVENT, CHANGE_POSTER, UPDATE_EVENT } from "mutations/events";
+import { useMutation } from "@apollo/client";
+import { CREATE_EVENT, CHANGE_POSTER, UPDATE_EVENT, UPDATE_AUDIENCE } from "mutations/events";
 import { ADMIN_GET_CLUB_EVENTS, GET_CLUB_EVENTS, GET_EVENT_BY_ID } from "queries/events";
-import { ROOM_BY_EVENT_ID } from "queries/room";
 
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -34,6 +33,7 @@ import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
 import { AudienceStringtoDict } from "utils/FormUtil";
 import { NavigationContext } from "contexts/NavigationContext";
+import { SessionContext } from "contexts/SessionContext";
 import EventVenues_Public from "constants/EventVenues_Public";
 
 import enLocale from "date-fns/locale/en-IN";
@@ -46,9 +46,13 @@ const Details = ({
     editing,
     setEditing,
     setCurrentPoster,
+    currentRoom,
+    setCurrentRoom,
+    currentBookingLoading,
 }) => {
     const { watch, control, handleSubmit } = useForm();
     const { isTabletOrMobile } = useContext(NavigationContext);
+    const { session } = useContext(SessionContext);
 
     const watchdatetimeStart = watch("datetimeStart", (new Date()));
 
@@ -61,21 +65,14 @@ const Details = ({
     });
 
     const [updateEvent] = useMutation(UPDATE_EVENT, {
-        refetchQueries: [GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS, ROOM_BY_EVENT_ID],
+        refetchQueries: [GET_EVENT_BY_ID, GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
     });
 
-    const [selectedRoom, setSelectedRoom] = useState("none");
-
-    const { data: currentBooking, loading: currentBookingLoading } = useQuery(
-        ROOM_BY_EVENT_ID,
-        {
-            variables: { eventId: activeEventId },
-            onCompleted: (data) => {
-                setSelectedRoom(data?.roomByEventId?.room || "none");
-            },
-        }
-    );
+    const [updateAudience] = useMutation(UPDATE_AUDIENCE, {
+        refetchQueries: [GET_EVENT_BY_ID],
+        awaitRefetchQueries: true,
+    });
 
     // send the new poster
     const [changePoster] = useMutation(CHANGE_POSTER, {
@@ -100,18 +97,30 @@ const Details = ({
         };
 
         // update or create new instance of data
-        await (activeEventId
-            ? updateEvent({
-                variables: { ...transformedData, id: activeEventId },
-                onCompleted: async () => {
-                    await changePoster({
-                        variables: { ...data?.rawPoster, eventId: activeEventId },
-                    });
-                },
-            })
+        await (activeEventId ?
+            ((eventData?.event?.state === "A_0") ? (
+                updateEvent({
+                    variables: { ...transformedData, id: activeEventId },
+                    onCompleted: async () => {
+                        await changePoster({
+                            variables: { ...data?.rawPoster, eventId: activeEventId },
+                        });
+                    },
+                }))
+                : (
+                    updateAudience({
+                        variables: { ...transformedData, id: activeEventId },
+                        onCompleted: async () => {
+                            await changePoster({
+                                variables: { ...data?.rawPoster, eventId: activeEventId },
+                            });
+                        },
+                    })
+                )
+            )
             : createEvent({
                 variables: { ...transformedData },
-            onCompleted: async ({ newEventDescription: { event } }) => {
+                onCompleted: async ({ newEventDescription: { event } }) => {
                     await changePoster({ variables: { ...data?.rawPoster, eventId: event.id } });
                 },
             }));
@@ -261,7 +270,7 @@ const Details = ({
                             </Grid>
                         </Box>
 
-                        {editing && eventData?.event?.state === "A_0" ? (
+                        {(editing && session.group === "club") ? ( // && eventData?.event?.state === "A_0" ? (
                             <Box display="flex">
                                 <FormControl component="fieldset">
                                     <FormGroup>
@@ -404,16 +413,16 @@ const Details = ({
                             <Skeleton animation="wave" />
                         </Typography>
                     </Grid>
-                ) : editing && eventData?.event?.state === "A_0" ||
+                ) : (editing && eventData?.event?.state === "A_0") ||
                     !activeEventId ||
-                    !selectedRoom ||
-                    selectedRoom === "none" ||
-                    selectedRoom === "other" ? null : (
+                    !currentRoom ||
+                    currentRoom === "none" ||
+                    currentRoom === "other" ? null : (
                     <Grid item xs={12} mt={2}>
                         <Typography variant="body1">
                             <Box mr={1} display="flex" alignItems="center">
                                 <LocationOnOutlined fontSize="small" sx={{ mr: 2 }} />
-                                {EventVenues_Public[currentBooking?.roomByEventId?.room] || ""}
+                                {EventVenues_Public[currentRoom] || ""}
                             </Box>
                         </Typography>
                     </Grid>
@@ -430,7 +439,7 @@ const Details = ({
                         <AudienceIcon sx={{ my: 0.5, mr: 2 }} />
                         {eventLoading ? (
                             <Skeleton animation="wave" width={200} />
-                        ) : editing && eventData?.event?.state === "A_0" ? (
+                        ) : (editing && session.group === "club") ? (
                             <FormControl component="fieldset" sx={{ ml: 1 }}>
                                 <FormGroup>
                                     <Box>
