@@ -7,8 +7,10 @@ export const JSONtoFormData = (object) => {
 };
 
 // convert audience string from API response to a dict
-export const AudienceStringtoDict = (audienceString) => {
+export const CheckboxesStringtoDict = (audienceString) => {
     var audienceMap = {};
     audienceString?.split(",")?.forEach((value) => (audienceMap[value] = true));
+
+    audienceMap[audienceString.substring(audienceString.lastIndexOf(',') + 1)] = false;
     return audienceMap;
 };

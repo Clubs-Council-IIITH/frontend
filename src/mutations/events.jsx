@@ -124,6 +124,31 @@ export const PROGRESS_EVENT = gql`
     }
 `;
 
+export const APPROVECC_EVENT = gql`
+    mutation approveCcEventMutation(
+        $id: ID!
+        $roles: String
+    ) {
+        approveCcEvent(
+            eventData: {
+                id: $id
+                roles: $roles
+            }
+        ) {
+            event {
+                id
+                poster
+                datetimeStart
+                datetimeEnd
+                name
+                description
+                audience
+                state
+            }
+        }
+    }
+`;
+
 export const SLC_REMINDER = gql`
     mutation slcReminder($id: ID!) {
         slcReminder(eventData: { id: $id }) {

@@ -44,6 +44,7 @@ import Budget from "./Budget";
 import Venue from "./Venue";
 import POC from "./POC";
 import Discussion from "./Discussion";
+import ApproveCC from "./ApproveCC";
 
 import EventStates from "constants/EventStates";
 import ResponseToast from "components/ResponseToast";
@@ -70,6 +71,10 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     ];
     const tabController = useState(0);
 
+    const tabsApproveCC = [
+        { title: "Approve", panel: <ApproveCC /> },
+    ];
+
     useEffect(() => {
         if (open) tabController[1](0);
     }, [open]);
@@ -84,6 +89,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     const [currentPoster, setCurrentPoster] = useState("");
     const [expandPoster, setExpandPoster] = useState(false);
     const [currentRoom, setCurrentRoom] = useState("none");
+    const [approving, setApproving] = useState(false);
 
     // fetch event details
     const [getEventData, { data: eventData, loading: eventLoading }] = useLazyQuery(
@@ -206,6 +212,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
             setEditing(!eventId);
             setDeleting(false);
             setExpandPoster(false);
+            setApproving(false);
         }
     }, [eventId, open]);
 
@@ -220,7 +227,8 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
     useEffect(() => {
         if (open) {
             getEventData();
-            getRoomData();
+            if (activeEventId)
+                getRoomData();
             return undefined; // this effect does not require a cleanup
         }
     }, [open, activeEventId]);
@@ -242,19 +250,30 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         currentBookingLoading,
     };
 
+    const tabPropsApproveCC = {
+        activeEventId,
+        setActiveEventId,
+        eventLoading,
+        editing,
+        setEditing,
+        currentRoom,
+        setCurrentRoom,
+        currentBookingLoading,
+        approving,
+        setApproving,
+        setOpen,
+    };
+
     // action handlers
     const handleCancel = () => {
         if (!activeEventId) setOpen(false);
         else if (editing) setEditing(false);
         else if (deleting) setDeleting(false);
+        else if (approving) setApproving(false);
     };
 
     const handleEdit = () => {
         setEditing(true);
-    };
-
-    const handleSave = () => {
-        getEventData();
     };
 
     const handleDelete = () => {
@@ -267,6 +286,10 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
 
         // close modal
         setOpen(false);
+    };
+
+    const handleApproving = () => {
+        setApproving(true);
     };
 
     const handleApprove = async () => {
@@ -292,8 +315,6 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         await sloReminder({ variables: { id: activeEventId } });
     };
 
-    console.log(currentRoom);
-
     // map action keys to buttons
     const actionButtons = {
         close: (
@@ -314,7 +335,6 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 variant="contained"
                 color="info"
                 disableElevation
-                onClick={handleSave}
             >
                 Save
             </Button>
@@ -356,14 +376,39 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         ),
         deleteConfirm: (
             <Button
+                disableElevation
                 key="save"
                 variant="contained"
                 color="error"
-                disableElevation
                 onClick={handleDeleteConfirm}
             >
                 Yes, Delete it
             </Button>
+        ),
+        approvecc: (
+            <Button
+                disableElevation
+                key="approve"
+                variant="contained"
+                color="success"
+                onClick={handleApproving}
+            >
+                Approve
+            </Button>
+        ),
+        approveccConfirm: (session.group === "clubs_council" ?
+            (
+                <Button
+                    disableElevation
+                    form="ActiveEventForm"
+                    key="save"
+                    type="submit"
+                    variant="contained"
+                    color="error"
+                >
+                    Confirm Approving
+                </Button>
+            ) : null
         ),
         approve: (
             <Button
@@ -565,6 +610,25 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                                         ?
                                                     </Typography>
                                                 </Box>
+                                            ) : approving ? (
+                                                <Box>
+                                                    {manage && activeEventId ? (
+                                                        <>
+                                                            <TabBar
+                                                                tabs={tabsApproveCC}
+                                                                controller={tabController}
+                                                                tabProps={tabPropsApproveCC}
+                                                            />
+                                                            <Divider />
+                                                        </>
+                                                    ) : null}
+
+                                                    <TabPanels
+                                                        tabs={tabsApproveCC}
+                                                        controller={tabController}
+                                                        tabProps={tabPropsApproveCC}
+                                                    />
+                                                </Box>
                                             ) : (
                                                 <Box>
                                                     {manage && activeEventId ? (
@@ -604,6 +668,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                                                             <>
                                                                 {actionButtons["cancel"]}
                                                                 {actionButtons["deleteConfirm"]}
+                                                            </>
+                                                        ) : approving ? (
+                                                            <>
+                                                                {actionButtons["cancel"]}
+                                                                {actionButtons["approveccConfirm"]}
                                                             </>
                                                         ) : (
                                                             actions.map(

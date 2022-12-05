@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
@@ -31,7 +31,7 @@ import {
 
 import { ISOtoDT, ISOtoHTML } from "utils/DateTimeUtil";
 import { AudienceFormatter } from "utils/EventUtil";
-import { AudienceStringtoDict } from "utils/FormUtil";
+import { CheckboxesStringtoDict } from "utils/FormUtil";
 import { NavigationContext } from "contexts/NavigationContext";
 import { SessionContext } from "contexts/SessionContext";
 import EventVenues_Public from "constants/EventVenues_Public";
@@ -90,7 +90,7 @@ const Details = ({
         const transformedData = {
             ...data,
             rawPoster: null,
-            audience: Object.entries(data.audience)
+            audience: Object.entries(checked)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
                 .join(","),
@@ -140,6 +140,67 @@ const Details = ({
         { value: "internal", label: "Internal/Non-Public" },
     ];
 
+    const [checked, setChecked] = useState(CheckboxesStringtoDict(
+        eventData?.event?.audience ||
+        audienceSelect.map((o) => o.value).join(",")
+    ));
+
+    const checkChecked = (value, field) => {
+        if (value === "internal" && checked["internal"] === false) {
+            var Map = {};
+
+            for (var i in checked) {
+                field.value[i] = false;
+                Map[i] = false;
+            }
+
+            field.value["internal"] = true;
+            Map["internal"] = true;
+
+            setChecked(Map);
+        }
+        else if (value === "internal") {
+            var Map = {};
+
+            for (var i in checked) {
+                field.value[i] = true;
+                Map[i] = true;
+            }
+
+            field.value["internal"] = false;
+            Map["internal"] = false;
+            setChecked(Map);
+        }
+        else {
+            var Map = {};
+            let count = 0;
+
+            for (var i in checked) {
+                if (i === "internal")
+                    Map[i] = false;
+                else if (i === value) {
+                    Map[i] = !checked[value];
+                    count = count + Map[i];
+                }
+                else {
+                    Map[i] = checked[i];
+                    count = count + Map[i];
+                }
+            }
+
+            if (!count) {
+                field.value["internal"] = true;
+                Map["internal"] = true;
+            }
+            else
+                field.value["internal"] = false;
+
+            setChecked(Map);
+        }
+
+        field.value = checked;
+    };
+
     return (
         <form
             id="ActiveEventForm"
@@ -152,16 +213,16 @@ const Details = ({
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
-                            {!editing && eventData?.event?.state === "A_0" ? (
+                            {!(editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
                                 <DatetimeIcon fontSize="small" sx={{ mr: 2 }} />
                             ) : null}
 
                             <Grid container alignItems="center">
-                                <Grid item mb={editing && eventData?.event?.state === "A_0" ? 2 : 0}>
+                                <Grid item mb={editing && (!activeEventId || eventData?.event?.state === "A_0") ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
-                                        ) : editing && eventData?.event?.state === "A_0" ? (
+                                        ) : (editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
                                             <Controller
                                                 name="datetimeStart"
                                                 control={control}
@@ -208,7 +269,7 @@ const Details = ({
                                     </Typography>
                                 </Grid>
 
-                                {!(isTabletOrMobile && editing && eventData?.event?.state === "A_0") ? (
+                                {!(isTabletOrMobile && (editing && (!activeEventId || eventData?.event?.state === "A_0"))) ? (
                                     <Grid item>
                                         <Box mx={1}>—</Box>
                                     </Grid>
@@ -216,11 +277,11 @@ const Details = ({
                                     <Box m={1} />
                                 )}
 
-                                <Grid item mb={editing && eventData?.event?.state === "A_0" ? 2 : 0}>
+                                <Grid item mb={(editing && (!activeEventId || eventData?.event?.state === "A_0")) ? 2 : 0}>
                                     <Typography variant="subtitle1">
                                         {eventLoading ? (
                                             <Skeleton animation="wave" width={100} />
-                                        ) : editing && eventData?.event?.state === "A_0" ? (
+                                        ) : (editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
                                             <Controller
                                                 name="datetimeEnd"
                                                 control={control}
@@ -280,7 +341,7 @@ const Details = ({
                                             shouldUnregister={true}
                                             defaultValue={{
                                                 img: null,
-                                                deletePrev: editing && eventData?.event?.state === "A_0",
+                                                deletePrev: (editing && (!activeEventId || eventData?.event?.state === "A_0")),
                                             }}
                                             render={({ field }) => (
                                                 <>
@@ -339,7 +400,7 @@ const Details = ({
                     <Typography variant="h4">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing && eventData?.event?.state === "A_0" ? (
+                        ) : (editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
                             <Controller
                                 name="name"
                                 control={control}
@@ -377,7 +438,7 @@ const Details = ({
                     <Typography variant="body1">
                         {eventLoading ? (
                             <Skeleton animation="wave" />
-                        ) : editing && eventData?.event?.state === "A_0" ? (
+                        ) : (editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
                             <Controller
                                 name="description"
                                 control={control}
@@ -413,7 +474,7 @@ const Details = ({
                             <Skeleton animation="wave" />
                         </Typography>
                     </Grid>
-                ) : (editing && eventData?.event?.state === "A_0") ||
+                ) : ((editing && (!activeEventId || eventData?.event?.state === "A_0"))) ||
                     !activeEventId ||
                     !currentRoom ||
                     currentRoom === "none" ||
@@ -429,7 +490,7 @@ const Details = ({
                 )}
 
                 <Grid item xs={12}>
-                    {editing && eventData?.event?.state === "A_0" ? (
+                    {(editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
                         <FormLabel component="legend" sx={{ fontSize: 12 }}>
                             Target Audience
                         </FormLabel>
@@ -447,10 +508,7 @@ const Details = ({
                                             name="audience"
                                             control={control}
                                             shouldUnregister={true}
-                                            defaultValue={AudienceStringtoDict(
-                                                eventData?.event?.audience ||
-                                                audienceSelect.map((o) => o.value).join(",")
-                                            )}
+                                                defaultValue={checked}
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
                                                     <FormControlLabel
@@ -460,14 +518,16 @@ const Details = ({
                                                                 key={idx}
                                                                 color="primary"
                                                                 checked={
-                                                                    field.value[audience.value]
+                                                                    checked[audience.value]
                                                                 }
-                                                                onChange={(e) =>
+                                                                onChange={(e) => {
                                                                     field.onChange({
                                                                         ...field.value,
                                                                         [audience.value]:
                                                                             e.target.checked,
-                                                                    })
+                                                                    });
+                                                                    checkChecked(audience.value, field);
+                                                                }
                                                                 }
                                                             />
                                                         }

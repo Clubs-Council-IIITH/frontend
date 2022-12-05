@@ -49,7 +49,8 @@ const Events = () => {
 
     const cardPropsPending = {
         showClub: true,
-        triggerView: (id) => triggerView(id, ["approveBudget", "approve", "submit", "editroom", "delete"]),
+        triggerView: (id) => triggerView(id, ["approvecc", "submit", "editroom", "delete"]),
+        // triggerView: (id) => triggerView(id, ["approveBudget", "approve", "submit", "editroom", "delete"]),
         // triggerView: (id) => triggerView(id, ["approveBudget", "approve", "submit", "delete"]),
     };
 
@@ -62,7 +63,7 @@ const Events = () => {
     const cardPropsDelayed = {
         manage: true,
         showClub: true,
-        triggerView: (id) => triggerView(id, ["approve", "delete"]),
+        triggerView: (id) => triggerView(id, ["editroom", "approvecc", "delete"]),
     };
 
     const cardPropsIncomplete = {
