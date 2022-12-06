@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useMutation } from "@apollo/client";
@@ -20,6 +20,7 @@ import {
     FormGroup,
     FormControlLabel,
     Checkbox,
+    Stack,
 } from "@mui/material";
 import {
     EventOutlined as DatetimeIcon,
@@ -56,6 +57,22 @@ const Details = ({
 
     const watchdatetimeStart = watch("datetimeStart", (new Date()));
 
+    const limit = 500;
+    const [descriptionContent, setDescriptionContent] = useState((eventData?.event?.description || "").slice(0, limit));
+    const [descriptionActive, setdescriptionActive] = useState(false);
+    const [descriptionLengthColor, setdescriptionLengthColor] = useState("primary");
+
+    const setFormattedContent = useCallback(
+        text => {
+            setDescriptionContent(text.slice(0, limit + 2));
+            if (text.length >= limit - 9)
+                setdescriptionLengthColor("red");
+            else
+                setdescriptionLengthColor("primary");
+        },
+        [limit, setDescriptionContent]
+    );
+
     const [createEvent] = useMutation(CREATE_EVENT, {
         refetchQueries: [GET_CLUB_EVENTS, ADMIN_GET_CLUB_EVENTS],
         awaitRefetchQueries: true,
@@ -90,6 +107,7 @@ const Details = ({
         const transformedData = {
             ...data,
             rawPoster: null,
+            description: descriptionContent,
             audience: Object.entries(checked)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key)
@@ -228,7 +246,7 @@ const Details = ({
                                                 control={control}
                                                 shouldUnregister={true}
                                                 defaultValue={ISOtoHTML(
-                                                    eventData?.event?.datetimeStart
+                                                    eventData?.event?.datetimeStart || new Date()
                                                 )}
                                                 render={({
                                                     field: { onChange, value },
@@ -439,31 +457,48 @@ const Details = ({
                         {eventLoading ? (
                             <Skeleton animation="wave" />
                         ) : (editing && (!activeEventId || eventData?.event?.state === "A_0")) ? (
-                            <Controller
-                                name="description"
-                                control={control}
-                                shouldUnregister={true}
-                                defaultValue={eventData?.event?.description || ""}
-                                render={({ field: { onChange, value }, fieldState: { error } }) => (
-                                    <TextField
-                                        fullWidth
-                                        label="Description"
-                                        type="text"
-                                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                        variant="standard"
-                                        multiline
-                                        rows={3}
-                                        value={value}
-                                        onChange={onChange}
-                                        error={error}
-                                        InputLabelProps={{ shrink: true }}
-                                        helperText={error ? error.message : null}
-                                        sx={{ mt: 1 }}
-                                    />
-                                )}
-                            />
+                            <>
+                                <Controller
+                                    name="description"
+                                    control={control}
+                                    shouldUnregister={true}
+                                    defaultValue={descriptionContent}
+                                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                        <TextField
+                                            fullWidth
+                                            label="Description"
+                                            type="text"
+                                            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                            variant="standard"
+                                            multiline
+                                            rows={3}
+                                            value={descriptionContent}
+                                            onChange={(e) => { setFormattedContent(e.target.value); }}
+                                            onFocus={(e) => { setdescriptionActive(true); }}
+                                            onBlur={(e) => { setdescriptionActive(false); }}
+                                            error={error}
+                                            inputProps={{ maxLength: limit }}
+                                            InputLabelProps={{ shrink: true }}
+                                            helperText={error ? error.message : null}
+                                            sx={{ mt: 1 }}
+                                        />
+                                    )}
+                                />
+                                {descriptionActive ?
+                                    <Stack direction="row" justifyContent="end">
+                                        <Box sx={{ color: descriptionLengthColor }}>
+                                            {descriptionContent.length}
+                                        </Box>
+                                        <Box>
+                                            {"/" + limit}
+                                        </Box>
+                                    </Stack>
+                                    : null}
+                            </>
                         ) : (
-                            eventData?.event?.description || "-"
+                            <div style={{ whiteSpace: "pre-line" }}>
+                                {descriptionContent || "-"}
+                            </div>
                         )}
                     </Typography>
                 </Grid>
@@ -508,7 +543,7 @@ const Details = ({
                                             name="audience"
                                             control={control}
                                             shouldUnregister={true}
-                                                defaultValue={checked}
+                                            defaultValue={checked}
                                             render={({ field }) =>
                                                 audienceSelect.map((audience, idx) => (
                                                     <FormControlLabel
