@@ -8,6 +8,7 @@
         "@emotion/css": "^11.10.0",
         "@emotion/react": "^11.10.4",
         "@emotion/styled": "^11.8.1",
+        "typescript": "^2.8.0",
         "@mui/icons-material": "^5.4.2",
         "@mui/lab": "^5.0.0-alpha.70",
         "@mui/material": "^5.4.3",

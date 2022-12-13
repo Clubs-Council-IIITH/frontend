@@ -42,65 +42,69 @@ const Upcoming = () => {
     };
 
     return (
-        <>
-            <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
-            <Box p={3} backgroundColor={theme.palette.grey[100]}>
-                <Box pb={3} display="flex" justifyContent="space-between" alignItem="center">
-                    <Typography variant="h5" fontWeight={500}>
-                        Upcoming Events
-                    </Typography>
-                    <Stack spacing={2}>
-                        {!upcomingLoading ? (
-                            <Pagination
-                                size="small"
-                                page={page}
-                                count={Math.ceil(
-                                    upcomingData
-                                        ?.allEvents
-                                        ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
-                                        ?.filter((event) =>
-                                            event?.state !== EventStates["completed"])
-                                        ?.length / EVENTS_PER_ROW)}
-                                onChange={(_, v) => setPage(v)}
-                            />
-                        ) : null}
-                    </Stack>
-                </Box>
-                <Box>
-                    {upcomingLoading ? (
-                        <Grid container direction="row" spacing={3}>
-                            {[...Array(EVENTS_PER_ROW).keys()].map((key) => (
-                                <EventCardMini
-                                    key={key}
-                                    width={parseInt(12 / EVENTS_PER_ROW)}
-                                    skeleton={true}
+        !upcomingLoading && upcomingData?.allEvents
+            ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+            ?.filter((event) => event?.state !== EventStates["completed"]
+            )?.length != 0 ?
+            <>
+                <EventModal controller={[viewModal, setViewModal]} {...viewProps} />
+                <Box p={3} backgroundColor={theme.palette.grey[100]}>
+                    <Box pb={3} display="flex" justifyContent="space-between" alignItem="center">
+                        <Typography variant="h5" fontWeight={500}>
+                            Upcoming Events
+                        </Typography>
+                        <Stack spacing={2}>
+                            {!upcomingLoading ? (
+                                <Pagination
+                                    size="small"
+                                    page={page}
+                                    count={Math.ceil(
+                                        upcomingData
+                                            ?.allEvents
+                                            ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+                                            ?.filter((event) =>
+                                                event?.state !== EventStates["completed"])
+                                            ?.length / EVENTS_PER_ROW)}
+                                    onChange={(_, v) => setPage(v)}
                                 />
-                            ))}
-                        </Grid>
-                    ) : upcomingData?.allEvents
-                        ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
-                        ?.filter((event) => event?.state !== EventStates["completed"]
-                        )?.length === 0 ? (
-                        <Empty />
-                    ) : (
-                        <Grid container direction="row" spacing={3}>
-                            {upcomingData?.allEvents
-                                ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
-                                ?.filter((event) => event?.state === EventStates["approved"])
-                                ?.slice(EVENTS_PER_ROW * (page - 1), EVENTS_PER_ROW * page)
-                                ?.map((event) => (
+                            ) : null}
+                        </Stack>
+                    </Box>
+                    <Box>
+                        {upcomingLoading ? (
+                            <Grid container direction="row" spacing={3}>
+                                {[...Array(EVENTS_PER_ROW).keys()].map((key) => (
                                     <EventCardMini
-                                        {...event}
-                                        {...cardProps}
+                                        key={key}
                                         width={parseInt(12 / EVENTS_PER_ROW)}
-                                        skeleton={upcomingLoading}
+                                        skeleton={true}
                                     />
                                 ))}
-                        </Grid>
-                    )}
+                            </Grid>
+                        ) : upcomingData?.allEvents
+                            ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+                            ?.filter((event) => event?.state !== EventStates["completed"]
+                            )?.length === 0 ? (
+                            <Empty />
+                        ) : (
+                            <Grid container direction="row" spacing={3}>
+                                {upcomingData?.allEvents
+                                    ?.filter((event) => Date.parse(event?.datetimeEnd) > Date.parse(new Date()))
+                                    ?.filter((event) => event?.state === EventStates["approved"])
+                                    ?.slice(EVENTS_PER_ROW * (page - 1), EVENTS_PER_ROW * page)
+                                    ?.map((event) => (
+                                        <EventCardMini
+                                            {...event}
+                                            {...cardProps}
+                                            width={parseInt(12 / EVENTS_PER_ROW)}
+                                            skeleton={upcomingLoading}
+                                        />
+                                    ))}
+                            </Grid>
+                        )}
+                    </Box>
                 </Box>
-            </Box>
-        </>
+            </> : null
     );
 };
 
