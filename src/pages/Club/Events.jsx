@@ -52,6 +52,16 @@ const Events = ({ manage, setActions }) => {
     const { data: eventsData, loading: eventsLoading } = useQuery(GET_EVENTS, {
         pollInterval: 1000 * 60 * 1, // 1 minute
         variables: { id: targetId },
+        onCompleted: (data) => {
+            expandState((data?.[targetEvents]
+                ?.filter(
+                    (e) =>
+                        e.state !== EventStates.completed &&
+                        e.state !== EventStates.deleted
+                )
+                ?.filter((e) => Date.parse(e?.datetimeEnd) > Date.parse(new Date()))
+                ?.length != 0) ? setExpandUpcoming : setExpandCompleted);
+        },
     });
 
     // event modal
