@@ -44,11 +44,11 @@ const tabs = [
         panel: <Events />,
         route: "/events",
     },
-    {
-        title: "Members",
-        panel: <Members />,
-        route: "/members",
-    },
+    // {
+    //     title: "Members",
+    //     panel: <Members />,
+    //     route: "/members",
+    // },
 ];
 
 const ActionButton = ({
