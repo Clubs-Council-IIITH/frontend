@@ -10,7 +10,7 @@ export const AudienceFormatter = (audienceString) => {
 };
 
 // convert event state into a progressbar percentage
-export const StateProgress = (state) => {
+export const StateProgress = (state, budgetApproved, roomApproved) => {
     if (state === EventStates["incomplete"]) {
         return {
             value: 1 * (100 / 5),
@@ -23,11 +23,23 @@ export const StateProgress = (state) => {
             color: blue,
             text: "Waiting for Clubs Council approval",
         };
-    } else if (state === EventStates["room|budget_pending"]) {
+    } else if (state === EventStates["room|budget_pending"] && !budgetApproved && !roomApproved) {
         return {
             value: 1 * (100 / 5),
             color: deepPurple,
-            text: "Waiting for Room/Budget approval",
+            text: "Waiting for SLC & SLO approval",
+        };
+    } else if (state === EventStates["room|budget_pending"] && !budgetApproved) {
+        return {
+            value: 1 * (100 / 5),
+            color: deepPurple,
+            text: "Waiting for SLC approval",
+        };
+    } else if (state === EventStates["room|budget_pending"] && !roomApproved) {
+        return {
+            value: 1 * (100 / 5),
+            color: deepPurple,
+            text: "Waiting for SLO approval",
         };
     } else if (state === EventStates["approved"]) {
         return {

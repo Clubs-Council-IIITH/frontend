@@ -497,7 +497,7 @@ const Details = ({
                             </>
                         ) : (
                             <div style={{ whiteSpace: "pre-line" }}>
-                                {descriptionContent || "-"}
+                                {eventData?.event?.description || "-"}
                             </div>
                         )}
                     </Typography>
