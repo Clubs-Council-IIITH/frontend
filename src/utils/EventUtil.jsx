@@ -10,7 +10,7 @@ export const AudienceFormatter = (audienceString) => {
 };
 
 // convert event state into a progressbar percentage
-export const StateProgress = (state, budgetApproved, roomApproved) => {
+export const StateProgress = (state, roomApproved, budgetApproved) => {
     if (state === EventStates["incomplete"]) {
         return {
             value: 1 * (100 / 5),

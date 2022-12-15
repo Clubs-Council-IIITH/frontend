@@ -39,6 +39,7 @@ const Events = () => {
     };
 
     const cardPropsPending = {
+        manage: true,
         showClub: true,
         triggerView: (id) => triggerView(id, ["approve"]),
     };
