@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@mui/styles";
 
@@ -34,6 +34,7 @@ import {
 } from "@mui/icons-material";
 
 import Empty from "components/Empty";
+import { SessionContext } from "contexts/SessionContext";
 
 import { CurrencyInput, CurrencyText } from "components/CurrencyFormat";
 
@@ -255,6 +256,7 @@ const BudgetField = ({ activeEventId }) => {
 
 const Budget = ({ activeEventId, editing, setEditing }) => {
     const { handleSubmit } = useForm();
+    const { session } = useContext(SessionContext);
 
     const { data: budgetData, loading: budgetLoading } = useQuery(ADMIN_GET_EVENT_BUDGET, {
         pollInterval: 1000 * 60 * 3, // 3 minutes
@@ -278,7 +280,7 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
                 <Grid item xs={12}>
                     <BudgetHeader items={budgetData?.adminEventBudget} loading={budgetLoading} />
                 </Grid>
-                {editing ? (
+                {(editing && session.group === "club") ? (
                     <Grid item xs={12}>
                         <Typography m={1} variant="h6">
                             Add a requirement
@@ -322,7 +324,7 @@ const Budget = ({ activeEventId, editing, setEditing }) => {
                                             <BudgetItem
                                                 item={item}
                                                 activeEventId={activeEventId}
-                                                editing={editing}
+                                                editing={(editing && session.group === "club")}
                                             />
                                         ))
                                     )}
