@@ -8,7 +8,7 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import Page from "components/Page";
 
-import EventStates from "constants/EventStates";
+// import EventStates from "constants/EventStates";
 import EventModal from "components/modals/EventModal";
 import { EventCard } from "components/cards";
 
@@ -41,7 +41,7 @@ const Events = () => {
     const cardPropsPending = {
         manage: true,
         showClub: true,
-        triggerView: (id) => triggerView(id, ["approve"]),
+        triggerView: (id) => triggerView(id, ["editroom", "approve"]),
     };
 
     const cardPropsApproved = {
@@ -74,8 +74,8 @@ const Events = () => {
                                         <EventCard skeleton showClub />
                                     </Grid>
                                 ))
-                                : pendingEventsData?.adminSloPendingEvents?.
-                                    filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
+                                : pendingEventsData?.adminSloPendingEvents
+                                    ?.filter((event) => Date.parse(event?.datetimeStart) > Date.parse(new Date()))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardPropsPending} />
@@ -114,8 +114,8 @@ const Events = () => {
                                         <EventCard skeleton showClub />
                                     </Grid>
                                 ))
-                                : pendingEventsData?.adminSloPendingEvents?.
-                                    filter((event) => Date.parse(event?.datetimeStart) < Date.parse(new Date()))
+                                : pendingEventsData?.adminSloPendingEvents
+                                    ?.filter((event) => Date.parse(event?.datetimeStart) < Date.parse(new Date()))
                                     ?.map((event, idx) => (
                                         <Grid item md={4} lg={3} key={idx}>
                                             <EventCard {...event} {...cardPropsPending} />

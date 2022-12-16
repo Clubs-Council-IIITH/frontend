@@ -350,7 +350,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                 Edit
             </Button>
         ),
-        editroom: ((session.group === "clubs_council" && currentRoom && currentRoom !== "none") ?
+        editroom: (((session.group === "clubs_council" || session.group === "slo") && currentRoom && currentRoom !== "none") ?
             (
                 <Button
                     disableElevation

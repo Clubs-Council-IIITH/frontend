@@ -54,7 +54,7 @@ const EventCard = ({
     const theme = useTheme();
 
     // get progressbar value and color
-    const stateProgress = StateProgress(state, roomApproved, budgetApproved,);
+    const stateProgress = StateProgress(state, roomApproved, budgetApproved);
 
     return (
         <Card

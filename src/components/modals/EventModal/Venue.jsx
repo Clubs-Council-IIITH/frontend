@@ -24,7 +24,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, cu
     const { control, handleSubmit } = useForm();
     const { session } = useContext(SessionContext);
 
-    // editing = editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council");
+    // editing = editing && ((eventData?.event?.state === "A_0" && session.group === "club") || (session.group === "clubs_council" || session.group === "slo"));
 
     const [selectedRoom, setSelectedRoom] = useState("none");
 
@@ -74,7 +74,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, cu
             <Grid container p={3}>
                 <Grid item xs={12}>
                     <FormLabel component="legend">Requested Venue</FormLabel>
-                    {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || (session.group === "clubs_council" && currentRoom !== "none"))) ? (
+                    {(editing && eventData?.event?.state === "A_0" && session.group === "club") ? (
                         <Select
                             fullWidth
                             name="venue"
@@ -97,6 +97,33 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, cu
                                         {EventVenues[room]}
                                     </MenuItem>
                                 ))
+                            )}
+                        </Select>
+                    ) : (editing && (session.group === "clubs_council" || session.group === "slo") && currentRoom !== "none") ? (
+                        <Select
+                            fullWidth
+                            name="venue"
+                            variant="standard"
+                            value={selectedRoom}
+                            onChange={(e) => setSelectedRoom(e.target.value)}
+                        >
+                            {roomsLoading ? (
+                                <>
+                                    <MenuItem>
+                                        <Skeleton animation="wave" />
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <Skeleton animation="wave" />
+                                    </MenuItem>
+                                </>
+                            ) : (
+                                rooms?.adminAvailableRooms
+                                    ?.filter(x => { return x.room !== "none" })
+                                    ?.map(({ room, available }, idx) => (
+                                        <MenuItem key={idx} value={room} disabled={!available}>
+                                            {EventVenues[room]}
+                                        </MenuItem>
+                                    ))
                             )}
                         </Select>
                     ) : (
@@ -127,7 +154,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, cu
                         currentBooking?.adminRoomByEventId?.room &&
                         currentBooking?.adminRoomByEventId?.room !== "none")) && (
                         <Grid item container mt={0} spacing={3}>
-                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council")) ?
+                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || (session.group === "clubs_council" || session.group === "slo"))) ?
                                 (
                                     <Grid item xs={12}>
                                         <Controller
@@ -178,7 +205,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, cu
                             }
 
 
-                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council")) ?
+                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || (session.group === "clubs_council" || session.group === "slo"))) ?
                                 (
                                     <Grid item xs={12}>
 
@@ -226,7 +253,7 @@ const Venue = ({ activeEventId, eventData, eventLoading, editing, setEditing, cu
                                 )
                             }
 
-                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || session.group === "clubs_council")) ?
+                            {(editing && ((eventData?.event?.state === "A_0" && session.group === "club") || (session.group === "clubs_council" || session.group === "slo"))) ?
                                 (
                                     <Grid item xs={12}>
 
