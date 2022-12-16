@@ -276,6 +276,11 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
         setEditing(true);
     };
 
+    const handleEditRoom = () => {
+        setEditing(true);
+        tabController[1](2);
+    };
+
     const handleDelete = () => {
         setDeleting(true);
     };
@@ -357,7 +362,7 @@ const EventModal = ({ manage, eventId = null, actions = [], controller: [open, s
                     key="edit"
                     variant="contained"
                     color="warning"
-                    onClick={handleEdit}
+                    onClick={handleEditRoom}
                 >
                     Edit Room
                 </Button>
