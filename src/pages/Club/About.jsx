@@ -5,10 +5,12 @@ import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GET_CLUB_BY_ID } from "queries/clubs";
 import { UPDATE_CLUB } from "mutations/clubs";
+import { GET_CLUB_MEMBERS, ADMIN_GET_CLUB_MEMBERS } from "queries/members";
 
 import UserGroups from "constants/UserGroups";
+import MemberModel from "models/MemberModel";
 
-import { Box, Button } from "@mui/material";
+import { List, Box, Button, Typography } from "@mui/material";
 import {
     EditOutlined as EditIcon,
     SaveOutlined as SaveIcon,
@@ -19,6 +21,8 @@ import { SessionContext } from "contexts/SessionContext";
 
 import Page from "components/Page";
 import RichTextEditor from "components/RichTextEditor";
+
+import { YearMembers } from "./Members"
 
 const About = ({ manage, setActions }) => {
     const { clubId } = useParams();
@@ -109,6 +113,67 @@ const About = ({ manage, setActions }) => {
         }
     }, [manage, editing, editorValue]);
 
+    const [members, setMembers] = useState([]);
+
+    // fetch members
+    const GET_MEMBERS = manage ? ADMIN_GET_CLUB_MEMBERS : GET_CLUB_MEMBERS;
+    const { data, loading } = useQuery(GET_MEMBERS, {
+        variables: { id: targetId },
+        onCompleted: (data) => {
+            const targetMembers = manage ? data?.adminClubMembers : data?.clubMembers;
+            setMembers(targetMembers?.map((o) => new MemberModel(o)));
+        },
+    });
+
+    // add member/create user form modal
+    const [formProps, setFormProps] = useState({});
+    const [formModal, setFormModal] = useState(false);
+
+    // delete confirmation modal
+    const [deleteProps, setDeleteProps] = useState({});
+    const [deleteModal, setDeleteModal] = useState(false);
+
+    // open edit modal and autofill data of member with given `id`
+    const triggerEdit = (id) => {
+        const targetMembers = (manage ? data?.adminClubMembers : data?.clubMembers).map(
+            (o) => new MemberModel(o)
+        );
+        setFormProps({ member: targetMembers?.find((member) => member.id === id) });
+        setFormModal(true);
+    };
+
+    // open delete modal
+    const triggerDelete = (id) => {
+        const targetMembers = (manage ? data?.adminClubMembers : data?.clubMembers).map(
+            (o) => new MemberModel(o)
+        );
+        setDeleteProps({ member: targetMembers?.find((member) => member.id === id) });
+        setDeleteModal(true);
+    };
+
+    // set/clear action buttons if `manage` is set
+    useEffect(() => {
+        if (manage) {
+            setActions([
+                // {
+                //     title: "Add Member (Coming Soon!)",
+                //     icon: HandshakeIcon,
+                //     disabled: true,
+                //     // onClick: () => {
+                //     //     setFormProps({});
+                //     //     setFormModal(true);
+                //     // },
+                // },
+            ]);
+        }
+    }, [manage]);
+
+    const cardProps = {
+        manage,
+        triggerEdit,
+        triggerDelete,
+    };
+
     return (
         <>
             <Page full loading={clubLoading}>
@@ -120,6 +185,26 @@ const About = ({ manage, setActions }) => {
                         />
                     ) : null}
                 </Box>
+                {members.length ? (
+                    <Box pt={2} px={3}>
+                        <Typography variant="h6"> Members </Typography>
+
+                        <List sx={{ pt: 2 }}>
+                            {/* iterate over a sorted list of unique years and render that year's members */}
+                            {members
+                                ?.map((m) => m.year)
+                                ?.filter((v, i, a) => a.indexOf(v) === i)
+                                ?.sort((a, b) => parseInt(b) - parseInt(a))
+                                ?.map((year) => (
+                                    <YearMembers
+                                        year={year}
+                                        members={members?.filter((m) => m.year === year)}
+                                        cardProps={cardProps}
+                                    />
+                                ))}
+                        </List>
+                    </Box>
+                ) : null}
             </Page>
         </>
     );

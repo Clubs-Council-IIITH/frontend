@@ -31,7 +31,7 @@ import MemberFormModal from "components/modals/MemberFormModal";
 import MemberDeleteModal from "components/modals/MemberDeleteModal";
 import { MemberCard } from "components/cards";
 
-const YearMembers = ({ year, members, cardProps }) => {
+export const YearMembers = ({ year, members, cardProps }) => {
     const [expandMembers, setExpandMembers] = useState(year === new Date().getFullYear());
 
     return (
