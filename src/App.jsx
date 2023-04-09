@@ -99,6 +99,12 @@ const insiderRoutes = [
         icon: InfoOutlined,
         component: <Insider.ProgressPage />,
     },
+    {
+        title: "Interview Schedule",
+        path: "/interviews",
+        icon: InfoOutlined,
+        component: <Insider.InterviewPage />,
+    },
 ];
 
 const ccRoutes = [
