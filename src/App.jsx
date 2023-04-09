@@ -37,6 +37,7 @@ import * as SLC from "pages/SLC";
 import * as SLO from "pages/SLO";
 import * as GAD from "pages/GAD";
 import * as Club from "pages/Club";
+import * as Insider from "pages/InsiderRoutes";
 // }}}
 
 // routes {{{
@@ -88,6 +89,15 @@ const inductionRoutes = [
         path: "/about",
         icon: InfoOutlined,
         component: <Public.About />,
+    },
+];
+
+const insiderRoutes = [
+    {
+        title: "Progress Report",
+        path: "/progress",
+        icon: InfoOutlined,
+        component: <Insider.ProgressPage />,
     },
 ];
 
@@ -203,6 +213,12 @@ const App = () => {
                             ))}
 
                             {inductionRoutes.map((route, idx) => (
+                                <Route exact={route.exact} path={route.path} key={idx}>
+                                    {route.component}
+                                </Route>
+                            ))}
+
+                            {insiderRoutes.map((route, idx) => (
                                 <Route exact={route.exact} path={route.path} key={idx}>
                                     {route.component}
                                 </Route>
