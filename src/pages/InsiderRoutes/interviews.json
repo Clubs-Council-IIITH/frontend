@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Utsav Shekhar",
+        "starttime": "15:30",
+        "endtime": "15:45",
+        "date": 10
+    },
+    {
+        "name": "Ansh Chablani",
+        "starttime": "15:45",
+        "endtime": "16:00",
+        "date": 10
+    },
+    {
+        "name": "Raagav Ramakrishnan",
+        "starttime": "16:00",
+        "endtime": "16:15",
+        "date": 10
+    },
+    {
+        "name": "Pranav Agrawal",
+        "starttime": "16:15",
+        "endtime": "16:30",
+        "date": 10
+    },
+    {
+        "name": "Divij D",
+        "starttime": "16:30",
+        "endtime": "16:45",
+        "date": 10
+    },
+    {
+        "name": "Agrim Mittal",
+        "starttime": "16:45",
+        "endtime": "17:00",
+        "date": 10
+    },
+    {
+        "name": "Bishwajeet Pal",
+        "starttime": "17:00",
+        "endtime": "17:15",
+        "date": 10
+    },
+    {
+        "name": "Akshat S. Shah",
+        "starttime": "17:15",
+        "endtime": "17:30",
+        "date": 10
+    },
+    {
+        "name": "Aanvik Bhatnagar",
+        "starttime": "22:00",
+        "endtime": "22:15",
+        "date": 11
+    },
+    {
+        "name": "Jalluri Ram Gopal",
+        "starttime": "22:15",
+        "endtime": "22:30",
+        "date": 11
+    },
+    {
+        "name": "Madireddy Ananya",
+        "starttime": "22:30",
+        "endtime": "22:45",
+        "date": 11
+    },
+    {
+        "name": "Chitturi Meghana Sai Rama Lakshmi",
+        "starttime": "22:45",
+        "endtime": "23:00",
+        "date": 11
+    },
+    {
+        "name": "Tejas Cavale",
+        "starttime": "23:00",
+        "endtime": "23:15",
+        "date": 11
+    },
+    {
+        "name": "Sajja Patel",
+        "starttime": "23:15",
+        "endtime": "23:30",
+        "date": 11
+    },
+    {
+        "name": "Himanshu Sarraf",
+        "starttime": "23:30",
+        "endtime": "23:45",
+        "date": 11
+    },
+    {
+        "name": "Praddyumn Shukla",
+        "starttime": "23:45",
+        "endtime": "00:00",
+        "date": 11
+    },
+    {
+        "name": "Ketaki Mangesh Shetye",
+        "starttime": "22:00",
+        "endtime": "22:15",
+        "date": 12
+    },
+    {
+        "name": "Prabhav Shetty",
+        "starttime": "22:15",
+        "endtime": "22:30",
+        "date": 12
+    },
+    {
+        "name": "Hamara Chaudhuri",
+        "starttime": "22:30",
+        "endtime": "22:45",
+        "date": 12
+    },
+    {
+        "name": "Gnana Prakash Punnavajhala",
+        "starttime": "22:45",
+        "endtime": "23:00",
+        "date": 12
+    },
+    {
+        "name": "Aaditya Vardhan Narain",
+        "starttime": "23:00",
+        "endtime": "23:15",
+        "date": 12
+    },
+    {
+        "name": "Kartik Vij",
+        "starttime": "23:15",
+        "endtime": "23:30",
+        "date": 12
+    },
+    {
+        "name": "Shrikara A",
+        "starttime": "23:30",
+        "endtime": "23:45",
+        "date": 12
+    },
+    {
+        "name": "Shailender Goyal",
+        "starttime": "23:45",
+        "endtime": "00:00",
+        "date": 12
+    },
+    {
+        "name": "Harsh Gupta",
+        "starttime": "22:00",
+        "endtime": "22:15",
+        "date": 13
+    },
+    {
+        "name": "Vempati Siva Koti Reddy",
+        "starttime": "22:15",
+        "endtime": "22:30",
+        "date": 13
+    },
+    {
+        "name": "Arihant Jain",
+        "starttime": "22:30",
+        "endtime": "22:45",
+        "date": 13
+    },
+    {
+        "name": "Mohammed Ihsan Ali",
+        "starttime": "22:45",
+        "endtime": "23:00",
+        "date": 13
+    },
+    {
+        "name": "Renu SreeVyshnavi Bakka",
+        "starttime": "23:00",
+        "endtime": "23:15",
+        "date": 13
+    },
+    {
+        "name": "Yashwanth",
+        "starttime": "23:15",
+        "endtime": "23:30",
+        "date": 13
+    },
+    {
+        "name": "G Ananya Varma",
+        "starttime": "23:30",
+        "endtime": "23:45",
+        "date": 13
+    },
+    {
+        "name": "Gowlapalli Rohit",
+        "starttime": "23:45",
+        "endtime": "00:00",
+        "date": 13
+    }
+]
