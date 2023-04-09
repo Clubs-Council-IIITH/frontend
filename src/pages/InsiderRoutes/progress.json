@@ -1,9 +1,17 @@
 [
     {
+        "month": "April 2023",
+        "version": "v1",
+        "tasks": [
+            "Added Interviews Schedule Page",
+            "Added Tech Team Progress Page for easier access to the data"
+        ]
+    },
+    {
         "month": "March 2023",
         "version": "v2",
         "tasks": [
-            "Added Mailing in the interfaces service", 
+            "Added Mailing in the interfaces service",
             "Completely implemented the clubs service - Queries & Mutations",
             "Completely implemented the members information storage feature (club members)",
             "Completely implemented user management microservice with integration with IIIT LDAP service",
@@ -56,16 +64,16 @@
         "month": "October 2022",
         "version": "v1",
         "tasks": [
-           "Setup Mailing Server (Server)",
-           "Integrated Mailing Service with event flow (Backend)",
-           "Setup Reverse-Proxy to provide secure connections over https (Server)",
-           "Updated clubs decription page to involve social media, website, etc (Frontend, Backend)",
-           "Updated User Model to store club member details (Backend)",
-           "Added Image Gallery on homepage (Frontend)",
-           "Added Bug Report Form (Frontend)",
-           "Implemented Rich Text Editor (Frontend)",
-           "Added Clubs Council About Page (Frontend)",
-           "Added ansible playbooks for easier and safe deployment on the server (Server)"
+            "Setup Mailing Server (Server)",
+            "Integrated Mailing Service with event flow (Backend)",
+            "Setup Reverse-Proxy to provide secure connections over https (Server)",
+            "Updated clubs decription page to involve social media, website, etc (Frontend, Backend)",
+            "Updated User Model to store club member details (Backend)",
+            "Added Image Gallery on homepage (Frontend)",
+            "Added Bug Report Form (Frontend)",
+            "Implemented Rich Text Editor (Frontend)",
+            "Added Clubs Council About Page (Frontend)",
+            "Added ansible playbooks for easier and safe deployment on the server (Server)"
         ]
     },
     {
@@ -106,5 +114,4 @@
             "Added past year event data with filteration"
         ]
     }
-    
 ]
