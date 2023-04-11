@@ -81,7 +81,7 @@ const InterviewPage = () => {
                 </Table>
             </TableContainer>
             <Typography variant="h6" pt={4} pb={3} px={2}>
-                <u>11-04-2023 (Tuesday)</u> - <b>TBA</b>
+                <u>11-04-2023 (Tuesday)</u> - <b>Large Meeting Room 22 (KRB 2nd Floor)</b>
             </Typography>
             <TableContainer component={Paper} variant="outlined">
                 <Table >

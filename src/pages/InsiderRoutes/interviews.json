@@ -36,7 +36,7 @@
         "date": 10
     },
     {
-        "name": "Bishwajeet Pal",
+        "name": "Bishwajeet Pal (Shifted)",
         "starttime": "17:00",
         "endtime": "17:15",
         "date": 10
@@ -72,27 +72,33 @@
         "date": 11
     },
     {
-        "name": "Tejas Cavale",
+        "name": "Himanshu Sarraf",
         "starttime": "23:00",
         "endtime": "23:15",
         "date": 11
     },
     {
-        "name": "Sajja Patel",
+        "name": "Agrim Mittal",
         "starttime": "23:15",
         "endtime": "23:30",
         "date": 11
     },
     {
-        "name": "Himanshu Sarraf",
+        "name": "Tejas Cavale",
         "starttime": "23:30",
         "endtime": "23:45",
         "date": 11
     },
     {
-        "name": "Agrim Mittal",
+        "name": "Sajja Patel",
         "starttime": "23:45",
         "endtime": "00:00",
+        "date": 11
+    },
+    {
+        "name": "Bishwajeet Pal",
+        "starttime": "00:00",
+        "endtime": "00:15",
         "date": 11
     },
     {
