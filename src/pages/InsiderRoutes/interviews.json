@@ -102,99 +102,111 @@
         "date": 11
     },
     {
-        "name": "Ketaki Mangesh Shetye",
-        "starttime": "22:00",
-        "endtime": "22:15",
-        "date": 12
-    },
-    {
-        "name": "Prabhav Shetty",
-        "starttime": "22:15",
-        "endtime": "22:30",
-        "date": 12
-    },
-    {
-        "name": "Hamara Chaudhuri",
-        "starttime": "22:30",
-        "endtime": "22:45",
-        "date": 12
-    },
-    {
-        "name": "Gnana Prakash Punnavajhala",
-        "starttime": "22:45",
-        "endtime": "23:00",
-        "date": 12
-    },
-    {
-        "name": "Aaditya Vardhan Narain",
-        "starttime": "23:00",
-        "endtime": "23:15",
-        "date": 12
-    },
-    {
-        "name": "Kartik Vij",
-        "starttime": "23:15",
-        "endtime": "23:30",
-        "date": 12
-    },
-    {
-        "name": "Shrikara A",
-        "starttime": "23:30",
-        "endtime": "23:45",
-        "date": 12
-    },
-    {
-        "name": "Shailender Goyal",
-        "starttime": "23:45",
-        "endtime": "00:00",
-        "date": 12
-    },
-    {
         "name": "Harsh Gupta",
-        "starttime": "22:00",
-        "endtime": "22:15",
+        "starttime": "15:30",
+        "endtime": "15:45",
         "date": 13
     },
     {
         "name": "Vempati Siva Koti Reddy",
-        "starttime": "22:15",
-        "endtime": "22:30",
+        "starttime": "15:45",
+        "endtime": "16:00",
         "date": 13
     },
     {
         "name": "Arihant Jain",
-        "starttime": "22:30",
-        "endtime": "22:45",
+        "starttime": "16:00",
+        "endtime": "16:15",
         "date": 13
     },
     {
         "name": "Mohammed Ihsan Ali",
-        "starttime": "22:45",
-        "endtime": "23:00",
-        "date": 13
-    },
-    {
-        "name": "Renu SreeVyshnavi Bakka",
-        "starttime": "23:00",
-        "endtime": "23:15",
+        "starttime": "16:15",
+        "endtime": "16:30",
         "date": 13
     },
     {
         "name": "Yashwanth",
-        "starttime": "23:15",
-        "endtime": "23:30",
+        "starttime": "16:30",
+        "endtime": "16:45",
         "date": 13
     },
     {
-        "name": "G Ananya Varma",
-        "starttime": "23:30",
-        "endtime": "23:45",
+        "name": "Renu SreeVyshnavi Bakka",
+        "starttime": "16:45",
+        "endtime": "17:00",
         "date": 13
     },
     {
         "name": "Gowlapalli Rohit",
-        "starttime": "23:45",
-        "endtime": "00:00",
+        "starttime": "17:00",
+        "endtime": "17:15",
         "date": 13
+    },
+    {
+        "name": "G Ananya Varma ",
+        "starttime": "17:15",
+        "endtime": "17:30",
+        "date": 13
+    },
+    {
+        "name": "Tejas Cavale",
+        "starttime": "17:30",
+        "endtime": "17:45",
+        "date": 13
+    },
+    {
+        "name": "Himanshu Sarraf ",
+        "starttime": "17:45",
+        "endtime": "18:00",
+        "date": 13
+    },
+    {
+        "name": "Ketaki Mangesh Shetye ",
+        "starttime": "11:00",
+        "endtime": "11:15",
+        "date": 16
+    },
+    {
+        "name": "Prabhav Shetty",
+        "starttime": "11:15",
+        "endtime": "11:30",
+        "date": 16
+    },
+    {
+        "name": "Hamara Chaudhuri",
+        "starttime": "11:30",
+        "endtime": "11:45",
+        "date": 16
+    },
+    {
+        "name": "Gnana Prakash Punnavajhala",
+        "starttime": "11:45",
+        "endtime": "12:00",
+        "date": 16
+    },
+    {
+        "name": "Aaditya Vardhan Narain ",
+        "starttime": "12:00",
+        "endtime": "12:15",
+        "date": 16
+    },
+    {
+        "name": "Kartik Vij ",
+        "starttime": "12:15",
+        "endtime": "12:30",
+        "date": 16
+    },
+    {
+        "name": "Shrikara A",
+        "starttime": "12:30",
+        "endtime": "12:45",
+        "date": 16
+    },
+    {
+        "name": "Shailender Goyal",
+        "starttime": "12:45",
+        "endtime": "13:00",
+        "date": 16
     }
 ]

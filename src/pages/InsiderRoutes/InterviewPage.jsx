@@ -109,7 +109,7 @@ const InterviewPage = () => {
                 </Table>
             </TableContainer>
             <Typography variant="h6" pt={4} pb={3} px={2}>
-                <u>12-04-2023 (Wednesday)</u> - <b>Postponed</b>
+                <u>13-04-2023 (Thursday)</u> - <b>TBA</b>
             </Typography>
             <TableContainer component={Paper} variant="outlined">
                 <Table >
@@ -121,7 +121,7 @@ const InterviewPage = () => {
                     </TableHead>
                     <TableBody>
                         {
-                            Data.filter(({ date }) => date === 12)
+                            Data.filter(({ date }) => date === 13)
                                 .map((data, key) => (
                                     <StyledTableRow key={key}>
                                         <StyledTableCell component="th" scope="row">
@@ -137,7 +137,7 @@ const InterviewPage = () => {
                 </Table>
             </TableContainer>
             <Typography variant="h6" pt={4} pb={3} px={2}>
-                <u>13-04-2023 (Thursday)</u> - <b>TBA</b>
+                <u>16-04-2023 (Sunday)</u> - <b>TBA</b>
             </Typography>
             <TableContainer component={Paper} variant="outlined">
                 <Table >
@@ -149,7 +149,7 @@ const InterviewPage = () => {
                     </TableHead>
                     <TableBody>
                         {
-                            Data.filter(({ date }) => date === 13)
+                            Data.filter(({ date }) => date === 16)
                                 .map((data, key) => (
                                     <StyledTableRow key={key}>
                                         <StyledTableCell component="th" scope="row">
