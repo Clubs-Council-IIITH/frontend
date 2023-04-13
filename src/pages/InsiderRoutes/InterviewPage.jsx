@@ -53,7 +53,7 @@ const InterviewPage = () => {
         <Page noToolbar header={"Interviews '23 Schedule"} loading={false} empty={false}>
             <Divider />
             <Typography variant="h6" pt={4} pb={3} px={2}>
-                <u>10-04-2023 (Monday)</u> - <b>Large Meeting Room 22 (KRB 2nd Floor)</b>
+                <u>10-04-2023 (Monday)</u> - <b>Large Meeting Room 22 (KRB 1st Floor)</b>
             </Typography>
             <TableContainer component={Paper} variant="outlined">
                 <Table >
@@ -81,7 +81,7 @@ const InterviewPage = () => {
                 </Table>
             </TableContainer>
             <Typography variant="h6" pt={4} pb={3} px={2}>
-                <u>11-04-2023 (Tuesday)</u> - <b>Large Meeting Room 22 (KRB 2nd Floor)</b>
+                <u>11-04-2023 (Tuesday)</u> - <b>Large Meeting Room 22 (KRB 1st Floor)</b>
             </Typography>
             <TableContainer component={Paper} variant="outlined">
                 <Table >
@@ -109,7 +109,7 @@ const InterviewPage = () => {
                 </Table>
             </TableContainer>
             <Typography variant="h6" pt={4} pb={3} px={2}>
-                <u>13-04-2023 (Thursday)</u> - <b>TBA</b>
+                <u>13-04-2023 (Thursday)</u> - <b>Large Meeting Room 22 (KRB 1st Floor)</b>
             </Typography>
             <TableContainer component={Paper} variant="outlined">
                 <Table >
