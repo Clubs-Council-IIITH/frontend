@@ -47,23 +47,6 @@ const Events = ({ manage, setActions }) => {
     const targetId = manage && session?.group === UserGroups.club ? session.props.club.id : clubId;
     const targetEvents = manage ? "adminClubEvents" : "clubEvents";
 
-    // fetch events
-    const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
-    const { data: eventsData, loading: eventsLoading } = useQuery(GET_EVENTS, {
-        pollInterval: 1000 * 60 * 1, // 1 minute
-        variables: { id: targetId },
-        onCompleted: (data) => {
-            expandState((data?.[targetEvents]
-                ?.filter(
-                    (e) =>
-                        e.state !== EventStates.completed &&
-                        e.state !== EventStates.deleted
-                )
-                ?.filter((e) => Date.parse(e?.datetimeEnd) > Date.parse(new Date()))
-                ?.length != 0) ? setExpandUpcoming : setExpandCompleted);
-        },
-    });
-
     // event modal
     const [viewProps, setViewProps] = useState({});
     const [viewModal, setViewModal] = useState(false);
@@ -82,6 +65,23 @@ const Events = ({ manage, setActions }) => {
         setExpandExpired(false);
         setTargetState(true);
     };
+
+    // fetch events
+    const GET_EVENTS = manage ? ADMIN_GET_CLUB_EVENTS : GET_CLUB_EVENTS;
+    const { data: eventsData, loading: eventsLoading } = useQuery(GET_EVENTS, {
+        pollInterval: 1000 * 60 * 1, // 1 minute
+        variables: { id: targetId },
+        onCompleted: (data) => {
+            expandState((data?.[targetEvents]
+                ?.filter(
+                    (e) =>
+                        e.state !== EventStates.completed &&
+                        e.state !== EventStates.deleted
+                )
+                ?.filter((e) => Date.parse(e?.datetimeEnd) > Date.parse(new Date()))
+                ?.length !== 0) ? setExpandUpcoming : setExpandCompleted);
+        },
+    });
 
     // open view modal
     const triggerView = (id, actions) => {
