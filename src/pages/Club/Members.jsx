@@ -32,7 +32,7 @@ import MemberDeleteModal from "components/modals/MemberDeleteModal";
 import { MemberCard } from "components/cards";
 
 export const YearMembers = ({ year, members, cardProps }) => {
-    const [expandMembers, setExpandMembers] = useState(year === new Date().getFullYear() || year === new Date().getFullYear() - 1 || year === new Date().getFullYear() - 2);
+    const [expandMembers, setExpandMembers] = useState(year === new Date().getFullYear() || year === new Date().getFullYear() - 1);
 
     return (
         <>
