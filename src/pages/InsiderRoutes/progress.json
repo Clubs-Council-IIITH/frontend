@@ -3,12 +3,18 @@
         "month": "April 2023",
         "version": "v2",
         "tasks": [
-            "Integrated Events Subgraph",
-            "Fix ClubHero Banner",
             "Added a Dev Data repository for better testing purposes",
             "Multi-Stage Images to Cache Dependencies for better docker builds",
             "Added Mongo-Express Container for better handling of mongo db data",
-            "Consistent Query Names for Events Service"
+            "Integrated Events Subgraph",
+            "Added Documentaion for the Queries in the code for clubs and events services",
+            "Integrate Club Members Queries in Frontend",
+            "Rewrite Members Model completely",
+            "Rewrite all Members Mutations & Queries for better and secure implementation",
+            "Add new club form and mutation in frontend",
+            "Add edit club form",
+            "Fix ClubHero Banner",
+            "Fixed scrollbar rendering glitch"
         ]
     },
     {
