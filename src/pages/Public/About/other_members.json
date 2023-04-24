@@ -1,0 +1,32 @@
+[
+    {
+        "name": {
+            "title": "Mr",
+            "first": "Praddyumn",
+            "last": "Shukla"
+        },
+        "role": "PG Representative",
+        "email": "praddyumn.2022@students.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Praddyumn.jpeg"
+    },
+    {
+        "name": {
+            "title": "Mr",
+            "first": "Shivam",
+            "last": "Singh"
+        },
+        "role": "Design Team",
+        "email": "shivam.s@research.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Shivam.jpg"
+    },
+    {
+        "name": {
+            "title": "Ms",
+            "first": "Sajja",
+            "last": "Patel"
+        },
+        "role": "Design Team",
+        "email": "sajja.patel@students.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Sajja.jpeg"
+    }
+]

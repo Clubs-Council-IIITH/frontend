@@ -6,6 +6,8 @@ import { AlternateEmail } from "@mui/icons-material";
 import Page from "components/Page";
 
 import TeamJSON from "./cc_members.json";
+import ExtendedTeamJSON from "./other_members.json";
+import TechTeamJSON from "./tech_members.json";
 
 const TeamCard = ({ name, img, role, email }) => {
     const theme = useTheme();
@@ -59,6 +61,26 @@ const About = () => {
             </Typography>
             <Grid container spacing={1}>
                 {TeamJSON.map((member, key) => (
+                    <Grid item xs={6} sm={4} md={3} lg={2.4} key={key}>
+                        <TeamCard {...member} />
+                    </Grid>
+                ))}
+            </Grid>
+            <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom mt={4}>
+                TECH TEAM
+            </Typography>
+            <Grid container spacing={1}>
+                {TechTeamJSON.map((member, key) => (
+                    <Grid item xs={6} sm={4} md={3} lg={2.4} key={key}>
+                        <TeamCard {...member} />
+                    </Grid>
+                ))}
+            </Grid>
+            <Typography variant="h6" color={theme.palette.secondary.dark} gutterBottom mt={4}>
+                EXTENDED TEAM
+            </Typography>
+            <Grid container spacing={1}>
+                {ExtendedTeamJSON.map((member, key) => (
                     <Grid item xs={6} sm={4} md={3} lg={2.4} key={key}>
                         <TeamCard {...member} />
                     </Grid>
