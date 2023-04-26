@@ -2,32 +2,22 @@
     {
         "name": {
             "title": "Mr",
-            "first": "Hariharan",
-            "last": "Kalimuthu"
-        },
-        "role": "Secretary",
-        "email": "hariharan.k@research.iiit.ac.in",
-        "img": "https://clubs.iiit.ac.in/media/imgs/members/Hari.jpg"
-    },
-    {
-        "name": {
-            "title": "Mr",
-            "first": "Radheshyam",
-            "last": "Thiyagarajan"
-        },
-        "role": "Secretary",
-        "email": "radheshyam.t@research.iiit.ac.in",
-        "img": "https://clubs.iiit.ac.in/media/imgs/members/Radheshyam.png"
-    },
-    {
-        "name": {
-            "title": "Mr",
             "first": "Bhav",
             "last": "Beri"
         },
-        "role": "Co-Secretary",
+        "role": "Secretary",
         "email": "bhav.beri@research.iiit.ac.in",
         "img": "https://clubs.iiit.ac.in/media/imgs/members/Bhav.jpg"
+    },
+    {
+        "name": {
+            "title": "Ms",
+            "first": "Vrinda",
+            "last": "Agarwal"
+        },
+        "role": "Secretary",
+        "email": "vrinda.agarwal@students.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Vrinda.jpg"
     },
     {
         "name": {
@@ -35,7 +25,7 @@
             "first": "Gnaneswar",
             "last": "Kulindala"
         },
-        "role": "Co-Secretary",
+        "role": "Joint-Secretary",
         "email": "gnaneswar.kulindala@research.iiit.ac.in",
         "img": "https://clubs.iiit.ac.in/media/imgs/members/Gnan.jpg"
     },
@@ -45,19 +35,9 @@
             "first": "Mihika",
             "last": "Sanghi"
         },
-        "role": "Co-Secretary",
+        "role": "Joint-Secretary",
         "email": "mihika.sanghi@research.iiit.ac.in",
         "img": "https://clubs.iiit.ac.in/media/imgs/members/Mihika.jpg"
-    },
-    {
-        "name": {
-            "title": "Ms",
-            "first": "Vrinda",
-            "last": "Agarwal"
-        },
-        "role": "Co-Secretary",
-        "email": "vrinda.agarwal@students.iiit.ac.in",
-        "img": "https://clubs.iiit.ac.in/media/imgs/members/Vrinda.jpg"
     },
     {
         "name": {
@@ -138,6 +118,26 @@
         "role": "Undersecretary",
         "email": "shrikara.a@students.iiit.ac.in",
         "img": "https://clubs.iiit.ac.in/media/imgs/members/Shrikara.jpeg"
+    },
+    {
+        "name": {
+            "title": "Mr",
+            "first": "Hariharan",
+            "last": "Kalimuthu"
+        },
+        "role": "Advisor",
+        "email": "hariharan.k@research.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Hari.jpg"
+    },
+    {
+        "name": {
+            "title": "Mr",
+            "first": "Radheshyam",
+            "last": "Thiyagarajan"
+        },
+        "role": "Advisor",
+        "email": "radheshyam.t@research.iiit.ac.in",
+        "img": "https://clubs.iiit.ac.in/media/imgs/members/Radheshyam.png"
     },
     {
         "name": {
