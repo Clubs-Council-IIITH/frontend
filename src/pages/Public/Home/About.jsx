@@ -38,7 +38,7 @@ const About = () => {
     // fetch all clubs
     const { data: clubsData, loading: clubsLoading } = useQuery(GET_ALL_CLUBS, {
         fetchPolicy: "cache-and-network",
-        pollInterval: 1000*60*3, // 3 minutes
+        pollInterval: 1000 * 60 * 3, // 3 minutes
     });
 
     if (clubsLoading) return null;
@@ -99,10 +99,10 @@ const About = () => {
                         } title="Student-Constituent Groups" />
                     </Grid>
                     <Grid item>
-                        <Statistic number="50+" title="Student Coordinators" />
+                        <Statistic number="70+" title="Student Coordinators" />
                     </Grid>
                     <Grid item>
-                        <Statistic number="250+" title="Organizing Team Members" />
+                        <Statistic number="400+" title="Organizing Team Members" />
                     </Grid>
                 </Grid>
             </Box>
