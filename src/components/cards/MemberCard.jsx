@@ -45,7 +45,7 @@ const MemberCard = ({ id, user, role, approved, triggerEdit, triggerDelete, mana
                     </Typography>
 
                     <Box display="flex" alignItems="center">
-                        <Typography variant="subtitle" mx={1}>
+                        <Typography variant="subtitle" mx={1} align="center">
                             {titleCase(role)}
                         </Typography>
 
